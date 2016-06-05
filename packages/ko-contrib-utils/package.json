@@ -1,0 +1,51 @@
+{
+  "name": "ko-contrib-utils",
+  "version": "0.0.1",
+  "description": "Handy Utilities for Knockout JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "export NODE_ENV=test; nyc --reporter=lcov --reporter=html ava --verbose --serial",
+    "test:watch": "ava --watch",
+    "build": "webpack & babel src --plugins transform-es2015-modules-umd -d lib; wait"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Profiscience/ko-contrib-utils.git"
+  },
+  "keywords": [
+    "knockout",
+    "knockout",
+    "js",
+    "utils",
+    "helpers",
+    "utilities"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Profiscience/ko-contrib-utils/issues"
+  },
+  "homepage": "https://github.com/Profiscience/ko-contrib-utils#readme",
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.9.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.11.1",
+    "eslint-config-profiscience": "^1.0.1",
+    "knockout": "^3.4.0",
+    "nyc": "^6.4.4"
+  },
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  }
+}
