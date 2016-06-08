@@ -6,8 +6,6 @@ import merge from './merge'
 import './increment'
 import './toString'
 
-merge(ko.utils, {
-  defaults,
-  fromJS,
-  merge
-})
+ko.utils.defaults = defaults
+ko.utils.fromJS = fromJS
+ko.utils.defaults = merge
