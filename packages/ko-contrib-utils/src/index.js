@@ -8,5 +8,6 @@ import './toString'
 
 merge(ko.utils, {
   defaults,
-  fromJS
+  fromJS,
+  merge
 })

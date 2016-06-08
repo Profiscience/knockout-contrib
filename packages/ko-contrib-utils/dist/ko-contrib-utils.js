@@ -7,7 +7,7 @@
 		exports["ko-contrib-utils"] = factory(require("knockout"));
 	else
 		root["ko-contrib-utils"] = factory(root["ko"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -56,7 +56,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _defaults = __webpack_require__(1);
+	var _knockout = __webpack_require__(1);
+
+	var _knockout2 = _interopRequireDefault(_knockout);
+
+	var _defaults = __webpack_require__(2);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -74,13 +78,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(0, _merge2.default)(ko.utils, {
+	(0, _merge2.default)(_knockout2.default.utils, {
 	  defaults: _defaults2.default,
-	  fromJS: _fromJS2.default
+	  fromJS: _fromJS2.default,
+	  merge: _merge2.default
 	});
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89,27 +100,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	exports.default = function (dest, src, mapArrays) {
-	  for (var prop in src) {
-	    if (isUndefined(src[prop]) || src[prop] === null) {
-	      if (isUndefined(dest[src])) {
-	        dest[prop] = _knockout2.default.observable(src[prop]);
-	      } else if (_knockout2.default.isWritableObservable(dest[prop])) {
-	        dest[prop](src[prop]);
-	      } else {
-	        dest[prop] = src[prop];
-	      }
-	    } else if (isUndefined(dest[prop])) {
-	      dest[prop] = (0, _fromJS2.default)(src[prop], src[prop] instanceof Array && mapArrays);
+	exports.default = function (dest, defaults, mapArraysDeep) {
+	  for (var prop in defaults) {
+	    if (isUndefined(dest[prop])) {
+	      dest[prop] = (0, _fromJS2.default)(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep);
 	    }
 	  }
 
 	  return dest;
 	};
-
-	var _knockout = __webpack_require__(2);
-
-	var _knockout2 = _interopRequireDefault(_knockout);
 
 	var _fromJS = __webpack_require__(3);
 
@@ -122,12 +121,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
-
-/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -138,38 +131,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = fromJS;
 
-	var _knockout = __webpack_require__(2);
+	var _knockout = __webpack_require__(1);
 
 	var _knockout2 = _interopRequireDefault(_knockout);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function fromJS(obj, mapArrays, bare) {
+	function fromJS(obj, mapArraysDeep, _parentIsArray) {
 	  var obs = void 0;
 
 	  if (_knockout2.default.isObservable(obj)) {
 	    obs = obj;
-	  } else if (isPrimitiveOrDate(obj)) {
-	    obs = bare ? obj : _knockout2.default.observable(obj);
 	  } else if (obj instanceof Array) {
 	    obs = [];
 
 	    for (var i = 0; i < obj.length; i++) {
-	      obs[i] = fromJS(obj[i], mapArrays, mapArrays !== true);
-	    }obs = _knockout2.default.observableArray(obs);
-	  } else if (obj.constructor === Object) {
+	      obs[i] = fromJS(obj[i], mapArraysDeep, true);
+	    }
+
+	    obs = _knockout2.default.observableArray(obs);
+	  } else if (obj && obj.constructor === Object) {
 	    obs = {};
 
 	    for (var p in obj) {
 	      obs[p] = fromJS(obj[p]);
 	    }
+	  } else {
+	    obs = _parentIsArray && !mapArraysDeep ? obj : _knockout2.default.observable(obj);
 	  }
 
 	  return obs;
-	}
-
-	function isPrimitiveOrDate(obj) {
-	  return obj === null || obj === undefined || obj.constructor === String || obj.constructor === Number || obj.constructor === Boolean || obj instanceof Date;
 	}
 
 /***/ },
@@ -183,7 +174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.default = merge;
 
-	var _knockout = __webpack_require__(2);
+	var _knockout = __webpack_require__(1);
 
 	var _knockout2 = _interopRequireDefault(_knockout);
 
@@ -193,24 +184,41 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function merge(dest, src, mapArrays) {
-	  for (var prop in src) {
-	    if (isUndefined(src[prop]) || src[prop] === null) {
-	      if (isUndefined(dest[src])) {
-	        dest[prop] = _knockout2.default.observable(src[prop]);
+	function merge(dest, src, mapArraysDeep) {
+	  var props = Object.keys(src);
+
+	  var _iteratorNormalCompletion = true;
+	  var _didIteratorError = false;
+	  var _iteratorError = undefined;
+
+	  try {
+	    for (var _iterator = props[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      var prop = _step.value;
+
+	      if (isUndefined(dest[prop])) {
+	        dest[prop] = (0, _fromJS2.default)(src[prop], src[prop] instanceof Array && mapArraysDeep);
 	      } else if (_knockout2.default.isWritableObservable(dest[prop])) {
-	        dest[prop](src[prop]);
+	        dest[prop](src[prop] instanceof Array && mapArraysDeep ? (0, _fromJS2.default)(src[prop], true)() : src[prop]);
+	      } else if (isUndefined(src[prop])) {
+	        dest[prop] = undefined;
+	      } else if (src[prop].constructor === Object) {
+	        merge(dest[prop], src[prop], mapArraysDeep);
 	      } else {
 	        dest[prop] = src[prop];
 	      }
-	    } else if (isUndefined(dest[prop])) {
-	      dest[prop] = (0, _fromJS2.default)(src[prop], src[prop] instanceof Array && mapArrays);
-	    } else if (_knockout2.default.isWritableObservable(dest[prop])) {
-	      dest[prop](_knockout2.default.unwrap(src[prop] instanceof Array && mapArrays ? (0, _fromJS2.default)(src[prop], true) : src[prop]));
-	    } else if (src[prop].constructor === Object) {
-	      merge(dest[prop], src[prop], mapArrays);
-	    } else {
-	      dest[prop] = src[prop];
+	    }
+	  } catch (err) {
+	    _didIteratorError = true;
+	    _iteratorError = err;
+	  } finally {
+	    try {
+	      if (!_iteratorNormalCompletion && _iterator.return) {
+	        _iterator.return();
+	      }
+	    } finally {
+	      if (_didIteratorError) {
+	        throw _iteratorError;
+	      }
 	    }
 	  }
 
@@ -227,7 +235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _knockout = __webpack_require__(2);
+	var _knockout = __webpack_require__(1);
 
 	var _knockout2 = _interopRequireDefault(_knockout);
 
@@ -251,27 +259,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _knockout = __webpack_require__(2);
+	var _knockout = __webpack_require__(1);
 
 	var _knockout2 = _interopRequireDefault(_knockout);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_knockout2.default.observable.fn.toString = function () {
-	  return toString('Observable').call(this);
+	  return toString(this, 'Observable');
 	};
 	_knockout2.default.observableArray.fn.toString = function () {
-	  return toString('bservableArray').call(this);
+	  return toString(this, 'ObservableArray');
 	};
 	_knockout2.default.computed.fn.toString = function () {
-	  return toString('Computed').call(this);
-	};
-	_knockout2.default.pureComputed.fn.toString = function () {
-	  return toString('PureComputed').call(this);
+	  return toString(this, 'Computed');
 	};
 
-	function toString(type) {
-	  return type + '(' + _knockout2.default.toJSON(this(), null, 2) + ')';
+	function toString(obs, type) {
+	  return type + '(' + _knockout2.default.toJSON(obs(), null) + ')';
 	}
 
 /***/ }
