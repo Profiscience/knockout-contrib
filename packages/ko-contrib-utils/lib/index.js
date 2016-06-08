@@ -29,5 +29,5 @@
 
   _knockout2.default.utils.defaults = _defaults2.default;
   _knockout2.default.utils.fromJS = _fromJS2.default;
-  _knockout2.default.utils.defaults = _merge2.default;
+  _knockout2.default.utils.merge = _merge2.default;
 });

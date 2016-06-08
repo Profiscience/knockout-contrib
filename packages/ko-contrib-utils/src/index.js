@@ -8,4 +8,4 @@ import './toString'
 
 ko.utils.defaults = defaults
 ko.utils.fromJS = fromJS
-ko.utils.defaults = merge
+ko.utils.merge = merge
