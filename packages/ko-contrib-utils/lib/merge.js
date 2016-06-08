@@ -28,24 +28,41 @@
     };
   }
 
-  function merge(dest, src, mapArrays) {
-    for (var prop in src) {
-      if (isUndefined(src[prop]) || src[prop] === null) {
-        if (isUndefined(dest[src])) {
-          dest[prop] = _knockout2.default.observable(src[prop]);
+  function merge(dest, src, mapArraysDeep) {
+    var props = Object.keys(src);
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = props[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var prop = _step.value;
+
+        if (isUndefined(dest[prop])) {
+          dest[prop] = (0, _fromJS2.default)(src[prop], src[prop] instanceof Array && mapArraysDeep);
         } else if (_knockout2.default.isWritableObservable(dest[prop])) {
-          dest[prop](src[prop]);
+          dest[prop](src[prop] instanceof Array && mapArraysDeep ? (0, _fromJS2.default)(src[prop], true)() : src[prop]);
+        } else if (isUndefined(src[prop])) {
+          dest[prop] = undefined;
+        } else if (src[prop].constructor === Object) {
+          merge(dest[prop], src[prop], mapArraysDeep);
         } else {
           dest[prop] = src[prop];
         }
-      } else if (isUndefined(dest[prop])) {
-        dest[prop] = (0, _fromJS2.default)(src[prop], src[prop] instanceof Array && mapArrays);
-      } else if (_knockout2.default.isWritableObservable(dest[prop])) {
-        dest[prop](_knockout2.default.unwrap(src[prop] instanceof Array && mapArrays ? (0, _fromJS2.default)(src[prop], true) : src[prop]));
-      } else if (src[prop].constructor === Object) {
-        merge(dest[prop], src[prop], mapArrays);
-      } else {
-        dest[prop] = src[prop];
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
       }
     }
 

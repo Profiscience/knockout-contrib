@@ -26,31 +26,29 @@
     };
   }
 
-  function fromJS(obj, mapArrays, bare) {
+  function fromJS(obj, mapArraysDeep, _parentIsArray) {
     var obs = void 0;
 
     if (_knockout2.default.isObservable(obj)) {
       obs = obj;
-    } else if (isPrimitiveOrDate(obj)) {
-      obs = bare ? obj : _knockout2.default.observable(obj);
     } else if (obj instanceof Array) {
       obs = [];
 
       for (var i = 0; i < obj.length; i++) {
-        obs[i] = fromJS(obj[i], mapArrays, mapArrays !== true);
-      }obs = _knockout2.default.observableArray(obs);
-    } else if (obj.constructor === Object) {
+        obs[i] = fromJS(obj[i], mapArraysDeep, true);
+      }
+
+      obs = _knockout2.default.observableArray(obs);
+    } else if (obj && obj.constructor === Object) {
       obs = {};
 
       for (var p in obj) {
         obs[p] = fromJS(obj[p]);
       }
+    } else {
+      obs = _parentIsArray && !mapArraysDeep ? obj : _knockout2.default.observable(obj);
     }
 
     return obs;
-  }
-
-  function isPrimitiveOrDate(obj) {
-    return obj === null || obj === undefined || obj.constructor === String || obj.constructor === Number || obj.constructor === Boolean || obj instanceof Date;
   }
 });

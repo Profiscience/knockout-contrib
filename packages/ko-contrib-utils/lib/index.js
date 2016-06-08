@@ -1,17 +1,19 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['./defaults', './fromJS', './merge', './increment', './toString'], factory);
+    define(['knockout', './defaults', './fromJS', './merge', './increment', './toString'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(require('./defaults'), require('./fromJS'), require('./merge'), require('./increment'), require('./toString'));
+    factory(require('knockout'), require('./defaults'), require('./fromJS'), require('./merge'), require('./increment'), require('./toString'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.defaults, global.fromJS, global.merge, global.increment, global.functionToStringNativeCode);
+    factory(global.knockout, global.defaults, global.fromJS, global.merge, global.increment, global.functionToStringNativeCode);
     global.index = mod.exports;
   }
-})(this, function (_defaults, _fromJS, _merge) {
+})(this, function (_knockout, _defaults, _fromJS, _merge) {
   'use strict';
+
+  var _knockout2 = _interopRequireDefault(_knockout);
 
   var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -25,8 +27,9 @@
     };
   }
 
-  (0, _merge2.default)(ko.utils, {
+  (0, _merge2.default)(_knockout2.default.utils, {
     defaults: _defaults2.default,
-    fromJS: _fromJS2.default
+    fromJS: _fromJS2.default,
+    merge: _merge2.default
   });
 });

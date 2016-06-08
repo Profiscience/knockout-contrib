@@ -22,19 +22,16 @@
   }
 
   _knockout2.default.observable.fn.toString = function () {
-    return toString('Observable').call(this);
+    return toString(this, 'Observable');
   };
   _knockout2.default.observableArray.fn.toString = function () {
-    return toString('bservableArray').call(this);
+    return toString(this, 'ObservableArray');
   };
   _knockout2.default.computed.fn.toString = function () {
-    return toString('Computed').call(this);
-  };
-  _knockout2.default.pureComputed.fn.toString = function () {
-    return toString('PureComputed').call(this);
+    return toString(this, 'Computed');
   };
 
-  function toString(type) {
-    return type + '(' + _knockout2.default.toJSON(this(), null, 2) + ')';
+  function toString(obs, type) {
+    return type + '(' + _knockout2.default.toJSON(obs(), null) + ')';
   }
 });
