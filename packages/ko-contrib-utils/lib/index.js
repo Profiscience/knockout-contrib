@@ -27,9 +27,7 @@
     };
   }
 
-  (0, _merge2.default)(_knockout2.default.utils, {
-    defaults: _defaults2.default,
-    fromJS: _fromJS2.default,
-    merge: _merge2.default
-  });
+  _knockout2.default.utils.defaults = _defaults2.default;
+  _knockout2.default.utils.fromJS = _fromJS2.default;
+  _knockout2.default.utils.defaults = _merge2.default;
 });
