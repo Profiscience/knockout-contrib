@@ -6,8 +6,12 @@
   "scripts": {
     "test": "export NODE_ENV=test; nyc --reporter=lcov --reporter=html ava --verbose --serial",
     "test:watch": "ava --watch",
-    "build": "webpack & babel src --plugins transform-es2015-modules-umd -d lib; wait"
+    "build": "webpack & babel src --plugins transform-es2015-modules-umd -d lib; wait",
+    "stage": "git add dist lib"
   },
+  "precommit": [
+    "npm run build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/ko-contrib-utils.git"
@@ -38,7 +42,8 @@
     "eslint": "^2.11.1",
     "eslint-config-profiscience": "^1.0.1",
     "knockout": "^3.4.0",
-    "nyc": "^6.4.4"
+    "nyc": "^6.4.4",
+    "precommit": "^1.2.0"
   },
   "peerDependencies": {
     "knockout": "^3.4.0"
