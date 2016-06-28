@@ -4,6 +4,7 @@ import defaults from './defaults'
 import fromJS from './fromJS'
 import merge from './merge'
 import './increment'
+import './subscribeOnce'
 import './toString'
 
 ko.utils.defaults = defaults

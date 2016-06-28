@@ -1,13 +1,13 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['knockout', './defaults', './fromJS', './merge', './increment', './toString'], factory);
+    define(['knockout', './defaults', './fromJS', './merge', './increment', './subscribeOnce', './toString'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(require('knockout'), require('./defaults'), require('./fromJS'), require('./merge'), require('./increment'), require('./toString'));
+    factory(require('knockout'), require('./defaults'), require('./fromJS'), require('./merge'), require('./increment'), require('./subscribeOnce'), require('./toString'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.knockout, global.defaults, global.fromJS, global.merge, global.increment, global.functionToStringNativeCode);
+    factory(global.knockout, global.defaults, global.fromJS, global.merge, global.increment, global.subscribeOnce, global.functionToStringNativeCode);
     global.index = mod.exports;
   }
 })(this, function (_knockout, _defaults, _fromJS, _merge) {
