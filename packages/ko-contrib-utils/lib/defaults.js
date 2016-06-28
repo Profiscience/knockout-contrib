@@ -16,16 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-
-  exports.default = function (dest, defaults, mapArraysDeep) {
-    for (var prop in defaults) {
-      if (isUndefined(dest[prop])) {
-        dest[prop] = (0, _fromJS2.default)(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep);
-      }
-    }
-
-    return dest;
-  };
+  exports.default = defaults;
 
   var _fromJS2 = _interopRequireDefault(_fromJS);
 
@@ -33,6 +24,16 @@
     return obj && obj.__esModule ? obj : {
       default: obj
     };
+  }
+
+  function defaults(dest, defaults, mapArraysDeep) {
+    for (var prop in defaults) {
+      if (isUndefined(dest[prop])) {
+        dest[prop] = (0, _fromJS2.default)(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep);
+      }
+    }
+
+    return dest;
   }
 
   function isUndefined(foo) {
