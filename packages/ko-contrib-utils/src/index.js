@@ -11,7 +11,7 @@ ko.utils.defaults = defaults
 ko.utils.fromJS = fromJS
 ko.utils.merge = merge
 
-export default {
+export {
   defaults,
   fromJS,
   merge
