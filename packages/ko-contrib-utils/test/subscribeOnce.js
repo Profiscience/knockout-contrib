@@ -9,7 +9,7 @@ test('should work', (t) => {
   const observableArray = ko.observableArray([null])
   const computed = ko.computed(() => observable())
   const pureComputed = ko.pureComputed(() => observable())
-  const ok = t.ok.bind(t)
+  const ok = t.truthy.bind(t)
 
   observable.subscribeOnce(ok)
   computed.subscribeOnce(ok)

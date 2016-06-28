@@ -41,7 +41,7 @@ function makeConfig({ minify } = {}) {
       }
     },
 
-    // devtool: 'source-map',
+    devtool: 'source-map',
 
     plugins: minify
       ? [
