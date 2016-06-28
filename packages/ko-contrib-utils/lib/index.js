@@ -16,6 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.merge = exports.fromJS = exports.defaults = undefined;
 
   var _knockout2 = _interopRequireDefault(_knockout);
 
@@ -35,9 +36,7 @@
   _knockout2.default.utils.fromJS = _fromJS2.default;
   _knockout2.default.utils.merge = _merge2.default;
 
-  exports.default = {
-    defaults: _defaults2.default,
-    fromJS: _fromJS2.default,
-    merge: _merge2.default
-  };
+  exports.defaults = _defaults2.default;
+  exports.fromJS = _fromJS2.default;
+  exports.merge = _merge2.default;
 });
