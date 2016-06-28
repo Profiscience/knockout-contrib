@@ -7,17 +7,19 @@
 [![Dependency Status](https://img.shields.io/david/Profiscience/ko-contrib-utils.svg)](https://david-dm.org/Profiscience/ko-contrib-utils)
 [![Peer Dependency Status](https://img.shields.io/david/peer/Profiscience/ko-contrib-utils.svg?maxAge=2592000)](https://david-dm.org/Profiscience/ko-contrib-utils#info=peerDependencies&view=table)
 
-## Table of Contents
+### Table of Contents
 
 * Utils
-  - [ko.utils.defaults](#defaults)
-  - [ko.utils.fromJS](#fromJS)
-  - [ko.utils.merge](#merge)
+  - [ko.utils.defaults](#defaultsdest-defaultvalues-maparrays--false)
+  - [ko.utils.fromJS](#fromjssrc-maparrays--false)
+  - [ko.utils.merge](#mergedest-src-maparrays--false)
 
 * Prototype Functions
-  - [ko.observable.fn.increment/decrement](#todo)  
-  - [ko.observable.fn.subscribeOnce](#todo)
-  - [ko.observable.fn.toString](#todo)
+  - [ko.observable.fn.increment/decrement](#observablefnincrementdecrementn--1)  
+  - [ko.observable.fn.subscribeOnce](#observablefnsubscribeoncefn)
+  - [ko.observable.fn.toString](#observablefntostring)
+
+### Utils
 
 #### defaults(dest, defaultValues[, mapArrays = false])
 
@@ -95,6 +97,8 @@ foos()
 //   baz: ko.observable('baz')
 // }
 ```
+
+### Prototype Functions for Observables
 
 #### observable.fn.increment/decrement([n = 1])
 
