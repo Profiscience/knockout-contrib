@@ -21,7 +21,7 @@
 
 ### Utils
 
-#### defaults(dest, defaultValues[, mapArrays = false])
+###### defaults(dest, defaultValues[, mapArrays = false])
 
 Creates observables for enumerable string properties of `defaultValues` where undefined in the destination object.
 
@@ -35,7 +35,7 @@ foos()
 // { foo: 'foo', bar: 'bar' }
 ```
 
-#### fromJS(src[, mapArrays = false])
+###### fromJS(src[, mapArrays = false])
 
 Creates a tree of observables from `src`.
 
@@ -65,7 +65,7 @@ ko.utils.fromJS(foos, true)
 // }
 ```
 
-#### merge(dest, src[, mapArrays = false])
+###### merge(dest, src[, mapArrays = false])
 
 For each enumerable property of src,
   a) creates an observable when undefined on dest
@@ -100,7 +100,7 @@ foos()
 
 ### Prototype Functions for Observables
 
-#### observable.fn.increment/decrement([n = 1])
+###### observable.fn.increment/decrement([n = 1])
 
 increments/decrements numeric observables.
 
@@ -115,7 +115,7 @@ foo()
 // 1
 ```
 
-#### observable.fn.subscribeOnce(fn)
+###### observable.fn.subscribeOnce(fn)
 
 Creates a subscription that is called once and then disposed.
 
@@ -131,6 +131,6 @@ foo(2)
 // nothing...
 ```
 
-#### observable.fn.toString()
+###### observable.fn.toString()
 
 Make debugging in the console much nicer; you won't ever need to actually call this.
