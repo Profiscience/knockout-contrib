@@ -1,6 +1,6 @@
 {
   "name": "ko-contrib-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Handy Utilities for Knockout JS",
   "main": "index.js",
   "scripts": {
