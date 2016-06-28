@@ -56,6 +56,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _knockout = __webpack_require__(1);
 	
 	var _knockout2 = _interopRequireDefault(_knockout);
@@ -83,6 +87,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	_knockout2.default.utils.defaults = _defaults2.default;
 	_knockout2.default.utils.fromJS = _fromJS2.default;
 	_knockout2.default.utils.merge = _merge2.default;
+	
+	exports.default = {
+	  defaults: _defaults2.default,
+	  fromJS: _fromJS2.default,
+	  merge: _merge2.default
+	};
 
 /***/ },
 /* 1 */

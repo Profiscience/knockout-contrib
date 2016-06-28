@@ -10,3 +10,9 @@ import './toString'
 ko.utils.defaults = defaults
 ko.utils.fromJS = fromJS
 ko.utils.merge = merge
+
+export default {
+  defaults,
+  fromJS,
+  merge
+}
