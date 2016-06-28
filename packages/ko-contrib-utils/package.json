@@ -2,7 +2,7 @@
   "name": "ko-contrib-utils",
   "version": "0.1.2",
   "description": "Handy Utilities for Knockout JS",
-  "main": "index.js",
+  "main": "dist/ko-contrib-utils.js",
   "scripts": {
     "test": "export NODE_ENV=test; nyc --reporter=lcov --reporter=html ava --verbose --serial",
     "test:watch": "ava --watch",
