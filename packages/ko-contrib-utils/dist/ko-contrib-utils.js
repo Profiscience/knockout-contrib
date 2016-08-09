@@ -59,36 +59,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.merge = exports.fromJS = exports.defaults = undefined;
+	exports.merge = exports.fromJS = exports.defaults = exports.cast = undefined;
 	
 	var _knockout = __webpack_require__(1);
 	
 	var _knockout2 = _interopRequireDefault(_knockout);
 	
-	var _defaults = __webpack_require__(2);
+	var _cast = __webpack_require__(2);
+	
+	var _cast2 = _interopRequireDefault(_cast);
+	
+	var _defaults = __webpack_require__(3);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
-	var _fromJS = __webpack_require__(3);
+	var _fromJS = __webpack_require__(4);
 	
 	var _fromJS2 = _interopRequireDefault(_fromJS);
 	
-	var _merge = __webpack_require__(4);
+	var _merge = __webpack_require__(5);
 	
 	var _merge2 = _interopRequireDefault(_merge);
-	
-	__webpack_require__(5);
 	
 	__webpack_require__(6);
 	
 	__webpack_require__(7);
 	
+	__webpack_require__(8);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	_knockout2.default.utils.cast = _cast2.default;
 	_knockout2.default.utils.defaults = _defaults2.default;
 	_knockout2.default.utils.fromJS = _fromJS2.default;
 	_knockout2.default.utils.merge = _merge2.default;
 	
+	exports.cast = _cast2.default;
 	exports.defaults = _defaults2.default;
 	exports.fromJS = _fromJS2.default;
 	exports.merge = _merge2.default;
@@ -108,9 +114,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.default = cast;
+	
+	var _knockout = __webpack_require__(1);
+	
+	var _knockout2 = _interopRequireDefault(_knockout);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function cast(src, defaultValue) {
+	  if (isUndefined(src)) {
+	    src = _knockout2.default.observable();
+	  }
+	
+	  if (isUndefined(src()) && defaultValue) {
+	    src(defaultValue);
+	  }
+	
+	  return src;
+	}
+	
+	function isUndefined(foo) {
+	  return typeof foo === 'undefined';
+	}
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.default = defaults;
 	
-	var _fromJS = __webpack_require__(3);
+	var _fromJS = __webpack_require__(4);
 	
 	var _fromJS2 = _interopRequireDefault(_fromJS);
 	
@@ -131,7 +170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -174,7 +213,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -188,7 +227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _knockout2 = _interopRequireDefault(_knockout);
 	
-	var _fromJS = __webpack_require__(3);
+	var _fromJS = __webpack_require__(4);
 	
 	var _fromJS2 = _interopRequireDefault(_fromJS);
 	
@@ -240,7 +279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -270,7 +309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -291,7 +330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
