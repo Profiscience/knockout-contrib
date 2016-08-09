@@ -10,6 +10,7 @@
 ### Table of Contents
 
 * Utils
+  - [ko.utils.cast](#castsrc-defaultvalue)
   - [ko.utils.defaults](#defaultsdest-defaultvalues-maparrays--false)
   - [ko.utils.fromJS](#fromjssrc-maparrays--false)
   - [ko.utils.merge](#mergedest-src-maparrays--false)
@@ -20,6 +21,21 @@
   - [ko.observable.fn.toString](#observablefntostring)
 
 ### Utils
+
+###### cast(src[, defaultValue])
+
+If `src` IS an observable
+  - and src IS NOT undefined OR NO defaultValue is provided, src is returned
+  - and src IS undefined AND a defaultValue is provided, src is set to the defaultValue and returned
+
+If `src` IS NOT an observable, a new observable is returned and then the previous logic takes over.
+
+```javascript
+function(someOptionalParam) {
+  this.obs = ko.utils.cast(someOptionalParam, 'some default value')
+  // obs will be observable regardless of what was passed in
+}
+```
 
 ###### defaults(dest, defaultValues[, mapArrays = false])
 
@@ -63,21 +79,6 @@ ko.utils.fromJS(foos, true)
 //     ])
 //   }
 // }
-```
-
-###### cast(src[, defaultValue])
-
-If `src` IS an observable
-  - and src IS NOT undefined OR NO defaultValue is provided, src is returned
-  - and src IS undefined AND a defaultValue is provided, src is set to the defaultValue and returned
-
-If `src` IS NOT an observable, a new observable is returned and then the previous logic takes over.
-
-```javascript
-function(someOptionalParam) {
-  this.obs = ko.utils.cast(someOptionalParam, 'some default value')
-  // obs will be observable regardless of what was passed in
-}
 ```
 
 ###### merge(dest, src[, mapArrays = false])
