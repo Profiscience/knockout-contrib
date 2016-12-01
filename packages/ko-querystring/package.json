@@ -1,0 +1,42 @@
+{
+  "name": "ko-query",
+  "version": "1.0.0",
+  "description": "Query(string) Abstraction for KnockoutJS",
+  "main": "dist/ko-query.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "lint": "eslint --max-warnings=0 *.js",
+    "format": "eslint --fix --max-warnings=0 *.js",
+    "test": "karma start",
+    "test:watch": "karma start karma.watch.js"
+  },
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "params",
+    "query",
+    "querystring"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "coveralls": "^2.11.15",
+    "eslint": "^3.11.1",
+    "eslint-config-profiscience": "^1.0.1",
+    "isparta-loader": "^2.0.0",
+    "jquery": "^3.1.1",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-tap": "^3.1.1",
+    "karma-webpack": "^1.8.0",
+    "knockout": "^3.4.1",
+    "tape": "^4.6.3",
+    "webpack": "^1.13.3"
+  }
+}

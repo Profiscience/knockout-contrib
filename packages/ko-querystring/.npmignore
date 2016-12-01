@@ -1,0 +1,16 @@
+.DS_Store
+.chrome/
+.git/
+node_modules/
+coverage/
+src/
+
+.eslintignore
+.eslintrc
+.gitignore
+.travis.yml
+bower.json
+test.js
+karma.*
+webpack.*
+npm-debug.log
