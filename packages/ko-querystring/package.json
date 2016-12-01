@@ -1,6 +1,6 @@
 {
   "name": "ko-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Query(string) Abstraction for KnockoutJS",
   "main": "dist/ko-query.js",
   "scripts": {
