@@ -41,6 +41,16 @@ export default class Query {
     return p
   }
 
+  setDefaults(d) {
+    const oldDefaults = JSON.parse(JSON.stringify(this._defaults)) // poor man's clone...
+    Object.assign(this._defaults, d)
+    Object.keys(d).forEach((k) => {
+      if (typeof this[k]() === 'undefined' || this[k]() === oldDefaults[k]) {
+        this[k](d[k])
+      }
+    })
+  }
+
   toJS() {
     return ko.toJS(query[this._group])
   }

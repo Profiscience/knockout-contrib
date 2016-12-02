@@ -84,6 +84,27 @@ ko.components.register('test', {
       t.end()
     })
 
+    test('#setDefaults', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+
+      const query = new Query({ foo: 'foo', bar: 'bar' })
+
+      query.setDefaults({
+        foo: 'notfoo',
+        bar: 'notbar'
+      })
+
+      t.equals('notfoo', query.foo(), '#setDefaults updates query params w/ default value to new default')
+      t.equals('foo', query.bar(), '#setDefaults leaves query params that are non-default alone')
+
+      query.clear()
+
+      t.deepEquals({ foo: 'notfoo', bar: 'notbar' }, query.toJS(), 'set defaults actually sets new defaults')
+
+      query.dispose()
+      t.end()
+    })
+
     test('#toJS', (t) => {
       history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
 
@@ -99,7 +120,7 @@ ko.components.register('test', {
       history.replaceState(null, null, location.pathname + '?{"foo": "notfoo", "bar": "notbar"}')
       const defaults = { foo: 'foo', bar: 'bar' }
       const query = new Query(defaults)
-      
+
       query.clear()
 
       t.deepEquals(defaults, query.toJS(), '#clear() resets defaults')
