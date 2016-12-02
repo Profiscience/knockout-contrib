@@ -1,8 +1,8 @@
 {
-  "name": "ko-query",
+  "name": "ko-querystring",
   "version": "1.0.1",
   "description": "Query(string) Abstraction for KnockoutJS",
-  "main": "dist/ko-query.js",
+  "main": "dist/ko-querystring.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",

@@ -14,8 +14,8 @@ function makeConfig(o) {
 
     output: {
       path: 'dist',
-      filename: minify ? 'ko-query.min.js' : 'ko-query.js',
-      library:  'ko-query',
+      filename: minify ? 'ko-querystring.min.js' : 'ko-querystring.js',
+      library:  'ko-querystring',
       libraryTarget: 'umd'
     },
 
