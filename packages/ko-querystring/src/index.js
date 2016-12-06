@@ -30,6 +30,10 @@ export default class Query {
         if (isUndefined(query[this._group][name])) {
           const d = this._defaults[name]
           query[this._group][name] = Query.createQuerySetterObservable(group, name, d, init[name])
+          Object.assign(query[this._group][name], {
+            isDefault: ko.pureComputed(() => query[this._group][name]() === d),
+            clear() { query[this._group][name](d) }
+          })
         }
         return query[this._group][name]
       }
@@ -86,7 +90,11 @@ export default class Query {
   }
 
   static writeQueryString() {
-    const _query = ko.toJS(query)
+    const _query = {}
+
+    for (const [g, q] of Object.entries(query)) {
+      _query[g] = ko.toJS(omit(q, (v) => isUndefined(v()) || v.isDefault()))
+    }
 
     if (_query[undefined]) {
       Object.assign(_query, _query[undefined])

@@ -60,12 +60,16 @@ ko.components.register('test', {
     })
 
     test('writability', (t) => {
-      const query = new Query()
+      const query = new Query({ foo: 'foo' })
+
+      query.foo('bar')
+      ko.tasks.runEarly()
+
+      t.equals('bar', Query.parse(location.search.substring(1)).foo, 'writes changes to querystring')
 
       query.foo('foo')
       ko.tasks.runEarly()
-
-      t.equals('foo', Query.parse(location.search.substring(1)).foo, 'writes changes to querystring')
+      t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits defaults from querystring')
 
       query.dispose()
       t.end()
@@ -79,6 +83,34 @@ ko.components.register('test', {
       query.foo(undefined)
 
       t.equals('foo', query.toJS().foo, 'falls back to default value when set to undefined')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('query[param]#isDefault', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"foo": "bar"}')
+
+      const query = new Query({ foo: 'foo' })
+
+      t.notOk(query.foo.isDefault(), 'query.param.isDefault() is false when not default')
+
+      query.foo('foo')
+
+      t.ok(query.foo.isDefault(), 'query[param]#isDefault() is true when default')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('query[param]#clear', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"foo": "bar"}')
+
+      const query = new Query({ foo: 'foo' })
+
+      query.foo.clear()
+
+      t.equals('foo', query.foo(), 'query[param]#clear resets param to default value')
 
       query.dispose()
       t.end()
