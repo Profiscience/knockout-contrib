@@ -110,7 +110,30 @@ ko.components.register('test', {
 
       const query = new Query()
 
-      t.deepEquals({ foo: 'foo' }, query.toJS(), 'return unwrapped query object')
+      t.deepEquals({ foo: 'foo' }, query.toJS(), 'returns unwrapped query object')
+
+      query.foo(undefined)
+
+      t.deepEquals({}, query.toJS(), 'omits undefined values')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('#toObservable', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
+
+      const query = new Query()
+      const q = query.asObservable()
+
+      t.ok(ko.isObservable(q), 'returns observable')
+      t.deepEquals({ foo: 'foo' }, q(), 'contains query')
+
+      query.foo(undefined)
+      t.deepEquals({}, q(), 'omits undefined values')
+
+      query.foo('bar')
+      t.deepEquals({ foo: 'bar' }, q(), 'updates correctly')
 
       query.dispose()
       t.end()

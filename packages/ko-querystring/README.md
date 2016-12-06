@@ -53,6 +53,13 @@ Set or change the default values for a query.
 ### query.clear
 Reset all the query params to their defined defaults, or undefined.
 
+### query.toJS()
+Returns unwrapped query object.
+
+### query.asObservable()
+Return observable query object.
+i.e. ko.observable({ foo: 'foo' }) instead of { foo: ko.observable('foo') }
+
 ### query.dispose
 Disposes the query object and cleans the querystring. Don't forget to clean up after 'yo self.
 

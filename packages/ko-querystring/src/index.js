@@ -1,6 +1,5 @@
 import ko from 'knockout'
-
-const isUndefined = (x) => typeof x === 'undefined'
+import { isUndefined, omit } from './utils'
 
 const query = {}
 
@@ -52,7 +51,11 @@ export default class Query {
   }
 
   toJS() {
-    return ko.toJS(query[this._group])
+    return omit(ko.toJS(query[this._group]), isUndefined)
+  }
+
+  asObservable() {
+    return ko.pureComputed(() => this.toJS())
   }
 
   clear() {
