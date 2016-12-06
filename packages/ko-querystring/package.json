@@ -1,6 +1,6 @@
 {
   "name": "ko-querystring",
-  "version": "1.0.0-pre.2",
+  "version": "1.0.0-pre.3",
   "description": "Query(string) Abstraction for KnockoutJS",
   "main": "dist/ko-querystring.js",
   "scripts": {
