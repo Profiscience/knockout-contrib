@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import { isUndefined, omit } from './utils'
+import { isEmpty, isUndefined, omit } from './utils'
 
 const query = {}
 
@@ -93,7 +93,7 @@ export default class Query {
     const _query = {}
 
     for (const [g, q] of Object.entries(query)) {
-      _query[g] = ko.toJS(omit(q, (v) => isUndefined(v()) || v.isDefault()))
+      _query[g] = ko.toJS(omit(q, (v) => isUndefined(v()) || isEmpty(v()) || v.isDefault()))
     }
 
     if (_query[undefined]) {

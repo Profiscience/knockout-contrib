@@ -71,6 +71,14 @@ ko.components.register('test', {
       ko.tasks.runEarly()
       t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits defaults from querystring')
 
+      query.foo('')
+      ko.tasks.runEarly()
+      t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits empty strings from querystring')
+
+      query.foo([])
+      ko.tasks.runEarly()
+      t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits empty arrays from querystring')
+
       query.dispose()
       t.end()
     })
