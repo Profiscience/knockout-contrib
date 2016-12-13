@@ -58,6 +58,10 @@ export default class Query {
     return omit(ko.toJS(query[this._group]), isUndefined)
   }
 
+  toString() {
+    return Query.stringify(this.toJS())
+  }
+
   asObservable() {
     return ko.pureComputed(() => this.toJS())
   }

@@ -56,6 +56,9 @@ Reset all the query params to their defined defaults, or undefined.
 ### query.toJS()
 Returns unwrapped query object.
 
+### query.toString()
+Returns stringified query.
+
 ### query.asObservable()
 Return observable query object.
 i.e. ko.observable({ foo: 'foo' }) instead of { foo: ko.observable('foo') }

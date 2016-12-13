@@ -73,7 +73,7 @@ ko.components.register('test', {
 
       query.foo('')
       ko.tasks.runEarly()
-      t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits empty strings from querystring')
+      t.equals(undefined, Query.parse(location.search.substring(1)).foo, 'omits empty strings from querystring when not ')
 
       query.foo([])
       ko.tasks.runEarly()
@@ -160,7 +160,18 @@ ko.components.register('test', {
       t.end()
     })
 
-    test('#toObservable', (t) => {
+    test('#toString', (t) => {
+      history.replaceState(null, null, location.pathname)
+
+      const query = new Query({ foo: 'foo' })
+
+      t.deepEquals(Query.stringify({ foo: 'foo' }), query.toString(), 'returns stringified query object')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('#asObservable', (t) => {
       history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
 
       const query = new Query()
