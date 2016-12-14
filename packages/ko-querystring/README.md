@@ -47,6 +47,12 @@ define all the query params you will use. Simply access them, and they are there
 Params will be initialized from the querystring if available, and their default
 value or undefined if not.
 
+### query[param].clear()
+Resets param to its default or undefined.
+
+### query[param].isDefault
+Observable value that is true if the param is its default value, otherwise false.
+
 ### query.setDefaults(defaults)
 Set or change the default values for a query.
 
