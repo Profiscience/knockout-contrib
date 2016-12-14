@@ -2,6 +2,7 @@ import ko from 'knockout'
 import { isEmpty, isUndefined, omit } from './utils'
 
 const query = {}
+const links = {}
 
 export default class Query {
   constructor(defaults = {}, group) {
@@ -10,6 +11,9 @@ export default class Query {
 
     if (isUndefined(query[this._group])) {
       query[this._group] = {}
+      links[this._group] = 1
+    } else {
+      links[this._group]++
     }
 
     let fromQS = Query.parse(Query.getQueryString())
@@ -22,7 +26,7 @@ export default class Query {
       defaults,
       fromQS)
 
-    const p = new Proxy(this, {
+    const { proxy, revoke } = Proxy.revocable(this, {
       get: (_, name) => {
         if (name[0] === '_' || !isUndefined(this[name])) {
           return this[name]
@@ -39,9 +43,11 @@ export default class Query {
       }
     })
 
-    Object.keys(init).forEach((k) => p[k])
+    this.revoke = revoke
 
-    return p
+    Object.keys(init).forEach((k) => proxy[k])
+
+    return proxy
   }
 
   setDefaults(d) {
@@ -71,8 +77,11 @@ export default class Query {
   }
 
   dispose() {
-    delete query[this._group]
-    Query.queueQueryStringWrite()
+    if (--links[this._group] === 0) {
+      delete query[this._group]
+      Query.queueQueryStringWrite()
+    }
+    this.revoke()
   }
 
   static parse(str) {

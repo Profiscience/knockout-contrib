@@ -203,6 +203,35 @@ ko.components.register('test', {
       t.end()
     })
 
+    test('#dispose', (t) => {
+      history.replaceState(null, null, location.pathname)
+
+      const a1 = new Query({}, 'a')
+      const a2 = new Query({}, 'a')
+
+      a1.foo('foo')
+      ko.tasks.runEarly()
+
+      a1.dispose()
+      ko.tasks.runEarly()
+
+      t.deepEquals({ a: { foo: 'foo' } }, Query.parse(location.search.substring(1)), 'does not remove query if linked group remains')
+
+      try {
+        a1.foo('notfoo')
+        t.fail('does not dispose')
+      } catch (e) {
+        t.pass('disposes query')
+      }
+
+      a2.dispose()
+      ko.tasks.runEarly()
+
+      t.deepEquals({}, Query.parse(location.search.substring(1)), 'removes query if no linked groups remains')
+
+      t.end()
+    })
+
     test('grouped/multiple queries', (t) => {
       const a = new Query({}, 'a')
       const b = new Query({}, 'b')
@@ -228,11 +257,19 @@ ko.components.register('test', {
 
       ko.tasks.runEarly()
 
-      t.equals('foo', a2.foo())
-      t.equals('bar', a1.bar())
+      t.equals('foo', a2.foo(), 'links via setter')
+      t.equals('bar', a1.bar(), 'links via defaults')
 
       a1.dispose()
+
+      const a3 = new Query({ baz: 'baz' }, 'a')
+
+      ko.tasks.runEarly()
+
+      t.equals('baz', a2.baz(), 'works after a linked query is disposed')
+
       a2.dispose()
+      a3.dispose()
       t.end()
     })
   }
