@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "lint": "eslint --max-warnings=0 *.js",
-    "format": "eslint --fix --max-warnings=0 *.js",
+    "lint": "eslint --max-warnings=0 *.js src",
     "test": "karma start",
     "test:watch": "karma start karma.watch.js",
     "prepublish": "npm run build"
