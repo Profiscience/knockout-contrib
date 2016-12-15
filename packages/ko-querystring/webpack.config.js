@@ -24,12 +24,7 @@ function makeConfig(o) {
         {
           test: /\.js$/,
           exclude: /(node_modules)/,
-          loader: 'babel',
-          query: {
-            cacheDirectory: true,
-            plugins: ['transform-es2015-modules-commonjs'],
-            presets: ['es2015']
-          }
+          loader: 'babel'
         }
       ]
     },
