@@ -39,7 +39,11 @@
       }
 
       obs = _knockout2.default.observableArray(obs);
-    } else if (obj && obj.constructor === Object) {
+    } else if (obj instanceof Date || obj instanceof RegExp) {
+      obs = _knockout2.default.observable(obj);
+    } else if (obj instanceof Function) {
+      obs = obj;
+    } else if (obj instanceof Object) {
       obs = {};
 
       for (var p in obj) {
