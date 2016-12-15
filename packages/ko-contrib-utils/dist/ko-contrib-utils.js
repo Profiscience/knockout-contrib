@@ -291,7 +291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_knockout2.default.observable.fn.increment = _knockout2.default.computed.fn.increment = function () {
-	  var amt = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+	  var amt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 	
 	  if (!_knockout2.default.isWritableObservable(this)) {
 	    throw new Error('ko.computed.fn.increment requires a writable computed');
@@ -300,7 +300,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	_knockout2.default.observable.fn.decrement = _knockout2.default.computed.fn.decrement = function () {
-	  var amt = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+	  var amt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 	
 	  if (!_knockout2.default.isWritableObservable(this)) {
 	    throw new Error('ko.computed.fn.decrement requires a writable computed');
