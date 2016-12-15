@@ -94,16 +94,16 @@ module.exports = function(config) {
 
       module: {
         preLoaders
+      },
+
+      isparta: {
+        embedSource: true,
+        noAutoWrap: true
       }
     },
 
     webpackMiddleware: {
       noInfo: true
-    },
-
-    isparta: {
-      embedSource: true,
-      noAutoWrap: true
     }
   })
 }
