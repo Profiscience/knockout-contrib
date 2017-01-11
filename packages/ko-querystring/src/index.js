@@ -4,7 +4,7 @@ import { isEmpty, isUndefined, omit } from './utils'
 const query = {}
 const links = {}
 
-export default class Query {
+class Query {
   constructor(defaults = {}, group) {
     this._group = group
     this._defaults = defaults
@@ -32,11 +32,10 @@ export default class Query {
           return this[name]
         }
         if (isUndefined(query[this._group][name])) {
-          const d = this._defaults[name]
-          query[this._group][name] = Query.createQuerySetterObservable(group, name, d, init[name])
+          query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name])
           Object.assign(query[this._group][name], {
-            isDefault: ko.pureComputed(() => query[this._group][name]() === d),
-            clear() { query[this._group][name](d) }
+            isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
+            clear: () => { query[this._group][name](this._defaults[name]) }
           })
         }
         return query[this._group][name]
@@ -58,6 +57,7 @@ export default class Query {
         this[k](d[k])
       }
     })
+    ko.tasks.runEarly()
   }
 
   toJS() {
@@ -82,17 +82,6 @@ export default class Query {
       Query.queueQueryStringWrite()
     }
     this.revoke()
-  }
-
-  static parse(str) {
-    return JSON.parse(decodeURIComponent(str || '{}'))
-  }
-
-  static stringify(obj) {
-    const json = JSON.stringify(obj)
-    return json === '{}'
-      ? ''
-      : encodeURIComponent(JSON.stringify(obj))
   }
 
   static getQueryString() {
@@ -161,3 +150,16 @@ export default class Query {
     })
   }
 }
+
+Query.parse = (str) => {
+  return JSON.parse(decodeURIComponent(str || '{}'))
+}
+
+Query.stringify = (obj) => {
+  const json = JSON.stringify(obj)
+  return json === '{}'
+    ? ''
+    : encodeURIComponent(JSON.stringify(obj))
+}
+
+export default Query
