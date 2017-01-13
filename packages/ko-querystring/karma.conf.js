@@ -40,10 +40,10 @@ const preLoaders = [
   }
 ]
 if (coverage) {
-  preLoaders[0].exclude.push(path.resolve('dist'))
+  preLoaders[0].exclude.push(path.resolve('src'))
   preLoaders.push({
     test: /\.js$/,
-    include: path.resolve('dist'),
+    include: path.resolve('src'),
     loader: 'isparta'
   })
 }
