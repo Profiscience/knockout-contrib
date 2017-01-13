@@ -272,6 +272,27 @@ ko.components.register('test', {
       a3.dispose()
       t.end()
     })
+
+    test('Query#setParser({ parse, stringify })', (t) => {
+      history.replaceState(null, null, location.pathname + '?foo=foo')
+
+      Query.setParser({
+        parse: (str) => ({ foo: str.replace('foo=', '') }),
+        stringify: (obj) => 'foo=' + obj.foo
+      })
+
+      const q = new Query()
+
+      t.equals(q.foo(), 'foo', 'uses custom parse function')
+
+      q.foo('bar')
+      ko.tasks.runEarly()
+
+      t.equals(window.location.search, '?foo=bar', 'uses custom stringifier')
+
+      q.dispose()
+      t.end()
+    })
   }
 })
 

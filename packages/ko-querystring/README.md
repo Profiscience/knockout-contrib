@@ -40,6 +40,23 @@ It also allows you to link queries if they are given the same group name.
 __NOTE:__ Params that are equal to their default will _not_ be displayed in the
 querystring. Less === More.
 
+### Query.setParser({ parse, stringify })
+By default, this lib is dumb, and it **does not** use valid querystrings. Instead,
+it uses `JSON.stringify` and `encodeURIComponent`, and vice versa. This function allows
+you to define a custom parser.
+
+e.g.
+
+```javascript
+import Query from 'ko-querystring'
+import rison from 'rison' // https://github.com/Nanonid/rison
+
+Query.setParser({
+  parse: rison.decode_object,
+  stringify: rison.encode_object
+})
+```
+
 ### query[param]
 Query params are created via super-cool ES6 proxies, so you don't need to explicitly
 define all the query params you will use. Simply access them, and they are there.
@@ -71,19 +88,6 @@ i.e. ko.observable({ foo: 'foo' }) instead of { foo: ko.observable('foo') }
 
 ### query.dispose()
 Disposes the query object and cleans the querystring. Don't forget to clean up after 'yo self.
-
-## Using a custom querystring parser
-By default, this lib is dumb, and it **does not** use valid querystrings. Instead,
-it uses `JSON.stringify` and `encodeURIComponent`, and vice versa. To use another
-parser, just replace the `parse` and `stringify` functions on `Query`.
-
-```javascript
-import Query from 'ko-querystring'
-import rison from 'rison' // https://github.com/Nanonid/rison
-
-Query.parse = rison.decode_object
-Query.stringify = rison.encode_object
-```
 
 ## MOAR!
 

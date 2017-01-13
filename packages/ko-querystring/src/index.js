@@ -4,6 +4,8 @@ import { isEmpty, isUndefined, omit } from './utils'
 const query = {}
 const links = {}
 
+let _parse, _stringify
+
 class Query {
   constructor(defaults = {}, group) {
     this._group = group
@@ -84,6 +86,28 @@ class Query {
     this.revoke()
   }
 
+  static get defaultParser() {
+    return {
+      parse: (str) => JSON.parse(decodeURIComponent(str || '{}')),
+      stringify: (obj) => JSON.stringify(obj) === '{}'
+          ? ''
+          : encodeURIComponent(JSON.stringify(obj))
+    }
+  }
+
+  static get parse() {
+    return _parse || this.defaultParser.parse
+  }
+
+  static get stringify() {
+    return _stringify || this.defaultParser.stringify
+  }
+
+  static setParser(parser) {
+    _parse = parser.parse
+    _stringify = parser.stringify
+  }
+  
   static getQueryString() {
     const matches = /\?([^#]*)/.exec(location.search + location.hash)
     return matches
@@ -149,17 +173,6 @@ class Query {
       }
     })
   }
-}
-
-Query.parse = (str) => {
-  return JSON.parse(decodeURIComponent(str || '{}'))
-}
-
-Query.stringify = (obj) => {
-  const json = JSON.stringify(obj)
-  return json === '{}'
-    ? ''
-    : encodeURIComponent(JSON.stringify(obj))
 }
 
 export default Query
