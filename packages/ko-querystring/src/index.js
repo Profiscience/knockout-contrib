@@ -39,6 +39,9 @@ class Query {
             isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
             clear: () => { query[this._group][name](this._defaults[name]) }
           })
+          if (this._forceRecompute) {
+            ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
+          }
         }
         return query[this._group][name]
       }
@@ -71,7 +74,14 @@ class Query {
   }
 
   asObservable() {
-    return ko.pureComputed(() => this.toJS())
+    if (!this._forceRecompute) {
+      this._forceRecompute = ko.observable(false)
+    }
+
+    return ko.pureComputed(() => {
+      this._forceRecompute()
+      return this.toJS()
+    })
   }
 
   clear() {
@@ -107,7 +117,7 @@ class Query {
     _parse = parser.parse
     _stringify = parser.stringify
   }
-  
+
   static getQueryString() {
     const matches = /\?([^#]*)/.exec(location.search + location.hash)
     return matches

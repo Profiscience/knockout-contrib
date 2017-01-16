@@ -172,10 +172,20 @@ ko.components.register('test', {
     })
 
     test('#asObservable', (t) => {
-      history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
+      t.plan(5)
+
+      history.replaceState(null, null, location.pathname)
 
       const query = new Query()
       const q = query.asObservable()
+
+      const killMe = q.subscribe(() => {
+        t.deepEquals({ foo: 'foo' }, q(), 'is subscribe-able to new query params')
+        killMe.dispose()
+      })
+
+      query.foo('foo')
+      ko.tasks.runEarly()
 
       t.ok(ko.isObservable(q), 'returns observable')
       t.deepEquals({ foo: 'foo' }, q(), 'contains query')
@@ -187,7 +197,6 @@ ko.components.register('test', {
       t.deepEquals({ foo: 'bar' }, q(), 'updates correctly')
 
       query.dispose()
-      t.end()
     })
 
     test('#clear', (t) => {
