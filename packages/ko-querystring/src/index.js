@@ -37,7 +37,9 @@ class Query {
           query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name])
           Object.assign(query[this._group][name], {
             isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
-            clear: () => { query[this._group][name](this._defaults[name]) }
+            clear: () => {
+              query[this._group][name](this._defaults[name])
+            }
           })
           if (this._forceRecompute) {
             ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
@@ -91,7 +93,7 @@ class Query {
   dispose() {
     if (--links[this._group] === 0) {
       delete query[this._group]
-      Query.queueQueryStringWrite()
+      Query.writeQueryString()
     }
     this.revoke()
   }
@@ -157,14 +159,17 @@ class Query {
   }
 
   static queueQueryStringWrite() {
-    if (this._updateQueued) {
-      return
+    if (!this._queuedUpdate) {
+      this._queuedUpdate = new Promise((resolve) => {
+        ko.tasks.schedule(() => {
+          Query.writeQueryString()
+          resolve()
+          this._queuedUpdate = false
+        })
+      })
     }
-    ko.tasks.schedule(() => {
-      Query.writeQueryString()
-      this._updateQueued = false
-    })
-    this._updateQueued = true
+
+    return this._queuedUpdate
   }
 
   static createQuerySetterObservable(group, name, defaultVal, initVal) {
