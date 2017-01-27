@@ -96,6 +96,41 @@ ko.components.register('test', {
       t.end()
     })
 
+    test('advanced', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"foo": "notfoo"}')
+
+      const query = new Query({
+        foo: {
+          default: 'foo',
+          initial: 'bar'
+        },
+        bar: {
+          default: 'bar',
+          initial: 'notbar'
+        },
+        baz: {
+          default: [],
+          coerce: (v) => v.length === 0 ? ['baz'] : v
+        }
+      })
+
+      let q = query.toJS()
+
+      t.equals('notfoo', q.foo, 'does not use the default or initial value when in querystring')
+      t.equals('notbar', q.bar, 'uses the initial value for undefined query params')
+
+      query.clear()
+      ko.tasks.runEarly()
+
+      q = query.toJS()
+
+      t.equals('foo', q.foo, 'uses default value')
+      t.equals('baz', q.baz[0], 'corercion works')
+
+      query.dispose()
+      t.end()
+    })
+
     test('query[param]#isDefault', (t) => {
       history.replaceState(null, null, location.pathname + '?{"foo": "bar"}')
 

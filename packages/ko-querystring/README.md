@@ -31,11 +31,38 @@ query.foo('foo')
 
 ## API
 
-### new Query(defaults[, name])
-Create a new query object using the `new` keyword, and pass the default values,
+### new Query([config = {}, name])
+Create a new query object using the `new` keyword, and pass a configuration object,
 and optionally a name to group the query with. This allows you to create multiple
 query objects with the same params, and they will not interfere with each other.
 It also allows you to link queries if they are given the same group name.
+
+The configuration object contains key/value pairs of querystring param names and
+their config, respectively. A querystring param config may be an object that
+contains any combination of three props, `default`, `initial`, and `coerce`, or
+a value which will be used as the default and initial value. The `coerce` function
+allows you to transform a value before it is fully set.
+
+```javascript
+const query = new Query({
+  // query param named foo
+  foo: {
+    default: 'foo',
+    initial: 'bar',
+    coerce: (v) => v === 'baz' ? 'qux' : v
+  },
+
+  bar: 'bar'
+})
+```
+
+In this case, the foo param will be set to "bar" initially — if not already in
+the querystring — but call to `query.clear()` will then set it to "foo". The `coerce`
+function disallows setting the param to "baz", and attempting to will cause it
+to be set to "qux" instead.
+
+Params to not have to be defined; attempting to access a query param not defined
+in the config will create one on-the-fly and it will be `undefined` until set.
 
 __NOTE:__ Params that are equal to their default will _not_ be displayed in the
 querystring. Less === More.

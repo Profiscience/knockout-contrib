@@ -6,10 +6,35 @@ const links = {}
 
 let _parse, _stringify
 
+function getCoercions(config) {
+  const coercions = {}
+  Object.entries(config).forEach(([k, v]) => coercions[k] = v.coerce)
+  return coercions
+}
+
+function getDefaults(config) {
+  const defaults = {}
+  Object.entries(config).forEach(([k, v]) =>
+    defaults[k] = v.default || v.initial || v.coerce
+      ? v.default
+      : v)
+  return defaults
+}
+
+function getInitialValues(config) {
+  const inits = {}
+  Object.entries(config).forEach(([k, v]) =>
+    inits[k] = v.default || v.initial || v.coerce
+      ? v.initial || v.default
+      : v)
+  return inits
+}
+
 class Query {
-  constructor(defaults = {}, group) {
+  constructor(config = {}, group) {
     this._group = group
-    this._defaults = defaults
+    this._config = config
+    this._defaults = getDefaults(config)
 
     if (isUndefined(query[this._group])) {
       query[this._group] = {}
@@ -18,12 +43,10 @@ class Query {
       links[this._group]++
     }
 
+    const coercions = getCoercions(config)
+    const initialValues = getInitialValues(config)
     const fromQS = Query.fromQS(this._group)
-
-    const init = Object.assign(
-      {},
-      defaults,
-      fromQS)
+    const init = Object.assign({}, initialValues, fromQS)
 
     const { proxy, revoke } = Proxy.revocable(this, {
       get: (_, name) => {
@@ -31,7 +54,7 @@ class Query {
           return this[name]
         }
         if (isUndefined(query[this._group][name])) {
-          query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name])
+          query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name], coercions[name])
           Object.assign(query[this._group][name], {
             isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
             clear: () => {
@@ -174,7 +197,7 @@ class Query {
     return this._queuedUpdate
   }
 
-  static createQuerySetterObservable(group, name, defaultVal, initVal) {
+  static createQuerySetterObservable(group, name, defaultVal, initVal, coerce) {
     const obs = ko.observable(initVal)
 
     return ko.pureComputed({
@@ -184,6 +207,9 @@ class Query {
       write(v) {
         if (isUndefined(v)) {
           v = defaultVal
+        }
+        if (coerce) {
+          v = coerce(v)
         }
         obs(v)
         Query.queueQueryStringWrite()
