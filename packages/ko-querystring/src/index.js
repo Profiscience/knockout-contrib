@@ -18,10 +18,7 @@ class Query {
       links[this._group]++
     }
 
-    let fromQS = Query.parse(Query.getQueryString())
-    if (!isUndefined(group)) {
-      fromQS = fromQS[group]
-    }
+    const fromQS = Query.fromQS(this._group)
 
     const init = Object.assign(
       {},
@@ -125,6 +122,11 @@ class Query {
     return matches
       ? matches[1]
       : ''
+  }
+
+  static fromQS(group) {
+    const query = this.parse(this.getQueryString())
+    return isUndefined(group) ? query : query[group]
   }
 
   static writeQueryString() {

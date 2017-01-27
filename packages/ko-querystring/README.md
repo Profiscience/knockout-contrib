@@ -40,6 +40,9 @@ It also allows you to link queries if they are given the same group name.
 __NOTE:__ Params that are equal to their default will _not_ be displayed in the
 querystring. Less === More.
 
+### Query.fromQS([group])
+Returns JS object containing current query from URL — for group if any.
+
 ### Query.setParser({ parse, stringify })
 By default, this lib is dumb, and it **does not** use valid querystrings. Instead,
 it uses `JSON.stringify` and `encodeURIComponent`, and vice versa. This function allows
