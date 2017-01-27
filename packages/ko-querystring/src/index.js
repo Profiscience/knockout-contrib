@@ -8,13 +8,13 @@ let _parse, _stringify
 
 function getCoercions(config) {
   const coercions = {}
-  Object.entries(config).forEach(([k, v]) => coercions[k] = v.coerce)
+  Object.entries(config).forEach(([k, v = {}]) => coercions[k] = v.coerce)
   return coercions
 }
 
 function getDefaults(config) {
   const defaults = {}
-  Object.entries(config).forEach(([k, v]) =>
+  Object.entries(config).forEach(([k, v = {}]) =>
     defaults[k] = v.default || v.initial || v.coerce
       ? v.default
       : v)
@@ -23,7 +23,7 @@ function getDefaults(config) {
 
 function getInitialValues(config) {
   const inits = {}
-  Object.entries(config).forEach(([k, v]) =>
+  Object.entries(config).forEach(([k, v = {}]) =>
     inits[k] = v.default || v.initial || v.coerce
       ? v.initial || v.default
       : v)
