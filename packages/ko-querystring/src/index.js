@@ -6,116 +6,72 @@ const links = {}
 
 let _parse, _stringify
 
+function getCoercions(config) {
+  const coercions = {}
+  Object.entries(config).forEach(([k, v = {}]) => coercions[k] = v.coerce)
+  return coercions
+}
+
 function getDefaults(config) {
-  const ret = {}
-  Object.entries(config).forEach(([k, v]) => ret[k] = v.default)
-  return ret
+  const defaults = {}
+  Object.entries(config).forEach(([k, v = {}]) =>
+    defaults[k] = v.default || v.initial || v.coerce
+      ? v.default
+      : v)
+  return defaults
 }
 
 function getInitialValues(config) {
-  const ret = {}
-  Object.entries(config).forEach(([name, { initial }]) => {
-    if (initial) {
-      ret[name] = initial
-    }
-  })
-  return ret
-}
-
-function getSessionValues(config, group) {
-  return getBrowserStorageValues(config, group, sessionStorage)
-}
-
-function getLocalValues(config, group) {
-  return getBrowserStorageValues(config, group, localStorage)
-}
-
-function getBrowserStorageValues(config, group, store) {
-  const ret = {}
-  Object.keys(config).forEach((name) => {
-    const browserStorageKey = getBrowserStorageKey(name, group)
-    const fromSession = store.getItem(browserStorageKey)
-    if (fromSession) {
-      ret[name] = fromSession
-    }
-  })
-  return ret
-}
-
-function getBrowserStorageKey(name, group) {
-  let key = '_KO_QUERYSTRING_'
-  if (group) {
-    key += group + '_'
-  }
-  key += name
-  return key
-}
-
-function expandConfig(c) {
-  const ret = {}
-  Object.entries(c).forEach(([k, v]) => {
-    ret[k] = v.default || v.initial || v.coerce || v.session || v.local
-      ? v
-      : { default: v }
-    })
-  return ret
+  const inits = {}
+  Object.entries(config).forEach(([k, v = {}]) =>
+    inits[k] = v.default || v.initial || v.coerce
+      ? v.initial || v.default
+      : v)
+  return inits
 }
 
 class Query {
   constructor(config = {}, group) {
-    config = expandConfig(config)
-
-    if (isUndefined(query[group])) {
-      query[group] = {}
-      links[group] = 1
-    } else {
-      links[group]++
-    }
-
     this._group = group
+    this._config = config
     this._defaults = getDefaults(config)
 
-    const initials = Object.assign(
-      {},
-      this._defaults,
-      getInitialValues(config),
-      getSessionValues(config, group),
-      getLocalValues(config, group),
-      Query.fromQS(group))
+    if (isUndefined(query[this._group])) {
+      query[this._group] = {}
+      links[this._group] = 1
+    } else {
+      links[this._group]++
+    }
+
+    const coercions = getCoercions(config)
+    const initialValues = getInitialValues(config)
+    const fromQS = Query.fromQS(this._group)
+    const init = Object.assign({}, initialValues, fromQS)
 
     const { proxy, revoke } = Proxy.revocable(this, {
       get: (_, name) => {
         if (name[0] === '_' || !isUndefined(this[name])) {
           return this[name]
         }
-        if (isUndefined(query[group][name])) {
-          const _config = config[name] || {}
-          query[group][name] = Query.createQuerySetterObservable({
-            group,
-            name,
-            default: this._defaults[name],
-            initial: initials[name],
-            coerce: _config.coerce,
-            session: _config.session,
-            local: _config.local
-          })
-          Object.assign(query[group][name], {
-            isDefault: ko.pureComputed(() => query[group][name]() === this._defaults[name]),
+        if (isUndefined(query[this._group][name])) {
+          query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name], coercions[name])
+          Object.assign(query[this._group][name], {
+            isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
             clear: () => {
-              query[group][name](this._defaults[name])
+              query[this._group][name](this._defaults[name])
             }
           })
           if (this._forceRecompute) {
             ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
           }
         }
-        return query[group][name]
+        return query[this._group][name]
       }
     })
 
     this.revoke = revoke
 
-    Object.keys(initials).forEach((k) => proxy[k])
+    Object.keys(init).forEach((k) => proxy[k])
 
     return proxy
   }
@@ -244,23 +200,8 @@ class Query {
     return this._queuedUpdate
   }
 
-  static createQuerySetterObservable({
-    group,
-    name,
-    default: _default,
-    initial,
-    coerce,
-    session,
-    local
-  }) {
-    const obs = ko.observable(initial)
-    const key = getBrowserStorageKey(name, group)
-
-    if (session) {
-      sessionStorage.setItem(key, initial)
-    } else if (local) {
-      localStorage.setItem(key, initial)
-    }
+  static createQuerySetterObservable(group, name, defaultVal, initVal, coerce) {
+    const obs = ko.observable(initVal)
 
     return ko.pureComputed({
       read() {
@@ -268,19 +209,13 @@ class Query {
       },
       write(v) {
         if (isUndefined(v)) {
-          v = _default
+          v = defaultVal
         }
         if (coerce) {
           v = coerce(v)
         }
         obs(v)
         Query.queueQueryStringWrite()
-
-        if (session) {
-          sessionStorage.setItem(key, v)
-        } else if (local) {
-          localStorage.setItem(key, v)
-        }
       }
     })
   }

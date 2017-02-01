@@ -52,7 +52,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
 
-    frameworks: ['tap', 'sinon'],
+    frameworks: ['tap'],
 
     files: ['test.js'],
 
@@ -93,8 +93,7 @@ module.exports = function(config) {
       },
 
       module: {
-        preLoaders,
-        noparse: [/sinon/]
+        preLoaders
       },
 
       isparta: {
