@@ -1,3 +1,5 @@
+/* global sinon */
+
 import ko from 'knockout'
 import test from 'tape'
 import $ from 'jquery'
@@ -96,6 +98,60 @@ ko.components.register('test', {
       t.end()
     })
 
+    test('session', (t) => {
+      const sessionStorageSpy = sinon.spy(window.sessionStorage, 'setItem')
+
+      const query1 = new Query({
+        foo: {
+          default: 'foo',
+          session: true
+        }
+      })
+
+      t.true(sessionStorageSpy.called, 'saves value in sessionStorage')
+
+      query1.dispose()
+
+      const query2 = new Query({
+        foo: {
+          session: true
+        }
+      })
+
+      t.equals(query2.foo(), 'foo', 'initializes from sessionStorage')
+
+      query2.dispose()
+
+      t.end()
+    })
+
+    test('local', (t) => {
+      const localStorageSpy = sinon.spy(window.localStorage, 'setItem')
+
+      const query1 = new Query({
+        foo: {
+          default: 'foo',
+          local: true
+        }
+      })
+
+      t.true(localStorageSpy.called, 'saves value in localStorage')
+
+      query1.dispose()
+
+      const query2 = new Query({
+        foo: {
+          local: true
+        }
+      })
+
+      t.equals(query2.foo(), 'foo', 'initializes from localStorage')
+
+      query2.dispose()
+
+      t.end()
+    })
+
     test('advanced', (t) => {
       history.replaceState(null, null, location.pathname + '?{"foo": "notfoo"}')
 
@@ -185,11 +241,11 @@ ko.components.register('test', {
 
       const query = new Query()
 
-      t.deepEquals({ foo: 'foo' }, query.toJS(), 'returns unwrapped query object')
+      t.deepEquals(query.toJS(), { foo: 'foo' }, 'returns unwrapped query object')
 
       query.foo(undefined)
 
-      t.deepEquals({}, query.toJS(), 'omits undefined values')
+      t.deepEquals(query.toJS(), {}, 'omits undefined values')
 
       query.dispose()
       t.end()

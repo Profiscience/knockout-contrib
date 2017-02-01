@@ -49,7 +49,15 @@ const query = new Query({
   foo: {
     default: 'foo',
     initial: 'bar',
-    coerce: (v) => v === 'baz' ? 'qux' : v
+
+    // force value
+    coerce: (v) => v === 'baz' ? 'qux' : v,
+
+    // use sessionStorage
+    session: false,
+
+    // use localStorage
+    local: false
   },
 
   bar: 'bar'
