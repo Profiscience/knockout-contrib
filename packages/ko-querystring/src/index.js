@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import { isEmpty, isUndefined, omit } from './utils'
+import { isBool, isEmpty, isNumber, isUndefined, omit } from './utils'
 
 const query = {}
 const links = {}
@@ -156,7 +156,10 @@ class Query {
     const _query = {}
 
     for (const [g, q] of Object.entries(query)) {
-      _query[g] = ko.toJS(omit(q, (v) => isUndefined(v()) || isEmpty(v()) || v.isDefault()))
+      _query[g] = ko.toJS(omit(q, (v) =>
+        v.isDefault() ||
+        isUndefined(v()) ||
+        (isEmpty(v()) && !isNumber(v()) && !isBool(v()))))
     }
 
     if (_query[undefined]) {

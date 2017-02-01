@@ -1,6 +1,14 @@
 
+export function isBool(x) {
+  return typeof x === 'boolean'
+}
+
 export function isEmpty(x) {
   return x.length === 0
+}
+
+export function isNumber(x) {
+  return !isNaN(parseFloat(x))
 }
 
 export function isUndefined(x) {
