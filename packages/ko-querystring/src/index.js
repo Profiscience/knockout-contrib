@@ -112,8 +112,11 @@ class Query {
 
   dispose() {
     if (--links[this._group] === 0) {
+      const current = Object.assign({}, Query.fromQS(), this.getCleanQuery())
+      delete current[this._group]
+      Query.writeQueryString(current)
+
       delete query[this._group]
-      Query.writeQueryString()
     }
     this.revoke()
   }
@@ -152,9 +155,8 @@ class Query {
     return isUndefined(group) ? query : query[group]
   }
 
-  static writeQueryString() {
+  static getCleanQuery() {
     const _query = {}
-
     for (const [g, q] of Object.entries(query)) {
       _query[g] = ko.toJS(omit(q, (v) =>
         v.isDefault() ||
@@ -165,6 +167,13 @@ class Query {
     if (_query[undefined]) {
       Object.assign(_query, _query[undefined])
       delete _query[undefined]
+    }
+    return _query
+  }
+
+  static writeQueryString(_query) {
+    if (!_query) {
+      _query = this.getCleanQuery()
     }
 
     const qs = Query.stringify(_query)
