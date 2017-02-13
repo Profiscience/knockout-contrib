@@ -19,22 +19,10 @@ ko.components.register('test', {
       t.end()
     })
 
-    test('implicit initialization', (t) => {
-      history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
-
-      const query = new Query()
-
-      t.ok(ko.isWritableObservable(query.foo), 'can be created on-the-fly')
-      t.equals('foo', query.foo(), 'implicit params are initialized from query string')
-
-      query.dispose()
-      t.end()
-    })
-
     test('url parsing', (t) => {
       history.replaceState(null, null, location.pathname + '#hash')
 
-      const query = new Query()
+      const query = new Query({ foo: undefined })
 
       query.foo('foo')
       ko.tasks.runEarly()
@@ -48,7 +36,7 @@ ko.components.register('test', {
     test('empty query', (t) => {
       history.replaceState(null, null, location.pathname)
 
-      const query = new Query()
+      const query = new Query({ foo: undefined })
 
       query.foo('foo')
       query.foo(undefined)
@@ -183,7 +171,7 @@ ko.components.register('test', {
     test('#toJS', (t) => {
       history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
 
-      const query = new Query()
+      const query = new Query({ foo: undefined })
 
       t.deepEquals({ foo: 'foo' }, query.toJS(), 'returns unwrapped query object')
 
@@ -211,7 +199,7 @@ ko.components.register('test', {
 
       history.replaceState(null, null, location.pathname)
 
-      const query = new Query()
+      const query = new Query({ foo: undefined })
       const q = query.asObservable()
 
       const killMe = q.subscribe(() => {
@@ -250,8 +238,8 @@ ko.components.register('test', {
     test('#dispose', (t) => {
       history.replaceState(null, null, location.pathname)
 
-      const a1 = new Query({}, 'a')
-      const a2 = new Query({}, 'a')
+      const a1 = new Query({ foo: undefined }, 'a')
+      const a2 = new Query({ foo: undefined }, 'a')
 
       a1.foo('foo')
       ko.tasks.runEarly()
@@ -260,13 +248,6 @@ ko.components.register('test', {
       ko.tasks.runEarly()
 
       t.deepEquals({ a: { foo: 'foo' } }, Query.parse(location.search.substring(1)), 'does not remove query if linked group remains')
-
-      try {
-        a1.foo('notfoo')
-        t.fail('does not dispose')
-      } catch (e) {
-        t.pass('disposes query')
-      }
 
       a2.dispose()
       ko.tasks.runEarly()
@@ -277,8 +258,8 @@ ko.components.register('test', {
     })
 
     test('grouped/multiple queries', (t) => {
-      const a = new Query({}, 'a')
-      const b = new Query({}, 'b')
+      const a = new Query({ foo: undefined }, 'a')
+      const b = new Query({ foo: undefined }, 'b')
 
       a.foo('foo')
       b.foo('notfoo')
@@ -294,20 +275,21 @@ ko.components.register('test', {
     })
 
     test('linked queries', (t) => {
-      const a1 = new Query({}, 'a')
-      a1.foo('foo')
+      const a1 = new Query({ foo: undefined, bar: undefined }, 'a')
+      const a2 = new Query({ foo: undefined, bar: 'bar', baz: undefined }, 'a')
 
-      const a2 = new Query({ bar: 'bar' }, 'a')
+      a1.foo('foo')
 
       ko.tasks.runEarly()
 
-      t.equals('foo', a2.foo(), 'links via setter')
-      t.equals('bar', a1.bar(), 'links via defaults')
+      t.equals('foo', a2.foo(), 'links')
 
       a1.dispose()
 
-      const a3 = new Query({ baz: 'baz' }, 'a')
+      const a3 = new Query({ baz: undefined }, 'a')
 
+      a3.baz('baz')
+      
       ko.tasks.runEarly()
 
       t.equals('baz', a2.baz(), 'works after a linked query is disposed')
@@ -325,7 +307,7 @@ ko.components.register('test', {
         stringify: (obj) => 'foo=' + obj.foo
       })
 
-      const q = new Query()
+      const q = new Query({ foo: undefined })
 
       t.equals(q.foo(), 'foo', 'uses custom parse function')
 

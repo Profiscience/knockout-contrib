@@ -22,11 +22,6 @@ import Query from 'ko-querystring'
 const query = new Query({ sort: 'alpha' })
 
 query.sort() // alpha
-
-// you can also create query parameters on the fly, e.g.
-query.foo('foo')
-// will create an observable on query.foo, and stick it in the querystring with
-// a value of "foo"
 ```
 
 ## API
@@ -60,9 +55,6 @@ In this case, the foo param will be set to "bar" initially — if not already in
 the querystring — but call to `query.clear()` will then set it to "foo". The `coerce`
 function disallows setting the param to "baz", and attempting to will cause it
 to be set to "qux" instead.
-
-Params to not have to be defined; attempting to access a query param not defined
-in the config will create one on-the-fly and it will be `undefined` until set.
 
 __NOTE:__ Params that are equal to their default will _not_ be displayed in the
 querystring. Less === More.
@@ -101,7 +93,7 @@ Resets param to its default or undefined.
 Observable value that is true if the param is its default value, otherwise false.
 
 ### query.setDefaults(defaults)
-Set or change the default values for a query.
+Change the default values for a query.
 
 ### query.clear()
 Reset all the query params to their defined defaults, or undefined.

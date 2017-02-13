@@ -6,28 +6,17 @@ const links = {}
 
 let _parse, _stringify
 
-function getCoercions(config) {
-  const coercions = {}
-  Object.entries(config).forEach(([k, v = {}]) => coercions[k] = v.coerce)
-  return coercions
-}
-
 function getDefaults(config) {
   const defaults = {}
-  Object.entries(config).forEach(([k, v = {}]) =>
-    defaults[k] = v.default || v.initial || v.coerce
+  Object.entries(config).forEach(([k, v]) =>
+    defaults[k] = isQueryParamConfigObject(v)
       ? v.default
       : v)
   return defaults
 }
 
-function getInitialValues(config) {
-  const inits = {}
-  Object.entries(config).forEach(([k, v = {}]) =>
-    inits[k] = v.default || v.initial || v.coerce
-      ? v.initial || v.default
-      : v)
-  return inits
+function isQueryParamConfigObject(c) {
+  return c && (c.default || c.initial || c.coerce)
 }
 
 class Query {
@@ -43,37 +32,34 @@ class Query {
       links[this._group]++
     }
 
-    const coercions = getCoercions(config)
-    const initialValues = getInitialValues(config)
     const fromQS = Query.fromQS(this._group)
-    const init = Object.assign({}, initialValues, fromQS)
 
-    const { proxy, revoke } = Proxy.revocable(this, {
-      get: (_, name) => {
-        if (name[0] === '_' || !isUndefined(this[name])) {
-          return this[name]
-        }
-        if (isUndefined(query[this._group][name])) {
-          query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init[name], coercions[name])
-          Object.assign(query[this._group][name], {
-            isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
-            clear: () => {
-              query[this._group][name](this._defaults[name])
+    Object.entries(config).forEach(([name, config]) => {
+      Object.defineProperty(this, name, {
+        get: () => {
+          const init = fromQS[name] || (config && config.initial) || this._defaults[name]
+          const coerce = (config && config.coerce) || ((x) => x)
+
+          if (isUndefined(query[this._group][name])) {
+            query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init, coerce)
+            Object.assign(query[this._group][name], {
+              isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
+              clear: () => {
+                query[this._group][name](this._defaults[name])
+              }
+            })
+            if (this._forceRecompute) {
+              ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
             }
-          })
-          if (this._forceRecompute) {
-            ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
           }
+          return query[this._group][name]
         }
-        return query[this._group][name]
-      }
+      })
+
+      this[name]
     })
 
-    this.revoke = revoke
-
-    Object.keys(init).forEach((k) => proxy[k])
-
-    return proxy
+    return this
   }
 
   setDefaults(d) {
@@ -112,13 +98,12 @@ class Query {
 
   dispose() {
     if (--links[this._group] === 0) {
-      const current = Object.assign({}, Query.fromQS(), this.getCleanQuery())
+      const current = Object.assign({}, Query.fromQS(), this.constructor.getCleanQuery())
       delete current[this._group]
       Query.writeQueryString(current)
 
       delete query[this._group]
     }
-    this.revoke()
   }
 
   static get defaultParser() {
@@ -152,7 +137,7 @@ class Query {
 
   static fromQS(group) {
     const query = this.parse(this.getQueryString())
-    return isUndefined(group) ? query : query[group]
+    return (isUndefined(group) ? query : query[group]) || {}
   }
 
   static getCleanQuery() {
