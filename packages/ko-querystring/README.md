@@ -92,7 +92,7 @@ Resets param to its default or undefined.
 ### query[param].isDefault
 Observable value that is true if the param is its default value, otherwise false.
 
-### query.setDefaults(defaults)
+### query.set(default || { default, initial, coerce })
 Change the default values for a query.
 
 ### query.clear()

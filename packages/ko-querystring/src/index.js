@@ -20,10 +20,8 @@ function isQueryParamConfigObject(c) {
 }
 
 class Query {
-  constructor(config = {}, group) {
+  constructor(config, group) {
     this._group = group
-    this._config = config
-    this._defaults = getDefaults(config)
 
     if (isUndefined(query[this._group])) {
       query[this._group] = {}
@@ -32,44 +30,29 @@ class Query {
       links[this._group]++
     }
 
-    const fromQS = Query.fromQS(this._group)
-
-    Object.entries(config).forEach(([name, config]) => {
-      Object.defineProperty(this, name, {
-        get: () => {
-          const init = fromQS[name] || (config && config.initial) || this._defaults[name]
-          const coerce = (config && config.coerce) || ((x) => x)
-
-          if (isUndefined(query[this._group][name])) {
-            query[this._group][name] = Query.createQuerySetterObservable(group, name, this._defaults[name], init, coerce)
-            Object.assign(query[this._group][name], {
-              isDefault: ko.pureComputed(() => query[this._group][name]() === this._defaults[name]),
-              clear: () => {
-                query[this._group][name](this._defaults[name])
-              }
-            })
-            if (this._forceRecompute) {
-              ko.tasks.schedule(() => this._forceRecompute(!this._forceRecompute()))
-            }
-          }
-          return query[this._group][name]
-        }
-      })
-
-      this[name]
-    })
-
-    return this
+    this.set(config)
   }
 
-  setDefaults(d) {
-    const oldDefaults = JSON.parse(JSON.stringify(this._defaults)) // poor man's clone...
-    Object.assign(this._defaults, d)
-    Object.keys(d).forEach((k) => {
-      if (typeof this[k]() === 'undefined' || this[k]() === oldDefaults[k]) {
-        this[k](d[k])
+  set(config) {
+    this._config = config
+    this._defaults = Object.assign({}, this._defaults || {}, getDefaults(config))
+    const group = this._group
+    const fromQS = Query.fromQS(group)
+
+    Object.entries(config).forEach(([name, config]) => {
+      this[name] = query[group][name]
+
+      if (isUndefined(this[name])) {
+        const _default = this._defaults[name]
+        const init = fromQS[name] || (config && config.initial) || _default
+        const coerce = (config && config.coerce) || ((x) => x)
+
+        this[name] = query[group][name] = Query.createQueryParam(group, name, _default, init, coerce)
+      } else {
+        this[name].set(config)
       }
     })
+
     ko.tasks.runEarly()
   }
 
@@ -93,7 +76,7 @@ class Query {
   }
 
   clear() {
-    Object.keys(query[this._group]).forEach((k) => query[this._group][k](this._defaults[k]))
+    Object.values(query[this._group]).forEach((p) => p.clear())
   }
 
   dispose() {
@@ -194,24 +177,51 @@ class Query {
     return this._queuedUpdate
   }
 
-  static createQuerySetterObservable(group, name, defaultVal, initVal, coerce) {
-    const obs = ko.observable(initVal)
+  static createQueryParam(group, name, __default, init, coerce) {
+    const _default = ko.observable(ko.toJS(__default))
+    const _p = ko.observable(init)
+    const isDefault = ko.pureComputed(() => p() === _default())
 
-    return ko.pureComputed({
+    const p = ko.pureComputed({
       read() {
-        return obs()
+        return _p()
       },
       write(v) {
         if (isUndefined(v)) {
-          v = defaultVal
+          v = _default()
         }
         if (coerce) {
           v = coerce(v)
         }
-        obs(v)
+        _p(v)
         Query.queueQueryStringWrite()
       }
     })
+
+    Object.assign(p, {
+      isDefault,
+      set: (d) => {
+        if (!isQueryParamConfigObject(d)) {
+          if (isDefault() || isUndefined(p())) {
+            p(d)
+          }
+          _default(d)
+        } else {
+          if (d.coerce) {
+            coerce = d.coerce
+          }
+          if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
+            p(isUndefined(d.initial) ? d.default : d.initial)
+          }
+          if (d.default) {
+            _default(d.default)
+          }
+        }
+      },
+      clear: () => p(_default())
+    })
+
+    return p
   }
 }
 

@@ -147,22 +147,60 @@ ko.components.register('test', {
       t.end()
     })
 
-    test('#setDefaults', (t) => {
+    test('#set', (t) => {
       history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
 
       const query = new Query({ foo: 'foo', bar: 'bar' })
 
-      query.setDefaults({
+      query.set({
         foo: 'notfoo',
         bar: 'notbar'
       })
 
-      t.equals('notfoo', query.foo(), '#setDefaults updates query params w/ default value to new default')
-      t.equals('foo', query.bar(), '#setDefaults leaves query params that are non-default alone')
+      t.equals('notfoo', query.foo(), '#set updates query params w/ default value to new default')
+      t.equals('foo', query.bar(), '#set leaves query params that are non-default alone')
 
       query.clear()
 
       t.deepEquals({ foo: 'notfoo', bar: 'notbar' }, query.toJS(), 'set defaults actually sets new defaults')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('query[param]#set shorthand', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+
+      const query = new Query({ foo: 'foo', bar: 'bar' })
+
+      query.foo.set('notfoo')
+      query.bar.set('notbar')
+
+      t.equals(query.foo(), 'notfoo', '#set updates query param w/ default value to new default')
+      t.equals('foo', query.bar(), '#set leaves query params that are non-default alone')
+
+      query.clear()
+
+      t.deepEquals(query.toJS(), { foo: 'notfoo', bar: 'notbar' }, 'set defaults actually sets new defaults')
+
+      query.dispose()
+      t.end()
+    })
+
+    test('query[param]#set', (t) => {
+      history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+
+      const query = new Query({ foo: 'foo', bar: 'bar' })
+
+      query.foo.set({ default: 'bar', coerce: (foo) => foo === 'foo' ? 'foo' : 'notfoo' })
+      query.bar.set({ default: 'notbar', initial: 'baz' })
+
+      t.equals(query.foo(), 'notfoo', '#set can set new default and coerce for param')
+      t.equals('baz', query.bar(), '#set can set new initial')
+
+      query.clear()
+
+      t.deepEquals(query.toJS(), { foo: 'notfoo', bar: 'notbar' }, 'set defaults actually sets new defaults')
 
       query.dispose()
       t.end()
@@ -289,7 +327,7 @@ ko.components.register('test', {
       const a3 = new Query({ baz: undefined }, 'a')
 
       a3.baz('baz')
-      
+
       ko.tasks.runEarly()
 
       t.equals('baz', a2.baz(), 'works after a linked query is disposed')
