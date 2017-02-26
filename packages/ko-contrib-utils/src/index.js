@@ -1,21 +1,8 @@
-import ko from 'knockout'
+export { default as decrement } from './decrement'
+export { default as increment } from './increment'
+export { default as subscribeOnce } from './subscribeOnce'
+export { default as toString } from './toString'
 
-import cast from './cast'
-import defaults from './defaults'
-import fromJS from './fromJS'
-import merge from './merge'
-import './increment'
-import './subscribeOnce'
-import './toString'
-
-ko.utils.cast = cast
-ko.utils.defaults = defaults
-ko.utils.fromJS = fromJS
-ko.utils.merge = merge
-
-export {
-  cast,
-  defaults,
-  fromJS,
-  merge
-}
+export { default as defaults } from './defaults'
+export { default as fromJS } from './fromJS'
+export { default as merge } from './merge'

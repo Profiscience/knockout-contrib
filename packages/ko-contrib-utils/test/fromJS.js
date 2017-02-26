@@ -12,7 +12,7 @@ test('should create a deep observable tree', (t) => {
     regexp: /foo/,
     obj: { foo: 'foo' },
     obs: ko.observable({ foo: 'bar' }),
-    func() {},
+    func() {}, // eslint-disable-line
     class: new class {
       constructor() {
         this.num = 1
@@ -24,7 +24,7 @@ test('should create a deep observable tree', (t) => {
         this.obs = ko.observable({ foo: 'bar' })
         this.regexp = /foo/
       }
-      func() {}
+      func() {} // eslint-disable-line
     }
   }
 
