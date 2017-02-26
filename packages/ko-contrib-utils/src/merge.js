@@ -7,25 +7,17 @@ export default function merge(dest, src, mapArraysDeep) {
   for (const prop of props) {
     if (isUndefined(dest[prop])) {
       dest[prop] = fromJS(src[prop], src[prop] instanceof Array && mapArraysDeep)
-    }
-
-    else if (ko.isWritableObservable(dest[prop])) {
+    } else if (ko.isWritableObservable(dest[prop])) {
       dest[prop](
         src[prop] instanceof Array && mapArraysDeep
           ? fromJS(src[prop], true)()
           : src[prop]
       )
-    }
-
-    else if (isUndefined(src[prop])) {
+    } else if (isUndefined(src[prop])) {
       dest[prop] = undefined
-    }
-
-    else if (src[prop].constructor === Object) {
+    } else if (src[prop].constructor === Object) {
       merge(dest[prop], src[prop], mapArraysDeep)
-    }
-
-    else {
+    } else {
       dest[prop] = src[prop]
     }
   }
