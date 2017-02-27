@@ -1,6 +1,8 @@
-this.ko = this.ko || {};
-(function (exports,ko) {
-'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('knockout')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'knockout'], factory) :
+	(factory((global.ko = global.ko || {}, global.ko.utils = global.ko.utils || {}),global.ko));
+}(this, (function (exports,ko) { 'use strict';
 
 ko = 'default' in ko ? ko['default'] : ko;
 
@@ -155,4 +157,6 @@ exports.defaults = defaults;
 exports.fromJS = fromJS;
 exports.merge = merge;
 
-}((this.ko.utils = this.ko.utils || {}),ko));
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

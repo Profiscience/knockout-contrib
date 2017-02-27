@@ -26,7 +26,7 @@ exports.umd = function * (fly) {
         external: ['knockout']
       },
       bundle: {
-        format: 'iife',
+        format: 'umd',
         moduleName: 'ko.utils',
         globals: {
           knockout: 'ko'
