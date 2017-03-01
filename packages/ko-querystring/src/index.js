@@ -39,13 +39,13 @@ class Query {
     const group = this._group
     const fromQS = Query.fromQS(group)
 
-    Object.entries(config).forEach(([name, config]) => {
+    Object.entries(config).forEach(([name, config = {}]) => {
       this[name] = query[group][name]
 
       if (isUndefined(this[name])) {
         const _default = this._defaults[name]
-        const init = fromQS[name] || (config && config.initial) || _default
-        const coerce = (config && config.coerce) || ((x) => x)
+        const coerce = config.coerce || ((x) => x)
+        const init = !isUndefined(fromQS[name]) ? fromQS[name] : config.initial
 
         this[name] = query[group][name] = Query.createQueryParam(group, name, _default, init, coerce)
       } else {
@@ -179,7 +179,7 @@ class Query {
 
   static createQueryParam(group, name, __default, init, coerce) {
     const _default = ko.observable(ko.toJS(__default))
-    const _p = ko.observable(init)
+    const _p = ko.observable(isUndefined(init) ? _default() : init)
     const isDefault = ko.pureComputed(() => p() === _default())
 
     const p = ko.pureComputed({

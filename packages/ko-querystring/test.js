@@ -8,12 +8,13 @@ ko.components.register('test', {
   template: '<div></div>',
   viewModel() {
     test('explicit initialization', (t) => {
-      history.replaceState(null, null, location.pathname + '?{"foo": "notfoo"}')
+      history.replaceState(null, null, location.pathname + '?{"foo": "notfoo", "baz": false}')
 
-      const query = new Query({ foo: 'foo', bar: 'bar' })
+      const query = new Query({ foo: 'foo', bar: 'bar', baz: true })
 
       t.equals('notfoo', query.foo(), 'should be initialized from query string')
       t.equals('bar', query.bar(), 'should fall back to default')
+      t.equals(false, query.baz(), 'should work with falsy params')
 
       query.dispose()
       t.end()
