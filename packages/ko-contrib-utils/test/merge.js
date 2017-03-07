@@ -1,6 +1,6 @@
 import test from 'ava'
 import ko from 'knockout'
-import merge from '../src/merge'
+import { merge } from '../dist/umd'
 
 test('should create a deep observable tree', (t) => {
   const actual = {
