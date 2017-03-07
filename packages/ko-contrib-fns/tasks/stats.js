@@ -27,7 +27,7 @@ module.exports = {
           console.log(green(
             '|',
             padEnd(
-              (padEnd(name, 'dist/ko-contrib-fns.min.js'.length) + `\t~${raw}kb\t~${gzipped}kb gzipped`),
+              (padEnd(name, 'ko-contrib-fns.min.js'.length) + `\t~${raw}kb\t~${gzipped}kb gzipped`),
               border.length - 5
             ),
             '|')))

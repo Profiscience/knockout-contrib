@@ -2,8 +2,8 @@
   "name": "ko-contrib-fns",
   "version": "0.0.2",
   "description": "Knockout JS Observable Functions",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "fly test",
     "build": "fly build",
