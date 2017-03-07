@@ -17,7 +17,10 @@ module.exports = {
           plugins: [
             typescriptPlugin({
               typescript,
-              tsconfig: extend({}, compilerOptions, { sourceMap: false })
+              tsconfig: extend({}, compilerOptions, {
+                module: 'es2015',
+                sourceMap: false
+              })
             }),
             nodeResolve({
               preferBuiltins: false
@@ -27,9 +30,9 @@ module.exports = {
           external: ['knockout']
         },
         bundle: {
-          format: 'iife',
+          format: 'umd',
           globals: {
-            knockout: 'ko'
+            knockout: 'window.ko'
           }
         }
       })
