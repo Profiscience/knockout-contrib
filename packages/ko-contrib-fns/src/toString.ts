@@ -1,17 +1,19 @@
+/// <reference path="toString.d.ts" />
+
 import * as ko from 'knockout'
 
-ko.observable.fn.toString = function() {
+ko.observable.fn.toString = function(): string {
   return toString(this, 'Observable')
 }
 
-ko.observableArray.fn.toString = function() {
+ko.observableArray.fn.toString = function(): string {
   return toString(this, 'ObservableArray')
 }
 
-ko.computed.fn.toString = function() {
+ko.computed.fn.toString = function(): string {
   return toString(this, 'Computed')
 }
 
-export default function toString(obs, type) {
+function toString(obs, type): string {
   return `${type}(${ko.toJSON(obs(), null)})`
 }
