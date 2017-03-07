@@ -1,19 +1,26 @@
 import test from 'ava'
 import ko from 'knockout'
-import defaults from '../src/defaults'
+import { defaults } from '../dist/umd'
 
 test('should assign default values', (t) => {
   const actual = {
-    foo: 'foo'
+    foo: 'foo',
+    bar: ko.observable('bar'),
+    baz: undefined,
+    qux: ko.observable(undefined)
   }
 
   defaults(actual, {
     foo: 'default',
-    bar: 'default'
+    bar: 'default',
+    baz: 'default',
+    qux: 'default',
   })
 
   t.is(actual.foo, 'foo')
-  t.is(actual.bar(), 'default')
+  t.is(actual.bar(), 'bar')
+  t.is(actual.baz(), 'default')
+  t.is(actual.qux(), 'default')
 })
 
 const testArrays = (mapArraysArg, shouldMapArrays) => (t) => {

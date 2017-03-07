@@ -1,6 +1,6 @@
 import test from 'ava'
 import ko from 'knockout'
-import fromJS from '../src/fromJS'
+import { fromJS } from '../dist/umd'
 
 test('should create a deep observable tree', (t) => {
   const raw = {
@@ -68,5 +68,5 @@ const testArrays = (mapArraysArg, shouldMapArrays) => (t) => {
 }
 
 test('should create shallow arrays when 2rd arg is undefined', testArrays())
-test('should create shallow arrays when 2rd arg is falsy', testArrays(false))
-test('should create deep arrays when 2rd arg is true', testArrays(null))
+test('should create shallow arrays when 2rd arg is falsy', testArrays(null))
+test('should create deep arrays when 2rd arg is true', testArrays(true, true))

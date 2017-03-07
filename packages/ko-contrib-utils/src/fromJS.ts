@@ -1,27 +1,29 @@
-import ko from 'knockout'
+import * as ko from 'knockout'
+import { KnockoutObservableTree } from './_types'
 
-export default function fromJS(obj, mapArraysDeep, _parentIsArray) {
-  let obs
+export default function fromJS(
+  obj: any,
+  mapArraysDeep: boolean = false,
+  _parentIsArray: boolean = false
+): KnockoutObservable<any> | KnockoutObservableTree {
+  let obs: KnockoutObservable<any> | KnockoutObservableTree
 
   if (ko.isObservable(obj)) {
     obs = obj
   } else if (obj instanceof Array) {
-    obs = []
-
+    const _arr = []
     for (let i = 0; i < obj.length; i++) {
-      obs[i] = fromJS(obj[i], mapArraysDeep, true)
+      _arr[i] = fromJS(obj[i], mapArraysDeep, true)
     }
-
-    obs = ko.observableArray(obs)
+    obs = ko.observableArray(_arr)
   } else if (obj instanceof Date || obj instanceof RegExp) {
     obs = ko.observable(obj)
   } else if (obj instanceof Function) {
     obs = obj
   } else if (obj instanceof Object) {
     obs = {}
-
     for (const p in obj) {
-      obs[p] = fromJS(obj[p])
+      obs[p] = fromJS(obj[p], mapArraysDeep)
     }
   } else {
     obs = _parentIsArray && !mapArraysDeep ? obj : ko.observable(obj)

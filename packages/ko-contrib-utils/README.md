@@ -8,34 +8,11 @@
 [![Peer Dependency Status](https://img.shields.io/david/peer/Profiscience/ko-contrib-utils.svg?maxAge=2592000)](https://david-dm.org/Profiscience/ko-contrib-utils#info=peerDependencies&view=table)
 
 ### Table of Contents
-
-* Utils
-  - [ko.utils.cast](#castsrc-defaultvalue)
-  - [ko.utils.defaults](#defaultsdest-defaultvalues-maparrays--false)
-  - [ko.utils.fromJS](#fromjssrc-maparrays--false)
-  - [ko.utils.merge](#mergedest-src-maparrays--false)
-
-* Prototype Functions
-  - [ko.observable.fn.increment/decrement](#observablefnincrementdecrementn--1)  
-  - [ko.observable.fn.subscribeOnce](#observablefnsubscribeoncefn)
-  - [ko.observable.fn.toString](#observablefntostring)
+- [defaults](#defaultsdest-defaultvalues-maparrays--false)
+- [fromJS](#fromjssrc-maparrays--false)
+- [merge](#mergedest-src-maparrays--false)
 
 ### Utils
-
-###### cast(src[, defaultValue])
-
-If `src` IS an observable
-  - and src IS NOT undefined OR NO defaultValue is provided, src is returned
-  - and src IS undefined AND a defaultValue is provided, src is set to the defaultValue and returned
-
-If `src` IS NOT an observable, a new observable is returned and then the previous logic takes over.
-
-```javascript
-function(someOptionalParam) {
-  this.obs = ko.utils.cast(someOptionalParam, 'some default value')
-  // obs will be observable regardless of what was passed in
-}
-```
 
 ###### defaults(dest, defaultValues[, mapArrays = false])
 
@@ -44,8 +21,10 @@ Creates observables for enumerable string properties of `defaultValues` where un
 If `mapArrays` is true, array elements will be created as mapped observables, else bare objects/primitives.
 
 ```javascript
+import { defaults } from 'ko-contrib-utils'
+
 const foos = { foo: 'foo' }
-ko.utils.defaults(foos, { foo: 'bar', bar: 'bar' })
+defaults(foos, { foo: 'bar', bar: 'bar' })
 
 foos()
 // { foo: 'foo', bar: 'bar' }
@@ -61,6 +40,8 @@ The much needed inverse to the undocumented `ko.toJS` function; a dumb version o
 that is a lot faster.
 
 ```javascript
+import { fromJS } from 'ko-contrib-utils'
+
 const foos = {
   foo: 'foo',
   bar: {
@@ -69,7 +50,7 @@ const foos = {
   }
 }
 
-ko.utils.fromJS(foos, true)
+fromJS(foos, true)
 // {
 //   foo: ko.observable('foo'),
 //   bar: {
@@ -95,12 +76,14 @@ probably want [ko.mapping](http://knockoutjs.com/documentation/plugins-mapping.h
 but far slower.
 
 ```javascript
+import { merge } from 'ko-contrib-utils'
+
 const foos = {
   foo: ko.observable('foo'),
   bar: 'bar'
 }
 
-ko.utils.merge(foos, {
+merge(foos, {
   foo: 'new foo',
   bar: 'new bar',
   baz: 'baz'
@@ -113,40 +96,3 @@ foos()
 //   baz: ko.observable('baz')
 // }
 ```
-
-### Prototype Functions for Observables
-
-###### observable.fn.increment/decrement([n = 1])
-
-increments/decrements numeric observables.
-
-```javascript
-const foo = ko.observable(0)
-
-foo.increment()
-foo.increment(3)
-foo.decrement()
-foo.decrement(2)
-foo()
-// 1
-```
-
-###### observable.fn.subscribeOnce(fn)
-
-Creates a subscription that is called once and then disposed.
-
-```javascript
-const foo = ko.observable(0)
-
-foo.subscribeOnce(() => console.log('hit!'))
-
-foo(1)
-// hit!
-
-foo(2)
-// nothing...
-```
-
-###### observable.fn.toString()
-
-Make debugging in the console much nicer; you won't ever need to actually call this.

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "umd",
+    "sourceMap": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "outDir": "./dist/umd",
+    "types": [
+      "knockout"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "test",
+    "node_modules"
+  ]
+}

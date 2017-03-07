@@ -1,38 +1,16 @@
+Object.assign(exports, require('./tasks/bundle'))
+Object.assign(exports, require('./tasks/modules'))
+Object.assign(exports, require('./tasks/stats'))
+Object.assign(exports, require('./tasks/test'))
+Object.assign(exports, require('./tasks/typings'))
+Object.assign(exports, require('./tasks/umd'))
+
 exports.build = function * (fly) {
-  yield fly.parallel(['modules', 'umd'])
+  yield fly.parallel(['modules', 'umd', 'typings', 'bundle'])
+  yield fly.start('stats')
 }
 
-exports.modules = function * (fly) {
-  yield fly.source('src/*.js')
-    .babel({
-      babelrc: false,
-      presets: [
-        ['es2015', { modules: false }]
-      ]
-    })
-    .target('dist/modules')
-}
-
-exports.umd = function * (fly) {
-  yield fly.source('src/index.js')
-    .rollup({
-      rollup: {
-        plugins: [
-          require('rollup-plugin-babel')({
-            babelrc: false,
-            presets: [['es2015', { modules: false }]]
-          })
-        ],
-        external: ['knockout']
-      },
-      bundle: {
-        format: 'umd',
-        moduleName: 'ko.utils',
-        globals: {
-          knockout: 'ko'
-        }
-      }
-    })
-    .concat({ output: 'ko-contrib-utils.js' })
-    .target('dist')
+exports.watch = function * (fly) {
+  yield fly.start('build')
+  yield fly.watch('src/*.ts', ['build', 'test'])
 }

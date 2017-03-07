@@ -1,16 +1,21 @@
-import ko from 'knockout'
+import * as ko from 'knockout'
+import { PlainObject, KnockoutObservableTree } from './_types'
 import fromJS from './fromJS'
 
-export default function merge(dest, src, mapArraysDeep) {
+export default function merge(
+  dest: PlainObject,
+  src: PlainObject,
+  mapArraysDeep: boolean = false
+): KnockoutObservableTree {
   const props = Object.keys(src)
 
   for (const prop of props) {
     if (isUndefined(dest[prop])) {
       dest[prop] = fromJS(src[prop], src[prop] instanceof Array && mapArraysDeep)
-    } else if (ko.isWritableObservable(dest[prop])) {
+    } else if (ko.isObservable(dest[prop])) {
       dest[prop](
         src[prop] instanceof Array && mapArraysDeep
-          ? fromJS(src[prop], true)()
+          ? ko.unwrap(fromJS(src[prop], true))
           : src[prop]
       )
     } else if (isUndefined(src[prop])) {
@@ -25,6 +30,6 @@ export default function merge(dest, src, mapArraysDeep) {
   return dest
 }
 
-function isUndefined(foo) {
+function isUndefined(foo): boolean {
   return typeof foo === 'undefined'
 }
