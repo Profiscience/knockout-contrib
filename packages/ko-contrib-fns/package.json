@@ -1,6 +1,6 @@
 {
   "name": "ko-contrib-fns",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Knockout JS Observable Functions",
   "main": "index.js",
   "typings": "index.d.ts",
