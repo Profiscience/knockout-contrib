@@ -1,6 +1,6 @@
 {
   "name": "ko-contrib-utils",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Handy Utilities for Knockout JS",
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/modules/index.js",
