@@ -1,0 +1,8 @@
+*
+!*/
+
+!*.js
+!*.js.map
+!*.d.ts
+
+flyfile.js
