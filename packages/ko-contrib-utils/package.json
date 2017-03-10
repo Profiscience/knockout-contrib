@@ -50,7 +50,7 @@
     "knockout": "^3.4.0",
     "nyc": "^10.0.0",
     "remap-istanbul": "^0.9.1",
-    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-ts": "^0.1.0",
     "typescript": "^2.2.1"
