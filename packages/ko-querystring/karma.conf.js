@@ -27,24 +27,33 @@ if (coverage) {
   reporters.push('coverage')
 }
 
-const preLoaders = [
+const rules = [
   {
     test: /\.js$/,
     exclude: [
       path.resolve('node_modules')
     ],
-    loader: 'babel',
-    query: {
-      cacheDirectory: true,
-    }
+    use: {
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true
+      }
+    },
+    enforce: 'pre'
   }
 ]
 if (coverage) {
-  preLoaders[0].exclude.push(path.resolve('src'))
-  preLoaders.push({
+  rules[0].exclude.push(path.resolve('src'))
+  rules.push({
     test: /\.js$/,
     include: path.resolve('src'),
-    loader: 'isparta'
+    use: {
+      loader: 'isparta-loader',
+      options: {
+        embedSource: true,
+        noAutoWrap: true
+      }
+    }
   })
 }
 
@@ -80,7 +89,7 @@ module.exports = function(config) {
     reporters,
 
     coverageReporter: {
-      dir : 'coverage/',
+      dir: 'coverage/',
       reporters: [
         { type: 'html', subdir: 'html' },
         { type: 'lcovonly', subdir: '.', file: 'lcov.txt' }
@@ -93,12 +102,7 @@ module.exports = function(config) {
       },
 
       module: {
-        preLoaders
-      },
-
-      isparta: {
-        embedSource: true,
-        noAutoWrap: true
+        rules
       }
     },
 

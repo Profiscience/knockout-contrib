@@ -1,5 +1,6 @@
 'use strict' // eslint-disable-line
 
+const path = require('path')
 const webpack = require('webpack')
 
 module.exports = [
@@ -13,18 +14,18 @@ function makeConfig(o) {
     entry: './src/index.js',
 
     output: {
-      path: 'dist',
+      path: path.resolve(__dirname, 'dist'),
       filename: minify ? 'ko-querystring.min.js' : 'ko-querystring.js',
       library:  'ko-querystring',
       libraryTarget: 'umd'
     },
 
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
           exclude: /(node_modules)/,
-          loader: 'babel'
+          use: 'babel-loader'
         }
       ]
     },
@@ -40,9 +41,8 @@ function makeConfig(o) {
 
     plugins: minify
       ? [
-          new webpack.optimize.DedupePlugin(),
-          new webpack.optimize.UglifyJsPlugin()
-        ]
+        new webpack.optimize.UglifyJsPlugin()
+      ]
       : []
   }
 }

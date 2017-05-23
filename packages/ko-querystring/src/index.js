@@ -9,9 +9,9 @@ let _parse, _stringify
 function getDefaults(config) {
   const defaults = {}
   Object.entries(config).forEach(([k, v]) =>
-    defaults[k] = isQueryParamConfigObject(v)
+    (defaults[k] = isQueryParamConfigObject(v)
       ? v.default
-      : v)
+      : v))
   return defaults
 }
 
