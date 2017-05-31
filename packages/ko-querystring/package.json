@@ -10,7 +10,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "lint": "eslint --max-warnings=0 *.js src",
-    "test": "karma start",
+    "test": "jest",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -32,17 +32,18 @@
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-profiscience": "^1.4.2",
-    "isparta-loader": "^2.0.0",
-    "jquery": "^3.2.1",
-    "karma": "^1.7.0",
-    "karma-chrome-launcher": "^2.1.1",
-    "karma-coverage": "^1.1.1",
-    "karma-firefox-launcher": "^1.0.1",
-    "karma-tap": "^3.1.1",
-    "karma-webpack": "^2.0.3",
+    "jest": "^20.0.4",
     "knockout": "^3.4.2",
     "minimist": "^1.2.0",
-    "tape": "^4.6.3",
     "webpack": "^2.6.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "testURL": "http://localhost"
   }
 }
