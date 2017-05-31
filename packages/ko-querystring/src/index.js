@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import { isBool, isEmpty, isNumber, isUndefined, omit } from './utils'
+import { isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
 
 const query = {}
 const links = {}
@@ -8,7 +8,7 @@ let _parse, _stringify
 
 function getDefaults(config) {
   const defaults = {}
-  Object.entries(config).forEach(([k, v]) =>
+  entries(config).forEach(([k, v]) =>
     (defaults[k] = isQueryParamConfigObject(v)
       ? v.default
       : v))
@@ -39,7 +39,7 @@ class Query {
     const group = this._group
     const fromQS = Query.fromQS(group)
 
-    Object.entries(config).forEach(([name, config = {}]) => {
+    entries(config).forEach(([name, config = {}]) => {
       this[name] = query[group][name]
 
       if (isUndefined(this[name])) {
@@ -76,7 +76,7 @@ class Query {
   }
 
   clear() {
-    Object.values(query[this._group]).forEach((p) => p.clear())
+    Object.keys(query[this._group]).forEach((k) => query[this._group][k].clear())
   }
 
   dispose() {
@@ -125,7 +125,7 @@ class Query {
 
   static getCleanQuery() {
     const _query = {}
-    for (const [g, q] of Object.entries(query)) {
+    for (const [g, q] of entries(query)) {
       _query[g] = ko.toJS(omit(q, (v) =>
         v.isDefault() ||
         isUndefined(v()) ||
