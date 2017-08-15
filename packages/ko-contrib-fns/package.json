@@ -29,7 +29,7 @@
   "homepage": "https://github.com/Profiscience/ko-contrib-fns#readme",
   "devDependencies": {
     "@types/knockout": "^3.4.39",
-    "ava": "^0.21.0",
+    "ava": "^0.22.0",
     "babel": "^6.23.0",
     "babel-register": "^6.23.0",
     "chalk": "^2.0.0",
