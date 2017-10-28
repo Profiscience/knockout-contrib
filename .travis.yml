@@ -13,21 +13,11 @@ cache:
   directories:
   - node_modules
 before_install:
-- yarn global add codecov greenkeeper-lockfile@1
+# - yarn global add codecov greenkeeper-lockfile@1
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- greenkeeper-lockfile-update
+# - greenkeeper-lockfile-update
 after_script:
-- codecov
-- greenkeeper-lockfile-upload
-notifications:
-  email: false
-  webhooks:
-    urls:
-    - https://webhooks.gitter.im/e/76b4266a7bbf95521f37
-    on_success: change
-    on_failure: always
-    on_start: never
-  slack:
-    secure: jLM26zBxuZZS71duWH1Bt1GrdEfMLOqNJWnyuObsuproBRQCmhzNWVd+qDEv+fcmZn8DPWr9gCj61RA8QpfEV8UOmS8HIfAjhGUGm1iWY3vkwcYxABq/mJdmJNFM29f3jY5cjBzCbAfPqWKuoswcqZ7ZPr2TE6wxGNr1Pc9x9Bq5j1wW6j1Kbj9ru/6NlOv2wO6XzkM34tEjeHrYmi/kS3756dLCqxOWuQx2sgCVxmU6ad9BsAOMJgJ9rJHI1qiTybI2BkUe5T8DXFUaHwLl1LRlYZCZol01vc/vv8LyxYRRW2f/UkL5XZ7BMxR3U/8ybnvulo0TbLnVWSCD4W2l+DGGPQtKASRrkxxzWlrHAQpzutsrZfQi5vkPgz2fu8JMIH32VTS01SoVlRH0TUIRfXO7EqJr+RziqxfLCXiAuMtWuey+8iWH/8PjE/hQCFON5VDFOBftdEZvIzRNoMtX8xwgco7SMLGWZfc5kdELt8OJ+qKZoBKxdgHG9/KcywKr0KMQvfFYwB3XaPOR0VWnwkzYWiZu84BRpAR4LkhDY+UnGEVFhOOpisfgtWO16DBft2Mv/PdUcQITxIXWK00SOpXDHG7s74gsrgs+mcJ08NUVlipp7mDVvTYm8TrMzeR/ZqaeL9NuojqxbxeuLuUHZB+3c1dkiThda83jiRCnne4=
+# - codecov
+# - greenkeeper-lockfile-upload
