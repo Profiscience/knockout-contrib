@@ -1,4 +1,9 @@
 {
+	"scripts": {
+		"install": "lerna bootstrap --hoist --npm-client=yarn",
+		"build": "lerna run build",
+		"test": "lerna run test"
+	},
 	"devDependencies": {
 		"lerna": "^2.4.0"
 	}

@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.0.1 (ko-component-router => @profiscience/knockout-contrib-router)
+
 ### Changed
 - Convert to monorepo
 - Rename router component to `router`
@@ -13,7 +15,6 @@
 ### Internal
 - Migrated build system from Fly to Taskr
 - Migrated from Coveralls to Codecov
-
 
 ## 5.0.1
 
