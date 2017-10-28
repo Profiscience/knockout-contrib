@@ -1,6 +1,7 @@
 {
 	"scripts": {
 		"install": "lerna bootstrap --hoist --npm-client=yarn",
-		"build": "lerna run build"
+		"build": "lerna run build",
+		"test": "lerna run test"
 	}
 }
