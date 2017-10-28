@@ -14,7 +14,7 @@ const ignoredAnchors = [
 
 ko.components.register('anchor', {
   template: `
-    <ko-component-router></ko-component-router>
+    <router></router>
 
     <a id="x-origin" href="http://example.com:8080"></a>
     <a id="download" download></a>

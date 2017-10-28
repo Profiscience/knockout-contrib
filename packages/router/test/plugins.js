@@ -4,7 +4,7 @@ import ko from 'knockout'
 import { Router } from '../'
 
 ko.components.register('plugins', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class PluginTest {
     constructor({ t, done }) {
       history.replaceState(null, null, '/component')

@@ -1,5 +1,20 @@
 # Changelog
 
+### Changed
+- Convert to monorepo
+- Rename router component to `router`
+- Import is now `@profiscience/knockout-contrib-router`
+- `ko-component-router-view` class changed to `router-view`
+
+### Added
+- Began work on first-class TypeScript support (`noImplicitAny`, introduce `IContext`)
+- `activePath` binding for applying a class to an element when a path is active
+
+### Internal
+- Migrated build system from Fly to Taskr
+- Migrated from Coveralls to Codecov
+
+
 ## 5.0.1
 
 ### Fixed

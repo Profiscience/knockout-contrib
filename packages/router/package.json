@@ -1,19 +1,20 @@
 {
-  "name": "ko-component-router",
+  "name": "@profiscience/knockout-contrib-router",
+  "private": false,
   "version": "5.0.1",
   "description": "Component-based routing for KnockoutJS",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
-  "homepage": "https://github.com/Profiscience/ko-component-router",
-  "bugs": "https://github.com/Profiscience/ko-component-router/issues",
-  "repository": "Profiscience/ko-component-router",
-  "main": "ko-component-router.js",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/router",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "Profiscience/knockout-contrib",
+  "main": "knockout-contrib-router.js",
   "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist/",
-    "ko-component-router.js"
+    "knockout-contrib-router.js"
   ],
   "scripts": {
     "build": "taskr build",

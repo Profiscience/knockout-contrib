@@ -5,7 +5,7 @@ object. Easy enough.
 
 ```javascript
 import ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 Router.useRoutes({
   '/user': {
@@ -24,13 +24,13 @@ ko.components.register('user-edit', ...)
 
 ## Custom Wrapper Components
 
-If an empty `ko-component-router` isn't enough for you, you can still pass a component
-name to the route along with your nested routes, and include a `<ko-component-router></ko-component-router>`
+If an empty template isn't enough for you, you can still pass a component
+name to the route along with your nested routes, and include a `<router></router>`
 in that component.
 
 ```javascript
 import ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 Router.useRoutes({
   '/user': [
@@ -53,7 +53,7 @@ ko.components.register('user-header', {
       New User
     </a>
 
-    <ko-component-router></ko-component-router>
+    <router></router>
   `
 })
 

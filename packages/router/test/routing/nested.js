@@ -3,7 +3,7 @@ import ko from 'knockout'
 import { Router } from '../../'
 
 ko.components.register('nested', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class NestedRoutingTest {
     constructor(ctx) {
       const { t, done } = ctx
@@ -45,7 +45,7 @@ ko.components.register('nested', {
       let parent
 
       ko.components.register('c-pre', {
-        template: '<ko-component-router></ko-component-router>',
+        template: '<router></router>',
         viewModel: class {
           constructor(ctx) {
             parent = ctx

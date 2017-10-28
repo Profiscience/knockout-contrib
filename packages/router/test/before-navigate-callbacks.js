@@ -3,7 +3,7 @@ import ko from 'knockout'
 import { Router } from '../'
 
 ko.components.register('before-navigate-callbacks', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class BeforeNavigateCallbackTest {
     constructor({ t, done }) {
       Router.useRoutes({
@@ -56,7 +56,7 @@ ko.components.register('before-navigate-callbacks', {
       let hit = false
 
       ko.components.register('nested', {
-        template: '<ko-component-router></ko-component-router>',
+        template: '<router></router>',
         viewModel: class {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => {

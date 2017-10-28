@@ -21,7 +21,7 @@ const tests = [
 const paths = map(tests, 'path')
 
 ko.components.register('routing', {
-  template: '<ko-component-router params="t: t, done: done"></ko-component-router>',
+  template: '<router params="t: t, done: done"></router>',
   viewModel: class RoutingTestSuite {
     constructor({ t, done }) {
       Router.useRoutes(init.routes)

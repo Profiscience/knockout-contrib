@@ -1,6 +1,10 @@
 # Installation
 ```bash
-$ npm install ko-component-router
+$ yarn add @profiscience/knockout-contrib-router
+```
+*or*
+```bash
+$ npm install @profiscience/knockout-contrib-router
 ```
 
 The following browser features are required:
@@ -22,7 +26,7 @@ window.history.setup('/', '!/', null)
 Configuration is set using the static `.setConfig` method on the `Router` class
 
 ```javascript
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 Router.setConfig({
   // base path app runs under, i.e. '/app'
@@ -59,7 +63,7 @@ and any data attached via middleware as their first argument.
 If a picture is worth 1k words, code is worth 1M...
 
 ```javascript
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 Router.useRoutes({
   routes: {
@@ -109,7 +113,7 @@ ko.applyBindings()
 ```html
 <!doctype html>
 <script src="/app.js"></script>
-<ko-component-router></ko-component-router>
+<router></router>
 ```
 ---
 

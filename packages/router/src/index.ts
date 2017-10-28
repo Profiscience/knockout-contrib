@@ -16,7 +16,7 @@ export { isActivePath, resolveHref } from './utils'
  * tl;dr, re-exported interfaces can't be declared w/ the top level name, so
  * to augment (declaration merging) IContext in consumer code, you'd need to do...
  *
- * declare module "ko-component-router/dist/typings/context" {
+ * declare module "@profiscience/knockout-contrib-router/dist/typings/context" {
  *   // ...
  * }
  *

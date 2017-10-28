@@ -1,4 +1,4 @@
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 export default class UserCardComponentViewModel {
   constructor({ user }) {

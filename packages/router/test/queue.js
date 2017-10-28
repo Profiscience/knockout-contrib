@@ -3,7 +3,7 @@ import ko from 'knockout'
 import { Router } from '../'
 
 ko.components.register('queue', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class QueueTest {
     constructor({ t, done }) {
       let queuedPromiseAResolved = false

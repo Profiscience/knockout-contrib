@@ -2,12 +2,12 @@
 
 *ES2015*
 ```javascript
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 ```
 
 *CommonJS*
 ```javascript
-const { Router } = require('ko-component-router')
+const { Router } = require('@profiscience/knockout-contrib-router')
 ```
 
 *Browser Globals*

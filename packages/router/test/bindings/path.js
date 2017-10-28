@@ -10,7 +10,7 @@ ko.components.register('bindings-path', {
     <a id="outer-deep" data-bind="path: '/a/a'"></a>
     <a id="outer-relative-b" data-bind="path: '/b'"></a>
     <a id="outer-absolute-b" data-bind="path: '//b'"></a>
-    <ko-component-router></ko-component-router>
+    <router></router>
   `,
   viewModel: class BindingTest {
     constructor({ t, done }) {
@@ -53,7 +53,7 @@ ko.components.register('bindings-path', {
         template: `
           <a id="inner-relative" data-bind="path: './a'"></a>
           <a id="inner-absolute" data-bind="path: '//a'"></a>
-          <ko-component-router></ko-component-router>
+          <router></router>
         `
       })
 

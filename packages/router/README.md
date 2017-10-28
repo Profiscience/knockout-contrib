@@ -1,6 +1,6 @@
-# ko-component-router
+# @profiscience/knockout-contrib-router
 
-[![Version][npm-version-shield]][npm]
+<!-- [![Version][npm-version-shield]][npm]
 [![License][wtfpl-shield]][wtfpl]
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
@@ -8,17 +8,17 @@
 [![Peer Dependency Status][david-dm-peer-shield]][david-dm-peer]
 [![Greenkeeper Status][greenkeeper-shield]][greenkeeper]
 [![Downloads][npm-stats-shield]][npm-stats]
-[![Gitter][gitter-shield]][gitter]
+[![Gitter][gitter-shield]][gitter] -->
 
 Super-duper flexible component based router + middleware framework for developing wicked awesome single page apps with [KnockoutJS][]
 
 ### Installation
 ```bash
-$ npm install ko-component-router
+$ npm install @profiscience/knockout-contrib-router
 ```
 ...or...
 ```bash
-$ yarn add ko-component-router
+$ yarn add @profiscience/knockout-contrib-router
 ```
 
 ### Usage
@@ -26,7 +26,7 @@ _app.js_
 ```typescript
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 const loading = ko.observable(true)
 
@@ -89,7 +89,7 @@ function loadingMiddleware(ctx) {
 // }
 
 // TypeScript? Good for you! Just add ~water~ these lines
-// declare module 'ko-component-router' {
+// declare module '@profiscience/knockout-contrib-router' {
 //   interface IContext {
 //     user?: MyUserTypeDef
 //     users?: MyUserTypeDef[]
@@ -112,14 +112,14 @@ ko.applyBindings({ loading })
 ```
 _index.html_
 ```html
-<ko-component-router data-bind="css: { opacity: loading() ? .5 : 1 }"></ko-component-router>
+<router data-bind="css: { opacity: loading() ? .5 : 1 }"></router>
 ```
 
 [More](./docs)
 
 [KnockoutJS]: https://knockoutjs.com
 
-[npm]: https://www.npmjs.com/package/ko-component-router
+<!-- [npm]: https://www.npmjs.com/package/ko-component-router
 [npm-version-shield]: https://img.shields.io/npm/v/ko-component-router.svg
 
 [wtfpl]: ./LICENSE.md
@@ -144,4 +144,4 @@ _index.html_
 [npm-stats-shield]: https://img.shields.io/npm/dt/ko-component-router.svg?maxAge=2592000
 
 [gitter]: https://gitter.im/Profiscience/ko-component-router
-[gitter-shield]: https://img.shields.io/gitter/room/profiscience/ko-component-router.svg
+[gitter-shield]: https://img.shields.io/gitter/room/profiscience/ko-component-router.svg -->

@@ -3,7 +3,7 @@ import ko from 'knockout'
 import { Router } from '../'
 
 ko.components.register('history', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class History {
     constructor({ t, done }) {
       Router.useRoutes({

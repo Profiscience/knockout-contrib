@@ -9,16 +9,16 @@ declare global {
   }
 }
 
-ko.components.register('ko-component-router', {
+ko.components.register('router', {
   synchronous: true,
   viewModel: { createViewModel },
   template:
     `<div data-bind="if: component">
-      <div class="ko-component-router-view" data-bind="__ko_component_router__"></div>
+      <div class="router-view" data-bind="__router__"></div>
     </div>`
 })
 
-ko.bindingHandlers.__ko_component_router__ = {
+ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
 
     const $router: Router = bindingCtx.$rawData

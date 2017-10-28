@@ -1,6 +1,6 @@
 import { random } from 'lodash-es'
 import ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 import loadingMiddleware from './middleware/loading'
 
 import * as foo from './views/foo'
@@ -47,7 +47,7 @@ Router.useRoutes({
   '/bar': 'bar'
 })
 
-ko.components.register('app', { template: '<ko-component-router></ko-component-router>' })
+ko.components.register('app', { template: '<router></router>' })
 ko.components.register('foo', foo)
 ko.components.register('bar', bar)
 

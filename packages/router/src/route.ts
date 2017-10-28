@@ -79,7 +79,7 @@ export class Route {
           m = m as RouteMap
           children = map(m, (routeConfig, path) => new Route(path, routeConfig))
           if (!component) {
-            component = 'ko-component-router'
+            component = 'router'
           }
         } else if (isFunction(m)) {
           m = m as Middleware

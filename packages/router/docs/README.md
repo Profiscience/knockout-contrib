@@ -8,7 +8,7 @@
 - [Plugins](./plugins.md)
 - [Best Practices](./best-practices.md)
 - [TypeScript Support](./typescript.md)
-- [Wiki (Usage Examples)](https://github.com/Profiscience/ko-component-router/wiki)
+- [Wiki (Usage Examples)](https://github.com/Profiscience/knockout-contrib/wiki/router)
 
 #### Further Reading
 - [Ali (KnockoutJS SPA Boilerplate)](https://github.com/caseyWebb/ali)

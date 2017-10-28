@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 
 function createOuterTemplate(foo) {
   return `
@@ -24,7 +24,7 @@ function createOuterTemplate(foo) {
     <br>
     <a data-bind="path: '//${foo}/qux'">//${foo}/qux</a>
 
-    <ko-component-router></ko-component-router>
+    <router></router>
   `
 }
 
@@ -46,7 +46,7 @@ ko.components.register('app', {
     <a data-bind="path: '/foo'">/foo</a>
     <a data-bind="path: '/bar'">/bar</a>
 
-    <ko-component-router></ko-component-router>
+    <router></router>
   `
 })
 

@@ -13,7 +13,7 @@ module.exports = function * (task) {
   ]
 
   const border = '-------------------------------------------------------------'
-  const padNameWidth = 'ko-component-router.min.js'.length + 3
+  const padNameWidth = 'knockout-contrib-router.min.js'.length + 3
   const padUncompressedWidth = '~XXXkb'.length + 3
   const padRightWidth = border.length - 4 - padNameWidth - padUncompressedWidth
   console.log(green(border)) // eslint-disable-line no-console
@@ -46,7 +46,7 @@ async function getModuleStats(task) {
 async function getBundleStats(task) {
   const stats = []
   await task
-    .source(path.resolve(__dirname, '../ko-component-router.*'))
+    .source(path.resolve(__dirname, '../knockout-contrib-router.*'))
     .run({ every: true }, function * ({ base: name, data }) {
       const kilobytes = round(Buffer.byteLength(data, 'utf8') / 1000)
       const compressedKilobytes = yield getGzippedSize(data)

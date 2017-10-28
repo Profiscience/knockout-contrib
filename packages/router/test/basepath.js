@@ -6,7 +6,7 @@ import { Router } from '../'
 ko.components.register('basepath', {
   template: `
     <a id="foo-link" data-bind="path: '/foo/foo'"></a>
-    <ko-component-router></ko-component-router>
+    <router></router>
   `,
   viewModel: class BasePath {
     constructor({ t, done }) {

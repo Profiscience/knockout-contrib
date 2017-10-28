@@ -1,4 +1,4 @@
-# ko-component-router examples
+# @profiscience/knockout-contrib-router examples
 
 *In this directory*
 

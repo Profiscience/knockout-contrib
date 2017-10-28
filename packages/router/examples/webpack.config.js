@@ -53,7 +53,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'ko-component-router': path.resolve(__dirname, '../src')
+      'knockout-contrib-router': path.resolve(__dirname, '../src')
     },
     extensions: [
       '.js',

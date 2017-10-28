@@ -3,7 +3,7 @@ import ko from 'knockout'
 import { Router } from '../'
 
 ko.components.register('redirect', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class RedirectTest {
     constructor({ t, done }) {
       const fooPre = {}

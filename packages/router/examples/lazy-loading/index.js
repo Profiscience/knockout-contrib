@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import { Router } from 'ko-component-router'
+import { Router } from '@profiscience/knockout-contrib-router'
 import lazyComponentLoaderPlugin from './plugins/lazy-component-loader'
 
 Router.setConfig({ base: '/lazy-loading', hashbang: true })
@@ -15,6 +15,6 @@ Router.useRoutes({
 }
 )
 
-ko.components.register('app', { template: '<ko-component-router></ko-component-router>' })
+ko.components.register('app', { template: '<router></router>' })
 
 ko.applyBindings()

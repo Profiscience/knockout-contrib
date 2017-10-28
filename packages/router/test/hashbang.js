@@ -6,7 +6,7 @@ import { Router } from '../'
 ko.components.register('hashbang', {
   template: `
     <a id="foo-link" data-bind="path: '/foo/foo'"></a>
-    <ko-component-router></ko-component-router>
+    <router></router>
   `,
   viewModel: class Hashbang {
     constructor({ t, done }) {

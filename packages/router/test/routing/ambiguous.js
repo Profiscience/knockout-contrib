@@ -1,7 +1,7 @@
 import ko from 'knockout'
 
 ko.components.register('ambiguous', {
-  template: '<ko-component-router></ko-component-router>',
+  template: '<router></router>',
   viewModel: class AmbiguousRoutingTest {
     constructor({ t, done }) {
       ko.components.register('wrong', {
