@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const { gzip } = require('zlib')
 const { each, padEnd, round } = require('lodash')
@@ -24,7 +26,7 @@ module.exports = {
           console.log(green(
             '|',
             padEnd(
-              (padEnd(name, 'dist/ko-contrib-utils.min.js'.length) + `\t~${raw}kb\t~${gzipped}kb gzipped`),
+              (padEnd(name, 'dist/knockout-contrib-utils.min.js'.length) + `\t~${raw}kb\t~${gzipped}kb gzipped`),
               border.length - 5
             ),
             '|')))

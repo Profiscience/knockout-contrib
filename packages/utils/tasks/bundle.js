@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const { extend } = require('lodash')
 const typescript = require('typescript')
@@ -35,7 +37,7 @@ module.exports = {
           }
         }
       })
-      .rename({ basename: 'ko-contrib-utils', extname: '.js' })
+      .rename({ basename: 'knockout-contrib-utils', extname: '.js' })
       .target(path.resolve(__dirname, '../dist'))
 
       .rename({ suffix: '.min' })

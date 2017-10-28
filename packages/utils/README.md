@@ -1,11 +1,11 @@
-# ko-contrib-utils
+# @profiscience/knockout-contrib-utils
 
-[![NPM Version](https://img.shields.io/npm/v/ko-contrib-utils.svg)](https://www.npmjs.com/package/ko-contrib-utils)
+<!-- [![NPM Version](https://img.shields.io/npm/v/ko-contrib-utils.svg)](https://www.npmjs.com/package/ko-contrib-utils)
 ![WTFPL](https://img.shields.io/npm/l/ko-contrib-utils.svg)
 [![Travis](https://img.shields.io/travis/Profiscience/ko-contrib-utils.svg)](https://travis-ci.org/Profiscience/ko-contrib-utils)
 [![Coverage Status](https://coveralls.io/repos/github/Profiscience/ko-contrib-utils/badge.svg?branch=master)](https://coveralls.io/github/Profiscience/ko-contrib-utils?branch=master)
 [![Dependency Status](https://img.shields.io/david/Profiscience/ko-contrib-utils.svg)](https://david-dm.org/Profiscience/ko-contrib-utils)
-[![Peer Dependency Status](https://img.shields.io/david/peer/Profiscience/ko-contrib-utils.svg?maxAge=2592000)](https://david-dm.org/Profiscience/ko-contrib-utils#info=peerDependencies&view=table)
+[![Peer Dependency Status](https://img.shields.io/david/peer/Profiscience/ko-contrib-utils.svg?maxAge=2592000)](https://david-dm.org/Profiscience/ko-contrib-utils#info=peerDependencies&view=table) -->
 
 ### Table of Contents
 - [defaults](#defaultsdest-defaultvalues-maparrays--false)
@@ -21,7 +21,7 @@ Creates observables for enumerable string properties of `defaultValues` where un
 If `mapArrays` is true, array elements will be created as mapped observables, else bare objects/primitives.
 
 ```javascript
-import { defaults } from 'ko-contrib-utils'
+import { defaults } from '@profiscience/knockout-contrib-utils'
 
 const foos = { foo: 'foo' }
 defaults(foos, { foo: 'bar', bar: 'bar' })
@@ -40,7 +40,7 @@ The much needed inverse to the undocumented `ko.toJS` function; a dumb version o
 that is a lot faster.
 
 ```javascript
-import { fromJS } from 'ko-contrib-utils'
+import { fromJS } from '@profiscience/knockout-contrib-utils'
 
 const foos = {
   foo: 'foo',
@@ -76,7 +76,7 @@ probably want [ko.mapping](http://knockoutjs.com/documentation/plugins-mapping.h
 but far slower.
 
 ```javascript
-import { merge } from 'ko-contrib-utils'
+import { merge } from '@profiscience/knockout-contrib-utils'
 
 const foos = {
   foo: ko.observable('foo'),
