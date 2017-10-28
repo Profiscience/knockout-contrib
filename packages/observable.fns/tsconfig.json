@@ -7,7 +7,7 @@
     "declaration": true,
     "rootDir": "./src",
     "baseUrl": "./src",
-    "outDir": "./",
+    "outDir": "./dist",
     "types": [
       "knockout"
     ],

@@ -1,18 +1,25 @@
 {
-  "name": "ko-contrib-fns",
-  "version": "0.0.5",
+  "name": "@profiscience/knockout-contrib-observable-fns",
+  "private": false,
+  "version": "1.0.0-0",
   "description": "Knockout JS Observable Functions",
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": "https://github.com/Profiscience/ko-contrib-fns/issues",
+  "homepage": "https://github.com/Profiscience/ko-contrib-fns#readme",
+  "repository": "Profiscience/knockout-contrib",
   "main": "index.js",
+  "module": "dist/index.js",
   "typings": "index.d.ts",
+  "global": "ko.observable.fns",
+  "files": [
+    "increment.js"
+  ],
   "scripts": {
     "test": "fly test",
     "build": "fly build",
     "watch": "fly watch",
     "prepublish": "yarn build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/ko-contrib-fns.git"
   },
   "keywords": [
     "knockout",
@@ -21,12 +28,6 @@
     "helpers",
     "utilities"
   ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
-  "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/ko-contrib-fns/issues"
-  },
-  "homepage": "https://github.com/Profiscience/ko-contrib-fns#readme",
   "devDependencies": {
     "@types/knockout": "^3.4.39",
     "ava": "^0.22.0",

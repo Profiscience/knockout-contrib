@@ -11,6 +11,7 @@
   "main": "knockout-contrib-router.js",
   "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
+  "global": "ko.router",
   "typings": "dist/index.d.ts",
   "files": [
     "dist/",

@@ -5,6 +5,7 @@
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/modules/index.js",
   "module": "dist/modules/index.js",
+  "global": "ko.utils",
   "typings": "dist/typings/index.d.ts",
   "files": [
     "dist"
