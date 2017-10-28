@@ -5,6 +5,7 @@ package-lock.json
 
 .cache/
 .chrome/
+.nyc_output/
 .vscode/
 coverage/
 dist/
