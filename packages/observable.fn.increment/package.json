@@ -6,12 +6,12 @@
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.increment#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fn.increment#readme",
   "repository": "Profiscience/knockout-contrib",
   "main": "knockout-contrib-observable-fn-increment.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fns.increment",
+  "global": "ko.observable.fn.increment",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-increment.js"

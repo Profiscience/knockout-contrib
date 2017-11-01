@@ -3,9 +3,9 @@
 This is a metapackage including all `@profiscience/knockout-contrib-observable-fn-*` packages
 
 ### Contents
-- [increment](../observable.fns.increment)
-- [subscribeOnce](../observable.fns.subscribeOnce)
-- [toString](../observable.fns.toString)
+- [increment](../observable.fn.increment)
+- [subscribeOnce](../observable.fn.subscribeOnce)
+- [toString](../observable.fn.toString)
 
 ### Usage
 

@@ -1,10 +1,10 @@
 # @profiscience/knockout-contrib-observable-fn-increment
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-observable-fn metapackage](../observable.fns)
-
-###### observable<number>.fn.increment/decrement(n?: number = 1)
+**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-observable-fn metapackage](../observable.fn)
 
 Increments/decrements numeric observables
+
+## Usage
 
 ```javascript
 import '@profiscience/knockout-contrib-observable-fn/increment'

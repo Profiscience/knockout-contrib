@@ -6,12 +6,12 @@
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.subscribeOnce#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fn.subscribeOnce#readme",
   "repository": "Profiscience/knockout-contrib",
   "main": "knockout-contrib-observable-fn-subscribe-once.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fns.subscribeOnce",
+  "global": "ko.observable.fn.subscribeOnce",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-subscribe-once.js"
