@@ -1,12 +1,11 @@
 import * as ko from 'knockout'
-import { PlainObject, KnockoutObservableTree } from './_types'
-import fromJS from './fromJS'
+import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 
-export default function merge(
-  dest: { [k: string]: any },
+export default function merge<T extends { [k: string]: any }>(
+  dest: T,
   src: { [k: string]: any },
   mapArraysDeep: boolean = false
-): KnockoutObservableTree {
+): T {
   const props = Object.keys(src)
 
   for (const prop of props) {

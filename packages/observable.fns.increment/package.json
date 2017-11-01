@@ -8,16 +8,14 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.increment#readme",
   "repository": "Profiscience/knockout-contrib",
-  "main": "dist/knockout-contrib-observable-fns-increment.js",
+  "main": "knockout-contrib-observable-fns-increment.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.observable.fns.increment",
   "files": [
-    "dist"
+    "dist",
+    "knockout-contrib-observable-fns-increment.js"
   ],
-  "scripts": {
-    "test": "fly test"
-  },
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -30,8 +28,5 @@
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
-  },
-  "devDependencies": {
-    "typescript": "^2.5.3"
   }
 }

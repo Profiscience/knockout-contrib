@@ -1,8 +1,9 @@
-import * as path from 'path'
-import { camelCase, kebabCase } from 'lodash'
-import 'taskr'
+'use strict'
 
-export default function * (task: taskr.Task) {
+const path = require('path')
+const { camelCase, kebabCase } = require('lodash')
+
+module.exports = function * (task) {
   this._.files = []
 
   yield task
@@ -13,7 +14,7 @@ export default function * (task: taskr.Task) {
       
       const files = yield generateMetaFiles(metapackage, packages)
 
-      console.log(`\nGenerated metapackage ${metapackageName}`)
+      console.log(`\n🔗  Generated ${metapackageName} metapackage`)
       files.forEach((f) => console.log(`- ${f.base}`))
 
       this._.files.push(...files)

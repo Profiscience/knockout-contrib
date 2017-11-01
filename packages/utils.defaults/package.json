@@ -2,12 +2,13 @@
   "name": "@profiscience/knockout-contrib-utils-defaults",
   "version": "1.0.0-0",
   "description": "Handy Utilities for Knockout JS",
-  "main": "dist/knockout-contrib-utils-defaults.js",
+  "main": "knockout-contrib-utils-defaults.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "knockout-contrib-utils-defaults.js"
   ],
   "repository": {
     "type": "git",
@@ -29,32 +30,7 @@
   "dependencies": {
     "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
   },
-  "devDependencies": {
-    "@types/knockout": "^3.4.39",
-    "ava": "^0.22.0",
-    "babel": "^6.23.0",
-    "babel-register": "^6.23.0",
-    "coveralls": "^3.0.0",
-    "cross-spawn": "^5.1.0",
-    "eslint": "^4.1.0",
-    "eslint-config-profiscience": "^2.0.0",
-    "fly": "^2.0.5",
-    "fly-rename": "^0.1.0",
-    "fly-rollup": "^2.0.0",
-    "fly-uglify": "^2.1.1",
-    "fly-watch": "^1.1.1",
-    "knockout": "^3.4.0",
-    "nyc": "^11.0.1",
-    "remap-istanbul": "^0.9.5",
-    "rollup-plugin-commonjs": "^8.0.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-ts": "^0.1.0",
-    "typescript": "^2.2.1"
-  },
   "peerDependencies": {
     "knockout": "^3.4.0"
-  },
-  "ava": {
-    "require": "babel-register"
   }
 }

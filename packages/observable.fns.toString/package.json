@@ -8,16 +8,14 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.toString#readme",
   "repository": "Profiscience/knockout-contrib",
-  "main": "dist/knockout-contrib-observable-fns-to-string.js",
+  "main": "knockout-contrib-observable-fns-to-string.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.observable.fns.toString",
   "files": [
-    "dist"
+    "dist",
+    "knockout-contrib-observable-fns-to-string.js"
   ],
-  "scripts": {
-    "test": "fly test"
-  },
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -29,8 +27,5 @@
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
-  },
-  "devDependencies": {
-    "typescript": "^2.5.3"
   }
 }

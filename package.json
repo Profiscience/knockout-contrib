@@ -2,12 +2,14 @@
 	"scripts": {
 		"meta": "taskr meta",
 		"install": "taskr meta && lerna bootstrap --hoist --npm-client=yarn",
-		"build": "lerna exec --concurrency 1 -- taskr build -d ../.. && taskr stats",
+		"build": "lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"test": "lerna run test"
 	},
 	"devDependencies": {
 		"@taskr/clear": "^1.1.0",
 		"@taskr/uglify": "^1.1.0",
+		"@types/chalk": "^2.2.0",
+		"@types/knockout": "^3.4.0",
 		"@types/lodash": "^4.14.80",
 		"@types/node": "^8.0.47",
 		"chalk": "^2.3.0",
@@ -19,7 +21,6 @@
 		"taskr": "^1.1.0",
 		"taskr-rename": "^0.0.1",
 		"taskr-rollup": "^0.0.3",
-		"ts-node": "^3.3.0",
 		"typescript": "^2.5.3"
 	}
 }

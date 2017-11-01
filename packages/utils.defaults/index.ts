@@ -1,11 +1,11 @@
 import * as ko from 'knockout'
 import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 
-export default function defaults<T>(
-  dest: { [k: string]: T | KnockoutObservable<T> | void },
-  defaults: { [k: string]: T },
+export default function defaults<T extends { [k: string]: any | KnockoutObservable<any> | void }>(
+  dest: T,
+  defaults: { [k: string]: any },
   mapArraysDeep: boolean = false
-): { [k: string]: T | KnockoutObservable<T> } {
+): T {
   for (const prop in defaults) {
     if (isUndefined(dest[prop])) {
       dest[prop] = fromJS(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep)
@@ -13,7 +13,6 @@ export default function defaults<T>(
       dest[prop](defaults[prop])
     }
   }
-
   return dest
 }
 
