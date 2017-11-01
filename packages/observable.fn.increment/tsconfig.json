@@ -8,12 +8,16 @@
     "declaration": true,
     "rootDir": "./",
     "baseUrl": "./",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "lib": [
+      "es2015"
+    ]
   },
   "include": [
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "test.ts"
   ]
 }
