@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 import 'jest'
-import './'
+import './index'
 
 test('increment by 1 by default', () => {
   const count = ko.observable(0)

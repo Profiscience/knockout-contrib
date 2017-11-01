@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
-  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/utils#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
   },

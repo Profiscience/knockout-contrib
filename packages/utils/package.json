@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
-  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/utils#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils",
   "peerDependencies": {
     "knockout": "^3.4.0"
   },

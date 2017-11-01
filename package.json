@@ -27,10 +27,9 @@
 		"typescript": "^2.5.3"
 	},
 	"jest": {
-    "moduleFileExtensions": [
-      "js",
-      "ts"
-    ],
+		"collectCoverage": true,
+		"coverageReporters": ["lcov", "html"],
+    "moduleFileExtensions": ["js", "ts"],
     "testRegex": "(__tests__/[^_].*|test)\\.ts$",
     "transform": {
       "^.+\\.[tj]s$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
