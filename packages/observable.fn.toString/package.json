@@ -1,5 +1,5 @@
 {
-  "name": "@profiscience/knockout-contrib-observable-fns-to-string",
+  "name": "@profiscience/knockout-contrib-observable-fn-to-string",
   "private": false,
   "version": "1.0.0-0",
   "description": "KnockoutJS Observable.fn.toString()",
@@ -8,13 +8,13 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.toString#readme",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-observable-fns-to-string.js",
+  "main": "knockout-contrib-observable-fn-to-string.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.observable.fns.toString",
   "files": [
     "dist",
-    "knockout-contrib-observable-fns-to-string.js"
+    "knockout-contrib-observable-fn-to-string.js"
   ],
   "keywords": [
     "knockout",
@@ -23,7 +23,7 @@
     "helpers",
     "utilities",
     "observable",
-    "knockout-contrib-observable-fns"
+    "knockout-contrib-observable-fn"
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"

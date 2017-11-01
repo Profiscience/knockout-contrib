@@ -12,7 +12,7 @@ module.exports = function* (task) {
   ]
 
   const border = '--------------------------------------------------------------------------------------'
-  const padNameWidth = 'knockout-contrib-observable-fns-subscribe-once.min.js'.length + 3
+  const padNameWidth = 'knockout-contrib-observable-fn-subscribe-once.min.js'.length + 3
   const padUncompressedWidth = '~XXXkb'.length + 3
   const padRightWidth = border.length - 4 - padNameWidth - padUncompressedWidth
   console.log(green(border)) // eslint-disable-line no-console

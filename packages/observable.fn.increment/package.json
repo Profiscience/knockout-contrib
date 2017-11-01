@@ -1,20 +1,20 @@
 {
-  "name": "@profiscience/knockout-contrib-observable-fns-subscribe-once",
+  "name": "@profiscience/knockout-contrib-observable-fn-increment",
   "private": false,
   "version": "1.0.0-0",
-  "description": "KnockoutJS Observable.fn.subscribeOnce()",
+  "description": "KnockoutJS Observable.fn.increment()",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.subscribeOnce#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.increment#readme",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-observable-fns-subscribe-once.js",
+  "main": "knockout-contrib-observable-fn-increment.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fns.subscribeOnce",
+  "global": "ko.observable.fns.increment",
   "files": [
     "dist",
-    "knockout-contrib-observable-fns-subscribe-once.js"
+    "knockout-contrib-observable-fn-increment.js"
   ],
   "keywords": [
     "knockout",
@@ -22,9 +22,9 @@
     "utils",
     "helpers",
     "utilities",
-    "subscribe",
+    "increment",
     "observable",
-    "knockout-contrib-observable-fns"
+    "knockout-contrib-observable-fn"
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
