@@ -1,23 +1,16 @@
 {
   "compilerOptions": {
-    "importHelpers": true,
     "moduleResolution": "node",
     "target": "es5",
-    "module": "umd",
+    "module": "es2015",
+    "declaration": true,
     "sourceMap": true,
-    "rootDir": "./src",
-    "baseUrl": "./src",
-    "outDir": "./dist/umd",
-    "types": [
-      "knockout"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "./"
   },
-  "exclude": [
-    "dist",
-    "test",
-    "node_modules"
-  ]
+  "include": [
+    "**/*"
+  ],
+  "exclude": []
 }

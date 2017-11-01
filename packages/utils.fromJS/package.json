@@ -1,9 +1,21 @@
 {
-  "name": "@profiscience/knockout-contrib-utils",
-  "private": false,
-  "version": "1.0.0-0",
+  "name": "@profiscience/knockout-contrib-utils-from-js",
+  "version": "0.4.0",
   "description": "Handy Utilities for Knockout JS",
-  "global": "ko.utils",
+  "main": "dist/knockout-contrib-utils-from-js.js",
+  "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "fly test",
+    "test:watch": "fly test:watch",
+    "build": "fly build",
+    "watch": "fly watch",
+    "prepublish": "yarn build"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
@@ -48,19 +60,5 @@
   },
   "ava": {
     "require": "babel-register"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "knockout-contrib-utils.js"
-  ],
-  "main": "knockout-contrib-utils.js",
-  "module": "index.js",
-  "js:next": "index.js",
-  "typings": "index.d.ts",
-  "dependencies": {
-    "@profiscience/knockout-contrib-utils-defaults": "1.0.0-0",
-    "@profiscience/knockout-contrib-utils-from-js": "0.4.0",
-    "@profiscience/knockout-contrib-utils-merge": "1.0.0-0"
   }
 }

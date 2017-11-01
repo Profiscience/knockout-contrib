@@ -1,60 +1,43 @@
 {
-  "name": "@profiscience/knockout-contrib-observable-fns",
   "private": false,
   "version": "1.0.0-0",
   "description": "Knockout JS Observable Functions",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
-  "bugs": "https://github.com/Profiscience/ko-contrib-fns/issues",
-  "homepage": "https://github.com/Profiscience/ko-contrib-fns#readme",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns#readme",
   "repository": "Profiscience/knockout-contrib",
-  "main": "index.js",
-  "module": "dist/index.js",
-  "typings": "index.d.ts",
   "global": "ko.observable.fns",
-  "files": [
-    "increment.js"
-  ],
-  "scripts": {
-    "test": "fly test",
-    "build": "fly build",
-    "watch": "fly watch",
-    "prepublish": "yarn build"
-  },
   "keywords": [
     "knockout",
     "knockoutjs",
     "utils",
     "helpers",
-    "utilities"
+    "utilities",
+    "observable"
   ],
-  "devDependencies": {
-    "@types/knockout": "^3.4.39",
-    "ava": "^0.22.0",
-    "babel": "^6.23.0",
-    "babel-register": "^6.23.0",
-    "chalk": "^2.0.0",
-    "coveralls": "^3.0.0",
-    "cross-spawn": "^5.1.0",
-    "eslint": "^4.1.0",
-    "eslint-config-profiscience": "^2.0.0",
-    "fly": "^2.0.5",
-    "fly-rename": "^0.1.0",
-    "fly-rollup": "^2.0.0",
-    "fly-uglify": "^2.1.1",
-    "fly-watch": "^1.1.1",
-    "knockout": "^3.4.0",
-    "nyc": "^11.0.2",
-    "remap-istanbul": "^0.9.5",
-    "rollup-plugin-commonjs": "^8.0.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-ts": "^0.1.0",
-    "typescript": "^2.2.1"
-  },
   "peerDependencies": {
     "knockout": "^3.4.0"
   },
-  "ava": {
-    "require": "babel-register"
+  "name": "@profiscience/knockout-contrib-observable-fns",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "knockout-contrib-observable-fns.js",
+    "increment.js",
+    "increment.d.ts",
+    "subscribeOnce.js",
+    "subscribeOnce.d.ts",
+    "toString.js",
+    "toString.d.ts"
+  ],
+  "main": "knockout-contrib-observable-fns.js",
+  "module": "index.js",
+  "js:next": "index.js",
+  "typings": "index.d.ts",
+  "dependencies": {
+    "@profiscience/knockout-contrib-observable-fns-increment": "1.0.0-0",
+    "@profiscience/knockout-contrib-observable-fns-subscribe-once": "1.0.0-0",
+    "@profiscience/knockout-contrib-observable-fns-to-string": "1.0.0-0"
   }
 }

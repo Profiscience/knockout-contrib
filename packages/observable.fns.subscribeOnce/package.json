@@ -1,0 +1,37 @@
+{
+  "name": "@profiscience/knockout-contrib-observable-fns-subscribe-once",
+  "private": false,
+  "version": "1.0.0-0",
+  "description": "KnockoutJS Observable.fn.subscribeOnce()",
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/packages/observable.fns.subscribeOnce#readme",
+  "repository": "Profiscience/knockout-contrib",
+  "main": "dist/knockout-contrib-observable-fns-subscribe-once.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "global": "ko.observable.fns.subscribeOnce",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "fly test"
+  },
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "utils",
+    "helpers",
+    "utilities",
+    "subscribe",
+    "observable",
+    "knockout-contrib-observable-fns"
+  ],
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3"
+  }
+}

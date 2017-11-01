@@ -28,9 +28,5 @@
     "src/**/*"
   ],
   "exclude": [
-    "dist",
-    "test",
-    "examples",
-    "node_modules"
   ]
 }
