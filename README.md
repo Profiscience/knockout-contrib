@@ -16,4 +16,6 @@ Package names are converted to kebab-case.
 Versioning. Maintaining large codebase(s) is easy when packages can be updated incrementally at-will.
 
 # Packages
+- [observable.fn](./packages/observable.fn)
 - [router](./packages/router)
+- [utils](./packages/utils)
