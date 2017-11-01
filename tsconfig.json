@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "importHelpers": true,
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "include": [
+    "**/test.ts",
+    "**/__tests__/*"
+  ]
+}
