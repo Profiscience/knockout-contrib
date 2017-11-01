@@ -1,10 +1,11 @@
-# @profiscience/knockout-contrib-observable-fn-increment
+# @profiscience/knockout-contrib-observable-fn-subscribe-once
 
 **NOTE:** It is recommended to use the [@profiscience/knockout-contrib-observable-fn metapackage](../observable.fn)
 
 Creates a subscription that is called once and then disposed.
 
-## Usage observable<T>.fn.subscribeOnce(fn: (newValue: T) => void)
+## Usage
+> observable<T>.fn.subscribeOnce(fn: (newValue: T) => void)
 
 ```javascript
 import '@profiscience/knockout-contrib-observable-fn/subscribeOnce'
