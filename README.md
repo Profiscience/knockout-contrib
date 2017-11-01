@@ -9,9 +9,13 @@ Individual packages are published under the `@profiscience/knockout-contrib-*` n
 $ yarn add @profiscience/knockout-contrib-router
 ```
 
+Package names are converted to kebab-case.
+
 ### Why individual packages instead of ES2015 import + treeshaking?
 
 Versioning. Maintaining large codebase(s) is easy when packages can be updated incrementally at-will.
 
 # Packages
+- [observable.fn](./packages/observable.fn)
 - [router](./packages/router)
+- [utils](./packages/utils)

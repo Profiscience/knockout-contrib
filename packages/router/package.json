@@ -12,6 +12,7 @@
   "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "global": "ko.router",
   "files": [
     "dist/",
     "knockout-contrib-router.js"
@@ -20,8 +21,7 @@
     "build": "taskr build",
     "watch": "taskr watch",
     "test": "taskr test",
-    "test:watch": "taskr test:watch",
-    "prepublish": "yarn build"
+    "test:watch": "taskr test:watch"
   },
   "keywords": [
     "knockoutjs",

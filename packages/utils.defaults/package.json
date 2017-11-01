@@ -1,9 +1,15 @@
 {
-  "name": "@profiscience/knockout-contrib-utils",
-  "private": false,
+  "name": "@profiscience/knockout-contrib-utils-defaults",
   "version": "1.0.0-0",
   "description": "Handy Utilities for Knockout JS",
-  "global": "ko.utils",
+  "main": "knockout-contrib-utils-defaults.js",
+  "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "knockout-contrib-utils-defaults.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
@@ -21,21 +27,10 @@
     "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/packages/utils#readme",
+  "dependencies": {
+    "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
+  },
   "peerDependencies": {
     "knockout": "^3.4.0"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "knockout-contrib-utils.js"
-  ],
-  "main": "knockout-contrib-utils.js",
-  "module": "index.js",
-  "js:next": "index.js",
-  "typings": "index.d.ts",
-  "dependencies": {
-    "@profiscience/knockout-contrib-utils-defaults": "1.0.0-0",
-    "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0",
-    "@profiscience/knockout-contrib-utils-merge": "1.0.0-0"
   }
 }
