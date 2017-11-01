@@ -1,6 +1,6 @@
 import 'jest'
 import * as ko from 'knockout'
-import './'
+import './index'
 
 test('returns the type and value', () => {
   const observable = ko.observable(null)

@@ -11,7 +11,7 @@ ko.observableArray.fn.subscribeOnce =
 ko.computed.fn.subscribeOnce =
   function(fn: (v) => void): KnockoutSubscription {
     const killMe = this.subscribe((v) => {
-      // killMe.dispose()
+      killMe.dispose()
       fn(v)
     })
     return killMe

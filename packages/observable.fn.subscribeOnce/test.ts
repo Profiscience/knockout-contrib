@@ -1,6 +1,6 @@
 import 'jest'
 import * as ko from 'knockout'
-import './'
+import './index'
 
 test('subscribes once, then disposes', () => {
   expect.assertions(4)
