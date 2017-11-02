@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('knockout')) :
 	typeof define === 'function' && define.amd ? define(['knockout'], factory) :
-	(global.ko = global.ko || {}, global.ko.utils = factory(global.ko));
+	(global.ko = global.ko || {}, global.ko.utils = global.ko.utils || {}, global.ko.utils.merge = factory(global.ko));
 }(this, (function (ko) { 'use strict';
 
 // can't accurately type this without conditional mapped types
