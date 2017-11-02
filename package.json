@@ -28,11 +28,17 @@
 	},
 	"jest": {
 		"collectCoverage": true,
-		"coverageReporters": ["lcov", "html"],
-    "moduleFileExtensions": ["js", "ts"],
-    "testRegex": "(__tests__/[^_].*|test)\\.ts$",
-    "transform": {
-      "^.+\\.[tj]s$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    }
-  }
+		"coverageReporters": [
+			"lcov",
+			"html"
+		],
+		"moduleFileExtensions": [
+			"js",
+			"ts"
+		],
+		"testRegex": "(__tests__/[^_].*|test)\\.ts$",
+		"transform": {
+			"^.+\\.[tj]s$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+		}
+	}
 }

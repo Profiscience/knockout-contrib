@@ -6,6 +6,7 @@
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "global": "ko.utils.defaults",
   "files": [
     "dist",
     "knockout-contrib-utils-defaults.js"
@@ -29,6 +30,9 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-jest-matchers": "1.0.0-0"
   },
   "peerDependencies": {
     "knockout": "^3.4.0"

@@ -2,12 +2,12 @@
   "compilerOptions": {
     "importHelpers": true,
     "moduleResolution": "node",
-    "target": "es5",
-    "module": "es2015",
+    "target": "es2015",
+    "module": "commonjs",
     "sourceMap": true,
     "declaration": true,
-    "rootDir": "./",
     "baseUrl": "./",
+    "rootDir": "./src",
     "outDir": "./dist"
   },
   "include": [
