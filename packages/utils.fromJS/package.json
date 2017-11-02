@@ -30,5 +30,8 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.fromJS",
   "peerDependencies": {
     "knockout": "^3.4.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-jest-matchers": "1.0.0-0"
   }
 }

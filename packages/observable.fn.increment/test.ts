@@ -1,5 +1,4 @@
 import * as ko from 'knockout'
-import 'jest'
 import './index'
 
 test('increment by 1 by default', () => {

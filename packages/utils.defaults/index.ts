@@ -4,7 +4,7 @@ import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 export default function defaults<T extends { [k: string]: any | KnockoutObservable<any> | void }>(
   dest: T,
   defaults: { [k: string]: any },
-  mapArraysDeep: boolean = false
+  mapArraysDeep = false
 ): T {
   for (const prop in defaults) {
     if (isUndefined(dest[prop])) {
@@ -16,6 +16,6 @@ export default function defaults<T extends { [k: string]: any | KnockoutObservab
   return dest
 }
 
-function isUndefined(foo): boolean {
+function isUndefined(foo: any): boolean {
   return typeof foo === 'undefined'
 }

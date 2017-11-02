@@ -1,4 +1,3 @@
-import 'jest'
 import * as ko from 'knockout'
 import './index'
 

@@ -8,12 +8,21 @@ const commonjs = require('rollup-plugin-commonjs')
 const { LERNA_PACKAGE_NAME } = process.env
 const PACKAGE_PATH = process.cwd()
 const pkg = require(path.join(PACKAGE_PATH, 'package.json'))
+const tsconfig = require(path.join(PACKAGE_PATH, 'tsconfig.json'))
 
 const cache = {}
 
 exports[`build:${LERNA_PACKAGE_NAME}`] = function* (task) {
+  const tasks = [`transpile:${LERNA_PACKAGE_NAME}`]
+
   yield task.clear(pkg.files)
-  yield task.serial([`transpile:${LERNA_PACKAGE_NAME}`, `bundle:${LERNA_PACKAGE_NAME}`])
+
+  // don't bundle node-only code, i.e. jest-matchers
+  if (tsconfig.compilerOptions.module !== 'commonjs') {
+    tasks.push(`bundle:${LERNA_PACKAGE_NAME}`)
+  }
+  
+  yield task.serial(tasks)
 }
 
 exports[`transpile:${LERNA_PACKAGE_NAME}`] = function* (task) {
@@ -41,7 +50,7 @@ exports[`bundle:${LERNA_PACKAGE_NAME}`] = function* (task) {
         globals: {
           knockout: 'ko'
         },
-        name: pkg.global || 'VOID'
+        name: pkg.global
       }
     })
     .target(dist)

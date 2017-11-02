@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "target": "es5",
     "module": "es2015",
+    "declaration": true,
     "sourceMap": true,
     "rootDir": "./",
     "baseUrl": "./",
@@ -13,6 +14,7 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "test.ts"
   ]
 }
