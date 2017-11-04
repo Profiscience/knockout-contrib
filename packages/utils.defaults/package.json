@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils-defaults",
-  "version": "1.0.0-0",
+  "version": "1.0.0-alpha.0",
   "description": "Handy Utilities for Knockout JS",
   "main": "knockout-contrib-utils-defaults.js",
   "module": "dist/index.js",
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
+    "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "1.0.0-0"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.0"
   },
   "peerDependencies": {
     "knockout": "^3.4.0"

@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-utils-merge",
   "private": false,
-  "version": "1.0.0-0",
+  "version": "1.0.0-alpha.0",
   "description": "Handy Utilities for Knockout JS",
   "main": "knockout-contrib-utils-merge.js",
   "module": "dist/index.js",
@@ -33,9 +33,9 @@
     "knockout": "^3.4.0"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "1.0.0-0"
+    "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "1.0.0-0"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.0"
   }
 }

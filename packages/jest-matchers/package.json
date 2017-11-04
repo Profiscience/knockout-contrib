@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-jest-matchers",
-  "version": "1.0.0-0",
+  "version": "1.0.0-alpha.0",
   "description": "Jest Matchers for Knockout JS",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/jest-matchers",
   "peerDependencies": {
-    "knockout": "^3.4.0",
-    "jest": "x.x.x"
+    "jest": "x.x.x",
+    "knockout": "^3.4.0"
   }
 }
