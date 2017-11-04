@@ -9,7 +9,6 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "sourceMap": true,
-    "inlineSources": true,
     "outDir": "./dist",
     "lib": [
       "dom",

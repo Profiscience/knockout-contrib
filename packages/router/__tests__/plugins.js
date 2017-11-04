@@ -1,7 +1,7 @@
 import { isPlainObject, merge } from 'lodash-es'
 import ko from 'knockout'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
 ko.components.register('plugins', {
   template: '<router></router>',

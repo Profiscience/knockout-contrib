@@ -2,7 +2,7 @@
 	"private": true,
 	"scripts": {
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
-		"test": "jest"
+		"test": "jest && cd packages/router && yarn test"
 	},
 	"workspaces": [
 		"packages/*"

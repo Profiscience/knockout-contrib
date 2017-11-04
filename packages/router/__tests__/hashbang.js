@@ -1,16 +1,17 @@
 import ko from 'knockout'
 import $ from 'jquery'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
-ko.components.register('basepath', {
+ko.components.register('hashbang', {
   template: `
     <a id="foo-link" data-bind="path: '/foo/foo'"></a>
     <router></router>
   `,
-  viewModel: class BasePath {
+  viewModel: class Hashbang {
     constructor({ t, done }) {
       Router.setConfig({
+        hashbang: true,
         base: '/base'
       })
 
@@ -23,17 +24,16 @@ ko.components.register('basepath', {
         }
       })
 
-      history.pushState(null, null, '/base/foo/foo')
+      history.pushState(null, null, '/base/#!/foo/foo')
 
       ko.components.register('foo', {
         viewModel: class {
           constructor(ctx) {
-            t.pass('initializes with basepath')
-            t.equals(location.pathname, '/base/foo/foo', 'uses basepath in url on init')
-            t.equals(ctx.canonicalPath, '/foo/foo', 'ctx.canonicalPath is correct')
+            t.pass('initializes with hashbang')
+            t.true(location.href.indexOf('/base/#!/foo/foo') > -1, 'uses hash in url on init')
 
-            ctx.router.initialized.then(() => setTimeout(() => { // Dirty hack for FF/TravisCI
-              t.equals($('#foo-link').attr('href'), '/base/foo/foo', 'sets href correctly in path binding')
+            ctx.router.initialized.then(() => setTimeout(() => { // dirty hack for FF/TravisCI
+              t.equals($('#foo-link').attr('href'), '/base/#!/foo/foo', 'sets href correctly in path binding')
               Router.update('/bar/bar')
             }))
           }
@@ -43,8 +43,8 @@ ko.components.register('basepath', {
       ko.components.register('bar', {
         viewModel: class {
           constructor() {
-            t.pass('navigates correctly with basepath')
-            t.equals('/base/bar/bar', location.pathname, 'uses basepath in url on update')
+            t.pass('navigates correctly with hashbang')
+            t.true(location.href.indexOf('/base/#!/bar/bar') > -1, 'uses hash in url on update')
 
             done()
           }
@@ -54,6 +54,7 @@ ko.components.register('basepath', {
 
     dispose() {
       Router.setConfig({
+        hashbang: false,
         base: ''
       })
     }
