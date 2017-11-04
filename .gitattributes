@@ -1,2 +1,8 @@
-packages/router/knockout-contrib-*.js linguist-generated=true
-packages/router/knockout-contrib-*.min.js linguist-generated=true
+packages/*/knockout-contrib-*.js linguist-generated=true
+packages/*/knockout-contrib-*.min.js linguist-generated=true
+
+packages/observable.fn/*.ts linguist-generated=true
+packages/observable.fn/*.js linguist-generated=true
+
+packages/utils/*.ts linguist-generated=true
+packages/utils/*.js linguist-generated=true
