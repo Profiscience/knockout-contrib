@@ -1,5 +1,26 @@
 # @profiscience/knockout-contrib-utils-merge
 
+[![Version][npm-version-shield]][npm]
+[![Dependency Status][david-dm-shield]][david-dm]
+[![Peer Dependency Status][david-dm-peer-shield]][david-dm-peer]
+[![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
+[![Downloads][npm-stats-shield]][npm-stats]
+
+[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.merge
+[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/utils.merge
+
+[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.merge&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/utils.merge&type=peer
+
+[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.merge&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/utils.merge&type=dev
+
+[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-utils-merge
+[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-utils-merge.svg
+
+[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-utils-merge&author=&from=&to=
+[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-utils-merge.svg?maxAge=2592000
+
 **NOTE:** It is recommended to use the [@profiscience/knockout-contrib-utils metapackage](../utils)
 
 ## Usage
