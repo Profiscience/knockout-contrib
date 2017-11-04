@@ -38,7 +38,6 @@ const tests = [
 class TestRunner {
   constructor() {
     $('body').append(`
-      <pre><code id="output"></code></pre>
       <div data-bind="if: test">
         <div id="test-container" data-bind="component: {
             name: test,
