@@ -10,10 +10,10 @@
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.increment
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.increment&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.increment&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/observable.fn.increment
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.increment&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.increment&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/observable.fn.increment
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-observable-fn-increment
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-observable-fn-increment.svg

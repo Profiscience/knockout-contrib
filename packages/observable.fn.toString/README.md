@@ -10,10 +10,10 @@
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.toString
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.toString&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.toString&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/observable.fn.toString
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.toString&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.toString&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/observable.fn.toString
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-observable-fn-to-string
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-observable-fn-to-string.svg

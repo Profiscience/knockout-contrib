@@ -120,10 +120,10 @@ _index.html_
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router.svg

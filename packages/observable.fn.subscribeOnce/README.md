@@ -10,10 +10,10 @@
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.subscribeOnce
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.subscribeOnce&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.subscribeOnce&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/observable.fn.subscribeOnce
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn.subscribeOnce&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn.subscribeOnce&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/observable.fn.subscribeOnce
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-observable-fn-subscribe-once
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-observable-fn-subscribe-once.svg

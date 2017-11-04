@@ -27,10 +27,10 @@ import '@profiscience/knockout-contrib-observable-fn/increment'
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/observable.fn
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/observable.fn&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/observable.fn&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/observable.fn
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-observable-fn
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-observable-fn.svg

@@ -26,10 +26,10 @@ expect(ko.observable(true)).toBeObservable()
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/jest-matchers
 
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/jest-matchers&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/jest-matchers&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/jest-matchers
 
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/jest-matchers&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/jest-matchers&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/jest-matchers
 
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-jest-matchers
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-jest-matchers.svg
