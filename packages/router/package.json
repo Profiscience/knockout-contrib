@@ -31,6 +31,7 @@
     "framework"
   ],
   "dependencies": {
+    "@types/lodash-es": "^4.14.4",
     "core-js": "^2.3.0",
     "lodash-es": "^4.14.0",
     "path-to-regexp": "^2.0.0",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "@types/knockout": "^3.4.0",
-    "@types/lodash-es": "^4.14.4",
     "eslint": "^4.9.0",
     "eslint-config-profiscience": "^2.0.4",
     "jquery": "^3.1.1",
