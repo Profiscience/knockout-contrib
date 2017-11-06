@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-utils",
   "private": false,
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Handy Utilities for Knockout JS",
   "global": "ko.utils",
   "repository": {
