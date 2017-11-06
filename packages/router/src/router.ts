@@ -1,9 +1,10 @@
 import * as ko from 'knockout'
-import { IContext } from './'
+import { IContext, IRouteConfig } from './'
 import { Context } from './context'
-import { Route, RouteConfig } from './route'
+import { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
 import {
   Callback,
+  MaybeArray,
   isBoolean, isPlainObject, isUndefined,
   castArray,
   extend, extendWith,
@@ -29,11 +30,13 @@ export type LifecycleGeneratorMiddleware = (ctx: Context & IContext, done?: () =
 
 export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
 
-export type Plugin = (routeConfig: any) => RouteConfig
+export type MaybeNormalizedRouteConfig = MaybeArray<IRouteConfig> | MaybeArray<NormalizedRouteConfig>
 
 export type RouteMap = {
-  [name: string]: RouteConfig[]
+  [k: string]: MaybeNormalizedRouteConfig
 }
+
+export type Plugin = (routeConfig: IRouteConfig | NormalizedRouteConfig) => MaybeArray<NormalizedRouteConfig>
 
 export class Router {
   public static head: Router
@@ -50,7 +53,7 @@ export class Router {
     activePathCSSClass: 'active-path'
   }
 
-  private static routes: RouteMap = {}
+  private static routes: NormalizedRouteMap = {}
   private static events: {
     click: string,
     popstate: string
@@ -229,24 +232,28 @@ export class Router {
     base?: string
     hashbang?: boolean
     activePathCSSClass?: string
-  }) {
+  }): typeof Router {
     extendWith(Router.config, {
       base,
       hashbang,
       activePathCSSClass
     }, (_default, v) => isUndefined(v) ? _default : v)
+    return this
   }
 
-  public static use(...fns: Middleware[]) {
+  public static use(...fns: Middleware[]): typeof Router {
     Router.middleware.push(...fns)
+    return this
   }
 
-  public static usePlugin(...fns: Plugin[]) {
+  public static usePlugin(...fns: Plugin[]): typeof Router {
     Router.plugins.push(...fns)
+    return this
   }
 
-  public static useRoutes(routes: { [route: string]: any }) {
+  public static useRoutes(routes: RouteMap): typeof Router {
     extend(Router.routes, Router.normalizeRoutes(routes))
+    return this
   }
 
   public static get(i: number): Router {
@@ -348,31 +355,33 @@ export class Router {
     return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
   }
 
-  private static createRoutes(routes: RouteMap): Route[] {
+  private static createRoutes(routes: NormalizedRouteMap): Route[] {
     return map(routes, (config, path) => new Route(path, config))
   }
 
-  private static normalizeRoutes(routes: { [route: string]: any }): RouteMap {
+  private static normalizeRoutes(routes: RouteMap): NormalizedRouteMap {
     return mapValues(routes, (c) =>
       map(Router.runPlugins(c), (routeConfig) =>
         isPlainObject(routeConfig)
-          ? Router.normalizeRoutes(routeConfig as RouteMap)
+          ? Router.normalizeRoutes(routeConfig as NormalizedRouteMap)
           : routeConfig))
   }
 
-  private static runPlugins(config: any): RouteConfig[] {
+  private static runPlugins(config: MaybeNormalizedRouteConfig): NormalizedRouteConfig[] {
     return flatMap(castArray(config), (rc) => {
       const routeConfig = reduce(
         Router.plugins,
-        (accum, plugin: Plugin) => {
+        (accum, plugin) => {
           const prc = plugin(rc)
-          return isUndefined(prc) ? accum : accum.concat(castArray<RouteConfig>(prc))
+          return isUndefined(prc)
+            ? accum as NormalizedRouteConfig[]
+            : accum.concat(castArray<NormalizedRouteConfig>(prc))
         }
-        , []
+        , [] as NormalizedRouteConfig[]
       )
       return routeConfig.length > 0
         ? routeConfig
-        : rc
+        : rc as NormalizedRouteConfig[]
     })
   }
 

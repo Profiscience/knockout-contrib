@@ -1,8 +1,12 @@
 import pathtoRegexp from 'path-to-regexp'
-import { RouteMap, Middleware } from './router'
+import { Middleware } from './router'
 import { isFunction, isPlainObject, isString, isUndefined, map, reduce } from './utils'
 
-export type RouteConfig = string | RouteMap | Middleware
+export type NormalizedRouteMap = {
+  [name: string]: NormalizedRouteConfig[]
+}
+
+export type NormalizedRouteConfig = string | NormalizedRouteMap | Middleware
 
 export class Route {
   public path: string
@@ -13,7 +17,7 @@ export class Route {
 
   private regexp: RegExp
 
-  constructor(path: string, config: RouteConfig[]) {
+  constructor(path: string, config: NormalizedRouteConfig[]) {
     const [component, middleware, children] = Route.parseConfig(config)
     this.path = path
     this.component = component
@@ -62,7 +66,7 @@ export class Route {
     return { params, pathname, childPath }
   }
 
-  private static parseConfig(config: (string | RouteMap | Middleware)[]): [string, Middleware[], Route[]] {
+  private static parseConfig(config: (string | NormalizedRouteMap | Middleware)[]): [string, Middleware[], Route[]] {
     let component: string
     let children: Route[]
 
@@ -70,13 +74,13 @@ export class Route {
       config,
       (
         accum: Middleware[],
-        m: string | RouteMap | Middleware
+        m: string | NormalizedRouteMap | Middleware
       ) => {
         if (isString(m)) {
           m = m as string
           component = m
         } else if (isPlainObject(m)) {
-          m = m as RouteMap
+          m = m as NormalizedRouteMap
           children = map(m, (routeConfig, path) => new Route(path, routeConfig))
           if (!component) {
             component = 'router'

@@ -1,9 +1,11 @@
+/* tslint:disable no-empty-interface */
+
 import './bindings'
 import './component'
 
 export { Context } from './context'
-export { Route, RouteConfig } from './route'
-export { Router, RouteMap, Middleware, Plugin } from './router'
+export { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
+export { Router, Middleware, Plugin } from './router'
 export { isActivePath, resolveHref } from './utils'
 
 /**
@@ -22,4 +24,5 @@ export { isActivePath, resolveHref } from './utils'
  *
  * and IMO that's just bad; at least way worse than this.
  */
-export interface IContext {} // tslint:disable-line no-empty-interface
+export interface IContext {}
+export interface IRouteConfig {}

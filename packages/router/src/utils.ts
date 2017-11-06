@@ -25,6 +25,7 @@ export { default as reduce } from 'lodash-es/reduce'
 export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
 export type SyncCallback<T> = () => T
 export type Callback<T> = AsyncCallback<T> | SyncCallback<T>
+export type MaybeArray<T> = T | T[]
 
 export async function sequence(callbacks: Callback<boolean | void>[], ...args: any[]): Promise<{
   count: number,
