@@ -56,9 +56,33 @@ async function generateMetaFiles(metapackage, packages) {
   ]
 
   const readme = {
-    header: `# ${metapackageId}\n\nThis is a metapackage including all \`${metapackageId}-*\` packages`,
+    header: [
+      `# ${metapackageId}\n`,
+      '[![Version][npm-version-shield]][npm]',
+      '[![Dependency Status][david-dm-shield]][david-dm]',
+      '[![Peer Dependency Status][david-dm-peer-shield]][david-dm-peer]',
+      '[![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]',
+      '[![Downloads][npm-stats-shield]][npm-stats]',
+      `\nThis is a metapackage including all \`${metapackageId}-*\` packages`
+    ].join('\n'),
     contents: '\n\n### Contents',
-    usage: '\n\n### Usage\n\n```javascript\n'
+    usage: '\n\n### Usage\n\n```javascript\n',
+    links: [
+      `\n[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}`,
+      `[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/${metapackageName}`,
+      
+      `\n[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=peer`,
+      `[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/${metapackageName}`,
+      
+      `\n[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=dev`,
+      `[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/${metapackageName}`,
+      
+      `\n[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-${kebabCase(metapackageName)}`,
+      `[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg`,
+      
+      `\n[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-${kebabCase(metapackageName)}&author=&from=&to=`,
+      `[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg?maxAge=2592000`
+    ].join('\n')
   }
   let index = ''
 
@@ -131,7 +155,7 @@ async function generateMetaFiles(metapackage, packages) {
     },
     {
       dir: metapackage.dir,
-      data: Buffer.from(readme.header + readme.contents + readme.usage),
+      data: Buffer.from(readme.header + readme.contents + readme.usage + '\n' + readme.links),
       base: 'README.md'
     },
     {

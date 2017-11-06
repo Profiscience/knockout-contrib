@@ -36,8 +36,8 @@
   "js:next": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
-    "@profiscience/knockout-contrib-observable-fn-increment": "^1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-observable-fn-subscribe-once": "^1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.0"
+    "@profiscience/knockout-contrib-observable-fn-increment": "1.0.0-alpha.0",
+    "@profiscience/knockout-contrib-observable-fn-subscribe-once": "1.0.0-alpha.0",
+    "@profiscience/knockout-contrib-observable-fn-to-string": "1.0.0-alpha.0"
   }
 }
