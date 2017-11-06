@@ -1,8 +1,11 @@
 'use strict' // eslint-disable-line strict
 
 const path = require('path')
+const HappyPack = require('happypack')
+const ForkTSCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
+  context: __dirname,
   entry: {
     'hashbang': path.resolve(__dirname, './hashbang/index.js'),
     'lazy-loading': path.resolve(__dirname, './lazy-loading/index.js'),
@@ -22,28 +25,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        loader: 'awesome-typescript-loader',
+        test: /\.[jt]s$/,
+        loader: 'happypack/loader?id=ts',
         exclude: [
-          path.resolve('node_modules')
-        ],
-        options: {
-          configFileName: path.resolve(__dirname, '../tsconfig.json'),
-          useBabel: true,
-          useCache: true,
-          cacheDirectory: path.resolve(__dirname, '.cache'),
-          module: 'es2015'
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: [
-          path.resolve('node_modules')
-        ],
-        options: {
-          cacheDirectory: true
-        }
+          path.resolve(__dirname, 'node_modules'),
+          path.resolve(__dirname, '../node_modules')
+        ]
       },
       {
         test: /\.html$/,
@@ -53,11 +40,29 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'knockout-contrib-router': path.resolve(__dirname, '../src')
+      '@profiscience/knockout-contrib-router': path.resolve(__dirname, '../dist')
     },
     extensions: [
       '.js',
       '.ts'
     ]
-  }
+  },
+  plugins: [
+    new HappyPack({
+      id: 'ts',
+      threads: ForkTSCheckerWebpackPlugin.TWO_CPUS_FREE,
+      loaders: [
+        {
+          path: 'ts-loader',
+          query: {
+            happyPackMode: true
+          }
+        }
+      ]
+    }),
+    new ForkTSCheckerWebpackPlugin({
+      async: false,
+      workers: 2
+    })
+  ]
 }
