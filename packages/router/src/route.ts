@@ -1,4 +1,7 @@
-import pathtoRegexp from 'path-to-regexp'
+// this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
+// declaration files so consumers don't need `allowSyntheticDefaultImports`
+import pathToRegexp from 'path-to-regexp'
+import { Key } from 'path-to-regexp'
 import { Middleware } from './router'
 import { isFunction, isPlainObject, isString, isUndefined, map, reduce } from './utils'
 
@@ -13,7 +16,7 @@ export class Route {
   public component: string
   public middleware: Middleware[]
   public children: Route[]
-  public keys: pathtoRegexp.Key[]
+  public keys: Key[]
 
   private regexp: RegExp
 
@@ -106,8 +109,8 @@ export class Route {
       path = path.replace(/\(?\*\)?/, '(.*)')
     }
 
-    const keys: pathtoRegexp.Key[] = []
-    const regexp = pathtoRegexp(path, keys)
+    const keys: Key[] = []
+    const regexp = pathToRegexp(path, keys)
 
     return { keys, regexp }
   }
