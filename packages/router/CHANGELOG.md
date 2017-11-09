@@ -7,6 +7,7 @@
 - Rename router component to `router`
 - Import is now `@profiscience/knockout-contrib-router`
 - `ko-component-router-view` class changed to `router-view`
+- Support chaining on router — `Router.setConfig(...).use(...).use(...).useRoutes(...)`
 
 ### Added
 - Began work on first-class TypeScript support (`noImplicitAny`, introduce `IContext`)
