@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import { Primitive, MaybeArray, isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
 
-export type IQueryParam<T> = (KnockoutObservable<any> | KnockoutObservableArray<any>) & {
+export type IQueryParam<T> = KnockoutObservable<any> & {
   isDefault(): boolean
   clear(): void
 }
@@ -12,7 +12,7 @@ export type IQuery<T> = {
 
 export interface IQueryParamConfig {
   default: MaybeArray<Primitive>
-  initial: MaybeArray<Primitive>
+  initial?: MaybeArray<Primitive>
   coerce?(v: any): MaybeArray<Primitive>
 }
 
@@ -120,11 +120,11 @@ export default class Query {
     return Query._parser.stringify(obj)
   }
 
-  public static create<T extends IQueryConfig>(config: T): IQuery<T> {
-    return new Query(config) as any
+  public static create<T extends IQueryConfig>(config: T, group?: string): IQuery<T> & Query {
+    return new Query(config, group) as any
   }
 
-  private static setParser(parser: IParser) {
+  public static setParser(parser: IParser) {
     Query._parser = parser
   }
 
@@ -224,22 +224,22 @@ export default class Query {
     Object.assign(p, {
       isDefault,
       set: (d: IQueryParamConfig) => {
-        // if (!this.isParamConfigObject(d)) {
-        //   if (isDefault() || isUndefined(p())) {
-        //     p(d)
-        //   }
-        //   _default(d)
-        // } else {
-        if (d.coerce) {
-          coerce = d.coerce
+        if (!this.isParamConfigObject(d)) {
+          if (isDefault() || isUndefined(p())) {
+            p(d)
+          }
+          _default(d)
+        } else {
+          if (d.coerce) {
+            coerce = d.coerce
+          }
+          if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
+            p(isUndefined(d.initial) ? d.default : d.initial)
+          }
+          if (d.default) {
+            _default(d.default)
+          }
         }
-        if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
-          p(isUndefined(d.initial) ? d.default : d.initial)
-        }
-        if (d.default) {
-          _default(d.default)
-        }
-        // }
       },
       clear: () => p(_default())
     })

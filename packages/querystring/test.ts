@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import * as jsdom from 'jsdom'
+// import * as jsdom from 'jsdom'
 import Query from './src'
 
 test('explicit initialization', () => {
@@ -179,7 +179,7 @@ test('query[param]#set', () => {
 
   const query = Query.create({ foo: 'foo', bar: 'bar' })
 
-  query.foo.set({ default: 'bar', coerce: (foo) => foo === 'foo' ? 'foo' : 'notfoo' })
+  query.foo.set({ default: 'bar', coerce: (foo: any) => foo === 'foo' ? 'foo' : 'notfoo' })
   query.bar.set({ default: 'notbar', initial: 'baz' })
 
   expect(query.foo()).toBe('notfoo')
