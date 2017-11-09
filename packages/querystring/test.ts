@@ -3,9 +3,9 @@ import * as jsdom from 'jsdom'
 import Query from './src'
 
 test('explicit initialization', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "notfoo", "baz": false}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "notfoo", "baz": false}')
 
-  const query = new Query({ foo: 'foo', bar: 'bar', baz: true })
+  const query = Query.create({ foo: 'foo', bar: 'bar', baz: true })
 
   expect(query.foo()).toBe('notfoo')
   expect(query.bar()).toBe('bar')
@@ -15,9 +15,9 @@ test('explicit initialization', () => {
 })
 
 test('url parsing', () => {
-  history.replaceState(null, null, location.pathname + '#hash')
+  history.replaceState(null, '', location.pathname + '#hash')
 
-  const query = new Query({ foo: undefined })
+  const query = Query.create({ foo: undefined })
 
   query.foo('foo')
   ko.tasks.runEarly()  
@@ -28,9 +28,9 @@ test('url parsing', () => {
 })
 
 test('empty query', () => {
-  history.replaceState(null, null, location.pathname)
+  history.replaceState(null, '', location.pathname)
 
-  const query = new Query({ foo: undefined })
+  const query = Query.create({ foo: undefined })
 
   query.foo('foo')
   query.foo(undefined)
@@ -41,7 +41,7 @@ test('empty query', () => {
 })
 
 test('writability', () => {
-  const query = new Query({ foo: 'foo' })
+  const query = Query.create({ foo: 'foo' })
 
   query.foo('bar')
   ko.tasks.runEarly()
@@ -65,9 +65,9 @@ test('writability', () => {
 })
 
 test('default fall-back', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "notfoo"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "notfoo"}')
 
-  const query = new Query({ foo: 'foo' })
+  const query = Query.create({ foo: 'foo' })
 
   query.foo(undefined)
 
@@ -77,9 +77,9 @@ test('default fall-back', () => {
 })
 
 test('advanced', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "notfoo"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "notfoo"}')
 
-  const query = new Query({
+  const query = Query.create({
     foo: {
       default: 'foo',
       initial: 'bar'
@@ -111,9 +111,9 @@ test('advanced', () => {
 })
 
 test('query[param]#isDefault', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "bar"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "bar"}')
 
-  const query = new Query({ foo: 'foo' })
+  const query = Query.create({ foo: 'foo' })
 
   expect(query.foo.isDefault()).toBe(false)  
   
@@ -125,9 +125,9 @@ test('query[param]#isDefault', () => {
 })
 
 test('query[param]#clear', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "bar"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "bar"}')
 
-  const query = new Query({ foo: 'foo' })
+  const query = Query.create({ foo: 'foo' })
 
   query.foo.clear()
 
@@ -137,9 +137,9 @@ test('query[param]#clear', () => {
 })
 
 test('#set', () => {
-  history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+  history.replaceState(null, '', location.pathname + '?{"bar": "foo"}')
 
-  const query = new Query({ foo: 'foo', bar: 'bar' })
+  const query = Query.create({ foo: 'foo', bar: 'bar' })
 
   query.set({
     foo: 'notfoo',
@@ -157,9 +157,9 @@ test('#set', () => {
 })
 
 test('query[param]#set shorthand', () => {
-  history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+  history.replaceState(null, '', location.pathname + '?{"bar": "foo"}')
 
-  const query = new Query({ foo: 'foo', bar: 'bar' })
+  const query = Query.create({ foo: 'foo', bar: 'bar' })
 
   query.foo.set('notfoo')
   query.bar.set('notbar')
@@ -175,9 +175,9 @@ test('query[param]#set shorthand', () => {
 })
 
 test('query[param]#set', () => {
-  history.replaceState(null, null, location.pathname + '?{"bar": "foo"}')
+  history.replaceState(null, '', location.pathname + '?{"bar": "foo"}')
 
-  const query = new Query({ foo: 'foo', bar: 'bar' })
+  const query = Query.create({ foo: 'foo', bar: 'bar' })
 
   query.foo.set({ default: 'bar', coerce: (foo) => foo === 'foo' ? 'foo' : 'notfoo' })
   query.bar.set({ default: 'notbar', initial: 'baz' })
@@ -193,9 +193,9 @@ test('query[param]#set', () => {
 })
 
 test('#toJS', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "foo"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "foo"}')
 
-  const query = new Query({ foo: undefined })
+  const query = Query.create({ foo: undefined })
 
   expect(query.toJS()).toEqual({ foo: 'foo' })
 
@@ -207,9 +207,9 @@ test('#toJS', () => {
 })
 
 test('#toString', () => {
-  history.replaceState(null, null, location.pathname)
+  history.replaceState(null, '', location.pathname)
 
-  const query = new Query({ foo: 'foo' })  
+  const query = Query.create({ foo: 'foo' })  
 
   expect(Query.stringify({ foo: 'foo' })).toEqual(query.toString())
 
@@ -217,9 +217,9 @@ test('#toString', () => {
 })
 
 test('#asObservable', (done) => {
-  history.replaceState(null, null, location.pathname)
+  history.replaceState(null, '', location.pathname)
 
-  const query = new Query({ foo: undefined })
+  const query = Query.create({ foo: undefined })
   const q = query.asObservable()
 
   const killMe = q.subscribe(() => {
@@ -246,9 +246,9 @@ test('#asObservable', (done) => {
 })
 
 test('#clear', () => {
-  history.replaceState(null, null, location.pathname + '?{"foo": "notfoo", "bar": "notbar"}')
+  history.replaceState(null, '', location.pathname + '?{"foo": "notfoo", "bar": "notbar"}')
   const defaults = { foo: 'foo', bar: 'bar' }
-  const query = new Query(defaults)
+  const query = Query.create(defaults)
 
   query.clear()
 
@@ -258,10 +258,10 @@ test('#clear', () => {
 })
 
 test('#dispose', () => {
-  history.replaceState(null, null, location.pathname)
+  history.replaceState(null, '', location.pathname)
 
-  const a1 = new Query({ foo: undefined }, 'a')
-  const a2 = new Query({ foo: undefined }, 'a')
+  const a1 = Query.create({ foo: undefined }, 'a')
+  const a2 = Query.create({ foo: undefined }, 'a')
 
   a1.foo('foo')
   ko.tasks.runEarly()
@@ -278,8 +278,8 @@ test('#dispose', () => {
 })
 
 test('grouped/multiple queries', () => {
-  const a = new Query({ foo: undefined }, 'a')
-  const b = new Query({ foo: undefined }, 'b')
+  const a = Query.create({ foo: undefined }, 'a')
+  const b = Query.create({ foo: undefined }, 'b')
 
   a.foo('foo')
   b.foo('notfoo')
@@ -294,8 +294,8 @@ test('grouped/multiple queries', () => {
 })
 
 test('linked queries', () => {
-  const a1 = new Query({ foo: undefined, bar: undefined }, 'a')
-  const a2 = new Query({ foo: undefined, bar: 'bar', baz: undefined }, 'a')
+  const a1 = Query.create({ foo: undefined, bar: undefined }, 'a')
+  const a2 = Query.create({ foo: undefined, bar: 'bar', baz: undefined }, 'a')
 
   a1.foo('foo')
 
@@ -305,7 +305,7 @@ test('linked queries', () => {
 
   a1.dispose()
 
-  const a3 = new Query({ baz: undefined }, 'a')
+  const a3 = Query.create({ baz: undefined }, 'a')
 
   a3.baz('baz')
 
@@ -318,14 +318,14 @@ test('linked queries', () => {
 })
 
 test('Query#setParser({ parse, stringify })', () => {
-  history.replaceState(null, null, location.pathname + '?foo=foo')
+  history.replaceState(null, '', location.pathname + '?foo=foo')
 
   Query.setParser({
     parse: (str) => ({ foo: str.replace('foo=', '') }),
     stringify: (obj) => 'foo=' + obj.foo
   })
 
-  const q = new Query({ foo: undefined })
+  const q = Query.create({ foo: undefined })
 
   expect(q.foo()).toBe('foo')
 

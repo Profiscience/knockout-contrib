@@ -1,64 +1,76 @@
 import * as ko from 'knockout'
-import { isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
+import { Primitive, MaybeArray, isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
 
-const query = {}
-const links = {}
-
-let _parse, _stringify
-
-function getDefaults(config) {
-  const defaults = {}
-  entries(config).forEach(([k, v]) =>
-    (defaults[k] = isQueryParamConfigObject(v)
-      ? v.default
-      : v))
-  return defaults
+export type IQueryParam<T> = (KnockoutObservable<any> | KnockoutObservableArray<any>) & {
+  isDefault(): boolean
+  clear(): void
 }
 
-function isQueryParamConfigObject(c) {
-  return c && (c.default || c.initial || c.coerce)
+export type IQuery<T> = {
+  [P in keyof T]: IQueryParam<T>
 }
 
-type IQuery<T> = {
-  [P in keyof T]: KnockoutObservable<any> | KnockoutObservableArray<any>
+export interface IQueryParamConfig {
+  default: MaybeArray<Primitive>
+  initial: MaybeArray<Primitive>
+  coerce?(v: any): MaybeArray<Primitive>
 }
 
-export class Query {
+export interface IQueryConfig {
+  [k: string]: MaybeArray<Primitive> | IQueryParamConfig
+}
+
+export interface IParser {
+  parse(str: string): { [k: string]: any }
+  stringify(obj: { [k: string]: any }): string
+}
+
+export default class Query {
+  private static readonly _raw = {} as { [k: string]: any }
+  private static readonly _refs = {} as { [k: string]: any }
   private static _queuedUpdate: Promise<void> | false
+  private static _parser: IParser = {
+    parse: (str) => JSON.parse(decodeURIComponent(str || '{}')),
+    stringify: (obj) => JSON.stringify(obj) === '{}'
+      ? ''
+      : encodeURIComponent(JSON.stringify(obj))
+  }
 
   private _group?: string
-  private _config?: any // @todo
-  private _defaults?: { [k: string]: any }
   private _forceRecompute?: KnockoutObservable<boolean>
+  private _config?: IQueryConfig
+  private _defaults?: { [k: string]: any }
 
-  constructor(config: any, group?: string) {
+  [k: string]: any
+
+  constructor(config: IQueryConfig, group?: string) {
     this._group = group
 
-    if (isUndefined(query[this._group])) {
-      query[this._group] = {}
-      links[this._group] = 1
+    if (isUndefined(Query._raw[this._group])) {
+      Query._raw[this._group] = {}
+      Query._refs[this._group] = 1
     } else {
-      links[this._group]++
+      Query._refs[this._group]++
     }
 
     this.set(config)
   }
 
-  public set(config) {
+  public set(config: IQueryConfig) {
     this._config = config
-    this._defaults = Object.assign({}, this._defaults || {}, getDefaults(config))
+    this._defaults = Object.assign({}, this._defaults || {}, Query.getDefaults(config))
     const group = this._group
     const fromQS = Query.fromQS(group)
 
     entries(config).forEach(([name, config = {}]) => {
-      this[name] = query[group][name]
+      this[name] = Query._raw[group][name]
 
       if (isUndefined(this[name])) {
         const _default = this._defaults[name]
-        const coerce = config.coerce || ((x) => x)
+        const coerce = config.coerce || ((x: any) => x)
         const init = !isUndefined(fromQS[name]) ? fromQS[name] : config.initial
 
-        this[name] = query[group][name] = Query.createQueryParam(group, name, _default, init, coerce)
+        this[name] = Query._raw[group][name] = Query.createQueryParam(group, name, _default, init, coerce)
       } else {
         this[name].set(config)
       }
@@ -68,7 +80,7 @@ export class Query {
   }
 
   public toJS() {
-    return omit(ko.toJS(query[this._group]), isUndefined)
+    return omit(ko.toJS(Query._raw[this._group]), isUndefined)
   }
 
   public toString() {
@@ -87,43 +99,33 @@ export class Query {
   }
 
   public clear() {
-    Object.keys(query[this._group]).forEach((k) => query[this._group][k].clear())
+    Object.keys(Query._raw[this._group]).forEach((k) => Query._raw[this._group][k].clear())
   }
 
   public dispose() {
-    if (--links[this._group] === 0) {
+    if (--Query._refs[this._group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       delete current[this._group]
       Query.writeQueryString(current)
 
-      delete query[this._group]
+      delete Query._raw[this._group]
     }
   }
 
-  private static get defaultParser() {
-    return {
-      parse: (str) => JSON.parse(decodeURIComponent(str || '{}')),
-      stringify: (obj) => JSON.stringify(obj) === '{}'
-          ? ''
-          : encodeURIComponent(JSON.stringify(obj))
-    }
+  public static parse(str: string) {
+    return Query._parser.parse(str)
   }
 
-  public static get parse() {
-    return _parse || this.defaultParser.parse
+  public static stringify(obj: { [k: string]: MaybeArray<Primitive> }) {
+    return Query._parser.stringify(obj)
   }
 
-  public static get stringify() {
-    return _stringify || this.defaultParser.stringify
-  }
-
-  public static create<T>(config: T): IQuery<T> & Query {
+  public static create<T extends IQueryConfig>(config: T): IQuery<T> {
     return new Query(config) as any
   }
 
-  private static setParser(parser) {
-    _parse = parser.parse
-    _stringify = parser.stringify
+  private static setParser(parser: IParser) {
+    Query._parser = parser
   }
 
   public static getQueryString() {
@@ -139,9 +141,9 @@ export class Query {
   }
 
   private static getCleanQuery() {
-    const _query = {}
-    for (const [g, q] of entries(query)) {
-      _query[g] = ko.toJS(omit(q, (v) =>
+    const _query = {} as { [k: string]: any }
+    for (const [g, q] of entries(Query._raw)) {
+      _query[g] = ko.toJS(omit(q, (v: IQueryParam<any>) =>
         v.isDefault() ||
         isUndefined(v()) ||
         (isEmpty(v()) && !isNumber(v()) && !isBool(v()))))
@@ -192,7 +194,13 @@ export class Query {
     return this._queuedUpdate
   }
 
-  private static createQueryParam(group, name, __default, init, coerce) {
+  private static createQueryParam(
+    group: string,
+    name: string,
+    __default: MaybeArray<Primitive>,
+    init: MaybeArray<Primitive>,
+    coerce: (x: any) => MaybeArray<Primitive>
+  ) {
     const _default = ko.observable(ko.toJS(__default))
     const _p = ko.observable(isUndefined(init) ? _default() : init)
     const isDefault = ko.pureComputed(() => p() === _default())
@@ -215,27 +223,40 @@ export class Query {
 
     Object.assign(p, {
       isDefault,
-      set: (d) => {
-        if (!isQueryParamConfigObject(d)) {
-          if (isDefault() || isUndefined(p())) {
-            p(d)
-          }
-          _default(d)
-        } else {
-          if (d.coerce) {
-            coerce = d.coerce
-          }
-          if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
-            p(isUndefined(d.initial) ? d.default : d.initial)
-          }
-          if (d.default) {
-            _default(d.default)
-          }
+      set: (d: IQueryParamConfig) => {
+        // if (!this.isParamConfigObject(d)) {
+        //   if (isDefault() || isUndefined(p())) {
+        //     p(d)
+        //   }
+        //   _default(d)
+        // } else {
+        if (d.coerce) {
+          coerce = d.coerce
         }
+        if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
+          p(isUndefined(d.initial) ? d.default : d.initial)
+        }
+        if (d.default) {
+          _default(d.default)
+        }
+        // }
       },
       clear: () => p(_default())
     })
 
     return p
+  }
+
+  private static isParamConfigObject(c: any) {
+    return c && (c.default || c.initial || c.coerce)
+  }
+
+  private static getDefaults(config: IQueryConfig) {
+    const defaults = {} as { [k: string]: any }
+    entries(config).forEach(([k, v]) =>
+      (defaults[k] = this.isParamConfigObject(v)
+        ? v.default
+        : v))
+    return defaults
   }
 }

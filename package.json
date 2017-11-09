@@ -12,6 +12,7 @@
 		"@taskr/uglify": "^1.1.0",
 		"@types/chalk": "^2.2.0",
 		"@types/jest": "^21.1.5",
+		"@types/jsdom": "^11.0.3",
 		"@types/knockout": "^3.4.0",
 		"@types/lodash": "^4.14.80",
 		"@types/node": "^8.0.47",
@@ -40,6 +41,7 @@
 			"ts"
 		],
 		"testRegex": "(__tests__/[^_].*|test)\\.ts$",
+		"testURL": "http://localhost",
 		"transform": {
 			"^.+\\.[tj]s$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
 		}
