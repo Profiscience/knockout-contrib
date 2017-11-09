@@ -1,4 +1,4 @@
-# ko-querystring
+# @profiscience/knockout-contrib-querystring
 
 [![NPM Version](https://img.shields.io/npm/v/ko-querystring.svg)](https://www.npmjs.com/package/ko-querystring)
 ![WTFPL](https://img.shields.io/npm/l/ko-querystring.svg)
