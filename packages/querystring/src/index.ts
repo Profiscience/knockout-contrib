@@ -1,4 +1,4 @@
-import ko from 'knockout'
+import * as ko from 'knockout'
 import { isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
 
 const query = {}
@@ -19,8 +19,19 @@ function isQueryParamConfigObject(c) {
   return c && (c.default || c.initial || c.coerce)
 }
 
-class Query {
-  constructor(config, group) {
+type IQuery<T> = {
+  [P in keyof T]: KnockoutObservable<any> | KnockoutObservableArray<any>
+}
+
+export class Query {
+  private static _queuedUpdate: Promise<void> | false
+
+  private _group?: string
+  private _config?: any // @todo
+  private _defaults?: { [k: string]: any }
+  private _forceRecompute?: KnockoutObservable<boolean>
+
+  constructor(config: any, group?: string) {
     this._group = group
 
     if (isUndefined(query[this._group])) {
@@ -33,7 +44,7 @@ class Query {
     this.set(config)
   }
 
-  set(config) {
+  public set(config) {
     this._config = config
     this._defaults = Object.assign({}, this._defaults || {}, getDefaults(config))
     const group = this._group
@@ -56,15 +67,15 @@ class Query {
     ko.tasks.runEarly()
   }
 
-  toJS() {
+  public toJS() {
     return omit(ko.toJS(query[this._group]), isUndefined)
   }
 
-  toString() {
+  public toString() {
     return Query.stringify(this.toJS())
   }
 
-  asObservable() {
+  public asObservable() {
     if (!this._forceRecompute) {
       this._forceRecompute = ko.observable(false)
     }
@@ -75,13 +86,13 @@ class Query {
     })
   }
 
-  clear() {
+  public clear() {
     Object.keys(query[this._group]).forEach((k) => query[this._group][k].clear())
   }
 
-  dispose() {
+  public dispose() {
     if (--links[this._group] === 0) {
-      const current = Object.assign({}, Query.fromQS(), this.constructor.getCleanQuery())
+      const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       delete current[this._group]
       Query.writeQueryString(current)
 
@@ -89,7 +100,7 @@ class Query {
     }
   }
 
-  static get defaultParser() {
+  private static get defaultParser() {
     return {
       parse: (str) => JSON.parse(decodeURIComponent(str || '{}')),
       stringify: (obj) => JSON.stringify(obj) === '{}'
@@ -98,32 +109,36 @@ class Query {
     }
   }
 
-  static get parse() {
+  public static get parse() {
     return _parse || this.defaultParser.parse
   }
 
-  static get stringify() {
+  public static get stringify() {
     return _stringify || this.defaultParser.stringify
   }
 
-  static setParser(parser) {
+  public static create<T>(config: T): IQuery<T> & Query {
+    return new Query(config) as any
+  }
+
+  private static setParser(parser) {
     _parse = parser.parse
     _stringify = parser.stringify
   }
 
-  static getQueryString() {
+  public static getQueryString() {
     const matches = /\?([^#]*)/.exec(location.search + location.hash)
     return matches
       ? matches[1]
       : ''
   }
 
-  static fromQS(group) {
+  public static fromQS(group?: string) {
     const query = this.parse(this.getQueryString())
     return (isUndefined(group) ? query : query[group]) || {}
   }
 
-  static getCleanQuery() {
+  private static getCleanQuery() {
     const _query = {}
     for (const [g, q] of entries(query)) {
       _query[g] = ko.toJS(omit(q, (v) =>
@@ -132,14 +147,14 @@ class Query {
         (isEmpty(v()) && !isNumber(v()) && !isBool(v()))))
     }
 
-    if (_query[undefined]) {
-      Object.assign(_query, _query[undefined])
-      delete _query[undefined]
+    if (_query[undefined as string]) {
+      Object.assign(_query, _query[undefined as string])
+      delete _query[undefined as string]
     }
     return _query
   }
 
-  static writeQueryString(_query) {
+  private static writeQueryString(_query?: any) {
     if (!_query) {
       _query = this.getCleanQuery()
     }
@@ -163,7 +178,7 @@ class Query {
     history.replaceState(history.state, document.title, newUrl)
   }
 
-  static queueQueryStringWrite() {
+  private static queueQueryStringWrite() {
     if (!this._queuedUpdate) {
       this._queuedUpdate = new Promise((resolve) => {
         ko.tasks.schedule(() => {
@@ -177,7 +192,7 @@ class Query {
     return this._queuedUpdate
   }
 
-  static createQueryParam(group, name, __default, init, coerce) {
+  private static createQueryParam(group, name, __default, init, coerce) {
     const _default = ko.observable(ko.toJS(__default))
     const _p = ko.observable(isUndefined(init) ? _default() : init)
     const isDefault = ko.pureComputed(() => p() === _default())
@@ -224,5 +239,3 @@ class Query {
     return p
   }
 }
-
-export default Query
