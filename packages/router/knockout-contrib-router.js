@@ -4930,6 +4930,8 @@ pathToRegexp_1.compile = compile_1;
 pathToRegexp_1.tokensToFunction = tokensToFunction_1;
 pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
 
+// this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
+// declaration files so consumers don't need `allowSyntheticDefaultImports`
 var Route = /** @class */ (function () {
     function Route(path, config) {
         var _a = __read(Route.parseConfig(config), 3), component = _a[0], middleware = _a[1], children = _a[2];
@@ -5192,6 +5194,7 @@ var Router = /** @class */ (function () {
             hashbang: hashbang,
             activePathCSSClass: activePathCSSClass
         }, function (_default, v) { return isUndefined(v) ? _default : v; });
+        return this;
     };
     Router.use = function () {
         var fns = [];
@@ -5199,6 +5202,7 @@ var Router = /** @class */ (function () {
             fns[_i] = arguments[_i];
         }
         (_a = Router.middleware).push.apply(_a, __spread(fns));
+        return this;
         var _a;
     };
     Router.usePlugin = function () {
@@ -5207,10 +5211,12 @@ var Router = /** @class */ (function () {
             fns[_i] = arguments[_i];
         }
         (_a = Router.plugins).push.apply(_a, __spread(fns));
+        return this;
         var _a;
     };
     Router.useRoutes = function (routes) {
         assignIn(Router.routes, Router.normalizeRoutes(routes));
+        return this;
     };
     Router.get = function (i) {
         var router = Router.head;
@@ -5314,7 +5320,9 @@ var Router = /** @class */ (function () {
         return flatMap(castArray(config), function (rc) {
             var routeConfig = reduce(Router.plugins, function (accum, plugin) {
                 var prc = plugin(rc);
-                return isUndefined(prc) ? accum : accum.concat(castArray(prc));
+                return isUndefined(prc)
+                    ? accum
+                    : accum.concat(castArray(prc));
             }, []);
             return routeConfig.length > 0
                 ? routeConfig
@@ -5440,6 +5448,8 @@ function createViewModel(params) {
     }
     return router;
 }
+
+/* tslint:disable no-empty-interface */
 
 exports.Context = Context;
 exports.Route = Route;

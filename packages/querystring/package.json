@@ -1,0 +1,25 @@
+{
+  "name": "@profiscience/knockout-contrib-querystring",
+  "version": "0.0.0",
+  "description": "Querystring Abstraction for KnockoutJS",
+  "main": "knockout-contrib-querystring.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "global": "ko.query",
+  "files": [
+    "dist",
+    "knockout-contrib-querystring.js"
+  ],
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "params",
+    "query",
+    "querystring"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "peerDependencies": {
+    "knockout": "^3.3.0"
+  }
+}
