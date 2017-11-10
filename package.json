@@ -2,7 +2,7 @@
 	"private": true,
 	"scripts": {
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
-		"test": "jest && cd packages/router && yarn test"
+		"test": "cd packages/router && yarn test && cd ../.. && jest"
 	},
 	"workspaces": [
 		"packages/*"
@@ -19,6 +19,7 @@
 		"chalk": "^2.3.0",
 		"execa": "^0.8.0",
 		"jest": "^21.2.1",
+		"jsx-dom": "^5.2.0",
 		"lerna": "^2.4.0",
 		"lodash": "^4.17.4",
 		"rollup": "^0.50.0",
@@ -38,12 +39,13 @@
 		],
 		"moduleFileExtensions": [
 			"js",
-			"ts"
+			"ts",
+			"tsx"
 		],
-		"testRegex": "(__tests__/[^_].*|test)\\.ts$",
+		"testRegex": "(__tests__/[^_].*|test)\\.tsx?$",
 		"testURL": "http://localhost",
 		"transform": {
-			"^.+\\.[tj]s$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+			"^.+\\.[tj]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
 		}
 	}
 }

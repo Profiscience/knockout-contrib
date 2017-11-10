@@ -3055,6 +3055,12 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jsx-dom@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-5.2.0.tgz#3f862f04811170eb23a57c42b6139f57cb6cdfee"
+  dependencies:
+    tslib "^1.8.0"
+
 karma-chrome-launcher@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-2.2.0.tgz#cf1b9d07136cc18fe239327d24654c3dbc368acf"
@@ -3135,6 +3141,10 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+knockout-punches@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
 
 knockout@^3.3.0:
   version "3.4.2"
@@ -5079,7 +5089,7 @@ ts-jest@^21.1.4:
     source-map-support "^0.5.0"
     yargs "^10.0.3"
 
-tslib@^1.7.0, tslib@^1.7.1:
+tslib@^1.7.0, tslib@^1.7.1, tslib@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.0.tgz#dc604ebad64bcbf696d613da6c954aa0e7ea1eb6"
 

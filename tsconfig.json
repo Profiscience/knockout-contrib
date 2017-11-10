@@ -5,10 +5,13 @@
     "module": "commonjs",
     "importHelpers": true,
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "jsx": "react",
+    "jsxFactory": "h"
   },
   "include": [
     "**/test.ts",
+    "**/test.tsx",
     "**/__tests__/*"
   ]
 }
