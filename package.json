@@ -19,6 +19,7 @@
 		"chalk": "^2.3.0",
 		"execa": "^0.8.0",
 		"jest": "^21.2.1",
+		"jquery": "^3.2.1",
 		"jsx-dom": "^5.2.0",
 		"knockout-punches": "^0.5.1",
 		"lerna": "^2.4.0",

@@ -37,7 +37,11 @@ exports[`bundle:${LERNA_PACKAGE_NAME}`] = function* (task) {
     .source(path.resolve(process.cwd(), pkg.module))
     .rollup({
       cache: cache[bundle],
-      external: ['knockout'],
+      external: [
+        'jquery',
+        'knockout',
+        'knockout-punches'
+      ],
       plugins: [
         nodeResolve({
           preferBuiltins: false
@@ -48,6 +52,7 @@ exports[`bundle:${LERNA_PACKAGE_NAME}`] = function* (task) {
         file: bundle,
         format: 'umd',
         globals: {
+          jquery: '$',
           knockout: 'ko'
         },
         name: pkg.global

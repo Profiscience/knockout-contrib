@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.jquery",
   "peerDependencies": {
+    "jquery": "x.x.x",
     "knockout": "^3.4.0",
     "knockout-punches": "^0.5.1"
   }
