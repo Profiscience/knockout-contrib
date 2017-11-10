@@ -25,6 +25,8 @@
 
 Invoke a jQuery plugin on an element
 
+This binding depends on jquery and namespaced bindings from knockout-punches.
+
 ## Usage
 
 ```typescript
