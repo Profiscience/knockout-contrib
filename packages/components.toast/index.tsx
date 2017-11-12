@@ -18,17 +18,24 @@ export default class ToastViewModel {
     this.toasts = new.target.toasts
   }
 
-  private onMouseOver() {
-    this.toasts().forEach((t) => {
-      clearTimeout(t.timer)
-      t.timer = undefined
-    })
+  private pauseOnHoverHandlers = {
+    mouseover: () => {
+      this.toasts().forEach((t) => {
+        clearTimeout(t.timer)
+        t.timer = undefined
+      })
+    },
+
+    mouseout: () => {
+      this.toasts().forEach((t) => {
+        t.timer = setTimeout(() => t.dispose(), 5000)
+      })
+    }
   }
 
-  private onMouseOut() {
-    this.toasts().forEach((t) => {
-      t.timer = setTimeout(() => t.dispose(), 5000)
-    })
+  private animateOut(el: HTMLElement) {
+    el.addEventListener('transitionend', () => el.remove())
+    el.classList.add('toast-exit')
   }
 
   public static success(text: string): Toast {
@@ -55,10 +62,9 @@ export default class ToastViewModel {
   }
 }
 
-
 const template = [
-  <div class='toast-container' data-bind='foreach: { data: toasts }, event: { mouseover: onMouseOver, mouseout: onMouseOut }'>
-    <div class='toast' data-bind='_toast'>
+  <div class='toast-container' data-bind='foreach: { data: toasts, beforeRemove: animateOut }, event: pauseOnHoverHandlers'>
+    <div class='toast toast-enter' data-bind='_toast'>
       <div class='toast-close' data-bind='click: dispose'>&times;</div>
       <span class='toast-text' data-bind='text: text'></span>
     </div>

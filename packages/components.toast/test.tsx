@@ -1,15 +1,15 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './src' // tree-shaking
-import Toast from './src'
+import './' // tree-shaking
+import Toast from './'
 
 describe('components.toast', () => {
   test('registers <knockout-contrib-toast /> component', () => {
     expect(ko.components.isRegistered('knockout-contrib-toast')).toBe(true)
   })
 
-  test('create and dispose toasts', () => {
+  test('create and dispose toasts', (done) => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const getToast = () => $el.querySelector('.toast')
 
@@ -22,10 +22,14 @@ describe('components.toast', () => {
     expect(getToast()).toBeTruthy()
 
     t.dispose()
-    expect(getToast()).toBeFalsy()    
+    getToast().addEventListener('transitionend', () => {
+      expect(getToast()).toBeFalsy()    
+      done()
+    })
+    getToast().dispatchEvent(new Event('transitionend'))
   })
 
-  test('binds toast-${index} class', () => {
+  test('binds toast-${index} class', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const getToast = (i) => $el.querySelector(`.toast.toast-${i}`)
 
@@ -41,15 +45,27 @@ describe('components.toast', () => {
     expect(getToast(1)).toBeTruthy()
 
     t1.dispose()
-    expect(getToast(1)).toBeFalsy()
+    await new Promise((resolve) => {
+      getToast(0).addEventListener('transitionend', () => {
+        expect(getToast(1)).toBeFalsy()
+        resolve()
+      })
+      getToast(0).dispatchEvent(new Event('transitionend'))
+    })
 
     t2.dispose()
-    expect(getToast(0)).toBeFalsy()    
+    await new Promise((resolve) => {
+      getToast(0).addEventListener('transitionend', () => {
+        expect(getToast(0)).toBeFalsy()
+        resolve()
+      })
+      getToast(0).dispatchEvent(new Event('transitionend'))
+    })
   })
 
-  test('binds toast-${type} class', () => {
+  test('binds toast-${type} class', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
-    const getToast = (i, t) => $el.querySelector(`.toast.toast-${i}.toast-${t}`)
+    const getToast = (i, t = i) => $el.querySelector(`.toast.toast-${i}.toast-${t}`)
     
     ko.applyBindings({}, $el)
     ko.tasks.runEarly()
@@ -66,9 +82,25 @@ describe('components.toast', () => {
     tSuccess.dispose()
     tError.dispose()
     tInfo.dispose()
+
+    await new Promise((resolve) => {
+      const t = getToast(0)
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
+    await new Promise((resolve) => {
+      const t = getToast(0)
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
+    await new Promise((resolve) => {
+      const t = getToast(0)
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
   })
 
-  test('binds text', () => {
+  test('binds text', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const t = Toast.success('gucci mane')
 
@@ -80,9 +112,15 @@ describe('components.toast', () => {
     expect($text.innerHTML).toBe('gucci mane')
 
     t.dispose()
+
+    await new Promise((resolve) => {
+      const t = $el.querySelector('.toast-0')
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
   })
 
-  test('disposes when toast-close is clicked', () => {
+  test('disposes when toast-close is clicked', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const getToast = () => $el.querySelector(`.toast`)
     
@@ -94,10 +132,16 @@ describe('components.toast', () => {
     const $close = $el.querySelector('.toast-close') as HTMLElement
     $close.click()
 
+    await new Promise((resolve) => {
+      const t = getToast()
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
+
     expect(getToast()).toBeFalsy()
   })
 
-  test('disposes after 5 seconds', () => {
+  test('disposes after 5 seconds', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const getToast = () => $el.querySelector(`.toast`)
     
@@ -110,15 +154,23 @@ describe('components.toast', () => {
 
     jest.runAllTimers()
 
+    await new Promise((resolve) => {
+      const t = getToast()
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
+
     expect(getToast()).toBeFalsy()
   })
 
-  test('mouseover stops timeout, mouseout resumes', () => {
+  test('mouseover stops timeout, mouseout resumes', async () => {
     const $el = <knockout-contrib-toast></knockout-contrib-toast>
     const getToast = () => $el.querySelector(`.toast`) as HTMLElement
     
     ko.applyBindings({}, $el)
     ko.tasks.runEarly()
+
+    jest.useFakeTimers()
     
     Toast.success('text')
 
@@ -130,6 +182,13 @@ describe('components.toast', () => {
     $el.querySelector(`.toast-container`).dispatchEvent(new Event('mouseout'))
 
     jest.runAllTimers()
+
+    await new Promise((resolve) => {
+      const t = getToast()
+      t.addEventListener('transitionend', resolve)
+      t.dispatchEvent(new Event('transitionend'))
+    })
+
     expect(getToast()).toBeFalsy()
   })
 })
