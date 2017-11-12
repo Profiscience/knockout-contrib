@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-jquery",
+  "private": false,
   "version": "1.0.0-alpha.2",
   "description": "jQuery Plugin Binding for KnockoutJS",
   "main": "knockout-contrib-bindings-jquery.js",

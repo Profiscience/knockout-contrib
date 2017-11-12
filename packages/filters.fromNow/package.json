@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-filters-from-now",
+  "private": false,
   "version": "1.0.0-alpha.2",
   "description": "Relative Time Filter for KnockoutJS",
   "main": "knockout-contrib-filters-from-now.js",

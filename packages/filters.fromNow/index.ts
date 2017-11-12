@@ -8,9 +8,14 @@ import ago from 's-ago'
     time = Date.now() - (time - Date.now())
   }
   const relativeTime = ago(new Date(time))
-  return isPast
-    ? relativeTime
-    : relativeTime === 'yesterday'
-      ? 'tomorrow'
-      : 'in ' + relativeTime.replace(' ago', '')
+  if (isPast) {
+    return relativeTime
+  }
+  if (relativeTime === 'yesterday') {
+    return 'tomorrow'
+  }
+  if (relativeTime.indexOf('last') > -1) {
+    return relativeTime.replace('last', 'next')
+  }
+  return 'in ' + relativeTime.replace(' ago', '')
 }

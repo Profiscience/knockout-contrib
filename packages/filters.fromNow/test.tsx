@@ -23,6 +23,20 @@ describe('filters.fromNow', () => {
     expect(el.innerHTML).toBe('yesterday')
   })
 
+  test('next week', () => {
+    const date = addDays(new Date(), 8)
+    const el = <span data-bind='text: date | fromNow'></span>
+    ko.applyBindings({ date }, el)
+    expect(el.innerHTML).toBe('next week')
+  })
+
+  test('last week', () => {
+    const date = subDays(new Date(), 8)
+    const el = <span data-bind='text: date | fromNow'></span>
+    ko.applyBindings({ date }, el)
+    expect(el.innerHTML).toBe('last week')
+  })
+
   test('in 3 days', () => {
     const date = addDays(new Date(), 3)
     const el = <span data-bind='text: date | fromNow'></span>
