@@ -38,7 +38,7 @@ export default class ToastViewModel {
   }
 
   private animateOut(el: HTMLElement) {
-    el.addEventListener('transitionend', () => el.remove())
+    el.addEventListener('animationend', () => el.remove())
     el.classList.add('toast-exit')
   }
 
