@@ -18,9 +18,13 @@
   "keywords": [
     "knockout",
     "knockoutjs",
-    "utils",
-    "helpers",
-    "utilities"
+    "filters",
+    "from-now",
+    "relative-time",
+    "relative",
+    "time",
+    "timeago",
+    "ago"
   ],
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",

@@ -1,4 +1,3 @@
-import 'knockout-punches'
 import * as ko from 'knockout'
 import ago from 's-ago'
 
