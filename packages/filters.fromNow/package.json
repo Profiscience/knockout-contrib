@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-filters-from-now",
   "version": "1.0.0-alpha.2",
-  "description": "jQuery Plugin Binding for KnockoutJS",
+  "description": "Relative Time Filter for KnockoutJS",
   "main": "knockout-contrib-filters-from-now.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
