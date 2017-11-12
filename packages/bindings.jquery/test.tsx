@@ -1,4 +1,5 @@
 import { h } from 'jsx-dom'
+import 'knockout-punches'
 import * as ko from 'knockout'
 import * as $ from 'jquery'
 
