@@ -33,6 +33,10 @@ export default class ToastViewModel {
     }
   }
 
+  private animateIn(el: HTMLElement) {
+    el.classList.add('toast-enter')
+  }
+
   private animateOut(el: HTMLElement) {
     el.addEventListener('transitionend', () => el.remove())
     el.classList.add('toast-exit')
@@ -64,7 +68,7 @@ export default class ToastViewModel {
 
 const template = [
   <div class='toast-container' data-bind='foreach: { data: toasts, beforeRemove: animateOut }, event: pauseOnHoverHandlers'>
-    <div class='toast toast-enter' data-bind='_toast'>
+    <div class='toast' data-bind='_toast'>
       <div class='toast-close' data-bind='click: dispose'>&times;</div>
       <span class='toast-text' data-bind='text: text'></span>
     </div>
