@@ -1,32 +1,10 @@
-import isArray from 'lodash/isArray'
-import isBoolean from 'lodash/isBoolean'
 import isFunction from 'lodash/isFunction'
 import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
-import castArray from 'lodash/castArray'
-import concat from 'lodash/concat'
-import extend from 'lodash/extend'
-import extendWith from 'lodash/extendWith'
-import filter from 'lodash/filter'
-import flatMap from 'lodash/flatMap'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
 import noop from 'lodash/noop'
-import reduce from 'lodash/reduce'
 import startsWith from 'lodash/startsWith'
 import { Context } from './context'
 import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
-
-export {
-  isArray, isBoolean, isFunction, isPlainObject, isString, isUndefined,
-  castArray,
-  concat,
-  extend, extendWith,
-  filter,
-  map, mapValues, flatMap,
-  reduce
-}
 
 export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
 export type SyncCallback<T> = () => T

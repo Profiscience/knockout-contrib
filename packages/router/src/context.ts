@@ -1,14 +1,15 @@
 import 'core-js/es7/symbol'
+import isUndefined from 'lodash/isUndefined'
+import concat from 'lodash/concat'
+import extend from 'lodash/extend'
+import map from 'lodash/map'
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
 import { Router, Middleware } from './router'
 import {
   Callback,
-  isThenable, isUndefined,
-  concat,
-  extend,
-  map,
+  isThenable,
   castLifecycleObjectMiddlewareToGenerator,
   sequence
 } from './utils'

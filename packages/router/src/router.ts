@@ -1,3 +1,13 @@
+import isBoolean from 'lodash/isBoolean'
+import isPlainObject from 'lodash/isPlainObject'
+import isUndefined from 'lodash/isUndefined'
+import castArray from 'lodash/castArray'
+import extend from 'lodash/extend'
+import extendWith from 'lodash/extendWith'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import reduce from 'lodash/reduce'
 import * as ko from 'knockout'
 import { IContext, IRouteConfig } from './'
 import { Context } from './context'
@@ -5,11 +15,6 @@ import { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
 import {
   Callback,
   MaybeArray,
-  isBoolean, isPlainObject, isUndefined,
-  castArray,
-  extend, extendWith,
-  flatMap, map, mapValues,
-  reduce,
   traversePath
 } from './utils'
 

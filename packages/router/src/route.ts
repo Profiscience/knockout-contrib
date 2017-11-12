@@ -1,9 +1,14 @@
+import isFunction from 'lodash/isFunction'
+import isPlainObject from 'lodash/isPlainObject'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import map from 'lodash/map'
+import reduce from 'lodash/reduce'
 // this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
 import pathToRegexp from 'path-to-regexp'
 import { Key } from 'path-to-regexp'
 import { Middleware } from './router'
-import { isFunction, isPlainObject, isString, isUndefined, map, reduce } from './utils'
 
 export type NormalizedRouteMap = {
   [name: string]: NormalizedRouteConfig[]

@@ -1,6 +1,7 @@
+import map from 'lodash/map'
 import * as ko from 'knockout'
 import { Router } from './router'
-import { map, traversePath } from './utils'
+import { traversePath } from './utils'
 
 declare global {
   // tslint:disable-next-line interface-name
