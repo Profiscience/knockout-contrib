@@ -67,7 +67,7 @@ export default class ToastViewModel {
 }
 
 const template = [
-  <div class='toast-container' data-bind='foreach: { data: toasts, beforeRemove: animateOut }, event: pauseOnHoverHandlers'>
+  <div class='toast-container' data-bind='foreach: { data: toasts, afterAdd: animateIn, beforeRemove: animateOut }, event: pauseOnHoverHandlers'>
     <div class='toast' data-bind='_toast'>
       <div class='toast-close' data-bind='click: dispose'>&times;</div>
       <span class='toast-text' data-bind='text: text'></span>
