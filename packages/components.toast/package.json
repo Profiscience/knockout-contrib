@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-toast",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Toast Notification Component for KnockoutJS",
   "main": "knockout-contrib-components-toast.js",
   "module": "dist/index.js",
