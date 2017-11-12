@@ -1,0 +1,39 @@
+{
+  "name": "@profiscience/knockout-contrib-components-toast",
+  "version": "1.0.0-alpha.0",
+  "description": "Toast Notification Component for KnockoutJS",
+  "main": "knockout-contrib-components-toast.js",
+  "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "global": "ko.contrib.components.toast",
+  "files": [
+    "dist",
+    "knockout-contrib-components-toast.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
+  },
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "components",
+    "notify",
+    "notification",
+    "toast",
+    "toastr"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Profiscience/knockout-contrib/issues"
+  },
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.toast",
+  "dependencies": {
+    "jsx-dom": "^5.2.0"
+  },
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  }
+}
