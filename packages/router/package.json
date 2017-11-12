@@ -31,9 +31,7 @@
     "framework"
   ],
   "dependencies": {
-    "@types/lodash-es": "^4.14.4",
     "core-js": "^2.3.0",
-    "lodash-es": "^4.14.0",
     "path-to-regexp": "^2.0.0",
     "tslib": "^1.7.0"
   },

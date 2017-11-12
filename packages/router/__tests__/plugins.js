@@ -1,4 +1,5 @@
-import { isPlainObject, merge } from 'lodash-es'
+import isPlainObject from 'lodash/isPlainObject'
+import merge from 'lodash/merge'
 import ko from 'knockout'
 
 import { Router } from '../dist'

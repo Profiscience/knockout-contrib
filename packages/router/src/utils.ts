@@ -1,26 +1,32 @@
-import isFunction from 'lodash-es/isFunction'
-import isUndefined from 'lodash-es/isUndefined'
-import isPlainObject from 'lodash-es/isPlainObject'
-import noop from 'lodash-es/noop'
-import startsWith from 'lodash-es/startsWith'
+import isArray from 'lodash/isArray'
+import isBoolean from 'lodash/isBoolean'
+import isFunction from 'lodash/isFunction'
+import isPlainObject from 'lodash/isPlainObject'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import castArray from 'lodash/castArray'
+import concat from 'lodash/concat'
+import extend from 'lodash/extend'
+import extendWith from 'lodash/extendWith'
+import filter from 'lodash/filter'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
+import noop from 'lodash/noop'
+import reduce from 'lodash/reduce'
+import startsWith from 'lodash/startsWith'
 import { Context } from './context'
 import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
 
-export { default as isArray } from 'lodash-es/isArray'
-export { default as isBoolean } from 'lodash-es/isBoolean'
-export { default as isFunction } from 'lodash-es/isFunction'
-export { default as isPlainObject } from 'lodash-es/isPlainObject'
-export { default as isString } from 'lodash-es/isString'
-export { default as isUndefined } from 'lodash-es/isUndefined'
-export { default as castArray } from 'lodash-es/castArray'
-export { default as concat } from 'lodash-es/concat'
-export { default as extend } from 'lodash-es/extend'
-export { default as extendWith } from 'lodash-es/extendWith'
-export { default as filter } from 'lodash-es/filter'
-export { default as flatMap } from 'lodash-es/flatMap'
-export { default as map } from 'lodash-es/map'
-export { default as mapValues } from 'lodash-es/mapValues'
-export { default as reduce } from 'lodash-es/reduce'
+export {
+  isArray, isBoolean, isFunction, isPlainObject, isString, isUndefined,
+  castArray,
+  concat,
+  extend, extendWith,
+  filter,
+  map, mapValues, flatMap,
+  reduce
+}
 
 export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
 export type SyncCallback<T> = () => T

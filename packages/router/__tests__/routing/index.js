@@ -1,5 +1,6 @@
 import ko from 'knockout'
-import { extend, map } from 'lodash-es'
+import extend from 'lodash/extend'
+import map from 'lodash/map'
 
 import { Router } from '../../dist'
 

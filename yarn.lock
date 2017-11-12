@@ -37,13 +37,7 @@
   version "3.4.46"
   resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.46.tgz#e8bf3c356524f4b4b6b4e4159da363e49e826468"
 
-"@types/lodash-es@^4.14.4":
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.0.tgz#ed9044d62ee36a93e0650b112701986b1c74c766"
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*", "@types/lodash@^4.14.80":
+"@types/lodash@^4.14.80":
   version "4.14.80"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.80.tgz#a6b8b7900e6a7dcbc2e90d9b6dfbe3f6a7f69951"
 
@@ -3324,10 +3318,6 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
-
-lodash-es@^4.14.0:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
 lodash._basecopy@^3.0.0:
   version "3.0.1"

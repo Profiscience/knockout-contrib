@@ -1,4 +1,4 @@
-import { random } from 'lodash-es'
+import { random } from 'lodash'
 import ko from 'knockout'
 import { Router } from '@profiscience/knockout-contrib-router'
 import loadingMiddleware from './middleware/loading'
