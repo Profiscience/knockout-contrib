@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
-    "build": "rm -r dist && tsc"
+    "build": "rm -r dist && tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,20 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
+    "@types/jest": "^21.1.8",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.2.3",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "testRegex": "__tests__/[^_].*\\.ts$",
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   }
 }
