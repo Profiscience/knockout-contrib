@@ -1,0 +1,38 @@
+{
+  "name": "@profiscience/framework",
+  "private": false,
+  "version": "0.0.0",
+  "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
+  "scripts": {
+    "build": "rm -r dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Profiscience/framework.git"
+  },
+  "keywords": [
+    "knockoutjs",
+    "ko",
+    "knockout",
+    "framework",
+    "spa",
+    "router",
+    "data",
+    "model",
+    "single-page-app",
+    "typescript"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Profiscience/framework/issues"
+  },
+  "homepage": "https://github.com/Profiscience/framework#readme",
+  "dependencies": {
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2"
+  }
+}
