@@ -5,20 +5,25 @@
 # Class: DataModelConstructorBuilder
 
 
-Creates a DataModel constructor with support for async initialization, and composition via mixins and `extends`. Updates observable properties in derived class when params are changed. Expects knockout-decorators to be used for declaring observable properties.
+Creates a DataModel constructor with support for async initialization that updates observable properties in derived class when params are changed.
 
 Example usage:
 
     import { observable } from 'knockout-decorators'
 
+    type MyDataModelParams = {}
+
     class MyDataModel extends DataModelConstructorBuilder
       // using a mixin to provide `fetch`
-      .Mixin(RESTMixin('https://example.com/some/api/endpoint')) {
+      .Mixin(RESTMixin('https://example.com/some/api/endpoint'))
+
+      // define params type
+      <MyDataModelParams>{
 
       // define which properties should be observable using decorators
       @observable
       public somePropertyInAPIResponseThatShouldBeObservable: string
-
+      // define non-observable props too for type-safety/autocomplete
       public somePropertyInAPIResponseThatShouldNotBeObservable: string
 
       // using a custom fetch method
@@ -27,30 +32,23 @@ Example usage:
       }
     }
 
-## Indexable
+    const model = await MyDataModel.create()
 
-\[k: `string`\]:&nbsp;`any`
-Creates a DataModel constructor with support for async initialization, and composition via mixins and `extends`. Updates observable properties in derived class when params are changed. Expects knockout-decorators to be used for declaring observable properties.
+    model.dispose()
 
-Example usage:
+## Type parameters
+#### P 
+## Hierarchy
 
-    import { observable } from 'knockout-decorators'
 
-    class MyDataModel extends DataModelConstructorBuilder
-      // using a mixin to provide `fetch`
-      .Mixin(RESTMixin('https://example.com/some/api/endpoint')) {
+ `Subscribable`.<[ConstructorBuilder](constructorbuilder.md)>,.<`this`>[ConstructorBuilder](constructorbuilder.md)`this`
 
-      // define which properties should be observable using decorators
-      @observable
-      public somePropertyInAPIResponseThatShouldBeObservable: string
+**↳ DataModelConstructorBuilder**
 
-      public somePropertyInAPIResponseThatShouldNotBeObservable: string
 
-      // using a custom fetch method
-      protected async fetch() {
-        return await $.get('https://example.com/some/api/endpoint')
-      }
-    }
+
+
+
 
 
 ## Index
@@ -62,14 +60,14 @@ Example usage:
 
 ### Properties
 
+* [loading](datamodelconstructorbuilder.md#loading)
 * [params](datamodelconstructorbuilder.md#params)
 
 
 ### Methods
 
-* [dispose](datamodelconstructorbuilder.md#dispose)
 * [fetch](datamodelconstructorbuilder.md#fetch)
-* [Mixin](datamodelconstructorbuilder.md#mixin)
+* [toJS](datamodelconstructorbuilder.md#tojs)
 * [create](datamodelconstructorbuilder.md#create)
 
 
@@ -79,10 +77,10 @@ Example usage:
 <a id="constructor"></a>
 
 
-### ⊕ **new DataModelConstructorBuilder**(params: *`object`*): [DataModelConstructorBuilder](datamodelconstructorbuilder.md)
+### ⊕ **new DataModelConstructorBuilder**(params: *`P`*): [DataModelConstructorBuilder](datamodelconstructorbuilder.md)
 
 
-*Defined in model/DataModelConstructorBuilder.ts:35*
+*Defined in DataModelConstructorBuilder.ts:47*
 
 
 
@@ -93,7 +91,7 @@ Constructs a new DataModel instance
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| params | `object`   |  Parameters for the current model state. If observable, will trigger updates to observable properties when modified |
+| params | `P`   |  Parameters for the current model state. If observable, will trigger updates to observable properties when modified |
 
 
 
@@ -105,24 +103,34 @@ Constructs a new DataModel instance
 
 
 ## Properties
+<a id="loading"></a>
+
+###  loading
+
+**●  loading**:  *`KnockoutObservable`.<`boolean`>*  =  ko.observable(true)
+
+*Defined in DataModelConstructorBuilder.ts:47*
+
+
+
+True if pending `.fetch()` response
+
+
+
+
+___
+
 <a id="params"></a>
 
 ### «Protected» params
 
-**●  params**:  *`object`* 
+**●  params**:  *`P`* 
 
-*Defined in model/DataModelConstructorBuilder.ts:43*
+*Defined in DataModelConstructorBuilder.ts:55*
 
 
 
 Parameters for the current model state. If observable, will trigger updates to observable properties when modified
-
-#### Type declaration
-
-
-[k: `string`]: [MaybeObservable](../#maybeobservable)`any`⎮[MaybeObservableArray](../#maybeobservablearray)`any`
-
-
 
 
 
@@ -131,33 +139,6 @@ ___
 
 
 ## Methods
-<a id="dispose"></a>
-
-###  dispose
-
-► **dispose**(): `void`
-
-
-
-*Defined in model/DataModelConstructorBuilder.ts:60*
-
-
-
-Model hook for disposing subscriptions, unhooking event listeners, and doing other cleanup
-
-By default, does nothing, but allows composing disposals via super.dispose() in mixins and derived classes without relying on manual composition in the constructor.
-
-
-
-
-**Returns:** `void`
-
-
-
-
-
-___
-
 <a id="fetch"></a>
 
 ### «Protected» fetch
@@ -166,7 +147,7 @@ ___
 
 
 
-*Defined in model/DataModelConstructorBuilder.ts:69*
+*Defined in DataModelConstructorBuilder.ts:100*
 
 
 
@@ -187,39 +168,24 @@ Should use `this.params`, if applicable.
 
 ___
 
-<a id="mixin"></a>
+<a id="tojs"></a>
 
-### «Static» Mixin
+###  toJS
 
-► **Mixin**T1,T2(this: *`T1`*, mixin: *`function`*): `T2`
-
-
-
-*Defined in model/DataModelConstructorBuilder.ts:93*
+► **toJS**(): `any`
 
 
 
-Dynamically applies mixins and returns a new constructor using the following pattern:
-
-    class MyDataModel extends DataModelConstructorBuilder.Mixin(myMixin) {}
+*Defined in DataModelConstructorBuilder.ts:79*
 
 
-**Type parameters:**
 
-#### T1 :  `object`
-#### T2 :  `object`
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| this | `T1`   |  - |
-| mixin | `function`   |  Mixin to apply to constructor |
+Return enumerable properties, unwrapped
 
 
 
 
-
-**Returns:** `T2`
+**Returns:** `any`
 
 
 
@@ -231,28 +197,32 @@ ___
 
 ### «Static» create
 
-► **create**(params: *`any`*): `Promise`.<`any`>
+► **create**T(this: *`object`*, params: *`any`*): `Promise`.<`T`>
 
 
 
-*Defined in model/DataModelConstructorBuilder.ts:78*
+*Defined in DataModelConstructorBuilder.ts:109*
 
 
 
 Factory for instantiating a model and waiting for the initial fetch to complete
 
 
+**Type parameters:**
+
+#### T 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
+| this | `object`   |  - |
 | params | `any`   |  (Optionally) observable parameters for this instance. Will be passed to the constructor. |
 
 
 
 
 
-**Returns:** `Promise`.<`any`>
+**Returns:** `Promise`.<`T`>
 
 
 

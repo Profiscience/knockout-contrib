@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
-    "build": "rm -r dist && tsc",
+    "build": "tsc",
     "test": "jest",
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
