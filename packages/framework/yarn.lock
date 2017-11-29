@@ -2,6 +2,34 @@
 # yarn lockfile v1
 
 
+"@profiscience/knockout-contrib-jest-matchers@^1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-jest-matchers/-/knockout-contrib-jest-matchers-1.0.0-alpha.0.tgz#e76b25957bb2a0b3489d846780cb05bd76be1b70"
+
+"@profiscience/knockout-contrib-utils-defaults@1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-utils-defaults/-/knockout-contrib-utils-defaults-1.0.0-alpha.0.tgz#07a4d0f961a0b0feff51b1b8a0a426ca617e12ff"
+  dependencies:
+    "@profiscience/knockout-contrib-utils-from-js" "^1.0.0-alpha.0"
+
+"@profiscience/knockout-contrib-utils-from-js@1.0.0-alpha.0", "@profiscience/knockout-contrib-utils-from-js@^1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-utils-from-js/-/knockout-contrib-utils-from-js-1.0.0-alpha.0.tgz#309e4a6b4a30189b5f2d83df3aec5fa6a4fafb84"
+
+"@profiscience/knockout-contrib-utils-merge@1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-utils-merge/-/knockout-contrib-utils-merge-1.0.0-alpha.0.tgz#18ebd3d8272b7ee89da6e88e8ba2d1268026c33a"
+  dependencies:
+    "@profiscience/knockout-contrib-utils-from-js" "^1.0.0-alpha.0"
+
+"@profiscience/knockout-contrib-utils@^1.0.0-alpha.5":
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-utils/-/knockout-contrib-utils-1.0.0-alpha.5.tgz#3ecee5901a1fb662a42912788f74ac8b10d22885"
+  dependencies:
+    "@profiscience/knockout-contrib-utils-defaults" "1.0.0-alpha.0"
+    "@profiscience/knockout-contrib-utils-from-js" "1.0.0-alpha.0"
+    "@profiscience/knockout-contrib-utils-merge" "1.0.0-alpha.0"
+
 "@types/fs-extra@4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.0.tgz#1dd742ad5c9bce308f7a52d02ebc01421bc9102f"
@@ -19,6 +47,10 @@
 "@types/jest@^21.1.8":
   version "21.1.8"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.8.tgz#d497213725684f1e5a37900b17a47c9c018f1a97"
+
+"@types/knockout@^3.4.47":
+  version "3.4.47"
+  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.47.tgz#e312370bd9688f373e4c8ace40a3317c88089ac6"
 
 "@types/lodash@4.14.74":
   version "4.14.74"
@@ -1640,6 +1672,10 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+knockout@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.2.tgz#e87958de77ad1e936f7ce645bab8b5d7c456d937"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
