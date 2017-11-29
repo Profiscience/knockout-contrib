@@ -18,6 +18,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "lib": [
       "dom",

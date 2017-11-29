@@ -10,23 +10,21 @@ import { INITIALIZED } from '../symbols'
 describe('DataModelConstructorBuilder', () => {
 
   test('requires .fetch() implementation', async () => {
-    interface IFooParams { }
-
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {}
+    class FooModel extends DataModelConstructorBuilder<{}> {}
 
     const foo = new FooModel({})
 
     await expect((foo as any)[INITIALIZED]).rejects.toBeTruthy()
 
     // tslint:disable-next-line no-console
-    console.log('The preceeding UnhandledPromiseRejection is expected')
+    console.error('The preceeding error is expected')
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public value: KnockoutObservable<string>
+      public readonly value: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'value' }
@@ -43,7 +41,7 @@ describe('DataModelConstructorBuilder', () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public value: KnockoutObservable<string>
+      public readonly value: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'value' }
@@ -56,9 +54,50 @@ describe('DataModelConstructorBuilder', () => {
     expect(foo.dispose).toBeDefined()
   })
 
-  test('updates model when params are changed')
+  test('updates model when params are changed', async () => {
+    interface IFooParams {
+      valueIn: KnockoutObservable<string>
+    }
 
-  test('.toJS() returns modified data')
+    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+      public readonly value: KnockoutObservable<string>
 
-  test('works with readonly observables (one-way data binding)')
+      protected async fetch() {
+        return { value: this.params.valueIn() }
+      }
+    }
+
+    const params: IFooParams = { valueIn: ko.observable('foo') }
+    const foo = await FooModel.create(params)
+
+    expect(foo.value()).toBe('foo')
+    params.valueIn('bar')
+
+    expect(foo.loading()).toBe(true)
+    await new Promise((resolve) => {
+      const sub = foo.value.subscribe((newVal) => {
+        sub.dispose()
+        resolve()
+      })
+    })
+
+    expect(foo.loading()).toBe(false)
+    expect(foo.value()).toBe('bar')
+  })
+
+  test('.toJS() returns unwrapped data', async () => {
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public value: KnockoutObservable<string>
+
+      protected async fetch() {
+        return { value: 'foo' }
+      }
+    }
+
+    const foo = await FooModel.create({})
+
+    expect(foo.toJS()).toEqual({
+      value: 'foo'
+    })
+  })
 })

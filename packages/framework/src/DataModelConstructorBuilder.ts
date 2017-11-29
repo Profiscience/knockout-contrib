@@ -1,7 +1,9 @@
+import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from './ConstructorBuilder'
 import { SubscriptionDisposalMixin } from './SubscriptionDisposalMixin'
 import { INITIALIZED } from './symbols'
+import { nonenumerable } from './utils'
 
 /**
  * Creates a DataModel constructor with support for async initialization that updates
@@ -40,6 +42,11 @@ import { INITIALIZED } from './symbols'
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
   /**
+   * True if pending `.fetch()` response
+   */
+  public loading = ko.observable(true)
+
+  /**
    * Constructs a new DataModel instance
    *
    * @param params Parameters for the current model state. If observable, will trigger
@@ -48,6 +55,9 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
   constructor(protected params: P) {
     super()
 
+    nonenumerable(this, 'params')
+    nonenumerable(this, 'loading')
+
     // we want to keep this mostly hidden as an implementation detail, and to make it work
     // an index property has to be added which compromises type safety
     const initialized = this.update();
@@ -55,16 +65,29 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
 
     initialized
       .then(() => {
-        // this.subscribe(params,)
+        this.subscribe(params, () => this.update())
       })
       .catch(() => {
-        throw new Error('Error initializing DataModel')
+        // tslint:disable-next-line no-console
+        console.error('Error initializing DataModel')
       })
+  }
 
+  /**
+   * Return enumerable properties, unwrapped
+   */
+  public toJS(): any {
+    const obj: any = {}
+    for (const k of Object.keys(this)) {
+      obj[k] = (this as any)[k]
+    }
+    return ko.toJS(obj)
   }
 
   private async update(): Promise<void> {
+    this.loading(true)
     merge(this, await this.fetch())
+    this.loading(false)
   }
 
   /**
