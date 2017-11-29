@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 import isFunction from 'lodash/isFunction'
-import { ConstructorBuilder } from './ConstructorBuilder'
+import { ConstructorBuilder } from '../model-builders/ConstructorBuilder'
 
 export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
 

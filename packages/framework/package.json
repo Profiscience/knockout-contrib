@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/Profiscience/framework#readme",
   "dependencies": {
+    "@profiscience/knockout-contrib-router": "^1.0.0-alpha.7",
     "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.5",
     "tslib": "^1.8.0"
   },
@@ -53,7 +54,7 @@
       "js",
       "ts"
     ],
-    "testRegex": "__tests__/[^_].*\\.ts$",
+    "testRegex": "[^_].*\\.test.ts$",
     "transform": {
       "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     }

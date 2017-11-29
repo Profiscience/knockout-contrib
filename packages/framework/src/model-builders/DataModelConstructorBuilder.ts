@@ -1,9 +1,10 @@
 import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from './ConstructorBuilder'
-import { SubscriptionDisposalMixin } from './SubscriptionDisposalMixin'
-import { INITIALIZED } from './symbols'
-import { nonenumerable } from './utils'
+import { SubscriptionDisposalMixin } from '../model-mixins/SubscriptionDisposalMixin'
+import { nonenumerable } from '../utils'
+
+export const INITIALIZED = Symbol('INITIALIZED')
 
 /**
  * Creates a DataModel constructor with support for async initialization that updates

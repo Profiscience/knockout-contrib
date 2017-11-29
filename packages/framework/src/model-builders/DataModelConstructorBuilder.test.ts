@@ -4,8 +4,7 @@ import 'jest'
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
 
-import { DataModelConstructorBuilder } from '../DataModelConstructorBuilder'
-import { INITIALIZED } from '../symbols'
+import { DataModelConstructorBuilder, INITIALIZED } from './DataModelConstructorBuilder'
 
 describe('DataModelConstructorBuilder', () => {
 
