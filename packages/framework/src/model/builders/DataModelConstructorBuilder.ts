@@ -1,8 +1,8 @@
 import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from './ConstructorBuilder'
-import { SubscriptionDisposalMixin } from '../model-mixins/SubscriptionDisposalMixin'
-import { nonenumerable } from '../utils'
+import { SubscriptionDisposalMixin } from '../mixins/SubscriptionDisposalMixin'
+import { nonenumerable } from '../../utils'
 
 export const INITIALIZED = Symbol('INITIALIZED')
 
