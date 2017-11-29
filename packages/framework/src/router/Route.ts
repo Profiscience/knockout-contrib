@@ -1,6 +1,8 @@
 import isFunction from 'lodash/isFunction'
 import { Context, NormalizedRouteConfig } from '@profiscience/knockout-contrib-router'
 
+export const STATE = Symbol('STATE')
+
 export interface IRouteConfig {
   state?: string
   title?: string | (() => string | Promise<string>)
@@ -28,6 +30,10 @@ export class Route {
     }
 
     this[path] = normalizedConfig
+
+    if (r.state) {
+      (this[path] as any)[STATE] = r.state
+    }
   }
 }
 

@@ -2,10 +2,10 @@ import 'jest'
 
 import { isPlainObject } from 'lodash'
 import { Route } from './Route'
-import { Context, IContext, Middleware } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, Middleware } from './Router'
 
 describe('Route', () => {
-  test('transforms properties into normalized route config', () => {
+  test('produces normalized route config', () => {
     const route = new Route('/foo', {
       children: [
         new Route('/bar', {}),
@@ -20,6 +20,14 @@ describe('Route', () => {
           '/baz': []
         }
       ]
+    })
+  })
+
+  describe('state', () => {
+    test('state is not enumerated', () => {
+      const route = new Route('/foo', { state: 'foo' })
+
+      expect(Object.keys(route)).toEqual(['/foo'])
     })
   })
 
@@ -77,6 +85,18 @@ describe('Route', () => {
       lifecycle.next()
       lifecycle.next()
       expect(document.title).toBe('start')
+    })
+  })
+
+  describe('with', () => {
+    test('extends context with object passed to with', () => {
+      const route = new Route('/foo', { with: { foo: 'bar' } })
+      const [middleware] = route['/foo']
+      const ctx = {} as Context & IContext
+
+      (middleware as Middleware)(ctx)
+
+      expect((ctx as any).foo).toBe('bar')
     })
   })
 
