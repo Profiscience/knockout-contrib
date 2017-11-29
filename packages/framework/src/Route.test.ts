@@ -2,7 +2,7 @@ import 'jest'
 
 import { isPlainObject } from 'lodash'
 import { Route } from './Route'
-import { Context, IContext, Middleware } from './Router'
+import { Context, IContext, Middleware } from '@profiscience/knockout-contrib-router'
 
 describe('Route', () => {
   test('produces normalized route config', () => {
