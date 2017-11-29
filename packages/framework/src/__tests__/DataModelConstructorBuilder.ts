@@ -17,6 +17,9 @@ describe('DataModelConstructorBuilder', () => {
     const foo = new FooModel({})
 
     await expect((foo as any)[INITIALIZED]).rejects.toBeTruthy()
+
+    // tslint:disable-next-line no-console
+    console.log('The preceeding UnhandledPromiseRejection is expected')
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
@@ -36,7 +39,7 @@ describe('DataModelConstructorBuilder', () => {
     expect(foo.value()).toBe('value')
   })
 
-  test('uses Subscribable mixin', () => {
+  test('uses SubscriptionDisposalMixin', () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
@@ -54,4 +57,8 @@ describe('DataModelConstructorBuilder', () => {
   })
 
   test('updates model when params are changed')
+
+  test('.toJS() returns modified data')
+
+  test('works with readonly observables (one-way data binding)')
 })

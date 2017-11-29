@@ -1,12 +1,11 @@
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from './ConstructorBuilder'
-import { SubscribableMixin } from './SubscribableMixin'
+import { SubscriptionDisposalMixin } from './SubscriptionDisposalMixin'
 import { INITIALIZED } from './symbols'
 
 /**
  * Creates a DataModel constructor with support for async initialization that updates
- * observable properties in derived class when params are changed. Designed for use
- * with knockout-decorators
+ * observable properties in derived class when params are changed.
  *
  * Example usage:
  *
@@ -39,7 +38,7 @@ import { INITIALIZED } from './symbols'
  * model.dispose()
  * ```
  */
-export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscribableMixin) {
+export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
   /**
    * Constructs a new DataModel instance
    *
@@ -47,11 +46,21 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
    *  updates to observable properties when modified
    */
   constructor(protected params: P) {
-    super();
+    super()
 
     // we want to keep this mostly hidden as an implementation detail, and to make it work
     // an index property has to be added which compromises type safety
-    (this as any)[INITIALIZED] = this.update()
+    const initialized = this.update();
+    (this as any)[INITIALIZED] = initialized
+
+    initialized
+      .then(() => {
+        // this.subscribe(params,)
+      })
+      .catch(() => {
+        throw new Error('Error initializing DataModel')
+      })
+
   }
 
   private async update(): Promise<void> {

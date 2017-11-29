@@ -1,2 +1,2 @@
-export { DataModelConstructorBuilder } from './model/DataModelConstructorBuilder'
+export { DataModelConstructorBuilder } from './DataModelConstructorBuilder'
 export { INITIALIZED } from './symbols'
