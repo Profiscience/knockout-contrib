@@ -7,7 +7,7 @@
 [![Dependency Status][david-dm-shield]][david-dm]
 [![Peer Dependency Status][david-dm-peer-shield]][david-dm-peer]
 
-[API Documentation](./src)
+[API Documentation](./docs)
 
 ## Introduction
 
@@ -202,7 +202,7 @@ Routing uses [@profiscience/knockout-contrib-router](https://github.com/profisci
 
 ---
 
-Still interested? Check out the [API](./src).
+Still interested? Check out the [API documentation](./docs).
 
 [KnockoutJS]: http://knockoutjs.com/
 [@profiscience/knockout-contrib-router]: https://github.com/profiscience/knockout-contrib/tree/master/packages/router/
