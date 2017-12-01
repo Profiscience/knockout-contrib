@@ -198,7 +198,7 @@ the DOM, it should be in the view model. Otherwise, stick it in the data model.
 
 ### Routing
 
-Routing uses [@profiscience/knockout-contrib-router](https://github.com/profiscience/knockout-contrib/tree/master/packages/router), but provides its own `Route` class (unrelated to the `Route` class in the router package) for transforming a route config into middleware (what plugins do in the router, but not in the global scope). As mentioned above, it is intimately tied to the [DataModelConstructorBuilder][] implementation in order to load data before rendering. 
+Routing uses [@profiscience/knockout-contrib-router](https://github.com/profiscience/knockout-contrib/tree/master/packages/router), but provides its own [Route][] class (unrelated to the `Route` class in the router package) for transforming a route config into middleware (what plugins do in the router, but not in the global scope). As mentioned above, it is intimately tied to the [DataModelConstructorBuilder][] implementation in order to load data before rendering. 
 
 ---
 
@@ -208,6 +208,7 @@ Still interested? Check out the [API documentation](./docs).
 [@profiscience/knockout-contrib-router]: https://github.com/profiscience/knockout-contrib/tree/master/packages/router/
 [Webpack]: https://webpack.js.org/
 
+[Route]: ./docs/classes/route
 [DataModelConstructorBuilder]: ./docs/classes/datamodelconstructorbuilder
 [ViewModelConstructorBuilder]: ./docs/classes/viewmodelconstructorbuilder
 
