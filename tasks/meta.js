@@ -160,7 +160,7 @@ async function generateMetaFiles(metapackage, packages) {
     },
     {
       dir: metapackage.dir,
-      data: Buffer.from(JSON.stringify(pkg, null, 2)),
+      data: Buffer.from(JSON.stringify(pkg, null, 2) + '\n'),
       base: 'package.json'
     },
     {
