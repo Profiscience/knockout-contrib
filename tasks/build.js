@@ -21,7 +21,7 @@ exports[`build:${LERNA_PACKAGE_NAME}`] = function* (task) {
   if (tsconfig.compilerOptions.module !== 'commonjs') {
     tasks.push(`bundle:${LERNA_PACKAGE_NAME}`)
   }
-  
+
   yield task.serial(tasks)
 }
 
@@ -32,7 +32,7 @@ exports[`transpile:${LERNA_PACKAGE_NAME}`] = function* (task) {
 exports[`bundle:${LERNA_PACKAGE_NAME}`] = function* (task) {
   const dist = path.join(process.cwd(), path.dirname(pkg.main))
   const bundle = path.basename(pkg.main)
-  
+
   yield task
     .source(path.resolve(process.cwd(), pkg.module))
     .rollup({

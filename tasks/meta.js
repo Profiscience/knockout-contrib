@@ -9,10 +9,11 @@ module.exports = function * (task) {
   yield task
     .source(path.join(__dirname, '../packages/*/.meta'))
     .run({ every: true }, function* (metapackage) {
+      /* eslint-disable no-invalid-this, no-console */
       const metapackageName = path.basename(metapackage.dir)
       const packages = yield this.$.expand(path.join(__dirname, `../packages/${metapackageName}.*`))
-      
-      const files = yield generateMetaFiles(metapackage, packages)
+
+      const files = generateMetaFiles(metapackage, packages)
 
       console.log(`\n🔗  Generated ${metapackageName} metapackage`)
       files.forEach((f) => console.log(`- ${f.base}`))
@@ -21,12 +22,12 @@ module.exports = function * (task) {
     })
     .target(path.join(__dirname, '../packages'))
 }
-  
-async function generateMetaFiles(metapackage, packages) {
+
+function generateMetaFiles(metapackage, packages) {
   const metapackageName = path.basename(metapackage.dir)
   const metapackageId = `@profiscience/knockout-contrib-${kebabCase(metapackageName)}`
   const exportType = metapackage.data.toString('utf8')
-  
+
   const tsconfig = {
     compilerOptions: {
       moduleResolution: 'node',
@@ -45,7 +46,7 @@ async function generateMetaFiles(metapackage, packages) {
     ]
   }
 
-  const gitignore = `*\n!.meta\n!package.json\n!README.md`
+  const gitignore = '*\n!.meta\n!package.json\n!README.md'
 
   const files = []
 
@@ -70,16 +71,16 @@ async function generateMetaFiles(metapackage, packages) {
     links: [
       `\n[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}`,
       `[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/${metapackageName}`,
-      
+
       `\n[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=peer`,
       `[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/${metapackageName}`,
-      
+
       `\n[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=dev`,
       `[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/${metapackageName}`,
-      
+
       `\n[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-${kebabCase(metapackageName)}`,
       `[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg`,
-      
+
       `\n[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-${kebabCase(metapackageName)}&author=&from=&to=`,
       `[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg?maxAge=2592000`
     ].join('\n')
@@ -87,14 +88,14 @@ async function generateMetaFiles(metapackage, packages) {
   let index = ''
 
   switch (exportType) {
-    case 'exports':
-      readme.usage += `// import all\nimport * as ${camelCase(metapackageName)} from '${metapackageId}'\n\n`
-      break
-    case 'global':
-      readme.usage += `// import all\nimport '${metapackageId}'\n\n`
-      break
-    default:
-      throw new Error('🔥  invalid keyword in .meta')
+  case 'exports':
+    readme.usage += `// import all\nimport * as ${camelCase(metapackageName)} from '${metapackageId}'\n\n`
+    break
+  case 'global':
+    readme.usage += `// import all\nimport '${metapackageId}'\n\n`
+    break
+  default:
+    throw new Error('🔥  invalid keyword in .meta')
   }
 
   packages.forEach((p, i) => {
@@ -102,26 +103,26 @@ async function generateMetaFiles(metapackage, packages) {
     const { name: packageId } = require(path.join(p, 'package.json'))
 
     readme.contents += `\n- [${packageName}](../${metapackageName}.${packageName})`
-    
+
     switch (exportType) {
-      case 'exports':
-        index += `export { default as ${packageName} } from '${packageId}'\n`, ''  
-        if (i === 0) {
-          readme.usage += `// import single\nimport { ${camelCase(packageName)} } from '${metapackageId}'`
-        }
-        break
-      case 'global':
-        index += `import \'./${packageName}\'\n`
-        distFiles.push(`${packageName}.js`, `${packageName}.d.ts`)
-        files.push({
-          dir: metapackage.dir,
-          data: Buffer.from(`import '${packageId}'\n`),
-          base: `${packageName}.ts`
-        })
-        if (i === 0) {
-          readme.usage += `// import single\nimport '${metapackageId}/${packageName}'`
-        }
-        break    
+    case 'exports':
+      index += `export { default as ${packageName} } from '${packageId}'\n`
+      if (i === 0) {
+        readme.usage += `// import single\nimport { ${camelCase(packageName)} } from '${metapackageId}'`
+      }
+      break
+    case 'global':
+      index += `import \'./${packageName}\'\n`
+      distFiles.push(`${packageName}.js`, `${packageName}.d.ts`)
+      files.push({
+        dir: metapackage.dir,
+        data: Buffer.from(`import '${packageId}'\n`),
+        base: `${packageName}.ts`
+      })
+      if (i === 0) {
+        readme.usage += `// import single\nimport '${metapackageId}/${packageName}'`
+      }
+      break
     }
   })
 
@@ -141,7 +142,7 @@ async function generateMetaFiles(metapackage, packages) {
       })
     }, {})
   })
-  
+
   files.push(
     {
       dir: metapackage.dir,

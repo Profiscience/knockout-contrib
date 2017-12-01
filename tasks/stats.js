@@ -2,7 +2,7 @@
 
 const path = require('path')
 const { gzip } = require('zlib')
-let _; const { each, padEnd, padStart, round } = _ = require('lodash')
+let _; const { padEnd, padStart, round } = _ = require('lodash')
 const { green } = require('chalk')
 
 module.exports = function* (task) {
