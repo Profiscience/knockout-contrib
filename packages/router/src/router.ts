@@ -15,7 +15,8 @@ import { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
 import {
   Callback,
   MaybeArray,
-  traversePath
+  traversePath,
+  log
 } from './utils'
 
 export type SimpleMiddleware = (ctx: Context & IContext, done?: () => any) =>
@@ -106,14 +107,16 @@ export class Router {
 
   public init() {
     this.isNavigating(false)
-    this.ctx.runAfterRender().then(() => {
-      const resolveRouter = (router: Router) => (resolve: typeof Promise.resolve) => resolve(router)
-      let ctx = this.ctx
-      while (ctx) {
-        map(ctx.router.onInit, resolveRouter(ctx.router))
-        ctx = ctx.$child
-      }
-    })
+    this.ctx.runAfterRender()
+      .then(() => {
+        const resolveRouter = (router: Router) => (resolve: typeof Promise.resolve) => resolve(router)
+        let ctx = this.ctx
+        while (ctx) {
+          map(ctx.router.onInit, resolveRouter(ctx.router))
+          ctx = ctx.$child
+        }
+      })
+      .catch((err) => log.error('Error initializing router', err))
   }
 
   public async update(
@@ -186,7 +189,7 @@ export class Router {
     if (!isUndefined(toCtx._redirect)) {
       await toCtx.runAfterRender()
       const { router: r, path: p } = traversePath(toCtx.router, toCtx._redirect)
-      r.update(p, toCtx._redirectArgs)
+      r.update(p, toCtx._redirectArgs).catch((err) => log.error('Error redirecting', err))
     }
 
     return true
@@ -323,12 +326,12 @@ export class Router {
       return
     }
 
-    Router.update(path)
+    Router.update(path).catch((err) => log.error('Error occured during navigation', err))
     e.preventDefault()
   }
 
   private static onpopstate(e: PopStateEvent) {
-    Router.update(Router.getPathFromLocation(), false)
+    Router.update(Router.getPathFromLocation(), false).catch((err) => log.error('Error navigating back', err))
     e.preventDefault()
   }
 

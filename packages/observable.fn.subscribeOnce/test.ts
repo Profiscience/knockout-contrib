@@ -3,12 +3,12 @@ import './index'
 
 test('subscribes once, then disposes', () => {
   expect.assertions(4)
-  
+
   const observable = ko.observable(null)
   const observableArray = ko.observableArray([null])
   const computed = ko.computed(() => observable())
   const pureComputed = ko.pureComputed(() => observable())
-  
+
   const hit = (v: any) => expect(v).toContain('foo')
 
   observable.subscribeOnce(hit)

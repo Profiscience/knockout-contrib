@@ -49,16 +49,16 @@ var Query = /** @class */ (function () {
         var group = this._group;
         var fromQS = Query.fromQS(group);
         entries(config).forEach(function (_a) {
-            var name = _a[0], _b = _a[1], config = _b === void 0 ? {} : _b;
+            var name = _a[0], _b = _a[1], paramConfig = _b === void 0 ? {} : _b;
             _this[name] = Query._raw[group][name];
             if (isUndefined(_this[name])) {
                 var _default = _this._defaults[name];
-                var coerce = config.coerce || (function (x) { return x; });
-                var init = !isUndefined(fromQS[name]) ? fromQS[name] : config.initial;
+                var coerce = paramConfig.coerce || (function (x) { return x; });
+                var init = !isUndefined(fromQS[name]) ? fromQS[name] : paramConfig.initial;
                 _this[name] = Query._raw[group][name] = Query.createQueryParam(group, name, _default, init, coerce);
             }
             else {
-                _this[name].set(config);
+                _this[name].set(paramConfig);
             }
         });
         ko.tasks.runEarly();
@@ -159,7 +159,8 @@ var Query = /** @class */ (function () {
         }
         return this._queuedUpdate;
     };
-    Query.createQueryParam = function (group, name, __default, init, coerce) {
+    Query.createQueryParam = function (group, name, __default, // tslint:disable-line variable-name
+        init, coerce) {
         var _this = this;
         var _default = ko.observable(ko.toJS(__default));
         var _p = ko.observable(isUndefined(init) ? _default() : init);
@@ -176,7 +177,8 @@ var Query = /** @class */ (function () {
                     v = coerce(v);
                 }
                 _p(v);
-                Query.queueQueryStringWrite();
+                Query.queueQueryStringWrite()
+                    .catch(function (err) { return console.error('[@profiscience/knockout-contrib-querystring] error queueing write'); });
             }
         });
         Object.assign(p, {

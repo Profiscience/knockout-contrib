@@ -3,14 +3,14 @@ import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 
 export default function defaults<T extends { [k: string]: any | KnockoutObservable<any> | void }>(
   dest: T,
-  defaults: { [k: string]: any },
+  defaultValues: { [k: string]: any },
   mapArraysDeep = false
 ): T {
-  for (const prop in defaults) {
+  for (const prop in defaultValues) {
     if (isUndefined(dest[prop])) {
-      dest[prop] = fromJS(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep)
+      dest[prop] = fromJS(defaultValues[prop], defaultValues[prop] instanceof Array && mapArraysDeep)
     } else if (ko.isObservable(dest[prop]) && isUndefined(dest[prop]())) {
-      dest[prop](defaults[prop])
+      dest[prop](defaultValues[prop])
     }
   }
   return dest

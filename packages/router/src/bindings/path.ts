@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 import { Router } from '../router'
-import { resolveHref, traversePath, getRouterForBindingContext } from '../utils'
+import { resolveHref, traversePath, getRouterForBindingContext, log } from '../utils'
 import { activePathBinding } from './active-path'
 
 export const pathBinding: KnockoutBindingHandler = {
@@ -9,15 +9,17 @@ export const pathBinding: KnockoutBindingHandler = {
 
     activePathBinding.init.apply(this, arguments)
 
-    Router.initialized.then(() => {
-      const router = getRouterForBindingContext(bindingCtx)
-      const route = ko.pureComputed(() => traversePath(router, path))
-      ko.applyBindingsToNode(el, {
-        attr: {
-          href: ko.pureComputed(() => resolveHref(route()))
-        }
+    Router.initialized
+      .then(() => {
+        const router = getRouterForBindingContext(bindingCtx)
+        const route = ko.pureComputed(() => traversePath(router, path))
+        ko.applyBindingsToNode(el, {
+          attr: {
+            href: ko.pureComputed(() => resolveHref(route()))
+          }
+        })
       })
-    })
+      .catch((err) => log.error('Error initializing path binding', err))
   }
 }
 

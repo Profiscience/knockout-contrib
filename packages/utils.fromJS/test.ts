@@ -12,7 +12,7 @@ test('should create a deep observable tree', () => {
     regexp: /foo/,
     obj: { foo: 'foo' },
     obs: ko.observable({ foo: 'bar' }),
-    func() {}, // eslint-disable-line
+    func() { }, // tslint:disable-line no-empty
     class: new class {
       public num = 1
       public str = 'str'
@@ -22,8 +22,8 @@ test('should create a deep observable tree', () => {
       public obj = { foo: 'foo' }
       public obs = ko.observable({ foo: 'bar' })
       public regexp = /foo/
-      public func() {} // eslint-disable-line
-    }
+      public func() { } // tslint:disable-line no-empty
+    }()
   }
 
   const actual = fromJS(raw)

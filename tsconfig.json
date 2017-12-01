@@ -10,8 +10,6 @@
     "jsxFactory": "h"
   },
   "include": [
-    "**/test.ts",
-    "**/test.tsx",
-    "**/__tests__/*"
+    "**/*.*"
   ]
 }

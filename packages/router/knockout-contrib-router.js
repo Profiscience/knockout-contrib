@@ -4581,6 +4581,16 @@ function getRouterForBindingContext(bindingCtx) {
     }
     return Router.head;
 }
+var log = {
+    error: function () {
+        var messages = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            messages[_i] = arguments[_i];
+        }
+        // tslint:disable-next-line no-console
+        console.error.apply(console, __spread(['[@profiscience/knockout-contrib-router]'], messages));
+    }
+};
 
 var Context = /** @class */ (function () {
     function Context(router, $parent, path, _with) {
@@ -5397,14 +5407,16 @@ var Router = /** @class */ (function () {
     Router.prototype.init = function () {
         var _this = this;
         this.isNavigating(false);
-        this.ctx.runAfterRender().then(function () {
+        this.ctx.runAfterRender()
+            .then(function () {
             var resolveRouter = function (router) { return function (resolve) { return resolve(router); }; };
             var ctx = _this.ctx;
             while (ctx) {
                 map_1(ctx.router.onInit, resolveRouter(ctx.router));
                 ctx = ctx.$child;
             }
-        });
+        })
+            .catch(function (err) { return log.error('Error initializing router', err); });
     };
     Router.prototype.update = function (url, _args) {
         return __awaiter(this, void 0, void 0, function () {
@@ -5469,7 +5481,7 @@ var Router = /** @class */ (function () {
                     case 7:
                         _d.sent();
                         _c = traversePath(toCtx.router, toCtx._redirect), r = _c.router, p = _c.path;
-                        r.update(p, toCtx._redirectArgs);
+                        r.update(p, toCtx._redirectArgs).catch(function (err) { return log.error('Error redirecting', err); });
                         _d.label = 8;
                     case 8: return [2 /*return*/, true];
                 }
@@ -5609,11 +5621,11 @@ var Router = /** @class */ (function () {
             hasOtherTarget) {
             return;
         }
-        Router.update(path);
+        Router.update(path).catch(function (err) { return log.error('Error occured during navigation', err); });
         e.preventDefault();
     };
     Router.onpopstate = function (e) {
-        Router.update(Router.getPathFromLocation(), false);
+        Router.update(Router.getPathFromLocation(), false).catch(function (err) { return log.error('Error navigating back', err); });
         e.preventDefault();
     };
     Router.canonicalizePath = function (path) {
@@ -5697,14 +5709,16 @@ var activePathBinding = {
     init: function (el, valueAccessor, allBindings, viewModel, bindingCtx) {
         var activePathCSSClass = allBindings.get('pathActiveClass') || Router.config.activePathCSSClass;
         var path = ko.unwrap(valueAccessor());
-        Router.initialized.then(function () {
+        Router.initialized
+            .then(function () {
             var router = getRouterForBindingContext(bindingCtx);
             var route = ko.pureComputed(function () { return traversePath(router, path); });
             ko.applyBindingsToNode(el, {
                 css: (_a = {}, _a[activePathCSSClass] = ko.pureComputed(function () { return isActivePath(route()); }), _a)
             });
             var _a;
-        });
+        })
+            .catch(function (err) { return log.error('Error initializing activePath binding', err); });
     }
 };
 ko.bindingHandlers.activePath = activePathBinding;
@@ -5713,7 +5727,8 @@ var pathBinding = {
     init: function (el, valueAccessor, allBindings, viewModel, bindingCtx) {
         var path = ko.unwrap(valueAccessor());
         activePathBinding.init.apply(this, arguments);
-        Router.initialized.then(function () {
+        Router.initialized
+            .then(function () {
             var router = getRouterForBindingContext(bindingCtx);
             var route = ko.pureComputed(function () { return traversePath(router, path); });
             ko.applyBindingsToNode(el, {
@@ -5721,7 +5736,8 @@ var pathBinding = {
                     href: ko.pureComputed(function () { return resolveHref(route()); })
                 }
             });
-        });
+        })
+            .catch(function (err) { return log.error('Error initializing path binding', err); });
     }
 };
 ko.bindingHandlers.path = pathBinding;
@@ -5745,7 +5761,9 @@ ko.bindingHandlers.__router__ = {
             $router.init();
         }
         else {
-            $router.ctx.$parent.router.initialized.then(function () { return $router.init(); });
+            $router.ctx.$parent.router.initialized
+                .then(function () { return $router.init(); })
+                .catch(noop_1);
         }
         return { controlsDescendantBindings: true };
     }
@@ -5765,16 +5783,19 @@ function createViewModel(params) {
         router.ctx.runBeforeRender()
             .then(function () {
             if (router.ctx._redirect) {
-                router.ctx.runAfterRender().then(function () {
+                router.ctx.runAfterRender()
+                    .then(function () {
                     var _a = traversePath(router, router.ctx._redirect), r = _a.router, p = _a.path;
-                    r.update(p, router.ctx._redirectArgs);
-                });
+                    r.update(p, router.ctx._redirectArgs).catch(function (err) { return log.error('Error redirecting', err); });
+                })
+                    .catch(function (err) { return log.error('Error in afterRender middleware', err); });
             }
             else {
                 router.ctx.render();
                 map_1(Router.onInit, function (resolve) { return resolve(router); });
             }
-        });
+        })
+            .catch(function (err) { return log.error('Error in beforeRender middleware', err); });
     }
     else if (router.ctx._redirect) {
         var _a = traversePath(router, router.ctx._redirect), r_1 = _a.router, p_1 = _a.path;

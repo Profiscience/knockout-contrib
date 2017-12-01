@@ -122,3 +122,10 @@ export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
   }
   return Router.head
 }
+
+export const log = {
+  error(...messages: string[]) {
+    // tslint:disable-next-line no-console
+    console.error('[@profiscience/knockout-contrib-router]', ...messages)
+  }
+}

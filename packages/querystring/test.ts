@@ -20,8 +20,8 @@ test('url parsing', () => {
   const query = Query.create({ foo: undefined })
 
   query.foo('foo')
-  ko.tasks.runEarly()  
-  
+  ko.tasks.runEarly()
+
   expect(location.hash).toBe('#hash')
 
   query.dispose()
@@ -115,8 +115,8 @@ test('query[param]#isDefault', () => {
 
   const query = Query.create({ foo: 'foo' })
 
-  expect(query.foo.isDefault()).toBe(false)  
-  
+  expect(query.foo.isDefault()).toBe(false)
+
   query.foo('foo')
 
   expect(query.foo.isDefault()).toBe(true)
@@ -167,8 +167,8 @@ test('query[param]#set shorthand', () => {
   expect(query.foo()).toBe('notfoo')
   expect(query.bar()).toBe('foo')
 
-  query.clear()  
-  
+  query.clear()
+
   expect(query.toJS()).toEqual({ foo: 'notfoo', bar: 'notbar' })
 
   query.dispose()
@@ -209,7 +209,7 @@ test('#toJS', () => {
 test('#toString', () => {
   history.replaceState(null, '', location.pathname)
 
-  const query = Query.create({ foo: 'foo' })  
+  const query = Query.create({ foo: 'foo' })
 
   expect(Query.stringify({ foo: 'foo' })).toEqual(query.toString())
 
@@ -235,7 +235,7 @@ test('#asObservable', (done) => {
   expect(q()).toEqual({ foo: 'foo' })
 
   query.foo(undefined)
-  
+
   expect(q()).toEqual({})
 
   query.foo('bar')
@@ -269,8 +269,8 @@ test('#dispose', () => {
   a1.dispose()
   ko.tasks.runEarly()
 
-  expect(Query.parse(location.search.substring(1))).toEqual({ a: { foo: 'foo' } })  
-  
+  expect(Query.parse(location.search.substring(1))).toEqual({ a: { foo: 'foo' } })
+
   a2.dispose()
   ko.tasks.runEarly()
 

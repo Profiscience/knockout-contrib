@@ -2,7 +2,8 @@ import 'knockout-punches'
 import * as ko from 'knockout'
 import $ from 'jquery'
 
-declare module global {
+declare global {
+  // tslint:disable-next-line interface-name
   interface KnockoutBindingHandlers {
     jquery: KnockoutBindingHandler
   }

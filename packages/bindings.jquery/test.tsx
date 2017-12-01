@@ -17,6 +17,7 @@ describe('bindings.jquery', () => {
   test('calls the jquery plugin with the correct options', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind='jquery.myPlugin: opts'></div>
+    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       expect(_opts).toEqual(opts)
       done()

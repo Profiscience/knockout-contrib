@@ -62,17 +62,17 @@ export default class Query {
     const group = this._group
     const fromQS = Query.fromQS(group)
 
-    entries(config).forEach(([name, config = {}]) => {
+    entries(config).forEach(([name, paramConfig = {}]) => {
       this[name] = Query._raw[group][name]
 
       if (isUndefined(this[name])) {
         const _default = this._defaults[name]
-        const coerce = config.coerce || ((x: any) => x)
-        const init = !isUndefined(fromQS[name]) ? fromQS[name] : config.initial
+        const coerce = paramConfig.coerce || ((x: any) => x)
+        const init = !isUndefined(fromQS[name]) ? fromQS[name] : paramConfig.initial
 
         this[name] = Query._raw[group][name] = Query.createQueryParam(group, name, _default, init, coerce)
       } else {
-        this[name].set(config)
+        this[name].set(paramConfig)
       }
     })
 
@@ -197,7 +197,7 @@ export default class Query {
   private static createQueryParam(
     group: string,
     name: string,
-    __default: MaybeArray<Primitive>,
+    __default: MaybeArray<Primitive>, // tslint:disable-line variable-name
     init: MaybeArray<Primitive>,
     coerce: (x: any) => MaybeArray<Primitive>
   ) {
@@ -218,6 +218,8 @@ export default class Query {
         }
         _p(v)
         Query.queueQueryStringWrite()
+          // tslint:disable-next-line no-console
+          .catch((err) => console.error('[@profiscience/knockout-contrib-querystring] error queueing write'))
       }
     })
 

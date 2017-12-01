@@ -1,7 +1,8 @@
 import map from 'lodash/map'
+import noop from 'lodash/noop'
 import * as ko from 'knockout'
 import { Router } from './router'
-import { traversePath } from './utils'
+import { traversePath, log } from './utils'
 
 declare global {
   // tslint:disable-next-line interface-name
@@ -35,7 +36,9 @@ ko.bindingHandlers.__router__ = {
     if ($router.isRoot) {
       $router.init()
     } else {
-      $router.ctx.$parent.router.initialized.then(() => $router.init())
+      $router.ctx.$parent.router.initialized
+        .then(() => $router.init())
+        .catch(noop)
     }
 
     return { controlsDescendantBindings: true }
@@ -57,15 +60,18 @@ function createViewModel(params: { [k: string]: any }) {
     router.ctx.runBeforeRender()
       .then(() => {
         if (router.ctx._redirect) {
-          router.ctx.runAfterRender().then(() => {
-            const { router: r, path: p } = traversePath(router, router.ctx._redirect)
-            r.update(p, router.ctx._redirectArgs)
-          })
+          router.ctx.runAfterRender()
+            .then(() => {
+              const { router: r, path: p } = traversePath(router, router.ctx._redirect)
+              r.update(p, router.ctx._redirectArgs).catch((err) => log.error('Error redirecting', err))
+            })
+            .catch((err) => log.error('Error in afterRender middleware', err))
         } else {
           router.ctx.render()
           map(Router.onInit, (resolve) => resolve(router))
         }
       })
+      .catch((err) => log.error('Error in beforeRender middleware', err))
   } else if (router.ctx._redirect) {
     const { router: r, path: p } = traversePath(router, router.ctx._redirect)
     setTimeout(() => r.update(p, router.ctx._redirectArgs))
