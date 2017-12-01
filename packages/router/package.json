@@ -40,13 +40,11 @@
   },
   "devDependencies": {
     "karma": "^1.6.0",
-    "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.1",
     "karma-mocha-reporter": "^2.2.2",
     "karma-remap-istanbul": "^0.6.0",
     "karma-rollup-preprocessor": "^5.0.1",
     "karma-tap": "^3.1.1",
-    "rollup": "^0.50.0",
     "rollup-plugin-istanbul": "^1.1.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.0",

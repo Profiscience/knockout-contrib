@@ -27,14 +27,10 @@ module.exports = (config) => {
     },
 
     browsers: [
-      process.env.TRAVIS ? '_Firefox' : '_Chrome'
+      '_Firefox'
     ],
 
     customLaunchers: {
-      _Chrome: {
-        base: 'Chrome',
-        flags: ['--incognito']
-      },
       _Firefox: {
         base: 'Firefox',
         flags: ['-private']
