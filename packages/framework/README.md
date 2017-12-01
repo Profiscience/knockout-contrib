@@ -163,11 +163,11 @@ class extends ConstructorBuilder
 }
 ```
 
-Two constructor builder classes are exported by the framework, the `DataModelConstructorBuilder` and the `ViewModelConstructorBuilder`...
+Two constructor builder classes are exported by the framework, the [DataModelConstructorBuilder][] and the [ViewModelConstructorBuilder][]...
 
 ### Data Models
 
-Data models, unsuprisingly, use the `DataModelConstructorBuilder`. They contain...
+Data models, unsuprisingly, use the [DataModelConstructorBuilder][]. They contain...
 
 a) logic to retrieve data from the store (HTTP API, LocalStorage, IndexedDB, etc...)  
 b) any business logic related to the data (modifying, saving, etc...)  
@@ -190,7 +190,7 @@ They are intimately tied to routing to allow async operations to complete before
 
 ### View Models
 
-View models contain the UI logic. For example, click handlers, (most) subscriptions, etc.
+View models extend [ViewModelConstructorBuilder][] and contain the UI logic. For example, click handlers, (most) subscriptions, etc.
 
 As a general rule of thumb, view models need the DOM to make sense, and data models shouldn't touch it. If
 whatever you are implementing is a reaction to the DOM, reads/writes the DOM, or does anything at all with
@@ -198,7 +198,7 @@ the DOM, it should be in the view model. Otherwise, stick it in the data model.
 
 ### Routing
 
-Routing uses [@profiscience/knockout-contrib-router](https://github.com/profiscience/knockout-contrib/tree/master/packages/router), but provides its own `Route` class (unrelated to the `Route` class in the router package) for transforming a route config into middleware (what plugins do in the router, but *not* in the global scope. See the [Route documentation](../src/route/) for more on this). As mentioned above, it is intimately tied to the DataModelConstructorBuilder implementation in order to load data before rendering. 
+Routing uses [@profiscience/knockout-contrib-router](https://github.com/profiscience/knockout-contrib/tree/master/packages/router), but provides its own `Route` class (unrelated to the `Route` class in the router package) for transforming a route config into middleware (what plugins do in the router, but not in the global scope). As mentioned above, it is intimately tied to the [DataModelConstructorBuilder][] implementation in order to load data before rendering. 
 
 ---
 
@@ -207,6 +207,9 @@ Still interested? Check out the [API documentation](./docs).
 [KnockoutJS]: http://knockoutjs.com/
 [@profiscience/knockout-contrib-router]: https://github.com/profiscience/knockout-contrib/tree/master/packages/router/
 [Webpack]: https://webpack.js.org/
+
+[DataModelConstructorBuilder]: ./docs/classes/datamodelconstructorbuilder
+[ViewModelConstructorBuilder]: ./docs/classes/viewmodelconstructorbuilder
 
 [travis-ci]: https://travis-ci.org/Profiscience/framework/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/framework/master.svg
@@ -229,5 +232,5 @@ Still interested? Check out the [API documentation](./docs).
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/framework&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/framework.svg?maxAge=2592000
 
-[wtfpl]: ./LICENSE.md
+[wtfpl]: ./LICENSE
 [wtfpl-shield]: https://img.shields.io/npm/l/@profiscience/framework.svg
