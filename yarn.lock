@@ -2998,7 +2998,7 @@ jest@^21.2.1:
   dependencies:
     jest-cli "^21.2.1"
 
-jquery@^3.1.1, jquery@^3.2.1:
+jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
@@ -3192,10 +3192,6 @@ knockout-punches@^0.5.1:
 knockout@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.0.tgz#59d7261815a11eb7c1a3f3c7077ca898a44caadb"
-
-knockout@^3.3.0:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.2.tgz#e87958de77ad1e936f7ce645bab8b5d7c456d937"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -4489,7 +4485,7 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^2.0.0"
     inherits "^2.0.1"
 
-rollup-plugin-commonjs@^8.0.2, rollup-plugin-commonjs@^8.2.5:
+rollup-plugin-commonjs@^8.2.5:
   version "8.2.6"
   resolved "https://registry.yarnpkg.com/rollup-plugin-commonjs/-/rollup-plugin-commonjs-8.2.6.tgz#27e5b9069ff94005bb01e01bb46a1e4873784677"
   dependencies:
