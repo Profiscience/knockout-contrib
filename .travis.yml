@@ -7,6 +7,10 @@ env:
   matrix:
   - TRAVIS=true
   global:
+branches:
+  only:
+  - master
+  - greenkeeper/*
 cache:
   yarn: true
   directories:
