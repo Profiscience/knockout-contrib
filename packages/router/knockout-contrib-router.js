@@ -4016,6 +4016,8 @@ var core = module.exports = { version: '2.5.1' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 });
 
+var _core_1 = _core.version;
+
 var _library = false;
 
 var SHARED = '__core-js_shared__';
@@ -4123,6 +4125,8 @@ var _wksDefine = function (name) {
 _wksDefine('asyncIterator');
 
 _wksDefine('observable');
+
+var symbol = _core.Symbol;
 
 /**
  * Copies the values of `source` to `array`.
@@ -5697,9 +5701,7 @@ var activePathBinding = {
             var router = getRouterForBindingContext(bindingCtx);
             var route = ko.pureComputed(function () { return traversePath(router, path); });
             ko.applyBindingsToNode(el, {
-                css: (_a = {},
-                    _a[activePathCSSClass] = ko.pureComputed(function () { return isActivePath(route()); }),
-                    _a)
+                css: (_a = {}, _a[activePathCSSClass] = ko.pureComputed(function () { return isActivePath(route()); }), _a)
             });
             var _a;
         });

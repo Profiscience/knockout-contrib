@@ -38,10 +38,12 @@ module.exports = (config) => {
     },
 
     singleRun: true,
+    // autoWatch: false,
 
     reporters: ['mocha', 'karma-remap-istanbul'],
 
     rollupPreprocessor: {
+      treeshake: false,
       cache,
       plugins: [
         json(),
