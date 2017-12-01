@@ -6,7 +6,7 @@ import * as ko from 'knockout'
 import { isPlainObject } from 'lodash'
 import { DataModelConstructorBuilder } from './model/builders/DataModelConstructorBuilder'
 import { ViewModelConstructorBuilder } from './model/builders/ViewModelConstructorBuilder'
-import { Route } from './Route'
+import { Route, STATE } from './Route'
 import { Context, IContext, Middleware } from '@profiscience/knockout-contrib-router'
 
 describe('Route', () => {
@@ -33,6 +33,12 @@ describe('Route', () => {
       const route = new Route('/foo', { state: 'foo' })
 
       expect(Object.keys(route)).toEqual(['/foo'])
+    })
+
+    test('state is accessible via exported STATE symbol', () => {
+      const route = new Route('/foo', { state: 'foo' })
+
+      expect((route['/foo'] as any)[STATE]).toEqual('foo')
     })
   })
 

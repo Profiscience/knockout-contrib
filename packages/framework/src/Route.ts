@@ -3,29 +3,129 @@ import { Context, IContext, NormalizedRouteConfig } from '@profiscience/knockout
 import { INITIALIZED } from './model/builders/DataModelConstructorBuilder'
 import { ViewModelConstructorBuilder } from './model/builders/ViewModelConstructorBuilder'
 
+/**
+ * Symbol to access state name on route. Requires casting as any in TypeScript due to symbol key limitations.
+ *
+ * Currently only used for metaprogramming in UniversitySite, namely generating E2E state definitions.
+ *
+ * Example:
+ *
+ * ```typescript
+ *  import { Route, STATE } from '@profiscience/framework'
+ *
+ *  const route = new Route('/', { state: 'home' })
+ *
+ *  route['/'][STATE] === 'home'
+ * ```
+ */
 export const STATE = Symbol('STATE')
 
-export interface IComponentConfig {
+interface IComponentConfig {
   template: string
+
   viewModel?: { new(ctx: Context & IContext): ViewModelConstructorBuilder }
   synchronous?: true
 }
 
-export interface IComponentConfigAccessor {
-  [k: string]: undefined | Promise<{ default: string | { new(ctx: Context & IContext): ViewModelConstructorBuilder } }>
+/**
+ * View model class
+ *
+ * Accepts router context as first and only argument in constructor
+ *
+ * See @profiscience/knockout-contrib-router for context API
+ */
+export interface IRoutedViewModelConstructor {
+  new(ctx: Context & IContext): ViewModelConstructorBuilder
+}
 
+/**
+ * Intended for use with Webpack (with html-loader) for lazy-loading/code-splitting
+ *
+ * Example:
+ *
+ * ```typescript
+ *  {
+ *    template: import('./template.html'),
+ *    viewModel: import('./viewModel')
+ *  }
+ */
+export interface ILazyComponent {
   template: Promise<{ default: string }>
-  viewModel?: Promise<{ default: { new(ctx: Context & IContext): ViewModelConstructorBuilder } }>
+  viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
 }
 
 export interface IRouteConfig {
+  /**
+   * State name, currently only used for metaprogramming. Accessed with exported STATE symbol.
+   *
+   * Example:
+   *
+   * ```typescript
+   *  import { Route, STATE } from '@profiscience/framework'
+   *
+   *  const route = new Route('/', { state: 'home' })
+   *
+   *  route['/'][STATE] === 'home'
+   * ```
+   */
   state?: string
+  /**
+   * Document title for view, can be async or sync accessor function
+   */
   title?: string | (() => string | Promise<string>)
-  component?(): IComponentConfigAccessor
+  /**
+   * Component accessor, intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
+   *
+   * Example:
+   *
+   * ```typescript
+   *  component: () => ({
+   *    template: import('./template.html'),
+   *    viewModel: import('./viewModel')
+   *  })
+   * ```
+   */
+  component?(): ILazyComponent
+  /**
+   * Nested routes
+   */
   children?: Route[]
+  /**
+   * Additional data to extend context with.
+   *
+   * Can be used for overriding url params, e.g.
+   *
+   * ```typescript
+   *  with: { params: { id: 0 } }
+   * ```
+   */
   with?: { [k: string]: any }
 }
 
+/**
+ * Creates a new route consumable by @profiscience/knockout-contrib-router.
+ *
+ * For convenience, Router is re-exported from @profiscience/knockout-contrib-router.
+ *
+ * Example:
+ *
+ * ```typescript
+ *  import { Route, Router } from '@profiscience/framework'
+ *
+ *  const routes = [
+ *    new Route('/', { state: 'home', component: ... }),
+ *    new Route('/users', {
+ *      state: 'user',
+ *      children: [
+ *        new Route('/', { state: 'list', component: ... }),
+ *        new Route('/:id', { state: 'show', component: ... })
+ *      ]
+ *    })
+ *  ]
+ * ```
+ *
+ * For all available properties, see IRouteConfig
+ */
 export class Route {
   [path: string]: NormalizedRouteConfig[]
 
@@ -96,7 +196,7 @@ const uniqueComponentNames = (function*() {
   }
 })()
 
-function createComponentMiddleware(component: IComponentConfigAccessor) {
+function createComponentMiddleware(component: ILazyComponent) {
   return function*(ctx: Context): IterableIterator<void> {
     /* beforeRender */
     const componentName = uniqueComponentNames.next().value
@@ -132,13 +232,13 @@ function createComponentMiddleware(component: IComponentConfigAccessor) {
   }
 }
 
-async function fetchComponent(accessor: IComponentConfigAccessor): Promise<IComponentConfig> {
+async function fetchComponent(accessor: ILazyComponent): Promise<IComponentConfig> {
   const component: IComponentConfig = {} as IComponentConfig
 
   const promises = Object
     .keys(accessor)
     .map(async (k) => {
-      component[k as 'template' | 'viewModel'] = ((await accessor[k]) as any).default
+      component[k as 'template' | 'viewModel'] = ((await (accessor as any)[k]) as any).default
     })
 
   await Promise.all(promises)

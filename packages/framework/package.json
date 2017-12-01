@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "build:docs": "rm -r docs && typedoc --out docs/api --name @profiscience/framework --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
+    "build:docs": "rm -r docs && typedoc --out docs/api --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
   "repository": {
     "type": "git",

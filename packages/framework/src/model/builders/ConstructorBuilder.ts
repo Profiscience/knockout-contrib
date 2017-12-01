@@ -1,3 +1,6 @@
+/**
+ * See Constructor Builders concept in the README
+ */
 export class ConstructorBuilder {
   /**
    * Dynamically applies mixins and returns a new constructor using the following pattern:

@@ -2,11 +2,15 @@ import * as ko from 'knockout'
 import isFunction from 'lodash/isFunction'
 import { ConstructorBuilder } from '../builders/ConstructorBuilder'
 
+/**
+ * Symbol to access subscriptions on viewModel instance
+ */
 export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
 
 /**
- * Adds .subscribe(obs, fn) and .dispose() methods with subscription tracking
- * to prevent leaks
+ * Adds .subscribe(obs, fn) and .dispose() methods with subscription tracking to prevent leaks
+ *
+ * Used by constructor builders
  *
  * @param ctor BaseModel
  */
@@ -18,6 +22,17 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
     }
 
     /**
+     * Create a subscription that will be disposed with the model
+     *
+     * Provides sugar for passing an accessor function or tree
+     *
+     * Example:
+     *
+     * ```typescript
+     *  this.subscribe(obs, onChange)
+     *  this.subscribe(() => obs(), onChange)
+     *  this.subscribe({ obs }, onChange)
+     * ```
      *
      * @param obs Observable to subscribe to
      * @param fn
@@ -40,6 +55,9 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
       return sub
     }
 
+    /**
+     * Dispose all subscriptions
+     */
     public dispose() {
       (this as any)[SUBSCRIPTIONS].forEach((sub: KnockoutSubscription) => sub.dispose())
     }

@@ -4,6 +4,9 @@ import { ConstructorBuilder } from './ConstructorBuilder'
 import { SubscriptionDisposalMixin } from '../mixins/SubscriptionDisposalMixin'
 import { nonenumerable } from '../../utils'
 
+/**
+ * Symbol for accessing initialization promise
+ */
 export const INITIALIZED = Symbol('INITIALIZED')
 
 /**
