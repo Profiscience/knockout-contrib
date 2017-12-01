@@ -1,16 +1,16 @@
 {
-  "name": "@profiscience/knockout-contrib-bindings-jquery",
+  "name": "@profiscience/knockout-contrib-filters-from-now",
   "private": false,
   "version": "1.0.0-alpha.2",
-  "description": "jQuery Plugin Binding for KnockoutJS",
-  "main": "knockout-contrib-bindings-jquery.js",
+  "description": "Relative Time Filter for KnockoutJS",
+  "main": "knockout-contrib-filters-from-now.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.bindingHandlers.jquery",
+  "global": "ko.filters.fromNow",
   "files": [
     "dist",
-    "knockout-contrib-bindings-jquery.js"
+    "knockout-contrib-filters-from-now.js"
   ],
   "repository": {
     "type": "git",
@@ -19,19 +19,26 @@
   "keywords": [
     "knockout",
     "knockoutjs",
-    "utils",
-    "helpers",
-    "utilities"
+    "filters",
+    "from-now",
+    "relative-time",
+    "relative",
+    "time",
+    "timeago",
+    "ago"
   ],
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": {
     "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.jquery",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/filters.fromNow",
   "peerDependencies": {
     "jquery": "x.x.x",
     "knockout": "^3.4.0",
     "knockout-punches": "^0.5.1"
+  },
+  "dependencies": {
+    "s-ago": "^1.1.0"
   }
 }
