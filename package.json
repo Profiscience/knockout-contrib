@@ -21,6 +21,7 @@
 		"jest": "^21.2.1",
 		"jquery": "^3.2.1",
 		"jsx-dom": "^5.2.0",
+		"knockout": "3.4.0",
 		"knockout-punches": "^0.5.1",
 		"lerna": "^2.4.0",
 		"lodash": "^4.17.4",

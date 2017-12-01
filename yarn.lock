@@ -3189,6 +3189,10 @@ knockout-punches@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
 
+knockout@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.0.tgz#59d7261815a11eb7c1a3f3c7077ca898a44caadb"
+
 knockout@^3.3.0:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.2.tgz#e87958de77ad1e936f7ce645bab8b5d7c456d937"
