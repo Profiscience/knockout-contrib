@@ -1,5 +1,7 @@
 # knockout-contrib
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg)](https://greenkeeper.io/)
+
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
 [![License][wtfpl-shield]][wtfpl]
