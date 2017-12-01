@@ -4,9 +4,12 @@
   "version": "1.0.0-alpha.0",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
+    "precommit": "yarn build:docs && git add docs",
+    "prepush": "yarn lint && yarn build && yarn test",
     "build": "tsc",
+    "lint": "tslint -p tsconfig.json",
     "test": "jest",
-    "build:docs": "rm -r docs && typedoc --out docs/api --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
+    "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -40,6 +43,7 @@
     "@types/jest": "^21.1.8",
     "@types/knockout": "^3.4.47",
     "@types/lodash": "^4.14.86",
+    "husky": "^0.14.3",
     "jest": "^21.2.1",
     "knockout": "^3.4.2",
     "lodash": "^4.17.4",
