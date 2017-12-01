@@ -1,11 +1,11 @@
 # knockout-contrib
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg)](https://greenkeeper.io/)
 
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
 [![License][wtfpl-shield]][wtfpl]
 [![Gitter][gitter-shield]][gitter]
+[![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
 This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS](https://knockoutjs.com)
 
@@ -32,6 +32,9 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 
 [gitter]: https://gitter.im/Profiscience/knockout-contrib
 [gitter-shield]: https://img.shields.io/gitter/room/profiscience/knockout-contrib.svg
+
+[greenkeeper]: https://greenkeeper.io
+[greenkeeper-shield]: https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg
 
 [wtfpl]: ./LICENSE.md
 [wtfpl-shield]: https://img.shields.io/npm/l/@profiscience/knockout-contrib-router.svg
