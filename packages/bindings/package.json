@@ -1,0 +1,34 @@
+{
+  "name": "@profiscience/knockout-contrib-bindings",
+  "version": "1.0.0-alpha.0",
+  "description": "Knockout JS Binding Handlers",
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings",
+  "repository": "Profiscience/knockout-contrib",
+  "global": "ko.contrib.bindings",
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "bindings",
+    "bindingHandlers"
+  ],
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  },
+  "main": "knockout-contrib-bindings.js",
+  "module": "index.js",
+  "js:next": "index.js",
+  "typings": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "knockout-contrib-bindings.js",
+    "jquery.js",
+    "jquery.d.ts"
+  ],
+  "dependencies": {
+    "@profiscience/knockout-contrib-bindings-jquery": "1.0.0-alpha.2"
+  }
+}
