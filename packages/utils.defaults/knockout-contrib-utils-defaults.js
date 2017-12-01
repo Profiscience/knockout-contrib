@@ -27,7 +27,8 @@ function fromJS(obj, mapArraysDeep, _parentIsArray) {
     }
     else if (obj instanceof Object) {
         var obs = {};
-        for (var p in obj) {
+        for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
+            var p = _a[_i];
             obs[p] = fromJS(obj[p], mapArraysDeep);
         }
         return obs;
@@ -37,14 +38,14 @@ function fromJS(obj, mapArraysDeep, _parentIsArray) {
     }
 }
 
-function defaults(dest, defaults, mapArraysDeep) {
+function defaults(dest, defaultValues, mapArraysDeep) {
     if (mapArraysDeep === void 0) { mapArraysDeep = false; }
-    for (var prop in defaults) {
+    for (var prop in defaultValues) {
         if (isUndefined(dest[prop])) {
-            dest[prop] = fromJS(defaults[prop], defaults[prop] instanceof Array && mapArraysDeep);
+            dest[prop] = fromJS(defaultValues[prop], defaultValues[prop] instanceof Array && mapArraysDeep);
         }
         else if (ko.isObservable(dest[prop]) && isUndefined(dest[prop]())) {
-            dest[prop](defaults[prop]);
+            dest[prop](defaultValues[prop]);
         }
     }
     return dest;

@@ -1,6 +1,6 @@
 
 export type Primitive = string | boolean | number | null | undefined
-export type MaybeArray<T> = T | Array<T>
+export type MaybeArray<T> = T | T[]
 
 export function isBool(x: any) {
   return typeof x === 'boolean'

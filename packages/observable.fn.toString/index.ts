@@ -1,6 +1,7 @@
 import * as ko from 'knockout'
 
 declare global {
+  // tslint:disable-next-line interface-name
   interface KnockoutObservableFunctions<T> {
     toString(): string
   }

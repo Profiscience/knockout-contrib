@@ -28,11 +28,11 @@ const testArrays = (mapArraysArg: undefined | boolean | null, shouldMapArrays: b
   defaults(actual, { foo: ['foo'] }, mapArraysArg as boolean)
 
   expect(actual.foo).toBeObservable()
-  
+
   shouldMapArrays
   ? expect(actual.foo()[0]).toBeObservable()
   : expect(actual.foo()[0]).not.toBeObservable()
-  
+
   expect(ko.toJS(actual.foo()[0])).toBe('foo')
 }
 

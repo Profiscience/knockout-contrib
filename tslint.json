@@ -1,17 +1,21 @@
 {
-  "extends": [
-    "tslint:recommended"
-  ],
+  "extends": "tslint:recommended",
   "rules": {
     "array-type": [true, "array"],
     "curly": true,
     "interface-over-type-literal": false,
     "quotemark": [true, "single"],
-    "member-ordering": [true, { "order": "instance-sandwich" }],    
+    "member-ordering": [true, "instance-sandwich"],
+    "no-floating-promises": true,
     "object-literal-sort-keys": false,
     "ordered-imports": [false],
     "semicolon": [true, "never"],
     "trailing-comma": [true, "never"],
-    "variable-name": [true, "allow-leading-underscore"]
+    "variable-name": [true, "allow-leading-underscore", "allow-trailing-underscore"]
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/*.d.ts"
+    ]
   }
 }

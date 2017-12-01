@@ -27,7 +27,8 @@ function fromJS(obj, mapArraysDeep, _parentIsArray) {
     }
     else if (obj instanceof Object) {
         var obs = {};
-        for (var p in obj) {
+        for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
+            var p = _a[_i];
             obs[p] = fromJS(obj[p], mapArraysDeep);
         }
         return obs;

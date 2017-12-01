@@ -33,7 +33,6 @@ test('creates a deep observable tree', () => {
   expect(actual.existingObject.newObject.foo).toBeObservable()
   expect(actual.newProperty).toBeObservable()
 
-
   expect(ko.toJS(actual)).toEqual({
     existingUntouched: 'old',
     existingNonObservable: 'new',
