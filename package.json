@@ -1,8 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"precommit": "yarn lint",
-		"prepush": "yarn build",
+		"prepush": "yarn lint",
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest"
