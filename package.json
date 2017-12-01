@@ -1,6 +1,8 @@
 {
 	"private": true,
 	"scripts": {
+		"precommit": "yarn lint",
+		"prepush": "yarn build",
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest"
@@ -21,6 +23,7 @@
 		"eslint": "^4.9.0",
 		"eslint-config-profiscience": "^2.0.4",
 		"execa": "^0.8.0",
+		"husky": "^0.14.3",
 		"jest": "^21.2.1",
 		"jquery": "^3.2.1",
 		"jsx-dom": "^5.2.0",
