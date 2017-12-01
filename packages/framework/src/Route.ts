@@ -48,6 +48,7 @@ export interface IRoutedViewModelConstructor {
  *    template: import('./template.html'),
  *    viewModel: import('./viewModel')
  *  }
+ * ```
  */
 export interface ILazyComponent {
   template: Promise<{ default: string }>

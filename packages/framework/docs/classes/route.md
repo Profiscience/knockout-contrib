@@ -67,7 +67,7 @@ For all available properties, see IRouteConfig
 ### ⊕ **new Route**(path: *`string`*, r: *[IRouteConfig](../interfaces/irouteconfig.md)*): [Route](route.md)
 
 
-*Defined in Route.ts:130*
+*Defined in Route.ts:131*
 
 
 

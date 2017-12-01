@@ -9,7 +9,10 @@ Intended for use with Webpack (with html-loader) for lazy-loading/code-splitting
 
 Example:
 
-```typescript { template: import('./template.html'), viewModel: import('./viewModel') }
+     {
+       template: import('./template.html'),
+       viewModel: import('./viewModel')
+     }
 
 
 ## Properties
@@ -19,7 +22,7 @@ Example:
 
 **●  template**:  *`Promise`.<`object`>* 
 
-*Defined in Route.ts:53*
+*Defined in Route.ts:54*
 
 
 
@@ -33,7 +36,7 @@ ___
 
 **●  viewModel**:  *`Promise`.<`object`>* 
 
-*Defined in Route.ts:54*
+*Defined in Route.ts:55*
 
 
 

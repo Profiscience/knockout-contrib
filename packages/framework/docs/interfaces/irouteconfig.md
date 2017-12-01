@@ -12,7 +12,7 @@
 
 **●  children**:  *[Route](../classes/route.md)[]* 
 
-*Defined in Route.ts:92*
+*Defined in Route.ts:93*
 
 
 
@@ -29,7 +29,7 @@ ___
 
 **●  state**:  *`undefined`⎮`string`* 
 
-*Defined in Route.ts:71*
+*Defined in Route.ts:72*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 **●  title**:  *`string`⎮`function`* 
 
-*Defined in Route.ts:75*
+*Defined in Route.ts:76*
 
 
 
@@ -71,7 +71,7 @@ ___
 
 **●  with**:  *`undefined`⎮`object`* 
 
-*Defined in Route.ts:102*
+*Defined in Route.ts:103*
 
 
 
@@ -96,7 +96,7 @@ ___
 
 
 
-*Defined in Route.ts:88*
+*Defined in Route.ts:89*
 
 
 

@@ -15,7 +15,7 @@ export const INITIALIZED = Symbol('INITIALIZED')
  *
  * Example usage:
  *
- * ```
+ * ```typescript
  * import { observable } from 'knockout-decorators'
  *
  * type MyDataModelParams = {}

@@ -5,7 +5,7 @@ export class ConstructorBuilder {
   /**
    * Dynamically applies mixins and returns a new constructor using the following pattern:
    *
-   * ```
+   * ```typescript
    * class MyModel extends ConstructorBuilder.Mixin(myMixin) {}
    * ```
    *
