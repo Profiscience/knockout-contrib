@@ -112,7 +112,7 @@ function generateMetaFiles(metapackage, packages) {
       }
       break
     case 'global':
-      index += `import \'./${packageName}\'\n`
+      index += `import './${packageName}'\n`
       distFiles.push(`${packageName}.js`, `${packageName}.d.ts`)
       files.push({
         dir: metapackage.dir,

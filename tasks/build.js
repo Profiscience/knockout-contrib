@@ -25,7 +25,7 @@ exports[`build:${LERNA_PACKAGE_NAME}`] = function* (task) {
   yield task.serial(tasks)
 }
 
-exports[`transpile:${LERNA_PACKAGE_NAME}`] = function* (task) {
+exports[`transpile:${LERNA_PACKAGE_NAME}`] = function* () {
   yield execa('../../node_modules/.bin/tsc', { stdio: 'inherit' })
 }
 
