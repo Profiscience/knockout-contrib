@@ -14,15 +14,6 @@ let cache
 
 module.exports = (config) => {
   config.set({
-    plugins: [
-      require('karma-chrome-launcher'),
-      require('karma-firefox-launcher'),
-      require('karma-mocha-reporter'),
-      require('karma-remap-istanbul'),
-      require('karma-rollup-preprocessor'),
-      require('karma-tap')
-    ],
-
     basePath: __dirname,
     
     frameworks: ['tap'],
