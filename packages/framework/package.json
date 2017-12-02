@@ -3,6 +3,8 @@
   "private": false,
   "version": "1.0.0-alpha.0",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "precommit": "yarn build:docs && git add docs",
     "prepush": "yarn lint && yarn build && yarn test",
