@@ -3,8 +3,6 @@
   "private": false,
   "version": "1.0.0-alpha.1",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "scripts": {
     "precommit": "yarn build:docs && git add docs",
     "prepush": "yarn lint && yarn build && yarn test",
@@ -13,6 +11,11 @@
     "test": "jest",
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/framework.git"
