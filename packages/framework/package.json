@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/framework",
   "private": false,
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
     "precommit": "yarn build:docs && git add docs",
