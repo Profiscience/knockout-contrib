@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Knockout JS Binding Handlers",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -29,6 +29,6 @@
     "jquery.d.ts"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-bindings-jquery": "1.0.0-alpha.2"
+    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.3"
   }
 }
