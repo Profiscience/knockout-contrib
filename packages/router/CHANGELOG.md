@@ -12,6 +12,7 @@
 ### Added
 - Began work on first-class TypeScript support (`noImplicitAny`, introduce `IContext`)
 - `activePath` binding for applying a class to an element when a path is active
+- `ctx.element` for accessing the routed view container
 
 ### Fixed
 - Support transpiled (async) generator middleware
