@@ -16,6 +16,7 @@ import './middleware'
 import './queue'
 import './redirect'
 import './before-navigate-callbacks'
+import './element'
 import './plugins'
 
 const tests = [
@@ -32,6 +33,7 @@ const tests = [
   'queue',
   'redirect',
   'before-navigate-callbacks',
+  'element',
   'plugins'
 ]
 
