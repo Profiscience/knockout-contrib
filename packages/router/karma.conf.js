@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-'use strict'
-
-const path = require('path')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const nodeBuiltins = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
@@ -15,7 +12,7 @@ let cache
 module.exports = (config) => {
   config.set({
     basePath: __dirname,
-    
+
     frameworks: ['tap'],
 
     files: [
@@ -37,6 +34,7 @@ module.exports = (config) => {
       },
     },
 
+    // to debug, comment out singleRun, and uncomment autoWatch
     singleRun: true,
     // autoWatch: false,
 
