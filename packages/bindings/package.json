@@ -29,6 +29,6 @@
     "jquery.d.ts"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.3"
+    "@profiscience/knockout-contrib-bindings-jquery": "1.0.0-alpha.3"
   }
 }
