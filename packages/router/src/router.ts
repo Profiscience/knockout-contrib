@@ -23,16 +23,16 @@ export type SimpleMiddleware = (ctx: Context & IContext, done?: () => any) =>
   | Promise<void>
   | void
 
-export type LifecycleObjectMiddleware = (ctx: Context & IContext, done?: () => any) => {
+export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
   beforeRender?: Callback<void>
   afterRender ?: Callback<void>
   beforeDispose?: Callback<void>
   afterDispose?: Callback<void>
 }
 
-export type LifecycleGeneratorMiddleware = (ctx: Context & IContext, done?: () => any) =>
+export type LifecycleGeneratorMiddleware = (ctx: Context & IContext) =>
   | IterableIterator<void | Promise<void>>
-  | AsyncIterableIterator<void | Promise<void>>
+  | AsyncIterableIterator<void>
 
 export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
 

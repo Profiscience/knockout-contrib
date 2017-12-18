@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.1 (ko-component-router => @profiscience/knockout-contrib-router)
+## Unreleased (ko-component-router => @profiscience/knockout-contrib-router)
 
 ### Changed
 - Convert to monorepo
@@ -12,6 +12,9 @@
 ### Added
 - Began work on first-class TypeScript support (`noImplicitAny`, introduce `IContext`)
 - `activePath` binding for applying a class to an element when a path is active
+
+### Fixed
+- Support transpiled (async) generator middleware
 
 ### Internal
 - Migrated build system from Fly to Taskr

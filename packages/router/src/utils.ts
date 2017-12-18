@@ -71,10 +71,6 @@ export function isActivePath({ router, path }: { router: Router, path: string })
   return true
 }
 
-export function isGenerator(x: any) {
-  return x.constructor.name === 'GeneratorFunction'
-}
-
 export function isThenable(x: any) {
   return !isUndefined(x) && isFunction(x.then)
 }
@@ -97,20 +93,21 @@ export function promisify(_fn: (...args: any[]) => void = noop): (...args: any[]
 }
 
 export function castLifecycleObjectMiddlewareToGenerator(fn: Middleware): LifecycleGeneratorMiddleware {
-  return isGenerator(fn)
-    ? fn as LifecycleGeneratorMiddleware
-    : async function *(ctx: Context) {
-      const ret = await promisify(fn)(ctx)
-
-      if (isPlainObject(ret)) {
-        yield await promisify(ret.beforeRender)()
-        yield await promisify(ret.afterRender)()
-        yield await promisify(ret.beforeDispose)()
-        yield await promisify(ret.afterDispose)()
-      } else {
-        yield ret
+  return async function*(ctx: Context) {
+    const ret = await promisify(fn)(ctx)
+    if (ret && isFunction(ret.next)) {
+      for await (const v of ret) {
+        yield await v
       }
+    } else if (isPlainObject(ret)) {
+      yield await promisify(ret.beforeRender)()
+      yield await promisify(ret.afterRender)()
+      yield await promisify(ret.beforeDispose)()
+      yield await promisify(ret.afterDispose)()
+    } else {
+      yield ret
     }
+  }
 }
 
 export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
