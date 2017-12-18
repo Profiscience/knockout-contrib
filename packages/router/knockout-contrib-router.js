@@ -4677,6 +4677,13 @@ var Context = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Context.prototype, "element", {
+        get: function () {
+            return this._redirect ? undefined : document.getElementsByClassName('router-view')[this.$parents.length];
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Context.prototype, "$root", {
         get: function () {
             var ctx = this;
