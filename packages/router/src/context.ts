@@ -71,6 +71,10 @@ export class Context implements IContext {
     return this.base.replace(new RegExp(this.$root.base, 'i'), '') + this.pathname
   }
 
+  public get element() {
+    return this._redirect ? undefined : document.getElementsByClassName('router-view')[this.$parents.length]
+  }
+
   public get $root(): Context & IContext {
     let ctx: Context & IContext = this
     while (ctx) {
