@@ -121,6 +121,14 @@ function __asyncGenerator(thisArg, _arguments, generator) {
     function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
 }
 
+
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator];
+    return m ? m.call(o) : typeof __values === "function" ? __values(o) : o[Symbol.iterator]();
+}
+
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 
@@ -4492,9 +4500,6 @@ function isActivePath(_a) {
     }
     return true;
 }
-function isGenerator(x) {
-    return x.constructor.name === 'GeneratorFunction';
-}
 function isThenable(x) {
     return !isUndefined_1(x) && isFunction_1(x.then);
 }
@@ -4534,43 +4539,78 @@ function promisify(_fn) {
     };
 }
 function castLifecycleObjectMiddlewareToGenerator(fn) {
-    return isGenerator(fn)
-        ? fn
-        : function (ctx) {
-            return __asyncGenerator(this, arguments, function () {
-                var ret;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, __await(promisify(fn)(ctx))];
-                        case 1:
-                            ret = _a.sent();
-                            if (!isPlainObject_1(ret)) return [3 /*break*/, 10];
-                            return [4 /*yield*/, __await(promisify(ret.beforeRender)())];
-                        case 2: return [4 /*yield*/, _a.sent()];
-                        case 3:
-                            _a.sent();
-                            return [4 /*yield*/, __await(promisify(ret.afterRender)())];
-                        case 4: return [4 /*yield*/, _a.sent()];
-                        case 5:
-                            _a.sent();
-                            return [4 /*yield*/, __await(promisify(ret.beforeDispose)())];
-                        case 6: return [4 /*yield*/, _a.sent()];
-                        case 7:
-                            _a.sent();
-                            return [4 /*yield*/, __await(promisify(ret.afterDispose)())];
-                        case 8: return [4 /*yield*/, _a.sent()];
-                        case 9:
-                            _a.sent();
-                            return [3 /*break*/, 12];
-                        case 10: return [4 /*yield*/, ret];
-                        case 11:
-                            _a.sent();
-                            _a.label = 12;
-                        case 12: return [2 /*return*/];
-                    }
-                });
+    return function (ctx) {
+        return __asyncGenerator(this, arguments, function () {
+            var ret, ret_1, ret_1_1, v, e_2_1, e_2, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, __await(promisify(fn)(ctx))];
+                    case 1:
+                        ret = _b.sent();
+                        if (!(ret && isFunction_1(ret.next))) return [3 /*break*/, 17];
+                        _b.label = 2;
+                    case 2:
+                        _b.trys.push([2, 10, 11, 16]);
+                        ret_1 = __asyncValues(ret);
+                        _b.label = 3;
+                    case 3: return [4 /*yield*/, __await(ret_1.next())];
+                    case 4:
+                        if (!(ret_1_1 = _b.sent(), !ret_1_1.done)) return [3 /*break*/, 9];
+                        return [4 /*yield*/, __await(ret_1_1.value)];
+                    case 5:
+                        v = _b.sent();
+                        return [4 /*yield*/, __await(v)];
+                    case 6: return [4 /*yield*/, _b.sent()];
+                    case 7:
+                        _b.sent();
+                        _b.label = 8;
+                    case 8: return [3 /*break*/, 3];
+                    case 9: return [3 /*break*/, 16];
+                    case 10:
+                        e_2_1 = _b.sent();
+                        e_2 = { error: e_2_1 };
+                        return [3 /*break*/, 16];
+                    case 11:
+                        _b.trys.push([11, , 14, 15]);
+                        if (!(ret_1_1 && !ret_1_1.done && (_a = ret_1.return))) return [3 /*break*/, 13];
+                        return [4 /*yield*/, __await(_a.call(ret_1))];
+                    case 12:
+                        _b.sent();
+                        _b.label = 13;
+                    case 13: return [3 /*break*/, 15];
+                    case 14:
+                        if (e_2) throw e_2.error;
+                        return [7 /*endfinally*/];
+                    case 15: return [7 /*endfinally*/];
+                    case 16: return [3 /*break*/, 28];
+                    case 17:
+                        if (!isPlainObject_1(ret)) return [3 /*break*/, 26];
+                        return [4 /*yield*/, __await(promisify(ret.beforeRender)())];
+                    case 18: return [4 /*yield*/, _b.sent()];
+                    case 19:
+                        _b.sent();
+                        return [4 /*yield*/, __await(promisify(ret.afterRender)())];
+                    case 20: return [4 /*yield*/, _b.sent()];
+                    case 21:
+                        _b.sent();
+                        return [4 /*yield*/, __await(promisify(ret.beforeDispose)())];
+                    case 22: return [4 /*yield*/, _b.sent()];
+                    case 23:
+                        _b.sent();
+                        return [4 /*yield*/, __await(promisify(ret.afterDispose)())];
+                    case 24: return [4 /*yield*/, _b.sent()];
+                    case 25:
+                        _b.sent();
+                        return [3 /*break*/, 28];
+                    case 26: return [4 /*yield*/, ret];
+                    case 27:
+                        _b.sent();
+                        _b.label = 28;
+                    case 28: return [2 /*return*/];
+                }
             });
-        };
+        });
+    };
 }
 function getRouterForBindingContext(bindingCtx) {
     while (!isUndefined_1(bindingCtx)) {
