@@ -12,7 +12,8 @@ module.exports = {
     'loading-animation': path.resolve(__dirname, './loading-animation/index.js'),
     'mvc': path.resolve(__dirname, './mvc/index.js'),
     'path-binding': path.resolve(__dirname, './path-binding/index.js'),
-    'simple-auth': path.resolve(__dirname, './simple-auth/index.js')
+    'simple-auth': path.resolve(__dirname, './simple-auth/index.js'),
+    'transition-animation': path.resolve(__dirname, './transition-animation/index.ts')
   },
   output: {
     publicPath: '/dist/',

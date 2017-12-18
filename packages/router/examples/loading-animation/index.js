@@ -55,6 +55,6 @@ ko.components.register('bar', bar)
 // are parsed and the app initializes
 ko.applyBindings({ loading })
 
-function randomTimeout() {
-  return new Promise((resolve) => setTimeout(resolve, random(1000)))
+async function randomTimeout() {
+  await new Promise((resolve) => setTimeout(resolve, random(1000)))
 }

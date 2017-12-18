@@ -11,6 +11,11 @@ Router that the current page belongs to
 #### ctx.route
 Current route
 
+### ctx.element
+DOM element for the `router-view` container for this route
+
+`undefined` before render and in redirections
+
 #### ctx.base
 Parent pathname and app base, if applicable
 
