@@ -4,7 +4,8 @@
 		"prepush": "yarn lint",
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"lint": "tslint -p tsconfig.json",
-		"test": "cd packages/router && yarn test && cd ../.. && jest"
+		"test": "cd packages/router && yarn test && cd ../.. && jest",
+		"generate": "plop"
 	},
 	"workspaces": [
 		"packages/*"
@@ -30,6 +31,7 @@
 		"knockout-punches": "^0.5.1",
 		"lerna": "^2.4.0",
 		"lodash": "^4.17.4",
+		"plop": "^1.9.0",
 		"rollup": "^0.52.0",
 		"rollup-plugin-commonjs": "^8.2.5",
 		"rollup-plugin-node-resolve": "^3.0.0",
