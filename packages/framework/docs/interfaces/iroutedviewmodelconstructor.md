@@ -19,7 +19,7 @@ See @profiscience/knockout-contrib-router for context API
 ### ⊕ **new IRoutedViewModelConstructor**(ctx: *`Context``IContext`*): [ViewModelConstructorBuilder](../classes/viewmodelconstructorbuilder.md)
 
 
-*Defined in Route.ts:37*
+*Defined in route/component.ts:31*
 
 
 

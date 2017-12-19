@@ -64,10 +64,10 @@ For all available properties, see IRouteConfig
 <a id="constructor"></a>
 
 
-### ⊕ **new Route**(path: *`string`*, r: *[IRouteConfig](../interfaces/irouteconfig.md)*): [Route](route.md)
+### ⊕ **new Route**(path: *`string`*, config: *[IRouteConfig](../interfaces/irouteconfig.md)*): [Route](route.md)
 
 
-*Defined in Route.ts:131*
+*Defined in route/index.ts:96*
 
 
 
@@ -76,7 +76,7 @@ For all available properties, see IRouteConfig
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | path | `string`   |  - |
-| r | [IRouteConfig](../interfaces/irouteconfig.md)   |  - |
+| config | [IRouteConfig](../interfaces/irouteconfig.md)   |  - |
 
 
 

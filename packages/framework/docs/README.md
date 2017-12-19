@@ -29,6 +29,8 @@
 ### Functions
 
 * [SubscriptionDisposalMixin](#subscriptiondisposalmixin)
+* [createComponentMiddleware](#createcomponentmiddleware)
+* [createTitleMiddleware](#createtitlemiddleware)
 * [nonenumerable](#nonenumerable)
 
 
@@ -58,7 +60,7 @@ ___
 
 **●  STATE**:  *`symbol`*  =  Symbol('STATE')
 
-*Defined in Route.ts:21*
+*Defined in route/index.ts:21*
 
 
 
@@ -129,6 +131,66 @@ Used by constructor builders
 
 
 **Returns:** `Subscribable``T`
+
+
+
+
+
+___
+
+<a id="createcomponentmiddleware"></a>
+
+###  createComponentMiddleware
+
+► **createComponentMiddleware**(getComponent: *`function`*): `(Anonymous function)`
+
+
+
+*Defined in route/component.ts:52*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| getComponent | `function`   |  - |
+
+
+
+
+
+**Returns:** `(Anonymous function)`
+
+
+
+
+
+___
+
+<a id="createtitlemiddleware"></a>
+
+###  createTitleMiddleware
+
+► **createTitleMiddleware**(title: *`string`⎮`function`*): `(Anonymous function)`
+
+
+
+*Defined in route/title.ts:3*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| title | `string`⎮`function`   |  - |
+
+
+
+
+
+**Returns:** `(Anonymous function)`
 
 
 
