@@ -53,7 +53,7 @@
 			"ts",
 			"tsx"
 		],
-		"testRegex": "(__tests__/[^_].*|test)\\.tsx?$",
+		"testRegex": "packages/[^/]+/(__tests__/[^_].*|test)\\.tsx?$",
 		"testURL": "http://localhost",
 		"transform": {
 			"^.+\\.[tj]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
