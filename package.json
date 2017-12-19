@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"prepush": "yarn lint && yarn build",
+		"prepush": "yarn lint",
 		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest"
@@ -36,7 +36,7 @@
 		"taskr": "^1.1.0",
 		"taskr-rename": "^0.0.1",
 		"taskr-rollup": "^0.0.3",
-		"ts-jest": "^21.1.4",
+		"ts-jest": "^22.0.0",
 		"tslint": "^5.8.0",
 		"typescript": "^2.5.3"
 	},
