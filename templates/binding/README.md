@@ -28,7 +28,7 @@
 ## Usage
 
 ```typescript
-import '@profiscience/knockout-contrib-bindings-{{kebabCase name}}'
+import '@profiscience/knockout-contrib-bindings/{{camelCase name}}'
 ```
 ```html
 <div data-bind="{{camelCase name}}: opts"></div>
