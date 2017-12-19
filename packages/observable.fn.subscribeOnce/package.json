@@ -1,6 +1,5 @@
 {
   "name": "@profiscience/knockout-contrib-observable-fn-subscribe-once",
-  "private": false,
   "version": "1.0.0-alpha.1",
   "description": "KnockoutJS Observable.fn.subscribeOnce()",
   "author": "Casey Webb <notcaseywebb@gmail.com>",

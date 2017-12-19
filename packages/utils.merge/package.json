@@ -1,6 +1,5 @@
 {
   "name": "@profiscience/knockout-contrib-utils-merge",
-  "private": false,
   "version": "1.0.0-alpha.1",
   "description": "Handy Utilities for Knockout JS",
   "main": "knockout-contrib-utils-merge.js",
