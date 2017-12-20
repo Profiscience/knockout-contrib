@@ -9,8 +9,9 @@
   "repository": "Profiscience/knockout-contrib",
   "main": "knockout-contrib-observable-fn-to-string.js",
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fn.toString",
+  "global": "ko.contrib.fn.toString",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-to-string.js"

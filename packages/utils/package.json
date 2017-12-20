@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-utils",
   "version": "1.0.0-alpha.6",
   "description": "Handy Utilities for Knockout JS",
-  "global": "ko.utils",
+  "global": "ko.contrib.utils",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"

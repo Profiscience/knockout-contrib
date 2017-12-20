@@ -9,8 +9,9 @@
   "repository": "Profiscience/knockout-contrib",
   "main": "knockout-contrib-observable-fn-increment.js",
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fn.increment",
+  "global": "ko.contrib.fn.increment",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-increment.js"

@@ -4,8 +4,9 @@
   "description": "Querystring Abstraction for KnockoutJS",
   "main": "knockout-contrib-querystring.js",
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.query",
+  "global": "ko.contrib.Query",
   "files": [
     "dist",
     "knockout-contrib-querystring.js"

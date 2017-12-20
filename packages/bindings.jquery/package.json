@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.bindingHandlers.jquery",
+  "global": "ko.contrib.bindings.jquery",
   "files": [
     "dist",
     "knockout-contrib-bindings-jquery.js"

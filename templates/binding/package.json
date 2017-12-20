@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.bindingHandlers.{{camelCase name}}",
+  "global": "ko.contrib.bindings.{{camelCase name}}",
   "files": [
     "dist",
     "knockout-contrib-bindings-{{kebabCase name}}.js"

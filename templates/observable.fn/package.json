@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fn.{{camelCase name}}",
+  "global": "ko.contrib.fn.{{camelCase name}}",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-{{kebabCase name}}.js"

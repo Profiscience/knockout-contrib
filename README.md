@@ -18,6 +18,8 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 ```
 
 # Packages
+- [bindings](./packages/bindings)
+- [framework](./packages/framework)
 - [jest-matchers](./packages/jest-matchers)
 - [observable.fn](./packages/observable.fn)
 - [querystring](./packages/querystring)

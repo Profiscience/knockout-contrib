@@ -9,8 +9,9 @@
   "repository": "Profiscience/knockout-contrib",
   "main": "knockout-contrib-observable-fn-subscribe-once.js",
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.observable.fn.subscribeOnce",
+  "global": "ko.contrib.fn.subscribeOnce",
   "files": [
     "dist",
     "knockout-contrib-observable-fn-subscribe-once.js"

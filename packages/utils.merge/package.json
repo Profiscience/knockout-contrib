@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.utils.merge",
+  "global": "ko.contrib.utils.merge",
   "files": [
     "dist",
     "knockout-contrib-utils-merge.js"
