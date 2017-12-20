@@ -13,8 +13,4 @@ coverage/
 dist/
 node_modules/
 
-packages/observable.fn/*.ts
-packages/observable.fn/*.js
-
-packages/utils/*.ts
-packages/utils/*.js
+packages/*/knockout-contrib-*
