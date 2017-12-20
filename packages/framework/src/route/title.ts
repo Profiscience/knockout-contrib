@@ -1,6 +1,8 @@
 import { Context } from '@profiscience/knockout-contrib-router'
 
-export function createTitleMiddleware(title: string | (() => string | Promise<string>)) {
+const TITLE_SET = Symbol('TITLE_SET')
+
+export function createTitleMiddleware(title: string | (() => string)) {
   return function*(ctx: Context): IterableIterator<void> {
     /* beforeRender */
     const prevTitle = document.title
@@ -9,14 +11,7 @@ export function createTitleMiddleware(title: string | (() => string | Promise<st
     /* afterRender */
 
     if (typeof title === 'function') {
-      const v = title()
-      if (typeof ((v as Promise<string>).then) === 'function') {
-        ctx.queue((v as Promise<string>).then((resolvedV: string) => {
-          document.title = resolvedV
-        }))
-      } else {
-        document.title = v as string
-      }
+      document.title = title()
     } else {
       document.title = title as string
     }

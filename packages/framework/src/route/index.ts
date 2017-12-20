@@ -38,7 +38,7 @@ export interface IRouteConfig {
   /**
    * Document title for view, can be async or sync accessor function
    */
-  title?: string | (() => string | Promise<string>)
+  title?: string | (() => string)
   /**
    * Component accessor, intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
    *

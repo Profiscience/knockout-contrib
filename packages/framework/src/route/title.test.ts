@@ -32,27 +32,4 @@ describe('title', () => {
     lifecycle.next()
     expect(document.title).toBe('start')
   })
-
-  test('title works with asynchronous getter function', async () => {
-    document.title = 'start'
-
-    const middleware = createTitleMiddleware(async () => 'foo')
-    let ctx: Context
-    let lifecycle: any
-
-    const queue = new Promise((resolve) => {
-      ctx = {
-        queue: (p: Promise<void>) => resolve()
-      } as Context
-      lifecycle = middleware(ctx)
-    })
-
-    lifecycle.next()
-    lifecycle.next()
-    await queue
-    expect(document.title).toBe('foo')
-    lifecycle.next()
-    lifecycle.next()
-    expect(document.title).toBe('start')
-  })
 })
