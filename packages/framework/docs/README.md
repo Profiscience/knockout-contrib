@@ -146,7 +146,7 @@ ___
 
 
 
-*Defined in route/component.ts:52*
+*Defined in route/component.ts:59*
 
 
 
@@ -172,11 +172,11 @@ ___
 
 ###  createTitleMiddleware
 
-► **createTitleMiddleware**(title: *`string`⎮`function`*): `(Anonymous function)`
+► **createTitleMiddleware**(title: *`string`⎮`function`*): `Middleware`
 
 
 
-*Defined in route/title.ts:5*
+*Defined in route/title.ts:3*
 
 
 
@@ -190,7 +190,7 @@ ___
 
 
 
-**Returns:** `(Anonymous function)`
+**Returns:** `Middleware`
 
 
 

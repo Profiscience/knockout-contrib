@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import { Context, NormalizedRouteConfig } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, NormalizedRouteConfig } from '@profiscience/knockout-contrib-router'
 import { createComponentMiddleware, ILazyComponent } from './component'
 import { createTitleMiddleware } from './title'
 
@@ -38,7 +38,7 @@ export interface IRouteConfig {
   /**
    * Document title for view, can be async or sync accessor function
    */
-  title?: string | (() => string)
+  title?: string | ((ctx: Context & IContext) => string)
   /**
    * Component accessor, intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
    *

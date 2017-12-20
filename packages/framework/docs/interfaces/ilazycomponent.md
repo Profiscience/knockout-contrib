@@ -22,7 +22,7 @@ Example:
 
 **●  template**:  *`Promise`.<`object`>* 
 
-*Defined in route/component.ts:48*
+*Defined in route/component.ts:55*
 
 
 
@@ -36,7 +36,7 @@ ___
 
 **●  viewModel**:  *`Promise`.<`object`>* 
 
-*Defined in route/component.ts:49*
+*Defined in route/component.ts:56*
 
 
 

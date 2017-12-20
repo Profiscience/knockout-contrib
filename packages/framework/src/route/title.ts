@@ -1,9 +1,7 @@
-import { Context } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, Middleware } from '@profiscience/knockout-contrib-router'
 
-const TITLE_SET = Symbol('TITLE_SET')
-
-export function createTitleMiddleware(title: string | (() => string)) {
-  return function*(ctx: Context): IterableIterator<void> {
+export function createTitleMiddleware(title: string | ((ctx: Context & IContext) => string)): Middleware {
+  return function*(ctx: Context & IContext): IterableIterator<void> {
     /* beforeRender */
     const prevTitle = document.title
 
@@ -11,7 +9,7 @@ export function createTitleMiddleware(title: string | (() => string)) {
     /* afterRender */
 
     if (typeof title === 'function') {
-      document.title = title()
+      document.title = title(ctx)
     } else {
       document.title = title as string
     }
