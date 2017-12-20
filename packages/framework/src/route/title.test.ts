@@ -8,7 +8,7 @@ describe('title', () => {
 
     const ctx = {} as Context
     const middleware = createTitleMiddleware('foo')
-    const lifecycle = middleware(ctx)
+    const lifecycle = middleware(ctx) as IterableIterator<void>
 
     lifecycle.next()
     lifecycle.next()
@@ -23,7 +23,7 @@ describe('title', () => {
 
     const ctx = {} as Context
     const middleware = createTitleMiddleware(() => 'foo')
-    const lifecycle = middleware(ctx)
+    const lifecycle = middleware(ctx) as IterableIterator<void>
 
     lifecycle.next()
     lifecycle.next()
