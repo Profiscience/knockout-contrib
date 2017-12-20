@@ -19,7 +19,7 @@
   },
   "main": "knockout-contrib-bindings.js",
   "module": "index.js",
-  "js:next": "index.js",
+  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "files": [
     "index.js",

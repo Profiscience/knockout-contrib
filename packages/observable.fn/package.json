@@ -32,7 +32,7 @@
   ],
   "main": "knockout-contrib-observable-fn.js",
   "module": "index.js",
-  "js:next": "index.js",
+  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-observable-fn-increment": "1.0.0-alpha.1",

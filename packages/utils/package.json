@@ -30,7 +30,7 @@
   ],
   "main": "knockout-contrib-utils.js",
   "module": "index.js",
-  "js:next": "index.js",
+  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-defaults": "1.0.0-alpha.1",
