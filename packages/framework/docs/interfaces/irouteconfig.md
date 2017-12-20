@@ -12,7 +12,7 @@
 
 **●  children**:  *[Route](../classes/route.md)[]* 
 
-*Defined in route/index.ts:58*
+*Defined in route/index.ts:81*
 
 
 
@@ -71,7 +71,7 @@ ___
 
 **●  with**:  *`undefined`⎮`object`* 
 
-*Defined in route/index.ts:68*
+*Defined in route/index.ts:91*
 
 
 
@@ -113,6 +113,46 @@ Example:
 
 
 **Returns:** [ILazyComponent](ilazycomponent.md)
+
+
+
+
+
+___
+
+<a id="components"></a>
+
+### «Optional» components
+
+► **components**(): `object`
+
+
+
+*Defined in route/index.ts:75*
+
+
+
+Route-specific components.
+
+Will only be registered for the duration of the route.
+
+Intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
+
+Example:
+
+     // in route config
+     components: () => ({
+       'my-component-name': import('./my-component')
+     })
+
+     // my-component/index.ts
+     export { viewModel } from './viewModel'
+     export { template } from './template.html'
+
+
+
+
+**Returns:** `object`
 
 
 
