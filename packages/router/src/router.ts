@@ -78,7 +78,7 @@ export class Router {
 
   constructor(
     url: string,
-    $parentCtx?: Context,
+    $parentCtx?: Context & IContext,
     _with: { [k: string]: any } = {}
   ) {
     this.component = ko.observable(null)
