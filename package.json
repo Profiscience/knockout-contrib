@@ -47,6 +47,10 @@
 	},
 	"jest": {
 		"collectCoverage": true,
+		"coveragePathIgnorePatterns": [
+			"/node_modules/",
+			"knockout-contrib-.+\\.js"
+		],
 		"coverageReporters": [
 			"lcov",
 			"html"
