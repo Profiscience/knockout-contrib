@@ -2,13 +2,11 @@
   "name": "@profiscience/knockout-contrib-querystring",
   "version": "0.0.1-alpha.3",
   "description": "Querystring Abstraction for KnockoutJS",
-  "main": "knockout-contrib-querystring.js",
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.query",
   "files": [
-    "dist",
-    "knockout-contrib-querystring.js"
+    "dist"
   ],
   "keywords": [
     "knockout",

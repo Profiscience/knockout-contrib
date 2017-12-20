@@ -1,17 +1,12 @@
 {
   "name": "@profiscience/framework",
-  "private": false,
   "version": "1.0.0-alpha.2",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
-    "precommit": "yarn build:docs && git add docs",
-    "prepush": "yarn lint && yarn build && yarn test",
-    "build": "tsc",
-    "lint": "tslint -p tsconfig.json",
-    "test": "jest",
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
   "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
@@ -45,28 +40,8 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.0",
-    "@types/jest": "^21.1.8",
-    "@types/knockout": "^3.4.47",
-    "@types/lodash": "^4.14.86",
-    "husky": "^0.14.3",
-    "jest": "^21.2.1",
-    "knockout": "^3.4.2",
-    "lodash": "^4.17.4",
-    "ts-jest": "^21.2.3",
-    "tslint": "^5.8.0",
     "typedoc": "^0.9.0",
-    "typedoc-plugin-markdown": "^1.0.11",
-    "typescript": "^2.6.2"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "ts"
-    ],
-    "testRegex": "[^_].*\\.test.ts$",
-    "transform": {
-      "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    }
+    "typedoc-plugin-markdown": "^1.0.11"
   },
   "peerDependencies": {
     "knockout": "^3.4.2",

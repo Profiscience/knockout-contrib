@@ -15,8 +15,8 @@ module.exports = function * (task) {
 
       const files = generateMetaFiles(metapackage, packages)
 
-      console.log(`\n🔗  Generated ${metapackageName} metapackage`)
-      files.forEach((f) => console.log(`- ${f.base}`))
+      console.log(`🔗  Generated ${metapackageName} metapackage`)
+      // files.forEach((f) => console.log(`- ${f.base}`))
 
       this._.files.push(...files)
     })
@@ -52,8 +52,7 @@ function generateMetaFiles(metapackage, packages) {
 
   const distFiles = [
     'index.js',
-    'index.d.ts',
-    `knockout-contrib-${kebabCase(metapackageName)}.js`
+    'index.d.ts'
   ]
 
   const readme = {
@@ -131,9 +130,8 @@ function generateMetaFiles(metapackage, packages) {
   const pkg = Object.assign(require(path.join(metapackage.dir, 'package.json')), {
     name: metapackageId,
     files: distFiles,
-    main: `knockout-contrib-${kebabCase(metapackageName)}.js`,
     module: 'index.js',
-    'js:next': 'index.js',
+    'jsnext:main': 'index.js',
     typings: 'index.d.ts',
     dependencies: packages.reduce((accum, p) => {
       const { name, version } = require(path.join(p, 'package.json'))

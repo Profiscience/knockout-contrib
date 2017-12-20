@@ -2,7 +2,7 @@
 	"private": true,
 	"scripts": {
 		"prepush": "yarn lint",
-		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
+		"build": "taskr meta && lerna exec --parallel -- tsc",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest",
 		"generate": "plop"
@@ -32,12 +32,7 @@
 		"lerna": "^2.4.0",
 		"lodash": "^4.17.4",
 		"plop": "^1.9.0",
-		"rollup": "^0.52.0",
-		"rollup-plugin-commonjs": "^8.2.5",
-		"rollup-plugin-node-resolve": "^3.0.0",
 		"taskr": "^1.1.0",
-		"taskr-rename": "^0.0.1",
-		"taskr-rollup": "^0.0.3",
 		"ts-jest": "^22.0.0",
 		"tslint": "^5.8.0",
 		"typescript": "^2.5.3"

@@ -6,7 +6,6 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn",
   "repository": "Profiscience/knockout-contrib",
-  "global": "ko.observable.fn",
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -22,7 +21,6 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "knockout-contrib-observable-fn.js",
     "increment.js",
     "increment.d.ts",
     "subscribeOnce.js",
@@ -30,9 +28,8 @@
     "toString.js",
     "toString.d.ts"
   ],
-  "main": "knockout-contrib-observable-fn.js",
   "module": "index.js",
-  "js:next": "index.js",
+  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-observable-fn-increment": "1.0.0-alpha.1",

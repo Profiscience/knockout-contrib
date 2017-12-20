@@ -1,8 +1,14 @@
-packages/*/knockout-contrib-*.js linguist-generated=true
-packages/*/knockout-contrib-*.min.js linguist-generated=true
+packages/bindings/*.ts linguist-generated=true
+packages/bindings/*.js linguist-generated=true
+packages/bindings/README.md linguist-generated=true
+packages/bindings/tsconfig.json linguist-generated=true
 
 packages/observable.fn/*.ts linguist-generated=true
 packages/observable.fn/*.js linguist-generated=true
+packages/observable.fn/README.md linguist-generated=true
+packages/observable.fn/tsconfig.json linguist-generated=true
 
 packages/utils/*.ts linguist-generated=true
 packages/utils/*.js linguist-generated=true
+packages/utils/README.md linguist-generated=true
+packages/utils/tsconfig.json linguist-generated=true

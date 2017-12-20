@@ -2,7 +2,6 @@
   "name": "@profiscience/knockout-contrib-utils",
   "version": "1.0.0-alpha.6",
   "description": "Handy Utilities for Knockout JS",
-  "global": "ko.utils",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
@@ -25,12 +24,10 @@
   },
   "files": [
     "index.js",
-    "index.d.ts",
-    "knockout-contrib-utils.js"
+    "index.d.ts"
   ],
-  "main": "knockout-contrib-utils.js",
   "module": "index.js",
-  "js:next": "index.js",
+  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-defaults": "1.0.0-alpha.1",

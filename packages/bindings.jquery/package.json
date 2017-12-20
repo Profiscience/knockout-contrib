@@ -2,14 +2,11 @@
   "name": "@profiscience/knockout-contrib-bindings-jquery",
   "version": "1.0.0-alpha.3",
   "description": "jQuery Plugin Binding for KnockoutJS",
-  "main": "knockout-contrib-bindings-jquery.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.bindingHandlers.jquery",
   "files": [
-    "dist",
-    "knockout-contrib-bindings-jquery.js"
+    "dist"
   ],
   "repository": {
     "type": "git",
