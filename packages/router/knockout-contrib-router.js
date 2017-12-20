@@ -5451,6 +5451,13 @@ var Router = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Router.prototype, "depth", {
+        get: function () {
+            return this.ctx.$parents.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Router.prototype.init = function () {
         var _this = this;
         this.isNavigating(false);
