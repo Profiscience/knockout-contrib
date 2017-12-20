@@ -25,6 +25,9 @@ Current [router context](./context.md) object
 #### router.initialized
 Promise that returns after this router is initialized
 
+#### router.depth
+Depth of this router; accessor for `router.ctx.$parents.length`
+
 #### router.isNavigating()
 Observable value that is true if router is navigating
 
@@ -41,12 +44,6 @@ Second argument can be a boolean `push`, or an options object:
 | push   | push history state entry       | true    |
 | force  | force reload of same route     | false   |
 | with   | object to extend context with  | {}      |
-
-#### router.$parent
-Parent router accessor
-
-#### router.$parents
-Array of parent routers
 
 ### Static
 
@@ -72,6 +69,20 @@ Plugins must be registered *before* routes
 
 #### Router.useRoutes(routes)
 Registers routes
+
+**NOTE:** `setConfig` and the `use` methods may be chained, e.g.
+
+```typescript
+Router
+  .setConfig(routerConfig)
+  
+  .use(someMiddleware)
+  .use(anotherMiddleware)
+
+  .usePlugin(somePlugin)
+  .useRoutes(homeRoutes)
+  .useRoutes(profileRoutes)
+```
 
 #### Router.update(path, [push = true], [options = { push: true, force: false, with: {} }])
 Convenience function for `Router.get(0).update(...)`

@@ -10,13 +10,15 @@ ko.components.register('nested', {
 
       t.pass('navigates to route with children')
       t.pass('uses specifed component with routes')
+      t.equals(Router.head, Router.get(0), 'Router.head is top-most router')
+      t.equals(ctx.router.depth, 0, 'ctx.router.depth is 0 for top-most router')
 
       const hLen = history.length
 
       ko.components.register('root', {
         viewModel: class {
-          constructor() {
-            t.equals(Router.head, Router.get(0), 'Router.head is top-most router')
+          constructor(ctx) {
+            t.equals(ctx.router.depth, 1, 'ctx.router.depth is correct')
             t.pass('initializes nested route')
             t.equals(hLen, history.length, 'child route does not add history entry')
             Router.update('/nested/a')
@@ -56,6 +58,8 @@ ko.components.register('nested', {
       ko.components.register('c', {
         viewModel: class {
           constructor(ctx) {
+            t.equals(ctx.router.depth, 2, 'ctx.router.depth is correct')
+
             t.pass('works with implied router component (no specified component)')
 
             t.equals(ctx.$root.$child.router, Router.get(1), 'Router.get(n) works')

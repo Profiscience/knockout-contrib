@@ -3,6 +3,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import isUndefined from 'lodash/isUndefined'
 import noop from 'lodash/noop'
 import startsWith from 'lodash/startsWith'
+import { IContext } from './'
 import { Context } from './context'
 import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
 
@@ -93,7 +94,7 @@ export function promisify(_fn: (...args: any[]) => void = noop): (...args: any[]
 }
 
 export function castLifecycleObjectMiddlewareToGenerator(fn: Middleware): LifecycleGeneratorMiddleware {
-  return async function*(ctx: Context) {
+  return async function*(ctx: Context & IContext) {
     const ret = await promisify(fn)(ctx)
     if (ret && isFunction(ret.next)) {
       for await (const v of ret) {

@@ -14,7 +14,7 @@ import {
   sequence
 } from './utils'
 
-export class Context implements IContext {
+export class Context /* implements IContext, use Context & IContext */ {
   public $child: Context & IContext
   public $parent: Context & IContext
   public router: Router
@@ -116,7 +116,7 @@ export class Context implements IContext {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: Context = this
+    let ctx: Context & IContext = this
     let callbacks: Callback<boolean | void>[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
@@ -127,7 +127,7 @@ export class Context implements IContext {
   }
 
   public render() {
-    let ctx: Context = this
+    let ctx: Context & IContext = this
     while (ctx) {
       if (isUndefined(ctx._redirect)) {
         ctx.router.component(ctx.route.component)
