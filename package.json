@@ -4,7 +4,7 @@
 		"build:docs": "lerna run build:docs",
 		"update:docs": "yarn build:docs && git add README.md packages/*/README.md && git add packages/*/docs/ && (git commit -m \"chore(docs)\" || true)",
 		"prepush": "yarn lint && yarn update:docs",
-		"build": "taskr meta && lerna exec --parallel --concurrency 4 -- tsc",
+		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../.. && taskr stats",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest",
 		"generate": "plop"
@@ -15,7 +15,6 @@
 	"devDependencies": {
 		"@taskr/clear": "^1.1.0",
 		"@taskr/uglify": "^1.1.0",
-		"@types/chalk": "^2.2.0",
 		"@types/jest": "^21.1.5",
 		"@types/jsdom": "^11.0.3",
 		"@types/knockout": "^3.4.0",
@@ -38,6 +37,8 @@
 		"rollup-plugin-commonjs": "^8.2.6",
 		"rollup-plugin-node-resolve": "^3.0.0",
 		"taskr": "^1.1.0",
+		"taskr-rename": "^0.0.1",
+		"taskr-rollup": "^0.0.3",
 		"ts-jest": "^22.0.0",
 		"tslint": "^5.8.0",
 		"typedoc": "^0.9.0",

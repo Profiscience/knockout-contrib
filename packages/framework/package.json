@@ -1,15 +1,17 @@
 {
-  "name": "@profiscience/framework",
+  "name": "@profiscience/knockout-contrib-framework",
   "version": "1.0.0-alpha.2",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
+  "main": "knockout-contrib-framework.js",
+  "global": "ko.contrib.framework",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "knockout-contrib-framework.js"
   ],
   "repository": {
     "type": "git",
@@ -30,9 +32,9 @@
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/Profiscience/framework/issues"
+    "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
-  "homepage": "https://github.com/Profiscience/framework#readme",
+  "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
     "@profiscience/knockout-contrib-router": "1.0.0",
     "@profiscience/knockout-contrib-utils": "1.0.0-alpha.6",
@@ -42,7 +44,7 @@
     "@profiscience/knockout-contrib-jest-matchers": "1.0.0-alpha.1"
   },
   "peerDependencies": {
-    "knockout": "^3.4.2",
-    "lodash": "^4.17.4"
+    "knockout": "^3.4.0",
+    "lodash": "^4.17.0"
   }
 }

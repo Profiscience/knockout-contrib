@@ -2,11 +2,14 @@
   "name": "@profiscience/knockout-contrib-utils-defaults",
   "version": "1.0.0-alpha.1",
   "description": "Handy Utilities for Knockout JS",
+  "main": "knockout-contrib-utils-defaults.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "global": "ko.contrib.utils.defaults",
   "files": [
-    "dist"
+    "dist",
+    "knockout-contrib-utils-defaults.js"
   ],
   "repository": {
     "type": "git",
