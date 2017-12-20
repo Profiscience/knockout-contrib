@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- `router.depth` property
+
+
+
 ## 1.0.0 (ko-component-router => @profiscience/knockout-contrib-router)
 
 ### Changed
