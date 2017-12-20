@@ -3,6 +3,13 @@ import { Context, IContext } from '@profiscience/knockout-contrib-router'
 import { INITIALIZED } from '../model/builders/DataModelConstructorBuilder'
 import { ViewModelConstructorBuilder } from '../model/builders/ViewModelConstructorBuilder'
 
+declare module '@profiscience/knockout-contrib-router' {
+  // tslint:disable-next-line no-shadowed-variable
+  interface IContext {
+    viewModel?: ViewModelConstructorBuilder
+  }
+}
+
 const uniqueComponentNames = (function*() {
   let i = 0
   while (true) {
@@ -50,7 +57,7 @@ export interface ILazyComponent {
 }
 
 export function createComponentMiddleware(getComponent: () => ILazyComponent) {
-  return function*(ctx: Context): IterableIterator<void> {
+  return function*(ctx: Context & IContext): IterableIterator<void> {
     const component = getComponent()
 
     /* beforeRender */
@@ -68,6 +75,7 @@ export function createComponentMiddleware(getComponent: () => ILazyComponent) {
 
         if (ViewModel) {
           const instance = new ViewModel(ctx)
+          ctx.viewModel = instance
           await initializeViewModel(instance)
           componentConfig.viewModel = {
             instance
