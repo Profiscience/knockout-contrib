@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/framework.git"
+    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
   },
   "keywords": [
     "knockoutjs",

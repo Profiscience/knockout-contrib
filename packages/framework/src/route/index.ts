@@ -53,6 +53,29 @@ export interface IRouteConfig {
    */
   component?(): ILazyComponent
   /**
+   * Route-specific components.
+   *
+   * Will only be registered for the duration of the route.
+   *
+   * Intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
+   *
+   * Example:
+   *
+   * ```typescript
+   *  // in route config
+   *  components: () => ({
+   *    'my-component-name': import('./my-component')
+   *  })
+   *
+   *  // my-component/index.ts
+   *  export { viewModel } from './viewModel'
+   *  export { template } from './template.html'
+   * ```
+   */
+  components?(): {
+    [k: string]: Promise<KnockoutComponentTypes.Config>
+  }
+  /**
    * Nested routes
    */
   children?: Route[]
