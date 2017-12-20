@@ -105,6 +105,10 @@ export class Router {
     }
   }
 
+  get depth(): number {
+    return this.ctx.$parents.length
+  }
+
   public init() {
     this.isNavigating(false)
     this.ctx.runAfterRender()
