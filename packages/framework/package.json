@@ -34,14 +34,12 @@
   },
   "homepage": "https://github.com/Profiscience/framework#readme",
   "dependencies": {
-    "@profiscience/knockout-contrib-router": "^1.0.0-alpha.7",
-    "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.5",
+    "@profiscience/knockout-contrib-router": "1.0.0",
+    "@profiscience/knockout-contrib-utils": "1.0.0-alpha.6",
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.0",
-    "typedoc": "^0.9.0",
-    "typedoc-plugin-markdown": "^1.0.11"
+    "@profiscience/knockout-contrib-jest-matchers": "1.0.0-alpha.1"
   },
   "peerDependencies": {
     "knockout": "^3.4.2",
