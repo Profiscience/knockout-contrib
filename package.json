@@ -33,7 +33,7 @@
 		"lerna": "^2.4.0",
 		"lodash": "^4.17.4",
 		"plop": "^1.9.0",
-		"rollup": "^0.52.3",
+		"rollup": "^0.53.0",
 		"rollup-plugin-commonjs": "^8.2.6",
 		"rollup-plugin-node-resolve": "^3.0.0",
 		"taskr": "^1.1.0",
