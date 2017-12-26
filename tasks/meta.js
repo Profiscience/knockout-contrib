@@ -15,8 +15,8 @@ module.exports = function * (task) {
 
       const files = generateMetaFiles(metapackage, packages)
 
-      console.log(`\n🔗  Generated ${metapackageName} metapackage`)
-      files.forEach((f) => console.log(`- ${f.base}`))
+      console.log(`🔗  Generated ${metapackageName} metapackage`)
+      // files.forEach((f) => console.log(`- ${f.base}`))
 
       this._.files.push(...files)
     })
@@ -28,26 +28,7 @@ function generateMetaFiles(metapackage, packages) {
   const metapackageId = `@profiscience/knockout-contrib-${kebabCase(metapackageName)}`
   const exportType = metapackage.data.toString('utf8')
 
-  const tsconfig = {
-    compilerOptions: {
-      moduleResolution: 'node',
-      target: 'es5',
-      module: 'es2015',
-      declaration: true,
-      sourceMap: true,
-      rootDir: './',
-      baseUrl: './',
-      outDir: './'
-    },
-    include: [
-      '**/*'
-    ],
-    exclude: [
-    ]
-  }
-
-  const gitignore = '*\n!.meta\n!package.json\n!README.md'
-
+  const lib = new Set()
   const files = []
 
   const distFiles = [
@@ -55,6 +36,8 @@ function generateMetaFiles(metapackage, packages) {
     'index.d.ts',
     `knockout-contrib-${kebabCase(metapackageName)}.js`
   ]
+
+  const gitignore = '*\n!.meta\n!package.json\n!README.md'
 
   const readme = {
     header: [
@@ -101,6 +84,9 @@ function generateMetaFiles(metapackage, packages) {
   packages.forEach((p, i) => {
     const packageName = p.split(metapackageName + '.')[1]
     const { name: packageId } = require(path.join(p, 'package.json'))
+    const requiredLibs = require(path.join(p, 'tsconfig.json')).compilerOptions.lib || []
+
+    requiredLibs.forEach((l) => lib.add(l))
 
     readme.contents += `\n- [${packageName}](../${metapackageName}.${packageName})`
 
@@ -142,6 +128,27 @@ function generateMetaFiles(metapackage, packages) {
       })
     }, {})
   })
+
+  const tsconfig = {
+    compilerOptions: {
+      moduleResolution: 'node',
+      target: 'es5',
+      module: 'es2015',
+      declaration: true,
+      sourceMap: true,
+      rootDir: './',
+      baseUrl: './',
+      outDir: './',
+    },
+    include: [
+      '**/*'
+    ],
+    exclude: [
+    ]
+  }
+  if (lib.size > 0) {
+    tsconfig.compilerOptions.lib = Array.from(lib)
+  }
 
   files.push(
     {
