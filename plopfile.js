@@ -25,4 +25,22 @@ module.exports = (plop) => {
       }
     ]
   })
+  plop.setGenerator('observable.fn', {
+    description: 'Create a new observable function',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'function name'
+      }
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/observable.fn.{{ kebabCase name }}',
+        templateFiles: 'templates/observable.fn/*',
+        base: 'templates/observable.fn'
+      }
+    ]
+  })
 }
