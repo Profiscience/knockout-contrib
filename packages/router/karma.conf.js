@@ -15,6 +15,14 @@ module.exports = (config) => {
   config.set({
     basePath: __dirname,
 
+    plugins: [
+      require('karma-firefox-launcher'),
+      require('karma-mocha-reporter'),
+      require('karma-remap-istanbul'),
+      require('karma-rollup-preprocessor'),
+      require('karma-tap')
+    ],
+
     frameworks: ['tap'],
 
     files: [
