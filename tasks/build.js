@@ -30,7 +30,7 @@ exports[BUILD] = function* (task) {
     tasks.push(BUNDLE)
   }
 
-  task.serial(tasks)
+  yield task.serial(tasks)
 }
 
 exports[STYLES] = function* (task) {
@@ -44,8 +44,16 @@ exports[STYLES] = function* (task) {
     .target(dist)
 
     .run({ every: true }, function* (file) {
-      const dtsGenerator = new CSSModuleDtsGenerator({ camelCase: true })
-      yield dtsGenerator.create(file.base, file.data.toString()).then((content) => content.writeFile())
+      const dtsGenerator = new CSSModuleDtsGenerator()
+      yield dtsGenerator.create(file.base, file.data.toString()).then(async (content) => {
+        if (content.messageList.length > 0) {
+          console.log('\n\n') // eslint-disable-line no-console
+          content.messageList.forEach((m) => console.error(m)) // eslint-disable-line no-console
+          console.error('\n\nuse camelCased css classes in css modules\n\n') // eslint-disable-line no-console
+          process.exit(1)
+        }
+        await content.writeFile()
+      })
     })
 }
 
@@ -54,7 +62,29 @@ exports[TRANSPILE] = function* () {
 }
 
 exports[BUNDLE] = function* (task) {
-  const cssExportMap = {}
+  const plugins = [
+    require('rollup-plugin-node-resolve')({ preferBuiltins: false }),
+    require('rollup-plugin-commonjs')()
+  ]
+
+  if (/components/.test(LERNA_PACKAGE_NAME)) {
+    const cssExportMap = {}
+    const p = require('rollup-plugin-postcss')({
+      plugins: [
+        require('postcss-modules')({
+          getJSON(id, exportTokens) {
+            cssExportMap[id] = exportTokens
+          }
+        })
+      ],
+      getExportNamed: true,
+      getExport: (id) => cssExportMap[id],
+      extract: path.join(dist, `${path.basename(pkg.main, '.js')}.css`)
+    })
+    // extract relies on the onwrite hook, but taskr-rollup doesn't use bundle.write, so fake it.
+    p.ongenerate = () => p.onwrite({ file: true })
+    plugins.push(p)
+  }
 
   yield task
     .source(path.resolve(process.cwd(), pkg.module))
@@ -64,29 +94,7 @@ exports[BUNDLE] = function* (task) {
         'knockout',
         'knockout-punches'
       ],
-      plugins: [
-        (() => {
-          const p = require('rollup-plugin-postcss')({
-            plugins: [
-              require('postcss-modules')({
-                getJSON(id, exportTokens) {
-                  cssExportMap[id] = exportTokens
-                }
-              })
-            ],
-            getExport: (id) => cssExportMap[id],
-            extract: path.join(dist, `${path.basename(pkg.main, '.js')}.css`)
-          })
-          // extract relies on the onwrite hook, but taskr-rollup does not use
-          // bundle.write, so fake it.
-          p.ongenerate = () => p.onwrite({ file: true })
-          return p
-        })(),
-        require('rollup-plugin-node-resolve')({
-          preferBuiltins: false
-        }),
-        require('rollup-plugin-commonjs')()
-      ],
+      plugins,
       output: {
         file: path.basename(pkg.main),
         format: 'umd',
