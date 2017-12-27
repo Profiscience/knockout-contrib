@@ -38,7 +38,7 @@
 		"rollup-plugin-node-resolve": "^3.0.0",
 		"taskr": "^1.1.0",
 		"taskr-rename": "^0.0.1",
-		"taskr-rollup": "^0.0.3",
+		"taskr-rollup": "^0.0.4",
 		"ts-jest": "^22.0.0",
 		"tslint": "^5.8.0",
 		"typedoc": "^0.9.0",
