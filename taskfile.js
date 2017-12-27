@@ -1,4 +1,9 @@
 'use strict'
-Object.assign(exports, require('./tasks/build'))
-Object.assign(exports, require('./tasks/examples'))
-exports.meta = require('./tasks/meta')
+
+const fs = require('fs')
+const path = require('path')
+const tasks = fs.readdirSync(path.resolve(__dirname, 'tasks'))
+
+for (const t of tasks) {
+  Object.assign(exports, require(`./tasks/${t}`))
+}

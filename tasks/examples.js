@@ -11,12 +11,13 @@ const middleware = require('webpack-dev-middleware')
 const HappyPack = require('happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-exports['serve:examples'] = function* () {
-  yield startExampleDevServer()
-}
-
-exports['build:examples'] = function* () {
-  yield buildExamples()
+module.exports = {
+  *'serve:examples'() {
+    yield startExampleDevServer()
+  },
+  *'build:examples'() {
+    yield buildExamples()
+  }
 }
 
 async function startExampleDevServer() {
@@ -55,7 +56,6 @@ async function getAliases() {
     const tsconfig = require(path.resolve(pkg, 'tsconfig.json'))
     const { name } = require(path.resolve(pkg, 'package.json'))
     const distDir = path.resolve(pkg, tsconfig.compilerOptions.outDir)
-    // const rootDir = path.resolve(pkg, tsconfig.compilerOptions.rootDir)
     return Object.assign({ [name]: distDir }, aliases)
   }, {})
 }
@@ -104,7 +104,8 @@ async function getWebpackConfig() {
       alias: await getAliases(),
       extensions: [
         '.js',
-        '.ts'
+        '.ts',
+        '.tsx'
       ]
     },
     plugins: [

@@ -22,8 +22,7 @@
   "typings": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts",
-    "webpack.js"
+    "index.d.ts"
   ],
   "dependencies": {
     "postcss-loader": "^2.0.9",

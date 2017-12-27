@@ -3,7 +3,7 @@
 const path = require('path')
 const { camelCase, kebabCase } = require('lodash')
 
-module.exports = function * (task) {
+exports.meta = function * (task) {
   this._.files = []
 
   /**
@@ -15,7 +15,6 @@ module.exports = function * (task) {
       /* eslint-disable no-invalid-this, no-console */
       const metapackageName = path.basename(metapackage.dir)
       const packages = yield this.$.expand(path.join(__dirname, `../packages/${metapackageName}.*`))
-
       const files = generateMetaFiles(metapackage, packages)
 
       console.log(`🔗  Generated ${metapackageName} metapackage`)
@@ -31,6 +30,7 @@ module.exports = function * (task) {
     .source(path.join(__dirname, '../packages/*/package.json'))
     .run({ every: true }, function* ({ dir, data, base }) { // eslint-disable-line require-yield
       const pkgJson = JSON.parse(data.toString())
+      const isComponent = pkgJson.name.indexOf('components-') > -1
       if (!pkgJson.scripts) {
         pkgJson.scripts = {}
       }
@@ -38,6 +38,9 @@ module.exports = function * (task) {
         build: '../../node_modules/.bin/taskr build -d ../..',
         test: 'DIR=$PWD; cd ../..; yarn test $DIR'
       }, pkgJson.scripts)
+      if (isComponent) {
+        pkgJson.scripts.watch = '../../node_modules/.bin/taskr watch -d ../..'
+      }
       this._.files.push({
         dir,
         data: Buffer.from(JSON.stringify(pkgJson, null, 2) + '\n'),
@@ -125,7 +128,7 @@ function generateMetaFiles(metapackage, packages) {
       distFiles.push(`${packageName}.js`, `${packageName}.d.ts`)
       files.push({
         dir: metapackage.dir,
-        data: Buffer.from(`import '${packageId}'\n`),
+        data: Buffer.from(`import '${packageId}'\nexport * from '${packageId}'\n`),
         base: `${packageName}.ts`
       })
       if (i === 0) {
@@ -137,7 +140,15 @@ function generateMetaFiles(metapackage, packages) {
 
   readme.usage += '\n```'
 
-  const pkg = Object.assign(require(path.join(metapackage.dir, 'package.json')), {
+  const pkg = require(path.join(metapackage.dir, 'package.json'))
+  const existingDeps = Object.keys(pkg.dependencies).reduce((accum, k) => {
+    if (!/@profiscience\/knockout-contrib/.test(k)) {
+      accum[k] = pkg.dependencies[k]
+    }
+    return accum
+  }, {})
+
+  Object.assign(pkg, {
     name: metapackageId,
     files: distFiles,
     main: `dist/knockout-contrib-${kebabCase(metapackageName)}.js`,
@@ -149,7 +160,7 @@ function generateMetaFiles(metapackage, packages) {
       return Object.assign(accum, {
         [name]: version
       })
-    }, {})
+    }, existingDeps)
   })
 
   const tsconfig = {
