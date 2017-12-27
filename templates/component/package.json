@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-components-{{kebabCase name}}",
   "version": "1.0.0-alpha.0",
   "description": "{{titleCase name}} Component for KnockoutJS",
-  "main": "knockout-contrib-components-{{kebabCase name}}.js",
+  "main": "dist/knockout-contrib-components-{{kebabCase name}}.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",

@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-utils-from-js",
   "version": "1.0.0-alpha.1",
   "description": "Handy Utilities for Knockout JS",
-  "main": "knockout-contrib-utils-from-js.js",
+  "main": "dist/knockout-contrib-utils-from-js.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",

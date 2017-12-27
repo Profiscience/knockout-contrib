@@ -17,7 +17,7 @@
   "peerDependencies": {
     "knockout": "^3.4.0"
   },
-  "main": "knockout-contrib-bindings.js",
+  "main": "dist/knockout-contrib-bindings.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",

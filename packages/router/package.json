@@ -7,7 +7,7 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-router.js",
+  "main": "dist/knockout-contrib-router.js",
   "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",

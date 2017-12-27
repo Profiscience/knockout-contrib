@@ -30,7 +30,7 @@
     "toString.js",
     "toString.d.ts"
   ],
-  "main": "knockout-contrib-observable-fn.js",
+  "main": "dist/knockout-contrib-observable-fn.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",

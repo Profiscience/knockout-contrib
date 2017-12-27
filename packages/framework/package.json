@@ -5,7 +5,7 @@
   "scripts": {
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
-  "main": "knockout-contrib-framework.js",
+  "main": "dist/knockout-contrib-framework.js",
   "global": "ko.contrib.framework",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",

@@ -28,7 +28,7 @@
     "index.d.ts",
     "knockout-contrib-utils.js"
   ],
-  "main": "knockout-contrib-utils.js",
+  "main": "dist/knockout-contrib-utils.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",

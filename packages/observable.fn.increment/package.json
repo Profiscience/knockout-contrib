@@ -7,7 +7,7 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.increment",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-observable-fn-increment.js",
+  "main": "dist/knockout-contrib-observable-fn-increment.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",

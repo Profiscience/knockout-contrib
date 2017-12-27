@@ -16,7 +16,7 @@
   "peerDependencies": {
     "knockout": "^3.4.0"
   },
-  "main": "knockout-contrib-components.js",
+  "main": "dist/knockout-contrib-components.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",
@@ -24,5 +24,6 @@
     "index.js",
     "index.d.ts",
     "knockout-contrib-components.js"
-  ]
+  ],
+  "dependencies": {}
 }
