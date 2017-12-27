@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict'
+
 const nodeResolve = require('rollup-plugin-node-resolve')
 const nodeBuiltins = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
@@ -70,8 +72,10 @@ module.exports = (config) => {
           ]
         })
       ],
-      format: 'iife',
-      sourcemap: 'inline'
+      output: {
+        format: 'iife',
+        sourcemap: 'inline'
+      }
     },
 
     remapIstanbulReporter: {
