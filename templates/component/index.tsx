@@ -1,7 +1,7 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
-import styles from './index.css'
+import * as styles from './index.css'
 
 export interface I{{pascalCase name}}Params {
 }
