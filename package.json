@@ -2,11 +2,13 @@
 	"private": true,
 	"scripts": {
 		"build:docs": "lerna run build:docs",
+		"build:examples": "taskr build:examples",
 		"update:docs": "yarn build:docs && git add README.md packages/*/README.md && git add packages/*/docs/ && (git commit -m \"chore(docs)\" || true)",
 		"prepush": "yarn lint && yarn update:docs",
 		"build": "taskr meta && lerna run build",
-		"lint": "tslint -p tsconfig.json",
+		"lint": "tslint --project tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest",
+		"serve:examples": "taskr serve:examples",
 		"generate": "plop"
 	},
 	"workspaces": [
@@ -15,14 +17,21 @@
 	"devDependencies": {
 		"@taskr/clear": "^1.1.0",
 		"@taskr/postcss": "^1.1.2",
+		"@taskr/watch": "^1.1.0",
 		"@types/jest": "^21.1.5",
 		"@types/jsdom": "^11.0.3",
 		"@types/knockout": "^3.4.0",
 		"@types/lodash": "^4.14.80",
 		"@types/node": "^8.0.47",
+		"caniuse-lite": "^1.0.30000784",
 		"eslint": "^4.14.0",
 		"eslint-config-profiscience": "^2.0.4",
 		"execa": "^0.8.0",
+		"express": "^4.16.2",
+		"globby": "^7.1.1",
+		"happypack": "^4.0.0",
+		"html-loader": "^0.5.1",
+		"html-webpack-plugin": "^2.30.1",
 		"husky": "^0.14.3",
 		"jest": "^22.0.1",
 		"jquery": "^3.2.1",
@@ -42,11 +51,14 @@
 		"taskr": "^1.1.0",
 		"taskr-rollup": "^0.0.4",
 		"ts-jest": "^22.0.0",
+		"ts-loader": "^3.2.0",
 		"tslint": "^5.8.0",
 		"typed-css-modules": "^0.3.1",
 		"typedoc": "^0.9.0",
 		"typedoc-plugin-markdown": "^1.0.11",
-		"typescript": "^2.5.3"
+		"typescript": "^2.5.3",
+		"webpack": "^3.10.0",
+		"webpack-dev-middleware": "^2.0.3"
 	},
 	"jest": {
 		"collectCoverage": true,

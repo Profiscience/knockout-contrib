@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.bindings.jquery",
   "files": [
-    "dist",
-    "knockout-contrib-bindings-jquery.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

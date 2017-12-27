@@ -24,7 +24,6 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "knockout-contrib-bindings.js",
     "jquery.js",
     "jquery.d.ts"
   ],

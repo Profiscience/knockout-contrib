@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "target": "es2015",
+    "target": "esnext",
     "module": "commonjs",
     "importHelpers": true,
-    "strict": true,
-    "noImplicitAny": true,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015",
+      "esnext.asynciterable"
+    ]
   },
   "include": [
-    "**/*.*"
+    "**/*"
+  ],
+  "exclude": [
+    "templates",
+    "dist"
   ]
 }

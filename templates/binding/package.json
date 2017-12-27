@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.bindings.{{camelCase name}}",
   "files": [
-    "dist",
-    "knockout-contrib-bindings-{{kebabCase name}}.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

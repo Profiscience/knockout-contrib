@@ -57,8 +57,7 @@ function generateMetaFiles(metapackage, packages) {
 
   const distFiles = [
     'index.js',
-    'index.d.ts',
-    `knockout-contrib-${kebabCase(metapackageName)}.js`
+    'index.d.ts'
   ]
 
   const gitignore = '*\n!.meta\n!package.json\n!README.md'

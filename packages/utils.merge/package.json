@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.utils.merge",
   "files": [
-    "dist",
-    "knockout-contrib-utils-merge.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

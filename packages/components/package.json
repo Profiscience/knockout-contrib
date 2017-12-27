@@ -23,9 +23,13 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "knockout-contrib-components.js"
+    "webpack.js"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "postcss-loader": "^2.0.9",
+    "postcss-modules": "^1.1.0",
+    "style-loader": "^0.19.1"
+  },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"

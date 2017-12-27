@@ -13,8 +13,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.fn.increment",
   "files": [
-    "dist",
-    "knockout-contrib-observable-fn-increment.js"
+    "dist"
   ],
   "keywords": [
     "knockout",

@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.Query",
   "files": [
-    "dist",
-    "knockout-contrib-querystring.js"
+    "dist"
   ],
   "keywords": [
     "knockout",

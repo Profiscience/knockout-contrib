@@ -13,8 +13,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.fn.toString",
   "files": [
-    "dist",
-    "knockout-contrib-observable-fn-to-string.js"
+    "dist"
   ],
   "keywords": [
     "knockout",

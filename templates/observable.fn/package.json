@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.fn.{{camelCase name}}",
   "files": [
-    "dist",
-    "knockout-contrib-observable-fn-{{kebabCase name}}.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

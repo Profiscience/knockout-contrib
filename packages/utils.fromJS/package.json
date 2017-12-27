@@ -8,8 +8,7 @@
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.utils.fromJS",
   "files": [
-    "dist",
-    "knockout-contrib-utils-from-js.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

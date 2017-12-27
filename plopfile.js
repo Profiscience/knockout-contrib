@@ -56,7 +56,7 @@ module.exports = (plop) => {
       {
         type: 'addMany',
         destination: 'packages/components.{{ kebabCase name }}',
-        templateFiles: 'templates/component/*',
+        templateFiles: 'templates/component/**/*',
         base: 'templates/component'
       }
     ]

@@ -17,6 +17,7 @@
   ],
   "exclude": [
     "dist",
+    "examples",
     "test.tsx"
   ]
 }

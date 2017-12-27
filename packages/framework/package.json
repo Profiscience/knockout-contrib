@@ -13,8 +13,7 @@
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "knockout-contrib-framework.js"
+    "dist"
   ],
   "repository": {
     "type": "git",
