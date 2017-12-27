@@ -6,6 +6,9 @@ const { camelCase, kebabCase } = require('lodash')
 module.exports = function * (task) {
   this._.files = []
 
+  /**
+   * Generate metapackages
+   */
   yield task
     .source(path.join(__dirname, '../packages/*/.meta'))
     .run({ every: true }, function* (metapackage) {
@@ -16,9 +19,30 @@ module.exports = function * (task) {
       const files = generateMetaFiles(metapackage, packages)
 
       console.log(`🔗  Generated ${metapackageName} metapackage`)
-      // files.forEach((f) => console.log(`- ${f.base}`))
 
       this._.files.push(...files)
+    })
+    .target(path.join(__dirname, '../packages'))
+
+  /**
+   * Add `build`, `test` task to each package
+   */
+  yield task
+    .source(path.join(__dirname, '../packages/*/package.json'))
+    .run({ every: true }, function* ({ dir, data, base }) { // eslint-disable-line require-yield
+      const pkgJson = JSON.parse(data.toString())
+      if (!pkgJson.scripts) {
+        pkgJson.scripts = {}
+      }
+      pkgJson.scripts = Object.assign({
+        build: '../../node_modules/.bin/taskr build -d ../..',
+        test: 'DIR=$PWD; cd ../..; yarn test $DIR'
+      }, pkgJson.scripts)
+      this._.files.push({
+        dir,
+        data: Buffer.from(JSON.stringify(pkgJson, null, 2) + '\n'),
+        base
+      })
     })
     .target(path.join(__dirname, '../packages'))
 }

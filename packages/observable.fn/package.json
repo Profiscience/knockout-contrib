@@ -38,5 +38,9 @@
     "@profiscience/knockout-contrib-observable-fn-increment": "1.0.0-alpha.1",
     "@profiscience/knockout-contrib-observable-fn-subscribe-once": "1.0.0-alpha.1",
     "@profiscience/knockout-contrib-observable-fn-to-string": "1.0.0-alpha.1"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

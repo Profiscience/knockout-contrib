@@ -33,5 +33,9 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.1"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

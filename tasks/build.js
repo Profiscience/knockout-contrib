@@ -4,36 +4,31 @@ const path = require('path')
 const execa = require('execa')
 const CSSModuleDtsGenerator = require('typed-css-modules')
 
-const { LERNA_PACKAGE_NAME } = process.env
 const PACKAGE_PATH = process.cwd()
+const PACKAGE_NAME = path.basename(PACKAGE_PATH)
 const pkg = require(path.join(PACKAGE_PATH, 'package.json'))
 const tsconfig = require(path.join(PACKAGE_PATH, 'tsconfig.json'))
 const dist = path.join(PACKAGE_PATH, 'dist')
 
-const STYLES = `styles:${LERNA_PACKAGE_NAME}`
-const BUILD = `build:${LERNA_PACKAGE_NAME}`
-const TRANSPILE = `transpile:${LERNA_PACKAGE_NAME}`
-const BUNDLE = `bundle:${LERNA_PACKAGE_NAME}`
-
-exports[BUILD] = function* (task) {
-  const tasks = [TRANSPILE]
+exports.build = function* (task) {
+  const tasks = ['transpile']
   const isNodePkg = tsconfig.compilerOptions.module === 'commonjs' // e.g. jest-matchers
-  const isComponent = /components-/.test(LERNA_PACKAGE_NAME)
+  const isComponent = /components-/.test(PACKAGE_NAME)
 
   yield task.clear(dist)
 
   if (isComponent) {
-    tasks.unshift(STYLES)
+    tasks.unshift('styles')
   }
 
   if (!isNodePkg) {
-    tasks.push(BUNDLE)
+    tasks.push('bundle')
   }
 
   yield task.serial(tasks)
 }
 
-exports[STYLES] = function* (task) {
+exports.styles = function* (task) {
   yield task
     .source(path.resolve(process.cwd(), '*.css'))
     .postcss({
@@ -57,17 +52,17 @@ exports[STYLES] = function* (task) {
     })
 }
 
-exports[TRANSPILE] = function* () {
+exports.transpile = function* () {
   yield execa('../../node_modules/.bin/tsc', { stdio: 'inherit' })
 }
 
-exports[BUNDLE] = function* (task) {
+exports.bundle = function* (task) {
   const plugins = [
     require('rollup-plugin-node-resolve')({ preferBuiltins: false }),
     require('rollup-plugin-commonjs')()
   ]
 
-  if (/components/.test(LERNA_PACKAGE_NAME)) {
+  if (/components/.test(PACKAGE_NAME)) {
     const cssExportMap = {}
     const p = require('rollup-plugin-postcss')({
       plugins: [

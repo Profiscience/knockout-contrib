@@ -27,5 +27,9 @@
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

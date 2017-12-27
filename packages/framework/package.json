@@ -3,6 +3,8 @@
   "version": "1.0.0-alpha.2",
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR",
     "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
   "main": "dist/knockout-contrib-framework.js",

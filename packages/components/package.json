@@ -25,5 +25,9 @@
     "index.d.ts",
     "knockout-contrib-components.js"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  }
 }

@@ -4,7 +4,7 @@
 		"build:docs": "lerna run build:docs",
 		"update:docs": "yarn build:docs && git add README.md packages/*/README.md && git add packages/*/docs/ && (git commit -m \"chore(docs)\" || true)",
 		"prepush": "yarn lint && yarn update:docs",
-		"build": "taskr meta && lerna exec -- taskr build:\\$LERNA_PACKAGE_NAME -d ../..",
+		"build": "taskr meta && lerna run build",
 		"lint": "tslint -p tsconfig.json",
 		"test": "cd packages/router && yarn test && cd ../.. && jest",
 		"generate": "plop"

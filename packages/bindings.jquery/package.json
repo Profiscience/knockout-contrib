@@ -32,5 +32,9 @@
     "jquery": "x.x.x",
     "knockout": "^3.4.0",
     "knockout-punches": "^0.5.1"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

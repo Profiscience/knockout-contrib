@@ -17,6 +17,7 @@
     "knockout-contrib-router.js"
   ],
   "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "karma start"
   },
   "keywords": [
