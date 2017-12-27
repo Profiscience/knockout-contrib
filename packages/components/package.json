@@ -1,34 +1,33 @@
 {
-  "name": "@profiscience/knockout-contrib-bindings",
-  "version": "1.0.0-alpha.1",
-  "description": "Knockout JS Binding Handlers",
+  "name": "@profiscience/knockout-contrib-components",
+  "version": "1.0.0-alpha.0",
+  "description": "Knockout JS Components",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components",
   "repository": "Profiscience/knockout-contrib",
-  "global": "ko.contrib.bindings",
+  "global": "ko.contrib.components",
   "keywords": [
     "knockout",
     "knockoutjs",
-    "bindings",
-    "bindingHandlers"
+    "components"
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
   },
-  "main": "dist/knockout-contrib-bindings.js",
+  "main": "dist/knockout-contrib-components.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts",
-    "jquery.js",
-    "jquery.d.ts"
+    "index.d.ts"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-bindings-jquery": "1.0.0-alpha.3"
+    "postcss-loader": "^2.0.9",
+    "postcss-modules": "^1.1.0",
+    "style-loader": "^0.19.1"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

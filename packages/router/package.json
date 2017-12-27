@@ -7,16 +7,16 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-router.js",
+  "main": "dist/knockout-contrib-router.js",
   "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.router",
   "files": [
-    "dist/",
-    "knockout-contrib-router.js"
+    "dist/"
   ],
   "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "karma start"
   },
   "keywords": [
@@ -38,13 +38,13 @@
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "karma": "^1.6.0",
+    "karma": "^2.0.0",
     "karma-firefox-launcher": "^1.0.1",
     "karma-mocha-reporter": "^2.2.2",
     "karma-remap-istanbul": "^0.6.0",
     "karma-rollup-preprocessor": "^5.0.0",
     "karma-tap": "^3.1.1",
-    "rollup-plugin-istanbul": "^1.1.0",
+    "rollup-plugin-istanbul": "^2.0.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.0",
     "rollup-plugin-node-globals": "^1.1.0",

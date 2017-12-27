@@ -10,9 +10,9 @@ declare global {
   }
 }
 
-const {{ camelCase name }}Binding: KnockoutBindingHandler = {
+const {{ camelCase name }}Binding{{#if namespaced }}{{else}}: KnockoutBindingHandler{{/if}} = {
   {{#if namespaced}}
-  getNamespacedHandler(arg: string) {
+  getNamespacedHandler(arg: string){{#if namespaced }}: KnockoutBindingHandler{{/if}} {
     return {
       init(el, valueAccessor, allBindings, viewModel, bindingContext) {
       },

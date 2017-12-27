@@ -1,66 +1,27 @@
 'use strict'
 
 const path = require('path')
-const execa = require('execa')
-const nodeResolve = require('rollup-plugin-node-resolve')
-const commonjs = require('rollup-plugin-commonjs')
+const { without } = require('lodash')
 
-const { LERNA_PACKAGE_NAME } = process.env
 const PACKAGE_PATH = process.cwd()
+const PACKAGE_NAME = path.basename(PACKAGE_PATH)
 const pkg = require(path.join(PACKAGE_PATH, 'package.json'))
 const tsconfig = require(path.join(PACKAGE_PATH, 'tsconfig.json'))
+const dist = path.join(PACKAGE_PATH, 'dist')
 
-const cache = {}
+exports.build = function* (task) {
+  const tasks = ['transpile']
+  const isNodePkg = tsconfig.compilerOptions.module === 'commonjs' // e.g. jest-matchers
+  const isComponent = /components\./.test(PACKAGE_NAME)
 
-exports[`build:${LERNA_PACKAGE_NAME}`] = function* (task) {
-  const tasks = [`transpile:${LERNA_PACKAGE_NAME}`]
+  yield task.clear([dist, ...without(pkg.files, 'webpack.js')])
 
-  yield task.clear(pkg.files)
-
-  // don't bundle node-only code, i.e. jest-matchers
-  if (tsconfig.compilerOptions.module !== 'commonjs') {
-    tasks.push(`bundle:${LERNA_PACKAGE_NAME}`)
+  if (isComponent) {
+    tasks.unshift('styles')
+  }
+  if (!isNodePkg) {
+    tasks.push('bundle')
   }
 
   yield task.serial(tasks)
-}
-
-exports[`transpile:${LERNA_PACKAGE_NAME}`] = function* () {
-  yield execa('../../node_modules/.bin/tsc', { stdio: 'inherit' })
-}
-
-exports[`bundle:${LERNA_PACKAGE_NAME}`] = function* (task) {
-  const dist = path.join(process.cwd(), path.dirname(pkg.main))
-  const bundle = path.basename(pkg.main)
-
-  yield task
-    .source(path.resolve(process.cwd(), pkg.module))
-    .rollup({
-      cache: cache[bundle],
-      external: [
-        'jquery',
-        'knockout',
-        'knockout-punches'
-      ],
-      plugins: [
-        nodeResolve({
-          preferBuiltins: false
-        }),
-        commonjs()
-      ],
-      output: {
-        file: bundle,
-        format: 'umd',
-        globals: {
-          jquery: '$',
-          knockout: 'ko'
-        },
-        name: pkg.global
-      }
-    })
-    .target(dist)
-
-    .uglify()
-    .rename({ suffix: '.min' })
-    .target(dist)
 }

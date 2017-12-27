@@ -2,14 +2,13 @@
   "name": "@profiscience/knockout-contrib-utils-merge",
   "version": "1.0.0-alpha.1",
   "description": "Handy Utilities for Knockout JS",
-  "main": "knockout-contrib-utils-merge.js",
+  "main": "dist/knockout-contrib-utils-merge.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.utils.merge",
   "files": [
-    "dist",
-    "knockout-contrib-utils-merge.js"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -36,5 +35,9 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.1"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

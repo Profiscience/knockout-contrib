@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "target": "es2015",
-    "module": "commonjs",
     "importHelpers": true,
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "es2015",
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "dist",
     "jsx": "react",
     "jsxFactory": "h",
     "lib": [
@@ -17,7 +22,8 @@
     "**/*"
   ],
   "exclude": [
-    "templates",
-    "dist"
+    "dist",
+    "examples",
+    "test.tsx"
   ]
 }

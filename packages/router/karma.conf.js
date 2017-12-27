@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict'
+
 const nodeResolve = require('rollup-plugin-node-resolve')
 const nodeBuiltins = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
@@ -12,6 +14,14 @@ let cache
 module.exports = (config) => {
   config.set({
     basePath: __dirname,
+
+    plugins: [
+      require('karma-firefox-launcher'),
+      require('karma-mocha-reporter'),
+      require('karma-remap-istanbul'),
+      require('karma-rollup-preprocessor'),
+      require('karma-tap')
+    ],
 
     frameworks: ['tap'],
 
@@ -70,8 +80,10 @@ module.exports = (config) => {
           ]
         })
       ],
-      format: 'iife',
-      sourcemap: 'inline'
+      output: {
+        format: 'iife',
+        sourcemap: 'inline'
+      }
     },
 
     remapIstanbulReporter: {

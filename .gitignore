@@ -4,6 +4,7 @@
 package-lock.json
 
 *.map
+*.css.d.ts
 
 .cache/
 .chrome/
@@ -12,5 +13,3 @@ package-lock.json
 coverage/
 dist/
 node_modules/
-
-packages/*/knockout-contrib-*

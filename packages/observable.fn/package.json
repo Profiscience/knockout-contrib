@@ -22,7 +22,6 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "knockout-contrib-observable-fn.js",
     "increment.js",
     "increment.d.ts",
     "subscribeOnce.js",
@@ -30,7 +29,7 @@
     "toString.js",
     "toString.d.ts"
   ],
-  "main": "knockout-contrib-observable-fn.js",
+  "main": "dist/knockout-contrib-observable-fn.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "typings": "index.d.ts",
@@ -38,5 +37,9 @@
     "@profiscience/knockout-contrib-observable-fn-increment": "1.0.0-alpha.1",
     "@profiscience/knockout-contrib-observable-fn-subscribe-once": "1.0.0-alpha.1",
     "@profiscience/knockout-contrib-observable-fn-to-string": "1.0.0-alpha.1"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

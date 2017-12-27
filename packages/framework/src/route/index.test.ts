@@ -45,5 +45,16 @@ describe('Route', () => {
 
       expect((ctx as any).foo).toBe('bar')
     })
+
+    test('works with symbol keys', () => {
+      const FOO = Symbol('foo')
+      const route = new Route('/foo', { with: { [FOO]: 'bar' } })
+      const [middleware] = route['/foo']
+      const ctx = {} as Context
+
+      (middleware as Middleware)(ctx)
+
+      expect((ctx as any)[FOO]).toBe('bar')
+    })
   })
 })

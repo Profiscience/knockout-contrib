@@ -3,22 +3,49 @@
 const path = require('path')
 const { camelCase, kebabCase } = require('lodash')
 
-module.exports = function * (task) {
+exports.meta = function * (task) {
   this._.files = []
 
+  /**
+   * Generate metapackages
+   */
   yield task
     .source(path.join(__dirname, '../packages/*/.meta'))
     .run({ every: true }, function* (metapackage) {
       /* eslint-disable no-invalid-this, no-console */
       const metapackageName = path.basename(metapackage.dir)
       const packages = yield this.$.expand(path.join(__dirname, `../packages/${metapackageName}.*`))
-
       const files = generateMetaFiles(metapackage, packages)
 
-      console.log(`\n🔗  Generated ${metapackageName} metapackage`)
-      files.forEach((f) => console.log(`- ${f.base}`))
+      console.log(`🔗  Generated ${metapackageName} metapackage`)
 
       this._.files.push(...files)
+    })
+    .target(path.join(__dirname, '../packages'))
+
+  /**
+   * Add `build`, `test` task to each package
+   */
+  yield task
+    .source(path.join(__dirname, '../packages/*/package.json'))
+    .run({ every: true }, function* ({ dir, data, base }) { // eslint-disable-line require-yield
+      const pkgJson = JSON.parse(data.toString())
+      const isComponent = pkgJson.name.indexOf('components-') > -1
+      if (!pkgJson.scripts) {
+        pkgJson.scripts = {}
+      }
+      pkgJson.scripts = Object.assign({
+        build: '../../node_modules/.bin/taskr build -d ../..',
+        test: 'DIR=$PWD; cd ../..; yarn test $DIR'
+      }, pkgJson.scripts)
+      if (isComponent) {
+        pkgJson.scripts.watch = '../../node_modules/.bin/taskr watch -d ../..'
+      }
+      this._.files.push({
+        dir,
+        data: Buffer.from(JSON.stringify(pkgJson, null, 2) + '\n'),
+        base
+      })
     })
     .target(path.join(__dirname, '../packages'))
 }
@@ -28,33 +55,15 @@ function generateMetaFiles(metapackage, packages) {
   const metapackageId = `@profiscience/knockout-contrib-${kebabCase(metapackageName)}`
   const exportType = metapackage.data.toString('utf8')
 
-  const tsconfig = {
-    compilerOptions: {
-      moduleResolution: 'node',
-      target: 'es5',
-      module: 'es2015',
-      declaration: true,
-      sourceMap: true,
-      rootDir: './',
-      baseUrl: './',
-      outDir: './'
-    },
-    include: [
-      '**/*'
-    ],
-    exclude: [
-    ]
-  }
-
-  const gitignore = '*\n!.meta\n!package.json\n!README.md'
-
+  const lib = new Set()
   const files = []
 
   const distFiles = [
     'index.js',
-    'index.d.ts',
-    `knockout-contrib-${kebabCase(metapackageName)}.js`
+    'index.d.ts'
   ]
+
+  const gitignore = '*\n!.meta\n!package.json\n!README.md'
 
   const readme = {
     header: [
@@ -101,6 +110,9 @@ function generateMetaFiles(metapackage, packages) {
   packages.forEach((p, i) => {
     const packageName = p.split(metapackageName + '.')[1]
     const { name: packageId } = require(path.join(p, 'package.json'))
+    const requiredLibs = require(path.join(p, 'tsconfig.json')).compilerOptions.lib || []
+
+    requiredLibs.forEach((l) => lib.add(l))
 
     readme.contents += `\n- [${packageName}](../${metapackageName}.${packageName})`
 
@@ -116,7 +128,7 @@ function generateMetaFiles(metapackage, packages) {
       distFiles.push(`${packageName}.js`, `${packageName}.d.ts`)
       files.push({
         dir: metapackage.dir,
-        data: Buffer.from(`import '${packageId}'\n`),
+        data: Buffer.from(`import '${packageId}'\nexport * from '${packageId}'\n`),
         base: `${packageName}.ts`
       })
       if (i === 0) {
@@ -128,10 +140,18 @@ function generateMetaFiles(metapackage, packages) {
 
   readme.usage += '\n```'
 
-  const pkg = Object.assign(require(path.join(metapackage.dir, 'package.json')), {
+  const pkg = require(path.join(metapackage.dir, 'package.json'))
+  const existingDeps = Object.keys(pkg.dependencies).reduce((accum, k) => {
+    if (!/@profiscience\/knockout-contrib/.test(k)) {
+      accum[k] = pkg.dependencies[k]
+    }
+    return accum
+  }, {})
+
+  Object.assign(pkg, {
     name: metapackageId,
     files: distFiles,
-    main: `knockout-contrib-${kebabCase(metapackageName)}.js`,
+    main: `dist/knockout-contrib-${kebabCase(metapackageName)}.js`,
     module: 'index.js',
     'jsnext:main': 'index.js',
     typings: 'index.d.ts',
@@ -140,8 +160,29 @@ function generateMetaFiles(metapackage, packages) {
       return Object.assign(accum, {
         [name]: version
       })
-    }, {})
+    }, existingDeps)
   })
+
+  const tsconfig = {
+    compilerOptions: {
+      moduleResolution: 'node',
+      target: 'es5',
+      module: 'es2015',
+      declaration: true,
+      sourceMap: true,
+      rootDir: './',
+      baseUrl: './',
+      outDir: './',
+    },
+    include: [
+      '**/*'
+    ],
+    exclude: [
+    ]
+  }
+  if (lib.size > 0) {
+    tsconfig.compilerOptions.lib = Array.from(lib)
+  }
 
   files.push(
     {

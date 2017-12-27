@@ -2,14 +2,13 @@
   "name": "@profiscience/knockout-contrib-bindings-{{kebabCase name}}",
   "version": "1.0.0-alpha.0",
   "description": "{{titleCase name}} Binding for KnockoutJS",
-  "main": "knockout-contrib-bindings-{{kebabCase name}}.js",
+  "main": "dist/knockout-contrib-bindings-{{kebabCase name}}.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.bindings.{{camelCase name}}",
   "files": [
-    "dist",
-    "knockout-contrib-bindings-{{kebabCase name}}.js"
+    "dist"
   ],
   "repository": {
     "type": "git",

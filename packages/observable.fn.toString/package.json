@@ -7,14 +7,13 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.toString",
   "repository": "Profiscience/knockout-contrib",
-  "main": "knockout-contrib-observable-fn-to-string.js",
+  "main": "dist/knockout-contrib-observable-fn-to-string.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "global": "ko.contrib.fn.toString",
   "files": [
-    "dist",
-    "knockout-contrib-observable-fn-to-string.js"
+    "dist"
   ],
   "keywords": [
     "knockout",
@@ -27,5 +26,9 @@
   ],
   "peerDependencies": {
     "knockout": "^3.4.0"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }
