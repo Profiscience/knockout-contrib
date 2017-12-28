@@ -8,7 +8,8 @@ echo $BRANCH
 #   then
     yarn build:docs;
     yarn build:examples;
-    cp ./_config.yml;
+    cp ./_config.yml dist;
+    rm -rf node_modules
     find . -name '*.md' -exec cp --parents \{\} dist \;
     tree dist
     ( cd dist
