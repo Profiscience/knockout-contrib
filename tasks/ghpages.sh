@@ -8,9 +8,9 @@ echo $BRANCH
 #   then
     yarn build:docs;
     yarn build:examples;
-    cp ./CNAME dist
-    cp ./countryiso.js dist
-    find . -name '*.md' -exec cp --target-directory dist {} \;
+    cp ./_config.yml;
+    find . -name '*.md' -exec cp --parents \{\} dist \;
+    tree dist
     ( cd dist
     git init
     git config user.name "Travis CI"
