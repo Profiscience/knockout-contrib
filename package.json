@@ -8,8 +8,7 @@
 		"lint": "tslint --project tsconfig.json",
 		"prepush": "yarn lint",
 		"serve:examples": "taskr serve:examples",
-		"test": "cd packages/router && yarn test && cd ../.. && jest",
-		"update:ghpages": "yarn build:docs && yarn build:examples && git add -A && git commit -m \"chore(gh-pages)\""
+		"test": "cd packages/router && yarn test && cd ../.. && jest"
 	},
 	"workspaces": [
 		"packages/*"

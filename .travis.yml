@@ -27,11 +27,10 @@ before_script:
 script:
 - yarn build
 - yarn test
-- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-- echo $BRANCH
-- if [ "$BRANCH" == "master" ]; then yarn update:ghpages; fi
 after_script:
 - codecov
 - greenkeeper-lockfile-upload
+after_success:
+- ./tasks/ghpages.sh
 notifications:
   email: false

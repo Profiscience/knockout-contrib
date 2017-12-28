@@ -74,11 +74,13 @@ async function getWebpackConfig({ ghpages } = {}) {
 
   const output = {
     filename: '[name].entry.js',
-    chunkFilename: '[id].js'
+    chunkFilename: '[id].js',
+    publicPath: '/',
+    path: path.resolve(root, 'examples/dist')
   }
   if (ghpages) {
     output.publicPath = '/knockout-contrib/examples/'
-    output.path = path.resolve(root, 'examples')
+    output.path = path.resolve(root, 'dist/examples')
   }
 
   await Promise.all(
