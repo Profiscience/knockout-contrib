@@ -1,16 +1,15 @@
 {
 	"private": true,
 	"scripts": {
+		"build": "taskr meta && lerna run build",
 		"build:docs": "lerna run build:docs",
 		"build:examples": "taskr build:examples",
-		"update:docs": "yarn build:docs && git add README.md packages/*/README.md && git add packages/*/docs/ && (git commit -m \"chore(docs)\" || true)",
-		"update:examples": "yarn build:examples && git add examples && (git commit -m \"chore(examples)\" || true)",
-		"prepush": "yarn lint && yarn update:examples && yarn update:docs",
-		"build": "taskr meta && lerna run build",
+		"generate": "plop",
 		"lint": "tslint --project tsconfig.json",
-		"test": "cd packages/router && yarn test && cd ../.. && jest",
+		"prepush": "yarn lint",
 		"serve:examples": "taskr serve:examples",
-		"generate": "plop"
+		"test": "cd packages/router && yarn test && cd ../.. && jest",
+		"update:ghpages": "yarn build:docs && yarn build:examples && git add -A && git commit -m \"chore(gh-pages)\""
 	},
 	"workspaces": [
 		"packages/*"

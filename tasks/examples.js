@@ -23,7 +23,7 @@ module.exports = {
     server = yield startExampleDevServer()
   },
   *'build:examples'() {
-    yield buildExamples()
+    yield buildExamples({ ghpages: true })
   }
 }
 
@@ -40,8 +40,8 @@ async function startExampleDevServer() {
     .listen(3000)
 }
 
-async function buildExamples() {
-  const config = await getWebpackConfig()
+async function buildExamples({ ghpages } = {}) {
+  const config = await getWebpackConfig({ ghpages })
   webpack(config, (err, stats) => {
     if (err || stats.hasErrors()) {
       console.error(stats.compilation.errors) // eslint-disable-line no-console
@@ -67,10 +67,19 @@ async function getAliases() {
   }, {})
 }
 
-async function getWebpackConfig() {
+async function getWebpackConfig({ ghpages } = {}) {
   const root = path.resolve(__dirname, '..')
   const entryFiles = await getEntryFiles()
   const entryFileContents = {}
+
+  const output = {
+    filename: '[name].entry.js',
+    chunkFilename: '[id].js'
+  }
+  if (ghpages) {
+    output.publicPath = '/knockout-contrib/examples/'
+    output.path = path.resolve(root, 'examples')
+  }
 
   await Promise.all(
     Object
@@ -84,12 +93,7 @@ async function getWebpackConfig() {
   return {
     context: root,
     entry: entryFiles,
-    output: {
-      publicPath: '/',
-      path: path.resolve(root, 'examples/dist'),
-      filename: '[name].entry.js',
-      chunkFilename: '[id].js'
-    },
+    output,
     devtool: 'inline-source-map',
     module: {
       rules: [
