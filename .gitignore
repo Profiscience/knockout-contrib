@@ -12,4 +12,5 @@ package-lock.json
 .vscode/
 coverage/
 dist/
+docs/
 node_modules/
