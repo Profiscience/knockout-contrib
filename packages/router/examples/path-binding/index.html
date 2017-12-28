@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>path-binding | @profiscience/knockout-contrib-router</title>
-  <style media="screen">
-    router {
-      display: block;
-      border: 1px solid red;
-      padding: 10px;
-      margin: 10px;
-    }
-  </style>
-</head>
-<body>
-  <app></app>
-  <script src="/dist/path-binding.js"></script>
-</body>
-</html>
+<style>
+  router {
+    display: block;
+    border: 1px solid red;
+    padding: 10px;
+    margin: 10px;
+  }
+</style>
+
+These paths exist outside any router, so '/' is good
+<br>
+<a data-bind="path: '/foo'">/foo</a>
+<a data-bind="path: '/bar'">/bar</a>
+
+<router></router>

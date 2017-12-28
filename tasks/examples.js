@@ -11,9 +11,16 @@ const middleware = require('webpack-dev-middleware')
 const HappyPack = require('happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+let server
+
 module.exports = {
-  *'serve:examples'() {
-    yield startExampleDevServer()
+  *'serve:examples'(task) {
+    server = yield startExampleDevServer()
+    yield task.watch('packages/*/examples/index.html', ['restart:examples'])
+  },
+  *'restart:examples'() {
+    server.close()
+    server = yield startExampleDevServer()
   },
   *'build:examples'() {
     yield buildExamples()
@@ -25,7 +32,7 @@ async function startExampleDevServer() {
   const compiler = webpack(config)
   const app = express()
   console.log('\nStarting dev server at http://localhost:3000\n') // eslint-disable-line no-console
-  app
+  return app
     .use(middleware(compiler, {
       // lazy: true,
       publicPath: config.output.publicPath

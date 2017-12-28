@@ -1,10 +1,9 @@
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import template from './index.html'
 
-Router.setConfig({ base: '/transition-animation', hashbang: true })
-
-Router.use(function*(ctx: any): IterableIterator<Promise<void>> {
+const transitionAnimationMiddleware: Middleware = function*(ctx: Context & IContext): IterableIterator<Promise<void>> {
   // ctx.element does not exist before render, for obvious reasons.
   yield
 
@@ -17,24 +16,25 @@ Router.use(function*(ctx: any): IterableIterator<Promise<void>> {
     yield new Promise((resolve) => $el.fadeIn(resolve))
     yield new Promise((resolve) => $el.fadeOut(resolve))
   }
-})
-
+}
 // This is semantically the same, but uses an async generator (which yields a promise)
 // instead of yielding a promise directly
 //
-// Router.use(async function*(ctx: any): AsyncIterableIterator<void> {
+// const transitionAnimationMiddleware = async function*(ctx: Context & IContext): AsyncIterableIterator<void> {
 //   yield
-//
+
 //   if (ctx.element) {
 //     const $el = $(ctx.element)
-//
+
 //     await new Promise((resolve) => $el.fadeIn(resolve))
 //     yield
-//
+
 //     await new Promise((resolve) => $el.fadeOut(resolve))
 //     yield
 //   }
-// })
+// }
+
+Router.use(transitionAnimationMiddleware)
 
 Router.useRoutes({
   '/': (ctx: any) => ctx.redirect('/foo'),
@@ -42,7 +42,6 @@ Router.useRoutes({
   '/bar': 'bar'
 })
 
-ko.components.register('app', { template: '<router></router>' })
 ko.components.register('foo', {
   template: `
     <h1>foo</h1>
@@ -62,4 +61,4 @@ ko.components.register('bar', {
   `
 })
 
-ko.applyBindings()
+ko.components.register('transition-animation', { template })
