@@ -33,7 +33,7 @@ ko.components.register('login', {
   viewModel: class {
     public login() {
       sessionStorage.setItem('authenticated', 'true')
-      Router.update('/')
+      Router.update('/').catch((err) => console.error('Error navigating', err)) // tslint:disable-line no-console
     }
   },
   template: `
