@@ -19,12 +19,17 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 
 # Packages
 - [bindings](./packages/bindings)
+- [components](./packages/components)
 - [framework](./packages/framework)
 - [jest-matchers](./packages/jest-matchers)
 - [observable.fn](./packages/observable.fn)
 - [querystring](./packages/querystring)
 - [router](./packages/router)
 - [utils](./packages/utils)
+
+[Examples][]
+
+[Examples]: ./examples/dist
 
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
