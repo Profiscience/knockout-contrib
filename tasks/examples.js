@@ -34,7 +34,7 @@ async function startExampleDevServer() {
   console.log('\nStarting dev server at http://localhost:3000\n') // eslint-disable-line no-console
   return app
     .use(middleware(compiler, {
-      // lazy: true,
+      lazy: true,
       publicPath: config.output.publicPath
     }))
     .listen(3000)
