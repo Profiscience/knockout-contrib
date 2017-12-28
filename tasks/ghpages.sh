@@ -6,7 +6,7 @@ echo $BRANCH
 
 # if [ "$BRANCH" == "master" ]
 #   then
-    yarn build:docs --since master;
+    yarn build:docs;
     yarn build:examples;
     cp ./CNAME dist
     cp ./countryiso.js dist

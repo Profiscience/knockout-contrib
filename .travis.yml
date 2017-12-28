@@ -25,7 +25,7 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 - greenkeeper-lockfile-update
 script:
-- yarn build --since master
+- yarn build
 - yarn test
 after_script:
 - codecov
