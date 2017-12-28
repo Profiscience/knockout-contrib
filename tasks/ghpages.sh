@@ -11,6 +11,7 @@ echo $BRANCH
     cp ./_config.yml dist;
     find . -name '*.md' -exec cp --parents \{\} dist \;
     ( cd dist
+    rm -rf node_modules
     git init
     git config user.name "Travis CI"
     git config user.email "travis@profiscience.com"
