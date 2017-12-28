@@ -1,13 +1,8 @@
-import ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import * as ko from 'knockout'
+import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import template from './index.html'
 
-Router.setConfig({
-  base: '/simple-auth',
-  hashbang: true
-})
-
-// globally registered auth middleware, runs for every route
-Router.use((ctx) => {
+const authMiddleware: Middleware = (ctx: Context & IContext) => {
   const isLoginPage = ctx.path === '/login'
   const isLoggedIn = sessionStorage.getItem('authenticated')
 
@@ -16,7 +11,10 @@ Router.use((ctx) => {
   } else if (isLoggedIn && isLoginPage) {
     ctx.redirect('//')
   }
-})
+}
+
+// globally registered auth middleware, runs for every route
+Router.use(authMiddleware)
 
 Router.useRoutes({
   '/': 'home',
@@ -28,15 +26,13 @@ Router.useRoutes({
 })
 
 ko.components.register('home', {
-  template: `
-    <a data-bind="path: '/logout'">Logout</a>
-  `
+  template: '<a data-bind="path: \'/logout\'">Logout</a>'
 })
 
 ko.components.register('login', {
   viewModel: class {
-    login() {
-      sessionStorage.setItem('authenticated', true)
+    public login() {
+      sessionStorage.setItem('authenticated', 'true')
       Router.update('/')
     }
   },
@@ -46,4 +42,4 @@ ko.components.register('login', {
   `
 })
 
-ko.applyBindings()
+ko.components.register('simple-auth', { template })

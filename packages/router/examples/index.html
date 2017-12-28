@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>examples | @profiscience/knockout-contrib-router</title>
-</head>
-<body>
-  <ul>
-    <li><a href="hashbang">hashbang</a></li>
-    <li><a href="lazy-loading">lazy-loading</a></li>
-    <li><a href="loading-animation">loading-animation</a></li>
-    <li><a href="mvc">mvc</a></li>
-    <li><a href="path-binding">path-binding</a></li>
-    <li><a href="simple-auth">simple auth</a></li>
-    <li><a href="transition-animation">transition-animation</a></li>
-  </ul>
-</body>
-</html>
+<div data-bind="ifnot: exampleComponent">
+  <label for="example-selector">
+    Select an example:
+  </label>
+  
+  <select name="example-selector" data-bind="options: examples, value: selectedExample, valueAllowUnset: true">
+  </select>
+</div>
+
+<div data-bind="if: exampleComponent">
+  <div data-bind="component: exampleComponent"></div>
+  <hr>
+  <small>Refresh the page to select another example</small>
+</div>

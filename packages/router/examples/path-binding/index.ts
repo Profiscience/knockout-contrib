@@ -1,5 +1,6 @@
 import ko from 'knockout'
 import { Router } from '@profiscience/knockout-contrib-router'
+import template from './index.html'
 
 function createOuterTemplate(foo) {
   return `
@@ -39,17 +40,6 @@ function createInnerTemplate(foo) {
   `
 }
 
-ko.components.register('app', {
-  template: `
-    These paths exist outside any router, so '/' is good
-    <br>
-    <a data-bind="path: '/foo'">/foo</a>
-    <a data-bind="path: '/bar'">/bar</a>
-
-    <router></router>
-  `
-})
-
 ko.components.register('empty', { template: '<span></span>' })
 
 ko.components.register('foo', { template: createOuterTemplate('foo') })
@@ -75,8 +65,4 @@ Router.useRoutes({
   ]
 })
 
-Router.setConfig({
-  base: '/path-binding'
-})
-
-ko.applyBindings()
+ko.components.register('path-binding', { template })
