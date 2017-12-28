@@ -5,7 +5,7 @@
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR",
-    "build:docs": "rm -r docs && typedoc --out docs --name @profiscience/framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
+    "build:docs": "typedoc --out ../../dist/api/framework --name @profiscience/knockout-contrib-framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported src/index.ts"
   },
   "main": "dist/knockout-contrib-framework.js",
   "global": "ko.contrib.framework",

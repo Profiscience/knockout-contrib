@@ -30,5 +30,7 @@ script:
 after_script:
 - codecov
 - greenkeeper-lockfile-upload
+after_success:
+- ./tasks/ghpages.sh
 notifications:
   email: false
