@@ -5,5 +5,7 @@ const path = require('path')
 const tasks = fs.readdirSync(path.resolve(__dirname, 'tasks'))
 
 for (const t of tasks) {
-  Object.assign(exports, require(`./tasks/${t}`))
+  if (path.extname(t) === '.js') {
+    Object.assign(exports, require(`./tasks/${t}`))
+  }
 }
