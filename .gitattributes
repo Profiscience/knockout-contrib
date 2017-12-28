@@ -6,3 +6,5 @@ packages/observable.fn/*.js linguist-generated=true
 
 packages/utils/*.ts linguist-generated=true
 packages/utils/*.js linguist-generated=true
+
+examples/dist/**/*.* linguist-generated=true
