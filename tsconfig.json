@@ -11,6 +11,10 @@
       "es5",
       "es2015",
       "esnext.asynciterable"
+    ],
+    "typeRoots": [
+      "@types",
+      "node_modules/@types"
     ]
   },
   "include": [
