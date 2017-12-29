@@ -7,15 +7,18 @@
 [![Gitter][gitter-shield]][gitter]
 [![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
+
 This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS](https://knockoutjs.com)
+
 
 # Installation
 Individual packages are published under the `@profiscience/knockout-contrib-*` namespace, with package names kebab-cased.
 
 e.g.
 ```bash
-$ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-observble-fns
+$ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-observble-fn
 ```
+
 
 # Packages
 - [bindings](./packages/bindings)
@@ -27,9 +30,8 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 - [router](./packages/router)
 - [utils](./packages/utils)
 
-[Examples][]
 
-[Examples]: ./examples/dist
+[Contributing][./CONTRIBUTING.md]
 
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
