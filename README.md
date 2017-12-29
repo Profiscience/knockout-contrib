@@ -31,7 +31,7 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 - [utils](./packages/utils)
 
 
-[Contributing][./CONTRIBUTING.md]
+[Contributing](./CONTRIBUTING.md)
 
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
