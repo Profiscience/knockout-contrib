@@ -17,7 +17,7 @@
 		"@taskr/clear": "^1.1.0",
 		"@taskr/postcss": "^1.1.2",
 		"@taskr/watch": "^1.1.0",
-		"@types/jest": "^21.1.5",
+		"@types/jest": "^22.0.0",
 		"@types/jsdom": "^11.0.3",
 		"@types/knockout": "^3.4.0",
 		"@types/lodash": "^4.14.80",
