@@ -6,8 +6,6 @@ ko.components.register('element', {
   template: '<router></router>',
   viewModel: class Element {
     constructor({ t, done }) {
-      const count = 0
-
       Router.useRoutes({
         '/': [
           (ctx) => ({
@@ -26,7 +24,6 @@ ko.components.register('element', {
             },
             afterRender() {
               const actual = document.getElementById('foo-view').parentElement
-              debugger // eslint-disable-line
               t.equals(ctx.element, actual, 'ctx.element is router-view container after render')
               done()
             }
