@@ -249,10 +249,14 @@ export class Router {
     return this
   }
 
-  public static useRoutes(routes: RouteMap): typeof Router {
-    Router.routes.push(...Object
-      .keys(routes)
-      .map((path) => new Route(path, ...castArray(routes[path]))))
+  public static useRoutes(routes: RouteMap | Route[]): typeof Router {
+    if (Array.isArray(routes)) {
+      Router.routes.push(...routes)
+    } else {
+      Router.routes.push(...Object
+        .keys(routes)
+        .map((path) => new Route(path, ...castArray(routes[path]))))
+    }
     return this
   }
 

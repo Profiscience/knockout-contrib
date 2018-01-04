@@ -10,13 +10,15 @@ import * as params from './params'
 import * as nested from './nested'
 import * as similar from './similar'
 import * as ambiguous from './ambiguous'
+// import * as routeConstructor from './route-constructor'
 
 const tests = [
   basic,
   params,
   nested,
   similar,
-  ambiguous
+  ambiguous,
+  // routeConstructor
 ]
 
 const paths = map(tests, 'path')

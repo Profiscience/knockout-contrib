@@ -2,7 +2,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import merge from 'lodash/merge'
 import ko from 'knockout'
 
-import { Router } from '../dist'
+import { Route, Router } from '../dist'
 
 ko.components.register('plugins', {
   template: '<router></router>',
@@ -47,6 +47,13 @@ ko.components.register('plugins', {
         },
       })
 
+      Router.useRoutes([
+        new Route('/route-constructor', {
+          component: 'route-constructor',
+          data: Promise.resolve(true)
+        })
+      ])
+
       ko.components.register('component', {
         viewModel: class {
           constructor() {
@@ -78,6 +85,15 @@ ko.components.register('plugins', {
         viewModel: class {
           constructor(ctx) {
             t.equals(true, ctx.data, 'plugins can be composed')
+            Router.update('/route-constructor')
+          }
+        }
+      })
+
+      ko.components.register('route-constructor', {
+        viewModel: class {
+          constructor(ctx) {
+            t.equals(true, ctx.data, 'plugins work with route constructor')
             done()
           }
         }
@@ -85,7 +101,7 @@ ko.components.register('plugins', {
     }
 
     dispose() {
-      Router.plugins = []
+      Route.plugins = []
     }
   }
 })
