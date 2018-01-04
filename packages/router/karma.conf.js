@@ -9,19 +9,59 @@ const commonjs = require('rollup-plugin-commonjs')
 const json = require('rollup-plugin-json')
 const rollupIstanbul = require('rollup-plugin-istanbul')
 
+const { TRAVIS, DEBUG } = process.env
+
+const karmaPlugins = [
+  require('karma-firefox-launcher'),
+  require('karma-mocha-reporter'),
+  require('karma-rollup-preprocessor'),
+  require('karma-tap')
+]
+
+const karmaReporters = ['mocha']
+
+const rollupPlugins = [
+  json(),
+  commonjs({
+    namedExports: {
+      knockout: [
+        'applyBindings',
+        'applyBindingsToNode',
+        'bindingHandlers',
+        'components',
+        'observable',
+        'pureComputed',
+        'tasks',
+        'unwrap'
+      ]
+    }
+  }),
+  nodeGlobals(),
+  nodeBuiltins(),
+  nodeResolve({
+    preferBuiltins: true
+  })
+]
+
 let cache
+
+if (TRAVIS) {
+  karmaPlugins.push(require('karma-remap-istanbul'))
+  karmaReporters.push('karma-remap-istanbul')
+  rollupPlugins.push(
+    rollupIstanbul({
+      include: [
+        'dist/**/*'
+      ]
+    })
+  )
+}
 
 module.exports = (config) => {
   config.set({
     basePath: __dirname,
 
-    plugins: [
-      require('karma-firefox-launcher'),
-      require('karma-mocha-reporter'),
-      require('karma-remap-istanbul'),
-      require('karma-rollup-preprocessor'),
-      require('karma-tap')
-    ],
+    plugins: karmaPlugins,
 
     frameworks: ['tap'],
 
@@ -45,41 +85,15 @@ module.exports = (config) => {
     },
 
     // to debug, comment out singleRun, and uncomment autoWatch
-    singleRun: true,
-    // autoWatch: false,
+    singleRun: !DEBUG,
+    autoWatch: !DEBUG,
 
-    reporters: ['mocha', 'karma-remap-istanbul'],
+    reporters: karmaReporters,
 
     rollupPreprocessor: {
       treeshake: false,
       cache,
-      plugins: [
-        json(),
-        commonjs({
-          namedExports: {
-            knockout: [
-              'applyBindings',
-              'applyBindingsToNode',
-              'bindingHandlers',
-              'components',
-              'observable',
-              'pureComputed',
-              'tasks',
-              'unwrap'
-            ]
-          }
-        }),
-        nodeGlobals(),
-        nodeBuiltins(),
-        nodeResolve({
-          preferBuiltins: true
-        }),
-        rollupIstanbul({
-          include: [
-            'dist/**/*'
-          ]
-        })
-      ],
+      plugins: rollupPlugins,
       output: {
         format: 'iife',
         sourcemap: 'inline'
