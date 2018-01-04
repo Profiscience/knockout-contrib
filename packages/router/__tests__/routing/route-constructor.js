@@ -8,8 +8,6 @@ ko.components.register('route-constructor', {
     constructor(ctx) {
       const { t, done } = ctx
 
-      ko.components.register('nested', { template: '<router></router>' })
-
       ko.components.register('spread', {
         viewModel: class {
           constructor() {
@@ -28,7 +26,7 @@ ko.components.register('route-constructor', {
         }
       })
 
-      ko.components.register('middleware', {
+      ko.components.register('route-constructor-middleware', {
         viewModel: class {
           constructor(ctx) {
             t.true(ctx.spreadMiddlewareHit, 'middleware spread in arguments is used')
@@ -50,20 +48,22 @@ export const path = '/nested/spread'
  * needs to be flattened.
  */
 export const routes = [
-  new Route('/nested', 'nested',
-    new Route('/spread', 'spread'),
-    [
-      new Route('/arr', 'arr')
-    ]
-  ),
-  new Route('/middleware', 'middleware',
-    (ctx) => {
-      ctx.spreadMiddlewareHit = true
-    },
-    [
+  new Route('/', 'route-constructor', [
+    new Route('/nested',
+      new Route('/spread', 'spread'),
+      [
+        new Route('/arr', 'arr')
+      ]
+    ),
+    new Route('/middleware', 'route-constructor-middleware',
       (ctx) => {
-        ctx.arrMiddlewareHit = true
-      }
-    ]
-  )
+        ctx.spreadMiddlewareHit = true
+      },
+      [
+        (ctx) => {
+          ctx.arrMiddlewareHit = true
+        }
+      ]
+    )
+  ])
 ]

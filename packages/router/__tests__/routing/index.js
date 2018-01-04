@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import extend from 'lodash/extend'
 import map from 'lodash/map'
 
 import { Router } from '../../dist'
@@ -10,7 +9,7 @@ import * as params from './params'
 import * as nested from './nested'
 import * as similar from './similar'
 import * as ambiguous from './ambiguous'
-// import * as routeConstructor from './route-constructor'
+import * as routeConstructor from './route-constructor'
 
 const tests = [
   basic,
@@ -18,7 +17,7 @@ const tests = [
   nested,
   similar,
   ambiguous,
-  // routeConstructor
+  routeConstructor
 ]
 
 const paths = map(tests, 'path')
@@ -29,7 +28,8 @@ ko.components.register('routing', {
     constructor({ t, done }) {
       Router.useRoutes(init.routes)
       history.pushState(null, null, init.path)
-      Router.useRoutes(extend({}, ...map(tests, 'routes')))
+
+      tests.forEach((test) => Router.useRoutes(test.routes))
 
       let resolve
       new Promise((_resolve) => (resolve = _resolve))

@@ -1,5 +1,6 @@
 import isUndefined from 'lodash/isUndefined'
 import castArray from 'lodash/castArray'
+import flatten from 'lodash/flatten'
 // this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
 import pathToRegexp from 'path-to-regexp'
@@ -40,6 +41,9 @@ export class Route {
   constructor(public path: string, ...config: RouteConfig[]) {
     Object.assign(this, Route.parseConfig(config))
     Object.assign(this, Route.parsePath(path, this.children.length > 0))
+    if (this.children.length > 0 && !this.component) {
+      this.component = 'router'
+    }
   }
 
   public matches(path: string) {
@@ -95,14 +99,13 @@ export class Route {
         component = configEntry
       } else if (typeof configEntry === 'function') {
         middleware.push(configEntry)
+      } else if (configEntry instanceof Route) {
+        children.push(configEntry)
       } else {
         children.push(...
           Object.keys((configEntry as { [k: string]: RouteConfig[] }))
             .map((childPath) => new Route(childPath, ...castArray(configEntry[childPath])))
         )
-        if (!component) {
-          component = 'router'
-        }
       }
     }
 
@@ -115,14 +118,14 @@ export class Route {
         const pluginStack = plugin(configEntry)
         return isUndefined(pluginStack)
           ? allPluginsStack
-          : [...allPluginsStack, ...castArray(pluginStack)]
+          : [...allPluginsStack, ...flatten(castArray(pluginStack))]
       }, [])
       return [
         ...routeStack,
         ...(
           configViaPlugins.length > 0
             ? configViaPlugins
-            : [configEntry as string | Middleware | { [k: string]: RouteConfig[] }]
+            : flatten(castArray(configEntry as any))
         )
       ]
     }, [])
