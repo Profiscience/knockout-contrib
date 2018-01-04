@@ -1,26 +1,22 @@
 import isBoolean from 'lodash/isBoolean'
-import isPlainObject from 'lodash/isPlainObject'
 import isUndefined from 'lodash/isUndefined'
 import castArray from 'lodash/castArray'
 import extendWith from 'lodash/extendWith'
-import flatMap from 'lodash/flatMap'
 import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import reduce from 'lodash/reduce'
 import * as ko from 'knockout'
-import { IContext, IRouteConfig } from './'
+import { IContext } from './'
 import { Context } from './context'
-import { Route, LegacyRouteConfig, LegacyRouteMap } from './route'
+import { RoutePlugin, Route, RouteMap } from './route'
 import {
   Callback,
-  MaybeArray,
+  MaybePromise,
   traversePath,
   log
 } from './utils'
 
-export type SimpleMiddleware = (ctx: Context & IContext, done?: () => any) =>
-  | Promise<void>
-  | void
+export type SimpleMiddleware =
+  | ((ctx: Context & IContext) => MaybePromise<void>)
+  | ((ctx: Context & IContext, done?: () => void) => void)
 
 export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
   beforeRender?: Callback<void>
@@ -30,24 +26,17 @@ export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
 }
 
 export type LifecycleGeneratorMiddleware = (ctx: Context & IContext) =>
+  // sync generators yielding nothing or a promise
   | IterableIterator<void | Promise<void>>
+  // async generators (async/await in block, but yield nothing)
   | AsyncIterableIterator<void>
 
 export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
-
-export type MaybeNormalizedRouteConfig = MaybeArray<IRouteConfig> | MaybeArray<LegacyRouteConfig>
-
-export type RouteMap = {
-  [k: string]: MaybeNormalizedRouteConfig
-}
-
-export type Plugin = (routeConfig: IRouteConfig | LegacyRouteConfig) => MaybeArray<LegacyRouteConfig>
 
 export class Router {
   public static head: Router
   public static onInit: ((router: Router) => void)[] = []
   public static middleware: Middleware[] = []
-  public static plugins: Plugin[] = []
   public static config: {
     base?: string
     hashbang?: boolean
@@ -254,13 +243,16 @@ export class Router {
     return this
   }
 
-  public static usePlugin(...fns: Plugin[]): typeof Router {
-    Router.plugins.push(...fns)
+  public static usePlugin(...fns: RoutePlugin[]): typeof Router {
+    log.warn('Router.usePlugin() is deprecated. Use Route.usePlugin().')
+    Route.usePlugin(...fns)
     return this
   }
 
   public static useRoutes(routes: RouteMap): typeof Router {
-    Router.routes.push(...Router.createRoutes(Router.normalizeRoutes(routes)))
+    Router.routes.push(...Object
+      .keys(routes)
+      .map((path) => new Route(path, ...castArray(routes[path]))))
     return this
   }
 
@@ -361,36 +353,6 @@ export class Router {
 
   private static hasRoute(path: string) {
     return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
-  }
-
-  private static createRoutes(routes: LegacyRouteMap): Route[] {
-    return map(routes, (config, path) => new Route(path, ...config))
-  }
-
-  private static normalizeRoutes(routes: RouteMap): LegacyRouteMap {
-    return mapValues(routes, (c) =>
-      map(Router.runPlugins(c), (routeConfig) =>
-        isPlainObject(routeConfig)
-          ? Router.normalizeRoutes(routeConfig as LegacyRouteMap)
-          : routeConfig))
-  }
-
-  private static runPlugins(config: MaybeNormalizedRouteConfig): LegacyRouteConfig[] {
-    return flatMap(castArray(config), (rc) => {
-      const routeConfig = reduce(
-        Router.plugins,
-        (accum, plugin) => {
-          const prc = plugin(rc)
-          return isUndefined(prc)
-            ? accum as LegacyRouteConfig[]
-            : accum.concat(castArray<LegacyRouteConfig>(prc))
-        }
-        , [] as LegacyRouteConfig[]
-      )
-      return routeConfig.length > 0
-        ? routeConfig
-        : rc as LegacyRouteConfig[]
-    })
   }
 
   private static sameOrigin(href: string) {
