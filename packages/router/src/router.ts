@@ -10,7 +10,7 @@ import reduce from 'lodash/reduce'
 import * as ko from 'knockout'
 import { IContext, IRouteConfig } from './'
 import { Context } from './context'
-import { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
+import { Route, LegacyRouteConfig, LegacyRouteMap } from './route'
 import {
   Callback,
   MaybeArray,
@@ -35,13 +35,13 @@ export type LifecycleGeneratorMiddleware = (ctx: Context & IContext) =>
 
 export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
 
-export type MaybeNormalizedRouteConfig = MaybeArray<IRouteConfig> | MaybeArray<NormalizedRouteConfig>
+export type MaybeNormalizedRouteConfig = MaybeArray<IRouteConfig> | MaybeArray<LegacyRouteConfig>
 
 export type RouteMap = {
   [k: string]: MaybeNormalizedRouteConfig
 }
 
-export type Plugin = (routeConfig: IRouteConfig | NormalizedRouteConfig) => MaybeArray<NormalizedRouteConfig>
+export type Plugin = (routeConfig: IRouteConfig | LegacyRouteConfig) => MaybeArray<LegacyRouteConfig>
 
 export class Router {
   public static head: Router
@@ -363,33 +363,33 @@ export class Router {
     return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
   }
 
-  private static createRoutes(routes: NormalizedRouteMap): Route[] {
-    return map(routes, (config, path) => new Route(path, config))
+  private static createRoutes(routes: LegacyRouteMap): Route[] {
+    return map(routes, (config, path) => new Route(path, ...config))
   }
 
-  private static normalizeRoutes(routes: RouteMap): NormalizedRouteMap {
+  private static normalizeRoutes(routes: RouteMap): LegacyRouteMap {
     return mapValues(routes, (c) =>
       map(Router.runPlugins(c), (routeConfig) =>
         isPlainObject(routeConfig)
-          ? Router.normalizeRoutes(routeConfig as NormalizedRouteMap)
+          ? Router.normalizeRoutes(routeConfig as LegacyRouteMap)
           : routeConfig))
   }
 
-  private static runPlugins(config: MaybeNormalizedRouteConfig): NormalizedRouteConfig[] {
+  private static runPlugins(config: MaybeNormalizedRouteConfig): LegacyRouteConfig[] {
     return flatMap(castArray(config), (rc) => {
       const routeConfig = reduce(
         Router.plugins,
         (accum, plugin) => {
           const prc = plugin(rc)
           return isUndefined(prc)
-            ? accum as NormalizedRouteConfig[]
-            : accum.concat(castArray<NormalizedRouteConfig>(prc))
+            ? accum as LegacyRouteConfig[]
+            : accum.concat(castArray<LegacyRouteConfig>(prc))
         }
-        , [] as NormalizedRouteConfig[]
+        , [] as LegacyRouteConfig[]
       )
       return routeConfig.length > 0
         ? routeConfig
-        : rc as NormalizedRouteConfig[]
+        : rc as LegacyRouteConfig[]
     })
   }
 

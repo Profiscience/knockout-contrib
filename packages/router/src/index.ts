@@ -4,7 +4,7 @@ import './bindings'
 import './component'
 
 export { Context } from './context'
-export { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
+export { Route, LegacyRouteConfig, LegacyRouteMap } from './route'
 export { Router, Middleware, Plugin } from './router'
 export { isActivePath, resolveHref } from './utils'
 

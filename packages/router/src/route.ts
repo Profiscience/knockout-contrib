@@ -8,13 +8,27 @@ import reduce from 'lodash/reduce'
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
 import pathToRegexp from 'path-to-regexp'
 import { Key } from 'path-to-regexp'
+import { IRouteConfig } from './'
 import { Middleware } from './router'
 
-export type NormalizedRouteMap = {
-  [name: string]: NormalizedRouteConfig[]
+export type LegacyRouteMap = {
+  [name: string]: LegacyRouteConfig[]
 }
 
-export type NormalizedRouteConfig = string | NormalizedRouteMap | Middleware
+export type LegacyRouteConfig = string | LegacyRouteMap | Middleware
+
+export type RouteConfig = (
+  | IRouteConfig  // custom route config, used w/ plugins
+  | string        // component name
+  | Middleware    // middleware
+  | Route[]       // children
+)[]
+
+type NormalizedRouteConfig = {
+  component?: string
+  middleware?: Middleware[]
+  children?: Route[]
+}
 
 export class Route {
   public path: string
@@ -25,8 +39,8 @@ export class Route {
 
   private regexp: RegExp
 
-  constructor(path: string, config: NormalizedRouteConfig[]) {
-    const [component, middleware, children] = Route.parseConfig(config)
+  constructor(path: string, ...config: RouteConfig) {
+    const { component, middleware, children } = Route.parseConfig(config)
     this.path = path
     this.component = component
     this.middleware = middleware
@@ -74,7 +88,7 @@ export class Route {
     return { params, pathname, childPath }
   }
 
-  private static parseConfig(config: (string | NormalizedRouteMap | Middleware)[]): [string, Middleware[], Route[]] {
+  private static parseConfig(config: RouteConfig): NormalizedRouteConfig {
     let component: string
     let children: Route[]
 
@@ -82,14 +96,14 @@ export class Route {
       config,
       (
         accum: Middleware[],
-        m: string | NormalizedRouteMap | Middleware
+        m: string | LegacyRouteMap | Middleware
       ) => {
         if (isString(m)) {
           m = m as string
           component = m
         } else if (isPlainObject(m)) {
-          m = m as NormalizedRouteMap
-          children = map(m, (routeConfig, path) => new Route(path, routeConfig))
+          m = m as LegacyRouteMap
+          children = map(m, (routeConfig, path) => new Route(path, ...routeConfig))
           if (!component) {
             component = 'router'
           }
@@ -100,7 +114,7 @@ export class Route {
         return accum
       }, [])
 
-    return [component, middleware, children]
+    return { component, middleware, children }
   }
 
   private static parsePath(path: string, hasChildren: boolean) {
