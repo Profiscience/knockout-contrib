@@ -2,7 +2,6 @@ import isBoolean from 'lodash/isBoolean'
 import isPlainObject from 'lodash/isPlainObject'
 import isUndefined from 'lodash/isUndefined'
 import castArray from 'lodash/castArray'
-import extend from 'lodash/extend'
 import extendWith from 'lodash/extendWith'
 import flatMap from 'lodash/flatMap'
 import map from 'lodash/map'
@@ -59,7 +58,7 @@ export class Router {
     activePathCSSClass: 'active-path'
   }
 
-  private static routes: NormalizedRouteMap = {}
+  private static routes: Route[] = []
   private static events: {
     click: string,
     popstate: string
@@ -85,7 +84,7 @@ export class Router {
     this.isNavigating = ko.observable(true)
     this.isRoot = isUndefined($parentCtx)
     this.routes = this.isRoot
-      ? Router.createRoutes(Router.routes)
+      ? Router.routes
       : $parentCtx.route.children
 
     if (this.isRoot) {
@@ -264,7 +263,7 @@ export class Router {
   }
 
   public static useRoutes(routes: RouteMap): typeof Router {
-    extend(Router.routes, Router.normalizeRoutes(routes))
+    Router.routes.push(...Router.createRoutes(Router.normalizeRoutes(routes)))
     return this
   }
 
