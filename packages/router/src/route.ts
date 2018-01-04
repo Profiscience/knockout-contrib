@@ -16,11 +16,11 @@ export type RouteMap = {
 export type RoutePlugin = (routeConfig: IRouteConfig) => MaybeArray<RouteConfig>
 
 export type RouteConfig =
-  | IRouteConfig      // custom route config, used w/ plugins
-  | string            // component name
-  | Middleware        // middleware
-  | MaybeArray<Route> // children
-  | RouteMap          // children, object shorthand
+  | MaybeArray<IRouteConfig> // custom route config, used w/ plugins
+  | MaybeArray<string>       // component name
+  | MaybeArray<Middleware>   // middleware
+  | MaybeArray<Route>        // children
+  | MaybeArray<RouteMap>     // children, object shorthand
 
 type NormalizedRouteConfig = {
   component?: string
