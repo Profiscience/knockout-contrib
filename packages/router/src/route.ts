@@ -31,7 +31,6 @@ type NormalizedRouteConfig = {
 }
 
 export class Route {
-  public path: string
   public component: string
   public middleware: Middleware[]
   public children: Route[]
@@ -39,16 +38,9 @@ export class Route {
 
   private regexp: RegExp
 
-  constructor(path: string, ...config: RouteConfig) {
-    const { component, middleware, children } = Route.parseConfig(config)
-    this.path = path
-    this.component = component
-    this.middleware = middleware
-    this.children = children
-
-    const { keys, regexp } = Route.parsePath(path, !isUndefined(children))
-    this.keys = keys
-    this.regexp = regexp
+  constructor(public path: string, ...config: RouteConfig) {
+    Object.assign(this, Route.parseConfig(config))
+    Object.assign(this, Route.parsePath(path, !isUndefined(this.children)))
   }
 
   public matches(path: string) {
