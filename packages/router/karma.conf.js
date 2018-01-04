@@ -2,13 +2,6 @@
 
 'use strict'
 
-const nodeResolve = require('rollup-plugin-node-resolve')
-const nodeBuiltins = require('rollup-plugin-node-builtins')
-const nodeGlobals = require('rollup-plugin-node-globals')
-const commonjs = require('rollup-plugin-commonjs')
-const json = require('rollup-plugin-json')
-const rollupIstanbul = require('rollup-plugin-istanbul')
-
 const { TRAVIS, DEBUG } = process.env
 
 const karmaPlugins = [
@@ -21,8 +14,8 @@ const karmaPlugins = [
 const karmaReporters = ['mocha']
 
 const rollupPlugins = [
-  json(),
-  commonjs({
+  require('rollup-plugin-json')(),
+  require('rollup-plugin-commonjs')({
     namedExports: {
       knockout: [
         'applyBindings',
@@ -36,9 +29,9 @@ const rollupPlugins = [
       ]
     }
   }),
-  nodeGlobals(),
-  nodeBuiltins(),
-  nodeResolve({
+  require('rollup-plugin-node-globals')(),
+  require('rollup-plugin-node-builtins')(),
+  require('rollup-plugin-node-resolve')({
     preferBuiltins: true
   })
 ]
@@ -49,7 +42,7 @@ if (TRAVIS) {
   karmaPlugins.push(require('karma-remap-istanbul'))
   karmaReporters.push('karma-remap-istanbul')
   rollupPlugins.push(
-    rollupIstanbul({
+    require('rollup-plugin-istanbul')({
       include: [
         'dist/**/*'
       ]

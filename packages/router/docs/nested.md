@@ -1,10 +1,13 @@
 # Nested
 
-Nested routes are registered by passing a route object as the config for another route
-object. Easy enough.
+Nested routes are registered by
 
-```javascript
-import ko from 'knockout'
+- with constructor syntax by including a route as an argument to the parent
+- with object syntax by including another route map in the config
+
+### Object Syntax
+```typescript
+import * as ko from 'knockout'
 import { Router } from '@profiscience/knockout-contrib-router'
 
 Router.useRoutes({
@@ -15,11 +18,37 @@ Router.useRoutes({
     '/:id/edit': 'user-edit'
   }
 })
+```
 
-ko.components.register('user-list', ...)
-ko.components.register('user-create', ...)
-ko.components.register('user-show', ...)
-ko.components.register('user-edit', ...)
+### Route Constructor Syntax
+```typescript
+import * as ko from 'knockout'
+import { Route, Router } from '@profiscience/knockout-contrib-router'
+
+Router.useRoutes([
+  new Route('/user', [
+    new Route('/', 'user-list'),
+    new Route('/', 'user-create'),
+    new Route('/:id', 'user-show'),
+    new Route('/:id/edit', 'user-edit')
+  ])
+])
+```
+
+You can also mix-and-match, should you find it appropriate...
+
+```typescript
+import * as ko from 'knockout'
+import { Route, Router } from '@profiscience/knockout-contrib-router'
+
+Router.useRoutes([
+  new Route('/user', {
+    '/': 'user-list',
+    '/new': 'user-create',
+    '/:id': 'user-show',
+    '/:id/edit': 'user-edit'
+  })
+])
 ```
 
 ## Custom Wrapper Components
@@ -56,11 +85,6 @@ ko.components.register('user-header', {
     <router></router>
   `
 })
-
-ko.components.register('user-list', ...)
-ko.components.register('user-create', ...)
-ko.components.register('user-show', ...)
-ko.components.register('user-edit', ...)
 ```
 
 ## Passing Data to Children

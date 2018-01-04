@@ -20,11 +20,13 @@ and stop it in the `afterRender`.
 For a contrived example of this, you could create a data plugin that enables you
 to have route configs like...
 
-```javascript
-export default {
+```typescript
+import { Route } from '@profiscience/knockout-contrib-router'
+
+export default new Route('/', {
   component: 'component-name',
   api: '/api/some/api/endpoint'
-}
+})
 ```
 
 Your `api` plugin could then accumulate any necessary params from `ctx.params` and

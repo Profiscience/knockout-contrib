@@ -17,7 +17,7 @@ ko.components.register('foo', {
   template: '<h1>FOO!</h1>'
 })
 
-Router.routes = {
+Router.useRoutes({
   '/foo': [
     (ctx) => loadData(ctx).then((data) => ctx.data = data),
     (ctx) => document.title = ctx.data.title,
@@ -28,7 +28,7 @@ Router.routes = {
       }
     }
   ]
-}
+})
 ```
 
 ...into a much more readable...
@@ -37,7 +37,7 @@ Router.routes = {
 import { Router } from '@profiscience/knockout-contrib-router'
 import loadData from './utils/loadData'
 
-Router.routes = {
+Router.useRoutes({
   '/foo': {
     component: {
       template: '<h1>FOO!</h1>'
@@ -50,16 +50,33 @@ Router.routes = {
       '/bar': 'bar'
     }
   }
-}
+})
+
+// ...or
+
+Router.useRoutes([
+  new Route('/foo', {
+    component: {
+      template: '<h1>FOO!</h1>'
+    },
+    loadData,
+    setTitle(ctx) {
+      document.title = ctx.data.title
+    },
+    routes: {
+      '/bar': 'bar'
+    }
+  })
+])
 ```
 
 We could do this by registering a plugin that essentially takes the latter, and
 returns the former.
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Route } from '@profiscience/knockout-contrib-router'
 
-Router.usePlugin((route) => {
+Route.usePlugin((route) => {
   return [
     (ctx) => route.loadData(ctx).then((data) => ctx.data = data),
     (ctx) => route.setTitle(ctx),
@@ -104,17 +121,17 @@ function loadDataPlugin(route) {
   return (ctx) => route.loadData(ctx).then((data) => ctx.data = data)
 }
 
-Router.plugins = [
+Router.usePlugins(
   componentPlugin,
   titlePlugin,
   nestedRoutePlugin,
   loadDataPlugin
-]
+)
 ```
 
-As you've seen, plugins are registered by using `Routes.usePlugin(fn)`.
+As you've seen, plugins are registered by using `Route.usePlugin(fn)`.
 
-Plugins must be registered *before* routes.
+Plugins must be registered *before* routes are instantiated.
 
 Plugins may return anything the router can make sense of, i.e. a middleware function,
 a component name, or a nested route object. They can also return an array of any combination

@@ -62,8 +62,8 @@ Sets router configuration
 #### Router.use(...fns)
 Registers app [middleware](./middleware.md)
 
-#### Router.usePlugin(...fns)
-Registers [plugin](./plugins.md)
+#### Router.usePlugin(...fns) [deprecated]
+Registers [plugin](./plugins.md). Use `Route.usePlugin` instead.
 
 Plugins must be registered *before* routes
 
