@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
-import { Context, IContext } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { createComponentsLoaderMiddleware } from './components'
+import { componentsPlugin } from './components'
 
 describe('route components', () => {
 
@@ -10,11 +10,13 @@ describe('route components', () => {
     const registerComponent = jest.fn()
     const ctx = { queue: queue as (p: any) => void } as Context & IContext
     const viewModel = () => { /* noop */ }
-    const componentsAccessor = {
-      foo: Promise.resolve({ viewModel, template: 'foo' }),
-      bar: Promise.resolve({ viewModel, template: 'bar' })
+    const routeConfig: IRouteConfig = {
+      components: () => ({
+        foo: Promise.resolve({ viewModel, template: 'foo' }),
+        bar: Promise.resolve({ viewModel, template: 'bar' })
+      })
     }
-    const middleware = createComponentsLoaderMiddleware(() => componentsAccessor)
+    const middleware = componentsPlugin(routeConfig)
     const lifecycle = middleware(ctx) as IterableIterator<void>
 
     ko.components.register = registerComponent
@@ -36,11 +38,13 @@ describe('route components', () => {
     const unregisterComponent = jest.fn()
     const ctx = { queue: queue as (p: any) => void } as Context & IContext
     const viewModel = () => { /* noop */ }
-    const componentsAccessor = {
-      foo: Promise.resolve({ viewModel, template: 'foo' }),
-      bar: Promise.resolve({ viewModel, template: 'bar' })
+    const routeConfig: IRouteConfig = {
+      components: () => ({
+        foo: Promise.resolve({ viewModel, template: 'foo' }),
+        bar: Promise.resolve({ viewModel, template: 'bar' })
+      })
     }
-    const middleware = createComponentsLoaderMiddleware(() => componentsAccessor)
+    const middleware = componentsPlugin(routeConfig)
     const lifecycle = middleware(ctx) as IterableIterator<void>
 
     ko.components.unregister = unregisterComponent

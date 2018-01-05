@@ -1,7 +1,19 @@
-import { Context, IContext, Middleware } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, IRouteConfig, Middleware } from '@profiscience/knockout-contrib-router'
 
-export function createTitleMiddleware(title: string | ((ctx: Context & IContext) => string)): Middleware {
+declare module '@profiscience/knockout-contrib-router' {
+  // tslint:disable-next-line no-shadowed-variable
+  interface IRouteConfig {
+    /**
+     * Document title for view, can be async or sync accessor function
+     */
+    title?: string | ((ctx: Context & IContext) => string)
+  }
+}
+
+export function titlePlugin({ title }: IRouteConfig): Middleware {
   return function*(ctx: Context & IContext): IterableIterator<void> {
+    if (!title) return
+
     /* beforeRender */
     const prevTitle = document.title
 

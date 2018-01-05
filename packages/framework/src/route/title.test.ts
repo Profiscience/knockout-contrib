@@ -1,13 +1,14 @@
-import { Context } from '@profiscience/knockout-contrib-router'
+import { Context, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { createTitleMiddleware } from './title'
+import { titlePlugin } from './title'
 
 describe('title', () => {
   test('sets the title after render and reverts after dispose', () => {
     document.title = 'start'
 
     const ctx = {} as Context
-    const middleware = createTitleMiddleware('foo')
+    const routeConfig: IRouteConfig = { title: 'foo' }
+    const middleware = titlePlugin(routeConfig)
     const lifecycle = middleware(ctx) as IterableIterator<void>
 
     lifecycle.next()
@@ -22,7 +23,8 @@ describe('title', () => {
     document.title = 'start'
 
     const ctx = {} as Context
-    const middleware = createTitleMiddleware(() => 'foo')
+    const routeConfig: IRouteConfig = { title: () => 'foo' }
+    const middleware = titlePlugin(routeConfig)
     const lifecycle = middleware(ctx) as IterableIterator<void>
 
     lifecycle.next()
