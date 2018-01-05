@@ -1,27 +1,22 @@
 import isBoolean from 'lodash/isBoolean'
-import isPlainObject from 'lodash/isPlainObject'
 import isUndefined from 'lodash/isUndefined'
 import castArray from 'lodash/castArray'
-import extend from 'lodash/extend'
 import extendWith from 'lodash/extendWith'
-import flatMap from 'lodash/flatMap'
 import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import reduce from 'lodash/reduce'
 import * as ko from 'knockout'
-import { IContext, IRouteConfig } from './'
+import { IContext } from './'
 import { Context } from './context'
-import { Route, NormalizedRouteConfig, NormalizedRouteMap } from './route'
+import { RoutePlugin, Route, RouteMap } from './route'
 import {
   Callback,
-  MaybeArray,
+  MaybePromise,
   traversePath,
   log
 } from './utils'
 
-export type SimpleMiddleware = (ctx: Context & IContext, done?: () => any) =>
-  | Promise<void>
-  | void
+export type SimpleMiddleware =
+  | ((ctx: Context & IContext) => MaybePromise<void>)
+  | ((ctx: Context & IContext, done?: () => void) => void)
 
 export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
   beforeRender?: Callback<void>
@@ -31,24 +26,17 @@ export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
 }
 
 export type LifecycleGeneratorMiddleware = (ctx: Context & IContext) =>
+  // sync generators yielding nothing or a promise
   | IterableIterator<void | Promise<void>>
+  // async generators (async/await in block, but yield nothing)
   | AsyncIterableIterator<void>
 
 export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
-
-export type MaybeNormalizedRouteConfig = MaybeArray<IRouteConfig> | MaybeArray<NormalizedRouteConfig>
-
-export type RouteMap = {
-  [k: string]: MaybeNormalizedRouteConfig
-}
-
-export type Plugin = (routeConfig: IRouteConfig | NormalizedRouteConfig) => MaybeArray<NormalizedRouteConfig>
 
 export class Router {
   public static head: Router
   public static onInit: ((router: Router) => void)[] = []
   public static middleware: Middleware[] = []
-  public static plugins: Plugin[] = []
   public static config: {
     base?: string
     hashbang?: boolean
@@ -59,7 +47,7 @@ export class Router {
     activePathCSSClass: 'active-path'
   }
 
-  private static routes: NormalizedRouteMap = {}
+  private static routes: Route[] = []
   private static events: {
     click: string,
     popstate: string
@@ -85,7 +73,7 @@ export class Router {
     this.isNavigating = ko.observable(true)
     this.isRoot = isUndefined($parentCtx)
     this.routes = this.isRoot
-      ? Router.createRoutes(Router.routes)
+      ? Router.routes
       : $parentCtx.route.children
 
     if (this.isRoot) {
@@ -203,17 +191,14 @@ export class Router {
     let matchingRouteWithFewestDynamicSegments
     let fewestMatchingSegments = Infinity
 
-    for (const rn in this.routes) {
-      if (this.routes.hasOwnProperty(rn)) {
-        const r = this.routes[rn]
-        if (r.matches(path)) {
-          if (r.keys.length === 0) {
-            return r
-          } else if (fewestMatchingSegments === Infinity ||
-            (r.keys.length < fewestMatchingSegments && r.keys[0].pattern !== '.*')) {
-            fewestMatchingSegments = r.keys.length
-            matchingRouteWithFewestDynamicSegments = r
-          }
+    for (const route of this.routes) {
+      if (route.matches(path)) {
+        if (route.keys.length === 0) {
+          return route
+        } else if (fewestMatchingSegments === Infinity ||
+          (route.keys.length < fewestMatchingSegments && route.keys[0].pattern !== '.*')) {
+          fewestMatchingSegments = route.keys.length
+          matchingRouteWithFewestDynamicSegments = route
         }
       }
     }
@@ -258,13 +243,20 @@ export class Router {
     return this
   }
 
-  public static usePlugin(...fns: Plugin[]): typeof Router {
-    Router.plugins.push(...fns)
+  public static usePlugin(...fns: RoutePlugin[]): typeof Router {
+    log.warn('Router.usePlugin() is deprecated. Use Route.usePlugin().')
+    Route.usePlugin(...fns)
     return this
   }
 
-  public static useRoutes(routes: RouteMap): typeof Router {
-    extend(Router.routes, Router.normalizeRoutes(routes))
+  public static useRoutes(routes: RouteMap | Route[]): typeof Router {
+    if (Array.isArray(routes)) {
+      Router.routes.push(...routes)
+    } else {
+      Router.routes.push(...Object
+        .keys(routes)
+        .map((path) => new Route(path, ...castArray(routes[path]))))
+    }
     return this
   }
 
@@ -365,36 +357,6 @@ export class Router {
 
   private static hasRoute(path: string) {
     return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
-  }
-
-  private static createRoutes(routes: NormalizedRouteMap): Route[] {
-    return map(routes, (config, path) => new Route(path, config))
-  }
-
-  private static normalizeRoutes(routes: RouteMap): NormalizedRouteMap {
-    return mapValues(routes, (c) =>
-      map(Router.runPlugins(c), (routeConfig) =>
-        isPlainObject(routeConfig)
-          ? Router.normalizeRoutes(routeConfig as NormalizedRouteMap)
-          : routeConfig))
-  }
-
-  private static runPlugins(config: MaybeNormalizedRouteConfig): NormalizedRouteConfig[] {
-    return flatMap(castArray(config), (rc) => {
-      const routeConfig = reduce(
-        Router.plugins,
-        (accum, plugin) => {
-          const prc = plugin(rc)
-          return isUndefined(prc)
-            ? accum as NormalizedRouteConfig[]
-            : accum.concat(castArray<NormalizedRouteConfig>(prc))
-        }
-        , [] as NormalizedRouteConfig[]
-      )
-      return routeConfig.length > 0
-        ? routeConfig
-        : rc as NormalizedRouteConfig[]
-    })
   }
 
   private static sameOrigin(href: string) {

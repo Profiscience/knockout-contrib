@@ -2,6 +2,8 @@ import ko from 'knockout'
 import $ from 'jquery'
 import tape from 'tape'
 
+import { Router } from '../dist'
+
 import './helpers/ko-overwrite-component-registration'
 
 import './anchor'
@@ -62,6 +64,7 @@ class TestRunner {
 
     return await new Promise((resolve) =>
       tape(test, (t) => {
+        Router.routes = []
         this.t = t
         this.done = () => {
           t.end()

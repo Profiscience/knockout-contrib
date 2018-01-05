@@ -183,7 +183,21 @@ Function entry to the first `yield` contains logic to be executed before the com
 is initialized, the second just after render, the third just before dispose, and the last
 just after.
 
-Yielding a promise is supported for async operations.
+For async with generator middleware, yield a promise *or* use an async generator. The following
+are equivalent...
+
+```typescript
+function * middleware(ctx): IterableIterator<Promise<void>> {
+  yield
+  yield Promise.resolve()
+}
+
+async function * middleware(ctx): AsyncIterableIterator<void> {
+  yield
+  await Promise.resolve()
+  yield
+}
+```
 
 I :heart: future JS.
 

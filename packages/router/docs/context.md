@@ -103,7 +103,7 @@ all of these requests are made at the same time and do not prevent other middlew
 from executing.
 
 #### ctx.redirect(path)
-Only to be used in plain middleware, or the `beforeRender` of a lifecycle middleware,
+Only to be used in plain middleware, or the `beforeRender` phase of a lifecycle/generator middleware,
 this function short circuits the middleware execution, prevents an intermediate render
 and runs and downstream lifecycle middleware to clean up, then navigates to a new route.
 

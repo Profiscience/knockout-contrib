@@ -1,12 +1,32 @@
 import * as ko from 'knockout'
-import { Context, IContext } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { INITIALIZED } from '../model/builders/DataModelConstructorBuilder'
 import { ViewModelConstructorBuilder } from '../model/builders/ViewModelConstructorBuilder'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
   interface IContext {
+    /**
+     * Route viewModel instance
+     */
     viewModel?: ViewModelConstructorBuilder
+  }
+
+  // tslint:disable-next-line no-shadowed-variable
+  interface IRouteConfig {
+    /**
+     * Component accessor, intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
+     *
+     * Example:
+     *
+     * ```typescript
+     *  component: () => ({
+     *    template: import('./template.html'),
+     *    viewModel: import('./viewModel')
+     *  })
+     * ```
+     */
+    component?: LazyComponentAccessor
   }
 }
 
@@ -14,16 +34,15 @@ const uniqueComponentNames = (function*() {
   let i = 0
   while (true) {
     const id = `__router_view_${i++}__`
-    if (ko.components.isRegistered(id)) {
-      continue
-    }
+    if (ko.components.isRegistered(id)) continue
     yield id
   }
 })()
 
-interface IComponentConfig {
-  template: string
+export type LazyComponentAccessor = () => ILazyComponent
 
+interface IRoutedComponentConfig {
+  template: string
   viewModel?: { new(ctx: Context & IContext): ViewModelConstructorBuilder }
   synchronous?: true
 }
@@ -56,9 +75,11 @@ export interface ILazyComponent {
   viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
 }
 
-export function createComponentMiddleware(getComponent: () => ILazyComponent) {
+export function componentPlugin({ component: componentAccessor }: IRouteConfig) {
   return function*(ctx: Context & IContext): IterableIterator<void> {
-    const component = getComponent()
+    if (!componentAccessor) return
+
+    const component = componentAccessor()
 
     /* beforeRender */
     const componentName = uniqueComponentNames.next().value
@@ -95,8 +116,8 @@ export function createComponentMiddleware(getComponent: () => ILazyComponent) {
   }
 }
 
-async function fetchComponent(accessor: ILazyComponent): Promise<IComponentConfig> {
-  const component: IComponentConfig = {} as IComponentConfig
+async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponentConfig> {
+  const component: IRoutedComponentConfig = {} as IRoutedComponentConfig
 
   const promises = Object
     .keys(accessor)

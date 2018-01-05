@@ -2,7 +2,7 @@
   "extends": "tslint:recommended",
   "rules": {
     "array-type": [true, "array"],
-    "curly": true,
+    "curly": [true, "ignore-same-line"],
     "interface-over-type-literal": false,
     "quotemark": [true, "single"],
     "member-ordering": [true, "instance-sandwich"],

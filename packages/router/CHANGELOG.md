@@ -4,7 +4,18 @@
 
 ### Added
 - `router.depth` property
+- Can now create and register route instances directly
+- All Middleware types are now exported (SimpleMiddleware, LifecycleObjectMiddleware, GeneratorMiddleware)
 
+### Removed
+- NormalizedRouteConfig type
+- NormalizedRouteMap type
+
+### Changed
+- `Router.usePlugin()` moved to `Route.usePlugin`
+
+### Internal
+- When using object shorthand, routes are initialized on registration instead of initialization
 
 
 ## 1.0.0 (ko-component-router => @profiscience/knockout-contrib-router)

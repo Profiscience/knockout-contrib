@@ -2,26 +2,59 @@
 
 'use strict'
 
-const nodeResolve = require('rollup-plugin-node-resolve')
-const nodeBuiltins = require('rollup-plugin-node-builtins')
-const nodeGlobals = require('rollup-plugin-node-globals')
-const commonjs = require('rollup-plugin-commonjs')
-const json = require('rollup-plugin-json')
-const rollupIstanbul = require('rollup-plugin-istanbul')
+const { TRAVIS, DEBUG } = process.env
+
+const karmaPlugins = [
+  require('karma-firefox-launcher'),
+  require('karma-mocha-reporter'),
+  require('karma-rollup-preprocessor'),
+  require('karma-tap')
+]
+
+const karmaReporters = ['mocha']
+
+const rollupPlugins = [
+  require('rollup-plugin-json')(),
+  require('rollup-plugin-commonjs')({
+    namedExports: {
+      knockout: [
+        'applyBindings',
+        'applyBindingsToNode',
+        'bindingHandlers',
+        'components',
+        'observable',
+        'pureComputed',
+        'tasks',
+        'unwrap'
+      ]
+    }
+  }),
+  require('rollup-plugin-node-globals')(),
+  require('rollup-plugin-node-builtins')(),
+  require('rollup-plugin-node-resolve')({
+    preferBuiltins: true
+  })
+]
 
 let cache
+
+if (TRAVIS) {
+  karmaPlugins.push(require('karma-remap-istanbul'))
+  karmaReporters.push('karma-remap-istanbul')
+  rollupPlugins.push(
+    require('rollup-plugin-istanbul')({
+      include: [
+        'dist/**/*'
+      ]
+    })
+  )
+}
 
 module.exports = (config) => {
   config.set({
     basePath: __dirname,
 
-    plugins: [
-      require('karma-firefox-launcher'),
-      require('karma-mocha-reporter'),
-      require('karma-remap-istanbul'),
-      require('karma-rollup-preprocessor'),
-      require('karma-tap')
-    ],
+    plugins: karmaPlugins,
 
     frameworks: ['tap'],
 
@@ -45,41 +78,15 @@ module.exports = (config) => {
     },
 
     // to debug, comment out singleRun, and uncomment autoWatch
-    singleRun: true,
-    // autoWatch: false,
+    singleRun: !DEBUG,
+    autoWatch: !DEBUG,
 
-    reporters: ['mocha', 'karma-remap-istanbul'],
+    reporters: karmaReporters,
 
     rollupPreprocessor: {
       treeshake: false,
       cache,
-      plugins: [
-        json(),
-        commonjs({
-          namedExports: {
-            knockout: [
-              'applyBindings',
-              'applyBindingsToNode',
-              'bindingHandlers',
-              'components',
-              'observable',
-              'pureComputed',
-              'tasks',
-              'unwrap'
-            ]
-          }
-        }),
-        nodeGlobals(),
-        nodeBuiltins(),
-        nodeResolve({
-          preferBuiltins: true
-        }),
-        rollupIstanbul({
-          include: [
-            'dist/**/*'
-          ]
-        })
-      ],
+      plugins: rollupPlugins,
       output: {
         format: 'iife',
         sourcemap: 'inline'

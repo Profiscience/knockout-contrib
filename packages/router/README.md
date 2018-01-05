@@ -23,19 +23,29 @@ _app.js_
 ```typescript
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib-router'
 
 const loading = ko.observable(true)
 
 Router.use(loadingMiddleware)
 
-Router.useRoutes({
-  '/': 'home',
-  '/users': {
-    '/': [loadUsers, 'users'],
-    '/:id': [loadUser, 'user']
-  }
-})
+Router.useRoutes([
+  new Route('/', 'home'),
+  new Route('/users', [
+    new Route('/', [loadUsers, 'users']),
+    new Route('/:id', [loadUser, 'user'])
+  ])
+])
+/**
+ * Optionally use object-shorthand
+ *  Router.useRoutes({
+ *    '/': 'home',
+ *    '/users': {
+ *      '/': [loadUsers, 'users'],
+ *      '/:id': [loadUser, 'user']
+ *    }
+ *  })
+ */
 
 ko.component.register('home', {
   template: `<a data-bind="path: '/users'">Show users</a>`

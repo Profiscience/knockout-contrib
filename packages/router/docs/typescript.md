@@ -38,7 +38,7 @@ That's it! If `fetchSomeData()` returns something of the wrong type, the compile
 
 **NOTE:** It's an interface prefixed with `I`, *not* the normal `Context` class. This is because TypeScript does not support declaration merging on classes.
 
-You may also take advantage of some types that are exported, namely `RouteConfig`, `RouteMap`, `Middleware`, and `Plugin`. You can use these to specify types where the compiler cannot otherwise infer them. For example...
+You may also take advantage of some types that are exported, namely `RouteConfig`, `RouteMap`, `Middleware`, and `RoutePlugin`. You can use these to specify types where the compiler cannot otherwise infer them. For example...
 
 ```typescript
 import { Plugin } from '@profiscience/knockout-contrib-router'
@@ -47,6 +47,9 @@ declare module '@profiscience/knockout-contrib-router' {
   interface IContext {
     data: string
   }
+  interface IRouteConfig {
+    apiUrl: string
+  }
 }
 
 const apiPlugin: Plugin = ({ apiUrl }) => async (ctx) => {
@@ -54,4 +57,15 @@ const apiPlugin: Plugin = ({ apiUrl }) => async (ctx) => {
 }
 
 export default apiPlugin
+```
+
+Note, we also augment `IRouteConfig` so that we can get type-safety with the route constructor, i.e.
+
+```typescript
+import { Route } from '@profiscience/knockout-contrib-router'
+
+new Route('/', {
+  // this is type-safe!
+  apiUrl: 'https://example.com'
+})
 ```

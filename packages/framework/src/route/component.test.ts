@@ -1,11 +1,11 @@
 /* tslint:disable max-classes-per-file */
 
 import * as ko from 'knockout'
-import { Context } from '@profiscience/knockout-contrib-router'
+import { Context, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { DataModelConstructorBuilder } from '../model/builders/DataModelConstructorBuilder'
 import { ViewModelConstructorBuilder } from '../model/builders/ViewModelConstructorBuilder'
 
-import { createComponentMiddleware } from './component'
+import { componentPlugin } from './component'
 
 describe('component', () => {
   test('sets component, disposes registration after render', async () => {
@@ -22,7 +22,8 @@ describe('component', () => {
     })
     const queue = jest.fn()
     const ctx = { queue: queue as any, route: {} } as Context
-    const middleware = createComponentMiddleware(getComponent)
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const middleware = componentPlugin(routeConfig)
     const lifecycle = middleware(ctx)
 
     lifecycle.next()
@@ -63,7 +64,8 @@ describe('component', () => {
     })
 
     const queue = jest.fn()
-    const middleware = createComponentMiddleware(getComponent)
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const middleware = componentPlugin(routeConfig)
     const ctx = { queue: queue as any, route: {} } as Context
     const lifecycle = middleware(ctx)
 

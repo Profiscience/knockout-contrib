@@ -100,9 +100,9 @@
   version "9.1.8"
   resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.1.8.tgz#d227f18bcb8f3f187e16965f2444859a04689758"
 
-"@types/jest@^21.1.5":
-  version "21.1.9"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.9.tgz#a913d6224e9d8a1f24908af536f65b5bf4d489bc"
+"@types/jest@^22.0.0":
+  version "22.0.0"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.0.0.tgz#23009941178aad7979a9591e026f7a96054d7bc0"
 
 "@types/jsdom@^11.0.3":
   version "11.0.4"

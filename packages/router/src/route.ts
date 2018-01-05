@@ -1,23 +1,36 @@
-import isFunction from 'lodash/isFunction'
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
-import map from 'lodash/map'
-import reduce from 'lodash/reduce'
+import castArray from 'lodash/castArray'
+import flatten from 'lodash/flatten'
 // this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
 import pathToRegexp from 'path-to-regexp'
 import { Key } from 'path-to-regexp'
+import { IRouteConfig } from './'
 import { Middleware } from './router'
+import { MaybeArray } from './utils'
 
-export type NormalizedRouteMap = {
-  [name: string]: NormalizedRouteConfig[]
+export type RouteMap = {
+  [path: string]: MaybeArray<RouteConfig>
 }
 
-export type NormalizedRouteConfig = string | NormalizedRouteMap | Middleware
+export type RoutePlugin = (routeConfig: IRouteConfig) => MaybeArray<RouteConfig>
+
+export type RouteConfig =
+  | MaybeArray<IRouteConfig> // custom route config, used w/ plugins
+  | MaybeArray<string>       // component name
+  | MaybeArray<Middleware>   // middleware
+  | MaybeArray<Route>        // children
+  | MaybeArray<RouteMap>     // children, object shorthand
+
+type NormalizedRouteConfig = {
+  component?: string
+  middleware?: Middleware[]
+  children?: Route[]
+}
 
 export class Route {
-  public path: string
+  private static plugins: RoutePlugin[] = []
+
   public component: string
   public middleware: Middleware[]
   public children: Route[]
@@ -25,16 +38,12 @@ export class Route {
 
   private regexp: RegExp
 
-  constructor(path: string, config: NormalizedRouteConfig[]) {
-    const [component, middleware, children] = Route.parseConfig(config)
-    this.path = path
-    this.component = component
-    this.middleware = middleware
-    this.children = children
-
-    const { keys, regexp } = Route.parsePath(path, !isUndefined(children))
-    this.keys = keys
-    this.regexp = regexp
+  constructor(public path: string, ...config: RouteConfig[]) {
+    Object.assign(this, Route.parseConfig(config))
+    Object.assign(this, Route.parsePath(path, this.children.length > 0))
+    if (this.children.length > 0 && !this.component) {
+      this.component = 'router'
+    }
   }
 
   public matches(path: string) {
@@ -42,16 +51,16 @@ export class Route {
     if (matches === null) {
       return false
     }
-    if (this.children) {
-      for (const childRoute of this.children) {
-        const childPath = '/' + (matches[matches.length - 1] || '')
-        if (childRoute.matches(childPath)) {
-          return true
-        }
-      }
-      return false
+    if (this.children.length === 0) {
+      return true
     }
-    return true
+    for (const childRoute of this.children) {
+      const childPath = '/' + (matches[matches.length - 1] || '')
+      if (childRoute.matches(childPath)) {
+        return true
+      }
+    }
+    return false
   }
 
   public parse(path: string): { params: { [k: string]: any }, pathname: string, childPath: string } {
@@ -74,33 +83,52 @@ export class Route {
     return { params, pathname, childPath }
   }
 
-  private static parseConfig(config: (string | NormalizedRouteMap | Middleware)[]): [string, Middleware[], Route[]] {
+  public static usePlugin(...fns: RoutePlugin[]): typeof Route {
+    this.plugins.push(...fns)
+    return this
+  }
+
+  private static parseConfig(config: RouteConfig[]): NormalizedRouteConfig {
+    const transformedConfig = this.runPlugins(config)
+    const children: Route[] = []
+    const middleware: Middleware[] = []
     let component: string
-    let children: Route[]
 
-    const middleware = reduce(
-      config,
-      (
-        accum: Middleware[],
-        m: string | NormalizedRouteMap | Middleware
-      ) => {
-        if (isString(m)) {
-          m = m as string
-          component = m
-        } else if (isPlainObject(m)) {
-          m = m as NormalizedRouteMap
-          children = map(m, (routeConfig, path) => new Route(path, routeConfig))
-          if (!component) {
-            component = 'router'
-          }
-        } else if (isFunction(m)) {
-          m = m as Middleware
-          accum.push(m)
-        }
-        return accum
+    for (const configEntry of transformedConfig) {
+      if (typeof configEntry === 'string') {
+        component = configEntry
+      } else if (typeof configEntry === 'function') {
+        middleware.push(configEntry)
+      } else if (configEntry instanceof Route) {
+        children.push(configEntry)
+      } else {
+        children.push(...
+          Object.keys((configEntry as { [k: string]: RouteConfig[] }))
+            .map((childPath) => new Route(childPath, ...castArray(configEntry[childPath])))
+        )
+      }
+    }
+
+    return { component, middleware, children }
+  }
+
+  private static runPlugins(config: RouteConfig[]): (string | Middleware | { [k: string]: RouteConfig[] })[] {
+    return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>((routeStack, configEntry) => {
+      const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
+        const pluginStack = plugin(configEntry)
+        return isUndefined(pluginStack)
+          ? allPluginsStack
+          : [...allPluginsStack, ...flatten(castArray(pluginStack))]
       }, [])
-
-    return [component, middleware, children]
+      return [
+        ...routeStack,
+        ...(
+          configViaPlugins.length > 0
+            ? configViaPlugins
+            : flatten(castArray(configEntry as any))
+        )
+      ]
+    }, [])
   }
 
   private static parsePath(path: string, hasChildren: boolean) {
