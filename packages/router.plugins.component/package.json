@@ -1,12 +1,12 @@
 {
-  "name": "@profiscience/knockout-contrib-router-plugins-{{kebabCase name}}",
+  "name": "@profiscience/knockout-contrib-router-plugins-component",
   "version": "1.0.0-alpha.0",
-  "description": "{{titleCase name}} Plugin for @profiscience/knockout-contrib-router",
-  "main": "dist/knockout-contrib-plugins-{{kebabCase name}}.js",
+  "description": "Component Plugin for @profiscience/knockout-contrib-router",
+  "main": "dist/knockout-contrib-plugins-component.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.router.plugins.{{camelCase name}}",
+  "global": "ko.contrib.router.plugins.component",
   "files": [
     "dist"
   ],
@@ -27,12 +27,16 @@
   "bugs": {
     "url": "https://github.com/Profiscience/knockout-contrib/issues"
   },
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.{{camelCase name}}",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.component",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "1.0.0",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "1.0.0"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

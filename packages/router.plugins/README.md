@@ -10,6 +10,7 @@ This is a metapackage including all `@profiscience/knockout-contrib-router-plugi
 
 ### Contents
 - [children](../router.plugins.children)
+- [component](../router.plugins.component)
 - [title](../router.plugins.title)
 - [with](../router.plugins.with)
 
