@@ -98,13 +98,14 @@ function generateMetaFiles(metapackage, packages) {
 
   switch (exportType) {
   case 'exports':
+  case 'named exports':
     readme.usage += `// import all\nimport * as ${camelCase(metapackageName)} from '${metapackageId}'\n\n`
     break
   case 'global':
     readme.usage += `// import all\nimport '${metapackageId}'\n\n`
     break
   default:
-    throw new Error('🔥  invalid keyword in .meta')
+    throw new Error(`🔥  invalid keyword in .meta ${exportType}`)
   }
 
   packages.forEach((p, i) => {
@@ -117,6 +118,13 @@ function generateMetaFiles(metapackage, packages) {
     readme.contents += `\n- [${packageName}](../${metapackageName}.${packageName})`
 
     switch (exportType) {
+    case 'named exports':
+      index += `export * from '${packageId}'\n`
+      if (i === 0) {
+        const n = metapackageName === 'router.plugins' ? packageName + 'Plugin' : packageName
+        readme.usage += `// import single\nimport { ${camelCase(n)} } from '${metapackageId}'`
+      }
+      break
     case 'exports':
       index += `export { default as ${packageName} } from '${packageId}'\n`
       if (i === 0) {

@@ -1,5 +1,5 @@
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { withPlugin } from './with'
+import { withPlugin } from './'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
@@ -8,7 +8,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-describe('with', () => {
+describe('router.plugins.with', () => {
   test('extends context with object passed to with', () => {
     const routeConfig: IRouteConfig = { with: { foo: 'bar' } }
     const ctx = {} as Context & IContext

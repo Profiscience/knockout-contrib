@@ -1,8 +1,9 @@
-import { Context, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import * as ko from 'knockout'
+import { Context, IContext, Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { titlePlugin } from './title'
+import { titlePlugin } from './'
 
-describe('title', () => {
+describe('router.plugins.title', () => {
   test('sets the title after render and reverts after dispose', () => {
     document.title = 'start'
 

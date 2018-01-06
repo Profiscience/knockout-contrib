@@ -6,10 +6,12 @@ import { ViewModelConstructorBuilder } from '../model/builders/ViewModelConstruc
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
   interface IContext {
-    /**
-     * Route viewModel instance
-     */
-    viewModel?: ViewModelConstructorBuilder
+    component: {
+      /**
+       * Route viewModel instance
+       */
+      viewModel?: ViewModelConstructorBuilder
+    }
   }
 
   // tslint:disable-next-line no-shadowed-variable
@@ -96,7 +98,7 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
 
         if (ViewModel) {
           const instance = new ViewModel(ctx)
-          ctx.viewModel = instance
+          ctx.component.viewModel = instance
           await initializeViewModel(instance)
           componentConfig.viewModel = {
             instance
