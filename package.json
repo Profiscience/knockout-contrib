@@ -21,7 +21,7 @@
 		"@types/jsdom": "^11.0.3",
 		"@types/knockout": "^3.4.0",
 		"@types/lodash": "^4.14.80",
-		"@types/node": "^8.0.47",
+		"@types/node": "^9.3.0",
 		"caniuse-lite": "^1.0.30000784",
 		"eslint": "^4.14.0",
 		"eslint-config-profiscience": "^2.0.4",
