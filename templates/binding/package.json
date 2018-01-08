@@ -4,9 +4,7 @@
   "description": "{{titleCase name}} Binding for KnockoutJS",
   "main": "dist/knockout-contrib-bindings-{{kebabCase name}}.js",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.bindings.{{camelCase name}}",
   "files": [
     "dist"
   ],

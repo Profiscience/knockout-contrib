@@ -4,9 +4,7 @@
   "description": "With Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-with.js",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.router.plugins.with",
   "files": [
     "dist"
   ],

@@ -4,9 +4,7 @@
   "description": "{{titleCase name}} Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-{{kebabCase name}}.js",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.router.plugins.{{camelCase name}}",
   "files": [
     "dist"
   ],

@@ -7,7 +7,6 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins",
   "repository": "Profiscience/knockout-contrib",
-  "global": "ko.contrib.router.plugins",
   "keywords": [
     "tko",
     "knockout",
@@ -21,7 +20,6 @@
   },
   "main": "dist/knockout-contrib-router-plugins.js",
   "module": "index.js",
-  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "files": [
     "index.js",

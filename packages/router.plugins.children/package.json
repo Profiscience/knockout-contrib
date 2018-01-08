@@ -4,9 +4,7 @@
   "description": "Children Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-children.js",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.router.plugins.children",
   "files": [
     "dist"
   ],

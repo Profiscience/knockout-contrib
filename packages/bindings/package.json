@@ -7,7 +7,6 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings",
   "repository": "Profiscience/knockout-contrib",
-  "global": "ko.contrib.bindings",
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -19,7 +18,6 @@
   },
   "main": "dist/knockout-contrib-bindings.js",
   "module": "index.js",
-  "jsnext:main": "index.js",
   "typings": "index.d.ts",
   "files": [
     "index.js",

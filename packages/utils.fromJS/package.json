@@ -4,9 +4,7 @@
   "description": "Handy Utilities for Knockout JS",
   "main": "dist/knockout-contrib-utils-from-js.js",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.utils.fromJS",
   "files": [
     "dist"
   ],

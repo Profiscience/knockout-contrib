@@ -7,35 +7,9 @@
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
   "main": "dist/knockout-contrib-framework-model-builders-base.js",
-  "global": "ko.contrib.framework.model.builders.base",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
-  },
-  "keywords": [
-    "knockoutjs",
-    "ko",
-    "knockout",
-    "framework",
-    "spa",
-    "data",
-    "model",
-    "builder",
-    "mixin",
-    "typescript"
-  ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "typings": "index.ts",
   "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/knockout-contrib/issues"
-  },
-  "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
     "tslib": "^1.8.0"
   }

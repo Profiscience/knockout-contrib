@@ -1,41 +1,14 @@
 {
   "name": "@profiscience/knockout-contrib-framework-model-builders-data",
   "version": "1.0.0-alpha.0",
-  "description": "DataModelConstructorBuilder for @profiscience/knockout-contrib-framework",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
   "main": "dist/knockout-contrib-framework-model-builders-data.js",
-  "global": "ko.contrib.framework.model.builders.data",
   "module": "dist/index.js",
-  "jsnext:main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
-  },
-  "keywords": [
-    "knockoutjs",
-    "ko",
-    "knockout",
-    "framework",
-    "spa",
-    "router",
-    "data",
-    "model",
-    "single-page-app",
-    "typescript"
-  ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "typings": "index.ts",
   "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/knockout-contrib/issues"
-  },
-  "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
     "@profiscience/knockout-contrib-framework-model-builders-base": "1.0.0-alpha.0",
     "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal": "1.0.0-alpha.0",

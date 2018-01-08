@@ -8,10 +8,8 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "Profiscience/knockout-contrib",
   "main": "dist/knockout-contrib-router.js",
-  "jsnext:main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "global": "ko.contrib.router",
   "files": [
     "dist/"
   ],

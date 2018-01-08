@@ -1,6 +1,4 @@
-.DS_Store
-
-coverage/
-dist/
-node_modules/
-*.log
+*
+!.meta
+!package.json
+!README.md

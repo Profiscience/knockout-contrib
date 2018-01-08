@@ -161,7 +161,6 @@ function generateMetaFiles(metapackage, packages) {
     files: distFiles,
     main: `dist/knockout-contrib-${kebabCase(metapackageName)}.js`,
     module: 'index.js',
-    'jsnext:main': 'index.js',
     typings: 'index.d.ts',
     dependencies: packages.reduce((accum, p) => {
       const { name, version } = require(path.join(p, 'package.json'))
