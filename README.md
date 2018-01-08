@@ -28,6 +28,7 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 - [observable.fn](./packages/observable.fn)
 - [querystring](./packages/querystring)
 - [router](./packages/router)
+- [router.plugins](./packages/router.plugins)
 - [utils](./packages/utils)
 
 
