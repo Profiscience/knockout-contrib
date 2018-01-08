@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true
+  },
+  "exclude": [
+    "dist",
+    "test.ts"
+  ]
+}
