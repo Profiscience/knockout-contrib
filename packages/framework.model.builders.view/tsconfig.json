@@ -13,7 +13,12 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.symbol"
+    ]
   },
   "exclude": [
     "dist",

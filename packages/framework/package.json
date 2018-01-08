@@ -35,12 +35,12 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
+    "tslib": "^1.8.0",
     "@profiscience/knockout-contrib-framework-model-builders-base": "1.0.0-alpha.0",
     "@profiscience/knockout-contrib-framework-model-builders-data": "1.0.0-alpha.0",
     "@profiscience/knockout-contrib-framework-model-builders-view": "1.0.0-alpha.0",
     "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal": "1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-framework-plugin": "1.0.0-alpha.0",
-    "tslib": "^1.8.0"
+    "@profiscience/knockout-contrib-framework-plugin": "1.0.0-alpha.0"
   },
   "peerDependencies": {
     "knockout": "^3.4.0"

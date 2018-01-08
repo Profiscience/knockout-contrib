@@ -63,7 +63,7 @@ function generateMetaFiles(metapackage, packages) {
     'index.d.ts'
   ]
 
-  const gitignore = '*\n!.meta\n!package.json\n!README.md'
+  const gitignore = '*\n!.meta\n!package.json\n!README.md\n!docs'
 
   const readme = {
     header: [
