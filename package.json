@@ -10,7 +10,7 @@
 		"test:router": "cd packages/router && yarn test",
 		"test": "jest",
 		"generate": "plop",
-		"update:docs": "yarn build:docs && git add packages/*/docs/typedoc && (git commit -m \"chore(docs)\" || true)"
+		"update:docs": "yarn build:docs && git add -f packages/*/docs/typedoc && (git commit -m \"chore(docs)\" || true)"
 	},
 	"workspaces": [
 		"packages/*"
