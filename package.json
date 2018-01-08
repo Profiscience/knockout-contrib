@@ -7,7 +7,8 @@
 		"lint": "tslint --project tsconfig.json",
 		"prepush": "yarn lint",
 		"serve:examples": "taskr serve:examples",
-		"test": "cd packages/router && yarn test && cd ../.. && jest",
+		"test:router": "cd packages/router && yarn test",
+		"test": "jest",
 		"generate": "plop"
 	},
 	"workspaces": [
