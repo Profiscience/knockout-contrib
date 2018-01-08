@@ -1,3 +1,8 @@
+### Contents
+- [jquery](../bindings.jquery)
+## Contents
+- [jquery](../bindings.jquery)
+- [jquery](../bindings.jquery)
 # @profiscience/knockout-contrib-bindings
 
 [![Version][npm-version-shield]][npm]
@@ -8,8 +13,14 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-bindings-*` packages
 
+<!-- TOC !-->
 ### Contents
-- [jquery](../bindings.jquery)
+- [model.builders.base](../framework.model.builders.base)
+- [model.builders.data](../framework.model.builders.data)
+- [model.builders.view](../framework.model.builders.view)
+- [model.mixins.subscriptionDisposal](../framework.model.mixins.subscriptionDisposal)
+- [plugin](../framework.plugin)
+<!-- /TOC !-->
 
 ### Usage
 

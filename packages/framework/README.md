@@ -8,12 +8,14 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-framework-*` packages
 
+<!-- TOC -->
 ### Contents
 - [model.builders.base](../framework.model.builders.base)
 - [model.builders.data](../framework.model.builders.data)
 - [model.builders.view](../framework.model.builders.view)
 - [model.mixins.subscriptionDisposal](../framework.model.mixins.subscriptionDisposal)
 - [plugin](../framework.plugin)
+<!-- /TOC -->
 
 ### Usage
 

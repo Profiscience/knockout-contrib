@@ -8,10 +8,12 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-utils-*` packages
 
+<!-- TOC -->
 ### Contents
 - [defaults](../utils.defaults)
 - [fromJS](../utils.fromJS)
 - [merge](../utils.merge)
+<!-- /TOC -->
 
 ### Usage
 

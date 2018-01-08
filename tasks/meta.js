@@ -1,7 +1,9 @@
 'use strict'
 
+const fs = require('fs')
 const path = require('path')
-const { camelCase, kebabCase } = require('lodash')
+const { promisify } = require('util')
+const { kebabCase } = require('lodash')
 
 exports.meta = function * (task) {
   this._.files = []
@@ -15,7 +17,7 @@ exports.meta = function * (task) {
       /* eslint-disable no-invalid-this, no-console */
       const metapackageName = path.basename(metapackage.dir)
       const packages = yield this.$.expand(path.join(__dirname, `../packages/${metapackageName}.*`))
-      const files = generateMetaFiles(metapackage, packages)
+      const files = yield generateMetaFiles(metapackage, packages)
 
       console.log(`🔗  Generated ${metapackageName} metapackage`)
 
@@ -50,7 +52,7 @@ exports.meta = function * (task) {
     .target(path.join(__dirname, '../packages'))
 }
 
-function generateMetaFiles(metapackage, packages) {
+async function generateMetaFiles(metapackage, packages) {
   const metapackageName = path.basename(metapackage.dir)
   const metapackageId = `@profiscience/knockout-contrib-${kebabCase(metapackageName)}`
   const exportType = metapackage.data.toString('utf8')
@@ -64,49 +66,9 @@ function generateMetaFiles(metapackage, packages) {
   ]
 
   const gitignore = '*\n!.meta\n!package.json\n!README.md'
+  const contents = []
 
-  const readme = {
-    header: [
-      `# ${metapackageId}\n`,
-      '[![Version][npm-version-shield]][npm]',
-      '[![Dependency Status][david-dm-shield]][david-dm]',
-      '[![Peer Dependency Status][david-dm-peer-shield]][david-dm-peer]',
-      '[![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]',
-      '[![Downloads][npm-stats-shield]][npm-stats]',
-      `\nThis is a metapackage including all \`${metapackageId}-*\` packages`
-    ].join('\n'),
-    contents: '\n\n### Contents',
-    usage: '\n\n### Usage\n\n```javascript\n',
-    links: [
-      `\n[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}`,
-      `[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/${metapackageName}`,
-
-      `\n[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=peer`,
-      `[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/${metapackageName}`,
-
-      `\n[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/${metapackageName}&type=dev`,
-      `[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/${metapackageName}`,
-
-      `\n[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-${kebabCase(metapackageName)}`,
-      `[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg`,
-
-      `\n[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-${kebabCase(metapackageName)}&author=&from=&to=`,
-      `[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-${kebabCase(metapackageName)}.svg?maxAge=2592000`
-    ].join('\n')
-  }
   let index = ''
-
-  switch (exportType) {
-  case 'exports':
-  case 'named exports':
-    readme.usage += `// import all\nimport * as ${camelCase(metapackageName)} from '${metapackageId}'\n\n`
-    break
-  case 'global':
-    readme.usage += `// import all\nimport '${metapackageId}'\n\n`
-    break
-  default:
-    throw new Error(`🔥  invalid keyword in .meta ${exportType}`)
-  }
 
   packages.forEach((p, i) => {
     const packageName = p.split(metapackageName + '.')[1]
@@ -115,21 +77,14 @@ function generateMetaFiles(metapackage, packages) {
 
     requiredLibs.forEach((l) => lib.add(l))
 
-    readme.contents += `\n- [${packageName}](../${metapackageName}.${packageName})`
+    contents.push(`- [${packageName}](../${metapackageName}.${packageName})`)
 
     switch (exportType) {
     case 'named exports':
       index += `export * from '${packageId}'\n`
-      if (i === 0) {
-        const n = metapackageName === 'router.plugins' ? packageName + 'Plugin' : packageName
-        readme.usage += `// import single\nimport { ${camelCase(n)} } from '${metapackageId}'`
-      }
       break
     case 'exports':
       index += `export { default as ${packageName} } from '${packageId}'\n`
-      if (i === 0) {
-        readme.usage += `// import single\nimport { ${camelCase(packageName)} } from '${metapackageId}'`
-      }
       break
     case 'global':
       index += `import './${packageName}'\n`
@@ -139,14 +94,14 @@ function generateMetaFiles(metapackage, packages) {
         data: Buffer.from(`import '${packageId}'\nexport * from '${packageId}'\n`),
         base: `${packageName}.ts`
       })
-      if (i === 0) {
-        readme.usage += `// import single\nimport '${metapackageId}/${packageName}'`
-      }
       break
     }
   })
 
-  readme.usage += '\n```'
+  const readmeLines = (await promisify(fs.readFile)(path.join(metapackage.dir, 'README.md'))).toString().split('\n')
+  const tocStart = readmeLines.indexOf('<!-- TOC -->')
+  const tocEnd = readmeLines.indexOf('<!-- /TOC -->')
+  readmeLines.splice(tocStart + 1, tocEnd - tocStart - 1, '### Contents', ...contents)
 
   const pkg = require(path.join(metapackage.dir, 'package.json'))
   const existingDeps = Object.keys(pkg.dependencies).reduce((accum, k) => {
@@ -204,7 +159,7 @@ function generateMetaFiles(metapackage, packages) {
     },
     {
       dir: metapackage.dir,
-      data: Buffer.from(readme.header + readme.contents + readme.usage + '\n' + readme.links),
+      data: Buffer.from(readmeLines.join('\n')),
       base: 'README.md'
     },
     {

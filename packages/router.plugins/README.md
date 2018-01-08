@@ -8,11 +8,13 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-router-plugins-*` packages
 
+<!-- TOC -->
 ### Contents
 - [children](../router.plugins.children)
 - [component](../router.plugins.component)
 - [title](../router.plugins.title)
 - [with](../router.plugins.with)
+<!-- /TOC -->
 
 ### Usage
 

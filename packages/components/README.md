@@ -8,7 +8,9 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-components-*` packages
 
+<!-- TOC -->
 ### Contents
+<!-- /TOC -->
 
 ### Usage
 
