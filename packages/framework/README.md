@@ -6,106 +6,54 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-## Introduction
+*NOTE:* Assumes a rudimentary understanding of [KnockoutJS][] and [Webpack][] (or the bundler du jour).
 
-This is an minimal "framework" for [KnockoutJS][] built on top of the [router][] package which makes dealing with a) async data sources (APIs, IndexedDB, etc.), b) mixins (particularly type-safe mixins), less painful.
+A minimal "framework" for [KnockoutJS][] built on top of [@profiscience/knockout-contrib-router][] designed with the following goals in mind...
 
-It accomplishes the former by coupling a [route plugin][] and the [DataModelConstructorBuilder][] class, and the latter with something we're calling a "constructor builder," more on that below.
+#### User Experience
 
-> There are two main schools of thought on loaders and SPA navigation. The first is
-> is to allow each view/component (and subview in nested routing) to manage itself. This yields
-> a UX similar to Facebook, where parts of the page come in at different times. There is nothing
-> wrong with this approach, but it requires more code, and more care to be taken in constraining
-> dimensions in CSS so that the page doesn't jar — in many cases it's impossible to prevent jarring.
-> The alternative is to use a global loader and show that until the next page is completely ready,
-> and then render it. GitHub uses this approach. IMHO, it's generally a better UX and, less boilerplate, and less work.
->
-> That being said, particularly heavy/slow sections/components may still need to be lazy-loaded
-> for the best performance. For example, we lazy load medium-editor and select2 inputs in their respective
-> components. Use discretion, and always profile.
+##### No Jarring
+There are two main schools of thought on loaders and SPA navigation. The first is is to allow each view/component (and subview in nested routing) to manage itself. This yields a UX similar to Facebook, where parts of the page come in at different times. There is nothing wrong with this approach, but it requires more code, and more care to be taken in constraining dimensions in CSS so that the page doesn't jar — in many cases it's impossible to prevent jarring.
 
-*NOTE:* Assumes a rudimentary understanding of [KnockoutJS][] (and [Webpack][]).
+The alternative is the approach that is used here, which is to display a global loader and show that until the next page is completely ready, and then render it. No view is rendered until all of its data has been loaded.
 
-### Concepts
+GitHub uses this approach, and IMHO it is an optimal UX.
 
-#### Constructor Builders and Mixins
+##### Lazy Loaded
+Minimal code should be required for initial page load, as well as navigation.
 
-Composition in TypeScript is weird. The [official documentation on mixins](https://www.typescriptlang.org/docs/handbook/mixins.html) requires a ton of duplication and was a non-starter for that reason. This documentation is out of date as [2.2 brought proper mixin support](https://blogs.msdn.microsoft.com/typescript/2017/02/22/announcing-typescript-2-2/) (if you have no idea what mixins are or how to write them, this is the link you should read first), but still, there is (AFAIK) no way to implement a type-safe `applyMixins` function.
+#### Developer Experience
 
-Because of this limitation, in order to use multiple mixins, you must use...
+##### First-Class TypeScript Support
+When following best-practices, types should be intuited as strictly as possible — i.e. `noImplicitAny` compatibility. TypeScript usage is henceforth assumed.
 
-```typescript
-class extends Mixin1(Mixin2(Mixin3(BaseModel))) {
-  constructor() {}
-}
-```
+##### Minimal Logic Boilerplate
+Boilerplate should be declarative and mostly confined to defining types.
 
-This syntax begins to become extremely noisy when other arguments are added, even in the best case as variables...
+Loading async data should require no extra effort additional code. i.e. there should be no need to wrap component templates with `if: ready` and create custom CSS
+to prevent jarring. Nor should a developer have to create middleware by hand for each route.
 
-```typescript
-class extends PaginationMixin(paginationOpts, InMemoryCachingMixin(inMemoryCachingOpts, AJAXMixin(ajaxOpts, BaseModel))) {
-  constructor() {}
-}
-```
+##### Reusability
+Heed to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principles. Prevent repetition wherever possible.
 
-Being noisy (and accumulating a mass of trailing parens) isn't the only flaw though. Consider for a moment how you'd comment out a single mixin — or reorder them; it's messy.
+##### Testability
+Unit testing views should be trivial. TDD should help a developer, not hurt.
 
-After a lot of toying around, I found a pattern that maintains type-safety/autocompletion and allows a (IMO) preferable chaining syntax I'm dubbing a "constructor builder" pattern. Implementing the above in this pattern yields the following...
+##### Extensibility
+Easily allow extending the framework, taking care to avoid conflicts and prevent leaks by using [Symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) where applicable.
+
+## API
+
+API documentation for this package is generated via TypeDoc and may be viewed [here](https://profiscience.github.io/knockout-contrib/packages/framework/docs/typedoc). All listed items are available as named exports, e.g.
 
 ```typescript
-class extends ConstructorBuilder
-  .Mixin(PaginationMixin(paginationOpts))
-  .Mixin(InMemoryCachingMixin(inMemoryCachingOpts))
-  .Mixin(AJAXMixin(ajaxOpts)) {
-
-  constructor() {}
-}
+import { frameworkPlugin, DataModelConstructor, ViewModelConstructor } from '@profiscience/knockout-contrib-framework'
 ```
-
-*NOTE:* Mixins either actually functions that return mixins. In other words, they're [curried](https://wiki.haskell.org/Currying) versions of the ones used in the previous example.
-
-With this syntax, readability is maintained even when expanding the option variables...
-
-```typescript
-class extends ConstructorBuilder
-  .Mixin(PaginationMixin({
-    property: 'users',
-    pageSize: 10
-  }))
-  .Mixin(InMemoryCachingMixin({
-    trackBy: {
-      users: {
-        id: true
-      }
-    }
-  }))
-  .Mixin(AJAXMixin('http://example.com/api/users')) {
-
-  constructor() {}
-}
-```
-
-#### Data Models
-
-Data models use the [DataModelConstructorBuilder][] and contain...
-
-a) logic to retrieve data from the store (HTTP API, LocalStorage, IndexedDB, etc...)  
-b) any business logic related to the data (modifying, saving, etc...)  
-c) any computed properties
-
-They are intimately tied to the `frameworkPlugin` to allow async operations to complete before rendering, eliminating the need to handle an unititialized state in each view.
-
-#### View Models
-
-View models extend [ViewModelConstructorBuilder][] and contain UI logic. For example, click handlers, (most) subscriptions, etc.
-
-As a general rule of thumb, view models need the DOM to make sense, and data models shouldn't touch it. If
-whatever you are implementing is a reaction to the DOM, reads/writes the DOM, or does anything at all with
-the DOM, it should be in the view model. Otherwise, stick it in the data model.
-
-Both the [DataModelConstructorBuilder][] and [ViewModelConstructorBuilder][] use the [SubscriptionDisposalMixin][].
 
 ## Usage
+
+- [Concepts][]
+- [Best Practices][]
 
 __app.js__
 ```typescript
@@ -152,7 +100,7 @@ import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-fram
 
 export interface IDataModelParams {}
 
-export default class DataModel extends DataModelConstructorBuilder<IDataModelParams> {
+export default class DataModel extends DataModelConstructorBuilder<IDataModelParams{
   public name: string
 
   public async fetch() {
@@ -174,15 +122,6 @@ Walking through this code step-by-step, the following occurs...
 - componentPlugin creates a viewModel instance and registers component with `{ viewModel: { instance } }`
 - **frameworkPlugin looks for DataModel instances on the viewModel instance; if found, prevents render until initialized**
 - Router completes render
-
-The bolded line is the magic provided by this package.
-
-
-## API
-
-API documentation is generated via TypeDoc and may be viewed [here](https://profiscience.github.io/knockout-contrib/packages/framework/docs/typedoc). All listed items are available as named exports (see usage below).
-
----
 
 <!-- TOC -->
 ## Contents
@@ -208,3 +147,10 @@ API documentation is generated via TypeDoc and may be viewed [here](https://prof
 
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-framework&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-framework.svg?maxAge=2592000
+
+[KnockoutJS]: https://knockoutjs.com
+[Webpack]: https://webpack.js.org
+[@profiscience/knockout-contrib-router]: ../router
+
+[Concepts]: https://profiscience.github.io/knockout-contrib/packages/framework/docs/concepts
+[Best Practices]: https://profiscience.github.io/knockout-contrib/packages/framework/docs/best-practices
