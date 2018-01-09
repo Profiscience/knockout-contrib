@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+
+## 1.1.0
+
 ### Added
 - `router.depth` property
 - Can now create and register route instances directly
