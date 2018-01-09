@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "@profiscience/knockout-contrib-router middleware",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -17,14 +17,14 @@
     "middleware"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "1.0.0-alpha.0"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.1"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0",
+    "@profiscience/knockout-contrib-router": "^1.1.0",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0"
+    "@profiscience/knockout-contrib-router": "^1.1.0"
   },
   "main": "dist/knockout-contrib-router-middleware.js",
   "module": "index.js",

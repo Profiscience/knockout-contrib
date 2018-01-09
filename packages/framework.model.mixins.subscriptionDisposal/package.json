@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -10,7 +10,7 @@
   "typings": "index.ts",
   "license": "WTFPL",
   "dependencies": {
-    "@profiscience/knockout-contrib-framework-model-builders-base": "1.0.0-alpha.0",
+    "@profiscience/knockout-contrib-framework-model-builders-base": "^1.0.0-alpha.1",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
