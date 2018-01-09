@@ -1,0 +1,19 @@
+{
+  "name": "@profiscience/knockout-contrib-router-plugins-authorization",
+  "version": "1.0.0-alpha.0",
+  "description": "Authorization Plugin for @profiscience/knockout-contrib-router",
+  "main": "dist/knockout-contrib-plugins-authorization.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "WTFPL",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router": "1.0.0",
+    "knockout": "^3.4.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-router": "1.0.0"
+  }
+}
