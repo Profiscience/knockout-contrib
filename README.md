@@ -1,9 +1,9 @@
 # knockout-contrib
 
 
+[![License][wtfpl-shield]][wtfpl]
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
-[![License][wtfpl-shield]][wtfpl]
 [![Gitter][gitter-shield]][gitter]
 [![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
