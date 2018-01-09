@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import { Context, IContext, Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { {{camelCase name}}Plugin } from './'
+import { {{camelCase name}}Plugin } from './index'
 
 describe('router.plugins.{{camelCase name}}', () => {
   test('@todo', () => {

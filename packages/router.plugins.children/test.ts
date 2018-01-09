@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import { Context, Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { childrenPlugin } from './'
+import { childrenPlugin } from './index'
 
 describe('router.plugins.children', () => {
   test('allows registering children with children property', () => {

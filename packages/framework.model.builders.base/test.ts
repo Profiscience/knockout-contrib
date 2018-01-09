@@ -1,6 +1,6 @@
 /* tslint:disable max-classes-per-file */
 
-import { ConstructorBuilder } from './'
+import { ConstructorBuilder } from './index'
 
 describe('framework.model.builders.base', () => {
   test('ConstructorBuilder.Mixin(m: Mixin) returns mixed-in constructor', async () => {

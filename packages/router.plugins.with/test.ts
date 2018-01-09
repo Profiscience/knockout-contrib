@@ -1,5 +1,5 @@
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { withPlugin } from './'
+import { withPlugin } from './index'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable

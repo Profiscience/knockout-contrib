@@ -3,7 +3,7 @@
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
 
-import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './'
+import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index'
 
 describe('framework.model.builders.data', () => {
 

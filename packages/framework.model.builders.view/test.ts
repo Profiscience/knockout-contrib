@@ -3,7 +3,7 @@
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
 
-import { ViewModelConstructorBuilder } from './'
+import { ViewModelConstructorBuilder } from './index'
 
 describe('framework.model.builders.view', () => {
   test('uses SubscriptionDisposalMixin', () => {

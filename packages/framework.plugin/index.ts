@@ -14,9 +14,9 @@ export function frameworkPlugin() {
       if (viewModel) {
         await Promise.all(
           Object
-          .keys(viewModel)
-          .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
-          .map(async (dataModelProp: any) => await (viewModel as any)[dataModelProp][INITIALIZED])
+            .keys(viewModel)
+            .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
+            .map(async (dataModelProp: any) => await (viewModel as any)[dataModelProp][INITIALIZED])
         )
       }
     })())

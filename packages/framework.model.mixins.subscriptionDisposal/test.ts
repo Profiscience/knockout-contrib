@@ -1,5 +1,6 @@
 import * as ko from 'knockout'
-import { SubscriptionDisposalMixin as Subscribable } from './'
+
+import { SubscriptionDisposalMixin as Subscribable } from './index'
 
 class EmptyClass { }
 

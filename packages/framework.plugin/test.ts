@@ -6,7 +6,7 @@ import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-fram
 import { Context, Route, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
-import { frameworkPlugin } from './'
+import { frameworkPlugin } from './index'
 
 Route
   .usePlugin(componentPlugin)
