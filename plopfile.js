@@ -61,6 +61,24 @@ module.exports = (plop) => {
       }
     ]
   })
+  plop.setGenerator('router.middleware', {
+    description: 'Create a new middleware function for the router package',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'middleware name'
+      }
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/router.middleware.{{ kebabCase name }}',
+        templateFiles: 'templates/router.middleware/*',
+        base: 'templates/router.middleware'
+      }
+    ]
+  })
   plop.setGenerator('router.plugin', {
     description: 'Create a new Route plugin for the router package',
     prompts: [
