@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "taskr meta && lerna run build",
+		"build": "taskr meta && lerna run build --since master",
 		"build:docs": "lerna run build:docs",
 		"build:examples": "taskr build:examples",
 		"lint": "tslint --project tsconfig.json",
