@@ -12,7 +12,8 @@
     "lib": [
       "dom",
       "es5",
-      "es2015.symbol"
+      "es2015.symbol",
+      "esnext.asynciterable"
     ]
   },
   "include": [
