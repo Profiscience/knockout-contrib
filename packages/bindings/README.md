@@ -8,8 +8,10 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-bindings-*` packages
 
+<!-- TOC -->
 ### Contents
 - [jquery](../bindings.jquery)
+<!-- /TOC -->
 
 ### Usage
 

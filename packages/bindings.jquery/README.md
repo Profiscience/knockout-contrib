@@ -21,7 +21,7 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-jquery&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-jquery.svg?maxAge=2592000
 
-<!-- **NOTE:** It is recommended to use the [@profiscience/knockout-contrib-utils metapackage](../utils) -->
+**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-bindings metapackage](../bindings)
 
 Invoke a jQuery plugin on an element
 

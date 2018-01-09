@@ -5,10 +5,12 @@
 		"build:docs": "lerna run build:docs",
 		"build:examples": "taskr build:examples",
 		"lint": "tslint --project tsconfig.json",
-		"prepush": "yarn lint",
+		"prepush": "yarn lint && yarn update:docs",
 		"serve:examples": "taskr serve:examples",
-		"test": "cd packages/router && yarn test && cd ../.. && jest",
-		"generate": "plop"
+		"test:router": "cd packages/router && yarn test",
+		"test": "jest",
+		"generate": "plop",
+		"update:docs": "yarn build:docs && git add -f packages/*/docs/typedoc && (git commit -m \"chore(docs)\" || true)"
 	},
 	"workspaces": [
 		"packages/*"

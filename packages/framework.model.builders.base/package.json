@@ -1,0 +1,16 @@
+{
+  "name": "@profiscience/knockout-contrib-framework-model-builders-base",
+  "version": "1.0.0-alpha.0",
+  "description": "Base ConstructorBuilder for @profiscience/knockout-contrib-framework",
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  },
+  "main": "dist/knockout-contrib-framework-model-builders-base.js",
+  "module": "dist/index.js",
+  "typings": "index.ts",
+  "license": "WTFPL",
+  "dependencies": {
+    "tslib": "^1.8.0"
+  }
+}

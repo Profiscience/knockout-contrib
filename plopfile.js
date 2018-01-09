@@ -61,4 +61,22 @@ module.exports = (plop) => {
       }
     ]
   })
+  plop.setGenerator('router.plugin', {
+    description: 'Create a new Route plugin for the router package',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'plugin name'
+      }
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/router.plugins.{{ kebabCase name }}',
+        templateFiles: 'templates/router.plugin/*',
+        base: 'templates/router.plugin'
+      }
+    ]
+  })
 }

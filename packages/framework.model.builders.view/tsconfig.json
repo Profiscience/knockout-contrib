@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.symbol"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "test.ts"
+  ]
+}

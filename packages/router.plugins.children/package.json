@@ -1,0 +1,40 @@
+{
+  "name": "@profiscience/knockout-contrib-router-plugins-children",
+  "version": "1.0.0-alpha.0",
+  "description": "Children Plugin for @profiscience/knockout-contrib-router",
+  "main": "dist/knockout-contrib-plugins-children.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
+  },
+  "keywords": [
+    "tko",
+    "knockout",
+    "knockoutjs",
+    "routing",
+    "router",
+    "spa"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Profiscience/knockout-contrib/issues"
+  },
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.children",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router": "1.0.0",
+    "knockout": "^3.4.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-router": "1.0.0"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  }
+}

@@ -8,10 +8,12 @@
 
 This is a metapackage including all `@profiscience/knockout-contrib-observable-fn-*` packages
 
+<!-- TOC -->
 ### Contents
 - [increment](../observable.fn.increment)
 - [subscribeOnce](../observable.fn.subscribeOnce)
 - [toString](../observable.fn.toString)
+<!-- /TOC -->
 
 ### Usage
 

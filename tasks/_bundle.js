@@ -2,6 +2,7 @@
 
 const path = require('path')
 const PACKAGE_PATH = process.cwd()
+const PACKAGE_DIR = path.basename(PACKAGE_PATH)
 const PACKAGE_NAME = path.basename(PACKAGE_PATH)
 const pkg = require(path.join(PACKAGE_PATH, 'package.json'))
 const dist = path.join(PACKAGE_PATH, 'dist')
@@ -47,7 +48,7 @@ exports.bundle = function * (task) {
           jquery: '$',
           knockout: 'ko'
         },
-        name: pkg.global
+        name: `ko.contrib.${PACKAGE_DIR}`
       }
     })
     .target(dist)

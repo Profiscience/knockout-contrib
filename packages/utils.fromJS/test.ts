@@ -1,5 +1,6 @@
 import '@profiscience/knockout-contrib-jest-matchers'
 import * as ko from 'knockout'
+
 import fromJS from './index'
 
 test('should create a deep observable tree', () => {
