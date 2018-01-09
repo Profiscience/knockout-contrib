@@ -73,7 +73,7 @@ module.exports = (plop) => {
     actions: [
       {
         type: 'addMany',
-        destination: 'packages/router.middleware.{{ kebabCase name }}',
+        destination: 'packages/router.middleware.{{ camelCase name }}',
         templateFiles: 'templates/router.middleware/*',
         base: 'templates/router.middleware'
       }
@@ -91,7 +91,7 @@ module.exports = (plop) => {
     actions: [
       {
         type: 'addMany',
-        destination: 'packages/router.plugins.{{ kebabCase name }}',
+        destination: 'packages/router.plugins.{{ camelCase name }}',
         templateFiles: 'templates/router.plugin/*',
         base: 'templates/router.plugin'
       }
