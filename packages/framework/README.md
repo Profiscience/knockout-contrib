@@ -124,7 +124,7 @@ Walking through this code step-by-step, the following occurs...
 - Router completes render
 
 <!-- TOC -->
-## Contents
+### Contents
 - [model.builders.base](../framework.model.builders.base)
 - [model.builders.data](../framework.model.builders.data)
 - [model.builders.view](../framework.model.builders.view)
