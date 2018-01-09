@@ -27,26 +27,54 @@ Prevent unauthorized access to a route.
 
 ## Usage
 
+- Register the plugin
+- Create your `Authorization` classes which implement the `IAuthorization` interface
+- Profit.
+
 ```typescript
 import { Route } from '@profiscience/knockout-contrib-router'
-import { IAuthorization, authorizationPlugin } from '@profiscience/knockout-contrib-router-plugins'
+import { IAuthorization, createAuthorizationPlugin } from '@profiscience/knockout-contrib-router-plugins'
 import { getCurrentUser } from './lib'
 
-Route.usePlugin(authorizationPlugin)
+Route.usePlugin(createAuthorizationPlugin({
+  isAdmin: false,
+  notAuthorizedRedirectPath: '/400'
+}))
 
 class RoleAuthorization implements IAuthorization {
+  // this will be used to set the flash message if using the flash message middleware
   public notAuthorizedMessage = `You must have the ${this.role} role to access this page`
 
   constructor(public role: string) {}
 
-  public authorized() {
+  // may be async via promises
+  public authorized(ctx: Context & IContext) {
     return getCurrentUser().roles.indexOf(this.role) > -1
   }
 }
 
+// basic usage, pass an array of the required authorizations. if not authorized, will redirect to the
+// globally configured notAuthorizedRedirectPath
 new Route('/', {
   authorize: [
     new RoleAuthorization('MANAGER')
   ]
+})
+
+// optionally supply a redirect path different from the globally configured value
+new Route('/', {
+  authorize: {
+    authorizations: [new RoleAuthorization('MANAGER')],
+    notAuthorizedRedirectPath: '/not-authorized' 
+  }
+})
+
+// notAuthorizedRedirectPath may also be an accessor function and accepting the context as the first and only argument.
+// may return a promise
+new Route('/:id/edit', {
+  authorize: {
+    authorizations: [new RoleAuthorization('MANAGER')],
+    notAuthorizedRedirectPath: (ctx: Context & IContext) => `/user/${ctx.params.id}`
+  }
 })
 ```
