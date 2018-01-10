@@ -60,10 +60,19 @@ import { flashMessage } from '@profiscience/knockout-contrib-router-middleware'
  * The following is an example of how you could add custom properties for your flash message
  */
 
+// If using TypeScript, define the interface for your flash message
+declare module '@profiscience/knockout-contrib-router-middleware-flash-message' {
+  // tslint:disable-next-line no-shadowed-variable
+  interface IFlashMessage {
+    text: string
+    type?: string
+  }
+}
+
 ko.components.register('flash-message', {
   viewModel: {
     instance: {
-      flashMessageText: ko.pureComputed(() => {
+      text: ko.pureComputed(() => {
         const unwrappedFlashMessage = flashMessage()
         if (typeof unwrappedFlashMessage === 'string') {
           return unwrappedFlashMessage
@@ -71,7 +80,7 @@ ko.components.register('flash-message', {
           return unwrappedFlashMessage.text
         }
       }),
-      flashMessageType: ko.pureComputed(() => {
+      css: ko.pureComputed(() => {
         const unwrappedFlashMessage = flashMessage()
         if (typeof unwrappedFlashMessage.type !== 'undefined') {
           return unwrappedFlashMessage.type
@@ -81,7 +90,7 @@ ko.components.register('flash-message', {
       })
     }
   },
-  template: `<div class="flash-message" data-bind="text: flashMessageText, css: flashMessageType"><div>`
+  template: `<div class="flash-message" data-bind="text: text, css: css"><div>`
 })
 ```
 
