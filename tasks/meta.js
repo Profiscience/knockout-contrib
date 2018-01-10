@@ -120,7 +120,7 @@ async function generateMetaFiles(metapackage, packages) {
     dependencies: packages.reduce((accum, p) => {
       const { name, version } = require(path.join(p, 'package.json'))
       return Object.assign(accum, {
-        [name]: version
+        [name]: `^${version}`
       })
     }, existingDeps)
   })
@@ -135,6 +135,8 @@ async function generateMetaFiles(metapackage, packages) {
       rootDir: './',
       baseUrl: './',
       outDir: './',
+      jsx: 'react',
+      jsxFactory: 'h'
     },
     include: [
       '**/*'

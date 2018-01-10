@@ -20,12 +20,15 @@
   "typings": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "flash-message.js",
+    "flash-message.d.ts"
   ],
   "dependencies": {
     "postcss-loader": "^2.0.10",
     "postcss-modules": "^1.1.0",
-    "style-loader": "^0.19.1"
+    "style-loader": "^0.19.1",
+    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

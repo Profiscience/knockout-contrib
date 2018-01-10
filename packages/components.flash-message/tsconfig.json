@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
+    "importHelpers": true,
     "moduleResolution": "node",
     "target": "es5",
     "module": "es2015",
-    "declaration": true,
     "sourceMap": true,
     "rootDir": "./",
     "baseUrl": "./",
-    "outDir": "./",
+    "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "h",
     "lib": [
       "dom",
       "es5",
-      "es2015.core",
-      "es2015.promise",
-      "es2015.symbol",
-      "es2015.reflect",
+      "es2015",
       "esnext.asynciterable"
     ]
   },
   "include": [
     "**/*"
   ],
-  "exclude": []
+  "exclude": [
+    "dist",
+    "examples",
+    "test.tsx"
+  ]
 }

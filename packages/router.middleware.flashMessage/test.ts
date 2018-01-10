@@ -1,26 +1,48 @@
 import { Context, IContext } from '@profiscience/knockout-contrib-router'
-import { FLASH_MESSAGE, flashMessageMiddleware, flashMessageText } from './index'
+import { FLASH_MESSAGE, flashMessageMiddleware, flashMessage } from './index'
 
 describe('router.middleware.flashMessage', () => {
-  test('sets flashMessageText after render', () => {
+  test('sets flashMessage after render', () => {
     const expected = 'This is a flash message'
     const ctx: Context & IContext = { [FLASH_MESSAGE]: expected } as Context & IContext
     const lifecycle = flashMessageMiddleware(ctx)
 
     lifecycle.next()
     /* beforeRender */
-    expect(flashMessageText()).toBe('')
+    expect(flashMessage()).toBe(false)
 
     lifecycle.next()
     /* afterRender */
-    expect(flashMessageText()).toBe(expected)
+    expect(flashMessage()).toBe(expected)
 
     lifecycle.next()
     /* beforeDispose */
-    expect(flashMessageText()).toBe(expected)
+    expect(flashMessage()).toBe(expected)
 
     lifecycle.next()
     /* afterDispose */
-    expect(flashMessageText()).toBe('')
+    expect(flashMessage()).toBe(false)
+  })
+
+  test('works with any value', () => {
+    const expected = { text: 'This is a flash message' }
+    const ctx: Context & IContext = { [FLASH_MESSAGE]: expected } as Context & IContext
+    const lifecycle = flashMessageMiddleware(ctx)
+
+    lifecycle.next()
+    /* beforeRender */
+    expect(flashMessage()).toBe(false)
+
+    lifecycle.next()
+    /* afterRender */
+    expect(flashMessage()).toEqual(expected)
+
+    lifecycle.next()
+    /* beforeDispose */
+    expect(flashMessage()).toEqual(expected)
+
+    lifecycle.next()
+    /* afterDispose */
+    expect(flashMessage()).toBe(false)
   })
 })

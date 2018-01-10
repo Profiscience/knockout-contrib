@@ -10,6 +10,7 @@ This is a metapackage including all `@profiscience/knockout-contrib-components-*
 
 <!-- TOC -->
 ### Contents
+- [flash-message](../components.flash-message)
 <!-- /TOC -->
 
 ### Usage
