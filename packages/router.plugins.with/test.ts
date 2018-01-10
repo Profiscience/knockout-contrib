@@ -29,4 +29,12 @@ describe('router.plugins.with', () => {
 
     expect((ctx as any)[FOO]).toBe('bar')
   })
+
+  test('doesn\'t blow up when not used', () => {
+    const ctx = {} as Context & IContext
+    const routeConfig: IRouteConfig = {}
+    const middleware = withPlugin(routeConfig)
+
+    expect(() => middleware(ctx)).not.toThrow()
+  })
 })
