@@ -9,7 +9,7 @@ describe('router.middleware.flashMessage', () => {
 
     lifecycle.next()
     /* beforeRender */
-    expect(flashMessage()).toBe('')
+    expect(flashMessage()).toBe(false)
 
     lifecycle.next()
     /* afterRender */
@@ -21,6 +21,6 @@ describe('router.middleware.flashMessage', () => {
 
     lifecycle.next()
     /* afterDispose */
-    expect(flashMessage()).toBe('')
+    expect(flashMessage()).toBe(false)
   })
 })
