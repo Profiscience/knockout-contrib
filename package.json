@@ -67,6 +67,7 @@
 	"jest": {
 		"collectCoverage": true,
 		"coveragePathIgnorePatterns": [
+			"/dist/",
 			"/node_modules/",
 			"knockout-contrib-.+\\.js"
 		],
