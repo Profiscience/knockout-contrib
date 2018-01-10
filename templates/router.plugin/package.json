@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.{{camelCase name}}",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0",
+    "@profiscience/knockout-contrib-router": "^1.0.0",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0"
+    "@profiscience/knockout-contrib-router": "^1.0.0"
   }
 }
