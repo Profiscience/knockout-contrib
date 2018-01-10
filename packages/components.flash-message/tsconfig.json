@@ -7,11 +7,13 @@
     "sourceMap": true,
     "rootDir": "./",
     "baseUrl": "./",
-    "outDir": "./dist",
+    "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "h",
     "lib": [
       "dom",
       "es5",
-      "es2015.symbol",
+      "es2015",
       "esnext.asynciterable"
     ]
   },
@@ -20,6 +22,7 @@
   ],
   "exclude": [
     "dist",
-    "test.ts"
+    "examples",
+    "test.tsx"
   ]
 }

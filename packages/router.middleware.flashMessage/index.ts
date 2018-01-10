@@ -3,14 +3,18 @@ import { Context, IContext } from '@profiscience/knockout-contrib-router'
 
 export const FLASH_MESSAGE = Symbol('FLASH_MESSAGE')
 
+// tslint:disable-next-line no-empty-interface
+export interface IFlashMessage {
+}
+
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
   interface IContext {
-    [FLASH_MESSAGE]: string
+    [FLASH_MESSAGE]: string | IFlashMessage
   }
 }
 
-export const flashMessageText = ko.observable('')
+export const flashMessage: KnockoutObservable<boolean | string | IFlashMessage> = ko.observable(false)
 
 export function* flashMessageMiddleware(ctx: Context & IContext) {
   /* beforeRender */
@@ -18,7 +22,7 @@ export function* flashMessageMiddleware(ctx: Context & IContext) {
   yield
   /* afterRender */
   if (ctx[FLASH_MESSAGE]) {
-    flashMessageText(ctx[FLASH_MESSAGE])
+    flashMessage(ctx[FLASH_MESSAGE])
   }
 
   yield
@@ -26,5 +30,5 @@ export function* flashMessageMiddleware(ctx: Context & IContext) {
 
   yield
   /* afterDispose */
-  flashMessageText('')
+  flashMessage(false as false)
 }

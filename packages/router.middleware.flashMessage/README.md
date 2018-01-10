@@ -29,28 +29,86 @@ Display a flash message which will be removed after the next navigation.
 
 ## Usage
 
+### Register the Middleware
+```typescript
+import { flashMessageMiddleware } from '@profiscience/knockout-contrib-router-middleware'
+
+Router.use(flashMessageMiddleware)
+```
+
+### Displaying the Flash Message
+
+Create a custom flash message component the exported `flashMessage` observable, or include the [flash-message component](../components.flash-message) (`<contrib-flash-message></contrib-flash-message>`).
+
+#### Default Flash Message Component
+```typescript
+import '@profiscience/knockout-contrib-components/flash-message'
+```
+```html
+<contrib-flash-message></contrib-flash-message>
+```
+
+#### Custom Flash Message Component
+```typescript
+import * as ko from 'knockout'
+import { Router } from '@profiscience/knockout-contrib-router'
+import { flashMessage } from '@profiscience/knockout-contrib-router-middleware'
+
+/**
+ * flashMessage is an observable contatining the value passed below
+ * 
+ * The following is an example of how you could add custom properties for your flash message
+ */
+
+ko.components.register('flash-message', {
+  viewModel: {
+    instance: {
+      flashMessageText: ko.pureComputed(() => {
+        const unwrappedFlashMessage = flashMessage()
+        if (typeof unwrappedFlashMessage === 'string') {
+          return unwrappedFlashMessage
+        } else {
+          return unwrappedFlashMessage.text
+        }
+      }),
+      flashMessageType: ko.pureComputed(() => {
+        const unwrappedFlashMessage = flashMessage()
+        if (typeof unwrappedFlashMessage.type !== 'undefined') {
+          return unwrappedFlashMessage.type
+        } else {
+          return 'info'
+        }
+      })
+    }
+  },
+  template: `<div class="flash-message" data-bind="text: flashMessageText, css: flashMessageType"><div>`
+})
+```
+
+### Setting a Flash Message
+
+Set message by extending the context prior to navigating via `Router.update`, `ctx.update`, or `ctx.redirect` via the `with` option and the exported symbol.
+
 ```typescript
 import { Router } from '@profiscience/knockout-contrib-router'
-import { FLASH_MESSAGE, flashMessageMiddleware, flashMessageText } from '@profiscience/knockout-contrib-router-middleware'
+import { FLASH_MESSAGE } from '@profiscience/knockout-contrib-router-middleware'
 
 /**
- * Register flashMessageMiddleware. If a property with the FLASH_MESSAGE Symbol is found
- * on the context, flashMessageText will be set with its value. flashMessageText will be
- * cleared during the next navigation.
- */
-Router.use(flashMessageMiddleware)
-
-/**
- * Navigate and set flash message for next page using exported FLASH_MESSAGE Symbol
+ * The following are supported by the default flash message component.
+ * As shown above, you can configure this however you'd like if you're
+ * using a custom component
  */
 Router.update('/', {
   with: {
+    // set only the text and use default values for other options
     [FLASH_MESSAGE]: 'You are not logged in!'
+
+    [FLASH_MESSAGE]: {
+      text: 'Saved successfully!',  // flash message text
+      type: 'success',              // bootstrap alert type, default: info
+      dismiss: true,                // allow dismissing the flash message, default: false
+      timeout: 5000                 // automatically dismiss the flash message after timeout in ms, default: false
+    }
   }
 })
-
-/**
- * Pass the observable containing flash message text to the template.
- */
-ko.applyBindings({ flashMessageText })
 ```

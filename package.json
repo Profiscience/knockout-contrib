@@ -36,6 +36,7 @@
 		"husky": "^0.14.3",
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^22.0.1",
+		"jest-jquery-matchers": "^1.4.2",
 		"jquery": "^3.2.1",
 		"jsx-dom": "^5.2.0",
 		"knockout": "^3.4.0",
