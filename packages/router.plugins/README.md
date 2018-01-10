@@ -13,6 +13,7 @@ This is a metapackage including all `@profiscience/knockout-contrib-router-plugi
 - [authorization](../router.plugins.authorization)
 - [children](../router.plugins.children)
 - [component](../router.plugins.component)
+- [components](../router.plugins.components)
 - [title](../router.plugins.title)
 - [with](../router.plugins.with)
 <!-- /TOC -->

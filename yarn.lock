@@ -63,6 +63,14 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@profiscience/knockout-contrib-router@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-router/-/knockout-contrib-router-1.0.0.tgz#d030a1c1dd8e5e1a06b3920f4a56d8e0595ac159"
+  dependencies:
+    core-js "^2.3.0"
+    path-to-regexp "^2.0.0"
+    tslib "^1.7.0"
+
 "@std/esm@^0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@std/esm/-/esm-0.16.0.tgz#2a7a33ecb7f1701cebd4c87df6d0d945ed51f730"
