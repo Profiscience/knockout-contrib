@@ -23,7 +23,7 @@
 
 **NOTE:** It is recommended to use the [@profiscience/knockout-contrib-components metapackage](../components)
 
-@todo description
+Flash message component for use with [@profiscience/knockout-contrib-router-middleware-flash-message](../router.middleware.flashMessage).
 
 ## Usage
 
@@ -31,9 +31,5 @@
 import '@profiscience/knockout-contrib-components/flash-message'
 ```
 ```html
-<flash-message></flash-message>
+<contrib-flash-message></contrib-flash-message>
 ```
-
-## Params
-
-@todo document params
