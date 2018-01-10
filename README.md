@@ -10,6 +10,7 @@
 
 This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS](https://knockoutjs.com)
 
+**NOTE:** Packages released as `X.X.X-alpha.X` are pre-releases and are subject to breaking changes without warning.
 
 # Installation
 Individual packages are published under the `@profiscience/knockout-contrib-*` namespace, with package names kebab-cased.
