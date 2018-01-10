@@ -30,5 +30,5 @@ export function* flashMessageMiddleware(ctx: Context & IContext) {
 
   yield
   /* afterDispose */
-  flashMessage(false as false)
+  flashMessage(false)
 }

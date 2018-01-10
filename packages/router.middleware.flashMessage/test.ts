@@ -23,4 +23,26 @@ describe('router.middleware.flashMessage', () => {
     /* afterDispose */
     expect(flashMessage()).toBe(false)
   })
+
+  test('works with any value', () => {
+    const expected = { text: 'This is a flash message' }
+    const ctx: Context & IContext = { [FLASH_MESSAGE]: expected } as Context & IContext
+    const lifecycle = flashMessageMiddleware(ctx)
+
+    lifecycle.next()
+    /* beforeRender */
+    expect(flashMessage()).toBe(false)
+
+    lifecycle.next()
+    /* afterRender */
+    expect(flashMessage()).toEqual(expected)
+
+    lifecycle.next()
+    /* beforeDispose */
+    expect(flashMessage()).toEqual(expected)
+
+    lifecycle.next()
+    /* afterDispose */
+    expect(flashMessage()).toBe(false)
+  })
 })

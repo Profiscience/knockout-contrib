@@ -63,16 +63,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@profiscience/knockout-contrib-framework@1.0.0-alpha.2":
-  version "1.0.0-alpha.3"
-  dependencies:
-    "@profiscience/knockout-contrib-framework-model-builders-base" "1.0.0-alpha.1"
-    "@profiscience/knockout-contrib-framework-model-builders-data" "1.0.0-alpha.1"
-    "@profiscience/knockout-contrib-framework-model-builders-view" "1.0.0-alpha.1"
-    "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal" "1.0.0-alpha.1"
-    "@profiscience/knockout-contrib-framework-plugin" "1.0.0-alpha.1"
-    tslib "^1.8.0"
-
 "@std/esm@^0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@std/esm/-/esm-0.16.0.tgz#2a7a33ecb7f1701cebd4c87df6d0d945ed51f730"
