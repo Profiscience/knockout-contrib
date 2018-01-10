@@ -97,6 +97,12 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
           ctx.component = componentConfig
           ko.components.register(ctx.route.component, componentConfig)
         }
+      } else {
+        ctx.component = {}
+        ko.components.register(ctx.route.component, {
+          synchronous: true,
+          template: componentConfig.template
+        })
       }
       return ctx.component
     }
