@@ -6,12 +6,12 @@ const { TRAVIS, DEBUG } = process.env
 
 const karmaPlugins = [
   require('karma-firefox-launcher'),
-  require('karma-mocha-reporter'),
+  require('karma-tap-pretty-reporter'),
   require('karma-rollup-preprocessor'),
   require('karma-tap')
 ]
 
-const karmaReporters = ['mocha']
+const karmaReporters = ['tap-pretty']
 
 const rollupPlugins = [
   require('rollup-plugin-json')(),
@@ -70,6 +70,10 @@ module.exports = (config) => {
       '_Firefox'
     ],
 
+    browserConsoleLogOptions: {
+      terminal: false
+    },
+
     customLaunchers: {
       _Firefox: {
         base: 'Firefox',
@@ -82,6 +86,10 @@ module.exports = (config) => {
     autoWatch: !DEBUG,
 
     reporters: karmaReporters,
+
+    tapReporter: {
+      prettify: require('tap-summary')
+    },
 
     rollupPreprocessor: {
       treeshake: false,
