@@ -44,6 +44,21 @@ describe('router.plugins.component', () => {
     expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
   })
 
+  test('logs warning if viewModel is not newable', () => {
+    console.warn = jest.fn()
+
+    const template = 'Hello, World!'
+    const component = { template, viewModel: { instance: {} } }
+    const ctx = { route: {} } as Context & IContext
+    const routeConfig: IRouteConfig = { component } as any
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    expect(console.warn).toBeCalled()
+  })
+
   test('works with template only components', () => {
     ko.components.register = jest.fn()
 

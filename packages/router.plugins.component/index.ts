@@ -71,9 +71,7 @@ export interface IRoutedComponentConfig {
 const uniqueComponentNames = (function*() {
   let i = 0
   while (true) {
-    const id = `__router_view_${i++}__`
-    if (ko.components.isRegistered(id)) continue
-    yield id
+    yield `__router_view_${i++}__`
   }
 })()
 
