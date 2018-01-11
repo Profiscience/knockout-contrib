@@ -44,6 +44,8 @@ export const INITIALIZED = Symbol('INITIALIZED')
  * ```
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
+  public [INITIALIZED]: Promise<void>
+
   /**
    * True if pending `.fetch()` response
    */
@@ -61,12 +63,9 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
-    // we want to keep this mostly hidden as an implementation detail, and to make it work
-    // an index property has to be added which compromises type safety
-    const initialized = this.update();
-    (this as any)[INITIALIZED] = initialized
+    this[INITIALIZED] = this.update()
 
-    initialized
+    this[INITIALIZED]
       .then(() => {
         this.subscribe(params, () => this.update())
       })
@@ -143,7 +142,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
  */
 export function nonenumerable(target: any, prop: string) {
   Object.defineProperty(target, prop, {
-    ...Object.getOwnPropertyDescriptor(target, prop) || {},
+    ...Object.getOwnPropertyDescriptor(target, prop),
     enumerable: false
   })
 }
