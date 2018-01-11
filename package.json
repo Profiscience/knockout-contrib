@@ -68,8 +68,7 @@
 		"collectCoverage": true,
 		"coveragePathIgnorePatterns": [
 			"/dist/",
-			"/node_modules/",
-			"knockout-contrib-.+\\.js"
+			"/node_modules/"
 		],
 		"coverageReporters": [
 			"lcov",
