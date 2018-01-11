@@ -1,5 +1,12 @@
 import { Context, IContext } from '@profiscience/knockout-contrib-router'
-import { FLASH_MESSAGE, flashMessageMiddleware, flashMessage } from './index'
+import { IFlashMessage, FLASH_MESSAGE, flashMessageMiddleware, flashMessage } from './index'
+
+declare module './index' {
+  // tslint:disable-next-line no-shadowed-variable
+  interface IFlashMessage {
+    text: string
+  }
+}
 
 describe('router.middleware.flashMessage', () => {
   test('sets flashMessage after render', () => {
@@ -24,8 +31,8 @@ describe('router.middleware.flashMessage', () => {
     expect(flashMessage()).toBe(false)
   })
 
-  test('works with any value', () => {
-    const expected = { text: 'This is a flash message' }
+  test('works with custom flash message format', () => {
+    const expected: IFlashMessage = { text: 'This is a flash message' }
     const ctx: Context & IContext = { [FLASH_MESSAGE]: expected } as Context & IContext
     const lifecycle = flashMessageMiddleware(ctx)
 
@@ -44,5 +51,17 @@ describe('router.middleware.flashMessage', () => {
     lifecycle.next()
     /* afterDispose */
     expect(flashMessage()).toBe(false)
+  })
+
+  test('doesn\'t blow up when not used', () => {
+    const ctx = {} as Context & IContext
+    const lifecycle = flashMessageMiddleware(ctx) as IterableIterator<void>
+
+    expect(() => {
+      lifecycle.next()
+      lifecycle.next()
+      lifecycle.next()
+      lifecycle.next()
+    }).not.toThrow()
   })
 })
