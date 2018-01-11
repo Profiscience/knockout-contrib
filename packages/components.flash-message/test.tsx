@@ -50,8 +50,14 @@ describe('flash-message component', () => {
     expect($el.getElementsByTagName('button')[0].style.display).not.toBe('none')
   })
 
-  test('does not show dismiss button when dismiss is false', () => {
+  test('does not show dismiss button when dismiss is undefined', () => {
     const v = { text: 'foo' }
+    flashMessage(v)
+    expect($el.getElementsByTagName('button')[0].style.display).toBe('none')
+  })
+
+  test('does not show dismiss button when dismiss is false', () => {
+    const v = { text: 'foo', dismiss: false }
     flashMessage(v)
     expect($el.getElementsByTagName('button')[0].style.display).toBe('none')
   })

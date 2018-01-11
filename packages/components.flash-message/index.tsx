@@ -50,7 +50,7 @@ class FlashMessageViewModel extends ViewModelConstructorBuilder {
   constructor() {
     super()
     this.subscribe(this.timeout, (t) => {
-      if (t) {
+      if (typeof t !== 'undefined') {
         setTimeout(() => flashMessage(false), t)
       }
     })
