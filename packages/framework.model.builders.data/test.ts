@@ -12,7 +12,7 @@ describe('framework.model.builders.data', () => {
 
     class FooModel extends DataModelConstructorBuilder<{}> {}
 
-    const foo = new FooModel({})
+    const foo: any = new FooModel({})
 
     await expect(foo[INITIALIZED]).rejects.toBeTruthy()
 

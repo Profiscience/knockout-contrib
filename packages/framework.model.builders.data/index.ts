@@ -44,7 +44,7 @@ export const INITIALIZED = Symbol('INITIALIZED')
  * ```
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
-  public [INITIALIZED]: Promise<void>
+  // public [INITIALIZED]: Promise<void> need TypeDoc to upgrade to TS >=2.7.0
 
   /**
    * True if pending `.fetch()` response
@@ -63,9 +63,11 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
-    this[INITIALIZED] = this.update()
+    const initialized = this.update();
 
-    this[INITIALIZED]
+    (this as any)[INITIALIZED] = initialized
+
+    initialized
       .then(() => {
         this.subscribe(params, () => this.update())
       })
