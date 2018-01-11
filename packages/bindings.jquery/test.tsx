@@ -25,7 +25,17 @@ describe('bindings.jquery', () => {
     ko.applyBindings({ opts }, el)
   })
 
-  test('works with value binding', (done) => {
+  test('options default to empty object', (done) => {
+    const el = <div data-bind='jquery.myPlugin'></div>
+    // tslint:disable-next-line only-arrow-functions
+    $.fn.myPlugin = function(_opts: any) {
+      expect(_opts).toEqual({})
+      done()
+    }
+    ko.applyBindings({}, el)
+  })
+
+  test('initializes value binding', (done) => {
     const val = ko.observable()
     const opts = { myOpts: true }
     const el = <div data-bind='jquery.myPlugin: opts, value: val'></div>
@@ -37,6 +47,22 @@ describe('bindings.jquery', () => {
       expect(v).toBe('foobar')
       done()
     })
+    ko.applyBindings({ opts, val }, el)
+  })
+
+  test('updates value binding on change', (done) => {
+    const val = ko.observable()
+    const opts = { myOpts: true }
+    const el = <div data-bind='jquery.myPlugin: opts, value: val'></div>
+    // tslint:disable-next-line only-arrow-functions
+    $.fn.myPlugin = function(_opts: any) {
+      val.subscribe((v) => {
+        expect(v).toBe('foobar')
+        done()
+      })
+      this.val('foobar')
+      this.trigger('change')
+    }
     ko.applyBindings({ opts, val }, el)
   })
 
