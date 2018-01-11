@@ -10,18 +10,15 @@ declare global {
 }
 
 const jqueryBinding: KnockoutBindingHandler = {
-  getNamespacedHandler(pluginName) {
+  getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
         const value = allBindings.get('value')
-        const changeHandler = allBindings.get('event.change')
+        const changeHandler = allBindings.get('event.change') || (allBindings.get('event') || {}).change
         let opts = valueAccessor()
 
         opts = opts || {}
 
-        $(el)[pluginName](opts)
-
-        // @todo: find where this is being used
         $(el).change((e) => {
           if (typeof value === 'function') {
             value($(el).val())
@@ -31,6 +28,12 @@ const jqueryBinding: KnockoutBindingHandler = {
             changeHandler(e)
           }
         })
+
+        $(el)[pluginName](opts)
+
+        if (typeof value === 'function') {
+          value($(el).val())
+        }
       }
     }
   }
