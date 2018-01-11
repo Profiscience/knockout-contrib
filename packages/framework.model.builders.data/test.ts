@@ -8,14 +8,15 @@ import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index
 describe('framework.model.builders.data', () => {
 
   test('requires .fetch() implementation', async () => {
+    console.error = jest.fn()
+
     class FooModel extends DataModelConstructorBuilder<{}> {}
 
     const foo = new FooModel({})
 
     await expect(foo[INITIALIZED]).rejects.toBeTruthy()
 
-    // tslint:disable-next-line no-console
-    console.error('The preceeding error is expected')
+    expect(console.error).lastCalledWith('Error initializing DataModel')
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
