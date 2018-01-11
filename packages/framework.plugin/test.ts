@@ -48,4 +48,35 @@ describe('framework.plugin', () => {
 
     expect(componentInstance.viewModel.data.foo()).toBe('bar')
   })
+
+  test('doesn\'t blow up when no component', async () => {
+    const queue = jest.fn()
+    const routeConfig: IRouteConfig = {}
+    const route = new Route('/', routeConfig)
+    const ctx = { queue: queue as any, route: {} } as Context & IContext
+
+    for (const middleware of route.middleware) {
+      const lifecycle = middleware(ctx)
+      if (lifecycle) lifecycle.next()
+    }
+
+    expect(queue).not.toBeCalled()
+  })
+
+  test('doesn\'t blow up when no viewModel', async () => {
+    const queue = jest.fn()
+    const getComponent = () => ({
+      template: Promise.resolve({ default: 'Hello, World!' })
+    })
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const route = new Route('/', routeConfig)
+    const ctx = { queue: queue as any, route: {} } as Context & IContext
+
+    expect(() => {
+      for (const middleware of route.middleware) {
+        const lifecycle = middleware(ctx)
+        if (lifecycle) lifecycle.next()
+      }
+    }).not.toThrow()
+  })
 })
