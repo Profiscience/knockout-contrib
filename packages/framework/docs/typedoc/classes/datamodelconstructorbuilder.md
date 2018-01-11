@@ -80,7 +80,7 @@ Example usage:
 ### ⊕ **new DataModelConstructorBuilder**(params: *`P`*): [DataModelConstructorBuilder](datamodelconstructorbuilder.md)
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:50*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:52*
 
 
 
@@ -109,7 +109,7 @@ Constructs a new DataModel instance
 
 **●  loading**:  *`KnockoutObservable`.<`boolean`>*  =  ko.observable(true)
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:50*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:52*
 
 
 
@@ -126,7 +126,7 @@ ___
 
 **●  params**:  *`P`* 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:58*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:60*
 
 
 
@@ -147,7 +147,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:103*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:104*
 
 
 
@@ -176,7 +176,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:82*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:83*
 
 
 
@@ -201,7 +201,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:112*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:113*
 
 
 

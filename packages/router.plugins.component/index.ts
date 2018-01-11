@@ -71,9 +71,7 @@ export interface IRoutedComponentConfig {
 const uniqueComponentNames = (function*() {
   let i = 0
   while (true) {
-    const id = `__router_view_${i++}__`
-    if (ko.components.isRegistered(id)) continue
-    yield id
+    yield `__router_view_${i++}__`
   }
 })()
 
@@ -97,6 +95,12 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
           ctx.component = componentConfig
           ko.components.register(ctx.route.component, componentConfig)
         }
+      } else {
+        ctx.component = {}
+        ko.components.register(ctx.route.component, {
+          synchronous: true,
+          template: componentConfig.template
+        })
       }
       return ctx.component
     }

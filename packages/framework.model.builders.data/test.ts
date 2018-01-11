@@ -8,14 +8,15 @@ import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index
 describe('framework.model.builders.data', () => {
 
   test('requires .fetch() implementation', async () => {
+    console.error = jest.fn()
+
     class FooModel extends DataModelConstructorBuilder<{}> {}
 
-    const foo = new FooModel({})
+    const foo: any = new FooModel({})
 
-    await expect((foo as any)[INITIALIZED]).rejects.toBeTruthy()
+    await expect(foo[INITIALIZED]).rejects.toBeTruthy()
 
-    // tslint:disable-next-line no-console
-    console.error('The preceeding error is expected')
+    expect(console.error).lastCalledWith('Error initializing DataModel')
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
@@ -33,6 +34,24 @@ describe('framework.model.builders.data', () => {
 
     expect(foo.value).toBeObservable()
     expect(foo.value()).toBe('value')
+  })
+
+  test('throws and logs error on .fetch() rejection', async () => {
+    console.error = jest.fn()
+
+    interface IFooParams { }
+
+    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+      public readonly value: KnockoutObservable<string>
+
+      protected async fetch() {
+        throw new Error()
+      }
+    }
+
+    await expect(FooModel.create({})).rejects.toBeTruthy()
+
+    expect(console.error).lastCalledWith('Error initializing DataModel')
   })
 
   test('uses SubscriptionDisposalMixin', () => {

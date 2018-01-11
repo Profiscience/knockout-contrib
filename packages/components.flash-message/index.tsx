@@ -16,28 +16,26 @@ declare module '@profiscience/knockout-contrib-router-middleware-flash-message' 
 class FlashMessageViewModel extends ViewModelConstructorBuilder {
   public visible = ko.pureComputed(() => flashMessage() !== false)
   public text = ko.pureComputed(() => {
-    const unwrapped = flashMessage() as IFlashMessage | string
-    if (!unwrapped) return
-    return typeof unwrapped === 'string'
+    const unwrapped = flashMessage()
+    return typeof unwrapped === 'string' || typeof unwrapped === 'boolean'
       ? unwrapped
       : unwrapped.text
   })
   public timeout = ko.pureComputed(() => {
-    const unwrapped = flashMessage() as IFlashMessage
-    if (!unwrapped) return
-    return typeof unwrapped.timeout !== 'undefined'
-      ? unwrapped.timeout
-      : false
+    const unwrapped = flashMessage()
+    if (typeof unwrapped === 'string' || typeof unwrapped === 'boolean') {
+      return false
+    } else {
+      return unwrapped.timeout
+    }
   })
   public dismissible = ko.pureComputed(() => {
-    const unwrapped = flashMessage() as IFlashMessage
-    if (!unwrapped) return
-    return typeof unwrapped !== 'string' && unwrapped.dismiss
+    const unwrapped = flashMessage()
+    return typeof unwrapped !== 'string' && typeof unwrapped !== 'boolean' && unwrapped.dismiss
   })
   public css = ko.pureComputed(() => {
-    const unwrapped = flashMessage() as IFlashMessage
-    if (!unwrapped) return
-    if (typeof unwrapped === 'string') return 'alert-info'
+    const unwrapped = flashMessage()
+    if (typeof unwrapped === 'string' || typeof unwrapped === 'boolean') return 'alert-info'
     let css = typeof unwrapped.type === 'undefined'
       ? ' alert-info'
       : ` alert-${unwrapped.type}`

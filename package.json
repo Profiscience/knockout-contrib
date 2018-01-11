@@ -67,8 +67,8 @@
 	"jest": {
 		"collectCoverage": true,
 		"coveragePathIgnorePatterns": [
-			"/node_modules/",
-			"knockout-contrib-.+\\.js"
+			"/dist/",
+			"/node_modules/"
 		],
 		"coverageReporters": [
 			"lcov",
