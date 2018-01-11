@@ -37,9 +37,6 @@ export default class Query {
   }
 
   private _group?: string
-  private _forceRecompute?: KnockoutObservable<boolean>
-  private _config?: IQueryConfig
-  private _defaults?: { [k: string]: any }
 
   [k: string]: any
 
@@ -57,8 +54,7 @@ export default class Query {
   }
 
   public set(config: IQueryConfig) {
-    this._config = config
-    this._defaults = Object.assign({}, this._defaults || {}, Query.getDefaults(config))
+    const defaults = Object.assign({}, Query.getDefaults(config))
     const group = this._group
     const fromQS = Query.fromQS(group)
 
@@ -66,7 +62,7 @@ export default class Query {
       this[name] = Query._raw[group][name]
 
       if (isUndefined(this[name])) {
-        const _default = this._defaults[name]
+        const _default = defaults[name]
         const coerce = paramConfig.coerce || ((x: any) => x)
         const init = !isUndefined(fromQS[name]) ? fromQS[name] : paramConfig.initial
 
@@ -88,14 +84,7 @@ export default class Query {
   }
 
   public asObservable() {
-    if (!this._forceRecompute) {
-      this._forceRecompute = ko.observable(false)
-    }
-
-    return ko.pureComputed(() => {
-      this._forceRecompute()
-      return this.toJS()
-    })
+    return ko.pureComputed(() => this.toJS())
   }
 
   public clear() {
@@ -146,7 +135,8 @@ export default class Query {
       _query[g] = ko.toJS(omit(q, (v: IQueryParam<any>) =>
         v.isDefault() ||
         isUndefined(v()) ||
-        (isEmpty(v()) && !isNumber(v()) && !isBool(v()))))
+        (isEmpty(v()) && !isNumber(v()) && !isBool(v()))
+      ))
     }
 
     if (_query[undefined as string]) {
