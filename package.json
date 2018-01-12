@@ -47,7 +47,7 @@
 		"postcss": "^6.0.14",
 		"postcss-cssnext": "^3.0.2",
 		"postcss-modules": "^1.1.0",
-		"rollup": "^0.53.0",
+		"rollup": "^0.54.0",
 		"rollup-plugin-commonjs": "^8.2.6",
 		"rollup-plugin-node-resolve": "^3.0.0",
 		"rollup-plugin-postcss": "^1.0.0",
