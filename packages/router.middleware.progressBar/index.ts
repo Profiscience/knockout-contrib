@@ -6,8 +6,8 @@ export function createProgressBarMiddleware(opts?: ToProgressOptions) {
   const progressBar = new ToProgress(opts)
 
   return function* progressBarMiddleware(ctx: Context & IContext) {
-    if (ctx.router.isRoot) progressBar.start()
+    if (ctx.router.isRoot) progressBar.start().catch(() => ({}))
     yield
-    if (!ctx.$child) progressBar.finish()
+    if (!ctx.$child) progressBar.finish().catch(() => ({}))
   }
 }
