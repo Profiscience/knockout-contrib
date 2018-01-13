@@ -7,6 +7,13 @@ beforeEach(() => {
 })
 
 describe('router.middleware.progressBar', () => {
+  test('passes options to toprogress2', () => {
+    const ctx: Context & IContext = {} as Context & IContext
+    const opts = { color: '#fff' }
+    const lifecycle = createProgressBarMiddleware(opts)(ctx)
+    lifecycle.next()
+    expect((ToProgress as any).initializedWith()).toBe(opts)
+  })
   test('starts progress bar before render at most once', () => {
     const topCtx: Context & IContext = {
       $child: {},
