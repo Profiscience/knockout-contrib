@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Changed
+- Clear `history.state` on Router.update, unless `push: false`
+
 
 ## 1.1.0
 
