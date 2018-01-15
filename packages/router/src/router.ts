@@ -332,7 +332,7 @@ export class Router {
   }
 
   private static canonicalizePath(path: string) {
-    return path.replace(new RegExp('/?#?!?/?'), '/')
+    return path.replace(new RegExp('^/?(?:#!)?/?'), '/')
   }
 
   private static parseUrl(url: string) {
