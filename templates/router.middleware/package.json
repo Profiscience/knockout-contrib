@@ -9,11 +9,11 @@
   ],
   "license": "WTFPL",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0",
+    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "1.0.0"
+    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
