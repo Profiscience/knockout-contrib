@@ -8,10 +8,6 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
-  },
   "keywords": [
     "tko",
     "knockout",
@@ -22,15 +18,18 @@
   ],
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/knockout-contrib/issues"
-  },
+  "repository": "Profiscience/knockout-contrib",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.{{camelCase name}}",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.0.0",
+    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.0.0"
+    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   }
 }

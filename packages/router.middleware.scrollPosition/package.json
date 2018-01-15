@@ -1,7 +1,7 @@
 {
-  "name": "@profiscience/knockout-contrib-router-middleware-{{kebabCase name}}",
+  "name": "@profiscience/knockout-contrib-router-middleware-scroll-position",
   "version": "1.0.0-alpha.0",
-  "main": "dist/knockout-contrib-router-middleware-{{kebabCase name}}.js",
+  "main": "dist/knockout-contrib-router-middleware-scroll-position.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -9,11 +9,11 @@
   ],
   "license": "WTFPL",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}",
+    "@profiscience/knockout-contrib-router": "^1.1.0",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}"
+    "@profiscience/knockout-contrib-router": "^1.1.0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

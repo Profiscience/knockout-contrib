@@ -167,7 +167,7 @@ export class Router {
     await fromCtx.runBeforeDispose()
 
     history[args.push ? 'pushState' : 'replaceState'](
-      history.state,
+      args.push ? {} : history.state,
       document.title,
       toCtx.base + toCtx.path + search + hash
     )
@@ -331,7 +331,7 @@ export class Router {
   }
 
   private static canonicalizePath(path: string) {
-    return path.replace(new RegExp('/?#?!?/?'), '/')
+    return path.replace(new RegExp('^/?(?:#!)?/?'), '/')
   }
 
   private static parseUrl(url: string) {
