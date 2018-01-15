@@ -56,6 +56,9 @@ Top-most router
 #### Router.initialized
 Alias for `Router.head.initialized`
 
+#### Router.isNavigating()
+Observable value which is true if *any* routers are navigating, including nested routers
+
 #### Router.setConfig({ base = '', hashbang = false, activePathCSSClass = 'active-path' })
 Sets router configuration
 
