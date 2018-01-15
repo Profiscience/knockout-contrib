@@ -2,6 +2,17 @@ import ko from 'knockout'
 
 import { Router } from '../../dist'
 
+function assertStaticIsNavigating(ctx) {
+  return () => ({
+    beforeRender() {
+      ctx.t.equals(true, Router.isNavigating(), 'Router.isNavigating() is true when nested routers are navigating')
+    },
+    afterRender() {
+      ctx.t.equals(false, Router.isNavigating(), 'Router.isNavigating() is false when all nested routers finish')
+    }
+  })
+}
+
 ko.components.register('nested', {
   template: '<router></router>',
   viewModel: class NestedRoutingTest {
@@ -92,6 +103,7 @@ export const routes = {
       '/a': 'a',
       '/b': 'b',
       '/c': [
+        assertStaticIsNavigating,
         'c-pre',
         {
           '/': 'c' // https://www.youtube.com/watch?v=5l-PjIqPOBw

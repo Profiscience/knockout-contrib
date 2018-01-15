@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- Static `Router.isNavigating` observable for determining if any routers are navigating
+
 ### Changed
 - Clear `history.state` on Router.update, unless `push: false`
 

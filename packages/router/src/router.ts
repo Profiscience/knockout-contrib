@@ -1,7 +1,6 @@
 import isBoolean from 'lodash/isBoolean'
 import isUndefined from 'lodash/isUndefined'
 import castArray from 'lodash/castArray'
-import extendWith from 'lodash/extendWith'
 import map from 'lodash/map'
 import * as ko from 'knockout'
 import { IContext } from './'
@@ -13,6 +12,18 @@ import {
   traversePath,
   log
 } from './utils'
+
+export type RouterConfig = {
+  base?: string
+  hashbang?: boolean
+  activePathCSSClass?: string
+}
+
+export type RouterUpdateOptions = {
+  push?: boolean
+  force?: boolean
+  with?: { [prop: string]: any }
+}
 
 export type SimpleMiddleware =
   | ((ctx: Context & IContext) => MaybePromise<void>)
@@ -35,23 +46,23 @@ export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | Lifecycl
 
 export class Router {
   public static head: Router
-  public static onInit: ((router: Router) => void)[] = []
-  public static middleware: Middleware[] = []
-  public static config: {
-    base?: string
-    hashbang?: boolean
-    activePathCSSClass?: string
-  } = {
+  public static readonly onInit: ((router: Router) => void)[] = []
+  public static readonly middleware: Middleware[] = []
+  public static readonly config = {
     base: '',
     hashbang: false,
     activePathCSSClass: 'active-path'
   }
+  public static readonly isNavigating = ko.pureComputed(() => {
+    if (Router.head.isNavigating()) return true
+    for (const ctx of Router.head.ctx.$children) {
+      if (ctx.router.isNavigating()) return true
+    }
+    return false
+  })
 
-  private static routes: Route[] = []
-  private static events: {
-    click: string,
-    popstate: string
-  } = {
+  private static readonly routes: Route[] = []
+  private static readonly events = {
     click:  document.ontouchstart ? 'touchstart' : 'click',
     popstate: 'popstate'
   }
@@ -113,11 +124,7 @@ export class Router {
 
   public async update(
     url: string,
-    _args?: boolean | {
-      push?: boolean
-      force?: boolean
-      with?: { [prop: string]: any }
-    }): Promise<boolean> {
+    _args?: boolean | RouterUpdateOptions): Promise<boolean> {
     let args
     if (isBoolean(_args)) {
       args = { push: _args as boolean }
@@ -225,16 +232,8 @@ export class Router {
     return Router.config.base + (Router.config.hashbang ? '/#!' : '')
   }
 
-  public static setConfig({ base, hashbang, activePathCSSClass }: {
-    base?: string
-    hashbang?: boolean
-    activePathCSSClass?: string
-  }): typeof Router {
-    extendWith(Router.config, {
-      base,
-      hashbang,
-      activePathCSSClass
-    }, (_default, v) => isUndefined(v) ? _default : v)
+  public static setConfig(config: RouterConfig): typeof Router {
+    Object.assign(Router.config, config)
     return this
   }
 
