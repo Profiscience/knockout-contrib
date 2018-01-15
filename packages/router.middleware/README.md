@@ -12,6 +12,7 @@ This is a metapackage including all `@profiscience/knockout-contrib-router-middl
 ### Contents
 - [flashMessage](../router.middleware.flashMessage)
 - [progressBar](../router.middleware.progressBar)
+- [scrollPosition](../router.middleware.scrollPosition)
 <!-- /TOC -->
 
 ### Usage
