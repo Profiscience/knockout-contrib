@@ -6,7 +6,9 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-This is a metapackage including all `@profiscience/knockout-contrib-components-*` packages
+> This is a metapackage including all `@profiscience/knockout-contrib-components-*` packages
+
+[Custom components](https://knockoutjs.com/documentation/component-overview.html) for [KnockoutJS][]
 
 <!-- TOC -->
 ### Contents
@@ -15,12 +17,36 @@ This is a metapackage including all `@profiscience/knockout-contrib-components-*
 
 ### Usage
 
+Importing a component will add it to Knockout's global registry with the `contrib` prefix. e.g. `<contrib-flash-message></contrib-flash-message>`
+
+You may import a single binding, or all of them.
+
 ```javascript
 // import all
 import '@profiscience/knockout-contrib-components'
 
-
+// import single
+import '@profiscience/knockout-contrib-components/flash-message' 
 ```
+
+### Styles
+
+Components use [Bootstrap v4][] as a base, and [CSS modules][] for any additional styling. If you are using [Webpack][], add the following to your configuration...
+
+```typescript
+module.exports = {
+  module: {
+    rules: [
+      require('@profiscience/knockout-contrib-components/webpack')
+    ]
+  }
+}
+```
+
+[KnockoutJS]: https://knockoutjs.com
+[Bootstrap v4]: https://getbootstrap.com/
+[CSS modules]: https://github.com/css-modules/css-modules
+[Webpack]: https://webpack.js.org
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/components
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/components

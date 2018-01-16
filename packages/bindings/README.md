@@ -6,7 +6,9 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-This is a metapackage including all `@profiscience/knockout-contrib-bindings-*` packages
+> This is a metapackage including all `@profiscience/knockout-contrib-bindings-*` packages
+
+Custom bindings for [KnockoutJS][]
 
 <!-- TOC -->
 ### Contents
@@ -15,6 +17,8 @@ This is a metapackage including all `@profiscience/knockout-contrib-bindings-*` 
 
 ### Usage
 
+Importing a package will add it to Knockout's global registry. You can import a single binding, or all of them.
+
 ```javascript
 // import all
 import '@profiscience/knockout-contrib-bindings'
@@ -22,6 +26,8 @@ import '@profiscience/knockout-contrib-bindings'
 // import single
 import '@profiscience/knockout-contrib-bindings/jquery'
 ```
+
+[KnockoutJS]: https://knockoutjs.com
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/bindings

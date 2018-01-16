@@ -6,7 +6,9 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-This is a metapackage including all `@profiscience/knockout-contrib-router-middleware-*` packages
+> This is a metapackage including all `@profiscience/knockout-contrib-router-middleware-*` packages
+
+[Router Middleware](../router/docs/middleware) for [@profiscience-knockout-contrib-router](../router)
 
 <!-- TOC -->
 ### Contents
@@ -16,6 +18,10 @@ This is a metapackage including all `@profiscience/knockout-contrib-router-middl
 <!-- /TOC -->
 
 ### Usage
+
+All named exports from each child package (see the table of contents above) are available to import.
+
+If using a bundler that supports tree-shaking, this will safely minify.
 
 ```javascript
 import { flashMessageMiddleware } from '@profiscience/knockout-contrib-router-middleware'

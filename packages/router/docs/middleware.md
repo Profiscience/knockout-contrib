@@ -1,4 +1,12 @@
-# Middleware
+  - [Registering Middleware](#registering-middleware)
+    - [App Middleware](#app-middleware)
+    - [Route Middleware](#route-middleware)
+  - [Middleware Functions](#middleware-functions)
+    - [Lifecycle Object](#lifecycle-object)
+    - [Generator Middleware](#generator-middleware)
+  - [Execution Order](#execution-order)
+  - [Using with Nested Routing](#using-with-nested-routing)
+  - [@profiscience/knockout-contrib-router-middleware](../../router.middleware)
 
 The real power and extensibility of the router comes in the form of middleware.
 In this case, middleware is a series of functions, sync or async, that compose a
@@ -9,7 +17,7 @@ and keep your viewModel as slim as possible (think skinny controllers, fat model
 
 ## Registering Middleware
 
-### App
+### App Middleware
 
 App middleware is ran for every route and is registered using `Router.use`
 
@@ -19,7 +27,7 @@ import { Router } from '@profiscience/knockout-contrib-router'
 Router.use(fn)
 ```
 
-### Route
+### Route Middleware
 
 First, let's look at some code...
 

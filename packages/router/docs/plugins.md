@@ -145,6 +145,8 @@ the route will not be passed along.
 
 Routes with array configs will have the plugins ran against each config in that array, not the whole array.
 
+Check out the [@profiscience/knockout-contrib-router-plugins](../../router.plugins) package for some ready-to-use plugins.
+
 ---
 
 [Back](./)

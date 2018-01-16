@@ -6,7 +6,7 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-This is a metapackage including all `@profiscience/knockout-contrib-utils-*` packages
+> This is a metapackage including all `@profiscience/knockout-contrib-utils-*` packages
 
 <!-- TOC -->
 ### Contents
@@ -16,6 +16,10 @@ This is a metapackage including all `@profiscience/knockout-contrib-utils-*` pac
 <!-- /TOC -->
 
 ### Usage
+
+Each child package (see the table of contents above) is available as a named export.
+
+If using a bundler that supports tree-shaking, this will safely minify.
 
 ```javascript
 // import all

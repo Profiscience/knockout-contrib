@@ -6,7 +6,9 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-This is a metapackage including all `@profiscience/knockout-contrib-observable-fn-*` packages
+> This is a metapackage including all `@profiscience/knockout-contrib-observable-fn-*` packages
+
+Extends the observable prototype. See [Adding custom functions using "fn"](https://knockoutjs.com/documentation/fn.html)
 
 <!-- TOC -->
 ### Contents
@@ -16,6 +18,10 @@ This is a metapackage including all `@profiscience/knockout-contrib-observable-f
 <!-- /TOC -->
 
 ### Usage
+
+Importing a function will add it to the prototype of all subsequently created observables.
+
+You may import a single function, or all of them.
 
 ```javascript
 // import all
