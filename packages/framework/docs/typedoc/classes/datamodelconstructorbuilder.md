@@ -68,6 +68,7 @@ Example usage:
 
 * [fetch](datamodelconstructorbuilder.md#fetch)
 * [toJS](datamodelconstructorbuilder.md#tojs)
+* [update](datamodelconstructorbuilder.md#update)
 * [create](datamodelconstructorbuilder.md#create)
 
 
@@ -147,7 +148,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:104*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:106*
 
 
 
@@ -176,7 +177,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:83*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:85*
 
 
 
@@ -193,6 +194,28 @@ Return enumerable properties, unwrapped
 
 ___
 
+<a id="update"></a>
+
+### «Protected» update
+
+► **update**(): `Promise`.<`void`>
+
+
+
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:93*
+
+
+
+
+
+**Returns:** `Promise`.<`void`>
+
+
+
+
+
+___
+
 <a id="create"></a>
 
 ### «Static» create
@@ -201,7 +224,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:113*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-builders-data/index.ts:115*
 
 
 
