@@ -12,7 +12,7 @@ import '@profiscience/knockout-contrib-observable-fn'
  *
  * @param ctor Base DataModel Constructor
  */
-export function CollectionMixin(property: string) {
+export function PagerMixin(property: string) {
   return <
     P extends { page: number }, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
   >(ctor: T) => class extends ctor {
