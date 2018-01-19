@@ -1,10 +1,9 @@
 import * as ko from 'knockout'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-base'
 
-/**
- * Symbol to access subscriptions on viewModel instance
- */
-export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
+type TwoDimensionalMap<X, Y, V> = Map<X, Map<Y, V>>
+
+type SubscriptionsMap = TwoDimensionalMap<any, any, KnockoutSubscription>
 
 /**
  * Adds .subscribe(obs, fn) and .dispose() methods with subscription tracking to prevent leaks
@@ -14,11 +13,23 @@ export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
  * @param ctor BaseModel
  */
 export function SubscriptionDisposalMixin<T extends { new(...args: any[]): ConstructorBuilder }>(ctor: T) {
+  const subscriptions: SubscriptionsMap = new Map()
+
+  function addSubscription(arg: any, fn: any, sub: KnockoutSubscription) {
+    if (!subscriptions.has(arg)) subscriptions.set(arg, new Map());
+    (subscriptions.get(arg) as Map<any, KnockoutSubscription>).set(fn, sub)
+  }
+
+  function removeSubscription(arg: any, fn: any) {
+    (subscriptions.get(arg) as Map<any, any>).get(fn).dispose();
+    (subscriptions.get(arg) as Map<any, any>).delete(fn)
+  }
+
+  function removeAllSubscriptions() {
+    subscriptions.forEach((v) => v.forEach((s) => s.dispose()))
+  }
+
   return class Subscribable extends ctor {
-    constructor(...args: any[]) {
-      super(...args);
-      (this as any)[SUBSCRIPTIONS] = []
-    }
 
     /**
      * Create a subscription that will be disposed with the model
@@ -32,13 +43,10 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
      *  this.subscribe(() => obs(), onChange)
      *  this.subscribe({ obs }, onChange)
      * ```
-     *
-     * @param obs Observable to subscribe to
-     * @param fn
      */
     public subscribe<T2>(obs: KnockoutObservable<T2>, fn: (newVal: T2) => void): KnockoutSubscription
     public subscribe<T2>(accessor: () => T2, fn: (newVal: T2) => void): KnockoutSubscription
-    public subscribe<T2>(tree: any, fn: (newVal: any) => void): KnockoutSubscription
+    public subscribe(tree: any, fn: (newVal: any) => void): KnockoutSubscription
     public subscribe<T2>(arg: any, fn: any) {
       let obs: KnockoutObservable<any>
 
@@ -49,16 +57,30 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
       } else {
         obs = ko.pureComputed(() => ko.toJS(arg))
       }
-      const sub = (obs as KnockoutObservable<T2>).subscribe((newVal: T2) => { fn(newVal) });
-      (this as any)[SUBSCRIPTIONS].push(sub)
+      const sub = (obs as KnockoutObservable<T2>).subscribe((newVal: T2) => { fn(newVal) })
+
+      addSubscription(arg, fn, sub)
+
       return sub
+    }
+
+    /**
+     * Disposes a single subscription
+     */
+    public unsubscribe<T2>(obs: KnockoutObservable<T2>, fn: (newVal: T2) => void): void
+    public unsubscribe<T2>(accessor: () => T2, fn: (newVal: T2) => void): void
+    public unsubscribe(tree: any, fn: (newVal: any) => void): void
+    public unsubscribe(sub: KnockoutSubscription): void
+    public unsubscribe<T2>(arg: any, fn?: any) {
+      if (typeof arg.dispose === 'function') arg.dispose()
+      else removeSubscription(arg, fn)
     }
 
     /**
      * Dispose all subscriptions
      */
-    public dispose() {
-      (this as any)[SUBSCRIPTIONS].forEach((sub: KnockoutSubscription) => sub.dispose())
+    public dispose(): void {
+      removeAllSubscriptions()
     }
   }
 }

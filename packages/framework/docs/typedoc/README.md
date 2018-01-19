@@ -14,7 +14,6 @@
 ### Variables
 
 * [INITIALIZED](#initialized)
-* [SUBSCRIPTIONS](#subscriptions)
 
 
 ### Functions
@@ -44,23 +43,6 @@ Symbol for accessing initialization promise
 
 ___
 
-<a id="subscriptions"></a>
-
-###  SUBSCRIPTIONS
-
-**●  SUBSCRIPTIONS**:  *`symbol`*  =  Symbol('SUBSCRIPTIONS')
-
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal/index.ts:7*
-
-
-
-Symbol to access subscriptions on viewModel instance
-
-
-
-
-___
-
 
 # Functions
 <a id="subscriptiondisposalmixin"></a>
@@ -71,7 +53,7 @@ ___
 
 
 
-*Defined in node_modules/@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal/index.ts:16*
+*Defined in node_modules/@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal/index.ts:15*
 
 
 
