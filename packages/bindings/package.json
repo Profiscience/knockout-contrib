@@ -25,7 +25,8 @@
   ],
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-ctrl-click": "^1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4"
+    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-bindings-toggle": "^1.0.0-alpha.0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

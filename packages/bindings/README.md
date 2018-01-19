@@ -14,6 +14,7 @@ Custom bindings for [KnockoutJS][]
 ### Contents
 - [ctrlClick](../bindings.ctrlClick)
 - [jquery](../bindings.jquery)
+- [toggle](../bindings.toggle)
 <!-- /TOC -->
 
 ### Usage
