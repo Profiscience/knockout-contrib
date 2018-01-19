@@ -1,5 +1,5 @@
 {
-  "name": "@profiscience/knockout-contrib-framework-model-mixins-collection",
+  "name": "@profiscience/knockout-contrib-framework-model-mixins-pager",
   "version": "1.0.0-alpha.1",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

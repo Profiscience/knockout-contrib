@@ -5,13 +5,13 @@ import '@profiscience/knockout-contrib-jest-matchers'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-data'
 
-import { CollectionMixin } from './index'
+import { PagerMixin } from './index'
 
 const FOOS = ['foo', 'bar', 'baz', 'qux']
 
-describe('framework.model.mixins.collection', () => {
+describe('framework.model.mixins.pager', () => {
   test('adds .getMore() method that loads next page', async () => {
-    class DataModel<P> extends DataModelConstructorBuilder.Mixin(CollectionMixin('foos'))<P> {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
       public foos: KnockoutObservableArray<string>
 
       protected async fetch(): Promise<any> {
@@ -43,7 +43,7 @@ describe('framework.model.mixins.collection', () => {
   })
 
   test('.hasMore() is observable', async () => {
-    class DataModel<P> extends DataModelConstructorBuilder.Mixin(CollectionMixin('foos'))<P> {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
       public foos: KnockoutObservableArray<string>
 
       protected async fetch(): Promise<any> {
@@ -66,7 +66,7 @@ describe('framework.model.mixins.collection', () => {
   })
 
   test('resolves false when no more records, else true', async () => {
-    class DataModel<P> extends DataModelConstructorBuilder.Mixin(CollectionMixin('foos'))<P> {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
       public foos: KnockoutObservableArray<string>
 
       protected async fetch(): Promise<any> {
@@ -85,7 +85,7 @@ describe('framework.model.mixins.collection', () => {
   })
 
   test('resets the page when other params change', async () => {
-    class DataModel<P> extends DataModelConstructorBuilder.Mixin(CollectionMixin('foos'))<P> {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
       public foos: KnockoutObservableArray<string>
 
       protected async fetch(): Promise<any> {
