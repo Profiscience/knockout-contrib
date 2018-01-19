@@ -24,7 +24,7 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 - greenkeeper-lockfile-update
 script:
-- yarn build
+- yarn build --concurrency 1
 - yarn test
 - yarn test:router
 after_script:
