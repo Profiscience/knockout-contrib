@@ -12,7 +12,9 @@ Custom bindings for [KnockoutJS][]
 
 <!-- TOC -->
 ### Contents
+- [ctrlClick](../bindings.ctrlClick)
 - [jquery](../bindings.jquery)
+- [shiftClick](../bindings.shiftClick)
 - [toggle](../bindings.toggle)
 <!-- /TOC -->
 

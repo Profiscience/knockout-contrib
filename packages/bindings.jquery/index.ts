@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const jqueryBinding: KnockoutBindingHandler = {
+export const jqueryBinding: KnockoutBindingHandler = {
   getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
@@ -40,6 +40,3 @@ const jqueryBinding: KnockoutBindingHandler = {
 }
 
 ko.bindingHandlers.jquery = jqueryBinding
-
-// allow for aliasing or no-conflict usage
-export default jqueryBinding

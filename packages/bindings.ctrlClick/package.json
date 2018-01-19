@@ -1,0 +1,30 @@
+{
+  "name": "@profiscience/knockout-contrib-bindings-ctrl-click",
+  "version": "1.0.0-alpha.0",
+  "description": "Ctrl Click Binding for KnockoutJS",
+  "main": "dist/knockout-contrib-bindings-ctrl-click.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "binding",
+    "bindingHandler",
+    "tko"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "repository": "Profiscience/knockout-contrib",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.ctrlClick",
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  }
+}
