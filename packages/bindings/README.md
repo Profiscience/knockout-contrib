@@ -13,6 +13,7 @@ Custom bindings for [KnockoutJS][]
 <!-- TOC -->
 ### Contents
 - [jquery](../bindings.jquery)
+- [toggle](../bindings.toggle)
 <!-- /TOC -->
 
 ### Usage

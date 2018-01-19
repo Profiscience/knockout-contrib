@@ -23,10 +23,13 @@
     "index.js",
     "index.d.ts",
     "jquery.js",
-    "jquery.d.ts"
+    "jquery.d.ts",
+    "toggle.js",
+    "toggle.d.ts"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4"
+    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-bindings-toggle": "^1.0.0-alpha.0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
