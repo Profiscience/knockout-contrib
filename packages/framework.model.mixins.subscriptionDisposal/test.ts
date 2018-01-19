@@ -153,6 +153,30 @@ describe('framework.model.mixins.subscriptionDisposal', () => {
 
       obs('bar')
     })
+
+    test('does not dispose all subscriptions for an observable', (done) => {
+      expect.assertions(1)
+
+      const instance = new (Subscribable(EmptyClass))()
+      const obs = ko.observable('')
+      const mock = jest.fn()
+      const handler1 = () => mock()
+      const handler2 = () => mock()
+
+      instance.subscribe(obs, handler1)
+      instance.subscribe(obs, handler2)
+
+      obs('foo')
+
+      instance.unsubscribe(obs, handler1)
+
+      obs.subscribe(() => {
+        expect(mock).toHaveBeenCalledTimes(3)
+        done()
+      })
+
+      obs('bar')
+    })
   })
 
   describe('.dispose()', () => {
