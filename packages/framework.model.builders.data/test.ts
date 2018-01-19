@@ -8,15 +8,11 @@ import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index
 describe('framework.model.builders.data', () => {
 
   test('requires .fetch() implementation', async () => {
-    console.error = jest.fn()
-
     class FooModel extends DataModelConstructorBuilder<{}> {}
 
     const foo: any = new FooModel({})
 
     await expect(foo[INITIALIZED]).rejects.toBeTruthy()
-
-    expect(console.error).lastCalledWith('Error initializing DataModel')
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
@@ -37,8 +33,6 @@ describe('framework.model.builders.data', () => {
   })
 
   test('throws and logs error on .fetch() rejection', async () => {
-    console.error = jest.fn()
-
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
@@ -50,8 +44,6 @@ describe('framework.model.builders.data', () => {
     }
 
     await expect(FooModel.create({})).rejects.toBeTruthy()
-
-    expect(console.error).lastCalledWith('Error initializing DataModel')
   })
 
   test('uses SubscriptionDisposalMixin', () => {

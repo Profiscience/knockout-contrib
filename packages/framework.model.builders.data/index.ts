@@ -44,7 +44,7 @@ export const INITIALIZED = Symbol('INITIALIZED')
  * ```
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
-  // public [INITIALIZED]: Promise<void> need TypeDoc to upgrade to TS >=2.7.0
+  public [INITIALIZED]: Promise<void>
 
   /**
    * True if pending `.fetch()` response
@@ -63,17 +63,9 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
-    const initialized = this.update();
-
-    (this as any)[INITIALIZED] = initialized
-
-    initialized
+    this[INITIALIZED] = this.update()
       .then(() => {
-        this.subscribe(params, () => this.update())
-      })
-      .catch(() => {
-        // tslint:disable-next-line no-console
-        console.error('Error initializing DataModel')
+        this.subscribe(this.params, () => this.update())
       })
   }
 
@@ -88,9 +80,9 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     return ko.toJS(obj)
   }
 
-  private async update(): Promise<void> {
+  protected async update(): Promise<void> {
     this.loading(true)
-    merge(this, await this.fetch())
+    merge(this, await this.fetch(), true)
     this.loading(false)
   }
 

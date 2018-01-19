@@ -1,0 +1,26 @@
+{
+  "name": "@profiscience/knockout-contrib-framework-model-mixins-pager",
+  "version": "1.0.0-alpha.1",
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  },
+  "main": "dist/knockout-contrib-framework-model-mixins-collection.js",
+  "module": "dist/index.js",
+  "typings": "index.ts",
+  "license": "WTFPL",
+  "dependencies": {
+    "@profiscience/knockout-contrib-framework-model-builders-data": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-observable-fn": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.7",
+    "core-js": "^2.5.3",
+    "tslib": "^1.8.0"
+  },
+  "peerDependencies": {
+    "knockout": "^3.4.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-framework-model-builders-base": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.2"
+  }
+}

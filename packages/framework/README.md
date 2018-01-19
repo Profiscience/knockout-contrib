@@ -44,7 +44,7 @@ Easily allow extending the framework, taking care to avoid conflicts and prevent
 
 ## API
 
-API documentation for this package is generated via TypeDoc and may be viewed [here](https://profiscience.github.io/knockout-contrib/packages/framework/docs/typedoc). All listed items are available as named exports, e.g.
+@TODO
 
 ```typescript
 import { frameworkPlugin, DataModelConstructor, ViewModelConstructor } from '@profiscience/knockout-contrib-framework'
@@ -128,6 +128,7 @@ Walking through this code step-by-step, the following occurs...
 - [model.builders.base](../framework.model.builders.base)
 - [model.builders.data](../framework.model.builders.data)
 - [model.builders.view](../framework.model.builders.view)
+- [model.mixins.pager](../framework.model.mixins.pager)
 - [model.mixins.subscriptionDisposal](../framework.model.mixins.subscriptionDisposal)
 - [plugin](../framework.plugin)
 <!-- /TOC -->
