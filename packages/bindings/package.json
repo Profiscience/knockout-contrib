@@ -21,11 +21,10 @@
   "typings": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts",
-    "jquery.js",
-    "jquery.d.ts"
+    "index.d.ts"
   ],
   "dependencies": {
+    "@profiscience/knockout-contrib-bindings-ctrl-click": "^1.0.0-alpha.0",
     "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4"
   },
   "scripts": {
