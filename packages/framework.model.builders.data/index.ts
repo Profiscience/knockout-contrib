@@ -67,10 +67,6 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
       .then(() => {
         this.subscribe(this.params, () => this.update())
       })
-      .catch(() => {
-        // tslint:disable-next-line no-console
-        console.error('Error initializing DataModel')
-      })
   }
 
   /**
