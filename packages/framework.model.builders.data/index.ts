@@ -69,7 +69,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
 
     initialized
       .then(() => {
-        this.subscribe(params, () => this.update())
+        this.subscribe(this.params, () => this.update())
       })
       .catch(() => {
         // tslint:disable-next-line no-console
@@ -88,9 +88,9 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     return ko.toJS(obj)
   }
 
-  private async update(): Promise<void> {
+  protected async update(): Promise<void> {
     this.loading(true)
-    merge(this, await this.fetch())
+    merge(this, await this.fetch(), true)
     this.loading(false)
   }
 
