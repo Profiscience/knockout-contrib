@@ -4,8 +4,7 @@
   "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR",
-    "build:docs": "typedoc --out docs/typedoc --name framework --readme none --mode file --theme markdown --excludePrivate --excludeNotExported index.ts"
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
   "main": "dist/knockout-contrib-framework.js",
   "module": "index.js",

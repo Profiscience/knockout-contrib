@@ -2,15 +2,13 @@
 	"private": true,
 	"scripts": {
 		"build": "taskr meta && lerna run build",
-		"build:docs": "lerna run build:docs",
 		"build:examples": "taskr build:examples",
 		"lint": "tslint --project tsconfig.json",
-		"prepush": "yarn lint && yarn update:docs",
+		"prepush": "yarn lint",
 		"serve:examples": "taskr serve:examples",
 		"test:router": "cd packages/router && yarn test",
 		"test": "jest",
-		"generate": "plop",
-		"update:docs": "yarn build:docs && git add -f packages/*/docs/typedoc && (git commit -m \"chore(docs)\" || true)"
+		"generate": "plop"
 	},
 	"workspaces": [
 		"packages/*"
@@ -58,8 +56,6 @@
 		"ts-loader": "^3.2.0",
 		"tslint": "^5.8.0",
 		"typed-css-modules": "^0.3.1",
-		"typedoc": "^0.9.0",
-		"typedoc-plugin-markdown": "^1.0.11",
 		"typescript": "^2.7.0-rc",
 		"webpack": "^3.10.0",
 		"webpack-dev-middleware": "^2.0.3"
