@@ -39,8 +39,7 @@ export function CollectionMixin(property: string) {
       this.params.page = 1
       this.pager = this.createPager()
       const p = super.update()
-      p.then(() => this.pager.next())
-      return p
+      return p.then(() => this.pager.next().then(() => { /* void */ }))
     }
 
     protected async * createPager(): AsyncIterableIterator<void> {
