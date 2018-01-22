@@ -9,7 +9,7 @@ export interface IFlashMessage {}
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
   interface IContext {
-    [FLASH_MESSAGE]: string | IFlashMessage
+    [FLASH_MESSAGE]?: string | IFlashMessage
   }
 }
 

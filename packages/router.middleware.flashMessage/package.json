@@ -3,7 +3,10 @@
   "version": "1.0.0-alpha.2",
   "main": "dist/knockout-contrib-router-middleware-flash-message.js",
   "module": "dist/index.js",
-  "typings": "index.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "license": "WTFPL",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^1.2.0",
