@@ -5,6 +5,7 @@
 		"build:examples": "taskr build:examples",
 		"lint": "tslint --project tsconfig.json",
 		"prepush": "yarn lint",
+		"prepublishOnly": "yarn build",
 		"serve:examples": "taskr serve:examples",
 		"test:router": "cd packages/router && yarn test",
 		"test": "jest",
