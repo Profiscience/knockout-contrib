@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"

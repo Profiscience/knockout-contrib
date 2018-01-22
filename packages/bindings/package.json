@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Knockout JS Binding Handlers",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -20,10 +20,10 @@
   "module": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
-    "@profiscience/knockout-contrib-bindings-ctrl-click": "^1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.4",
-    "@profiscience/knockout-contrib-bindings-shift-click": "^1.0.0-alpha.0",
-    "@profiscience/knockout-contrib-bindings-toggle": "^1.0.0-alpha.0"
+    "@profiscience/knockout-contrib-bindings-ctrl-click": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.5",
+    "@profiscience/knockout-contrib-bindings-shift-click": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-bindings-toggle": "^1.0.0-alpha.1"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

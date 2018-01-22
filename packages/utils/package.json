@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Handy Utilities for Knockout JS",
   "repository": {
     "type": "git",
@@ -30,9 +30,9 @@
   "module": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-defaults": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-utils-merge": "^1.0.0-alpha.2"
+    "@profiscience/knockout-contrib-utils-defaults": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-utils-merge": "^1.0.0-alpha.3"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

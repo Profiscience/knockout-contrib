@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-ctrl-click",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Ctrl Click Binding for KnockoutJS",
   "main": "dist/knockout-contrib-bindings-ctrl-click.js",
   "module": "dist/index.js",
