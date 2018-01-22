@@ -8,7 +8,7 @@
   "license": "WTFPL",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^1.2.0",
-    "@profiscience/knockout-contrib-router-middleware": "1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-router-middleware": "^1.0.0-alpha.2",
     "knockout": "^3.4.0"
   },
   "devDependencies": {
