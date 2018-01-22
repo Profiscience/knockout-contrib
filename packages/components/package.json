@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Knockout JS Components",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -25,7 +25,7 @@
     "flash-message.d.ts"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.3",
     "postcss-loader": "^2.0.10",
     "postcss-modules": "^1.1.0",
     "style-loader": "^0.19.1"

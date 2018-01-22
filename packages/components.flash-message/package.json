@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Flash Message Component for KnockoutJS",
   "main": "dist/knockout-contrib-components-flash-message.js",
   "module": "dist/index.js",
