@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 ### Added
 - Static `Router.isNavigating` observable for determining if any routers are navigating
