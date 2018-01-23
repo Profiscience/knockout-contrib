@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "@profiscience/knockout-contrib-router plugins",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -28,7 +28,7 @@
   "dependencies": {
     "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-router-plugins-components": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-router-plugins-title": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.2"

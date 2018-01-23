@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-progress-bar",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "main": "dist/knockout-contrib-router-middleware-progress-bar.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
