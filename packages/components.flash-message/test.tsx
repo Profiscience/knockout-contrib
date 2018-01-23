@@ -29,7 +29,7 @@ describe('flash-message component', () => {
 
   test('does not display when flashMessage() is false', () => {
     flashMessage(false)
-    expect($el.firstChild.firstChild).not.toExist()
+    expect(($el.firstChild as HTMLDivElement).style.display).toBe('none')
   })
 
   test('default type is info', () => {

@@ -60,7 +60,7 @@ class FlashMessageViewModel extends ViewModelConstructorBuilder {
 }
 
 const template = [
-  <div role='alert' class='alert' data-bind='if: visible, css: css'>
+  <div role='alert' class='alert' data-bind='visible: visible, css: css'>
     <span data-bind='text: text'></span>
     <button type='button' class='close' data-bind='visible: dismissible, click: dismiss' aria-label='Close'>
       <span aria-hidden='true'>&times;</span>
