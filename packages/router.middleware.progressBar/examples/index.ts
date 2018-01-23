@@ -4,7 +4,7 @@ import { createProgressBarMiddleware } from '@profiscience/knockout-contrib-rout
 
 declare module '@profiscience/knockout-contrib-router' {
   interface IRouteConfig {
-    delay: number
+    delay?: number
   }
 }
 
