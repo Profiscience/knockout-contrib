@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-components",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Components Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-components.js",
   "module": "dist/index.js",
