@@ -10,7 +10,7 @@ import { Middleware } from './router'
 import { MaybeArray } from './utils'
 
 export type RouteMap = {
-  [path: string]: MaybeArray<RouteConfig>
+  [path: string]: MaybeArray<IRouteConfig | string | Middleware | RouteMap>
 }
 
 export type RoutePlugin = (routeConfig: IRouteConfig) => MaybeArray<RouteConfig>
