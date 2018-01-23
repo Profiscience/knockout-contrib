@@ -47,7 +47,7 @@ export interface IRoutedComponentInstance {
  * ```
  */
 export interface ILazyComponent {
-  template: Promise<{ default: string }>
+  template: Promise<string | { default: string }>
   viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
 }
 
@@ -63,6 +63,7 @@ export interface IRoutedViewModelConstructor {
 }
 
 export interface IRoutedComponentConfig {
+  [k: string]: any
   template: string
   viewModel?: { new(ctx: Context & IContext): any }
   synchronous?: true
@@ -76,6 +77,8 @@ const uniqueComponentNames = (function*() {
 })()
 
 export function componentPlugin({ component: componentAccessor }: IRouteConfig) {
+  const componentName = uniqueComponentNames.next().value
+
   return function*(ctx: Context & IContext): IterableIterator<void> {
     if (!componentAccessor) return
 
@@ -84,31 +87,30 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
         try {
           const instance = new (componentConfig.viewModel as any)(ctx)
           ctx.component = { viewModel: instance }
-          ko.components.register(ctx.route.component, {
+          ko.components.register(componentName, {
             synchronous: true,
-            template: componentConfig.template,
+            ...componentConfig,
             viewModel: { instance }
           })
         } catch (e) {
           // tslint:disable-next-line no-console max-line-length
           console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to `new` viewModel. This may cause unexpected behavior.')
           ctx.component = componentConfig
-          ko.components.register(ctx.route.component, componentConfig)
+          ko.components.register(componentName, componentConfig)
         }
       } else {
         ctx.component = {}
-        ko.components.register(ctx.route.component, {
+        ko.components.register(componentName, {
           synchronous: true,
-          template: componentConfig.template
+          ...componentConfig
         })
       }
       return ctx.component
     }
 
-    ctx.route.component = uniqueComponentNames.next().value
+    ctx.route.component = componentName
 
     /* beforeRender */
-
     if (typeof componentAccessor === 'function') {
       const p = fetchComponent(componentAccessor()).then(initializeComponent)
       ctx.component = p
@@ -120,7 +122,7 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
     yield
     /* afterRender */
 
-    ko.components.unregister(ctx.route.component)
+    ko.components.unregister(componentName)
   }
 }
 
@@ -130,7 +132,12 @@ async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponen
   const promises = Object
     .keys(accessor)
     .map(async (k) => {
-      component[k as 'template' | 'viewModel'] = ((await (accessor as any)[k]) as any).default
+      const imports = await accessor[k]
+      if (typeof imports.default !== 'undefined') {
+        component[k] = imports.default
+      } else {
+        component[k] = imports
+      }
     })
 
   await Promise.all(promises)

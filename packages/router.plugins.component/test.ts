@@ -133,6 +133,30 @@ describe('router.plugins.component', () => {
     expect(registeredComponent.synchronous).toBe(true)
   })
 
+  test('works with implicit default import', async () => {
+    ko.components.register = jest.fn()
+
+    const template = 'Hello, World!'
+    const getComponent = () => ({
+      // intended for use with import('./template.html')
+      template: Promise.resolve(template)
+    })
+    const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    await ctx.component
+
+    const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
+    expect(ctx.route.component).toBe(componentId)
+    expect(registeredComponentName).toBe(componentId)
+    expect(registeredComponent.template).toBe(template)
+    expect(registeredComponent.synchronous).toBe(true)
+  })
+
   test('ctx.component.viewModel is viewModel instance', () => {
     ko.components.register = jest.fn()
 
