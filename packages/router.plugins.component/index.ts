@@ -21,7 +21,7 @@ declare module '@profiscience/knockout-contrib-router' {
      *  })
      * ```
      */
-    component?: LazyComponentAccessor | IRoutedComponentConfig
+    component?: LazyComponentAccessor | IRoutedComponentConfig | { name: string, params?: { [k: string]: any }}
   }
 }
 
@@ -115,8 +115,23 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
       const p = fetchComponent(componentAccessor()).then(initializeComponent)
       ctx.component = p
       ctx.queue(p.then(() => {/* noop */}))
+    } else if (typeof (componentAccessor as any).name === 'string') {
+      let params: any = (componentAccessor as any).params || {}
+      if (typeof (componentAccessor as any).params === 'function') {
+        params = (componentAccessor as any).params(ctx)
+      }
+      ko.components.register(componentName, {
+        synchronous: true,
+        template: '<div data-bind="component: { name: name, params: params }"></div>',
+        viewModel: {
+          instance: {
+            name: (componentAccessor as any).name,
+            params
+          }
+        }
+      })
     } else {
-      initializeComponent(componentAccessor)
+      initializeComponent(componentAccessor as IRoutedComponentConfig)
     }
 
     yield

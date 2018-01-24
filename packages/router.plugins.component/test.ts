@@ -15,9 +15,14 @@ const uniqueComponentNames = (function*() {
 })()
 
 let componentId: string
+const registerComponent = ko.components.register
 
 beforeEach(() => {
   componentId = uniqueComponentNames.next().value
+})
+
+afterEach(() => {
+  ko.components.register = registerComponent
 })
 
 describe('router.plugins.component', () => {
@@ -155,6 +160,124 @@ describe('router.plugins.component', () => {
     expect(registeredComponentName).toBe(componentId)
     expect(registeredComponent.template).toBe(template)
     expect(registeredComponent.synchronous).toBe(true)
+  })
+
+  test('works with name/params object', (done) => {
+    expect.assertions(3)
+
+    const ctx = { route: {} } as Context & IContext
+    const name = 'my-component'
+    const params = { foo: 'bar' }
+    const routeConfig: IRouteConfig = {
+      component: {
+        name: 'my-component',
+        params
+      }
+    }
+
+    ko.components.register(name, {
+      template: 'Hello, World!',
+      viewModel: class {
+        constructor(actual: any) {
+          expect(actual).toBe(params)
+          done()
+        }
+      }
+    })
+
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    const wrapperComponentName = ctx.route.component
+
+    const el = document.createElement('div')
+
+    expect(ko.components.isRegistered(wrapperComponentName)).toBe(true)
+
+    ko.applyBindingsToNode(el, {
+      component: {
+        name: wrapperComponentName,
+        params: ctx
+      }
+    })
+
+    ko.components.unregister('my-component')
+
+    expect(el.firstChild).not.toBeNull()
+  })
+
+  test('params can be an accessor function', (done) => {
+    const ctx = { route: {}, foo: 'foo' } as any
+    const name = 'my-component'
+    const params = ({ foo }: any) => ({ foo })
+    const routeConfig: IRouteConfig = {
+      component: {
+        name: 'my-component',
+        params
+      }
+    }
+
+    ko.components.register(name, {
+      template: 'Hello, World!',
+      viewModel: class {
+        constructor({ foo }: any) {
+          expect(foo).toBe('foo')
+          done()
+        }
+      }
+    })
+
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    const wrapperComponentName = ctx.route.component
+    const el = document.createElement('div')
+    ko.applyBindingsToNode(el, {
+      component: {
+        name: wrapperComponentName,
+        params: ctx
+      }
+    })
+
+    ko.components.unregister('my-component')
+  })
+
+  test('params are optional', (done) => {
+    const ctx = { route: {}, foo: 'foo' } as any
+    const name = 'my-component'
+    const routeConfig: IRouteConfig = {
+      component: {
+        name: 'my-component'
+      }
+    }
+
+    ko.components.register(name, {
+      template: 'Hello, World!',
+      viewModel: class {
+        constructor(params: any) {
+          expect(params).toEqual({})
+          done()
+        }
+      }
+    })
+
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    const wrapperComponentName = ctx.route.component
+    const el = document.createElement('div')
+    ko.applyBindingsToNode(el, {
+      component: {
+        name: wrapperComponentName,
+        params: ctx
+      }
+    })
   })
 
   test('ctx.component.viewModel is viewModel instance', () => {
