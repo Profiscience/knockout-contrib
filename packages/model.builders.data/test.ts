@@ -5,7 +5,7 @@ import '@profiscience/knockout-contrib-jest-matchers'
 
 import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index'
 
-describe('framework.model.builders.data', () => {
+describe('model.builders.data', () => {
 
   test('requires .fetch() implementation', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {}

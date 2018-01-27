@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-base'
+import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
 type TwoDimensionalMap<X, Y, V> = Map<X, Map<Y, V>>
 

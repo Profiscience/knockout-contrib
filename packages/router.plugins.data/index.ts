@@ -1,11 +1,11 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { INITIALIZED } from '@profiscience/knockout-contrib-framework-model-builders-data'
+import { INITIALIZED } from '@profiscience/knockout-contrib-model'
 
 // for ctx.component type definition
 import '@profiscience/knockout-contrib-router-plugins-component'
 
-export function frameworkPlugin() {
+export function dataPlugin() {
   return (ctx: Context & IContext) => {
     if (!ctx.component) return
 

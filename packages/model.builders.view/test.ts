@@ -5,7 +5,7 @@ import '@profiscience/knockout-contrib-jest-matchers'
 
 import { ViewModelConstructorBuilder } from './index'
 
-describe('framework.model.builders.view', () => {
+describe('model.builders.view', () => {
   test('uses SubscriptionDisposalMixin', () => {
     class FooModel extends ViewModelConstructorBuilder {
       public readonly value: KnockoutObservable<string>

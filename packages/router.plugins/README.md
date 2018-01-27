@@ -16,6 +16,7 @@
 - [children](../router.plugins.children)
 - [component](../router.plugins.component)
 - [components](../router.plugins.components)
+- [data](../router.plugins.data)
 - [title](../router.plugins.title)
 - [with](../router.plugins.with)
 <!-- /TOC -->

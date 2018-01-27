@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-framework
+# @profiscience/knockout-contrib-model
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,7 +8,7 @@
 
 *NOTE:* Assumes a rudimentary understanding of [KnockoutJS][] and [Webpack][] (or the bundler du jour).
 
-A minimal "framework" for [KnockoutJS][] built on top of [@profiscience/knockout-contrib-router][] designed with the following goals in mind...
+Composable view and data model builders for [KnockoutJS][] with [@profiscience/knockout-contrib-router][] integration designed with the following goals in mind...
 
 #### User Experience
 
@@ -40,14 +40,14 @@ Heed to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principles.
 Unit testing views should be trivial. TDD should help a developer, not hurt.
 
 ##### Extensibility
-Easily allow extending the framework, taking care to avoid conflicts and prevent leaks by using [Symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) where applicable.
+Easily allow extending, taking care to avoid conflicts and prevent leaks by using [Symbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) where applicable.
 
 ## API
 
 @TODO
 
 ```typescript
-import { frameworkPlugin, DataModelConstructor, ViewModelConstructor } from '@profiscience/knockout-contrib-framework'
+import { DataModelConstructorBuilder, ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 ```
 
 ## Usage
@@ -59,8 +59,7 @@ __app.js__
 ```typescript
 import * as ko from 'knockout'
 import { Route, Router } from '@profiscience/knockout-contrib-router'
-import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins'
-import { frameworkPlugin } from '@profiscience/knockout-contrib-framework'
+import { componentPlugin, dataPlugin } from '@profiscience/knockout-contrib-router-plugins'
 
 const home = new Route('/', {
   // via router.plugins.component package
@@ -79,14 +78,14 @@ Route
 
   // Must be registered ** AFTER ** component plugin. Delays render until all
   // DataModel properties on the viewModel instance have been initialized.
-  .usePlugin(frameworkPlugin)
+  .usePlugin(dataPlugin)
 
 ko.applyBindings()
 ```
 
 __viewModel.js__
 ```typescript
-import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
+import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 import { DataModel } from './dataModel'
 
 export default class ViewModel extends ViewModelConstructorBuilder {
@@ -96,7 +95,7 @@ export default class ViewModel extends ViewModelConstructorBuilder {
 
 __dataModel.js__
 ```typescript
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
+import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 
 export interface IDataModelParams {}
 
@@ -120,38 +119,37 @@ Walking through this code step-by-step, the following occurs...
 - Page is loaded on the home url (`/`)
 - Router loads the component files (`viewModel.js` and `template.js`)
 - componentPlugin creates a viewModel instance and registers component with `{ viewModel: { instance } }`
-- **frameworkPlugin looks for DataModel instances on the viewModel instance; if found, prevents render until initialized**
+- **dataPlugin looks for DataModel instances on the viewModel instance; if found, prevents render until initialized**
 - Router completes render
 
 <!-- TOC -->
 ### Contents
-- [model.builders.base](../framework.model.builders.base)
-- [model.builders.data](../framework.model.builders.data)
-- [model.builders.view](../framework.model.builders.view)
-- [model.mixins.pager](../framework.model.mixins.pager)
-- [model.mixins.subscriptionDisposal](../framework.model.mixins.subscriptionDisposal)
-- [plugin](../framework.plugin)
+- [builders.base](../model.builders.base)
+- [builders.data](../model.builders.data)
+- [builders.view](../model.builders.view)
+- [mixins.pager](../model.mixins.pager)
+- [mixins.subscriptionDisposal](../model.mixins.subscriptionDisposal)
 <!-- /TOC -->
 
 
-[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/framework
-[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/framework
+[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/model
+[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/model
 
-[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/framework&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/framework
+[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/model&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/model
 
-[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/framework&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/framework
+[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/model&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/model
 
-[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-framework
-[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-framework.svg
+[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-model
+[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-model.svg
 
-[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-framework&author=&from=&to=
-[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-framework.svg?maxAge=2592000
+[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-model&author=&from=&to=
+[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-model.svg?maxAge=2592000
 
 [KnockoutJS]: https://knockoutjs.com
 [Webpack]: https://webpack.js.org
 [@profiscience/knockout-contrib-router]: ../router
 
-[Concepts]: https://profiscience.github.io/knockout-contrib/packages/framework/docs/concepts
-[Best Practices]: https://profiscience.github.io/knockout-contrib/packages/framework/docs/best-practices
+[Concepts]: https://profiscience.github.io/knockout-contrib/packages/model/docs/concepts
+[Best Practices]: https://profiscience.github.io/knockout-contrib/packages/model/docs/best-practices

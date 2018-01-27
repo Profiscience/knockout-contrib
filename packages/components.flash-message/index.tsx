@@ -1,6 +1,6 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
-import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
+import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 import { IFlashMessage, flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
 declare module '@profiscience/knockout-contrib-router-middleware-flash-message' {

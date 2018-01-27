@@ -1,3 +1,3 @@
-# @profiscience/knockout-contrib-framework-model-mixins-subscription-disposal
+# @profiscience/knockout-contrib-model-mixins-subscription-disposal
 
 @TODO

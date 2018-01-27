@@ -1,3 +1,3 @@
-# @profiscience/knockout-contrib-framework-model-mixins-pager
+# @profiscience/knockout-contrib-model-mixins-pager
 
 @TODO

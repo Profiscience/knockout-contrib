@@ -4,7 +4,7 @@ import { SubscriptionDisposalMixin as Subscribable } from './index'
 
 class EmptyClass { }
 
-describe('framework.model.mixins.subscriptionDisposal', () => {
+describe('model.mixins.subscriptionDisposal', () => {
   describe('.subscribe()', () => {
     test('.subscribe(obs, fn) is equivalent to obs.subscribe(fn)', async () => {
       const instance = new (Subscribable(EmptyClass))()
