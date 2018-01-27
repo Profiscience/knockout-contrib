@@ -4,6 +4,8 @@ import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builder
 import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-model-mixins-subscription-disposal'
 import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 
+const INSTANCES: { [k: string]: DataModelConstructorBuilder<any> } = {}
+
 /**
  * Creates a DataModel constructor with support for async initialization that updates
  * observable properties in derived class when params are changed.
@@ -40,6 +42,8 @@ import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
  * ```
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
+  protected readonly INSTANCE_ID = Symbol()
+
   public [INITIALIZED]: Promise<void>
 
   /**
@@ -55,6 +59,8 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
    */
   constructor(protected params: P) {
     super()
+
+    INSTANCES[this.INSTANCE_ID] = this
 
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
@@ -76,6 +82,15 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     return ko.toJS(obj)
   }
 
+  public async save(): Promise<void> {
+    await DataModelConstructorBuilder.updateAll()
+  }
+
+  public async delete(): Promise<void> {
+    this.dispose()
+    await DataModelConstructorBuilder.updateAll()
+  }
+
   protected async update(): Promise<void> {
     this.loading(true)
     merge(this, await this.fetch(), true)
@@ -93,15 +108,24 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     throw new Error('fetch is not implemented in derived class')
   }
 
+  public dispose(): void {
+    delete INSTANCES[this.INSTANCE_ID]
+    super.dispose()
+  }
+
   /**
    * Factory for instantiating a model and waiting for the initial fetch to complete
    *
    * @param params (Optionally) observable parameters for this instance. Will be passed to the constructor.
    */
-  public static async create<T>(this: { new(params: any): T }, params: any): Promise<T> {
+  public static async create<T>(this: { new(params: any): T }, params: any): Promise<T > {
     const instance = Reflect.construct(this, [params])
     await instance[INITIALIZED]
     return instance
+  }
+
+  public static async updateAll() {
+    await Promise.all(Object.keys(INSTANCES).map((i) => INSTANCES[i].update()))
   }
 }
 
