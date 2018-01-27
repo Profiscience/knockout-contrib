@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- Restrict TS usage with route constructor for better type safety (disallow object shorthand with TS)
+
+
 ## 1.2.0
 
 ### Added
