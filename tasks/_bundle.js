@@ -43,12 +43,7 @@ exports.bundle = function * (task) {
       plugins,
       output: {
         file: path.basename(pkg.main),
-        format: 'umd',
-        globals: {
-          jquery: '$',
-          knockout: 'ko'
-        },
-        name: `ko.contrib.${PACKAGE_DIR}`
+        format: 'cjs'
       }
     })
     .target(dist)

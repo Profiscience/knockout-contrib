@@ -1,7 +1,7 @@
 // tslint:disable max-classes-per-file
 
 import * as ko from 'knockout'
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-data'
+import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 export type RestMixinConfig = RestMixinRequestConfig & {
   baseURL?: string
