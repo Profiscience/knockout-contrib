@@ -1,4 +1,4 @@
-export * from './index'
+export * from './mixin'
 export {
   RestApiError,
   RestHelperFetchOptions,

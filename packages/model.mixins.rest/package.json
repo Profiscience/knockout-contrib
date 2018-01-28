@@ -7,10 +7,7 @@
   },
   "main": "dist/knockout-contrib-model-mixins-rest.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "typings": "index.ts",
   "license": "WTFPL",
   "dependencies": {
     "tslib": "^1.8.0"

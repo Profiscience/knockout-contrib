@@ -110,7 +110,7 @@ export class RestApiHelper {
         ? v.map((vi) => `${k}[]=${encodeURIComponent(vi)}`)
         : [`${k}=${encodeURIComponent(v)}`]
     }
-    const flatten = (accum, v) => [...accum, ...v]
+    const flatten = (accum: string[], v: string[]) => [...accum, ...v]
     return Object.keys(ko.toJS(query)).map(encode).reduce(flatten, []).join('&')
   }
 }
