@@ -1,9 +1,22 @@
 # Changelog
 
-## Unreleased
+## next
+
+Minor breaking changes due to required new features introduced in Knockout 3.5.0-beta.
+
+This release will move out of beta when Knockout 3.5 does.
+
+For now it is published as `next`
 
 ### Changed
-- Restrict TS usage with route constructor for better type safety (disallow object shorthand with TS)
+- [**BREAKING**] Upgrade [Knockout 3.5.0-beta][] peer dependency
+
+### Added
+- Delay navigation complete until `descendantsComplete` (see [Knockout 3.5.0-beta][], [Knockout #2319][])
+
+
+[Knockout 3.5.0-beta]: https://github.com/knockout/knockout/releases/tag/v3.5.0-beta
+[Knockout #2319]: https://github.com/knockout/knockout/pull/2319
 
 
 ## 1.2.0
