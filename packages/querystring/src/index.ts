@@ -199,7 +199,7 @@ export default class Query {
       read() {
         return _p()
       },
-      write(v) {
+      write(v: MaybeArray<Primitive>) {
         if (isUndefined(v)) {
           v = _default()
         }
@@ -215,13 +215,15 @@ export default class Query {
 
     Object.assign(p, {
       isDefault,
-      set: (d: IQueryParamConfig) => {
+      set: (d: IQueryParamConfig | MaybeArray<Primitive>) => {
         if (!this.isParamConfigObject(d)) {
+          d = d as MaybeArray<Primitive>
           if (isDefault() || isUndefined(p())) {
             p(d)
           }
           _default(d)
         } else {
+          d = d as IQueryParamConfig
           if (d.coerce) {
             coerce = d.coerce
           }
