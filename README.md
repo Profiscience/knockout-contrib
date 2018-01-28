@@ -36,7 +36,7 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 
 [Contributing](./CONTRIBUTING.md)
 
-[KnockoutJS]: https://knockoutjs.com)
+[KnockoutJS]: https://knockoutjs.com
 
 [knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--beta-red.svg
 
