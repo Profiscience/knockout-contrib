@@ -7,7 +7,7 @@ export type RestMixinConfig = RestHelperRequestConfig & {
   stringifyQuery?: (query: { [k: string]: any }) => string
 }
 
-export function RESTMixin(config: RestMixinConfig, controller: string) {
+export const createRESTMixin = (config: RestMixinConfig = {}) => (controller: string) => {
   const api = new RestApiHelper({
     ...config,
     baseURL: [config.baseURL, controller]
@@ -34,8 +34,4 @@ export function RESTMixin(config: RestMixinConfig, controller: string) {
       return res
     }
   }
-}
-
-export function createRESTMixin(config: RestMixinConfig = {}) {
-  return RESTMixin.bind(null, config)
 }
