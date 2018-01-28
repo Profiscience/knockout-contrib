@@ -99,16 +99,20 @@
     parse5 "^3.0.2"
 
 "@types/knockout@^3.4.0":
-  version "3.4.47"
-  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.47.tgz#e312370bd9688f373e4c8ace40a3317c88089ac6"
+  version "3.4.49"
+  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.49.tgz#14b9068ae321fd55771e2d27ee050574fa25e463"
 
 "@types/lodash@^4.14.80":
-  version "4.14.92"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.92.tgz#6e3cb0b71a1e12180a47a42a744e856c3ae99a57"
+  version "4.14.97"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.97.tgz#7262d6d5fc5e87cdb3f68eb33accd4024f2b211e"
 
-"@types/node@*", "@types/node@^9.3.0":
+"@types/node@*":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.3.0.tgz#3a129cda7c4e5df2409702626892cb4b96546dd5"
+
+"@types/node@^9.3.0":
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.0.tgz#b85a0bcf1e1cc84eb4901b7e96966aedc6f078d1"
 
 "@types/tough-cookie@*":
   version "2.3.2"
