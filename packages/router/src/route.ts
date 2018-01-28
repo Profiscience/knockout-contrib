@@ -20,7 +20,10 @@ export type RouteConfig =
   | MaybeArray<string>       // component name
   | MaybeArray<Middleware>   // middleware
   | MaybeArray<Route>        // children
-  | MaybeArray<RouteMap>     // children, object shorthand
+  /**
+   * This makes for really fragile type-safety, so don't expose it in the API
+   */
+  // | MaybeArray<RouteMap>     // children, object shorthand
 
 type NormalizedRouteConfig = {
   component?: string

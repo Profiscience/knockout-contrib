@@ -21,7 +21,10 @@ declare module '@profiscience/knockout-contrib-router' {
      *  })
      * ```
      */
-    component?: LazyComponentAccessor | IRoutedComponentConfig | { name: string, params?: { [k: string]: any }}
+    component?:
+      | LazyComponentAccessor
+      | IRoutedComponentConfig
+      | { name: string, params?: { [k: string]: any } | ((ctx: Context & IContext) => { [k: string]: any }) }
   }
 }
 
@@ -63,7 +66,6 @@ export interface IRoutedViewModelConstructor {
 }
 
 export interface IRoutedComponentConfig {
-  [k: string]: any
   template: string
   viewModel?: { new(ctx: Context & IContext): any }
   synchronous?: true

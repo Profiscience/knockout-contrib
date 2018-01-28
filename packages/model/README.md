@@ -128,6 +128,7 @@ Walking through this code step-by-step, the following occurs...
 - [builders.data](../model.builders.data)
 - [builders.view](../model.builders.view)
 - [mixins.pager](../model.mixins.pager)
+- [mixins.rest](../model.mixins.rest)
 - [mixins.subscriptionDisposal](../model.mixins.subscriptionDisposal)
 <!-- /TOC -->
 
