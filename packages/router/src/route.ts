@@ -1,13 +1,10 @@
-import isUndefined from 'lodash/isUndefined'
-import castArray from 'lodash/castArray'
-import flatten from 'lodash/flatten'
 // this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
 import pathToRegexp from 'path-to-regexp'
 import { Key } from 'path-to-regexp'
 import { IRouteConfig } from './'
 import { Middleware } from './router'
-import { MaybeArray } from './utils'
+import { MaybeArray, castArray, flatten } from './utils'
 
 export type RouteMap = {
   [path: string]: MaybeArray<IRouteConfig | string | Middleware | RouteMap>
@@ -119,7 +116,7 @@ export class Route {
     return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>((routeStack, configEntry) => {
       const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
         const pluginStack = plugin(configEntry)
-        return isUndefined(pluginStack)
+        return typeof pluginStack === 'undefined'
           ? allPluginsStack
           : [...allPluginsStack, ...flatten(castArray(pluginStack))]
       }, [])

@@ -1,8 +1,6 @@
-import map from 'lodash/map'
-import noop from 'lodash/noop'
 import * as ko from 'knockout'
 import { Router } from './router'
-import { traversePath, log } from './utils'
+import { traversePath, log, noop } from './utils'
 
 declare global {
   // tslint:disable-next-line interface-name
@@ -69,7 +67,7 @@ function createViewModel(params: { [k: string]: any }) {
             .catch((err) => log.error('Error in afterRender middleware', err))
         } else {
           router.ctx.render()
-          map(Router.onInit, (resolve) => resolve(router))
+          Router.onInit.forEach((resolve) => resolve(router))
         }
       })
       .catch((err) => log.error('Error in beforeRender middleware', err))

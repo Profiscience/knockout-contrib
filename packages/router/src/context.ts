@@ -5,7 +5,7 @@ import { Route } from './route'
 import { Router, Middleware } from './router'
 import {
   Callback,
-  isThenable,
+  isPromise,
   castLifecycleObjectMiddlewareToGenerator,
   sequence
 } from './utils'
@@ -189,9 +189,9 @@ export class Context /* implements IContext, use Context & IContext */ {
       let beforeRender = true
       return async () => {
         const ret = runner.next()
-        if (isThenable(ret)) {
+        if (isPromise(ret)) {
           await ret
-        } else if (isThenable((ret as IteratorResult<Promise<void> | void>).value)) {
+        } else if (isPromise((ret as IteratorResult<Promise<void> | void>).value)) {
           await (ret as IteratorResult<Promise<void> | void>).value
         }
         if (beforeRender) {

@@ -1,8 +1,3 @@
-import isFunction from 'lodash/isFunction'
-import isPlainObject from 'lodash/isPlainObject'
-import isUndefined from 'lodash/isUndefined'
-import noop from 'lodash/noop'
-import startsWith from 'lodash/startsWith'
 import { IContext } from './'
 import { Context } from './context'
 import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
@@ -13,18 +8,18 @@ export type Callback<T> = AsyncCallback<T> | SyncCallback<T>
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 
-export function flatMap<T, R>(collection: T[], fn: (t: T) => MaybeArray<R>): R[] {
-  const flattened = []
-  for (const i of collection) {
-    const ret = fn(i)
-    if (Array.isArray(ret)) {
-      flattened.push(...ret)
-    } else {
-      flattened.push(ret)
-    }
-  }
-  return flattened
-}
+export const noop = () => { /* void */ }
+export const isPromise = (x: any = {}) => typeof x.then === 'function'
+export const isIterable = (x: any = {}) => typeof x[Symbol.iterator] === 'function'
+export const startsWith = (string: string, target: string) => string.indexOf(target) === 0
+export const castArray = <T>(x: MaybeArray<T>): T[] => Array.isArray(x) ? x : [x]
+export const flatten = <T>(xs: MaybeArray<T>[]): T[] => xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
+export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] => flatten(xs.map(fn))
+export const promisify = (_fn: (...args: any[]) => any) => async (...args: any[]) => await (
+  _fn.length === args.length + 1
+    ? new Promise((r) => _fn(...args, r))
+    : _fn(...args)
+)
 
 export async function sequence(callbacks: Callback<boolean | void>[], ...args: any[]): Promise<{
   count: number,
@@ -46,7 +41,6 @@ export async function sequence(callbacks: Callback<boolean | void>[], ...args: a
 export function traversePath(router: Router, path: string) {
   if (path.indexOf('//') === 0) {
     path = path.replace('//', '/')
-
     while (!router.isRoot) {
       router = router.ctx.$parent.router
     }
@@ -55,13 +49,11 @@ export function traversePath(router: Router, path: string) {
       path = path.replace('./', '/')
       router = router.ctx.$child.router
     }
-
     while (path && path.match(/\/?\.\./i) && !router.isRoot) {
       router = router.ctx.$parent.router
       path = path.replace(/\/?\.\./i, '')
     }
   }
-
   return { router, path }
 }
 
@@ -72,8 +64,7 @@ export function resolveHref({ router, path }: { router: Router, path: string }) 
 export function isActivePath({ router, path }: { router: Router, path: string }): boolean {
   let ctx = router.ctx
   while (ctx) {
-    // create dependency on isNavigating so that this works with nested routes
-    // inside a computed
+    // create dependency on isNavigating so that this works with nested routes inside a computed
     ctx.router.isNavigating()
 
     if (ctx.$child ? startsWith(path, ctx.pathname) : path === ctx.pathname) {
@@ -86,48 +77,25 @@ export function isActivePath({ router, path }: { router: Router, path: string })
   return true
 }
 
-export function isThenable(x: any) {
-  return !isUndefined(x) && isFunction(x.then)
-}
-
-export function promisify(_fn: (...args: any[]) => void = noop): (...args: any[]) => Promise<any> {
-  return async (...args) => {
-    const fn = () =>
-      _fn.length === args.length + 1
-        ? new Promise((r) => {
-          _fn(...args, r)
-        })
-        : _fn(...args)
-
-    const ret = fn()
-
-    return isThenable(ret)
-      ? await ret
-      : ret
-  }
-}
-
 export function castLifecycleObjectMiddlewareToGenerator(fn: Middleware): LifecycleGeneratorMiddleware {
   return async function*(ctx: Context & IContext) {
     const ret = await promisify(fn)(ctx)
-    if (ret && isFunction(ret.next)) {
-      for await (const v of ret) {
-        yield await v
-      }
-    } else if (isPlainObject(ret)) {
-      yield await promisify(ret.beforeRender)()
-      yield await promisify(ret.afterRender)()
-      yield await promisify(ret.beforeDispose)()
-      yield await promisify(ret.afterDispose)()
+    if (typeof ret === 'undefined') return
+    if (isIterable(ret)) {
+      for await (const v of ret) yield await v
     } else {
-      yield ret
+      if (isPromise(ret)) yield await ret
+      if (ret.beforeRender) yield await promisify(ret.beforeRender)()
+      if (ret.afterRender) yield await promisify(ret.afterRender)()
+      if (ret.beforeDispose) yield await promisify(ret.beforeDispose)()
+      if (ret.afterDispose) yield await promisify(ret.afterDispose)()
     }
   }
 }
 
 export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
-  while (!isUndefined(bindingCtx)) {
-    if (!isUndefined(bindingCtx.$router)) {
+  while (bindingCtx) {
+    if (bindingCtx.$router) {
       return bindingCtx.$router
     }
     bindingCtx = bindingCtx.$parentContext
@@ -135,13 +103,10 @@ export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
   return Router.head
 }
 
+// tslint:disable-next-line no-console
+const _consoleLogger: any = console
+const _logger = (t: string) => (...ms: string[]) => _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
 export const log = {
-  error(...messages: string[]) {
-    // tslint:disable-next-line no-console
-    console.error('[@profiscience/knockout-contrib-router]', ...messages)
-  },
-  warn(...messages: string[]) {
-    // tslint:disable-next-line no-console
-    console.warn('[@profiscience/knockout-contrib-router]', ...messages)
-  }
+  error: _logger('error'),
+  warn: _logger('warn')
 }

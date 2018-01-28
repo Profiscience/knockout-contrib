@@ -1,12 +1,9 @@
-import isBoolean from 'lodash/isBoolean'
-import isUndefined from 'lodash/isUndefined'
-import castArray from 'lodash/castArray'
-import map from 'lodash/map'
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Context } from './context'
 import { RoutePlugin, Route, RouteMap } from './route'
 import {
+  castArray,
   Callback,
   MaybePromise,
   traversePath,
@@ -67,7 +64,7 @@ export class Router {
     popstate: 'popstate'
   }
 
-  public onInit: (() => void)[] = []
+  public onInit: ((router: Router) => void)[] = []
   public component: KnockoutObservable<string>
   public isNavigating: KnockoutObservable<boolean>
   public routes: Route[]
@@ -82,7 +79,7 @@ export class Router {
   ) {
     this.component = ko.observable(null)
     this.isNavigating = ko.observable(true)
-    this.isRoot = isUndefined($parentCtx)
+    this.isRoot = typeof $parentCtx === 'undefined'
     this.routes = this.isRoot
       ? Router.routes
       : $parentCtx.route.children
@@ -112,7 +109,7 @@ export class Router {
     this.isNavigating(false)
     this.ctx.runAfterRender()
       .then(() => {
-        map(this.ctx.router.onInit, (resolve: typeof Promise.resolve) => resolve(this))
+        this.ctx.router.onInit.forEach((resolve) => resolve(this))
       })
       .catch((err) => log.error('Error initializing router', err))
   }
@@ -121,17 +118,18 @@ export class Router {
     url: string,
     _args?: boolean | RouterUpdateOptions): Promise<boolean> {
     let args
-    if (isBoolean(_args)) {
+    if (typeof _args === 'boolean') {
       args = { push: _args as boolean }
-    } else if (isUndefined(_args)) {
+    } else if (typeof _args === 'undefined') {
       args = {}
     } else {
       args = _args
     }
-    if (isUndefined(args.push)) {
+
+    if (typeof args.push === 'undefined') {
       args.push = true
     }
-    if (isUndefined(args.with)) {
+    if (typeof args.with === 'undefined') {
       args.with = {}
     }
 
@@ -169,7 +167,7 @@ export class Router {
 
     await toCtx.runBeforeRender()
 
-    if (isUndefined(toCtx._redirect)) {
+    if (typeof toCtx._redirect === 'undefined') {
       this.component(null)
       ko.tasks.runEarly()
     }
@@ -180,7 +178,7 @@ export class Router {
 
     toCtx.render()
 
-    if (!isUndefined(toCtx._redirect)) {
+    if (typeof toCtx._redirect !== 'undefined') {
       await toCtx.runAfterRender()
       const { router: r, path: p } = traversePath(toCtx.router, toCtx._redirect)
       r.update(p, toCtx._redirectArgs).catch((err) => log.error('Error redirecting', err))
@@ -350,7 +348,7 @@ export class Router {
   }
 
   private static hasRoute(path: string) {
-    return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
+    return typeof Router.head.resolveRoute(Router.getPath(path)) !== 'undefined'
   }
 
   private static sameOrigin(href: string) {
