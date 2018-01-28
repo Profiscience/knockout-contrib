@@ -20,7 +20,7 @@
     "knockout": "^3.4.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.1",
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.3"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.1"
   }
 }
