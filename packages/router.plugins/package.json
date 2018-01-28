@@ -30,7 +30,7 @@
     "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-router-plugins-components": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-model-plugin": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-router-plugins-title": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.2"
   },

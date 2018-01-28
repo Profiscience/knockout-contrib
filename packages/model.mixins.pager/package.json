@@ -17,10 +17,12 @@
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "knockout": "^3.5.0-beta"
+    "knockout": "^3.5.0-beta",
+    "@profiscience/knockout-contrib-router-plugins-init": "1.0.0-alpha.2"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.1"
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-router-plugins-init": "1.0.0-alpha.2"
   }
 }

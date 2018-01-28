@@ -1,32 +1,28 @@
 /* tslint:disable max-classes-per-file */
 
 import * as ko from 'knockout'
-import { DataModelConstructorBuilder, ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 import { Context, Route, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
-import { dataPlugin } from './index'
+import { initializerPlugin, INITIALIZED } from './index'
 
 Route
   .usePlugin(componentPlugin)
   // must come after component plugin. b/c of this can not be registered with global middleware.
-  .usePlugin(dataPlugin)
+  .usePlugin(initializerPlugin)
 
-describe('router.plugins.data', () => {
-  test('works with router.plugins.component, initializes DataModel properties on ViewModel', async () => {
-    class DataModel extends DataModelConstructorBuilder<{}> {
-      public async fetch() {
-        // force this to sleep so it will actually fail
-        await new Promise((resolve) => setTimeout(resolve, 500))
-        return { foo: 'bar' }
-      }
-    }
+describe('router.plugins.init', () => {
+  test('works with router.plugins.component, initializes props with INITIALIZED prop on ViewModel', async () => {
+    const spy = jest.spyOn(Promise, 'all')
+    const promise = Promise.resolve()
 
     const getComponent = () => ({
       template: Promise.resolve({ default: 'Hello, World!' }),
       viewModel: Promise.resolve({
-        default: class extends ViewModelConstructorBuilder {
-          public data = new DataModel({})
+        default: class {
+          public data = {
+            [INITIALIZED]: promise
+          }
         }
       })
     })
@@ -45,7 +41,7 @@ describe('router.plugins.data', () => {
 
     const componentInstance = await ctx.component
 
-    expect(componentInstance.viewModel.data.foo()).toBe('bar')
+    expect(spy).toBeCalledWith([promise])
   })
 
   test('doesn\'t blow up when no component', async () => {

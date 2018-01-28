@@ -1,9 +1,10 @@
 /* tslint:disable max-classes-per-file no-empty-interface */
 
 import * as ko from 'knockout'
+import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 import '@profiscience/knockout-contrib-jest-matchers'
 
-import { DataModelConstructorBuilder, INITIALIZED, nonenumerable } from './index'
+import { DataModelConstructorBuilder, nonenumerable } from './index'
 
 describe('model.builders.data', () => {
 

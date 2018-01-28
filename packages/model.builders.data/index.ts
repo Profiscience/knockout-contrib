@@ -2,11 +2,7 @@ import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-model-mixins-subscription-disposal'
-
-/**
- * Symbol for accessing initialization promise
- */
-export const INITIALIZED = Symbol('INITIALIZED')
+import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 
 /**
  * Creates a DataModel constructor with support for async initialization that updates
