@@ -85,7 +85,7 @@ describe('router.plugins.component', () => {
     expect(registeredComponent.synchronous).toBe(true)
   })
 
-  test('works with async component, ctx.component is promise while pending', async () => {
+  test('works with async template/viewModel pair, ctx.component is promise while pending', async () => {
     ko.components.register = jest.fn()
 
     class ViewModel {}
@@ -96,6 +96,33 @@ describe('router.plugins.component', () => {
       viewModel: Promise.resolve({
         default: ViewModel
       })
+    })
+    const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+
+    await ctx.component
+
+    const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
+    expect(ctx.route.component).toBe(componentId)
+    expect(registeredComponentName).toBe(componentId)
+    expect(registeredComponent.template).toBe(template)
+    expect(registeredComponent.synchronous).toBe(true)
+    expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
+  })
+
+  test('works with async component config, ctx.component is promise while pending', async () => {
+    ko.components.register = jest.fn()
+
+    class ViewModel {}
+    const template = 'Hello, World!'
+    const getComponent = () => Promise.resolve({
+      // intended for use with import('./component')
+      template,
+      viewModel: ViewModel
     })
     const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
     const routeConfig: IRouteConfig = { component: getComponent }

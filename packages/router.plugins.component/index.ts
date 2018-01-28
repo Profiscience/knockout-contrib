@@ -49,7 +49,7 @@ export interface IRoutedComponentInstance {
  *  }
  * ```
  */
-export interface ILazyComponent {
+export type ILazyComponent = Promise<{ template: string, viewModel: IRoutedViewModelConstructor }> | {
   template: Promise<string | { default: string }>
   viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
 }
@@ -146,18 +146,21 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
 async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponentConfig> {
   const component: IRoutedComponentConfig = {} as IRoutedComponentConfig
 
-  const promises = Object
-    .keys(accessor)
-    .map(async (k) => {
-      const imports = await accessor[k]
-      if (typeof imports.default !== 'undefined') {
-        component[k] = imports.default
-      } else {
-        component[k] = imports
-      }
-    })
-
-  await Promise.all(promises)
+  if (accessor instanceof Promise) {
+    Object.assign(component, await accessor)
+  } else {
+    const promises = Object
+      .keys(accessor)
+      .map(async (k) => {
+        const imports = await accessor[k]
+        if (typeof imports.default !== 'undefined') {
+          component[k] = imports.default
+        } else {
+          component[k] = imports
+        }
+      })
+    await Promise.all(promises)
+  }
 
   return component
 }
