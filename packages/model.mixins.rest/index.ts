@@ -1,2 +1,6 @@
 export * from './index'
-export { RestApiError } from './helper'
+export {
+  RestApiError,
+  RestHelperFetchOptions,
+  RestHelperUpdateOptions
+} from './helper'

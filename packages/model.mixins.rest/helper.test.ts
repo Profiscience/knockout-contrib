@@ -164,6 +164,23 @@ describe('model.mixins.rest api helper', () => {
       expect(res).toEqual({ foo: 'bar' })
     })
 
+    test('uses the correct HTTP method', () => {
+      const api = new RestApiHelper({})
+      const { mock } = fetch.mockResponse(JSON.stringify({ foo: 'bar' })) as any
+
+      api.get()
+      api.post()
+      api.put()
+      api.patch()
+      api.delete()
+
+      expect(mock.calls[0][1].method).toBe('GET')
+      expect(mock.calls[1][1].method).toBe('POST')
+      expect(mock.calls[2][1].method).toBe('PUT')
+      expect(mock.calls[3][1].method).toBe('PATCH')
+      expect(mock.calls[4][1].method).toBe('DELETE')
+    })
+
     test('post, put, patch, and delete support data as first arg', () => {
       const api = new RestApiHelper({})
       const { mock } = fetch.mockResponse(JSON.stringify({ foo: 'bar' })) as any

@@ -28,6 +28,6 @@
   },
   "exclude": [
     "dist",
-    "test.ts"
+    "*.test.ts"
   ]
 }

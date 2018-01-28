@@ -1,11 +1,30 @@
 import * as ko from 'knockout'
-import {
-  RestMixinConfig,
-  RestMixinApiFetchHelperMethod,
-  RestMixinApiUpdateHelperMethod,
-  RestMixinFetchOptions,
-  RestMixinUpdateRequestOptions
-} from './mixin'
+import { RestMixinConfig } from './mixin'
+
+export type RestHelperRequestConfig = {
+  headers?: { [k: string]: string }
+  cors?: boolean
+  authenticated?: boolean
+}
+
+export type RestHelperFetchOptions = {
+  params?: { [k: string]: any }
+}
+
+export type RestHelperUpdateOptions = {
+  params?: { [k: string]: any }
+  data?: { [k: string]: any }
+}
+
+export type RestHelperFetchMethod = {
+  (opts?: RestHelperFetchOptions): Promise<any>
+  (endpoint?: string, opts?: RestHelperFetchOptions): Promise<any>
+}
+
+export type RestHelperUpdateMethod = {
+  (opts?: RestHelperUpdateOptions): Promise<any>
+  (endpoint?: string, opts?: RestHelperUpdateOptions): Promise<any>
+}
 
 export class RestApiHelper {
   private baseURL = ''
@@ -35,14 +54,14 @@ export class RestApiHelper {
     }
   }
 
-  public get: RestMixinApiFetchHelperMethod = this.createRequestMethod('GET')
-  public post: RestMixinApiUpdateHelperMethod = this.createRequestMethod('POST')
-  public put: RestMixinApiUpdateHelperMethod = this.createRequestMethod('PUT')
-  public patch: RestMixinApiUpdateHelperMethod = this.createRequestMethod('PATCH')
-  public delete: RestMixinApiUpdateHelperMethod = this.createRequestMethod('DELETE')
+  public get: RestHelperFetchMethod = this.createRequestMethod('GET')
+  public post: RestHelperUpdateMethod = this.createRequestMethod('POST')
+  public put: RestHelperUpdateMethod = this.createRequestMethod('PUT')
+  public patch: RestHelperUpdateMethod = this.createRequestMethod('PATCH')
+  public delete: RestHelperUpdateMethod = this.createRequestMethod('DELETE')
 
   /* istanbul ignore next */
-  public download(endpoint: string, opts: RestMixinUpdateRequestOptions = {}) {
+  public download(endpoint: string, opts: RestHelperUpdateOptions = {}) {
     let url = this.baseURL + endpoint
     if (opts.params) {
       url += this.stringifyQuery(opts.params)
@@ -53,7 +72,7 @@ export class RestApiHelper {
   private createRequestMethod(method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE') {
     return async (arg1: any = {}, arg2: any = {}) => {
       let endpoint: string
-      let opts: RestMixinFetchOptions & RestMixinUpdateRequestOptions
+      let opts: RestHelperFetchOptions & RestHelperUpdateOptions
 
       if (typeof arg1 === 'string') {
         endpoint = arg1
@@ -63,8 +82,8 @@ export class RestApiHelper {
         opts = arg1
       }
 
-      const requestInit = { ...this.requestInit } // clone
-      let url = this.baseURL + endpoint
+      const requestInit = { ...this.requestInit, method }
+      let url = this.baseURL + endpoint.replace(/^\/?(.+)$/, '/$1')
 
       if (opts.params) {
         url += '?' + this.stringifyQuery(opts.params)
@@ -92,7 +111,7 @@ export class RestApiHelper {
         : [`${k}=${encodeURIComponent(v)}`]
     }
     const flatten = (accum, v) => [...accum, ...v]
-    return Object.keys(ko.toJS(query)).map(encode).reduce(flatten).join('&')
+    return Object.keys(ko.toJS(query)).map(encode).reduce(flatten, []).join('&')
   }
 }
 

@@ -1,60 +1,36 @@
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
-import { RestApiHelper } from './helper'
+import { RestApiHelper, RestHelperRequestConfig } from './helper'
 
-export type RestMixinConfig = RestMixinRequestConfig & {
+export type RestMixinConfig = RestHelperRequestConfig & {
   baseURL?: string
   stringifyQuery?: (query: { [k: string]: any }) => string
 }
 
-export type RestMixinRequestConfig = {
-  headers?: { [k: string]: string }
-  cors?: boolean
-  authenticated?: boolean
-}
-
-export type RestMixinFetchOptions = {
-  params?: { [k: string]: any }
-}
-
-export type RestMixinUpdateRequestOptions = {
-  params?: { [k: string]: any }
-  data?: { [k: string]: any }
-}
-
-export type RestMixinApiFetchHelperMethod = {
-  (opts?: RestMixinFetchOptions): Promise<any>
-  (endpoint?: string, opts?: RestMixinFetchOptions): Promise<any>
-}
-
-export type RestMixinApiUpdateHelperMethod = {
-  (opts?: RestMixinUpdateRequestOptions): Promise<any>
-  (endpoint?: string, opts?: RestMixinUpdateRequestOptions): Promise<any>
-}
-
 export function createRESTMixin(pluginConfig: RestMixinConfig = {}) {
-  return (controller: string, controllerConfig: RestMixinConfig = {}) => {
+  return (controller: string) => {
+    const api = new RestApiHelper({
+      ...pluginConfig,
+      baseURL: [pluginConfig.baseURL, controller]
+        .filter((v) => typeof v !== 'undefined')
+        .join('/')
+    })
+
     return <P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) => class extends ctor {
-      protected api = new RestApiHelper({
-        ...pluginConfig,
-        ...controllerConfig,
-        baseURL: [pluginConfig.baseURL, controllerConfig.baseURL]
-          .filter((v) => typeof v !== 'undefined')
-          .join('/')
-      })
+      protected api = api
 
       protected fetch() {
-        return this.api.get({ params: this.params })
+        return api.get({ params: this.params })
       }
 
       public async save() {
-        const res = await this.api.post({ params: this.params, data: this.toJS() })
+        const res = await api.post({ params: this.params, data: this.toJS() })
         await super.save()
         return res
       }
 
       public async delete() {
-        const res = await this.api.delete({ params: this.params })
+        const res = await api.delete({ params: this.params })
         await super.delete()
         return res
       }

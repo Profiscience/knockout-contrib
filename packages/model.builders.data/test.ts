@@ -14,6 +14,8 @@ describe('model.builders.data', () => {
     const foo: any = new FooModel({})
 
     await expect(foo[INITIALIZED]).rejects.toBeTruthy()
+
+    foo.dispose()
   })
 
   test('uses .fetch() to initialize data and maps to observables', async () => {
@@ -31,6 +33,8 @@ describe('model.builders.data', () => {
 
     expect(foo.value).toBeObservable()
     expect(foo.value()).toBe('value')
+
+    foo.dispose()
   })
 
   test('throws and logs error on .fetch() rejection', async () => {
@@ -62,6 +66,8 @@ describe('model.builders.data', () => {
 
     expect(foo.subscribe).toBeDefined()
     expect(foo.dispose).toBeDefined()
+
+    foo.dispose()
   })
 
   test('updates model when params are changed', async () => {
@@ -93,6 +99,8 @@ describe('model.builders.data', () => {
 
     expect(foo.loading()).toBe(false)
     expect(foo.value()).toBe('bar')
+
+    foo.dispose()
   })
 
   test('.toJS() returns unwrapped data', async () => {
@@ -109,6 +117,82 @@ describe('model.builders.data', () => {
     expect(foo.toJS()).toEqual({
       value: 'foo'
     })
+
+    foo.dispose()
+  })
+
+  test('.save() calls #updateAll()', async () => {
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public value: KnockoutObservable<string>
+
+      protected async fetch() {
+        return { value: 'foo' }
+      }
+    }
+
+    const foo = await FooModel.create({})
+    const updateAll = jest.spyOn(DataModelConstructorBuilder, 'updateAll')
+
+    await foo.save()
+
+    expect(updateAll).toBeCalled()
+
+    foo.dispose()
+  })
+
+  test('.delete() disposes the instance, then updates', async () => {
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public value: KnockoutObservable<string>
+
+      protected async fetch() {
+        return { value: 'foo' }
+      }
+    }
+
+    const foo = await FooModel.create({})
+    const dispose = jest.spyOn(foo, 'dispose')
+    const updateAll = jest.spyOn(DataModelConstructorBuilder, 'updateAll')
+
+    await foo.delete()
+
+    expect(foo.dispose).toBeCalled()
+    expect(updateAll).toBeCalled()
+  })
+
+  test('#updateAll() updates all registered instances', async () => {
+    let value: string = 'foo'
+
+    class M1 extends DataModelConstructorBuilder<{}> {
+      public value: KnockoutObservable<string>
+      protected async fetch() {
+        return { value }
+      }
+    }
+    class M2 extends DataModelConstructorBuilder<{}> {
+      public value: KnockoutObservable<string>
+      protected async fetch() {
+        return { value }
+      }
+    }
+
+    const m1 = await M1.create({})
+    const m2 = await M2.create({})
+
+    expect(m1.value()).toBe('foo')
+    expect(m2.value()).toBe('foo')
+
+    value = 'bar'
+    await DataModelConstructorBuilder.updateAll()
+
+    // expect(m1.value()).toBe('bar')
+    // expect(m2.value()).toBe('bar')
+
+    // m1.dispose()
+    // value = 'baz'
+    // await DataModelConstructorBuilder.updateAll()
+
+    // expect(m1.value()).toBe('bar')
+    // expect(m2.value()).toBe('baz')
   })
 
   describe('utils', () => {

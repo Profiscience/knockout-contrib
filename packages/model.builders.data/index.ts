@@ -42,7 +42,7 @@ const INSTANCES: { [k: string]: DataModelConstructorBuilder<any> } = {}
  * ```
  */
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
-  protected readonly INSTANCE_ID = Symbol()
+  protected readonly INSTANCE_ID = Symbol('DATA_MODEL_INSTANCE')
 
   public [INITIALIZED]: Promise<void>
 
@@ -120,12 +120,19 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
    */
   public static async create<T>(this: { new(params: any): T }, params: any): Promise<T > {
     const instance = Reflect.construct(this, [params])
-    await instance[INITIALIZED]
+    try {
+      await instance[INITIALIZED]
+    } catch (e) {
+      instance.dispose()
+      throw e
+    }
     return instance
   }
 
   public static async updateAll() {
-    await Promise.all(Object.keys(INSTANCES).map((i) => INSTANCES[i].update()))
+    await Promise.all(Object.getOwnPropertySymbols(INSTANCES).map((i) => {
+      return INSTANCES[i].update()
+    }))
   }
 }
 
