@@ -1,6 +1,7 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { INITIALIZED } from '@profiscience/knockout-contrib-model'
+
+export const INITIALIZED = Symbol('INITIALIZED')
 
 // for ctx.component type definition
 import '@profiscience/knockout-contrib-router-plugins-component'
@@ -16,7 +17,7 @@ export function dataPlugin() {
           Object
             .keys(viewModel)
             .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
-            .map(async (dataModelProp: any) => await (viewModel as any)[dataModelProp][INITIALIZED])
+            .map((prop: any) => (viewModel as any)[prop][INITIALIZED])
         )
       }
     })())
