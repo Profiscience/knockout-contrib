@@ -24,7 +24,7 @@
     "knockout-contrib-observable-fn"
   ],
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

@@ -4898,9 +4898,9 @@ knockout-punches@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
 
-knockout@^3.4.0:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.2.tgz#e87958de77ad1e936f7ce645bab8b5d7c456d937"
+knockout@^3.5.0-beta:
+  version "3.5.0-beta"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0-beta.tgz#0a90af428f6b5dfbba73fe57be1dc78bb3812758"
 
 labeled-stream-splicer@^2.0.0:
   version "2.0.0"

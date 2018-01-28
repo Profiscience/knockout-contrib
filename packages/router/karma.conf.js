@@ -20,6 +20,7 @@ const rollupPlugins = [
       knockout: [
         'applyBindings',
         'applyBindingsToNode',
+        'bindingEvent',
         'bindingHandlers',
         'components',
         'observable',

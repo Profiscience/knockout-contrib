@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils",
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "files": [
     "index.js",

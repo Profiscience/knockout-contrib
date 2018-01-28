@@ -14,7 +14,7 @@
     "bindingHandlers"
   ],
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "main": "dist/knockout-contrib-bindings.js",
   "module": "index.js",

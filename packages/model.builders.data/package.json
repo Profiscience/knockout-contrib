@@ -19,6 +19,6 @@
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.3"
   },
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   }
 }
