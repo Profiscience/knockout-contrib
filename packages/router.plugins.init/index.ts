@@ -6,7 +6,7 @@ export const INITIALIZED = Symbol('INITIALIZED')
 // for ctx.component type definition
 import '@profiscience/knockout-contrib-router-plugins-component'
 
-export function dataPlugin() {
+export function initializerPlugin() {
   return (ctx: Context & IContext) => {
     if (!ctx.component) return
 
