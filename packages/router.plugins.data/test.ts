@@ -1,19 +1,18 @@
 /* tslint:disable max-classes-per-file */
 
 import * as ko from 'knockout'
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-data'
-import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-view'
+import { DataModelConstructorBuilder, ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 import { Context, Route, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
-import { frameworkPlugin } from './index'
+import { dataPlugin } from './index'
 
 Route
   .usePlugin(componentPlugin)
   // must come after component plugin. b/c of this can not be registered with global middleware.
-  .usePlugin(frameworkPlugin)
+  .usePlugin(dataPlugin)
 
-describe('framework.plugin', () => {
+describe('router.plugins.data', () => {
   test('works with router.plugins.component, initializes DataModel properties on ViewModel', async () => {
     class DataModel extends DataModelConstructorBuilder<{}> {
       public async fetch() {

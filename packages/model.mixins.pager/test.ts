@@ -2,14 +2,14 @@
 
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-base'
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-data'
+import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
+import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 import { PagerMixin } from './index'
 
 const FOOS = ['foo', 'bar', 'baz', 'qux']
 
-describe('framework.model.mixins.pager', () => {
+describe('model.mixins.pager', () => {
   test('adds .getMore() method that loads next page', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
       public foos: KnockoutObservableArray<string>

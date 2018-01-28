@@ -1,9 +1,9 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
-import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
+import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
 import * as styles from './index.css'
 
-export interface I{{pascalCase name}}Params {
+export interface I {{pascalCase name}}Params {
 }
 
 class {{pascalCase name}}ViewModel extends ViewModelConstructorBuilder {

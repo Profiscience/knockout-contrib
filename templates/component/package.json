@@ -20,7 +20,7 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.{{kebabCase name}}",
   "dependencies": {
-    "@profiscience/knockout-contrib-framework": "^{{getCurrentVersion 'framework'}}",
+    "@profiscience/knockout-contrib-model": "^{{getCurrentVersion 'model'}}",
     "jsx-dom": "^5.2.0"
   },
   "peerDependencies": {

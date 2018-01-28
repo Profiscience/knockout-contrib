@@ -13,9 +13,9 @@ e.g.
 $ yarn test
 # tests all packages
 
-$ cd packages/framework
+$ cd packages/model.builders.base
 $ yarn test
-# test framework package
+# test model.builders.base package
 ```
 
 

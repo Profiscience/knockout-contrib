@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-framework-model-builders-base'
-import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal'
+import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
+import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-model-mixins-subscription-disposal'
 
 /**
  * Symbol for accessing initialization promise
@@ -118,7 +118,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
  *
  * Example usage
  * ```typescript
- *  import { utils } from '@profiscience/framework'
+ *  import { utils } from '@profiscience/model'
  *
  *  const obj = {
  *    foo: true,

@@ -1,16 +1,16 @@
 {
-  "name": "@profiscience/knockout-contrib-framework-plugin",
+  "name": "@profiscience/knockout-contrib-model-plugin",
   "version": "1.0.0-alpha.2",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
-  "main": "dist/knockout-contrib-framework-plugin.js",
+  "main": "dist/knockout-contrib-model-plugin.js",
   "module": "dist/index.js",
   "typings": "index.ts",
   "license": "WTFPL",
   "dependencies": {
-    "@profiscience/knockout-contrib-framework-model-builders-data": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.2",
     "tslib": "^1.8.0"
   },
   "devDependencies": {

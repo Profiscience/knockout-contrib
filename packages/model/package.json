@@ -1,12 +1,12 @@
 {
-  "name": "@profiscience/knockout-contrib-framework",
+  "name": "@profiscience/knockout-contrib-model",
   "version": "1.0.0-alpha.5",
-  "description": "An opinionated framework with first-class TypeScript support for building modern SPAs with KnockoutJS",
+  "description": "An opinionated model with first-class TypeScript support and router integration with KnockoutJS",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
-  "main": "dist/knockout-contrib-framework.js",
+  "main": "dist/knockout-contrib-model.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "files": [
@@ -21,7 +21,6 @@
     "knockoutjs",
     "ko",
     "knockout",
-    "framework",
     "spa",
     "router",
     "data",
@@ -34,13 +33,12 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
-    "@profiscience/knockout-contrib-framework-model-builders-base": "^1.0.0-alpha.1",
-    "@profiscience/knockout-contrib-framework-model-builders-data": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-framework-model-builders-view": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-framework-model-mixins-pager": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-framework-model-mixins-subscription-disposal": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-framework-plugin": "^1.0.0-alpha.2",
-    "tslib": "^1.8.0"
+    "tslib": "^1.8.0",
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.1",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.2",
+    "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.2"
   },
   "peerDependencies": {
     "knockout": "^3.4.0"
