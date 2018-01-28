@@ -41,6 +41,6 @@
     "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.2"
   },
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   }
 }

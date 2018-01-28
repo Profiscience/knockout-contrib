@@ -28,7 +28,7 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.with",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^1.2.0",
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^1.2.0"

@@ -196,6 +196,7 @@ describe('router.plugins.component', () => {
 
     expect(ko.components.isRegistered(wrapperComponentName)).toBe(true)
 
+    ko.applyBindings({}, el)
     ko.applyBindingsToNode(el, {
       component: {
         name: wrapperComponentName,
@@ -236,6 +237,8 @@ describe('router.plugins.component', () => {
 
     const wrapperComponentName = ctx.route.component
     const el = document.createElement('div')
+
+    ko.applyBindings({}, el)
     ko.applyBindingsToNode(el, {
       component: {
         name: wrapperComponentName,
@@ -272,6 +275,8 @@ describe('router.plugins.component', () => {
 
     const wrapperComponentName = ctx.route.component
     const el = document.createElement('div')
+
+    ko.applyBindings({}, el)
     ko.applyBindingsToNode(el, {
       component: {
         name: wrapperComponentName,

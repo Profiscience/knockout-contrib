@@ -99,8 +99,8 @@
     parse5 "^3.0.2"
 
 "@types/knockout@^3.4.0":
-  version "3.4.47"
-  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.47.tgz#e312370bd9688f373e4c8ace40a3317c88089ac6"
+  version "3.4.49"
+  resolved "https://registry.yarnpkg.com/@types/knockout/-/knockout-3.4.49.tgz#14b9068ae321fd55771e2d27ee050574fa25e463"
 
 "@types/lodash@^4.14.80":
   version "4.14.92"
@@ -4862,9 +4862,9 @@ knockout-punches@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
 
-knockout@^3.4.0:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.4.2.tgz#e87958de77ad1e936f7ce645bab8b5d7c456d937"
+knockout@^3.5.0-beta:
+  version "3.5.0-beta"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0-beta.tgz#0a90af428f6b5dfbba73fe57be1dc78bb3812758"
 
 labeled-stream-splicer@^2.0.0:
   version "2.0.0"

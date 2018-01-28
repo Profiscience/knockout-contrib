@@ -21,7 +21,7 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.ctrlClick",
   "peerDependencies": {
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

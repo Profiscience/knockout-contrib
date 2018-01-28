@@ -112,12 +112,7 @@ export class Router {
     this.isNavigating(false)
     this.ctx.runAfterRender()
       .then(() => {
-        const resolveRouter = (router: Router) => (resolve: typeof Promise.resolve) => resolve(router)
-        let ctx = this.ctx
-        while (ctx) {
-          map(ctx.router.onInit, resolveRouter(ctx.router))
-          ctx = ctx.$child
-        }
+        map(this.ctx.router.onInit, (resolve: typeof Promise.resolve) => resolve(this))
       })
       .catch((err) => log.error('Error initializing router', err))
   }

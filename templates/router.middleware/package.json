@@ -10,7 +10,7 @@
   "license": "WTFPL",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}",
-    "knockout": "^3.4.0"
+    "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^{{getCurrentVersion 'router'}}"

@@ -1,6 +1,6 @@
 # knockout-contrib
 
-
+[![KnockoutJS][knockout-shield]][KnockoutJS]
 [![License][wtfpl-shield]][wtfpl]
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
@@ -8,7 +8,7 @@
 [![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
 
-This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS](https://knockoutjs.com)
+This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS][]
 
 **NOTE:** Packages released as `X.X.X-alpha.X` are pre-releases and are subject to breaking changes without warning. Otherwise, strict [semver](https://semver.org/) is used, and any discovered breaking changes will be worked around or rolled back if necessary.
 
@@ -35,6 +35,10 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 
 
 [Contributing](./CONTRIBUTING.md)
+
+[KnockoutJS]: https://knockoutjs.com)
+
+[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--beta-red.svg
 
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg

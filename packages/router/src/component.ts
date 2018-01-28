@@ -16,30 +16,31 @@ ko.components.register('router', {
   viewModel: { createViewModel },
   template:
     `<div data-bind="if: component">
-      <div class="router-view" data-bind="__router__"></div>
+      <div data-bind="let: { $router: $rawData }">
+        <div class="router-view" data-bind="__router__"></div>
+      </div>
     </div>`
 })
 
 ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
+    const $router = bindingCtx.$router
+    const bindingEvent: any = (ko as any).bindingEvent
 
-    const $router: Router = bindingCtx.$rawData
+    bindingEvent.subscribe(el, 'descendantsComplete', () => {
+      if ($router.isRoot) {
+        $router.init()
+      } else {
+        $router.ctx.$parent.router.initialized
+          .then(() => $router.init())
+          .catch(noop)
+      }
+    })
 
     ko.applyBindingsToNode(el, {
-      css: $router.component,
-      component: {
-        name: $router.component,
-        params: $router.ctx
-      }
-    }, bindingCtx.extend({ $router }))
-
-    if ($router.isRoot) {
-      $router.init()
-    } else {
-      $router.ctx.$parent.router.initialized
-        .then(() => $router.init())
-        .catch(noop)
-    }
+      component: { name: $router.component, params: $router.ctx },
+      css: $router.component
+    })
 
     return { controlsDescendantBindings: true }
   }
