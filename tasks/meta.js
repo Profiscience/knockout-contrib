@@ -70,7 +70,7 @@ async function generateMetaFiles(metapackage, packages) {
 
   let index = ''
 
-  packages.forEach((p, i) => {
+  packages.forEach((p) => {
     const packageName = p.split(metapackageName + '.')[1]
     const { name: packageId } = require(path.join(p, 'package.json'))
     const requiredLibs = require(path.join(p, 'tsconfig.json')).compilerOptions.lib || []
@@ -117,12 +117,13 @@ async function generateMetaFiles(metapackage, packages) {
     main: `dist/knockout-contrib-${kebabCase(metapackageName)}.js`,
     module: 'index.js',
     typings: 'index.d.ts',
-    dependencies: packages.reduce((accum, p) => {
-      const { name, version } = require(path.join(p, 'package.json'))
-      return Object.assign(accum, {
-        [name]: `^${version}`
-      })
-    }, existingDeps)
+    dependencies: packages
+      .map((pkgPath) => require(path.join(pkgPath, 'package.json')))
+      .sort((a, b) => a.name > b.name)
+      .reduce((accum, { name, version }) =>
+        Object.assign(accum, {
+          [name]: `^${version}`
+        }), existingDeps)
   })
 
   const tsconfig = {
