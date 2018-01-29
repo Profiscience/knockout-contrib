@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-toggle",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Toggle Binding for KnockoutJS",
   "main": "dist/knockout-contrib-bindings-toggle.js",
   "module": "dist/index.js",

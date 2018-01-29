@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-jest-matchers",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Jest Matchers for Knockout JS",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Knockout JS Observable Functions",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -32,9 +32,9 @@
   "module": "index.js",
   "typings": "index.d.ts",
   "dependencies": {
-    "@profiscience/knockout-contrib-observable-fn-increment": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-observable-fn-subscribe-once": "^1.0.0-alpha.2",
-    "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.2"
+    "@profiscience/knockout-contrib-observable-fn-increment": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-observable-fn-subscribe-once": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.3"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

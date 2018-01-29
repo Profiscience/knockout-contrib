@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-flash-message",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "main": "dist/knockout-contrib-router-middleware-flash-message.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -9,11 +9,11 @@
   ],
   "license": "WTFPL",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.2.0",
+    "@profiscience/knockout-contrib-router": "^2.0.0-0",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.2.0"
+    "@profiscience/knockout-contrib-router": "^2.0.0-0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils-from-js",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Handy Utilities for Knockout JS",
   "main": "dist/knockout-contrib-utils-from-js.js",
   "module": "dist/index.js",
@@ -29,7 +29,7 @@
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.3"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.4"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Knockout JS Components",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -25,10 +25,10 @@
     "flash-message.d.ts"
   ],
   "dependencies": {
+    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.5",
     "postcss-loader": "^2.0.10",
     "postcss-modules": "^1.1.0",
-    "style-loader": "^0.20.0",
-    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.4"
+    "style-loader": "^0.20.0"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
