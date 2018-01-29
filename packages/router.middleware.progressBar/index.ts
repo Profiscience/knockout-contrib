@@ -7,14 +7,10 @@ export function createProgressBarMiddleware(opts?: ToProgressOptions) {
   let i = 0
 
   return function* progressBarMiddleware(ctx: Context & IContext) {
-    if (i === 0) {
-      progressBar.start().catch(/* istanbul ignore next */() => ({}))
-    }
+    if (i === 0) progressBar.start().catch(/* istanbul ignore next */() => ({}))
     i++
     yield
     i--
-    if (i === 0) {
-      progressBar.finish().catch(/* istanbul ignore next */() => ({}))
-    }
+    if (i === 0) progressBar.finish().catch(/* istanbul ignore next */() => ({}))
   }
 }
