@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Flash Message Component for KnockoutJS",
   "main": "dist/knockout-contrib-components-flash-message.js",
   "module": "dist/index.js",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.flash-message",
   "dependencies": {
-    "@profiscience/knockout-contrib-model": "^1.0.0-alpha.6",
+    "@profiscience/knockout-contrib-model": "^1.0.0-alpha.7",
     "jsx-dom": "^5.2.0"
   },
   "peerDependencies": {
