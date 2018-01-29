@@ -58,7 +58,7 @@ const isNotJsonToken = (t: string) => {
       return true
   }
 }
-function hashParams(obj: { [k: string]: any }) {
+function hashParams(obj: { [k: string]: any } = {}) {
   return JSON.stringify(obj).split('').filter(isNotJsonToken).sort().join('')
 }
 
