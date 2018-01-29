@@ -18,7 +18,7 @@
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
   "peerDependencies": {
-    "knockout": "^3.3.0"
+    "knockout": "^3.5.0-beta"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
