@@ -27,8 +27,9 @@ describe('router.middleware.progressBar', () => {
       },
       $child: undefined
     } as Context & IContext
-    const topLifecycle = createProgressBarMiddleware()(topCtx)
-    const bottomLifecycle = createProgressBarMiddleware()(bottomCtx)
+    const middleware = createProgressBarMiddleware()
+    const topLifecycle = middleware(topCtx)
+    const bottomLifecycle = middleware(bottomCtx)
     topLifecycle.next()
     bottomLifecycle.next()
     expect((ToProgress as any).start).toHaveBeenCalledTimes(1)
@@ -46,11 +47,12 @@ describe('router.middleware.progressBar', () => {
       },
       $child: undefined
     } as Context & IContext
-    const topLifecycle = createProgressBarMiddleware()(topCtx)
-    const bottomLifecycle = createProgressBarMiddleware()(bottomCtx)
-    topLifecycle.next()
+    const middleware = createProgressBarMiddleware()
+    const topLifecycle = middleware(topCtx)
+    const bottomLifecycle = middleware(bottomCtx)
     topLifecycle.next()
     bottomLifecycle.next()
+    topLifecycle.next()
     bottomLifecycle.next()
     expect((ToProgress as any).finish).toHaveBeenCalledTimes(1)
   })

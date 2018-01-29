@@ -4,10 +4,17 @@ import { Context, IContext } from '@profiscience/knockout-contrib-router'
 
 export function createProgressBarMiddleware(opts?: ToProgressOptions) {
   const progressBar = new ToProgress(opts)
+  let i = 0
 
   return function* progressBarMiddleware(ctx: Context & IContext) {
-    if (ctx.router.isRoot) progressBar.start().catch(/* istanbul ignore next */() => ({}))
+    if (i === 0) {
+      progressBar.start().catch(/* istanbul ignore next */() => ({}))
+    }
+    i++
     yield
-    if (!ctx.$child) progressBar.finish().catch(/* istanbul ignore next */() => ({}))
+    i--
+    if (i === 0) {
+      progressBar.finish().catch(/* istanbul ignore next */() => ({}))
+    }
   }
 }
