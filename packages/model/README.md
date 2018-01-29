@@ -127,6 +127,7 @@ Walking through this code step-by-step, the following occurs...
 - [builders.base](../model.builders.base)
 - [builders.data](../model.builders.data)
 - [builders.view](../model.builders.view)
+- [mixins.cache.memory](../model.mixins.cache.memory)
 - [mixins.pager](../model.mixins.pager)
 - [mixins.rest](../model.mixins.rest)
 - [mixins.subscriptionDisposal](../model.mixins.subscriptionDisposal)
