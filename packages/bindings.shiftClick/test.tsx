@@ -12,7 +12,7 @@ const shiftClickEvent = new Event('click')
 
 describe('bindings.shiftClick', () => {
   test('calls handler only when shift depressed', () => {
-    const actualEl = <div data-bind='ctrlClick: handler'></div>
+    const actualEl = <div data-bind='shiftClick: handler'></div>
     const handler = jest.fn()
     ko.applyBindings({ handler }, actualEl)
 
