@@ -44,10 +44,13 @@
     "karma-rollup-preprocessor": "^5.1.1",
     "karma-tap": "^4.0.0",
     "karma-tap-pretty-reporter": "^3.0.5",
+    "rollup": "^0.55.1",
+    "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-istanbul": "^2.0.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.0",
     "rollup-plugin-node-globals": "^1.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "tap-diff": "^0.1.1",
     "tape": "^4.8.0"
   }
