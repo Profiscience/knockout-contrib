@@ -35,7 +35,7 @@
     "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.3"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
   }
 }

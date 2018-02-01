@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "es2015",
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "./",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015",
+      "esnext.asynciterable",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.reflect",
+      "es2015.symbol"
+    ]
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": []
+}
