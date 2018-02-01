@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-data",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -17,10 +17,10 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.4",
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.3"
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.4"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.3",
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.4",
     "knockout": "^3.5.0-beta"
   }
 }

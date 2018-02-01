@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-authorization",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "Authorization Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-authorization.js",
   "module": "dist/index.js",
