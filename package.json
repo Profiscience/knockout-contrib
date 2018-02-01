@@ -84,6 +84,9 @@
 		"testURL": "http://localhost",
 		"transform": {
 			"^.+\\.[tj]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-		}
+		},
+		"transformIgnorePatterns": [
+			"<rootDir>/node_modules/(?!@profiscience)"
+		]
 	}
 }
