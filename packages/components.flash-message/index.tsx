@@ -1,3 +1,4 @@
+import 'jsx-dom' // type defs
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model'
@@ -13,7 +14,7 @@ declare module '@profiscience/knockout-contrib-router-middleware-flash-message' 
   }
 }
 
-class FlashMessageViewModel extends ViewModelConstructorBuilder {
+export class FlashMessageViewModel extends ViewModelConstructorBuilder {
   public visible = ko.pureComputed(() => flashMessage() !== false)
   public text = ko.pureComputed(() => {
     const unwrapped = flashMessage()
@@ -68,8 +69,8 @@ const template = [
   </div>
 ]
 
-ko.components.register('contrib-flash-message', {
+export default {
   synchronous: true,
   viewModel: FlashMessageViewModel,
   template
-})
+}
