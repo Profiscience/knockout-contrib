@@ -7,8 +7,7 @@
     "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
-  "main": "dist/knockout-contrib-model.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "repository": {
     "type": "git",

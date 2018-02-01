@@ -13,8 +13,7 @@
     "bindings",
     "bindingHandlers"
   ],
-  "main": "dist/knockout-contrib-bindings.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",

@@ -28,8 +28,7 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-0"
   },
-  "main": "dist/knockout-contrib-router-middleware.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",

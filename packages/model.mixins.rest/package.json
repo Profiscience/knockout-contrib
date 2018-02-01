@@ -5,8 +5,7 @@
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
-  "main": "dist/knockout-contrib-model-mixins-rest.js",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {

@@ -12,8 +12,7 @@
     "knockoutjs",
     "components"
   ],
-  "main": "dist/knockout-contrib-components.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",

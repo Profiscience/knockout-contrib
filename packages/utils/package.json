@@ -17,8 +17,7 @@
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils",
-  "main": "dist/knockout-contrib-utils.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"

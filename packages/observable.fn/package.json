@@ -15,8 +15,7 @@
     "observable"
   ],
   "name": "@profiscience/knockout-contrib-observable-fn",
-  "main": "dist/knockout-contrib-observable-fn.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"

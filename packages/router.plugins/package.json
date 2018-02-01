@@ -18,8 +18,7 @@
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "main": "dist/knockout-contrib-router-plugins.js",
-  "module": "index.js",
+  "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.5",
