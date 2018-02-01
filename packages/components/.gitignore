@@ -1,0 +1,5 @@
+*.js
+*.d.ts
+index.ts
+lazy.ts
+flash-message.ts

@@ -12,18 +12,12 @@
     "knockoutjs",
     "components"
   ],
+  "main": "dist/knockout-contrib-components.js",
+  "module": "index.js",
+  "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "main": "dist/knockout-contrib-components.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "flash-message.js",
-    "flash-message.d.ts"
-  ],
   "dependencies": {
     "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.8",
     "postcss-loader": "^2.0.10",
@@ -31,7 +25,7 @@
     "style-loader": "^0.20.0"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "../../node_modules/.bin/taskr build -d ../.."
   }
 }
