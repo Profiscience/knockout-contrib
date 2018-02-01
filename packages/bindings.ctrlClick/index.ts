@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export const ctrlClickBinding: KnockoutBindingHandler = {
+const ctrlClickBinding: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     const allowMeta = allBindings.get('ctrlClickAllowMeta') !== false
     ko.applyBindingsToNode(el, {
@@ -21,4 +21,4 @@ export const ctrlClickBinding: KnockoutBindingHandler = {
   }
 }
 
-ko.bindingHandlers.ctrlClick = ctrlClickBinding
+export default ctrlClickBinding

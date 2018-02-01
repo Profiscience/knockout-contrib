@@ -1,7 +1,9 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './index'
+import binding from './index'
+
+ko.bindingHandlers.shiftClick = binding
 
 const clickEvent = new Event('click')
 const shiftClickEvent = new Event('click')

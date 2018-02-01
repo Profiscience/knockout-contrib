@@ -2,7 +2,9 @@ import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import * as $ from 'jquery'
 
-import './index'
+import binding from './index'
+
+ko.bindingHandlers.jquery = binding
 
 describe('bindings.jquery', () => {
   test('calls the jquery plugin on the bound element', (done) => {

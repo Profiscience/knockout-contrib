@@ -1,7 +1,9 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './index'
+import binding from './index'
+
+ko.bindingHandlers.toggle = binding
 
 describe('bindings.toggle', () => {
   test('toggles observable', () => {
