@@ -4,7 +4,7 @@
   "description": "Shift Click Binding for KnockoutJS",
   "main": "dist/knockout-contrib-bindings-shift-click.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

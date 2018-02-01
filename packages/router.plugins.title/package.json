@@ -4,7 +4,7 @@
   "description": "Title Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/knockout-contrib-plugins-title.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

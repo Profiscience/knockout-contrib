@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.6",
   "main": "dist/knockout-contrib-bindings-jquery.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

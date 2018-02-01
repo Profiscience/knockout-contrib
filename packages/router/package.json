@@ -12,7 +12,7 @@
   "repository": "Profiscience/knockout-contrib",
   "main": "dist/knockout-contrib-router.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/"
   ],

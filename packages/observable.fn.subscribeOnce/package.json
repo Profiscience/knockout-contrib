@@ -9,7 +9,7 @@
   "repository": "Profiscience/knockout-contrib",
   "main": "dist/knockout-contrib-observable-fn-subscribe-once.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

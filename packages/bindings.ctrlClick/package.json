@@ -4,7 +4,7 @@
   "description": "Ctrl Click Binding for KnockoutJS",
   "main": "dist/knockout-contrib-bindings-ctrl-click.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

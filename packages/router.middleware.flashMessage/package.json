@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.4",
   "main": "dist/knockout-contrib-router-middleware-flash-message.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

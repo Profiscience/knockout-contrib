@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.2",
   "main": "dist/knockout-contrib-router-middleware-scroll-position.js",
   "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

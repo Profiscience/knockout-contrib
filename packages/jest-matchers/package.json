@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.4",
   "description": "Jest Matchers for Knockout JS",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

@@ -8,7 +8,7 @@
   },
   "main": "dist/knockout-contrib-model-builders-base.js",
   "module": "dist/index.js",
-  "typings": "index.ts",
+  "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
     "tslib": "^1.8.0"

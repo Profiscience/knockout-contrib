@@ -7,7 +7,7 @@
   },
   "main": "dist/knockout-contrib-model-mixins-cache.js",
   "module": "dist/index.js",
-  "typings": "index.ts",
+  "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
     "tslib": "^1.8.0"
