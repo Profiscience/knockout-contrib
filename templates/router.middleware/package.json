@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-router-middleware-{{kebabCase name}}",
   "version": "1.0.0-alpha.0",
   "main": "dist/knockout-contrib-router-middleware-{{kebabCase name}}.js",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
