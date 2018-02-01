@@ -1,4 +1,3 @@
-*
-!.meta
-!package.json
-!README.md
+*.js
+*.d.ts
+index.ts
