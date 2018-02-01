@@ -24,5 +24,7 @@
   "include": [
     "**/*"
   ],
-  "exclude": []
+  "exclude": [
+    "tasks"
+  ]
 }
