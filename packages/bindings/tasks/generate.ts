@@ -61,9 +61,9 @@ async function generateIndividual(name: string, pkg: { name: string }) {
   const contents = [
     AUTOGEN_BANNER,
     `import * as ko from 'knockout'\n`,
-    `import ${name} from '${pkg.name}'`,
+    `import binding from '${pkg.name}'`,
     `export * from '${pkg.name}'`,
-    `ko.bindingHandlers.${name} = ${name}`,
+    `ko.bindingHandlers.${name} = binding`,
   ].join('\n') + '\n'
   await writeFile(path.resolve(__dirname, `../${name}.ts`), contents)
 }
