@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 
-export function defaults<T extends { [k: string]: any | KnockoutObservable<any> | void }>(
+export default function defaults<T extends { [k: string]: any | KnockoutObservable<any> | void }>(
   dest: T,
   defaultValues: { [k: string]: any },
   mapArraysDeep = false

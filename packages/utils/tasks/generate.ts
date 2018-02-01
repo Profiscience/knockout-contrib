@@ -40,7 +40,7 @@ async function generateIndex(packages: { [k: string]: any }) {
   const names = Object.keys(packages)
   const contents = [
     AUTOGEN_BANNER,
-    ...names.map((p) => `export * from '${packages[p].name}'`)
+    ...names.map((n) => `export { default as ${n} } from '${packages[n].name}'`)
   ].join('\n') + '\n'
   await writeFile(path.resolve(__dirname, '../index.ts'), contents)
 }

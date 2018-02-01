@@ -2,7 +2,7 @@ import * as ko from 'knockout'
 
 // can't accurately type this without conditional mapped types
 // see: https://github.com/Microsoft/TypeScript/issues/12424
-export function fromJS(obj: { [k: string]: any }, mapArraysDeep = false, _parentIsArray = false): any {
+export default function fromJS(obj: { [k: string]: any }, mapArraysDeep = false, _parentIsArray = false): any {
   if (ko.isObservable(obj)) {
     return obj
   } else if (obj instanceof Array) {
