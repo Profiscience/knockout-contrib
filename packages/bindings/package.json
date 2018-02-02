@@ -15,6 +15,10 @@
   ],
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "*.js",
+    "*.d.ts"
+  ],
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
     "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
