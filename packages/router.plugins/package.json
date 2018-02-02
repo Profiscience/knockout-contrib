@@ -20,6 +20,10 @@
   },
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "dependencies": {
     "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.6",
     "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.4",

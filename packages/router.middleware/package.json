@@ -30,6 +30,10 @@
   },
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
     "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."

@@ -4,7 +4,6 @@
     "target": "es5",
     "module": "esnext",
     "declaration": true,
-    "sourceMap": true,
     "rootDir": "./",
     "baseUrl": "./",
     "outDir": "./",
