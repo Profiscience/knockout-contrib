@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-observable-fn-to-string",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "KnockoutJS Observable.fn.toString()",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",

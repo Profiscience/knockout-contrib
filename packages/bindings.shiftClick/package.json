@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-shift-click",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Shift Click Binding for KnockoutJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

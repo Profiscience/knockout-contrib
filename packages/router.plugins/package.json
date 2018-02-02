@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "@profiscience/knockout-contrib-router plugins",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -21,13 +21,13 @@
   "main": "index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.5",
-    "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.5",
-    "@profiscience/knockout-contrib-router-plugins-components": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.4",
-    "@profiscience/knockout-contrib-router-plugins-title": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.3"
+    "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.6",
+    "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.6",
+    "@profiscience/knockout-contrib-router-plugins-components": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.5",
+    "@profiscience/knockout-contrib-router-plugins-title": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.4"
   },
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",

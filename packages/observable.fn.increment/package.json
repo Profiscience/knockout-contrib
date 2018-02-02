@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-observable-fn-increment",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "KnockoutJS Observable.fn.increment()",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
