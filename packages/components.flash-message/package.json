@@ -2,9 +2,8 @@
   "name": "@profiscience/knockout-contrib-components-flash-message",
   "version": "1.0.0-alpha.8",
   "description": "Flash Message Component for KnockoutJS",
-  "main": "dist/knockout-contrib-components-flash-message.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"

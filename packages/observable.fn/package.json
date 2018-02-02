@@ -14,30 +14,19 @@
     "utilities",
     "observable"
   ],
+  "name": "@profiscience/knockout-contrib-observable-fn",
+  "main": "index.js",
+  "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "name": "@profiscience/knockout-contrib-observable-fn",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "increment.js",
-    "increment.d.ts",
-    "subscribeOnce.js",
-    "subscribeOnce.d.ts",
-    "toString.js",
-    "toString.d.ts"
-  ],
-  "main": "dist/knockout-contrib-observable-fn.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-observable-fn-increment": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-observable-fn-subscribe-once": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.3"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
   }
 }

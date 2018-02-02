@@ -3,16 +3,12 @@
   "version": "1.0.0-alpha.9",
   "description": "An opinionated model with first-class TypeScript support and router integration with KnockoutJS",
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
-  "main": "dist/knockout-contrib-model.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"

@@ -3,8 +3,8 @@
   "version": "1.0.0-alpha.0",
   "description": "{{titleCase name}} Observable Function for KnockoutJS",
   "main": "dist/knockout-contrib-observable-fn-{{kebabCase name}}.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

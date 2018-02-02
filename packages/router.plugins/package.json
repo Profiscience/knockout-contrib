@@ -18,13 +18,8 @@
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "main": "dist/knockout-contrib-router-plugins.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "index.js",
+  "types": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-router-plugins-authorization": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-router-plugins-children": "^1.0.0-alpha.3",
@@ -35,7 +30,7 @@
     "@profiscience/knockout-contrib-router-plugins-with": "^1.0.0-alpha.3"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
   }
 }

@@ -1,7 +1,9 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './index'
+import binding from './index'
+
+ko.bindingHandlers.ctrlClick = binding
 
 const clickEvent = new Event('click')
 const ctrlClickEvent = new Event('click')

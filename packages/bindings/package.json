@@ -13,32 +13,19 @@
     "bindings",
     "bindingHandlers"
   ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
+  },
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "main": "dist/knockout-contrib-bindings.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-ctrl-click": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-bindings-jquery": "^1.0.0-alpha.6",
     "@profiscience/knockout-contrib-bindings-shift-click": "^1.0.0-alpha.2",
     "@profiscience/knockout-contrib-bindings-toggle": "^1.0.0-alpha.2"
-  },
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "ctrlClick.js",
-    "ctrlClick.d.ts",
-    "jquery.js",
-    "jquery.d.ts",
-    "shiftClick.js",
-    "shiftClick.d.ts",
-    "toggle.js",
-    "toggle.d.ts"
-  ]
+  }
 }

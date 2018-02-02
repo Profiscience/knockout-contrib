@@ -2,9 +2,8 @@
   "name": "@profiscience/knockout-contrib-router-plugins-authorization",
   "version": "1.0.0-alpha.5",
   "description": "Authorization Plugin for @profiscience/knockout-contrib-router",
-  "main": "dist/knockout-contrib-plugins-authorization.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "WTFPL",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-0",
@@ -12,7 +11,8 @@
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-0"
+    "@profiscience/knockout-contrib-router": "^2.0.0-0",
+    "@profiscience/knockout-contrib-router-middleware": "^1.0.0-alpha.2"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

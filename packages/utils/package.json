@@ -15,27 +15,20 @@
   ],
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/knockout-contrib/issues"
-  },
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils",
+  "main": "index.js",
+  "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
-  "main": "dist/knockout-contrib-utils.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-defaults": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-utils-merge": "^1.0.0-alpha.4"
   },
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
   }
 }

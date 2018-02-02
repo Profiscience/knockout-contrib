@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export const shiftClickBinding: KnockoutBindingHandler = {
+const shiftClickBinding: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(el, {
       click($data, e) {
@@ -18,4 +18,4 @@ export const shiftClickBinding: KnockoutBindingHandler = {
   }
 }
 
-ko.bindingHandlers.ctrlClick = shiftClickBinding
+export default shiftClickBinding

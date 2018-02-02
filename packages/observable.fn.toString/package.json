@@ -7,9 +7,8 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.toString",
   "repository": "Profiscience/knockout-contrib",
-  "main": "dist/knockout-contrib-observable-fn-to-string.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

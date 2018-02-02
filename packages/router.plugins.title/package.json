@@ -2,9 +2,8 @@
   "name": "@profiscience/knockout-contrib-router-plugins-title",
   "version": "1.0.0-alpha.3",
   "description": "Title Plugin for @profiscience/knockout-contrib-router",
-  "main": "dist/knockout-contrib-plugins-title.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

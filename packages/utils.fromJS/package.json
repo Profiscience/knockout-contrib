@@ -2,9 +2,8 @@
   "name": "@profiscience/knockout-contrib-utils-from-js",
   "version": "1.0.0-alpha.4",
   "description": "Handy Utilities for Knockout JS",
-  "main": "dist/knockout-contrib-utils-from-js.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

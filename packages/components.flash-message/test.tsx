@@ -3,7 +3,9 @@ import * as ko from 'knockout'
 import 'jest-jquery-matchers' // import type defs
 import { flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
-import './index'
+import componentConfig from './index'
+
+ko.components.register('contrib-flash-message', componentConfig)
 
 jest.addMatchers(require('jest-jquery-matchers')) // tslint:disable-line no-var-requires
 

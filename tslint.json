@@ -16,6 +16,7 @@
   "linterOptions": {
     "exclude": [
       "templates/**/*",
+      "**/*.js",
       "**/*.d.ts"
     ]
   }

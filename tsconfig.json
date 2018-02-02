@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "target": "es2015",
     "module": "commonjs",
     "importHelpers": true,
@@ -22,6 +23,7 @@
   ],
   "exclude": [
     "templates",
-    "dist"
+    "dist",
+    "tasks"
   ]
 }

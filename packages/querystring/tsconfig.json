@@ -5,8 +5,8 @@
     "module": "es2015",
     "declaration": true,
     "sourceMap": true,
-    "rootDir": "./src",
     "baseUrl": "./",
+    "rootDir": "./src",
     "outDir": "./dist",
     "noImplicitAny": true,
     "lib": [
@@ -19,6 +19,7 @@
     "**/*"
   ],
   "exclude": [
+    "dist",
     "test.ts"
   ]
 }

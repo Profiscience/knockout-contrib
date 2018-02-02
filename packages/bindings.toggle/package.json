@@ -2,9 +2,8 @@
   "name": "@profiscience/knockout-contrib-bindings-toggle",
   "version": "1.0.0-alpha.2",
   "description": "Toggle Binding for KnockoutJS",
-  "main": "dist/knockout-contrib-bindings-toggle.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

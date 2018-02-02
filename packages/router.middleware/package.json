@@ -28,15 +28,10 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-0"
   },
-  "main": "dist/knockout-contrib-router-middleware.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+    "generate": "cd tasks && ts-node ./generate.ts",
+    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../.."
   }
 }

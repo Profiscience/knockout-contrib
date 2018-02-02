@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = {
+export default {
   test: /@profiscience\/knockout-contrib.+\.css/,
   use: [
     'style-loader',
