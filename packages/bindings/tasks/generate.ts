@@ -69,8 +69,13 @@ async function generateIndividual(name: string, pkg: { name: string }) {
 }
 
 getBindingPackages()
-  .then((packages) => {
-    generateIndex(Object.keys(packages))
-    generateGitIgnore(packages)
-    Object.keys(packages).forEach((k) => generateIndividual(k, packages[k]))
+  .then((packages) => Promise.all([
+    generateIndex(Object.keys(packages)),
+    generateGitIgnore(packages),
+    ...Object.keys(packages).map((k) => generateIndividual(k, packages[k]))
+  ]))
+  .catch((err) => {
+    // tslint:disable-next-line no-console
+    console.error('Error generating bindings metapackage', err)
+    process.exit(1)
   })

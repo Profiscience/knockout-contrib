@@ -45,4 +45,10 @@ async function generateIndex(packages: { [k: string]: any }) {
   await writeFile(path.resolve(__dirname, '../index.ts'), contents)
 }
 
-getModelPackages().then(generateIndex)
+getModelPackages()
+  .then(generateIndex)
+  .catch((err) => {
+    // tslint:disable-next-line no-console
+    console.error('Error generating model metapackage', err.message)
+    process.exit(1)
+  })

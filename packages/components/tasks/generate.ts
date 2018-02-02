@@ -84,9 +84,14 @@ async function generateIndividual(name: string, pkg: { name: string }) {
 }
 
 getComponentPackages()
-  .then((packages) => {
-    generateGitIgnore(packages)
-    generateIndex(packages)
-    generateLazyManifest(packages)
-    Object.keys(packages).forEach((k) => generateIndividual(k, packages[k]))
+  .then((packages) => Promise.all([
+    generateGitIgnore(packages),
+    generateIndex(packages),
+    generateLazyManifest(packages),
+    ...Object.keys(packages).map((k) => generateIndividual(k, packages[k]))
+  ]))
+  .catch((err) => {
+    // tslint:disable-next-line no-console
+    console.error('Error generating components metapackage', err.message)
+    process.exit(1)
   })

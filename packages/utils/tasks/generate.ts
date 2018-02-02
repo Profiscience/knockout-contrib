@@ -45,4 +45,10 @@ async function generateIndex(packages: { [k: string]: any }) {
   await writeFile(path.resolve(__dirname, '../index.ts'), contents)
 }
 
-getUtilPackages().then(generateIndex)
+getUtilPackages()
+  .then(generateIndex)
+  .catch((err) => {
+    // tslint:disable-next-line no-console
+    console.error('Error generating utils metapackage', err.message)
+    process.exit(1)
+  })

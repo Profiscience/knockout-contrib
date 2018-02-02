@@ -45,4 +45,10 @@ async function generateIndex(packages: { [k: string]: any }) {
   await writeFile(path.resolve(__dirname, '../index.ts'), contents)
 }
 
-getRouterMiddlewarePackages().then(generateIndex)
+getRouterMiddlewarePackages()
+  .then(generateIndex)
+  .catch((err) => {
+    // tslint:disable-next-line no-console
+    console.error('Error generating router.middleware metapackage', err.message)
+    process.exit(1)
+  })
