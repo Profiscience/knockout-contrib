@@ -29,7 +29,7 @@ export class Context /* implements IContext, use Context & IContext */ {
 
   constructor(
     public router: Router,
-    public $parent: Context,
+    public $parent: Context & IContext,
     public path: string,
     _with: { [key: string]: any } = {}
   ) {
