@@ -22,8 +22,14 @@ export const createRESTMixin = (config: RestMixinConfig = {}) => (controller: st
       return api.get({ params: this.params })
     }
 
-    public async save() {
+    public async create() {
       const res = await api.post({ params: this.params, data: this.toJS() })
+      await super.save()
+      return res
+    }
+
+    public async save() {
+      const res = await api.put({ params: this.params, data: this.toJS() })
       await super.save()
       return res
     }

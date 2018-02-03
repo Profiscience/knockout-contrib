@@ -60,7 +60,27 @@ describe('model.mixins.rest', () => {
     expect(mock.calls[0][1].method).toBe('GET')
   })
 
-  test('implements .save() using POST', async () => {
+  test('implements .create() using POST', async () => {
+    const APIMixin = createRESTMixin({ baseURL: '/api' })
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
+      public foos: KnockoutObservableArray<string>
+    }
+
+    const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
+    const model = await DataModel.create({})
+
+    model.toJS = jest.fn()
+    DataModelConstructorBuilder.updateAll = jest.fn()
+
+    await model.create()
+
+    expect(mock.calls[1][0]).toBe('/api/controller?')
+    expect(mock.calls[1][1].method).toBe('POST')
+    expect(model.toJS).toBeCalled()
+    expect(DataModelConstructorBuilder.updateAll).toBeCalled()
+  })
+
+  test('implements .save() using PUT', async () => {
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
       public foos: KnockoutObservableArray<string>
@@ -75,7 +95,7 @@ describe('model.mixins.rest', () => {
     await model.save()
 
     expect(mock.calls[1][0]).toBe('/api/controller?')
-    expect(mock.calls[1][1].method).toBe('POST')
+    expect(mock.calls[1][1].method).toBe('PUT')
     expect(model.toJS).toBeCalled()
     expect(DataModelConstructorBuilder.updateAll).toBeCalled()
   })
