@@ -1,7 +1,6 @@
 // tslint:disable max-classes-per-file
 
 import * as ko from 'knockout'
-import '@profiscience/knockout-contrib-jest-matchers'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
@@ -36,10 +35,6 @@ describe('model.mixins.pager', () => {
     await model.getMore()
 
     expect(ko.toJS(model.foos())).toEqual(FOOS)
-
-    for (const foo of model.foos()) {
-      expect(foo).toBeObservable()
-    }
   })
 
   test('.hasMore() is observable', async () => {

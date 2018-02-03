@@ -66,7 +66,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     nonenumerable(this, 'loading')
 
     if (initData) {
-      merge(this, initData, true)
+      merge(this, initData)
       this.subscribe(this.params, () => this.update())
       this[INITIALIZED] = Promise.resolve()
     } else {
@@ -99,7 +99,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
 
   protected async update(): Promise<void> {
     this.loading(true)
-    merge(this, await this.fetch(), true)
+    merge(this, await this.fetch())
     this.loading(false)
   }
 
