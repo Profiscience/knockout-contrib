@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-pager",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -9,19 +9,19 @@
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.8",
     "@profiscience/knockout-contrib-observable-fn": "^1.0.0-alpha.10",
     "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.11",
     "core-js": "^2.5.3",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.5",
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.6",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.5"
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.6"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-cache-memory",
-  "version": "0.0.6-0",
+  "version": "0.0.6-1",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -12,12 +12,12 @@
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.8",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.7"
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.8"
   }
 }

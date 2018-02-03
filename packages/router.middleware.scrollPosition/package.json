@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-scroll-position",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -8,11 +8,11 @@
   ],
   "license": "WTFPL",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-1",
+    "@profiscience/knockout-contrib-router": "^2.0.0-2",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-1"
+    "@profiscience/knockout-contrib-router": "^2.0.0-2"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
