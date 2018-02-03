@@ -4,4 +4,14 @@ import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-model-
 /**
  * ConstructorBuilder with SubscriptionDisposalMixin, use as base for view models.
  */
-export class ViewModelConstructorBuilder extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {}
+export class ViewModelConstructorBuilder extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
+  public dispose() {
+    const m = this as any
+    Object
+      .getOwnPropertyNames(m)
+      .forEach((k) => {
+        if (typeof m[k].dispose === 'function') m[k].dispose()
+      })
+    super.dispose()
+  }
+}
