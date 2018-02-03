@@ -17,6 +17,7 @@
 - [component](../router.plugins.component)
 - [components](../router.plugins.components)
 - [init](../router.plugins.init)
+- [redirect](../router.plugins.redirect)
 - [title](../router.plugins.title)
 - [with](../router.plugins.with)
 <!-- /TOC -->

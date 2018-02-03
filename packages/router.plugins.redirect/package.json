@@ -1,0 +1,34 @@
+{
+  "name": "@profiscience/knockout-contrib-router-plugins-redirect",
+  "version": "0.0.0",
+  "description": "Redirect Plugin for @profiscience/knockout-contrib-router",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "tko",
+    "knockout",
+    "knockoutjs",
+    "routing",
+    "router",
+    "spa"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "repository": "Profiscience/knockout-contrib",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.redirect",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router": "^2.0.0-2",
+    "knockout": "^3.5.0-beta"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-router": "^2.0.0-2"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  }
+}
