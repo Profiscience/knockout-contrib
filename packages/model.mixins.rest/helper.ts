@@ -84,7 +84,7 @@ export class RestApiHelper {
 
       const requestInit = { ...this.requestInit, method }
 
-      const url = this.constructUrl(endpoint, opts.params)
+      const url = this.constructUrl(endpoint, ko.toJS(opts.params))
 
       if (method !== 'GET' && typeof opts.data !== 'undefined') {
         requestInit.body = ko.toJSON(opts.data)

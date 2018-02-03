@@ -1,3 +1,4 @@
+import * as ko from 'knockout'
 import { RestApiHelper, RestApiError } from './helper'
 import 'jest-fetch-mock'
 
@@ -40,11 +41,16 @@ describe('model.mixins.rest api helper', () => {
 
     test('interpolates url with `:param` syntaxt', async () => {
       const api = new RestApiHelper({ baseURL: 'https://example.com/api' })
-      const { mock } = fetch.mockResponseOnce(JSON.stringify({})) as any
+      const { mock } = fetch.mockResponse(JSON.stringify({})) as any
       await api.get('endpoint/:foo', {
         params: { foo: 'foo' }
       })
+      await api.get('endpoint/:foo', {
+        params: { foo: ko.observable('foo') }
+      })
       expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/foo')
+      expect(mock.calls[1][0]).toBe('https://example.com/api/endpoint/foo')
+      fetch.resetMocks()
     })
 
     test('interpolates url with `:optionalParam?` syntaxt', async () => {
@@ -54,8 +60,12 @@ describe('model.mixins.rest api helper', () => {
       await api.get('endpoint/:foo?', {
         params: { foo: 'foo' }
       })
+      await api.get('endpoint/:foo?', {
+        params: { foo: ko.observable('foo') }
+      })
       expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/')
       expect(mock.calls[1][0]).toBe('https://example.com/api/endpoint/foo')
+      expect(mock.calls[2][0]).toBe('https://example.com/api/endpoint/foo')
       fetch.resetMocks()
     })
 
@@ -67,11 +77,19 @@ describe('model.mixins.rest api helper', () => {
         params: { foo: false }
       })
       await api.get('endpoint/foo?', {
+        params: { foo: ko.observable(false) }
+      })
+      await api.get('endpoint/foo?', {
         params: { foo: true }
+      })
+      await api.get('endpoint/foo?', {
+        params: { foo: ko.observable(true) }
       })
       expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/')
       expect(mock.calls[1][0]).toBe('https://example.com/api/endpoint/')
-      expect(mock.calls[2][0]).toBe('https://example.com/api/endpoint/foo')
+      expect(mock.calls[2][0]).toBe('https://example.com/api/endpoint/')
+      expect(mock.calls[3][0]).toBe('https://example.com/api/endpoint/foo')
+      expect(mock.calls[4][0]).toBe('https://example.com/api/endpoint/foo')
       fetch.resetMocks()
     })
 
