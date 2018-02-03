@@ -28,7 +28,7 @@ describe('model.mixins.rest', () => {
       const model = await DataModel.create({})
 
       expect(ko.toJS(model.foos())).toEqual(FOOS)
-      expect(mock.calls[0][0]).toBe('/api?')
+      expect(mock.calls[0][0]).toBe('/api')
     })
 
     test('is compose-able', async () => {
@@ -56,7 +56,7 @@ describe('model.mixins.rest', () => {
     const model = await DataModel.create({})
 
     expect(ko.toJS(model.foos())).toEqual(FOOS)
-    expect(mock.calls[0][0]).toBe('/api/controller?')
+    expect(mock.calls[0][0]).toBe('/api/controller')
     expect(mock.calls[0][1].method).toBe('GET')
   })
 
@@ -74,7 +74,7 @@ describe('model.mixins.rest', () => {
 
     await model.create()
 
-    expect(mock.calls[1][0]).toBe('/api/controller?')
+    expect(mock.calls[1][0]).toBe('/api/controller')
     expect(mock.calls[1][1].method).toBe('POST')
     expect(model.toJS).toBeCalled()
     expect(DataModelConstructorBuilder.updateAll).toBeCalled()
@@ -94,7 +94,7 @@ describe('model.mixins.rest', () => {
 
     await model.save()
 
-    expect(mock.calls[1][0]).toBe('/api/controller?')
+    expect(mock.calls[1][0]).toBe('/api/controller')
     expect(mock.calls[1][1].method).toBe('PUT')
     expect(model.toJS).toBeCalled()
     expect(DataModelConstructorBuilder.updateAll).toBeCalled()
@@ -114,7 +114,7 @@ describe('model.mixins.rest', () => {
 
     await model.delete()
 
-    expect(mock.calls[1][0]).toBe('/api/controller?')
+    expect(mock.calls[1][0]).toBe('/api/controller')
     expect(mock.calls[1][1].method).toBe('DELETE')
     expect(model.dispose).toBeCalled()
     expect(DataModelConstructorBuilder.updateAll).toBeCalled()

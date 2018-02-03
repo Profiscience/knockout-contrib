@@ -83,11 +83,8 @@ export class RestApiHelper {
       }
 
       const requestInit = { ...this.requestInit, method }
-      let url = this.baseURL + endpoint.replace(/^\/?(.+)$/, '/$1')
 
-      if (opts.params) {
-        url += '?' + this.stringifyQuery(opts.params)
-      }
+      const url = this.constructUrl(endpoint, opts.params)
 
       if (method !== 'GET' && typeof opts.data !== 'undefined') {
         requestInit.body = ko.toJSON(opts.data)
@@ -101,6 +98,35 @@ export class RestApiHelper {
 
       return await res.json()
     }
+  }
+
+  private constructUrl(endpoint: string, params: { [k: string]: any } = {}) {
+    // handle full url, https://example.com/api/endpoint/:param?
+    const queryParams: Set<string> = new Set(Object.keys(params))
+    let url = this.baseURL + endpoint.replace(/^\/?(.+)$/, '/$1') // replace leading double /
+
+    const pattern = /(:?)([^/?]+)(\??)/g
+    let match: RegExpExecArray | null
+    while ((match = pattern.exec(url)) !== null) { // tslint:disable-line no-conditional-assignment
+      const [_, isInterpolated, name, isOptional] = match
+      if (!isOptional && !params[name]) continue
+      if (isInterpolated) {
+        let textToReplace = ':' + name
+        if (isOptional) textToReplace += '?'
+        url = url.replace(textToReplace, params[name] || '')
+        queryParams.delete(name)
+      } else if (isOptional) {
+        url = url.replace(name + '?', params[name] ? name : '')
+        queryParams.delete(name)
+      }
+    }
+
+    if (queryParams.size > 0) {
+      const query = Array.from(queryParams).reduce((accum, p) => ({ ...accum, [p]: params[p] }), {})
+      url += '?' + this.stringifyQuery(query)
+    }
+
+    return url
   }
 
   private stringifyQuery(query: { [k: string]: any } = {}): string {

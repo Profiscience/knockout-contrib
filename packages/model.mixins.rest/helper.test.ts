@@ -37,9 +37,44 @@ describe('model.mixins.rest api helper', () => {
       await api.get('/bar')
       expect(mock.calls[0][0]).toBe('/foo/bar')
     })
-  })
 
-  describe('query', () => {
+    test('interpolates url with `:param` syntaxt', async () => {
+      const api = new RestApiHelper({ baseURL: 'https://example.com/api' })
+      const { mock } = fetch.mockResponseOnce(JSON.stringify({})) as any
+      await api.get('endpoint/:foo', {
+        params: { foo: 'foo' }
+      })
+      expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/foo')
+    })
+
+    test('interpolates url with `:optionalParam?` syntaxt', async () => {
+      const api = new RestApiHelper({ baseURL: 'https://example.com/api' })
+      const { mock } = fetch.mockResponse(JSON.stringify({})) as any
+      await api.get('endpoint/:foo?')
+      await api.get('endpoint/:foo?', {
+        params: { foo: 'foo' }
+      })
+      expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/')
+      expect(mock.calls[1][0]).toBe('https://example.com/api/endpoint/foo')
+      fetch.resetMocks()
+    })
+
+    test('interpolates url with `optionalSegment?` syntaxt', async () => {
+      const api = new RestApiHelper({ baseURL: 'https://example.com/api' })
+      const { mock } = fetch.mockResponse(JSON.stringify({})) as any
+      await api.get('endpoint/foo?')
+      await api.get('endpoint/foo?', {
+        params: { foo: false }
+      })
+      await api.get('endpoint/foo?', {
+        params: { foo: true }
+      })
+      expect(mock.calls[0][0]).toBe('https://example.com/api/endpoint/')
+      expect(mock.calls[1][0]).toBe('https://example.com/api/endpoint/')
+      expect(mock.calls[2][0]).toBe('https://example.com/api/endpoint/foo')
+      fetch.resetMocks()
+    })
+
     test('defaults to simple bracket notation querystring', async () => {
       const api = new RestApiHelper({})
       const { mock } = fetch.mockResponseOnce(JSON.stringify({ foo: 'bar' })) as any
