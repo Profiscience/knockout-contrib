@@ -49,7 +49,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
   /**
    * True if pending `.fetch()` response
    */
-  public loading = ko.observable(true)
+  public loading: KnockoutObservable<boolean> = ko.observable()
 
   /**
    * Constructs a new DataModel instance
@@ -57,7 +57,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
    * @param params Parameters for the current model state. If observable, will trigger
    *  updates to observable properties when modified
    */
-  constructor(protected params: P) {
+  constructor(protected params: P, initData?: { [k: string]: any }) {
     super()
 
     INSTANCES[this.INSTANCE_ID] = this
@@ -65,10 +65,16 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(Sub
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
-    this[INITIALIZED] = this.update()
-      .then(() => {
-        this.subscribe(this.params, () => this.update())
-      })
+    if (initData) {
+      merge(this, initData, true)
+      this.subscribe(this.params, () => this.update())
+      this[INITIALIZED] = Promise.resolve()
+    } else {
+      this[INITIALIZED] = this.update()
+        .then(() => {
+          this.subscribe(this.params, () => this.update())
+        })
+    }
   }
 
   /**

@@ -8,12 +8,26 @@ import { DataModelConstructorBuilder, nonenumerable } from './index'
 
 describe('model.builders.data', () => {
 
-  test('requires .fetch() implementation', async () => {
+  test('requires .fetch() implementation if no initial data', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {}
 
     const foo: any = new FooModel({})
 
     await expect(foo[INITIALIZED]).rejects.toBeTruthy()
+
+    foo.dispose()
+  })
+
+  test('uses initial data with constructor if provided', async () => {
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public readonly value: KnockoutObservable<string>
+    }
+    const foo = new FooModel({}, { value: 'value' })
+
+    await foo[INITIALIZED]
+
+    expect(foo.value).toBeObservable()
+    expect(foo.value()).toBe('value')
 
     foo.dispose()
   })
