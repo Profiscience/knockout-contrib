@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.23",
+    "@profiscience/knockout-contrib-components-markdown": "^0.0.0",
     "postcss-loader": "^2.0.10",
     "postcss-modules": "^1.1.0",
     "style-loader": "^0.20.0"
