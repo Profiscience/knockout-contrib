@@ -24,10 +24,8 @@
     "@types/knockout": "^3.4.0",
     "@types/lodash": "^4.14.80",
     "@types/node": "^9.3.0",
-    "caniuse-lite": "^1.0.30000784",
+    "are-we-there-yet": "^1.1.4",
     "execa": "^0.9.0",
-    "happypack": "^4.0.0",
-    "html-webpack-plugin": "^2.30.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.1",
     "jest-jquery-matchers": "^2.0.0",
@@ -44,8 +42,7 @@
     "ts-loader": "^3.2.0",
     "ts-node": "^4.1.0",
     "typed-css-modules": "^0.3.1",
-    "typescript": "^2.7.0-rc",
-    "webpack": "^3.10.0"
+    "typescript": "^2.7.0-rc"
   },
   "optionalDependencies": {
     "@taskr/watch": "^1.1.0",
@@ -53,11 +50,14 @@
     "eslint-config-profiscience": "^2.0.4",
     "express": "^4.16.2",
     "globby": "^7.1.1",
+    "happypack": "^4.0.0",
     "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "plop": "^1.9.0",
     "toprogress": "^0.1.3",
     "tslint": "^5.8.0",
+    "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.3"
   },
   "jest": {

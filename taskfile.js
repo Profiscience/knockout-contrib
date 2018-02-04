@@ -1,13 +1,13 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const { endsWith } = require('lodash')
-const tasks = fs.readdirSync(path.resolve(__dirname, 'tasks'))
+Object.assign(exports, require('./tasks/build'))
+Object.assign(exports, require('./tasks/_transpile'))
+Object.assign(exports, require('./tasks/_styles'))
 
-for (const t of tasks) {
-  if (endsWith(t, '.ts')) {
-    continue
-  }
-  Object.assign(exports, require(`./tasks/${t}`))
+// optional dependencies
+try {
+  Object.assign(exports, require('./tasks/examples'))
+  Object.assign(exports, require('./tasks/watch'))
+} catch (e) {
+  // noop
 }
