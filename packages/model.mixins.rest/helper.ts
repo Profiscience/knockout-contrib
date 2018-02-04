@@ -2,7 +2,7 @@ import * as ko from 'knockout'
 import { RestMixinConfig } from './mixin'
 
 export type RestHelperRequestConfig = {
-  headers?: { [k: string]: string }
+  headers?: { [k: string]: string | KnockoutObservable<string> }
   cors?: boolean
   authenticated?: boolean
 }
@@ -82,7 +82,10 @@ export class RestApiHelper {
         opts = arg1
       }
 
-      const requestInit = { ...this.requestInit, method }
+      const requestInit = {
+        ...ko.toJS(this.requestInit),
+        method
+      }
 
       const url = this.constructUrl(endpoint, ko.toJS(opts.params))
 

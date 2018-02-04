@@ -144,6 +144,22 @@ describe('model.mixins.rest api helper', () => {
       expect(mock.calls[0][1].headers['Content-Type']).toBe('application/json')
       expect(mock.calls[0][1].headers['X-Test']).toBe('foobar')
     })
+
+    test('headers can be observable (values)', async () => {
+      const header = ko.observable('foo')
+      const api = new RestApiHelper({
+        headers: {
+          'X-Test': header
+        }
+      })
+      const { mock } = fetch.mockResponse(JSON.stringify({ foo: 'bar' })) as any
+      await api.get()
+      header('bar')
+      await api.get()
+      expect(mock.calls[0][1].headers['X-Test']).toBe('foo')
+      expect(mock.calls[1][1].headers['X-Test']).toBe('bar')
+      fetch.resetMocks()
+    })
   })
 
   describe('authentication', () => {
