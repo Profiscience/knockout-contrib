@@ -2,9 +2,6 @@ import 'core-js/es7/symbol'
 
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
-import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
-import { fromJS } from '@profiscience/knockout-contrib-utils'
-import '@profiscience/knockout-contrib-observable-fn'
 
 export type PaginationStrategy<T extends { [k: string]: any }> = (page: number) => T
 

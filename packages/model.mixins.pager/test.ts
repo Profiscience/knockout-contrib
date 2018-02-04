@@ -1,7 +1,6 @@
 // tslint:disable max-classes-per-file
 
 import * as ko from 'knockout'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 import { PagerMixin } from './index'

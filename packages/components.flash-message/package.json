@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.flash-message",
   "dependencies": {
-    "@profiscience/knockout-contrib-model": "^1.0.0-alpha.24",
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.6",
     "jsx-dom": "^5.2.0"
   },
   "peerDependencies": {
