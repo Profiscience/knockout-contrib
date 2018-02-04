@@ -10,7 +10,7 @@ export class ViewModelConstructorBuilder extends ConstructorBuilder.Mixin(Subscr
     Object
       .getOwnPropertyNames(m)
       .forEach((k) => {
-        if (typeof m[k].dispose === 'function') m[k].dispose()
+        if (m[k] && typeof m[k].dispose === 'function') m[k].dispose()
       })
     super.dispose()
   }

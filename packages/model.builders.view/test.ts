@@ -51,6 +51,18 @@ describe('model.builders.view', () => {
 
     expect(mock).not.toBeCalled()
   })
+
+  test('doesn\'t blow up with undefined properties', () => {
+    class FooModel extends ViewModelConstructorBuilder {
+      public foo = undefined
+
+      constructor() {
+        super()
+      }
+    }
+    const m = new FooModel()
+    expect(() => m.dispose()).not.toThrow()
+  })
 })
 
 function nonenumerable(target: any, prop: string) {
