@@ -160,6 +160,24 @@ describe('model.mixins.rest api helper', () => {
       expect(mock.calls[1][1].headers['X-Test']).toBe('bar')
       fetch.resetMocks()
     })
+
+    test('headers can be observable (entire obj)', async () => {
+      const key = ko.observable('X-FOO')
+      const value = ko.observable('FOO')
+      const api = new RestApiHelper({
+        headers: ko.pureComputed(() => ({
+          [key()]: value()
+        }))
+      })
+      const { mock } = fetch.mockResponse(JSON.stringify({ foo: 'bar' })) as any
+      await api.get()
+      key('X-BAR')
+      value('BAR')
+      await api.get()
+      expect(mock.calls[0][1].headers['X-FOO']).toBe('FOO')
+      expect(mock.calls[1][1].headers['X-BAR']).toBe('BAR')
+      fetch.resetMocks()
+    })
   })
 
   describe('authentication', () => {

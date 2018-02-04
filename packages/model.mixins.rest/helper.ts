@@ -44,7 +44,11 @@ export class RestApiHelper {
       this.stringifyQuery = config.stringifyQuery
     }
     if (config.headers) {
-      Object.assign(this.requestInit.headers, config.headers)
+      const defaultHeaders = this.requestInit.headers
+      this.requestInit.headers = ko.pureComputed(() => ({
+        ...defaultHeaders,
+        ...ko.toJS(config.headers)
+      }))
     }
     if (config.cors) {
       this.requestInit.mode = 'cors'
