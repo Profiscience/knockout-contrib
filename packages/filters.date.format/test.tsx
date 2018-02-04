@@ -11,14 +11,14 @@ import dateFilter from './index'
 
 describe('fiters.date', () => {
   test('formats date', () => {
-    const el = <div data-bind='text: date | date.format:"MM_DD_YYYY"'></div>
-    ko.applyBindings({ date: new Date(0) }, el)
-    expect(el).toHaveText('12_31_1969')
+    const el = <div data-bind='text: date | date.format:"YYYY_M_D"'></div>
+    ko.applyBindings({ date: new Date(1970, 0, 1) }, el)
+    expect(el).toHaveText('1970_1_1')
   })
 
   test('works with observable', () => {
-    const el = <div data-bind='text: date | date.format:"MM_DD_YYYY"'></div>
-    ko.applyBindings({ date: ko.observable(new Date(0)) }, el)
-    expect(el).toHaveText('12_31_1969')
+    const el = <div data-bind='text: date | date.format:"YYYY_M_D"'></div>
+    ko.applyBindings({ date: ko.observable(new Date(1970, 0, 1)) }, el)
+    expect(el).toHaveText('1970_1_1')
   })
 })
