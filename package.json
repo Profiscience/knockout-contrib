@@ -26,6 +26,7 @@
     "@types/node": "^9.3.0",
     "are-we-there-yet": "^1.1.4",
     "execa": "^0.9.0",
+    "gauge": "^2.7.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.1",
     "jest-jquery-matchers": "^2.0.0",
