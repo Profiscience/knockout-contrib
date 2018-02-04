@@ -1,0 +1,34 @@
+{
+  "name": "@profiscience/knockout-contrib-components-markdown",
+  "version": "0.0.0",
+  "description": "Markdown Component for KnockoutJS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "component",
+    "tko"
+  ],
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "repository": "Profiscience/knockout-contrib",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.markdown",
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.6",
+    "@types/marked": "^0.3.0",
+    "jsx-dom": "^5.2.0",
+    "marked": "^0.3.12"
+  },
+  "peerDependencies": {
+    "knockout": "^3.5.0-beta"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  }
+}
