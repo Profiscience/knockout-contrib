@@ -25,7 +25,10 @@ cache:
   yarn: true
   directories:
   - node_modules
+  - /tmp/jest_1jk
   ${dirs.map((d) => '- ' + getDist(d)).join('\n  ')}
+install:
+- yarn install --ignore-optional
 before_script:
 - sh -e /etc/init.d/xvfb start
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-update
@@ -36,7 +39,6 @@ script:
 after_script:
 - npx codecov
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-upload
-- yarn jest:config | ag cacheDirectory
 notifications:
   email: false
 `
