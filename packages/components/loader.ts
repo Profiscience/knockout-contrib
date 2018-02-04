@@ -9,7 +9,7 @@ export class LazyComponentLoader implements KnockoutComponentTypes.Loader {
     if (!this.components[name]) return cb(null)
 
     this.components[name]()
-      .then((config) => cb(config))
+      .then((config) => cb({ synchronous: true, ...config }))
       .catch((e) => {
         // tslint:disable-next-line no-console
         console.error('Error loading component:', name, e.message)
