@@ -8,8 +8,6 @@ import '@profiscience/knockout-contrib-observable-fn'
 
 export type PaginationStrategy<T extends { [k: string]: any }> = (page: number) => T
 
-const defaultPaginationStrategy = (page: number) => ({ page })
-
 /**
  * Adds `page` param for use with fetch, and `.getMore()` method and `.hasMore()` observable.
  *
@@ -55,22 +53,22 @@ export function PagerMixin<PaginationParams = { page: number }>(
 
       Object.assign(this.params, strategy(page))
 
-      let next = this.fetch()
+      const tap = (fn: any) => (v: any) => {
+        fn(v)
+        return v
+      }
+      const updateHasMore = (d: any) => this.hasMore(d[property] && d[property].length > 0)
+
+      let next = this.fetch().then(tap(updateHasMore))
       let data: any
 
       yield
-
       do {
-        data = await next
-        this.hasMore(data[property] && data[property].length > 0)
-
-        if (this.hasMore()) {
-          (this as any)[property].push(...data[property].map((i: any) => fromJS(i)))
-          Object.assign(this.params, strategy(++page))
-          next = this.fetch()
-          yield
-        }
-
+        data = await next;
+        (this as any)[property].push(...data[property])
+        Object.assign(this.params, strategy(++page))
+        next = this.fetch().then(tap(updateHasMore))
+        yield
       } while (this.hasMore())
     }
   }

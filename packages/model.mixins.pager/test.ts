@@ -55,9 +55,9 @@ describe('model.mixins.pager', () => {
     await model.getMore()
     expect(model.hasMore()).toBe(true)
     await model.getMore()
-    expect(model.hasMore()).toBe(true)
-    await model.getMore()
     expect(model.hasMore()).toBe(false)
+
+    expect(model.foos()).toEqual(FOOS)
   })
 
   test('resolves false when no more records, else true', async () => {
@@ -110,6 +110,35 @@ describe('model.mixins.pager', () => {
     expect(ko.toJS(model.foos())).toEqual(FOOS.slice(0, 2))
   })
 
+  test('resets hasMore when other params change if the second page exists', async () => {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
+      public foos: KnockoutObservableArray<string>
+
+      protected async fetch(): Promise<any> {
+        return {
+          foos: this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]]
+        }
+      }
+    }
+
+    const extraneous = ko.observable(false)
+
+    const model = await DataModel.create({ extraneous })
+
+    await expect(model.getMore()).resolves.toBe(true)
+    await expect(model.getMore()).resolves.toBe(true)
+    await expect(model.getMore()).resolves.toBe(true)
+    await expect(model.getMore()).resolves.toBe(false)
+
+    expect(model.hasMore()).toBe(false)
+
+    extraneous(true)
+
+    await new Promise((resolve) => model.foos.subscribe(resolve))
+
+    expect(model.hasMore()).toBe(true)
+  })
+
   test('can use custom strategy', async () => {
     const strategy = (page: number) => ({ pageNumber: page })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos', strategy))<P> {
@@ -124,8 +153,6 @@ describe('model.mixins.pager', () => {
 
     const model = await DataModel.create({})
 
-    await model.getMore()
-    expect(model.hasMore()).toBe(true)
     await model.getMore()
     expect(model.hasMore()).toBe(true)
     await model.getMore()
