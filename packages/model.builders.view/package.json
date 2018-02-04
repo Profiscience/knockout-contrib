@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-view",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"

@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Markdown Component for KnockoutJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.markdown",
   "dependencies": {
-    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.6",
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.7",
     "@types/marked": "^0.3.0",
     "jsx-dom": "^5.2.0",
     "marked": "^0.3.12"

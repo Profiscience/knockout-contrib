@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model",
-  "version": "1.0.0-alpha.27",
+  "version": "1.0.0-alpha.28",
   "description": "An opinionated model with first-class TypeScript support and router integration with KnockoutJS",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
@@ -35,7 +35,7 @@
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.3",
     "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.11",
-    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.6",
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.7",
     "@profiscience/knockout-contrib-model-mixins-cache-memory": "^0.0.6-4",
     "@profiscience/knockout-contrib-model-mixins-lazy": "^0.0.2",
     "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.14",
