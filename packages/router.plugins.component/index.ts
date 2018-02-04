@@ -80,6 +80,7 @@ const uniqueComponentNames = (function*() {
 
 export function componentPlugin({ component: componentAccessor }: IRouteConfig) {
   const componentName = uniqueComponentNames.next().value
+  let viewModelInstance: any
 
   return function*(ctx: Context & IContext): IterableIterator<void> {
     if (!componentAccessor) return
@@ -87,12 +88,12 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
     function initializeComponent(componentConfig: IRoutedComponentConfig) {
       if (componentConfig.viewModel) {
         try {
-          const instance = new (componentConfig.viewModel as any)(ctx)
-          ctx.component = { viewModel: instance }
+          viewModelInstance = new (componentConfig.viewModel as any)(ctx)
+          ctx.component = { viewModel: viewModelInstance }
           ko.components.register(componentName, {
             synchronous: true,
             ...componentConfig,
-            viewModel: { instance }
+            viewModel: { instance: viewModelInstance }
           })
         } catch (e) {
           // tslint:disable-next-line no-console max-line-length
@@ -140,6 +141,13 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
     /* afterRender */
 
     ko.components.unregister(componentName)
+
+    yield
+    /* beforeDispose */
+    if (viewModelInstance && viewModelInstance.dispose) {
+      viewModelInstance.dispose()
+      viewModelInstance.dispose = () => { /* noop */ }
+    }
   }
 }
 

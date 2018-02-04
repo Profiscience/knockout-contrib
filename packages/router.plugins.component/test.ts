@@ -355,6 +355,45 @@ describe('router.plugins.component', () => {
     expect(component.viewModel.itsMe).toBe(true)
   })
 
+  test('patches viewModel dispose to run beforeDispose', () => {
+    const dispose = jest.fn()
+
+    class ViewModel {
+      public dispose = dispose
+    }
+
+    const template = 'Hello, World!'
+    const component = { template, viewModel: ViewModel }
+    const ctx = { route: {} } as Context & IContext
+    const routeConfig: IRouteConfig = { component }
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+    lifecycle.next()
+    expect(dispose).not.toBeCalled()
+    const instance = ctx.component as IRoutedComponentInstance
+    lifecycle.next()
+    expect(dispose).toHaveBeenCalledTimes(1)
+    instance.viewModel.dispose()
+    expect(dispose).toHaveBeenCalledTimes(1)
+  })
+
+  test('doesn\'t die if view model doesn\'t have dispose function', () => {
+    class ViewModel {}
+
+    const template = 'Hello, World!'
+    const component = { template, viewModel: ViewModel }
+    const ctx = { route: {} } as Context & IContext
+    const routeConfig: IRouteConfig = { component }
+    const middleware = componentPlugin(routeConfig)
+    const lifecycle = middleware(ctx)
+
+    lifecycle.next()
+    lifecycle.next()
+    expect(() => lifecycle.next()).not.toThrow()
+  })
+
   test('disposes component registration after render', () => {
     ko.components.unregister = jest.fn()
 
