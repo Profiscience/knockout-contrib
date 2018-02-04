@@ -1,6 +1,8 @@
 import * as ko from 'knockout'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
+export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
+
 type TwoDimensionalMap<X, Y, V> = Map<X, Map<Y, V>>
 
 type SubscriptionsMap = TwoDimensionalMap<any, any, KnockoutSubscription>
@@ -13,23 +15,8 @@ type SubscriptionsMap = TwoDimensionalMap<any, any, KnockoutSubscription>
  * @param ctor BaseModel
  */
 export function SubscriptionDisposalMixin<T extends { new(...args: any[]): ConstructorBuilder }>(ctor: T) {
-  const subscriptions: SubscriptionsMap = new Map()
-
-  function addSubscription(arg: any, fn: any, sub: KnockoutSubscription) {
-    if (!subscriptions.has(arg)) subscriptions.set(arg, new Map());
-    (subscriptions.get(arg) as Map<any, KnockoutSubscription>).set(fn, sub)
-  }
-
-  function removeSubscription(arg: any, fn: any) {
-    (subscriptions.get(arg) as Map<any, any>).get(fn).dispose();
-    (subscriptions.get(arg) as Map<any, any>).delete(fn)
-  }
-
-  function removeAllSubscriptions() {
-    subscriptions.forEach((v) => v.forEach((s) => s.dispose()))
-  }
-
   return class Subscribable extends ctor {
+    private [SUBSCRIPTIONS] = new Map<any, Map<any, KnockoutSubscription>>()
 
     /**
      * Create a subscription that will be disposed with the model
@@ -59,7 +46,7 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
       }
       const sub = (obs as KnockoutObservable<T2>).subscribe((newVal: T2) => { fn(newVal) })
 
-      addSubscription(arg, fn, sub)
+      this.addSubscription(arg, fn, sub)
 
       return sub
     }
@@ -73,14 +60,28 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
     public unsubscribe(sub: KnockoutSubscription): void
     public unsubscribe<T2>(arg: any, fn?: any) {
       if (typeof arg.dispose === 'function') arg.dispose()
-      else removeSubscription(arg, fn)
+      else this.removeSubscription(arg, fn)
     }
 
     /**
      * Dispose all subscriptions
      */
     public dispose(): void {
-      removeAllSubscriptions()
+      this.removeAllSubscriptions()
+    }
+
+    private addSubscription(arg: any, fn: any, sub: KnockoutSubscription) {
+      if (!this[SUBSCRIPTIONS].has(arg)) this[SUBSCRIPTIONS].set(arg, new Map());
+      (this[SUBSCRIPTIONS].get(arg) as Map<any, KnockoutSubscription>).set(fn, sub)
+    }
+
+    private removeSubscription(arg: any, fn: any) {
+      (this[SUBSCRIPTIONS].get(arg) as Map<any, any>).get(fn).dispose();
+      (this[SUBSCRIPTIONS].get(arg) as Map<any, any>).delete(fn)
+    }
+
+    private removeAllSubscriptions() {
+      this[SUBSCRIPTIONS].forEach((v) => v.forEach((s) => s.dispose()))
     }
   }
 }
