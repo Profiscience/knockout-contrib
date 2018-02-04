@@ -19,7 +19,7 @@ export function LazyMixin(triggerProp: string) {
           if (!awake) {
             awake = true
             this.fetch = this[ORIGINAL_FETCH]
-            this.update()
+            this.update().catch(() => { /* @TODO */  })
           }
           return v
         },
