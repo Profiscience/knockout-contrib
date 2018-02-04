@@ -1,3 +1,5 @@
+import * as ko from 'knockout'
+
 export type LazyComponentConfig = { [k: string]: () => Promise<any> }
 
 export class LazyComponentLoader implements KnockoutComponentTypes.Loader {
