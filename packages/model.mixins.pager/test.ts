@@ -109,4 +109,30 @@ describe('model.mixins.pager', () => {
 
     expect(ko.toJS(model.foos())).toEqual(FOOS.slice(0, 2))
   })
+
+  test('can use custom strategy', async () => {
+    const strategy = (page: number) => ({ pageNumber: page })
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos', strategy))<P> {
+      public foos: KnockoutObservableArray<string>
+
+      protected async fetch(): Promise<any> {
+        return {
+          foos: this.params.pageNumber > FOOS.length ? [] : [FOOS[this.params.pageNumber - 1]]
+        }
+      }
+    }
+
+    const model = await DataModel.create({})
+
+    await model.getMore()
+    expect(model.hasMore()).toBe(true)
+    await model.getMore()
+    expect(model.hasMore()).toBe(true)
+    await model.getMore()
+    expect(model.hasMore()).toBe(true)
+    await model.getMore()
+    expect(model.hasMore()).toBe(false)
+
+    expect(ko.toJS(model.foos())).toEqual(FOOS)
+  })
 })

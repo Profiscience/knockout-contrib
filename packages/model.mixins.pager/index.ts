@@ -6,6 +6,10 @@ import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 import { fromJS } from '@profiscience/knockout-contrib-utils'
 import '@profiscience/knockout-contrib-observable-fn'
 
+export type PaginationStrategy<T extends { [k: string]: any }> = (page: number) => T
+
+const defaultPaginationStrategy = (page: number) => ({ page })
+
 /**
  * Adds `page` param for use with fetch, and `.getMore()` method and `.hasMore()` observable.
  *
@@ -13,9 +17,12 @@ import '@profiscience/knockout-contrib-observable-fn'
  *
  * @param ctor Base DataModel Constructor
  */
-export function PagerMixin(property: string) {
+export function PagerMixin<PaginationParams = { page: number }>(
+  property: string,
+  strategy: PaginationStrategy<PaginationParams> = ((page: number) => ({ page })) as PaginationStrategy<any>
+) {
   return <
-    P extends { page: number }, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
+    P extends PaginationParams, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
   >(ctor: T) => class extends ctor {
     protected pager!: AsyncIterableIterator<void>
 
@@ -23,7 +30,7 @@ export function PagerMixin(property: string) {
 
     constructor(...args: any[]) {
       // add page to params, have to do it this way b/c of param enforcments for mixins by TypeScript
-      args[0].page = 1
+      Object.assign(args[0], strategy(1))
       super(...args)
 
       this.hasMore = ko.observable(true)
@@ -37,14 +44,16 @@ export function PagerMixin(property: string) {
     }
 
     protected update() {
-      this.params.page = 1
+      Object.assign(this.params, strategy(1))
       this.pager = this.createPager()
       const p = super.update()
       return p.then(() => this.pager.next().then(() => { /* void */ }))
     }
 
     protected async * createPager(): AsyncIterableIterator<void> {
-      this.params.page = 2
+      let page = 2
+
+      Object.assign(this.params, strategy(page))
 
       let next = this.fetch()
       let data: any
@@ -57,7 +66,7 @@ export function PagerMixin(property: string) {
 
         if (this.hasMore()) {
           (this as any)[property].push(...data[property].map((i: any) => fromJS(i)))
-          this.params.page++
+          Object.assign(this.params, strategy(++page))
           next = this.fetch()
           yield
         }
