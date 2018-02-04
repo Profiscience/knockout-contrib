@@ -73,6 +73,6 @@ script:
 after_script:
 - npx codecov
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-upload
-- yarn jest:config | ag cacheDirectory
+- yarn jest:config | grep cacheDirectory
 notifications:
   email: false
