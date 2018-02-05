@@ -25,7 +25,6 @@ cache:
   yarn: true
   directories:
   - node_modules
-  - /tmp/jest_1jk
   ${dirs.map((d) => '- ' + getDist(d)).join('\n  ')}
 install:
 - yarn install --ignore-optional
