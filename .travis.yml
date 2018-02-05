@@ -1,3 +1,4 @@
+
 language: node_js
 node_js:
 - stable
@@ -18,17 +19,61 @@ cache:
   yarn: true
   directories:
   - node_modules
-before_install:
-- yarn global add codecov greenkeeper-lockfile@1 && source ~/.bashrc
+  - packages/bindings/
+  - packages/bindings.ctrlClick/dist
+  - packages/bindings.jquery/dist
+  - packages/bindings.shiftClick/dist
+  - packages/bindings.toggle/dist
+  - packages/components/
+  - packages/components.flash-message/dist
+  - packages/components.markdown/dist
+  - packages/filters/
+  - packages/filters.date.format/dist
+  - packages/jest-matchers/dist
+  - packages/model/
+  - packages/model.builders.base/dist
+  - packages/model.builders.data/dist
+  - packages/model.builders.view/dist
+  - packages/model.mixins.cache.memory/dist
+  - packages/model.mixins.lazy/dist
+  - packages/model.mixins.pager/dist
+  - packages/model.mixins.rest/dist
+  - packages/model.mixins.subscriptionDisposal/dist
+  - packages/model.mixins.transform/dist
+  - packages/observable.fn/
+  - packages/observable.fn.increment/dist
+  - packages/observable.fn.subscribeOnce/dist
+  - packages/observable.fn.toString/dist
+  - packages/querystring/dist
+  - packages/router/dist
+  - packages/router.middleware/
+  - packages/router.middleware.flashMessage/dist
+  - packages/router.middleware.progressBar/dist
+  - packages/router.middleware.scrollPosition/dist
+  - packages/router.plugins/
+  - packages/router.plugins.authorization/dist
+  - packages/router.plugins.children/dist
+  - packages/router.plugins.component/dist
+  - packages/router.plugins.components/dist
+  - packages/router.plugins.init/dist
+  - packages/router.plugins.redirect/dist
+  - packages/router.plugins.title/dist
+  - packages/router.plugins.with/dist
+  - packages/utils/
+  - packages/utils.defaults/dist
+  - packages/utils.fromJS/dist
+  - packages/utils.merge/dist
+install:
+- yarn install --ignore-optional
 before_script:
 - sh -e /etc/init.d/xvfb start
-- greenkeeper-lockfile-update
+- npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-update
 script:
-- yarn build --concurrency 1
+- yarn build --concurrency 1 --since $TRAVIS_BRANCH
 - yarn test
 - yarn test:router
 after_script:
-- codecov
-- greenkeeper-lockfile-upload
+- npx codecov
+- npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-upload
 notifications:
   email: false

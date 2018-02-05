@@ -15,3 +15,5 @@ dist/
 node_modules/
 
 packages/*/yarn.lock
+
+tasks/TASK_COUNT
