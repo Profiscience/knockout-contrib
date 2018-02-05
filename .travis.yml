@@ -19,7 +19,6 @@ cache:
   yarn: true
   directories:
   - node_modules
-  - /tmp/jest_1jk
   - packages/bindings/
   - packages/bindings.ctrlClick/dist
   - packages/bindings.jquery/dist

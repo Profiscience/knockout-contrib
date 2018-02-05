@@ -10,8 +10,7 @@
     "test:router": "cd packages/router && yarn test",
     "update:travis.yml": "ts-node tasks/build-travis-yml.ts && git add .travis.yml && (git commit -m \"chore(.travis.yml)\" || true)",
     "test": "jest",
-    "generate": "plop",
-    "jest:config": "jest --showConfig"
+    "generate": "plop"
   },
   "workspaces": [
     "packages/*"
