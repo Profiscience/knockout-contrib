@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@profiscience/knockout-contrib-components": "^1.0.0-alpha.30",
-    "@profiscience/knockout-contrib-router": "^1.2.0",
+    "@profiscience/knockout-contrib-router": "^2.0.0-2",
     "@profiscience/knockout-contrib-router-middleware": "^1.0.0-alpha.9",
     "@profiscience/knockout-contrib-router-plugins": "^1.0.0-alpha.12",
     "knockout-punches": "^0.5.1"
