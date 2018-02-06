@@ -8,8 +8,8 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/framework",
   "repository": "Profiscience/knockout-contrib",
   "files": [
-    "*.d.ts",
-    "*.js"
+    "**/*.d.ts",
+    "**/*.js"
   ],
   "scripts": {
     "build": "yarn build:plugin && yarn build:runtime",
