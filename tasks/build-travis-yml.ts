@@ -45,9 +45,13 @@ notifications:
 fs.writeFileSync(path.resolve(__dirname, '../.travis.yml'), contents)
 
 function getDist(pkgName: string) {
+  const tsconfigPath = path.resolve(__dirname, '../packages', pkgName, 'tsconfig.json')
+  const exists = fs.existsSync(tsconfigPath)
   return path.join(
     './packages',
     pkgName,
-    require(path.resolve(__dirname, '../packages', pkgName, 'tsconfig.json')).compilerOptions.outDir
+    exists
+      ? require(path.resolve(__dirname, '../packages', pkgName, 'tsconfig.json')).compilerOptions.outDir
+      : './'
   )
 }
