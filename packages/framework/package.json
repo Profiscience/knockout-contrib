@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-framework",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Convention-over-Configuration Framework for KnockoutJS",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
