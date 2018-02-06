@@ -37,6 +37,7 @@ export async function initialize(config: KnockoutContribFrameworkConfig) {
 }
 
 async function registerRoutes() {
+  /* tslint:disable max-line-length */
   // dist / knockout-contrib-framework / @profiscience / node_modules
   // @ts-ignore
   const MANIFEST = await import( /* webpackMode: "eager" */ '@profiscience/knockout-contrib-framework/build/VIEW_MANIFEST')
