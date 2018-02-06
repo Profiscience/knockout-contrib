@@ -1,30 +1,31 @@
-export async function __generateLazyComponentManifest(dir: string, { hot } = { hot: false }) {
-  const [
-    fs,
-    path,
-    { promisify }
-  ] = await Promise.all([
-      import('fs'),
-      import('path'),
-      import('util')
-  ])
-  const components = (await promisify(fs.readdir)(dir)).filter((f) => path.extname(f) === '')
-  const contextDependencies = components.map((c) => path.resolve(dir, c))
+import * as fs from 'fs'
+import * as path from 'path'
+import { promisify as pify } from 'util'
+
+const readdir = pify(fs.readdir)
+const writeFile = pify(fs.writeFile)
+const mkdir = pify(fs.mkdir)
+
+const hot = true
+// ../knockout-contrib-framework
+// ../../@profiscience
+// ../../../node_modules
+// ../../../../
+const src = path.resolve(__dirname, '../../../../src/components')
+
+export async function generateComponentsManifest() {
+  const components = (await readdir(src)).filter((f) => path.extname(f) === '')
   let code = generateManifest(components)
   if (hot) {
-    code += 'module.hot.accept()'
     code += generateHMR(components)
   }
-  return {
-    code,
-    contextDependencies,
-    cacheable: true
-  }
+  if (!fs.existsSync(path.resolve(__dirname, '../build'))) await mkdir(path.resolve(__dirname, '../build'))
+  await writeFile(path.resolve(__dirname, '../build/COMPONENT_MANIFEST.js'), code)
 }
 
 function generateManifest(components: string[]) {
   return `
-    const manifest = { ${components.map((c) => `'${c}': () => import('./${c}')`).join(',')} }
+    const manifest = { ${components.map((c) => `'${c}': () => import('${path.resolve(src, c)}')`).join(',')} }
     export default manifest
   `
 }
@@ -66,8 +67,8 @@ function generateHMR(components: string[]) {
     ${
       components
         .map((c) => `
-          module.hot.accept('./${c}', () => {
-            const ready = readys.get(${c})
+          module.hot.accept('${path.resolve(src, c)}', () => {
+            const ready = readys.get('${c}')
             ready(false)
             ko.components.unregister('__${c}__')
             ko.components.clearCachedDefinition('__${c}__')

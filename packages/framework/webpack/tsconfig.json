@@ -4,14 +4,14 @@
     "target": "esnext",
     "module": "commonjs",
     "declaration": true,
+    "baseUrl": "../",
     "rootDir": "./",
-    "baseUrl": "./",
-    "outDir": "./dist"
+    "outDir": "./"
   },
   "include": [
-    "**/*"
+    "*.ts"
   ],
   "exclude": [
-    "dist"
+    "*.d.ts"
   ]
 }

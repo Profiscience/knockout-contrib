@@ -1,0 +1,29 @@
+{
+  "name": "@profiscience/knockout-contrib-framework",
+  "version": "0.0.0",
+  "description": "Convention-over-Configuration Framework for KnockoutJS",
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "license": "WTFPL",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/framework",
+  "repository": "Profiscience/knockout-contrib",
+  "files": [
+    "*.d.ts",
+    "*.js"
+  ],
+  "scripts": {
+    "build": "yarn build:plugin && yarn build:runtime",
+    "build:plugin": "tsc -p webpack/tsconfig.json",
+    "build:runtime": "tsc -p runtime/tsconfig.json"
+  },
+  "peerDependencies": {
+    "knockout": "^3.5.0-beta"
+  },
+  "dependencies": {
+    "@profiscience/knockout-contrib-components": "^1.0.0-alpha.30",
+    "@profiscience/knockout-contrib-router": "^1.2.0",
+    "@profiscience/knockout-contrib-router-middleware": "^1.0.0-alpha.9",
+    "@profiscience/knockout-contrib-router-plugins": "^1.0.0-alpha.12",
+    "knockout-punches": "^0.5.1"
+  }
+}
