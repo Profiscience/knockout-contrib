@@ -19,7 +19,6 @@ cache:
   yarn: true
   directories:
   - node_modules
-  - packages/batteries/dist
   - packages/bindings/
   - packages/bindings.ctrlClick/dist
   - packages/bindings.jquery/dist
@@ -30,6 +29,7 @@ cache:
   - packages/components.markdown/dist
   - packages/filters/
   - packages/filters.date.format/dist
+  - packages/framework/
   - packages/jest-matchers/dist
   - packages/model/
   - packages/model.builders.base/dist
