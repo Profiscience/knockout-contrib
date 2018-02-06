@@ -10,5 +10,12 @@ export class KnockoutContribFrameworkWebpackPlugin {
       ])
       cb()
     })
+    compiler.plugin('watch-run', async (_: any, cb: any) => {
+      await Promise.all([
+        generateComponentsManifest(),
+        generateViewsManifest()
+      ])
+      cb()
+    })
   }
 }

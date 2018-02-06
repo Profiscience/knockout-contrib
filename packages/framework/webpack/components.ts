@@ -3,6 +3,7 @@ import * as path from 'path'
 import { promisify as pify } from 'util'
 
 const readdir = pify(fs.readdir)
+const readFile = pify(fs.readFile)
 const writeFile = pify(fs.writeFile)
 const mkdir = pify(fs.mkdir)
 
@@ -12,6 +13,8 @@ const hot = true
 // ../../../node_modules
 // ../../../../
 const src = path.resolve(__dirname, '../../../../src/components')
+const outDir = path.resolve(__dirname, '../build')
+const outFile = path.join(outDir, 'COMPONENT_MANIFEST.js')
 
 export async function generateComponentsManifest() {
   const components = (await readdir(src)).filter((f) => path.extname(f) === '')
@@ -19,8 +22,12 @@ export async function generateComponentsManifest() {
   if (hot) {
     code += generateHMR(components)
   }
-  if (!fs.existsSync(path.resolve(__dirname, '../build'))) await mkdir(path.resolve(__dirname, '../build'))
-  await writeFile(path.resolve(__dirname, '../build/COMPONENT_MANIFEST.js'), code)
+  if (!fs.existsSync(outDir)) {
+    await mkdir(path.resolve(__dirname, '../build'))
+  } else if (fs.existsSync(outFile) && Buffer.from(code).equals(await readFile(outFile))) {
+    return
+  }
+  await writeFile(outFile, code)
 }
 
 function generateManifest(components: string[]) {
