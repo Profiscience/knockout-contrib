@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-filters",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Knockout-Punches Text Filters",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -29,6 +29,6 @@
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-filters-date-format": "0.0.0"
+    "@profiscience/knockout-contrib-filters-date-format": "^0.0.1"
   }
 }

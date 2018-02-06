@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-filters-date-format",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Date formatting filter for KnockoutJS + Knockout-Punches",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
