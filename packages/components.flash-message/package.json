@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
-  "version": "1.0.0-alpha.26",
+  "version": "1.0.0-alpha.27",
   "description": "Flash Message Component for KnockoutJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,11 +25,11 @@
     "jsx-dom": "^5.2.0"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.8",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.7"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.8"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

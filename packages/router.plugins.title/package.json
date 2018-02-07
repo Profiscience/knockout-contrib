@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-title",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "description": "Title Plugin for @profiscience/knockout-contrib-router",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.title",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-3",
+    "@profiscience/knockout-contrib-router": "^2.0.0-4",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-3"
+    "@profiscience/knockout-contrib-router": "^2.0.0-4"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
