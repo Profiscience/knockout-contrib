@@ -63,13 +63,38 @@ describe('model.mixins.spread', () => {
     model.dispose()
   })
 
-  test('patches .toJS() by default', async () => {
+  test('patches .toJS()', async () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(FoosMixin)
       .Mixin(SpreadMixin('foos'))<P> {
     }
 
     const model = await DataModel.create({})
+
+    model.foo('notfoo')
+
+    expect(model.toJS()).toEqual({
+      foos: {
+        foo: 'notfoo'
+      },
+      bar: 'bar'
+    })
+
+    model.dispose()
+  })
+
+  test('.toJS() patching works with init data', async () => {
+    class DataModel<P> extends DataModelConstructorBuilder
+      .Mixin(SpreadMixin('foos'))<P> {
+      public foo: KnockoutObservable<string>
+    }
+
+    const model = new DataModel({}, {
+      foos: {
+        foo: 'foo'
+      },
+      bar: 'bar'
+    })
 
     model.foo('notfoo')
 
