@@ -1,0 +1,23 @@
+{
+  "name": "@profiscience/knockout-contrib-model-mixins-spread",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
+  },
+  "main": "dist/index.js",
+  "types": "index.ts",
+  "license": "WTFPL",
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-mixins-transform": "^0.0.4",
+    "core-js": "^2.5.3",
+    "tslib": "^1.8.0"
+  },
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.13",
+    "knockout": "^3.5.0-beta"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.13"
+  }
+}
