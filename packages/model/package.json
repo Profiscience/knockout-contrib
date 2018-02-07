@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model",
-  "version": "1.0.0-alpha.32",
+  "version": "1.0.0-alpha.33",
   "description": "An opinionated model with first-class TypeScript support and router integration with KnockoutJS",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
@@ -40,7 +40,7 @@
     "@profiscience/knockout-contrib-model-mixins-lazy": "^0.0.5",
     "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.16",
     "@profiscience/knockout-contrib-model-mixins-rest": "^1.0.0-alpha.15",
-    "@profiscience/knockout-contrib-model-mixins-spread": "^0.0.2",
+    "@profiscience/knockout-contrib-model-mixins-spread": "^0.0.3",
     "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-model-mixins-transform": "^0.0.4",
     "tslib": "^1.8.0"
