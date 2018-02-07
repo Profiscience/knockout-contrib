@@ -5,7 +5,7 @@ const ORIGINAL_FETCH = Symbol('ORIGINAL_FETCH')
 
 export function LazyMixin(triggerProp: string) {
   return <
-    P extends { page: number }, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
+    P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
   >(ctor: T) => class extends ctor {
     protected [ORIGINAL_FETCH]: any
 
