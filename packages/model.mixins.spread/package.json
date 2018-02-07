@@ -9,7 +9,6 @@
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
-    "@profiscience/knockout-contrib-model-mixins-transform": "^0.0.4",
     "core-js": "^2.5.3",
     "tslib": "^1.8.0"
   },

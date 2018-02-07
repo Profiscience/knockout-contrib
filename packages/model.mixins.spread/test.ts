@@ -63,6 +63,26 @@ describe('model.mixins.spread', () => {
     model.dispose()
   })
 
+  test('patches .toJS() by default', async () => {
+    class DataModel<P> extends DataModelConstructorBuilder
+      .Mixin(FoosMixin)
+      .Mixin(SpreadMixin('foos'))<P> {
+    }
+
+    const model = await DataModel.create({})
+
+    model.foo('notfoo')
+
+    expect(model.toJS()).toEqual({
+      foos: {
+        foo: 'notfoo'
+      },
+      bar: 'bar'
+    })
+
+    model.dispose()
+  })
+
   test('throws if attempting to spread array', async () => {
     function FoosArrMixin<
       P extends { page: number },
