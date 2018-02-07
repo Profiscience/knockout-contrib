@@ -31,8 +31,9 @@ export async function generateComponentsManifest() {
 }
 
 function generateManifest(components: string[]) {
+  // tslint:disable max-line-length
   return `
-    const manifest = { ${components.map((c) => `'${c}': () => import('${path.resolve(src, c)}')`).join(',')} }
+    var manifest = { ${components.map((c) => `'${c}': function(){ return import('${path.resolve(src, c)}') }`).join(',')} }
     export default manifest
   `
 }
@@ -41,31 +42,29 @@ function generateHMR(components: string[]) {
   return `
     import * as ko from 'knockout'
 
-    const readys = new Map()
+    var readys = new Map()
 
     ko.components.loaders.unshift({
-      loadComponent(name, componentConfig, cb) {
+      loadComponent: function(name, componentConfig, cb) {
         if (!manifest[name]) return cb(null)
         readys.set(name, ko.observable(true))
-        ko.components.register(\`__\${name}__\`, componentConfig)
-        if (!componentConfig.viewModel) {
-          componentConfig.viewModel = class {}
-        }
+        ko.components.register('__' + name + '__', componentConfig)
+        if (!componentConfig.viewModel) componentConfig.viewModel = function EmptyViewModel() {}
         cb(null)
       },
-      loadTemplate(name, templateConfig, cb) {
+      loadTemplate: function(name, templateConfig, cb) {
         if (!manifest[name]) return cb(null)
         const $wrapper = document.createElement('span')
         const $component = document.createElement('span')
         $wrapper.setAttribute('data-bind', 'if: ready')
-        $component.setAttribute('data-bind', \`component: { name: '__\${name}__', params: $data }\`)
+        $component.setAttribute('data-bind', 'component: { name: "__" + name + "__", params: $data }')
         $wrapper.appendChild($component)
         cb([$wrapper])
       },
-      loadViewModel(name, viewModelConfig, cb) {
+      loadViewModel: function(name, viewModelConfig, cb) {
         if (!manifest[name]) return cb(null)
-        cb((params) => {
-          return { ready: readys.get(name), params }
+        cb(function(params) {
+          return { ready: readys.get(name), params: params }
         })
       }
     })
@@ -73,12 +72,12 @@ function generateHMR(components: string[]) {
     ${
       components
         .map((c) => `
-          module.hot.accept('${path.resolve(src, c)}', () => {
-            const ready = readys.get('${c}')
+          module.hot.accept('${path.resolve(src, c)}', function() {
+            var ready = readys.get('${c}')
             ready(false)
             ko.components.unregister('__${c}__')
             ko.components.clearCachedDefinition('__${c}__')
-            manifest['${c}']().then((config) => {
+            manifest['${c}']().then(function(config) {
               ko.components.register('__${c}__', config)
               ready(true)
             })
