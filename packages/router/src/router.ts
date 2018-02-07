@@ -43,20 +43,27 @@ export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | Lifecycl
 
 export class Router {
   public static head: Router
-  public static readonly onInit: ((router: Router) => void)[] = []
+  public static readonly onInit: ((router: Router) => void)[] = [
+    () => Router._isNavigating.subscribe(Router.isNavigating)
+  ]
   public static readonly middleware: Middleware[] = []
   public static readonly config = {
     base: '',
     hashbang: false,
     activePathCSSClass: 'active-path'
   }
-  public static readonly isNavigating = ko.pureComputed(() => {
+
+  /**
+   * If router is not initialized, Router.head is undefined. See above onInit arr.
+   */
+  private static readonly _isNavigating = ko.pureComputed(() => {
     if (Router.head.isNavigating()) return true
     for (const ctx of Router.head.ctx.$children) {
       if (ctx.router.isNavigating()) return true
     }
     return false
   })
+  public static readonly isNavigating = ko.observable(true)
 
   private static readonly routes: Route[] = []
   private static readonly events = {

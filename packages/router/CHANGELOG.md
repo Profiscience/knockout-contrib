@@ -14,6 +14,8 @@ For now it is published as `next`
 ### Added
 - Delay navigation complete until `descendantsComplete` (see [Knockout 3.5.0-beta][], [Knockout #2319][])
 
+### Fixed
+- Static `Router.isNavigating` shouldn't throw if read before initialization
 
 [Knockout 3.5.0-beta]: https://github.com/knockout/knockout/releases/tag/v3.5.0-beta
 [Knockout #2319]: https://github.com/knockout/knockout/pull/2319
