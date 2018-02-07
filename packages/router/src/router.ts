@@ -44,7 +44,10 @@ export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | Lifecycl
 export class Router {
   public static head: Router
   public static readonly onInit: ((router: Router) => void)[] = [
-    () => Router._isNavigating.subscribe(Router.isNavigating)
+    () => {
+      Router.isNavigating(Router._isNavigating())
+      Router._isNavigating.subscribe(Router.isNavigating)
+    }
   ]
   public static readonly middleware: Middleware[] = []
   public static readonly config = {
