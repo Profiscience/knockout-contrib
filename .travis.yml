@@ -25,7 +25,7 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-update
 script:
-- yarn build --concurrency 1 --since $TRAVIS_BRANCH
+- yarn build --concurrency 1
 - yarn test
 - yarn test:router
 after_script:
