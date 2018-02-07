@@ -65,7 +65,6 @@ function generateHMR(components: string[]) {
       loadViewModel(name, viewModelConfig, cb) {
         if (!manifest[name]) return cb(null)
         cb((params) => {
-          console.log('createViewModel')
           return { ready: readys.get(name), params }
         })
       }

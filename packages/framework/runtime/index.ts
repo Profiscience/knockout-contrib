@@ -19,9 +19,9 @@ export class App {
     _window.ko = ko
   }
 
-  public async start() {
+  public async start(data?: { [k: string]: any }) {
     components.initialize()
     await routing.initialize(this.config)
-    ko.applyBindings()
+    ko.applyBindings(data)
   }
 }
