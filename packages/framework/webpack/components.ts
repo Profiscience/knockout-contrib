@@ -69,21 +69,25 @@ function generateHMR(components: string[]) {
       }
     })
 
-    ${
-      components
-        .map((c) => `
-          module.hot.accept('${path.resolve(src, c)}', function() {
-            var ready = readys.get('${c}')
-            ready(false)
-            ko.components.unregister('__${c}__')
-            ko.components.clearCachedDefinition('__${c}__')
-            manifest['${c}']().then(function(config) {
-              ko.components.register('__${c}__', config)
-              ready(true)
-            })
+    if (module.hot) {
+      function createAcceptHandler(componentName) {
+        return function() {
+          var ready = readys.get(componentName)
+          var hotComponentName = '__' + componentName + '__'
+          ready(false)
+          ko.components.unregister(hotComponentName)
+          ko.components.clearCachedDefinition(hotComponentName)
+          manifest[componentName]().then(function(config) {
+            ko.components.register(hotComponentName, config)
+            ready(true)
           })
-        `)
-        .join('\n')
+        }
+      }
+      ${
+        components
+          .map((c) => `module.hot.accept('${path.resolve(src, c)}', createAcceptHandler('${c}'))`)
+          .join('\n')
+      }
     }
   `
 }
