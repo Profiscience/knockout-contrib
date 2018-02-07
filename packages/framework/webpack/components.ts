@@ -57,7 +57,7 @@ function generateHMR(components: string[]) {
         const $wrapper = document.createElement('span')
         const $component = document.createElement('span')
         $wrapper.setAttribute('data-bind', 'if: ready')
-        $component.setAttribute('data-bind', 'component: { name: "__" + name + "__", params: $data }')
+        $component.setAttribute('data-bind', 'component: { name: "__' + name + '__", params: params }')
         $wrapper.appendChild($component)
         cb([$wrapper])
       },
