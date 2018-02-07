@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "description": "@profiscience/knockout-contrib-router middleware",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -17,16 +17,16 @@
     "middleware"
   ],
   "dependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.6",
-    "@profiscience/knockout-contrib-router-middleware-progress-bar": "^1.0.0-alpha.6",
-    "@profiscience/knockout-contrib-router-middleware-scroll-position": "^1.0.0-alpha.4"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-router-middleware-progress-bar": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-router-middleware-scroll-position": "^1.0.0-alpha.5"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-2",
+    "@profiscience/knockout-contrib-router": "^2.0.0-3",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-2"
+    "@profiscience/knockout-contrib-router": "^2.0.0-3"
   },
   "main": "index.js",
   "types": "index.d.ts",

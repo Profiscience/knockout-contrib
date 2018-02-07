@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components",
-  "version": "1.0.0-alpha.30",
+  "version": "1.0.0-alpha.31",
   "description": "Knockout JS Components",
   "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
@@ -27,7 +27,7 @@
     "knockout": "^3.5.0-beta"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.25",
+    "@profiscience/knockout-contrib-components-flash-message": "^1.0.0-alpha.26",
     "@profiscience/knockout-contrib-components-markdown": "^0.0.2",
     "postcss-loader": "^2.0.10",
     "postcss-modules": "^1.1.0",

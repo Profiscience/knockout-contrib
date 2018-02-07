@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-progress-bar",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -8,11 +8,11 @@
   ],
   "license": "WTFPL",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-2",
+    "@profiscience/knockout-contrib-router": "^2.0.0-3",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-2"
+    "@profiscience/knockout-contrib-router": "^2.0.0-3"
   },
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
