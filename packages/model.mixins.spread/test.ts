@@ -62,4 +62,30 @@ describe('model.mixins.spread', () => {
 
     model.dispose()
   })
+
+  test('throws if attempting to spread array', async () => {
+    function FoosArrMixin<
+      P extends { page: number },
+      T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
+    >(ctor: T) {
+      return class extends ctor {
+        public foo: KnockoutObservable<string>
+        public bar: KnockoutObservable<string>
+        protected async fetch(): Promise<any> {
+          return {
+            foos: [
+              'foo'
+            ],
+            bar: 'bar'
+          }
+        }
+      }
+    }
+    class DataModel<P> extends DataModelConstructorBuilder
+      .Mixin(FoosArrMixin)
+      .Mixin(SpreadMixin('foos'))<P> {
+    }
+
+    await expect(DataModel.create({})).rejects.toBeTruthy()
+  })
 })
