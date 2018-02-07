@@ -68,6 +68,7 @@ export function SubscriptionDisposalMixin<T extends { new(...args: any[]): Const
      */
     public dispose(): void {
       this.removeAllSubscriptions()
+      super.dispose()
     }
 
     private addSubscription(arg: any, fn: any, sub: KnockoutSubscription) {

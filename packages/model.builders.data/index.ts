@@ -1,6 +1,7 @@
 import * as ko from 'knockout'
 import { merge } from '@profiscience/knockout-contrib-utils'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
+import { DisposalAggregatorMixin } from '@profiscience/knockout-contrib-model-mixins-disposal-aggregator'
 import { SubscriptionDisposalMixin } from '@profiscience/knockout-contrib-model-mixins-subscription-disposal'
 import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 
@@ -41,7 +42,9 @@ const INSTANCES: { [k: string]: DataModelConstructorBuilder<any> } = {}
  * model.dispose()
  * ```
  */
-export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin) {
+export class DataModelConstructorBuilder<P> extends ConstructorBuilder
+  .Mixin(SubscriptionDisposalMixin)
+  .Mixin(DisposalAggregatorMixin) {
   protected readonly INSTANCE_ID = Symbol('DATA_MODEL_INSTANCE')
 
   public [INITIALIZED]: Promise<void>

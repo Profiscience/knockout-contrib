@@ -84,6 +84,47 @@ describe('model.builders.data', () => {
     foo.dispose()
   })
 
+  test('.dispose() calls .dispose() on every property that has it', () => {
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public foo = { dispose: jest.fn() }
+      public bar = { dispose: jest.fn() }
+      public baz = {}
+      constructor() {
+        super({})
+        nonenumerable(this, 'bar')
+      }
+      protected async fetch() {
+        return {}
+      }
+    }
+
+    const m = new FooModel()
+    m.dispose()
+
+    expect(m.foo.dispose).toBeCalled()
+    expect(m.bar.dispose).toBeCalled()
+  })
+
+  test('.dispose() calls super.dispose()', () => {
+    const mock = jest.fn()
+    class FooModel extends DataModelConstructorBuilder<{}> {
+      public foo = ko.observable('foo')
+      constructor() {
+        super({})
+        this.subscribe(this.foo, mock)
+      }
+      protected async fetch() {
+        return {}
+      }
+    }
+
+    const m = new FooModel()
+    m.dispose()
+    m.foo('bar')
+
+    expect(mock).not.toBeCalled()
+  })
+
   test('updates model when params are changed', async () => {
     interface IFooParams {
       valueIn: KnockoutObservable<string>

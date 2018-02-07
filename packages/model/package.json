@@ -37,6 +37,7 @@
     "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.13",
     "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.7",
     "@profiscience/knockout-contrib-model-mixins-cache-memory": "^0.0.7",
+    "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^0.0.0",
     "@profiscience/knockout-contrib-model-mixins-lazy": "^0.0.5",
     "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.16",
     "@profiscience/knockout-contrib-model-mixins-rest": "^1.0.0-alpha.15",

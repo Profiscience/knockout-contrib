@@ -2,7 +2,9 @@ import * as ko from 'knockout'
 
 import { SubscriptionDisposalMixin as Subscribable } from './index'
 
-class EmptyClass { }
+class EmptyClass {
+  public dispose() { /* noop */ }
+}
 
 describe('model.mixins.subscriptionDisposal', () => {
   describe('.subscribe()', () => {

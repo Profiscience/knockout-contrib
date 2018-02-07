@@ -1,6 +1,6 @@
 {
-  "name": "@profiscience/knockout-contrib-model-builders-view",
-  "version": "1.0.0-alpha.7",
+  "name": "@profiscience/knockout-contrib-model-mixins-disposal-aggregator",
+  "version": "0.0.0",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -10,12 +10,7 @@
   "license": "WTFPL",
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "0.0.0",
-    "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.5",
     "tslib": "^1.8.0"
-  },
-  "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5"
   },
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
