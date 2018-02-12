@@ -43,4 +43,19 @@ describe('model.mixins.transform', () => {
 
     model.dispose()
   })
+
+  test('transforms initData', async () => {
+    const reverseFoos = (obj: any) => ({ ...obj, foos: reverse(obj.foos) })
+    const ReverseFoosMixin = TransformMixin(reverseFoos) // tslint:disable-line variable-name
+    class DataModel<P> extends DataModelConstructorBuilder
+      .Mixin(ReverseFoosMixin)<P> {
+      public foos: KnockoutObservableArray<string>
+    }
+
+    const model = new DataModel({}, { foos: FOOS })
+
+    expect(ko.toJS(model.foos())).toEqual(reverse(FOOS))
+
+    model.dispose()
+  })
 })
