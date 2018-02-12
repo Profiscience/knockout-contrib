@@ -63,8 +63,6 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
   constructor(protected params: P, initData?: { [k: string]: any }) {
     super()
 
-    INSTANCES[this.INSTANCE_ID] = this
-
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
@@ -73,6 +71,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
       this.subscribe(this.params, () => this.update())
       this[INITIALIZED] = Promise.resolve()
     } else {
+      INSTANCES[this.INSTANCE_ID] = this
       this[INITIALIZED] = this.update()
         .then(() => {
           this.subscribe(this.params, () => this.update())
