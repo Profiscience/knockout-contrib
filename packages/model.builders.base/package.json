@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-base",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Base ConstructorBuilder for @profiscience/knockout-contrib-model",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",

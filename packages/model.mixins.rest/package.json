@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-rest",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.16",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -12,12 +12,12 @@
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.13",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.14",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.3",
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.13",
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.14",
     "jest-fetch-mock": "^1.4.1"
   }
 }
