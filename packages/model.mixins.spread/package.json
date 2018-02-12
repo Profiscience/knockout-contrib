@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-spread",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
