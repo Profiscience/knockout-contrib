@@ -17,7 +17,9 @@ function FoosMixin<
         foos: {
           foo: 'foo'
         },
-        bar: 'bar'
+        bar: {
+          bar: 'bar'
+        }
       }
     }
   }
@@ -33,6 +35,31 @@ describe('model.mixins.spread', () => {
     const model = await DataModel.create({})
 
     expect(ko.toJS(model.foo())).toEqual('foo')
+
+    model.dispose()
+  })
+
+  test('can spread multiple properties', async () => {
+    class DataModel<P> extends DataModelConstructorBuilder
+      .Mixin(FoosMixin)
+      .Mixin(SpreadMixin('foos'))
+      .Mixin(SpreadMixin('bar'))
+      <P> {
+    }
+
+    const model = await DataModel.create({})
+
+    expect(model.foo()).toEqual('foo')
+    expect(model.bar()).toEqual('bar')
+
+    expect(model.toJS()).toEqual({
+      foos: {
+        foo: 'foo'
+      },
+      bar: {
+        bar: 'bar'
+      }
+    })
 
     model.dispose()
   })
@@ -58,7 +85,7 @@ describe('model.mixins.spread', () => {
 
     const model = await DataModel.create({})
 
-    expect(ko.toJS(model.bar())).toBe('bar')
+    expect(ko.toJS(model.bar.bar())).toBe('bar')
 
     model.dispose()
   })
@@ -77,7 +104,9 @@ describe('model.mixins.spread', () => {
       foos: {
         foo: 'notfoo'
       },
-      bar: 'bar'
+      bar: {
+        bar: 'bar'
+      }
     })
 
     model.dispose()

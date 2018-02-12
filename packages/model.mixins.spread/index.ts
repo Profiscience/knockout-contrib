@@ -3,25 +3,32 @@ import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-mode
 
 export const SPREAD_MAPPINGS = Symbol('SPREAD_MAPPINGS')
 
-function spread(target: any, property: string, res: any) {
-  const mappings = target[SPREAD_MAPPINGS]
-  mappings[property] = Object.keys(res[property])
-  mappings[property].forEach((m: any) => res[m] = res[property][m])
-  delete res[property]
+function spread(data: any, property: string) {
+  const obj = data[property]
+  const keys = Object.keys(obj)
+  delete data[property]
+  for (const k of keys) {
+    data[k] = obj[k]
+  }
+  return keys
 }
 
 export function SpreadMixin(property: string) {
   return <
     P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
-    >(ctor: T) => {
+  >(ctor: T) => {
     return class extends ctor {
-      protected [SPREAD_MAPPINGS]: { [k: string]: string[] } = {}
+      protected [SPREAD_MAPPINGS]: { [k: string]: string[] }
 
       constructor(...args: any[]) {
+        let spreadKeys: string[] = []
+
+        if (args[1]) spreadKeys = spread(args[1], property)
+
         super(...args)
-        if (args[1]) {
-          spread(this, property, this)
-        }
+
+        if (!this[SPREAD_MAPPINGS]) this[SPREAD_MAPPINGS] = {}
+        this[SPREAD_MAPPINGS][property] = spreadKeys
       }
 
       protected async fetch() {
@@ -32,18 +39,21 @@ export function SpreadMixin(property: string) {
             '[@profiscience/knockout-contrib-model-mixins-spread] Can not spread an array onto a model (i.e. Object.assign({}, []))'
           )
         }
-        spread(this, property, res)
+
+        this[SPREAD_MAPPINGS][property] = spread(res, property)
+
         return res
       }
 
       public toJS() {
         const ret = super.toJS()
         const mappings = this[SPREAD_MAPPINGS][property]
-        ret[property] = {}
+        const obj: any = {}
         mappings.forEach((m) => {
-          ret[property][m] = ret[m]
+          obj[m] = ret[m]
           delete ret[m]
         })
+        ret[property] = obj
         return ret
       }
     }
