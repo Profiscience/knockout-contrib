@@ -66,17 +66,24 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
-    if (initData) {
-      merge(this, initData)
-      this.subscribe(this.params, () => this.update())
-      this[INITIALIZED] = Promise.resolve()
-    } else {
+    if (!initData) {
+      this.loading(true)
+      /**
+       * Assume if data is supplied then something else is responsible for updating
+       * this model. Typically, initData is used when
+       *  a) creating a new record
+       *  b) casting a property as another class with the TransformMixin
+       * In either case, it is inappropriate for the model refresh itself.
+       */
       INSTANCES[this.INSTANCE_ID] = this
-      this[INITIALIZED] = this.update()
-        .then(() => {
-          this.subscribe(this.params, () => this.update())
-        })
     }
+
+    this[INITIALIZED] = this.fetch(initData)
+      .then((res) => {
+        merge(this, res)
+        this.loading(false)
+        this.subscribe(this.params, () => this.update())
+      })
   }
 
   /**
@@ -112,8 +119,12 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
    *
    * @abstract
    */
-  protected async fetch(): Promise<any> {
-    throw new Error('fetch is not implemented in derived class')
+  protected async fetch(initData?: any): Promise<any> {
+    if (initData) {
+      return initData
+    } else {
+      throw new Error('fetch is not implemented in derived class and no initial data supplied')
+    }
   }
 
   public dispose(): void {
@@ -126,8 +137,8 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
    *
    * @param params (Optionally) observable parameters for this instance. Will be passed to the constructor.
    */
-  public static async create<T>(this: { new(params: any): T }, params: any): Promise<T > {
-    const instance = Reflect.construct(this, [params])
+  public static async create<T>(this: { new(params: any): T }, params: any, initData?: any): Promise<T > {
+    const instance = Reflect.construct(this, [params, initData])
     try {
       await instance[INITIALIZED]
     } catch (e) {
