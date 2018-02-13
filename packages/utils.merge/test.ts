@@ -93,4 +93,25 @@ describe('utils.merge', () => {
     merge(dest, src)
     expect(dest.foo()).toBe('foo')
   })
+
+  test('merges prototype chains', () => {
+    // tslint:disable max-classes-per-file
+    class Src {
+      public v = 'foo'
+      public foo() {
+        return this.v
+      }
+    }
+    class Dest {
+      public v = 'bar'
+      public bar() {
+        return this.v
+      }
+    }
+    const src = new Src()
+    const dest: any = new Dest()
+    merge(dest, src)
+    expect(dest.foo()).toBe('foo')
+    expect(dest.bar()).toBe('foo')
+  })
 })

@@ -16,7 +16,7 @@ export default function fromJS(obj: { [k: string]: any }, mapArraysDeep = false,
   } else if (obj instanceof Function) {
     return obj
   } else if (obj instanceof Object) {
-    const obs = {}
+    const obs = Object.create(Object.getPrototypeOf(obj))
     for (const p of Object.keys(obj)) {
       obs[p] = fromJS(obj[p], mapArraysDeep)
     }

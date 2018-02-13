@@ -7,6 +7,11 @@ export default function merge<T extends { [k: string]: any }>(
   mapArraysDeep: boolean = false
 ): T {
   const props = Object.getOwnPropertyNames(src)
+  const proto = Object.getPrototypeOf(src)
+
+  if (proto && proto !== Object.prototype) {
+    props.push(...Object.getOwnPropertyNames(proto).filter((p) => p !== 'constructor'))
+  }
 
   for (const prop of props) {
     if (isUndefined(dest[prop])) {
