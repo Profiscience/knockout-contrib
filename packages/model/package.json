@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model",
-  "version": "1.0.0-alpha.36",
+  "version": "1.0.0-alpha.37",
   "description": "An opinionated model with first-class TypeScript support and router integration with KnockoutJS",
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
@@ -34,16 +34,16 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib#readme",
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.15",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.16",
     "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.8",
-    "@profiscience/knockout-contrib-model-mixins-cache-memory": "^0.0.9",
+    "@profiscience/knockout-contrib-model-mixins-cache-memory": "^0.0.10",
     "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^0.0.1",
-    "@profiscience/knockout-contrib-model-mixins-lazy": "^0.0.7",
-    "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.18",
-    "@profiscience/knockout-contrib-model-mixins-rest": "^1.0.0-alpha.17",
-    "@profiscience/knockout-contrib-model-mixins-spread": "^0.0.6",
+    "@profiscience/knockout-contrib-model-mixins-lazy": "^0.0.8",
+    "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.0-alpha.19",
+    "@profiscience/knockout-contrib-model-mixins-rest": "^1.0.0-alpha.18",
+    "@profiscience/knockout-contrib-model-mixins-spread": "^0.0.7",
     "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.6",
-    "@profiscience/knockout-contrib-model-mixins-transform": "^0.0.6",
+    "@profiscience/knockout-contrib-model-mixins-transform": "^0.0.7",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
