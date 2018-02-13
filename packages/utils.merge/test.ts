@@ -86,38 +86,26 @@ describe('utils.merge', () => {
   test('creates/sets shallow arrays when 3rd arg is false', testArrays(false, false))
   test('creates/sets deep arrays when 3rd arg is true', testArrays(true, true))
 
-  test('merges non-enumerable properties', () => {
-    const src = { foo: ko.observable('foo') }
-    const dest: any = {}
-    Object.defineProperty(src, 'foo', {
-      enumerable: false
-    })
-    merge(dest, src)
-    expect(dest.foo()).toBe('foo')
-  })
+  test('strict only uses existing observables', () => {
+    const dest: any = {
+      foo: ko.observable(),
+      deep: {
+        foo: ko.observable()
+      }
+    }
+    const src = {
+      foo: 'foo',
+      bar: 'bar',
+      deep: {
+        foo: 'foo',
+        bar: 'bar'
+      }
+    }
+    merge(dest, src, { strict: true })
 
-  test('merges prototype chains', () => {
-    // tslint:disable max-classes-per-file
-    class BaseSrc {
-      public baz() {
-        return 'baz'
-      }
-    }
-    class Src extends BaseSrc {
-      public foo() {
-        return 'foo'
-      }
-    }
-    class Dest {
-      public bar() {
-        return 'bar'
-      }
-    }
-    const src = new Src()
-    const dest: any = new Dest()
-    merge(dest, src)
-    expect(dest.foo()).toBe('foo')
-    expect(dest.bar()).toBe('bar')
-    expect(dest.baz()).toBe('baz')
+    expect(dest.foo).toBeObservable()
+    expect(dest.bar).not.toBeObservable()
+    expect(dest.deep.foo).toBeObservable()
+    expect(dest.deep.bar).not.toBeObservable()
   })
 })

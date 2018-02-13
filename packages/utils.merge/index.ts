@@ -3,6 +3,7 @@ import fromJS from '@profiscience/knockout-contrib-utils-from-js'
 
 export type MergeOptions = {
   deep?: boolean
+  strict?: boolean
 }
 
 export default function merge<T extends { [k: string]: any }>(
@@ -10,17 +11,15 @@ export default function merge<T extends { [k: string]: any }>(
   src: { [k: string]: any },
   opts: MergeOptions = { deep: false }
 ): T {
-  const props = Object.getOwnPropertyNames(src)
-
-  let proto = Object.getPrototypeOf(src)
-  while (proto && proto !== Object.prototype) {
-    props.push(...Object.getOwnPropertyNames(proto).filter((p) => p !== 'constructor'))
-    proto = proto.__proto__
-  }
+  const props = Object.keys(src)
 
   for (const prop of props) {
     if (isUndefined(dest[prop])) {
-      dest[prop] = fromJS(src[prop], src[prop] instanceof Array && opts.deep)
+      if (opts.strict) {
+        dest[prop] = src[prop]
+      } else {
+        dest[prop] = fromJS(src[prop], src[prop] instanceof Array && opts.deep)
+      }
     } else if (ko.isObservable(dest[prop])) {
       dest[prop](
         src[prop] instanceof Array && opts.deep
