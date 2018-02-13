@@ -2,6 +2,7 @@ import 'core-js/es7/symbol'
 
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
+import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 
 export type PaginationStrategy<T extends { [k: string]: any }> = (page: number) => T
 
@@ -28,7 +29,13 @@ export function PagerMixin<PaginationParams = { page: number }>(
       Object.assign(args[0], strategy(1))
       super(...args)
 
+      this.pager = this.createPager()
       this.hasMore = ko.observable(true)
+
+      const initialized = this[INITIALIZED]
+      this[INITIALIZED] = initialized
+        // @TODO unchain this when proper error handling is implemented
+        .then(() => this.pager.next().then(() => { /* void */ }))
     }
 
     public async getMore(): Promise<boolean> {
