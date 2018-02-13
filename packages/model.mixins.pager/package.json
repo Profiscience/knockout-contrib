@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-pager",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.20",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -13,10 +13,10 @@
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.16",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.17",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.16"
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.17"
   }
 }
