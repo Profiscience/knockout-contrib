@@ -58,7 +58,7 @@ async function getEntryFiles() {
 }
 
 async function getAliases() {
-  const packages = await globby('packages/*', { nodir: false })
+  const packages = await globby('packages/*', { onlyFiles: false })
   return packages.reduce((aliases, pkg) => {
     const tsconfig = require(path.resolve(pkg, 'tsconfig.json'))
     const { name } = require(path.resolve(pkg, 'package.json'))
