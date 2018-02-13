@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-observable-fn-increment
+# @profiscience/knockout-contrib-observable-fn-to-string
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]

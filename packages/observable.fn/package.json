@@ -27,7 +27,8 @@
   "dependencies": {
     "@profiscience/knockout-contrib-observable-fn-increment": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-observable-fn-subscribe-once": "^1.0.0-alpha.4",
-    "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.4"
+    "@profiscience/knockout-contrib-observable-fn-to-string": "^1.0.0-alpha.4",
+    "@profiscience/knockout-contrib-observable-fn-toggle": "^0.0.0"
   },
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
