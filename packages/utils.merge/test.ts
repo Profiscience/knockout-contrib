@@ -64,6 +64,12 @@ describe('utils.merge', () => {
     expect(ko.toJS(actual)).toEqual({ foo: undefined })
   })
 
+  test('supports null destination properties', () => {
+    const dest: any = { foo: null }
+    merge(dest, { foo: null })
+    expect(dest.foo).toBeNull()
+  })
+
   const testArrays = (mapArraysArg?: null | boolean, shouldMapArrays?: boolean) => () => {
     _test({})
     _test({ foo: ko.observableArray([]) })

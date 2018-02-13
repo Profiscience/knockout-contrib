@@ -26,8 +26,8 @@ export default function merge<T extends { [k: string]: any }>(
           ? ko.unwrap(fromJS(src[prop], true))
           : src[prop]
       )
-    } else if (isUndefined(src[prop])) {
-      dest[prop] = undefined
+    } else if (isUndefined(src[prop]) || src[prop] === null) {
+      dest[prop] = src[prop]
     } else if (src[prop].constructor === Object) {
       merge(dest[prop], src[prop], opts)
     } else {
