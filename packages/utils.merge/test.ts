@@ -69,7 +69,9 @@ describe('utils.merge', () => {
     _test({ foo: ko.observableArray([]) })
 
     function _test(actual: any) {
-      merge(actual, { foo: ['foo'] }, mapArraysArg as boolean)
+      merge(actual, { foo: ['foo'] }, {
+        deep: mapArraysArg
+      })
 
       expect(actual.foo).toBeObservable()
       expect(ko.toJS(actual.foo()[0])).toBe('foo')
