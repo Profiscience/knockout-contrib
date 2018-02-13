@@ -50,7 +50,7 @@
     "eslint": "^4.14.0",
     "eslint-config-profiscience": "^2.0.4",
     "express": "^4.16.2",
-    "globby": "^7.1.1",
+    "globby": "^8.0.0",
     "happypack": "^4.0.0",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
