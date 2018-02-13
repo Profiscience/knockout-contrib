@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
+import { DataModelConstructorBuilder, nonenumerable } from '@profiscience/knockout-contrib-model-builders-data'
 import { RestApiHelper, RestHelperRequestConfig } from './helper'
 
 export type RestMixinConfig = RestHelperRequestConfig & {
@@ -17,6 +17,11 @@ export const createRESTMixin = (config: RestMixinConfig = {}) => (controller: st
 
   return <P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) => class extends ctor {
     protected api = api
+
+    constructor(...args: any[]) {
+      super(...args)
+      nonenumerable(this, 'api')
+    }
 
     protected async fetch(initData?: any) {
       return initData || await api.get({ params: this.params })

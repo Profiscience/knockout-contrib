@@ -120,4 +120,16 @@ describe('model.mixins.rest', () => {
     expect(DataModelConstructorBuilder.updateAll).toBeCalled()
   })
 
+  test('does not pollute enumerable properties', async () => {
+    const APIMixin = createRESTMixin({ baseURL: '/api' })
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
+      public foos: KnockoutObservableArray<string>
+    }
+
+    const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
+    const model = await DataModel.create({})
+
+    expect(Object.keys(model)).toEqual(['foos'])
+  })
+
 })
