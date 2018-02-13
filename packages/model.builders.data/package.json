@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-data",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.21",
   "scripts": {
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
@@ -12,7 +12,7 @@
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^0.0.1",
     "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0-alpha.6",
-    "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.14",
+    "@profiscience/knockout-contrib-utils": "^1.0.0-alpha.15",
     "tslib": "^1.8.0"
   },
   "devDependencies": {
