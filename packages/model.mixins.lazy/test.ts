@@ -5,10 +5,10 @@ import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-mode
 
 import { LazyMixin } from './index'
 
+const FOOS = ['foo', 'bar', 'baz', 'qux']
+
 describe('model.mixins.lazy', () => {
   test('does not call fetch until specified property is accessed', (done) => {
-    const FOOS = ['foo', 'bar', 'baz', 'qux']
-
     const spy = jest.fn()
 
     function FoosMixin<P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) {
@@ -45,5 +45,32 @@ describe('model.mixins.lazy', () => {
       done()
     })
 
+  })
+
+  test('does not affect models created with initial data', async () => {
+    const spy = jest.fn()
+
+    function FoosMixin<P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) {
+      return class extends ctor {
+        public foos: KnockoutObservableArray<string> = ko.observableArray([])
+        protected async fetch(): Promise<any> {
+          spy()
+          return {
+            foos: FOOS
+          }
+        }
+      }
+    }
+
+    class DataModel extends DataModelConstructorBuilder
+      .Mixin(LazyMixin('foos'))
+      <{}> {
+        public foos: KnockoutObservableArray<string>
+      }
+
+    const model = await DataModel.create({}, { foos: FOOS })
+
+    expect(model.foos()).toEqual(FOOS)
+    expect(spy).not.toBeCalled()
   })
 })

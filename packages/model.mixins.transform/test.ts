@@ -52,7 +52,7 @@ describe('model.mixins.transform', () => {
       public foos: KnockoutObservableArray<string>
     }
 
-    const model = new DataModel({}, { foos: FOOS })
+    const model = await DataModel.create({}, { foos: FOOS })
 
     expect(ko.toJS(model.foos())).toEqual(reverse(FOOS))
 

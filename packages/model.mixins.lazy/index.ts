@@ -12,24 +12,28 @@ export function LazyMixin(triggerProp: string) {
     constructor(...args: any[]) {
       super(...args)
 
-      let awake = false
-      let v = (this as any)[triggerProp]
-      Object.defineProperty(this, triggerProp, {
-        get: () => {
-          if (!awake) {
-            awake = true
-            this.fetch = this[ORIGINAL_FETCH]
-            this.update().catch(() => { /* @TODO */  })
-          }
-          return v
-        },
-        set: (_v) => v = _v
-      })
+      if (args[1]) {
+        this.fetch = this[ORIGINAL_FETCH]
+      } else {
+        let awake = false
+        let v = (this as any)[triggerProp]
+        Object.defineProperty(this, triggerProp, {
+          get: () => {
+            if (!awake) {
+              awake = true
+              this.fetch = this[ORIGINAL_FETCH]
+              this.update().catch(() => { /* @TODO */  })
+            }
+            return v
+          },
+          set: (_v) => v = _v
+        })
+      }
     }
 
-    protected async fetch() {
+    protected async fetch(initData: any = {}) {
       this[ORIGINAL_FETCH] = super.fetch.bind(this)
-      return {}
+      return initData
     }
   }
 }

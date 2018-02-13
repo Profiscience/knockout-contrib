@@ -18,8 +18,8 @@ export const createRESTMixin = (config: RestMixinConfig = {}) => (controller: st
   return <P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) => class extends ctor {
     protected api = api
 
-    protected fetch() {
-      return api.get({ params: this.params })
+    protected async fetch(initData?: any) {
+      return initData || await api.get({ params: this.params })
     }
 
     public async create() {

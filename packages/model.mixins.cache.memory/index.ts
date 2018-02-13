@@ -31,11 +31,11 @@ export function InMemoryCacheMixin() {
       return super.delete()
     }
 
-    protected fetch() {
+    protected fetch(...args: any[]) {
       this[IS_CACHED] = true
       const key = hashParams(ko.toJS(this.params))
       if (!CACHE[CACHE_ID][key]) {
-        CACHE[CACHE_ID][key] = super.fetch()
+        CACHE[CACHE_ID][key] = super.fetch(...args)
       }
       return CACHE[CACHE_ID][key]
     }

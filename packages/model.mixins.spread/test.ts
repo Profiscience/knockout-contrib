@@ -118,7 +118,7 @@ describe('model.mixins.spread', () => {
       public foo: KnockoutObservable<string>
     }
 
-    const model = new DataModel({}, {
+    const model = await DataModel.create({}, {
       foos: {
         foo: 'foo'
       },
