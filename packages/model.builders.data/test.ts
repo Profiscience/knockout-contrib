@@ -26,29 +26,32 @@ describe('model.builders.data', () => {
 
     await foo[INITIALIZED]
 
-    expect(foo.value).toBeObservable()
-    expect(foo.value()).toBe('value')
+    expect(foo.value).toBe('value')
 
     foo.dispose()
   })
 
-  test('uses .fetch() to initialize data and maps to observables', async () => {
+  test('uses .fetch() to initialize data and merges w/ strict', async () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public readonly value: KnockoutObservable<string>
+      public readonly foo = ko.observable()
+      public readonly bar: string
 
       protected async fetch() {
-        return { value: 'value' }
+        return { foo: 'foo', bar: 'bar' }
       }
     }
 
-    const foo = await FooModel.create({})
+    const model = await FooModel.create({})
 
-    expect(foo.value).toBeObservable()
-    expect(foo.value()).toBe('value')
+    expect(model.foo).toBeObservable()
+    expect(model.foo()).toBe('foo')
 
-    foo.dispose()
+    expect(model.bar).not.toBeObservable()
+    expect(model.bar).toBe('bar')
+
+    model.dispose()
   })
 
   test('throws and logs error on .fetch() rejection', async () => {
@@ -131,7 +134,7 @@ describe('model.builders.data', () => {
     }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public readonly value: KnockoutObservable<string>
+      public readonly value = ko.observable()
 
       protected async fetch() {
         return { value: this.params.valueIn() }
@@ -218,13 +221,13 @@ describe('model.builders.data', () => {
     let value: string = 'foo'
 
     class M1 extends DataModelConstructorBuilder<{}> {
-      public value: KnockoutObservable<string>
+      public value = ko.observable()
       protected async fetch() {
         return { value }
       }
     }
     class M2 extends DataModelConstructorBuilder<{}> {
-      public value: KnockoutObservable<string>
+      public value = ko.observable()
       protected async fetch() {
         return { value }
       }

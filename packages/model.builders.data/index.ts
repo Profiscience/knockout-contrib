@@ -81,7 +81,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
 
     this[INITIALIZED] = this.fetch(initData)
       .then((res) => {
-        merge(this, res)
+        merge(this, res, { strict: true })
         this.loading(false)
         this.subscribe(this.params, () => this.update())
       })
@@ -109,7 +109,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
 
   protected async update(): Promise<void> {
     this.loading(true)
-    merge(this, await this.fetch())
+    merge(this, await this.fetch(), { strict: true })
     this.loading(false)
   }
 

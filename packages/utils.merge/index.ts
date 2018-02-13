@@ -9,7 +9,7 @@ export type MergeOptions = {
 export default function merge<T extends { [k: string]: any }>(
   dest: T,
   src: { [k: string]: any },
-  opts: MergeOptions = { deep: false }
+  opts: MergeOptions = { deep: false, strict: false }
 ): T {
   const props = Object.keys(src)
 
