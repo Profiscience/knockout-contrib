@@ -6,7 +6,7 @@ export default function merge<T extends { [k: string]: any }>(
   src: { [k: string]: any },
   mapArraysDeep: boolean = false
 ): T {
-  const props = Object.keys(src)
+  const props = Object.getOwnPropertyNames(src)
 
   for (const prop of props) {
     if (isUndefined(dest[prop])) {
