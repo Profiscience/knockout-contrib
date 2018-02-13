@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils-merge",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Handy Utilities for Knockout JS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

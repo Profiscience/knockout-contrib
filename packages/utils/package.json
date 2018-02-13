@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "description": "Handy Utilities for Knockout JS",
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
   "dependencies": {
     "@profiscience/knockout-contrib-utils-defaults": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.5",
-    "@profiscience/knockout-contrib-utils-merge": "^1.0.0-alpha.5"
+    "@profiscience/knockout-contrib-utils-merge": "^1.0.0-alpha.6"
   },
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
