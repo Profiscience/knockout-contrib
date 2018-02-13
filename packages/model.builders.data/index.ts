@@ -63,6 +63,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
   constructor(protected params: P, initData?: { [k: string]: any }) {
     super()
 
+    nonenumerable(this, 'INSTANCE_ID')
     nonenumerable(this, 'params')
     nonenumerable(this, 'loading')
 
