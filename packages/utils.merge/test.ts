@@ -96,22 +96,26 @@ describe('utils.merge', () => {
 
   test('merges prototype chains', () => {
     // tslint:disable max-classes-per-file
-    class Src {
-      public v = 'foo'
+    class BaseSrc {
+      public baz() {
+        return 'baz'
+      }
+    }
+    class Src extends BaseSrc {
       public foo() {
-        return this.v
+        return 'foo'
       }
     }
     class Dest {
-      public v = 'bar'
       public bar() {
-        return this.v
+        return 'bar'
       }
     }
     const src = new Src()
     const dest: any = new Dest()
     merge(dest, src)
     expect(dest.foo()).toBe('foo')
-    expect(dest.bar()).toBe('foo')
+    expect(dest.bar()).toBe('bar')
+    expect(dest.baz()).toBe('baz')
   })
 })
