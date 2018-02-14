@@ -10,7 +10,7 @@ const FOOS = ['foo', 'bar', 'baz', 'qux']
 describe('model.mixins.pager', () => {
   test('adds .getMore() method that loads next page', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {
@@ -38,7 +38,7 @@ describe('model.mixins.pager', () => {
 
   test('.hasMore() is observable', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {
@@ -61,7 +61,7 @@ describe('model.mixins.pager', () => {
 
   test('resolves false when no more records, else true', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {
@@ -80,7 +80,7 @@ describe('model.mixins.pager', () => {
 
   test('resets the page when other params change', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {
@@ -111,7 +111,7 @@ describe('model.mixins.pager', () => {
 
   test('resets hasMore when other params change if the second page exists', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {
@@ -141,7 +141,7 @@ describe('model.mixins.pager', () => {
   test('can use custom strategy', async () => {
     const strategy = (page: number) => ({ pageNumber: page })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(PagerMixin('foos', strategy))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
 
       protected async fetch(): Promise<any> {
         return {

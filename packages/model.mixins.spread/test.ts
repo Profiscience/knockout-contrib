@@ -10,8 +10,7 @@ function FoosMixin<
   T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
 >(ctor: T) {
   return class extends ctor {
-    public foo: KnockoutObservable<string>
-    public bar: KnockoutObservable<string>
+    public foo = ko.observable()
     protected async fetch(): Promise<any> {
       return {
         foos: {
@@ -45,6 +44,7 @@ describe('model.mixins.spread', () => {
       .Mixin(SpreadMixin('foos'))
       .Mixin(SpreadMixin('bar'))
       <P> {
+      public bar = ko.observable()
     }
 
     const model = await DataModel.create({})
@@ -81,6 +81,9 @@ describe('model.mixins.spread', () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(FoosMixin)
       .Mixin(SpreadMixin('foos'))<P> {
+      public bar = {
+        bar: ko.observable()
+      }
     }
 
     const model = await DataModel.create({})
@@ -115,7 +118,7 @@ describe('model.mixins.spread', () => {
   test('.toJS() patching works with init data', async () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(SpreadMixin('foos'))<P> {
-      public foo: KnockoutObservable<string>
+      public foo = ko.observable()
     }
 
     const model = await DataModel.create({}, {
@@ -143,8 +146,8 @@ describe('model.mixins.spread', () => {
       T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
     >(ctor: T) {
       return class extends ctor {
-        public foo: KnockoutObservable<string>
-        public bar: KnockoutObservable<string>
+        public foo = ko.observable()
+        public bar = ko.observable()
         protected async fetch(): Promise<any> {
           return {
             foos: [

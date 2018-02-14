@@ -65,7 +65,7 @@ describe('model.mixins.lazy', () => {
     class DataModel extends DataModelConstructorBuilder
       .Mixin(LazyMixin('foos'))
       <{}> {
-        public foos: KnockoutObservableArray<string>
+        public foos = ko.observableArray()
       }
 
     const model = await DataModel.create({}, { foos: FOOS })

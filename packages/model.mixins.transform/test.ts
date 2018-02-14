@@ -20,7 +20,7 @@ function FoosMixin<
   T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
 >(ctor: T) {
   return class extends ctor {
-    public foos: KnockoutObservable<string>
+    public foos = ko.observableArray()
     protected async fetch(): Promise<any> {
       return {
         foos: FOOS
@@ -49,7 +49,7 @@ describe('model.mixins.transform', () => {
     const ReverseFoosMixin = TransformMixin(reverseFoos) // tslint:disable-line variable-name
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(ReverseFoosMixin)<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
     }
 
     const model = await DataModel.create({}, { foos: FOOS })

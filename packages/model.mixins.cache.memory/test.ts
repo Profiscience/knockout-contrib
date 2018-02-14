@@ -10,7 +10,7 @@ import { InMemoryCacheMixin } from './index'
 describe('model.mixins.cache.memory', () => {
   test('throws with invalid implementation', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(InMemoryCacheMixin())<P> {
-      public foo: KnockoutObservable<string>
+      public foo = ko.observable()
       protected async fetch() { return { foo: 'foo' } }
     }
 
@@ -22,6 +22,7 @@ describe('model.mixins.cache.memory', () => {
     const FetchMixin = <
       P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
     >(ctor: T) => class extends ctor {
+      public foo = ko.observable()
       protected async fetch() {
         return { foo: 'foo' }
       }
@@ -114,8 +115,10 @@ describe('model.mixins.cache.memory', () => {
     // tslint:disable-next-line variable-name
     const FetchMixin = <
       P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
-      >(ctor: T) => class extends ctor {
-      public v: IDataModelParams
+    >(ctor: T) => class extends ctor {
+      public v: IDataModelParams = {
+        param: ko.observable()
+      }
       protected async fetch() {
         fetch()
         return { v: ko.toJS(this.params) }
@@ -128,7 +131,7 @@ describe('model.mixins.cache.memory', () => {
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())
       <IDataModelParams> {
-      public foo: KnockoutObservable<string>
+      public foo = ko.observable()
     }
 
     const model = await DataModel.create({ param })

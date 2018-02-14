@@ -21,7 +21,7 @@ describe('model.mixins.rest', () => {
     test('defaults to empty string', async () => {
       const APIMixin = createRESTMixin()
       class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('/api'))<P> {
-        public foos: KnockoutObservableArray<string>
+        public foos = ko.observableArray()
       }
 
       const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
@@ -49,7 +49,7 @@ describe('model.mixins.rest', () => {
   test('implements fetch using GET', async () => {
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos = ko.observableArray()
     }
 
     const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
