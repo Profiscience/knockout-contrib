@@ -33,9 +33,15 @@ export async function generateComponentsManifest() {
 function generateManifest(components: string[]) {
   // tslint:disable max-line-length
   return `
-    var manifest = { ${components.map((c) => `'${c}': function(){ return import('${path.resolve(src, c)}') }`).join(',')} }
+    var manifest = { ${components.map((c) => generateComponentImport(c)).join(',')} }
     export default manifest
   `
+}
+
+function generateComponentImport(component: string) {
+  const isAppComponent = component.indexOf('app') === 0
+  const webpackMode = isAppComponent ? 'eager' : 'lazy'
+  return `'${component}': function(){ return import(/* webpackMode: "${webpackMode}", webpackChunkName: "${component}-component" */ '${path.resolve(src, component)}') }`
 }
 
 function generateHMR(components: string[]) {
