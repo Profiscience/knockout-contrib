@@ -154,17 +154,27 @@ export default class Query {
     const qs = Query.stringify(_query)
 
     const currentUrl = location.pathname + location.search + location.hash
-    const currentPathname = /([^?#]*)/.exec(currentUrl)[1]
-    const hashMatches = /(#[^!]*)/.exec(currentUrl)
+    const hashbang = currentUrl.indexOf('#!') > -1
+    let newUrl
 
-    let newUrl = currentPathname
+    if (hashbang) {
+      newUrl = currentUrl.replace(
+        /(?:\?[^#]+|$)/,
+        qs ? '?' + qs : ''
+      )
+    } else {
+      const currentPathname = /([^?#]*)/.exec(currentUrl)[1]
+      const hashMatches = /(#[^!]*)/.exec(currentUrl)
 
-    if (qs) {
-      newUrl += '?' + qs
-    }
+      newUrl = currentPathname
 
-    if (hashMatches) {
-      newUrl += hashMatches[1]
+      if (qs) {
+        newUrl += '?' + qs
+      }
+
+      if (hashMatches) {
+        newUrl += hashMatches[1]
+      }
     }
 
     history.replaceState(history.state, document.title, newUrl)

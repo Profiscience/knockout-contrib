@@ -40,6 +40,28 @@ describe('querystring', () => {
     query.dispose()
   })
 
+  test('hashbang', () => {
+    history.replaceState(null, '', location.pathname + '#!/path?{"foo":"notfoo"}')
+
+    const query = Query.create({ foo: 'foo' })
+
+    expect(query.foo()).toBe('notfoo')
+
+    query.foo('bar')
+    ko.tasks.runEarly()
+    expect(location.hash).toBe(`#!/path?${encodeURIComponent('{"foo":"bar"}')}`)
+
+    query.foo('foo')
+    ko.tasks.runEarly()
+    expect(location.hash).toBe('#!/path')
+
+    query.foo('baz')
+    ko.tasks.runEarly()
+    expect(location.hash).toBe(`#!/path?${encodeURIComponent('{"foo":"baz"}')}`)
+
+    query.dispose()
+  })
+
   test('empty query', () => {
     history.replaceState(null, '', location.pathname)
 
