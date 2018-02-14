@@ -17,8 +17,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "*.js",
-    "*.d.ts"
+    "index.js",
+    "index.d.ts",
+    "date.format.js",
+    "date.format.d.ts"
   ],
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",

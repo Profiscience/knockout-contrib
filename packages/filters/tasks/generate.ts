@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { promisify as pify } from 'util'
-import { camelCase } from 'lodash'
+import { camelCase, flatten } from 'lodash'
 import chalk from 'chalk'
 
 // tslint:disable no-var-requires
@@ -34,6 +34,16 @@ async function getFilterPackages() {
         }
       }
     }, {})
+}
+
+async function generatePackageJson(packages: string[]) {
+  const pkg = require('../package.json')
+  pkg.files = flatten([
+    'index.js',
+    'index.d.ts',
+    ...packages.map((p) => [`${p}.js`, `${p}.d.ts`])
+  ])
+  await writeFile(path.resolve(__dirname, '../package.json'), JSON.stringify(pkg, null, 2) + '\n')
 }
 
 async function generateGitIgnore(packages: { [k: string]: any }) {
@@ -71,6 +81,7 @@ getFilterPackages()
   .then((packages) => Promise.all([
     generateIndex(Object.keys(packages)),
     generateGitIgnore(packages),
+    generatePackageJson(Object.keys(packages)),
     ...Object.keys(packages).map((k) => generateIndividual(k, packages[k]))
   ]))
   .catch((err) => {
