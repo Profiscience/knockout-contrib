@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { promisify as pify } from 'util'
-import { KnockoutContribFrameworkWebpackPluginConfig } from 'support/webpack'
+import { KnockoutContribFrameworkWebpackPluginConfig } from './index'
 
 const readdir = pify(fs.readdir)
 const readFile = pify(fs.readFile)
