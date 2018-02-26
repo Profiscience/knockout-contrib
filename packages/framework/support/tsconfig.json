@@ -9,7 +9,7 @@
     "outDir": "./"
   },
   "include": [
-    "*.ts"
+    "**/*"
   ],
   "exclude": [
     "*.d.ts"

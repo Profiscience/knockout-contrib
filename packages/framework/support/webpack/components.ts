@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { promisify as pify } from 'util'
+import { KnockoutContribFrameworkWebpackPluginConfig } from './index'
 
 const readdir = pify(fs.readdir)
 const readFile = pify(fs.readFile)
@@ -8,43 +9,39 @@ const writeFile = pify(fs.writeFile)
 const mkdir = pify(fs.mkdir)
 
 const hot = true
-// ../knockout-contrib-framework
-// ../../@profiscience
-// ../../../node_modules
-// ../../../../
-const src = path.resolve(__dirname, '../../../../src/components')
-const outDir = path.resolve(__dirname, '../build')
+const outDir = path.resolve(__dirname, '../../build')
 const outFile = path.join(outDir, 'COMPONENT_MANIFEST.js')
 
-export async function generateComponentsManifest() {
+export async function generateComponentsManifest(config: KnockoutContribFrameworkWebpackPluginConfig) {
+  const src = path.join(config.context, 'components')
   const components = (await readdir(src)).filter((f) => path.extname(f) === '')
-  let code = generateManifest(components)
+  let code = generateManifest(src, components)
   if (hot) {
-    code += generateHMR(components)
+    code += generateHMR(src, components)
   }
   if (!fs.existsSync(outDir)) {
-    await mkdir(path.resolve(__dirname, '../build'))
+    await mkdir(path.resolve(__dirname, '../../build'))
   } else if (fs.existsSync(outFile) && Buffer.from(code).equals(await readFile(outFile))) {
     return
   }
   await writeFile(outFile, code)
 }
 
-function generateManifest(components: string[]) {
+function generateManifest(src: string, components: string[]) {
   // tslint:disable max-line-length
   return `
-    var manifest = { ${components.map((c) => generateComponentImport(c)).join(',')} }
+    var manifest = { ${components.map((c) => generateComponentImport(src, c)).join(',')} }
     export default manifest
   `
 }
 
-function generateComponentImport(component: string) {
+function generateComponentImport(src: string, component: string) {
   const isAppComponent = component.indexOf('app') === 0
   const webpackMode = isAppComponent ? 'eager' : 'lazy'
   return `'${component}': function(){ return import(/* webpackMode: "${webpackMode}", webpackChunkName: "${component}-component" */ '${path.resolve(src, component)}') }`
 }
 
-function generateHMR(components: string[]) {
+function generateHMR(src: string, components: string[]) {
   return `
     import * as ko from 'knockout'
 

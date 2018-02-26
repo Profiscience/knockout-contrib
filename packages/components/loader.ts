@@ -7,7 +7,7 @@ export class LazyComponentLoader implements KnockoutComponentTypes.Loader {
     Object.keys(this.components).forEach((name) => ko.components.register(name, {}))
   }
 
-  public getConfig(name, cb) {
+  public getConfig(name: string, cb: (comfig: null | KnockoutComponentTypes.Config) => void) {
     if (!this.components[name]) return cb(null)
 
     this.components[name]()
