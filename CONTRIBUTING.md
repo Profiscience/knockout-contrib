@@ -68,7 +68,7 @@ $ yarn watch
 
 ## Linking (Developing with other repositories)
 
-Often you will want to try out a bug-fix or feature in a real-world application before publishing or submitting a PR. However, there are some caveats introduced by the fact that we need all repositories to share the same version of knockout _and_ @types/knockout. The workaround is to use linked copies of these packages wherever they are used. In order to do this you need to clone/download Knockout (and the types) and link them. Due to the structure of DefinitelyTyped, it is easier to obtain these from npm.
+Often you will want to try out a bug-fix or feature in a real-world application before publishing or submitting a PR. However, there are some caveats introduced by the fact that we need all repositories to share the same version of knockout _and_ @types/knockout. The workaround is to use local, linked copies of these packages wherever they are used. In order to do this you need to clone/download Knockout (and the types) and link them. Due to the structure of DefinitelyTyped, it is easier to obtain these from npm.
 
 Use the following script to set up local copies of Knockout and @types/knockout in the current directory (you DO NOT want to run this inside of a project directory, rather use your common root, e.g. `~/Code`)...
 
@@ -84,6 +84,14 @@ Then, in this repo, as well as your project repo, run...
 ```bash
 yarn link @types/knockout knockout
 ```
+
+To link your local copy of `knockout-contrib` for use in another repo, you will want to link each package individually. You can do this for all packages with the following one-liner from the root of this repository...
+
+```bash
+lerna exec -- "cd ~/Code/my-project; yarn link \$LERNA_PACKAGE_NAME"
+```
+
+It's wise to link all of the packages — and not just the ones you think you will need — to avoid weird, hard to track down bugs caused by cross-dependencies and the heavy usage of Symbols in this repository.
 
 [node]: https://nodejs.org
 [yarn]: https://yarnpkg.com
