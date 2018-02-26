@@ -12,8 +12,8 @@
     "**/*.js"
   ],
   "scripts": {
-    "build": "yarn build:plugin && yarn build:runtime",
-    "build:plugin": "tsc -p webpack/tsconfig.json",
+    "build": "yarn build:support && yarn build:runtime",
+    "build:support": "tsc -p support/tsconfig.json",
     "build:runtime": "tsc -p runtime/tsconfig.json"
   },
   "peerDependencies": {
