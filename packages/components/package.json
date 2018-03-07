@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "generate": "cd tasks && ts-node ./generate.ts",
-    "build": "yarn generate && ../../node_modules/.bin/taskr build -d ../..",
+    "build": "yarn generate && tsc && tsc -p support",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
   "peerDependencies": {
