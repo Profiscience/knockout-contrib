@@ -5,6 +5,10 @@
     "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
+  "files": [
+    "index.ts",
+    "dist"
+  ],
   "main": "dist/index.js",
   "types": "index.ts",
   "license": "WTFPL",
