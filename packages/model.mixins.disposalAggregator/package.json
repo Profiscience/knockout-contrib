@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-model-mixins-disposal-aggregator",
   "version": "0.0.1",
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
+    "build": "tsc",
     "test": "DIR=$PWD; cd ../..; yarn test $DIR"
   },
   "files": [
