@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 // @ts-ignore
-import { LazyComponentLoader } from './loader.ts'
+import { LazyComponentLoader } from '../loader.ts'
 
 describe('components/loader', () => {
   test('registers synchronously with empty config for custom element usage', () => {

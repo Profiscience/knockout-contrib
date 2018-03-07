@@ -10,6 +10,8 @@
 
 [Custom components](https://knockoutjs.com/documentation/component-overview.html) for [KnockoutJS][]
 
+Styled with [Bootstrap v4][]
+
 <!-- TOC -->
 ### Contents
 - [flash-message](../components.flash-message)
@@ -27,20 +29,6 @@ import '@profiscience/knockout-contrib-components'
 
 // import single
 import '@profiscience/knockout-contrib-components/flash-message' 
-```
-
-### Styles
-
-Components use [Bootstrap v4][] as a base, and [CSS modules][] for any additional styling. If you are using [Webpack][], add the following to your configuration...
-
-```typescript
-module.exports = {
-  module: {
-    rules: [
-      require('@profiscience/knockout-contrib-components/webpack')
-    ]
-  }
-}
 ```
 
 [KnockoutJS]: https://knockoutjs.com

@@ -1,43 +1,55 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { promisify as pify } from 'util'
-import { KnockoutContribFrameworkWebpackPluginConfig } from './index'
 
 const readdir = pify(fs.readdir)
 const readFile = pify(fs.readFile)
 const writeFile = pify(fs.writeFile)
-const mkdir = pify(fs.mkdir)
 
-const hot = true
-const outDir = path.resolve(__dirname, '../../build')
-const outFile = path.join(outDir, 'COMPONENT_MANIFEST.js')
+const hot = true // @TODO make configurable
 
-export async function generateComponentsManifest(config: KnockoutContribFrameworkWebpackPluginConfig) {
-  const src = path.join(config.context, 'components')
-  const components = (await readdir(src)).filter((f) => path.extname(f) === '')
-  let code = generateManifest(src, components)
-  if (hot) {
-    code += generateHMR(src, components)
+export class KnockoutComponentManifestWebpackPlugin {
+  constructor(private dir: string) {}
+
+  public apply(compiler: any) {
+    const pluginName = 'KnockoutComponentManifestPlugin'
+    compiler.hooks.beforeRun.tapPromise(pluginName, () => generateComponentsManifest(this.dir))
+    compiler.hooks.watchRun.tapPromise(pluginName, () => generateComponentsManifest(this.dir))
   }
-  if (!fs.existsSync(outDir)) {
-    await mkdir(path.resolve(__dirname, '../../build'))
-  } else if (fs.existsSync(outFile) && Buffer.from(code).equals(await readFile(outFile))) {
+}
+
+async function generateComponentsManifest(dir: string) {
+  const components = (await readdir(dir)).filter(isDirectory)
+  const outFile = path.resolve(dir, 'index.ts')
+  let code = generateManifest(dir, components)
+  if (hot) {
+    code += generateHMR(dir, components)
+  }
+  if (await isUnchanged(outFile, code)) {
     return
   }
   await writeFile(outFile, code)
 }
 
+function isDirectory(f: string) {
+  return path.extname(f) === ''
+}
+
+async function isUnchanged(file: string, contents: string) {
+  return fs.existsSync(file) && Buffer.from(contents).equals(await readFile(file))
+}
+
 function generateManifest(src: string, components: string[]) {
-  // tslint:disable max-line-length
   return `
-    var manifest = { ${components.map((c) => generateComponentImport(src, c)).join(',')} }
-    export default manifest
+  var manifest = { ${components.map((c) => generateComponentImport(src, c)).join(',')} }
+  export default manifest
   `
 }
 
 function generateComponentImport(src: string, component: string) {
   const isAppComponent = component.indexOf('app') === 0
   const webpackMode = isAppComponent ? 'eager' : 'lazy'
+  // tslint:disable max-line-length
   return `'${component}': function(){ return import(/* webpackMode: "${webpackMode}", webpackChunkName: "${component}-component" */ '${path.resolve(src, component)}') }`
 }
 

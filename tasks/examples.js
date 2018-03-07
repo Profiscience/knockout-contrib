@@ -103,8 +103,7 @@ async function getWebpackConfig() {
         {
           test: /\.html$/,
           loader: 'html-loader'
-        },
-        require('../packages/components/webpack')
+        }
       ]
     },
     resolve: {

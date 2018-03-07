@@ -1,6 +1,5 @@
+/*.ts
 *.js
 *.d.ts
-index.ts
-lazy.ts
-flash-message.ts
-markdown.ts
+!loader.ts
+!loader.test.ts

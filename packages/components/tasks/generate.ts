@@ -36,20 +36,6 @@ async function getComponentPackages(): Promise<{ [k: string]: { name: string } }
     }, {})
 }
 
-async function generateGitIgnore(packages: { [k: string]: any }) {
-  const names = Object.keys(packages)
-  const contents = names.reduce((accum, n) => [
-    ...accum,
-    `${n}.ts`
-  ], [
-    '*.js',
-    '*.d.ts',
-    'index.ts',
-    'lazy.ts'
-  ]).join('\n')
-  await writeFile(path.resolve(__dirname, '../.gitignore'), contents)
-}
-
 async function generateIndex(packages: { [k: string]: any }) {
   const names = Object.keys(packages)
   const contents = [
@@ -85,7 +71,6 @@ async function generateIndividual(name: string, pkg: { name: string }) {
 
 getComponentPackages()
   .then((packages) => Promise.all([
-    generateGitIgnore(packages),
     generateIndex(packages),
     generateLazyManifest(packages),
     ...Object.keys(packages).map((k) => generateIndividual(k, packages[k]))
