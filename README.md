@@ -7,6 +7,8 @@
 [![Gitter][gitter-shield]][gitter]
 [![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
+> :tada: :tada: :tada: Want to meet up? Find me (@caseyWebb) at [Collision Conf 2018](https://collisionconf.com/) in NOLA, April 30 - May 3. Special thanks to Collision for their open source initiative and providing us with a free pair of tickets! :tada: :tada: :tada:
+
 
 This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS][]
 
