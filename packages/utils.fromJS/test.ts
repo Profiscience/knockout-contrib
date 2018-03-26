@@ -6,32 +6,49 @@ import * as ko from 'knockout'
 import fromJS from './index'
 
 describe('utils.fromJS', () => {
-
   test('should create a deep observable tree', () => {
+    class Clazz {
+      public num = 1
+      public str = 'str'
+      public date = new Date()
+      public bool = true
+      public arr = []
+      public obj = { foo: 'foo' }
+      public obs = ko.observable({ foo: 'bar' })
+      public regexp = /foo/
+      public func() { } // tslint:disable-line no-empty
+    }
+
     const raw = {
       num: 1,
       str: 'str',
       date: new Date(),
       bool: true,
-      arr: [],
+      arr: [
+        'foo'
+      ],
       regexp: /foo/,
       obj: { foo: 'foo' },
       obs: ko.observable({ foo: 'bar' }),
       func() { }, // tslint:disable-line no-empty
-      class: new class {
-        public num = 1
-        public str = 'str'
-        public date = new Date()
-        public bool = true
-        public arr = []
-        public obj = { foo: 'foo' }
-        public obs = ko.observable({ foo: 'bar' })
-        public regexp = /foo/
-        public func() { } // tslint:disable-line no-empty
-      }()
+      class: new Clazz()
     }
 
     const actual = fromJS(raw)
+
+    {
+      // test type checking (not fool-proof)
+      const num: KnockoutObservable<number> = actual.num
+      const str: KnockoutObservable<string> = actual.str
+      const date: KnockoutObservable<Date> = actual.date
+      const bool: KnockoutObservable<boolean> = actual.bool
+
+      const arr: KnockoutObservableArray<string> = actual.arr
+      const regexp: KnockoutObservable<RegExp> = actual.regexp
+      const nestedStr: KnockoutObservable<string> = actual.obj.foo
+      const obs: KnockoutObservable<{ foo: string }> = actual.obs
+      const func: () => void = actual.func
+    }
 
     expect(actual.num).toBeObservable()
     expect(actual.str).toBeObservable()
