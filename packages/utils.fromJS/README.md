@@ -56,7 +56,7 @@ fromJS(foos, true)
 // }
 ```
 
-## Benchmark <span id="benchmark"></span>
+## Benchmark
 
 ```shell
 $ ./benchmark.ts
