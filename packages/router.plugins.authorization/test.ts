@@ -1,5 +1,5 @@
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { FLASH_MESSAGE } from '@profiscience/knockout-contrib-router-middleware'
+import { FLASH_MESSAGE } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 import { IAuthorization, createAuthorizationPlugin } from './index'
 
 const currentUser = { isDeveloper: false }

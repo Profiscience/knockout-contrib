@@ -1,11 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-init",
   "version": "1.0.0-alpha.9",
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
@@ -20,5 +16,6 @@
     "@profiscience/knockout-contrib-router": "^2.0.0-4",
     "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.10",
     "knockout": "^3.5.0-beta"
-  }
+  },
+  "module": "dist/default/index.js"
 }

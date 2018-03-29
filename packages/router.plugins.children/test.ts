@@ -20,7 +20,7 @@ describe('router.plugins.children', () => {
       '/a': 'a',
       '/b': 'b'
     }
-    const routeConfig: IRouteConfig = { children }
+    const routeConfig: IRouteConfig = { children } as any
     const ret = childrenPlugin(routeConfig)
 
     expect(ret).toEqual(children)

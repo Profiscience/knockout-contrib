@@ -69,6 +69,10 @@ export class Route {
     const params: { [k: string]: any } = {}
     const matches = this.regexp.exec(path)
 
+    if (!matches) {
+      throw new Error(`[@profiscience/knockout-contrib-router] Failed to parse "${path}" with route "${this.path}"`)
+    }
+
     for (let i = 1, len = matches.length; i < len; ++i) {
       const k = this.keys[i - 1]
       const v = matches[i] || ''
@@ -92,7 +96,7 @@ export class Route {
     const transformedConfig = this.runPlugins(config)
     const children: Route[] = []
     const middleware: Middleware[] = []
-    let component: string
+    let component: undefined | string
 
     for (const configEntry of transformedConfig) {
       if (typeof configEntry === 'string') {
@@ -113,22 +117,24 @@ export class Route {
   }
 
   private static runPlugins(config: RouteConfig[]): (string | Middleware | { [k: string]: RouteConfig[] })[] {
-    return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>((routeStack, configEntry) => {
-      const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
-        const pluginStack = plugin(configEntry)
-        return typeof pluginStack === 'undefined'
-          ? allPluginsStack
-          : [...allPluginsStack, ...flatten(castArray(pluginStack))]
-      }, [])
-      return [
-        ...routeStack,
-        ...(
-          configViaPlugins.length > 0
-            ? configViaPlugins
-            : flatten(castArray(configEntry as any))
-        )
-      ]
-    }, [])
+    return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>(
+      (routeStack, configEntry: RouteConfig & IRouteConfig) => {
+        const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
+          const pluginStack: IRouteConfig = plugin(configEntry) as any
+          return typeof pluginStack === 'undefined'
+            ? allPluginsStack
+            : [...allPluginsStack, ...flatten(castArray(pluginStack))]
+        }, [])
+        return [
+          ...routeStack,
+          ...(
+            configViaPlugins.length > 0
+              ? configViaPlugins
+              : flatten(castArray(configEntry as any))
+          )
+        ]
+      },
+    [])
   }
 
   private static parsePath(path: string, hasChildren: boolean) {

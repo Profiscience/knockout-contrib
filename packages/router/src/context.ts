@@ -29,10 +29,11 @@ export class Context /* implements IContext, use Context & IContext */ {
 
   constructor(
     public router: Router,
-    public $parent: Context & IContext,
+    public $parent: undefined | Context & IContext,
     public path: string,
     _with: { [key: string]: any } = {}
   ) {
+    const ctx: Context & IContext = this as any
     const route = router.resolveRoute(path)
     const { params, pathname, childPath } = route.parse(path)
 
@@ -43,11 +44,11 @@ export class Context /* implements IContext, use Context & IContext */ {
     }, _with)
 
     if ($parent) {
-      $parent.$child = this
+      $parent.$child = ctx
     }
     if (childPath) {
       // tslint:disable-next-line no-unused-expression
-      new Router(childPath, this).ctx
+      new Router(childPath, ctx).ctx
     }
   }
 
@@ -58,7 +59,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   public get base(): string {
     return this.router.isRoot
       ? Router.base
-      : this.$parent.base + this.$parent.pathname
+      : (this.$parent as Context & IContext).base + (this.$parent as Context & IContext).pathname
   }
 
   // full path w/o base
@@ -71,18 +72,13 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $root(): Context & IContext {
-    let ctx: Context & IContext = this
-    while (ctx) {
-      if (ctx.$parent) {
-        ctx = ctx.$parent
-      } else {
-        return ctx
-      }
-    }
+    let ctx: Context & IContext = this as any
+    while (ctx.$parent) ctx = ctx.$parent
+    return ctx
   }
 
   public get $parents(): (Context & IContext)[] {
-    const parents = []
+    const parents: (Context & IContext)[] = []
     let parent = this.$parent
     while (parent) {
       parents.push(parent)
@@ -92,7 +88,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $children(): (Context & IContext)[] {
-    const children = []
+    const children: (Context & IContext)[] = []
     let child = this.$child
     while (child) {
       children.push(child)
@@ -111,7 +107,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: Context & IContext = this
+    let ctx: Context & IContext = this as any
     let callbacks: Callback<boolean | void>[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
@@ -122,7 +118,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public render() {
-    let ctx: Context & IContext = this
+    let ctx: Context & IContext = this as any
     while (ctx) {
       if (typeof ctx._redirect === 'undefined') {
         ctx.router.component(ctx.route.component)
@@ -133,8 +129,9 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeRender(flush = true) {
-    const appMiddlewareDownstream = Context.runMiddleware(Router.middleware, this)
-    const routeMiddlewareDownstream = Context.runMiddleware(this.route.middleware, this)
+    const ctx: Context & IContext = this as any
+    const appMiddlewareDownstream = Context.runMiddleware(Router.middleware, ctx)
+    const routeMiddlewareDownstream = Context.runMiddleware(this.route.middleware, ctx)
 
     const { count: numAppMiddlewareRanPreRedirect } = await sequence(appMiddlewareDownstream)
     const { count: numRouteMiddlewareRanPreRedirect } = await sequence(routeMiddlewareDownstream)
@@ -183,7 +180,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     await Promise.all<Promise<void>>([thisQueue, ...childQueues])
   }
 
-  private static runMiddleware(middleware: Middleware[], ctx: Context): Callback<void>[] {
+  private static runMiddleware(middleware: Middleware[], ctx: Context & IContext): Callback<void>[] {
     return middleware.map((fn) => {
       const runner = castLifecycleObjectMiddlewareToGenerator(fn)(ctx)
       let beforeRender = true

@@ -2,11 +2,8 @@
   "name": "@profiscience/knockout-contrib-querystring",
   "version": "0.0.1-alpha.9",
   "description": "Querystring Abstraction for KnockoutJS",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/node/index.js",
+  "types": "src/index.ts",
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -19,8 +16,5 @@
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  }
+  "module": "dist/default/index.js"
 }

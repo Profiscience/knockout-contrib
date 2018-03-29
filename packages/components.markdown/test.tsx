@@ -31,7 +31,7 @@ describe('components.markdown', () => {
     const content = '```js\nsome code\n```'
     const options = {
       highlight(code, lang, cb) {
-        cb(null, '')
+        if (cb) cb(null, '')
         done()
       }
     } as MarkedOptions

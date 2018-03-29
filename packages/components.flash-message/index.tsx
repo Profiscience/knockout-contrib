@@ -18,13 +18,13 @@ export class FlashMessageViewModel extends ViewModelConstructorBuilder {
   public visible = ko.pureComputed(() => flashMessage() !== false)
   public text = ko.pureComputed(() => {
     const unwrapped = flashMessage()
-    return typeof unwrapped === 'string' || typeof unwrapped === 'boolean'
+    return typeof unwrapped === 'undefined' || typeof unwrapped === 'string' || typeof unwrapped === 'boolean'
       ? unwrapped
       : unwrapped.text
   })
   public timeout = ko.pureComputed(() => {
     const unwrapped = flashMessage()
-    if (typeof unwrapped === 'string' || typeof unwrapped === 'boolean') {
+    if (typeof unwrapped === 'undefined' || typeof unwrapped === 'string' || typeof unwrapped === 'boolean') {
       return false
     } else {
       return unwrapped.timeout
@@ -32,11 +32,16 @@ export class FlashMessageViewModel extends ViewModelConstructorBuilder {
   })
   public dismissible = ko.pureComputed(() => {
     const unwrapped = flashMessage()
-    return typeof unwrapped !== 'string' && typeof unwrapped !== 'boolean' && unwrapped.dismiss
+    return typeof unwrapped !== 'undefined' &&
+      typeof unwrapped !== 'string' &&
+      typeof unwrapped !== 'boolean' &&
+      unwrapped.dismiss
   })
   public css = ko.pureComputed(() => {
     const unwrapped = flashMessage()
-    if (typeof unwrapped === 'string' || typeof unwrapped === 'boolean') return 'alert-info'
+    if (typeof unwrapped === 'undefined' || typeof unwrapped === 'string' || typeof unwrapped === 'boolean') {
+      return 'alert-info'
+    }
     let css = typeof unwrapped.type === 'undefined'
       ? ' alert-info'
       : ` alert-${unwrapped.type}`
@@ -58,6 +63,8 @@ export class FlashMessageViewModel extends ViewModelConstructorBuilder {
   public dismiss() {
     flashMessage(false)
   }
+
+  private static isFlashMessageObject
 }
 
 const template = [

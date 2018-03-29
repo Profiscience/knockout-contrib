@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-import { Router } from '../../dist'
+import { Router } from '../../'
 
 function assertStaticIsNavigating(ctx) {
   return () => ({

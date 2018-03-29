@@ -4,8 +4,8 @@ import './index'
 test('subscribes once, then disposes', () => {
   expect.assertions(4)
 
-  const observable = ko.observable(null)
-  const observableArray = ko.observableArray([null])
+  const observable = ko.observable('')
+  const observableArray = ko.observableArray<string>([])
   const computed = ko.computed(() => observable())
   const pureComputed = ko.pureComputed(() => observable())
 
@@ -19,7 +19,7 @@ test('subscribes once, then disposes', () => {
   observable('foo')
   observableArray(['foo'])
 
-  // expect.assertions(4)  would cause these to fail
+  // expect.assertions(4) would cause these to fail
   observable('bar')
   observableArray.push('bar')
 })

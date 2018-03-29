@@ -33,7 +33,7 @@ describe('router.plugins.init', () => {
     const ctx = { queue: queue as any, route: {} } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx)
+      const lifecycle = middleware(ctx) as IterableIterator<void>
       if (lifecycle) lifecycle.next()
     }
 
@@ -51,7 +51,7 @@ describe('router.plugins.init', () => {
     const ctx = { queue: queue as any, route: {} } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx)
+      const lifecycle = middleware(ctx) as IterableIterator<void>
       if (lifecycle) lifecycle.next()
     }
 
@@ -69,7 +69,7 @@ describe('router.plugins.init', () => {
 
     expect(() => {
       for (const middleware of route.middleware) {
-        const lifecycle = middleware(ctx)
+        const lifecycle = middleware(ctx) as IterableIterator<void>
         if (lifecycle) lifecycle.next()
       }
     }).not.toThrow()

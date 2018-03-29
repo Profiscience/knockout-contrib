@@ -70,7 +70,7 @@ describe('utils.merge', () => {
     expect(dest.foo).toBeNull()
   })
 
-  const testArrays = (mapArraysArg?: null | boolean, shouldMapArrays?: boolean) => () => {
+  const testArrays = (mapArraysArg?: boolean, shouldMapArrays?: boolean) => () => {
     _test({})
     _test({ foo: ko.observableArray([]) })
 
@@ -88,7 +88,7 @@ describe('utils.merge', () => {
   }
 
   test('creates/sets shallow arrays when 3rd arg is undefined', testArrays(undefined, false))
-  test('creates/sets shallow arrays when 3rd arg is falsy', testArrays(null, false))
+  test('creates/sets shallow arrays when 3rd arg is falsy', testArrays(null as any, false))
   test('creates/sets shallow arrays when 3rd arg is false', testArrays(false, false))
   test('creates/sets deep arrays when 3rd arg is true', testArrays(true, true))
 

@@ -26,7 +26,7 @@ describe('router.middleware.progressBar', () => {
         isRoot: false
       },
       $child: undefined
-    } as Context & IContext
+    } as any
     const middleware = createProgressBarMiddleware()
     const topLifecycle = middleware(topCtx)
     const bottomLifecycle = middleware(bottomCtx)
@@ -46,7 +46,7 @@ describe('router.middleware.progressBar', () => {
         isRoot: false
       },
       $child: undefined
-    } as Context & IContext
+    } as any
     const middleware = createProgressBarMiddleware()
     const topLifecycle = middleware(topCtx)
     const bottomLifecycle = middleware(bottomCtx)

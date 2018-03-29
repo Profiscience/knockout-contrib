@@ -41,7 +41,7 @@ export default class Query {
   [k: string]: any
 
   constructor(config: IQueryConfig, group?: string) {
-    this._group = group
+    this._group = group as string
 
     if (isUndefined(Query._raw[this._group])) {
       Query._raw[this._group] = {}
@@ -55,7 +55,7 @@ export default class Query {
 
   public set(config: IQueryConfig) {
     const defaults = Object.assign({}, Query.getDefaults(config))
-    const group = this._group
+    const group = this._group as string
     const fromQS = Query.fromQS(group)
 
     entries(config).forEach(([name, paramConfig = {}]) => {
@@ -76,7 +76,7 @@ export default class Query {
   }
 
   public toJS() {
-    return omit(ko.toJS(Query._raw[this._group]), isUndefined)
+    return omit(ko.toJS(Query._raw[this._group as string]), isUndefined)
   }
 
   public toString() {
@@ -88,16 +88,18 @@ export default class Query {
   }
 
   public clear() {
-    Object.keys(Query._raw[this._group]).forEach((k) => Query._raw[this._group][k].clear())
+    const group = this._group as string
+    Object.keys(Query._raw[group]).forEach((k) => Query._raw[group][k].clear())
   }
 
   public dispose() {
-    if (--Query._refs[this._group] === 0) {
+    const group = this._group as string
+    if (--Query._refs[group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
-      delete current[this._group]
+      delete current[group]
       Query.writeQueryString(current)
 
-      delete Query._raw[this._group]
+      delete Query._raw[group]
     }
   }
 
@@ -126,7 +128,7 @@ export default class Query {
 
   public static fromQS(group?: string) {
     const query = this.parse(this.getQueryString())
-    return (isUndefined(group) ? query : query[group]) || {}
+    return (isUndefined(group) ? query : query[group as string]) || {}
   }
 
   private static getCleanQuery() {
@@ -139,9 +141,10 @@ export default class Query {
       ))
     }
 
-    if (_query[undefined as string]) {
-      Object.assign(_query, _query[undefined as string])
-      delete _query[undefined as string]
+    const group: string = undefined as any
+    if (_query[group]) {
+      Object.assign(_query, _query[group])
+      delete _query[group]
     }
     return _query
   }
@@ -163,7 +166,13 @@ export default class Query {
         qs ? '?' + qs : ''
       )
     } else {
-      const currentPathname = /([^?#]*)/.exec(currentUrl)[1]
+      const matches = /([^?#]*)/.exec(currentUrl)
+
+      if (!matches) {
+        throw new Error('[@profiscience/knockout-contrib-querystring] Failed to write updated querystring')
+      }
+
+      const currentPathname = matches[1]
       const hashMatches = /(#[^!]*)/.exec(currentUrl)
 
       newUrl = currentPathname
@@ -216,7 +225,7 @@ export default class Query {
         if (coerce) {
           v = coerce(v)
         }
-        _p(v)
+        _p(v as any)
         Query.queueQueryStringWrite()
           // tslint:disable-next-line no-console
           .catch((err) => console.error('[@profiscience/knockout-contrib-querystring] error queueing write'))
@@ -231,7 +240,7 @@ export default class Query {
           if (isDefault() || isUndefined(p())) {
             p(d)
           }
-          _default(d)
+          _default(d as any)
         } else {
           d = d as IQueryParamConfig
           if (d.coerce) {

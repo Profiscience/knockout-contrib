@@ -12,14 +12,20 @@ export const noop = () => { /* void */ }
 export const isPromise = (x: any = {}) => typeof x.then === 'function'
 export const isIterable = (x: any = {}) => typeof x[Symbol.iterator] === 'function'
 export const startsWith = (string: string, target: string) => string.indexOf(target) === 0
-export const castArray = <T>(x: MaybeArray<T>): T[] => Array.isArray(x) ? x : [x]
-export const flatten = <T>(xs: MaybeArray<T>[]): T[] => xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
 export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] => flatten(xs.map(fn))
 export const promisify = (_fn: (...args: any[]) => any) => async (...args: any[]) => await (
   _fn.length === args.length + 1
     ? new Promise((r) => _fn(...args, r))
     : _fn(...args)
 )
+
+export function flatten<T>(xs: MaybeArray<T>[]): T[] {
+  return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
+}
+
+export function castArray<T>(x: MaybeArray<T>): T[] {
+  return Array.isArray(x) ? x : [x]
+}
 
 export async function sequence(callbacks: Callback<boolean | void>[], ...args: any[]): Promise<{
   count: number,
@@ -42,7 +48,7 @@ export function traversePath(router: Router, path: string) {
   if (path.indexOf('//') === 0) {
     path = path.replace('//', '/')
     while (!router.isRoot) {
-      router = router.ctx.$parent.router
+      router = (router.ctx.$parent as Context & IContext).router
     }
   } else {
     if (path.indexOf('./') === 0) {
@@ -50,7 +56,7 @@ export function traversePath(router: Router, path: string) {
       router = router.ctx.$child.router
     }
     while (path && path.match(/\/?\.\./i) && !router.isRoot) {
-      router = router.ctx.$parent.router
+      router = (router.ctx.$parent as Context & IContext).router
       path = path.replace(/\/?\.\./i, '')
     }
   }
@@ -94,13 +100,15 @@ export function castLifecycleObjectMiddlewareToGenerator(fn: Middleware): Lifecy
 }
 
 export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
-  while (bindingCtx) {
+  while (true) {
     if (bindingCtx.$router) {
       return bindingCtx.$router
+    } else if (!bindingCtx.$parentContext) {
+      return Router.head
+    } else {
+      bindingCtx = bindingCtx.$parentContext as KnockoutBindingContext
     }
-    bindingCtx = bindingCtx.$parentContext
   }
-  return Router.head
 }
 
 // tslint:disable-next-line no-console

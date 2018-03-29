@@ -1,11 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-subscription-disposal",
   "version": "1.0.0-alpha.6",
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
@@ -14,5 +10,6 @@
   },
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
-  }
+  },
+  "module": "dist/default/index.js"
 }
