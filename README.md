@@ -1,11 +1,10 @@
 # knockout-contrib
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg)](https://greenkeeper.io/)
-
 [![KnockoutJS][knockout-shield]][KnockoutJS]
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
 [![Gitter][gitter-shield]][gitter]
+[![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
 Goodies for building rich UIs with [KnockoutJS][]. Packages are published under the `@profiscience/knockout-contrib-*` namespace.
 
@@ -40,3 +39,6 @@ If both components are published together, you'd be required to update `componen
 
 [gitter]: https://gitter.im/Profiscience/knockout-contrib
 [gitter-shield]: https://img.shields.io/gitter/room/profiscience/knockout-contrib.svg
+
+[greenkeeper]: https://greenkeeper.io/
+[greenkeeper-shield]: https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg
