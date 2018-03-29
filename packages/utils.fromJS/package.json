@@ -17,10 +17,14 @@
     "helpers",
     "utilities"
   ],
+  "scripts": {
+    "bench": "ts-node ./benchmark.ts"
+  },
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5",
+    "knockout-mapping": "^2.6.0"
   }
 }

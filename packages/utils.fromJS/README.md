@@ -31,7 +31,7 @@ Creates a tree of observables from `src`.
 If `mapArrays` is true, array elements will be created as mapped observables, else bare objects/primitives.
 
 The much needed inverse to the undocumented `ko.toJS` function; a dumb version of [ko.mapping.fromJS](http://knockoutjs.com/documentation/plugins-mapping.html)
-that is a lot faster.
+that is [_a lot faster_](#benchmark).
 
 ```javascript
 import { fromJS } from '@profiscience/knockout-contrib-utils'
@@ -54,4 +54,13 @@ fromJS(foos, true)
 //     ])
 //   }
 // }
+```
+
+## Benchmark
+
+```shell
+$ ./benchmark.ts
+utils.fromJS                   x 316,313 ops/sec ±3.37% (79 runs sampled)
+utils.fromJS (deep arrays)     x 151,401 ops/sec ±3.24% (81 runs sampled)
+mapping.fromJS                 x 11,995 ops/sec ±3.82% (81 runs sampled)
 ```
