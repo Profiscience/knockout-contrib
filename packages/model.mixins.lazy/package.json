@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-lazy",
+  "description": "@profiscience/knockout-contrib-model-builders-data lazy property initialization mixin",
   "version": "0.0.16",
   "main": "dist/node/index.js",
   "types": "index.ts",

@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-jquery",
+  "description": "jQuery plugin binding for KnockoutJS",
   "version": "1.0.0-alpha.7",
   "main": "dist/node/index.js",
   "types": "index.ts",

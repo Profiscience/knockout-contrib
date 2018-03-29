@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-cache-memory",
+  "description": "In-Memory Caching Mixin for @profiscience/knockout-contrib-model-builders-*",
   "version": "0.0.18",
   "main": "dist/node/index.js",
   "types": "index.ts",

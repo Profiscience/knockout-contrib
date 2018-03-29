@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-disposal-aggregator",
+  "description": "Automatically dispose all subscriptions for @profiscience/knockout-contrib-model-builders-* instances",
   "version": "0.0.2",
   "main": "dist/node/index.js",
   "types": "index.ts",

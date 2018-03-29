@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-base",
+  "description": "Base for @profiscience/knockout-contrib-model-builders-data and @profiscience/knockout-contrib-model-builders-view",
   "version": "1.0.0-alpha.4",
-  "description": "Base ConstructorBuilder for @profiscience/knockout-contrib-model",
   "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",

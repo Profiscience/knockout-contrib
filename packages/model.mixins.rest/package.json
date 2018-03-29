@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-rest",
+  "description": "REST API Mixin for @profiscience/knockout-contrib-model-builders-data",
   "version": "1.0.0-alpha.26",
   "main": "dist/node/index.js",
   "types": "index.ts",

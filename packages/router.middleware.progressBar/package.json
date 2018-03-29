@@ -14,5 +14,6 @@
   "dependencies": {
     "toprogress2": "^2.0.0"
   },
-  "module": "dist/default/index.js"
+  "module": "dist/default/index.js",
+  "description": "Top progress bar middleware for @profiscience/knockout-contrib-router"
 }

@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-transform",
+  "description": "@profiscience/knockout-contrib-model-mixins-data fetch response transformer mixin",
   "version": "0.0.15",
   "main": "dist/node/index.js",
   "types": "index.ts",

@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-spread",
+  "description": "Mixin to spread fetch() properties onto @profiscience/knockout-contrib-model-builders-data instance",
   "version": "0.0.15",
   "main": "dist/node/index.js",
   "types": "index.ts",

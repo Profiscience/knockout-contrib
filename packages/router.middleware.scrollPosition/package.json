@@ -11,5 +11,6 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4"
   },
-  "module": "dist/default/index.js"
+  "module": "dist/default/index.js",
+  "description": "@profiscience/knockout-contrib-router middleware to scroll to top when navigating to a new page and restore scroll position on forward/back navigation"
 }

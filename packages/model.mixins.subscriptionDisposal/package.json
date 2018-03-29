@@ -1,5 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-subscription-disposal",
+  "description": "Subscription tracking/disposal mixin for @profiscience/knockout-contrib-model-builders-*",
   "version": "1.0.0-alpha.6",
   "main": "dist/node/index.js",
   "types": "index.ts",
