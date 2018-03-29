@@ -2,15 +2,19 @@
   "name": "@profiscience/knockout-contrib-router-middleware-flash-message",
   "description": "Flash message middleware for @profiscience/knockout-contrib-router",
   "version": "1.0.0-alpha.8",
-  "main": "dist/node/index.js",
-  "types": "index.ts",
   "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.middleware.flashMessage",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4"
-  },
-  "module": "dist/default/index.js"
+  }
 }

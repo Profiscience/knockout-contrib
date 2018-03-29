@@ -1,13 +1,14 @@
 {
   "name": "@profiscience/knockout-contrib-observable-fn-toggle",
-  "version": "0.0.2",
   "description": "KnockoutJS Observable.fn.toggle()",
-  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "version": "0.0.2",
   "license": "WTFPL",
-  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.toggle",
-  "repository": "Profiscience/knockout-contrib",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "index.ts",
   "keywords": [
     "knockout",
@@ -22,6 +23,5 @@
   ],
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
-  },
-  "module": "dist/default/index.js"
+  }
 }

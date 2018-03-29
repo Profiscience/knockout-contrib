@@ -2,15 +2,19 @@
   "name": "@profiscience/knockout-contrib-model-mixins-subscription-disposal",
   "description": "Subscription tracking/disposal mixin for @profiscience/knockout-contrib-model-builders-*",
   "version": "1.0.0-alpha.6",
-  "main": "dist/node/index.js",
-  "types": "index.ts",
   "license": "WTFPL",
-  "dependencies": {
-    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
-    "tslib": "^1.8.0"
-  },
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.subscriptionDisposal",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "module": "dist/default/index.js"
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
+    "tslib": "^1.8.0"
+  }
 }

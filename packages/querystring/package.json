@@ -1,8 +1,14 @@
 {
   "name": "@profiscience/knockout-contrib-querystring",
-  "version": "0.0.1-alpha.9",
   "description": "Querystring Abstraction for KnockoutJS",
+  "version": "0.0.1-alpha.9",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/querystring",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "src/index.ts",
   "keywords": [
     "knockout",
@@ -11,10 +17,7 @@
     "query",
     "querystring"
   ],
-  "author": "Casey Webb (https://caseyWebb.xyz)",
-  "license": "WTFPL",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
-  },
-  "module": "dist/default/index.js"
+  }
 }

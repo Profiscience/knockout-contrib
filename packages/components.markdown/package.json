@@ -1,8 +1,14 @@
 {
   "name": "@profiscience/knockout-contrib-components-markdown",
-  "version": "0.0.4",
   "description": "Markdown Component for KnockoutJS",
+  "version": "0.0.4",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.markdown",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "index.tsx",
   "keywords": [
     "knockout",
@@ -10,19 +16,13 @@
     "component",
     "tko"
   ],
-  "author": "Casey Webb (https://caseyWebb.xyz)",
-  "license": "WTFPL",
-  "repository": "Profiscience/knockout-contrib",
-  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.markdown",
+  "peerDependencies": {
+    "knockout": "^3.5.0-beta"
+  },
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.9",
     "@types/marked": "^0.3.0",
     "jsx-dom": "^5.2.0",
     "marked": "^0.3.12"
-  },
-  "peerDependencies": {
-    "knockout": "^3.5.0-beta"
-  },
-  "module": "dist/default/index.js"
+  }
 }

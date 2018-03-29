@@ -2,9 +2,18 @@
   "name": "@profiscience/knockout-contrib-model-builders-data",
   "description": "Extensible view model builder for KnockoutJS",
   "version": "1.0.0-alpha.23",
-  "main": "dist/node/index.js",
-  "types": "index.ts",
   "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.data",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.9",
+    "knockout": "^3.5.0-beta"
+  },
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^0.0.2",
@@ -15,10 +24,5 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.9"
-  },
-  "peerDependencies": {
-    "@profiscience/knockout-contrib-router-plugins-init": "^1.0.0-alpha.9",
-    "knockout": "^3.5.0-beta"
-  },
-  "module": "dist/default/index.js"
+  }
 }
