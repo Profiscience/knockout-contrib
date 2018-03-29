@@ -35,6 +35,7 @@ suite
     (ko as any).mapping.fromJS({ ...obj })
   })
   .on('cycle', (e) => {
+    // tslint:disable:no-console
     if (e.target.error) {
       console.error(e.target.error)
       process.exit(1)
