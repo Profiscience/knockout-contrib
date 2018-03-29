@@ -1,13 +1,15 @@
 {
   "name": "@profiscience/knockout-contrib-utils-defaults",
-  "version": "1.0.0-alpha.6",
   "description": "Handy Utilities for Knockout JS",
+  "version": "1.0.0-alpha.6",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
-  },
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -15,20 +17,13 @@
     "helpers",
     "utilities"
   ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
-  "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/Profiscience/knockout-contrib/issues"
+  "peerDependencies": {
+    "knockout": "^3.5.0-beta"
   },
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
   "dependencies": {
     "@profiscience/knockout-contrib-utils-from-js": "^1.0.0-alpha.6"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5"
-  },
-  "peerDependencies": {
-    "knockout": "^3.5.0-beta"
-  },
-  "module": "dist/default/index.js"
+  }
 }

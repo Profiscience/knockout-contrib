@@ -1,8 +1,14 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-redirect",
-  "version": "0.0.3",
   "description": "Redirect Plugin for @profiscience/knockout-contrib-router",
+  "version": "0.0.3",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.redirect",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "index.ts",
   "keywords": [
     "tko",
@@ -12,17 +18,11 @@
     "router",
     "spa"
   ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
-  "license": "WTFPL",
-  "repository": "Profiscience/knockout-contrib",
-  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.redirect",
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4"
-  },
-  "module": "dist/default/index.js"
+  }
 }

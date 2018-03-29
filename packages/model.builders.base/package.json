@@ -1,12 +1,16 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-base",
+  "description": "Base for @profiscience/knockout-contrib-model-builders-data and @profiscience/knockout-contrib-model-builders-view",
   "version": "1.0.0-alpha.4",
-  "description": "Base ConstructorBuilder for @profiscience/knockout-contrib-model",
-  "main": "dist/node/index.js",
-  "types": "index.ts",
   "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.base",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
   "dependencies": {
     "tslib": "^1.8.0"
-  },
-  "module": "dist/default/index.js"
+  }
 }

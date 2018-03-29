@@ -1,13 +1,15 @@
 {
   "name": "@profiscience/knockout-contrib-filters-date-format",
-  "version": "0.0.1",
   "description": "Date formatting filter for KnockoutJS + Knockout-Punches",
+  "version": "0.0.1",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/filters.date.format",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
   "types": "index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
-  },
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -16,14 +18,11 @@
     "time",
     "filter"
   ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
-  "license": "WTFPL",
   "peerDependencies": {
     "knockout": "^3.5.0-beta",
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {
     "date-fns": "^2.0.0-alpha.7"
-  },
-  "module": "dist/default/index.js"
+  }
 }
