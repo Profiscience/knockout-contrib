@@ -22,7 +22,7 @@
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.9",
     "@types/marked": "^0.3.0",
-    "jsx-dom": "^5.2.0",
+    "jsx-dom": "^6.0.0",
     "marked": "^0.3.12"
   }
 }

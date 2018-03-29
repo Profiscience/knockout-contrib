@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.9",
-    "jsx-dom": "^5.2.0"
+    "jsx-dom": "^6.0.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.8"

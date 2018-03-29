@@ -30,7 +30,7 @@
     "jest-fetch-mock": "^1.5.0",
     "jest-jquery-matchers": "^2.0.0",
     "jquery": "^3.2.1",
-    "jsx-dom": "^5.2.0",
+    "jsx-dom": "^6.1.1",
     "knockout": "^3.5.0-beta",
     "knockout-punches": "^0.5.1",
     "lerna": "^2.4.0",
