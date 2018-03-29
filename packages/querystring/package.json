@@ -11,7 +11,7 @@
     "query",
     "querystring"
   ],
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
   "license": "WTFPL",
   "peerDependencies": {
     "knockout": "^3.5.0-beta"

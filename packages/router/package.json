@@ -5,7 +5,7 @@
     "tag": "next"
   },
   "description": "Component-based routing for KnockoutJS",
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
   "license": "WTFPL",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",

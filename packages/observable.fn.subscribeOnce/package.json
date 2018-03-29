@@ -2,7 +2,7 @@
   "name": "@profiscience/knockout-contrib-observable-fn-subscribe-once",
   "version": "1.0.0-alpha.4",
   "description": "KnockoutJS Observable.fn.subscribeOnce()",
-  "author": "Casey Webb <notcaseywebb@gmail.com>",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
   "license": "WTFPL",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.subscribeOnce",
