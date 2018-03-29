@@ -6,7 +6,7 @@ type KnockoutObservableTree<T> =
   T extends RegExp ? KnockoutObservable<RegExp> :
   T extends KnockoutObservable<any> ? T : // tslint:disable-line
   T extends KnockoutObservableArray<any> ? T :
-  T extends Function ? T :
+  T extends (...args: any[]) => any ? T :
   T extends { [k: string]: any } ? { readonly [P in keyof T]: KnockoutObservableTree<T[P]> } :
   KnockoutObservable<T>
 
@@ -14,7 +14,7 @@ export default function fromJS<T>(obj: T, mapArraysDeep = false, _parentIsArray 
   if (ko.isObservable(obj)) {
     return obj as any
   } else if (obj instanceof Array) {
-    const _arr = []
+    const _arr: any[] = []
     for (let i = 0; i < obj.length; i++) {
       _arr[i] = fromJS(obj[i], mapArraysDeep, true)
     }

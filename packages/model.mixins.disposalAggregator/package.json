@@ -1,15 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-disposal-aggregator",
   "version": "0.0.2",
-  "scripts": {
-    "build": "tsc",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "files": [
-    "index.ts",
-    "dist"
-  ],
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
@@ -18,5 +10,6 @@
   },
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
-  }
+  },
+  "module": "dist/default/index.js"
 }

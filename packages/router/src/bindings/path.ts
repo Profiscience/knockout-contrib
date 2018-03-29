@@ -5,9 +5,9 @@ import { activePathBinding } from './active-path'
 
 export const pathBinding: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    const path = ko.unwrap(valueAccessor())
+    (activePathBinding.init as any).call(this, el, valueAccessor, allBindings, viewModel, bindingCtx)
 
-    activePathBinding.init.apply(this, arguments)
+    const path = ko.unwrap(valueAccessor())
 
     Router.initialized
       .then(() => {

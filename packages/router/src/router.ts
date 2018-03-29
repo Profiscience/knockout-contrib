@@ -75,7 +75,7 @@ export class Router {
   }
 
   public onInit: ((router: Router) => void)[] = []
-  public component: KnockoutObservable<string>
+  public component: KnockoutObservable<null | string>
   public isNavigating: KnockoutObservable<boolean>
   public routes: Route[]
   public isRoot: boolean
@@ -92,7 +92,7 @@ export class Router {
     this.isRoot = typeof $parentCtx === 'undefined'
     this.routes = this.isRoot
       ? Router.routes
-      : $parentCtx.route.children
+      : ($parentCtx as Context & IContext).route.children
 
     if (this.isRoot) {
       Router.head = this
@@ -100,7 +100,7 @@ export class Router {
       window.addEventListener(Router.events.popstate, Router.onpopstate)
     }
 
-    this.ctx = new Context(this, $parentCtx, Router.getPath(url), _with)
+    this.ctx = new Context(this, $parentCtx, Router.getPath(url), _with) as Context & IContext
   }
 
   get initialized(): Promise<Router> {
@@ -182,7 +182,7 @@ export class Router {
       ko.tasks.runEarly()
     }
 
-    this.ctx = toCtx
+    this.ctx = toCtx as Context & IContext
 
     await fromCtx.runAfterDispose()
 

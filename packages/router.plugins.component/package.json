@@ -2,11 +2,8 @@
   "name": "@profiscience/knockout-contrib-router-plugins-component",
   "version": "1.0.0-alpha.10",
   "description": "Component Plugin for @profiscience/knockout-contrib-router",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/node/index.js",
+  "types": "index.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/Profiscience/knockout-contrib.git"
@@ -32,8 +29,5 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4"
   },
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  }
+  "module": "dist/default/index.js"
 }

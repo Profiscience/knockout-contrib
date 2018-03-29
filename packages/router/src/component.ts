@@ -26,12 +26,12 @@ ko.bindingHandlers.__router__ = {
     const bindingEvent: any = (ko as any).bindingEvent
 
     bindingEvent.subscribe(el, 'descendantsComplete', () => {
-      if ($router.isRoot) {
-        $router.init()
-      } else {
+      if ($router.ctx.$parent) {
         $router.ctx.$parent.router.initialized
           .then(() => $router.init())
           .catch(noop)
+      } else {
+        $router.init()
       }
     })
 

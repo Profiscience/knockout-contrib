@@ -2,7 +2,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import merge from 'lodash/merge'
 import ko from 'knockout'
 
-import { Route, Router } from '../dist'
+import { Route, Router } from '../'
 
 ko.components.register('plugins', {
   template: '<router></router>',

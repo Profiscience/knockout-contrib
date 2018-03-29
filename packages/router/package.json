@@ -10,13 +10,9 @@
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "Profiscience/knockout-contrib",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
+  "main": "dist/node/index.js",
+  "types": "src/index.ts",
   "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
     "test": "karma start"
   },
   "keywords": [
@@ -53,5 +49,6 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "tap-diff": "^0.1.1",
     "tape": "^4.8.0"
-  }
+  },
+  "module": "dist/default/index.js"
 }

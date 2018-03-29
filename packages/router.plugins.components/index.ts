@@ -25,7 +25,7 @@ export function componentsPlugin({ components }: IRouteConfig): Middleware {
   return function*(ctx: Context & IContext): IterableIterator<void> {
     if (!components) return
 
-    let componentNames = []
+    let componentNames: string[] = []
 
     /* beforeRender */
     ctx.queue(fetchComponents(components).then((componentMap) => {

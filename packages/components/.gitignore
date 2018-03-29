@@ -1,5 +1,0 @@
-/*.ts
-*.js
-*.d.ts
-!loader.ts
-!loader.test.ts

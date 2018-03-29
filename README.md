@@ -1,42 +1,30 @@
 # knockout-contrib
 
 [![KnockoutJS][knockout-shield]][KnockoutJS]
-[![License][wtfpl-shield]][wtfpl]
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
 [![Gitter][gitter-shield]][gitter]
-[![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
-> :tada: :tada: :tada: Want to meet up? Find me (@caseyWebb) at [Collision Conf 2018](https://collisionconf.com/) in NOLA, April 30 - May 3. Special thanks to Collision for their open source initiative and providing us with a free pair of tickets! :tada: :tada: :tada:
+Goodies for building rich UIs with [KnockoutJS][]. Packages are published under the `@profiscience/knockout-contrib-*` namespace.
 
-
-This is the [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) used internally at [Profisciencē](https://profiscience.com) for building rich UIs with [KnockoutJS][]
-
-**NOTE:** Packages released as `X.X.X-alpha.X` are pre-releases and are subject to breaking changes without warning. Otherwise, strict [semver](https://semver.org/) is used, and any discovered breaking changes will be worked around or rolled back if necessary.
-
-# Installation
-Individual packages are published under the `@profiscience/knockout-contrib-*` namespace, with package names kebab-cased.
-
-e.g.
-```bash
-$ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-observble-fn
+_e.g._
+```shell
+$ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-router-plugins-component
 ```
 
+##### Why is everything published as a separate package?
 
-# Packages
-- [bindings](./packages/bindings)
-- [components](./packages/components)
-- [jest-matchers](./packages/jest-matchers)
-- [model](./packages/model)
-- [observable.fn](./packages/observable.fn)
-- [querystring](./packages/querystring)
-- [router](./packages/router)
-- [router.middleware](./packages/router.middleware)
-- [router.plugins](./packages/router.plugins)
-- [utils](./packages/utils)
+_tl;dr it keeps you out of dependency hell_
 
+Publishing a independent packages instead of a single package utilizing tree-shaking or nested imports (i.e. `import 'components/markdown'`) allows each package to have its own semver.
 
-[Contributing](./CONTRIBUTING.md)
+Take the following scenario...
+
+> - you're using `components.a`
+> - breaking changes are introduced into `components.a`
+> - `components.b` is added, and now you want to use it
+
+If both components are published together, you'd be required to update `components.a` before getting on with the work you set out to do with `components.b`. A monorepo grants the ability to avoid this nonsense while maintaining a unified build/test process.
 
 [KnockoutJS]: https://knockoutjs.com
 
@@ -50,9 +38,3 @@ $ yarn add @profiscience/knockout-contrib-router @profiscience/knockout-contrib-
 
 [gitter]: https://gitter.im/Profiscience/knockout-contrib
 [gitter-shield]: https://img.shields.io/gitter/room/profiscience/knockout-contrib.svg
-
-[greenkeeper]: https://greenkeeper.io
-[greenkeeper-shield]: https://badges.greenkeeper.io/Profiscience/knockout-contrib.svg
-
-[wtfpl]: ./LICENSE.md
-[wtfpl-shield]: https://img.shields.io/npm/l/@profiscience/knockout-contrib-router.svg

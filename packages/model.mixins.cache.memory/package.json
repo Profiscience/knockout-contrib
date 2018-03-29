@@ -1,11 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-cache-memory",
   "version": "0.0.18",
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
@@ -19,5 +15,6 @@
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.5",
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.0-alpha.4",
     "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.23"
-  }
+  },
+  "module": "dist/default/index.js"
 }

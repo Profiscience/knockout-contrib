@@ -2,11 +2,8 @@
   "name": "@profiscience/knockout-contrib-components-markdown",
   "version": "0.0.4",
   "description": "Markdown Component for KnockoutJS",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/node/index.js",
+  "types": "index.tsx",
   "keywords": [
     "knockout",
     "knockoutjs",
@@ -27,8 +24,5 @@
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
   },
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  }
+  "module": "dist/default/index.js"
 }

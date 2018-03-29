@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 import { RestApiHelper, RestApiError } from './helper'
-import 'jest-fetch-mock'
+import * as fetch from 'jest-fetch-mock'
 
 // tslint:disable-next-line no-var-requires
 (global as any).fetch = require('jest-fetch-mock')

@@ -3,7 +3,7 @@
 import * as ko from 'knockout'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
-import 'jest-fetch-mock'
+import * as fetch from 'jest-fetch-mock'
 
 import { createRESTMixin } from './mixin'
 

@@ -20,12 +20,13 @@ cache:
   directories:
   - node_modules
 install:
-- yarn install --ignore-optional
+- yarn install
 before_script:
 - sh -e /etc/init.d/xvfb start
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-update
 script:
-- yarn build --concurrency 1
+- yarn build
+- yarn lint
 - yarn test
 - yarn test:router
 after_script:

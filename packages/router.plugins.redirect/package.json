@@ -2,11 +2,8 @@
   "name": "@profiscience/knockout-contrib-router-plugins-redirect",
   "version": "0.0.3",
   "description": "Redirect Plugin for @profiscience/knockout-contrib-router",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "dist/node/index.js",
+  "types": "index.ts",
   "keywords": [
     "tko",
     "knockout",
@@ -27,8 +24,5 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-4"
   },
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  }
+  "module": "dist/default/index.js"
 }

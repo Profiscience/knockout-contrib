@@ -1,11 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-lazy",
   "version": "0.0.16",
-  "scripts": {
-    "build": "../../node_modules/.bin/taskr build -d ../..",
-    "test": "DIR=$PWD; cd ../..; yarn test $DIR"
-  },
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "types": "index.ts",
   "license": "WTFPL",
   "dependencies": {
@@ -17,5 +13,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.23"
-  }
+  },
+  "module": "dist/default/index.js"
 }

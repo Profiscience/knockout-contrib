@@ -20,5 +20,5 @@ ko.computed.fn.toString = function(): string {
 }
 
 function toString(obs, type): string {
-  return `${type}(${ko.toJSON(obs(), null)})`
+  return `${type}(${ko.toJSON(obs())})`
 }

@@ -1,5 +1,5 @@
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { FLASH_MESSAGE } from '@profiscience/knockout-contrib-router-middleware'
+import { FLASH_MESSAGE } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
@@ -78,12 +78,13 @@ function normalizeArgs(pluginConfig: AuthorizationPluginConfig, routeConfig: IRo
     return {
       requiredAuthorizations: routeConfig.authorize,
       getNotAuthorizedRedirectPath: () => pluginConfig.notAuthorizedRedirectPath
-    }
+    } as any
   }
+  const config = (routeConfig as any).authorize
   return {
-    requiredAuthorizations: routeConfig.authorize.authorizations,
-    getNotAuthorizedRedirectPath: typeof routeConfig.authorize.notAuthorizedRedirectPath === 'function'
-      ? routeConfig.authorize.notAuthorizedRedirectPath
-      : () => (routeConfig.authorize as any).notAuthorizedRedirectPath
+    requiredAuthorizations: config.authorizations,
+    getNotAuthorizedRedirectPath: typeof config.notAuthorizedRedirectPath === 'function'
+      ? config.notAuthorizedRedirectPath
+      : () => config.notAuthorizedRedirectPath
   }
 }
