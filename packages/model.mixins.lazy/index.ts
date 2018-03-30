@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 const ORIGINAL_FETCH = Symbol('ORIGINAL_FETCH')

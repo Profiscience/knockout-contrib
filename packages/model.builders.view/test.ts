@@ -1,6 +1,5 @@
 /* tslint:disable max-classes-per-file no-empty-interface */
 
-import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
 
 import { ViewModelConstructorBuilder } from './index'

@@ -1,12 +1,8 @@
 // tslint:disable max-classes-per-file
 
-import * as ko from 'knockout'
-
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
 import { DisposalAggregatorMixin } from './index'
-
-class EmptyClass { }
 
 describe('model.mixins.disposalAggregator', () => {
   test('.dispose() calls .dispose() on every property that has it', () => {

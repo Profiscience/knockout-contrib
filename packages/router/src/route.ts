@@ -29,14 +29,14 @@ type NormalizedRouteConfig = {
 }
 
 export class Route {
-  private static plugins: RoutePlugin[] = []
+  private static readonly plugins: RoutePlugin[] = []
 
   public component: string
   public middleware: Middleware[]
   public children: Route[]
-  public keys: Key[]
+  public readonly keys: Key[]
 
-  private regexp: RegExp
+  private readonly regexp: RegExp
 
   constructor(public path: string, ...config: RouteConfig[]) {
     Object.assign(this, Route.parseConfig(config))
@@ -63,8 +63,8 @@ export class Route {
     return false
   }
 
-  public parse(path: string): { params: { [k: string]: any }, pathname: string, childPath: string } {
-    let childPath
+  public parse(path: string): { params: { [k: string]: any }, pathname: string, childPath?: string } {
+    let childPath: string | undefined
     let pathname = path
     const params: { [k: string]: any } = {}
     const matches = this.regexp.exec(path)
@@ -120,7 +120,7 @@ export class Route {
     return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>(
       (routeStack, configEntry: RouteConfig & IRouteConfig) => {
         const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
-          const pluginStack: IRouteConfig = plugin(configEntry) as any
+          const pluginStack: IRouteConfig | undefined = plugin(configEntry) as any
           return typeof pluginStack === 'undefined'
             ? allPluginsStack
             : [...allPluginsStack, ...flatten(castArray(pluginStack))]

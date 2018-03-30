@@ -50,18 +50,6 @@ describe('model.mixins.lazy', () => {
   test('does not affect models created with initial data', async () => {
     const spy = jest.fn()
 
-    function FoosMixin<P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }>(ctor: T) {
-      return class extends ctor {
-        public foos: KnockoutObservableArray<string> = ko.observableArray([])
-        protected async fetch(): Promise<any> {
-          spy()
-          return {
-            foos: FOOS
-          }
-        }
-      }
-    }
-
     class DataModel extends DataModelConstructorBuilder
       .Mixin(LazyMixin('foos'))
       <{}> {

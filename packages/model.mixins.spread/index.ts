@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 export const SPREAD_MAPPINGS = Symbol('SPREAD_MAPPINGS')

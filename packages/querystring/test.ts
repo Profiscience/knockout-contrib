@@ -357,7 +357,7 @@ describe('querystring', () => {
 
     Query.setParser({
       parse: (str) => ({ foo: str.replace('foo=', '') }),
-      stringify: (obj) => 'foo=' + obj.foo
+      stringify: (obj) => 'foo=' + (obj.foo as string)
     })
 
     const q = Query.create({ foo: undefined })

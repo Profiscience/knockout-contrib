@@ -1,6 +1,5 @@
 /* tslint:disable max-classes-per-file */
 
-import * as ko from 'knockout'
 import { Context, Route, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
@@ -39,7 +38,7 @@ describe('router.plugins.init', () => {
 
     await Promise.all(queue.mock.calls.map(([p]) => p))
 
-    const componentInstance = await ctx.component
+    await ctx.component
 
     expect(spy).toBeCalledWith([promise])
   })

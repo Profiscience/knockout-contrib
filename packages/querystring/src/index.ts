@@ -36,7 +36,7 @@ export default class Query {
       : encodeURIComponent(JSON.stringify(obj))
   }
 
-  private _group?: string
+  private readonly _group?: string
 
   [k: string]: any
 

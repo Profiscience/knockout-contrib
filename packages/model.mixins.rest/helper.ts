@@ -27,8 +27,8 @@ export type RestHelperUpdateMethod = {
 }
 
 export class RestApiHelper {
-  private baseURL = ''
-  private requestInit: RequestInit = {
+  private readonly baseURL: string
+  private readonly requestInit: RequestInit = {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -37,9 +37,8 @@ export class RestApiHelper {
   }
 
   constructor(config: RestMixinConfig) {
-    if (config.baseURL) {
-      this.baseURL = config.baseURL
-    }
+    this.baseURL = config.baseURL || ''
+
     if (config.stringifyQuery) {
       this.stringifyQuery = config.stringifyQuery
     }
@@ -115,7 +114,7 @@ export class RestApiHelper {
     const pattern = /(:?)([^/?]+)(\??)/g
     let match: RegExpExecArray | null
     while ((match = pattern.exec(url)) !== null) { // tslint:disable-line no-conditional-assignment
-      const [_, isInterpolated, name, isOptional] = match
+      const [, isInterpolated, name, isOptional] = match
       if (!isOptional && !params[name]) continue
       if (isInterpolated) {
         let textToReplace = ':' + name

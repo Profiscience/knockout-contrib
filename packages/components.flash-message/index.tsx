@@ -2,7 +2,7 @@ import 'jsx-dom' // type defs
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-view'
-import { IFlashMessage, flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
+import { flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
 declare module '@profiscience/knockout-contrib-router-middleware-flash-message' {
   // tslint:disable-next-line no-shadowed-variable
@@ -63,8 +63,6 @@ export class FlashMessageViewModel extends ViewModelConstructorBuilder {
   public dismiss() {
     flashMessage(false)
   }
-
-  private static isFlashMessageObject
 }
 
 const template = [

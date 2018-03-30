@@ -75,7 +75,7 @@ describe('flash-message component', () => {
     const v = { text: 'foo', timeout: 1000 }
     jest.useFakeTimers()
     flashMessage(v)
-    await jest.runAllTimers()
+    jest.runAllTimers()
     expect(flashMessage()).toBe(false)
   })
 })

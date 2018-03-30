@@ -1,4 +1,4 @@
-import { Route, RouteMap, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import { Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
