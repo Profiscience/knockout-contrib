@@ -213,7 +213,7 @@ describe('model.builders.data', () => {
 
     await foo.delete()
 
-    expect(foo.dispose).toBeCalled()
+    expect(dispose).toBeCalled()
     expect(updateAll).toBeCalled()
   })
 

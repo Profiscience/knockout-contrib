@@ -1,7 +1,6 @@
 // tslint:disable max-classes-per-file variable-name
 
 import * as ko from 'knockout'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 import * as fetch from 'jest-fetch-mock'
 
@@ -121,12 +120,13 @@ describe('model.mixins.rest', () => {
   })
 
   test('does not pollute enumerable properties', async () => {
+    fetch.mockResponse(JSON.stringify({ foos: FOOS }))
+
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
       public foos: KnockoutObservableArray<string>
     }
 
-    const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
     const model = await DataModel.create({})
 
     expect(Object.keys(model)).toEqual(['foos'])

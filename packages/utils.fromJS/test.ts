@@ -38,6 +38,7 @@ describe('utils.fromJS', () => {
 
     {
       // test type checking (not fool-proof)
+      // tslint:disable:no-unused-variable
       const num: KnockoutObservable<number> = actual.num
       const str: KnockoutObservable<string> = actual.str
       const date: KnockoutObservable<Date> = actual.date

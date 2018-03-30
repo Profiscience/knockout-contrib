@@ -15,15 +15,15 @@ export class Context /* implements IContext, use Context & IContext */ {
   public route: Route
   public params: { [k: string]: any }
   public pathname: string
-  public _redirect: string
-  public _redirectArgs: {
+  public _redirect?: string
+  public _redirectArgs?: {
     push: false
     force?: boolean
     with?: { [prop: string]: any }
   }
 
+  private readonly _beforeNavigateCallbacks: Callback<void>[] = []
   private _queue: Promise<void>[]  = []
-  private _beforeNavigateCallbacks: Callback<void>[] = []
   private _appMiddlewareDownstream: Callback<void>[] = []
   private _routeMiddlewareDownstream: Callback<void>[] = []
 
@@ -35,6 +35,14 @@ export class Context /* implements IContext, use Context & IContext */ {
   ) {
     const ctx: Context & IContext = this as any
     const route = router.resolveRoute(path)
+
+    if (!route) {
+      throw new Error(
+        // tslint:disable-next-line:max-line-length
+        `[@profiscience/knockout-contrib-router] Router@${router.depth} context initialized with path ${path}, but no matching route was found`
+      )
+    }
+
     const { params, pathname, childPath } = route.parse(path)
 
     Object.assign(this, {

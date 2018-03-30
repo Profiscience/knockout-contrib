@@ -147,10 +147,18 @@ export class Router {
     const { search, hash } = Router.parseUrl(url)
     const path = Router.getPath(url)
     const route = this.resolveRoute(path)
+
+    if (!route) {
+      throw new Error(
+        // tslint:disable-next-line:max-line-length
+        `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${path}", but no matching route was found`
+      )
+    }
+
     const { pathname, childPath } = route.parse(path)
     const samePage = fromCtx.pathname === pathname
 
-    if (fromCtx.$child && samePage && !args.force) {
+    if (childPath && samePage && !args.force) {
       return await fromCtx.$child.router.update(childPath + search + hash, args)
     }
 
@@ -161,7 +169,7 @@ export class Router {
     }
 
     const shouldNavigate = await fromCtx.runBeforeNavigateCallbacks()
-    if (shouldNavigate === false) {
+    if (!shouldNavigate) {
       return false
     }
 
@@ -197,7 +205,7 @@ export class Router {
     return true
   }
 
-  public resolveRoute(path: string): Route {
+  public resolveRoute(path: string): Route | undefined {
     let matchingRouteWithFewestDynamicSegments
     let fewestMatchingSegments = Infinity
 
@@ -372,6 +380,6 @@ export class Router {
 
   private static which(e: MouseEvent): number {
     e = e || window.event as MouseEvent
-    return e.which === null ? e.button : e.which
+    return e.which === null ? e.button : e.which // tslint:disable-line:strict-type-predicates
   }
 }

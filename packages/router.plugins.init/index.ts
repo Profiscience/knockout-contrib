@@ -1,5 +1,4 @@
-import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import { Context, IContext } from '@profiscience/knockout-contrib-router'
 
 export const INITIALIZED = Symbol('INITIALIZED')
 

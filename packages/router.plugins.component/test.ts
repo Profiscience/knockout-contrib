@@ -3,7 +3,7 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { componentPlugin, IRoutedComponentConfig, IRoutedComponentInstance } from './index'
+import { componentPlugin, IRoutedComponentInstance } from './index'
 
 const uniqueComponentNames = (function*() {
   let i = 0

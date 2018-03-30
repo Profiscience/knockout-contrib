@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { ToProgress, ToProgressOptions } from 'toprogress2'
 import { Context, IContext } from '@profiscience/knockout-contrib-router'
 

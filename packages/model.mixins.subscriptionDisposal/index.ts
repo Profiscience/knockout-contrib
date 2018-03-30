@@ -3,10 +3,6 @@ import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builder
 
 export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
 
-type TwoDimensionalMap<X, Y, V> = Map<X, Map<Y, V>>
-
-type SubscriptionsMap = TwoDimensionalMap<any, any, KnockoutSubscription>
-
 /**
  * Adds .subscribe(obs, fn) and .dispose() methods with subscription tracking to prevent leaks
  *

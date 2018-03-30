@@ -21,13 +21,12 @@ function parseArgv() {
 const getSourceFiles = () => globby([
   '**/*.ts',
   '**/*.tsx',
-  '!**/dist',
-  '!**/examples',
-  '!**/node_modules',
+  '!**/examples/**/*',
+  '!**/node_modules/**/*',
+  '!**/__tests__/**/*',
   '!**/test.ts',
   '!**/test.tsx',
-  '!**/*.test.ts',
-  '!**/__tests__'
+  '!**/*.test.ts'
 ], {
   cwd: PACKAGES_DIR
 }).then((files) => files.map((f) => path.resolve(__dirname, 'packages', f)))

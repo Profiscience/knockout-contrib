@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 export function TransformMixin<P extends {}>(transform: (fetchData: any, params: P) => any) {

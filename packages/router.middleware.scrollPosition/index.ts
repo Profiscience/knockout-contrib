@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { Context, IContext } from '@profiscience/knockout-contrib-router'
 
 export type ScrollPositionMiddlewareOpts = {

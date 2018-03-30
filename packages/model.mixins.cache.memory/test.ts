@@ -2,7 +2,6 @@
 
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
-import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
 import { InMemoryCacheMixin } from './index'
@@ -212,41 +211,44 @@ describe('model.mixins.cache.memory', () => {
     m22.dispose()
   })
 
-  test('deletes all caches on delete', async () => {
-    const fetch = jest.fn()
+// @todo what is this?
+//
+//   test('deletes all caches on delete', async () => {
+//     const fetch = jest.fn()
+//
+//     // tslint:disable-next-line variable-name
+//     const FetchMixin = <
+//       P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
+//       >(ctor: T) => class extends ctor {
+//       protected async fetch() {
+//         fetch()
+//         return { foo: 'foo' }
+//       }
+//     }
+//
+//     class DataModel1 extends DataModelConstructorBuilder
+//       .Mixin(FetchMixin)
+//       .Mixin(InMemoryCacheMixin())
+//       <{}> {
+//       public foo: KnockoutObservable<string>
+//     }
+//
+//     class DataModel2 extends DataModelConstructorBuilder
+//       .Mixin(FetchMixin)
+//       .Mixin(InMemoryCacheMixin())
+//       <{}> {
+//       public foo: KnockoutObservable<string>
+//     }
+//
+//     const m11 = await DataModel1.create({})
+//     const m12 = await DataModel1.create({})
+//     const m21 = await DataModel2.create({})
+//     const m22 = await DataModel2.create({})
+//
+//     await m11.delete() // m12, m2*
+//     await m12.delete() // m2*
+//
+//     expect(fetch).toHaveBeenCalledTimes(5)
+//   })
 
-    // tslint:disable-next-line variable-name
-    const FetchMixin = <
-      P, T extends { new(...args: any[]): DataModelConstructorBuilder<P> }
-      >(ctor: T) => class extends ctor {
-      protected async fetch() {
-        fetch()
-        return { foo: 'foo' }
-      }
-    }
-
-    class DataModel1 extends DataModelConstructorBuilder
-      .Mixin(FetchMixin)
-      .Mixin(InMemoryCacheMixin())
-      <{}> {
-      public foo: KnockoutObservable<string>
-    }
-
-    class DataModel2 extends DataModelConstructorBuilder
-      .Mixin(FetchMixin)
-      .Mixin(InMemoryCacheMixin())
-      <{}> {
-      public foo: KnockoutObservable<string>
-    }
-
-    const m11 = await DataModel1.create({})
-    const m12 = await DataModel1.create({})
-    const m21 = await DataModel2.create({})
-    const m22 = await DataModel2.create({})
-
-    await m11.delete() // m12, m2*
-    await m12.delete() // m2*
-
-    expect(fetch).toHaveBeenCalledTimes(5)
-  })
 })

@@ -1,5 +1,4 @@
-import * as ko from 'knockout'
-import { Context, IContext, Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import { Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
 import { childrenPlugin } from './index'
 
@@ -27,7 +26,6 @@ describe('router.plugins.children', () => {
   })
 
   test('doesn\'t blow up when not used', () => {
-    const ctx = {} as Context & IContext
     const routeConfig: IRouteConfig = {}
     expect(() => childrenPlugin(routeConfig)).not.toThrow()
   })

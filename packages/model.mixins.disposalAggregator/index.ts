@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
 export function DisposalAggregatorMixin<T extends { new(...args: any[]): ConstructorBuilder }>(ctor: T) {

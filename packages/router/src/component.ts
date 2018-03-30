@@ -58,11 +58,13 @@ function createViewModel(params: { [k: string]: any }) {
   if (router.isRoot) {
     router.ctx.runBeforeRender()
       .then(() => {
-        if (router.ctx._redirect) {
+        const redirectPath = router.ctx._redirect
+        const redirectArgs = router.ctx._redirectArgs
+        if (redirectPath) {
           router.ctx.runAfterRender()
             .then(() => {
-              const { router: r, path: p } = traversePath(router, router.ctx._redirect)
-              r.update(p, router.ctx._redirectArgs).catch((err) => log.error('Error redirecting', err))
+              const { router: r, path: p } = traversePath(router, redirectPath)
+              r.update(p, redirectArgs).catch((err) => log.error('Error redirecting', err))
             })
             .catch((err) => log.error('Error in afterRender middleware', err))
         } else {

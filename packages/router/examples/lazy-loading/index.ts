@@ -1,8 +1,10 @@
 import * as ko from 'knockout'
-import { Plugin, Router } from '@profiscience/knockout-contrib-router'
+import { RoutePlugin, Router } from '@profiscience/knockout-contrib-router'
+
+// @ts-ignore
 import template from './index.html'
 
-const lazyLoadPlugin: Plugin = (componentName: string) => [
+const lazyLoadPlugin: RoutePlugin = (componentName: string) => [
   // we return an array that the router understands, so first we'll
   // include the name of the component
   componentName,

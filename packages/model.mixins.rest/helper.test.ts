@@ -236,8 +236,8 @@ describe('model.mixins.rest api helper', () => {
     })
 
     test('sets redirect follow', async () => {
-      const api = new RestApiHelper({})
       const { mock } = fetch.mockResponseOnce(JSON.stringify({ foo: 'bar' })) as any
+      const api = new RestApiHelper({})
       await api.get()
       expect(mock.calls[0][1].redirect).toBe('follow')
     })
@@ -245,8 +245,8 @@ describe('model.mixins.rest api helper', () => {
 
   describe('helper methods', () => {
     test('return parsed response', async () => {
+      fetch.mockResponseOnce(JSON.stringify({ foo: 'bar' }))
       const api = new RestApiHelper({})
-      const { mock } = fetch.mockResponseOnce(JSON.stringify({ foo: 'bar' })) as any
       const res = await api.get()
       expect(res).toEqual({ foo: 'bar' })
     })
@@ -318,14 +318,14 @@ describe('model.mixins.rest api helper', () => {
     })
 
     test('rejects if status < 200', async () => {
+      fetch.mockResponse('', { status: 199 })
       const api = new RestApiHelper({})
-      const { mock } = fetch.mockResponse('', { status: 199 }) as any
       await expect(api.get()).rejects.toBeInstanceOf(RestApiError)
     })
 
     test('rejects if status >= 300', async () => {
+      fetch.mockResponse('', { status: 301 })
       const api = new RestApiHelper({})
-      const { mock } = fetch.mockResponse('', { status: 301 }) as any
       await expect(api.get()).rejects.toBeInstanceOf(RestApiError)
     })
   })

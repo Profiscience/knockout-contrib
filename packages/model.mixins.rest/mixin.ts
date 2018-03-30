@@ -1,4 +1,3 @@
-import * as ko from 'knockout'
 import { DataModelConstructorBuilder, nonenumerable } from '@profiscience/knockout-contrib-model-builders-data'
 import { RestApiHelper, RestHelperRequestConfig } from './helper'
 

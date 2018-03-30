@@ -10,7 +10,7 @@ export type MarkdownComponentParams = {
 }
 
 export class MarkdownViewModel extends ViewModelConstructorBuilder {
-  private options: MarkedOptions
+  private readonly options: MarkedOptions
   public html = ko.observable('')
 
   constructor(params: MarkdownComponentParams) {
