@@ -3,19 +3,18 @@ import * as ko from 'knockout'
 declare global {
   // tslint:disable-next-line interface-name
   interface KnockoutBindingHandlers {
-    ctrlClick: KnockoutBindingHandler
-    ctrlClickAllowMeta: KnockoutBindingHandler
+    shiftClick: KnockoutBindingHandler
   }
 }
 
-const shiftClickBinding: KnockoutBindingHandler = {
+export const shiftClickBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(el, {
-      click($data, e) {
-        if (e.shiftKey) valueAccessor()($data, e)
+      click($data, e: MouseEvent) {
+        if (e.shiftKey) valueAccessor().call(this, $data, e)
       }
     })
   }
 }
 
-export default shiftClickBinding
+ko.bindingHandlers.shiftClick = shiftClickBindingHandler

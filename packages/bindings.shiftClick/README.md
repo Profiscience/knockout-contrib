@@ -21,17 +21,24 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-shift-click&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-shift-click.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-bindings metapackage](../bindings)
+Built-in [click binding][], filtered for shift+click
 
-Like the [click binding][], but only calls handler if shift key is pressed.
+__NOTE:__ Consider mobile users when using this binding
 
 ## Usage
 
 ```typescript
-import '@profiscience/knockout-contrib-bindings/shiftClick'
+// register as "shiftClick"
+import '@profiscience/knockout-contrib-bindings-shift-click'
+
+// register as custom name
+import * as ko from 'knockout'
+import { shiftClickBindingHandler } from '@profiscience/knockout-contrib-bindings-shift-click'
+ko.bindingHandlers['click.shift'] = shiftClickBindingHandler
 ```
+
 ```html
-<div data-bind="shiftClick: handler"></div>
+<div data-bind="shiftClick: (event, data) => console.log(data)"></div>
 ```
 
 [click binding]: https://knockoutjs.com/documentation/click-binding.html
