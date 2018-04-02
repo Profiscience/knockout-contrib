@@ -21,15 +21,21 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-toggle&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-toggle.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-bindings metapackage](../bindings)
-
-Toggle a boolean observable on click. Disable with the `toggleDisable` binding.
+Toggle an observable boolean on click. Disable with optional `toggleDisable` binding.
 
 ## Usage
 
 ```typescript
-import '@profiscience/knockout-contrib-bindings/toggle'
+// register as "toggle"
+import '@profiscience/knockout-contrib-bindings-toggle'
+
+// register using custom name
+import * as ko from 'knockout'
+import { toggleBindingHandler } from '@profiscience/knockout-contrib-bindings-toggle'
+ko.bindingHandlers['contrib.toggle'] = toggleBindingHandler
+delete ko.bindingHandlers.toggle // remove default registration
 ```
+
 ```html
-<div data-bind="toggle: myBool, toggleDisable: ko.observable(false)"></div>
+<div data-bind="toggle: myObsBool, toggleDisable: ko.observable(false)"></div>
 ```

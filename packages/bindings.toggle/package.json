@@ -15,7 +15,8 @@
     "knockoutjs",
     "binding",
     "bindingHandler",
-    "tko"
+    "tko",
+    "knockout-binding"
   ],
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
