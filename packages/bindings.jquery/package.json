@@ -14,5 +14,13 @@
     "jquery": "x.x.x",
     "knockout": "^3.5.0-beta",
     "knockout-punches": "^0.5.1"
-  }
+  },
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "binding",
+    "bindingHandler",
+    "tko",
+    "knockout-binding"
+  ]
 }

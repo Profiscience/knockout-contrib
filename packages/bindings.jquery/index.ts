@@ -1,3 +1,4 @@
+import * as ko from 'knockout'
 import 'knockout-punches'
 import $ from 'jquery'
 
@@ -8,34 +9,26 @@ declare global {
   }
 }
 
-const jqueryBinding: KnockoutBindingHandler = {
+export const jqueryBindingHandler: KnockoutBindingHandler = {
   getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
+        const $el = $(el)
         const value = allBindings.get('value')
         const changeHandler = allBindings.get('event.change') || (allBindings.get('event') || {}).change
-        let opts = valueAccessor()
+        const opts = valueAccessor()
 
-        opts = opts || {}
-
-        $(el).change((e) => {
-          if (typeof value === 'function') {
-            value($(el).val())
-          }
-
-          if (typeof changeHandler === 'function') {
-            changeHandler(e)
-          }
+        $el.on('change', (e) => {
+          if (value) value(el.value)
+          if (changeHandler) changeHandler(e)
         })
 
-        $(el)[pluginName](opts)
+        $el[pluginName](opts)
 
-        if (typeof value === 'function') {
-          value($(el).val())
-        }
+        if (value) value(el.value)
       }
     }
   }
 }
 
-export default jqueryBinding
+ko.bindingHandlers.jquery = jqueryBindingHandler

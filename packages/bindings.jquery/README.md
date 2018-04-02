@@ -23,19 +23,20 @@
 
 Invoke a jQuery plugin on an element
 
-This binding depends on jquery and namespaced bindings from knockout-punches.
-
-
-### Installation
-
-It is recommended to use the [@profiscience/knockout-contrib-bindings metapackage](../bindings)
-
+> Depends on jquery and knockout-punches
 
 ## Usage
 
 ```typescript
+// register as "jquery"
 import '@profiscience/knockout-contrib-bindings-jquery'
+
+// register as custom name
+import * as ko from 'knockout'
+import { jqueryBindingHandler } from '@profiscience/knockout-contrib-bindings-jquery'
+ko.bindingHandlers.$ = jqueryBindingHandler
 ```
+
 ```html
 <div data-bind="$.somePlugin: pluginOpts"></div>
 ```

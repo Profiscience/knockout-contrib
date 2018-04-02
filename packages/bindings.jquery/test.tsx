@@ -2,9 +2,7 @@ import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import * as $ from 'jquery'
 
-import binding from './index'
-
-ko.bindingHandlers.jquery = binding
+import './index'
 
 describe('bindings.jquery', () => {
   test('calls the jquery plugin on the bound element', (done) => {
@@ -27,11 +25,11 @@ describe('bindings.jquery', () => {
     ko.applyBindings({ opts }, el)
   })
 
-  test('options default to empty object', (done) => {
+  test('options default to undefined', (done) => {
     const el = <div data-bind='jquery.myPlugin'></div>
     // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
-      expect(_opts).toEqual({})
+      expect(_opts).toBeUndefined()
       done()
     }
     ko.applyBindings({}, el)
