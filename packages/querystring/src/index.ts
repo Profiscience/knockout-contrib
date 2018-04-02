@@ -1,13 +1,13 @@
 import * as ko from 'knockout'
 import { Primitive, MaybeArray, isBool, isEmpty, isNumber, isUndefined, entries, omit } from './utils'
 
-export type IQueryParam<T> = KnockoutObservable<any> & {
+export type IQueryParam<T> = KnockoutObservable<T | undefined> & {
   isDefault(): boolean
   clear(): void
 }
 
 export type IQuery<T> = {
-  [P in keyof T]: IQueryParam<T>
+  [P in keyof T]: IQueryParam<T[P]>
 }
 
 export interface IQueryParamConfig {
@@ -88,8 +88,7 @@ export default class Query {
   }
 
   public clear() {
-    const group = this._group as string
-    Object.keys(Query._raw[group]).forEach((k) => Query._raw[group][k].clear())
+    Object.keys(Query._raw[this._group as string]).forEach((k) => Query._raw[this._group as string][k].clear())
   }
 
   public dispose() {
@@ -98,7 +97,6 @@ export default class Query {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       delete current[group]
       Query.writeQueryString(current)
-
       delete Query._raw[group]
     }
   }
@@ -166,13 +164,11 @@ export default class Query {
         qs ? '?' + qs : ''
       )
     } else {
-      const matches = /([^?#]*)/.exec(currentUrl)
-
-      if (!matches) {
-        throw new Error('[@profiscience/knockout-contrib-querystring] Failed to write updated querystring')
+      const pathnameMatches = /([^?#]*)/.exec(currentUrl)
+      if (!pathnameMatches) {
+        throw new Error('Failed to write query string; could not parse current url')
       }
-
-      const currentPathname = matches[1]
+      const currentPathname = pathnameMatches[1]
       const hashMatches = /(#[^!]*)/.exec(currentUrl)
 
       newUrl = currentPathname
@@ -225,7 +221,7 @@ export default class Query {
         if (coerce) {
           v = coerce(v)
         }
-        _p(v as any)
+        _p(v as string)
         Query.queueQueryStringWrite()
           // tslint:disable-next-line no-console
           .catch((err) => console.error('[@profiscience/knockout-contrib-querystring] error queueing write'))
@@ -240,7 +236,7 @@ export default class Query {
           if (isDefault() || isUndefined(p())) {
             p(d)
           }
-          _default(d as any)
+          _default(d as string)
         } else {
           d = d as IQueryParamConfig
           if (d.coerce) {

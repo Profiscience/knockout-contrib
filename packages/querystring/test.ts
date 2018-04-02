@@ -30,7 +30,7 @@ describe('querystring', () => {
   test('url parsing', () => {
     history.replaceState(null, '', location.pathname + '#hash')
 
-    const query = Query.create({ foo: undefined })
+    const query = Query.create<{ foo: string | undefined }>({ foo: undefined })
 
     query.foo('foo')
     ko.tasks.runEarly()
@@ -65,7 +65,7 @@ describe('querystring', () => {
   test('empty query', () => {
     history.replaceState(null, '', location.pathname)
 
-    const query = Query.create({ foo: undefined })
+    const query = Query.create<{ foo: string | undefined }>({ foo: undefined })
 
     query.foo('foo')
     query.foo(undefined)
@@ -76,7 +76,7 @@ describe('querystring', () => {
   })
 
   test('writability', () => {
-    const query = Query.create({ foo: 'foo' })
+    const query = Query.create<{ foo: any }>({ foo: 'foo' })
 
     query.foo('bar')
     ko.tasks.runEarly()
@@ -254,7 +254,7 @@ describe('querystring', () => {
   test('#asObservable', (done) => {
     history.replaceState(null, '', location.pathname)
 
-    const query = Query.create({ foo: undefined })
+    const query = Query.create<{ foo: string | undefined }>({ foo: undefined })
     const q = query.asObservable()
 
     const killMe = q.subscribe(() => {
@@ -295,8 +295,8 @@ describe('querystring', () => {
   test('#dispose', () => {
     history.replaceState(null, '', location.pathname)
 
-    const a1 = Query.create({ foo: undefined }, 'a')
-    const a2 = Query.create({ foo: undefined }, 'a')
+    const a1 = Query.create<{ foo: string | undefined }>({ foo: undefined }, 'a')
+    const a2 = Query.create<{ foo: string | undefined }>({ foo: undefined }, 'a')
 
     a1.foo('foo')
     ko.tasks.runEarly()
@@ -313,8 +313,8 @@ describe('querystring', () => {
   })
 
   test('grouped/multiple queries', () => {
-    const a = Query.create({ foo: undefined }, 'a')
-    const b = Query.create({ foo: undefined }, 'b')
+    const a = Query.create<{ foo: string | undefined }>({ foo: undefined }, 'a')
+    const b = Query.create<{ foo: string | undefined }>({ foo: undefined }, 'b')
 
     a.foo('foo')
     b.foo('notfoo')
@@ -329,8 +329,13 @@ describe('querystring', () => {
   })
 
   test('linked queries', () => {
-    const a1 = Query.create({ foo: undefined, bar: undefined }, 'a')
-    const a2 = Query.create({ foo: undefined, bar: 'bar', baz: undefined }, 'a')
+    type IFooBarBaz = {
+      foo: string | undefined
+      bar: string | undefined
+      baz: string | undefined
+    }
+    const a1 = Query.create<IFooBarBaz>({ foo: undefined, bar: undefined, baz: undefined }, 'a')
+    const a2 = Query.create<IFooBarBaz>({ foo: undefined, bar: 'bar', baz: undefined }, 'a')
 
     a1.foo('foo')
 
@@ -340,7 +345,7 @@ describe('querystring', () => {
 
     a1.dispose()
 
-    const a3 = Query.create({ baz: undefined }, 'a')
+    const a3 = Query.create<IFooBarBaz>({ foo: undefined, bar: undefined, baz: undefined }, 'a')
 
     a3.baz('baz')
 
@@ -357,10 +362,10 @@ describe('querystring', () => {
 
     Query.setParser({
       parse: (str) => ({ foo: str.replace('foo=', '') }),
-      stringify: (obj) => 'foo=' + (obj.foo as string)
+      stringify: (obj: { foo: string }) => 'foo=' + obj.foo
     })
 
-    const q = Query.create({ foo: undefined })
+    const q = Query.create<{ foo: string | undefined }>({ foo: undefined })
 
     expect(q.foo()).toBe('foo')
 
