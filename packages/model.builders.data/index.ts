@@ -165,7 +165,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
  *
  * Example usage
  * ```typescript
- *  import { utils } from '@profiscience/model'
+ *  import { nonenumerable } from '@profiscience/knockout-contrib-model-builders-data'
  *
  *  const obj = {
  *    foo: true,
@@ -174,7 +174,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder
  *    baz: true
  *  }
  *
- *  utils.nonenumerable(obj, 'dontInclude')
+ *  nonenumerable(obj, 'dontInclude')
  *
  *  Object.keys(obj) === ['foo', 'bar', 'baz']
  * ```
