@@ -14,7 +14,6 @@ export class ConstructorBuilder {
    * @param mixin Mixin to apply to constructor
    */
   public static Mixin<
-    P,
     T1 extends { new(...args: any[]): ConstructorBuilder },
     T2 extends { new(...args: any[]): ConstructorBuilder }
   >(

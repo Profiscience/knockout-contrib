@@ -16,7 +16,6 @@ describe('model.builders.base', () => {
 
     const model = new BaseModel()
 
-    expect(model.fetch).toBeDefined()
     await expect(model.fetch()).resolves.toEqual({ foo: 'bar' })
   })
 })
