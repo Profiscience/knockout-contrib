@@ -21,19 +21,24 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-ctrl-click&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-ctrl-click.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-bindings metapackage](../bindings)
+Built-in [click binding][], filtered for ctrl+click
 
-Like the [click binding][], but only calls handler if ctrl (or meta, for Macs) key is pressed.
-
-You can disable handling the meta key by setting the optional `ctrlClickAllowMeta` binding to `false`.
+__NOTE:__ Consider MacOS (where meta+click is more intuitive) and mobile users (where there is no access to ctrl) when using this binding
 
 ## Usage
 
 ```typescript
-import '@profiscience/knockout-contrib-bindings/ctrlClick'
+// register as "ctrlClick"
+import '@profiscience/knockout-contrib-bindings-ctrl-click'
+
+// register as custom name
+import * as ko from 'knockout'
+import { ctrlClickBindingHandler } from '@profiscience/knockout-contrib-bindings-ctrl-click'
+ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
 ```
+
 ```html
-<div data-bind="ctrlClick: handler, ctrlClickAllowMeta: true"></div>
+<div data-bind="ctrlClick: (event, data) => console.log(data)"></div>
 ```
 
 [click binding]: https://knockoutjs.com/documentation/click-binding.html

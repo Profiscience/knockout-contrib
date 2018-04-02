@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-ctrl-click",
-  "description": "Ctrl Click Binding for KnockoutJS",
+  "description": "KnockoutJS Ctrl+Click Binding",
   "version": "1.0.0-alpha.3",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
@@ -15,7 +15,8 @@
     "knockoutjs",
     "binding",
     "bindingHandler",
-    "tko"
+    "tko",
+    "knockout-binding"
   ],
   "peerDependencies": {
     "knockout": "^3.5.0-beta"
