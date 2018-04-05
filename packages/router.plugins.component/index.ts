@@ -1,10 +1,14 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
+type MaybePromise<T> = T | Promise<T>
+type MaybeDefaultExport<T> = T | { default: T }
+type MaybeAccessor<A, T> = T | ((A) => T)
+
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
   interface IContext {
-    component: Promise<IRoutedComponentInstance> | IRoutedComponentInstance
+    component: MaybePromise<IRoutedComponentInstance>
   }
 
   // tslint:disable-next-line no-shadowed-variable
@@ -21,14 +25,9 @@ declare module '@profiscience/knockout-contrib-router' {
      *  })
      * ```
      */
-    component?:
-      | LazyComponentAccessor
-      | IRoutedComponentConfig
-      | { name: string, params?: { [k: string]: any } | ((ctx: Context & IContext) => { [k: string]: any }) }
+    component?: IRouteComponentConfig
   }
 }
-
-export type LazyComponentAccessor = () => ILazyComponent
 
 export interface IRoutedComponentInstance {
   /**
@@ -49,9 +48,17 @@ export interface IRoutedComponentInstance {
  *  }
  * ```
  */
-export type ILazyComponent = Promise<{ template: string, viewModel: IRoutedViewModelConstructor }> | {
-  template: Promise<string | { default: string }>
-  viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
+export type IRouteComponentConfig =
+  | MaybeAccessor<Context & IContext, MaybePromise<string>>
+  | MaybeAccessor<Context & IContext, MaybePromise<MaybeLazy<IAnonymousComponent>>>
+
+export type MaybeLazy<T extends {}> = MaybePromise<{
+  [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>>
+}>
+
+export type IAnonymousComponent = {
+  template: string
+  viewModel?: IRoutedViewModelConstructor
 }
 
 /**
@@ -63,12 +70,6 @@ export type ILazyComponent = Promise<{ template: string, viewModel: IRoutedViewM
  */
 export interface IRoutedViewModelConstructor {
   new(ctx: Context & IContext): any
-}
-
-export interface IRoutedComponentConfig {
-  template: string
-  viewModel?: { new(ctx: Context & IContext): any }
-  synchronous?: true
 }
 
 const uniqueComponentNames = (function*() {
@@ -97,7 +98,7 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
           })
         } catch (e) {
           // tslint:disable-next-line no-console max-line-length
-          console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to `new` viewModel. This may cause unexpected behavior.')
+          console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel. This may cause unexpected behavior. See note about anonymous vs named components in documentation.')
           ctx.component = componentConfig
           ko.components.register(componentName, componentConfig)
         }
@@ -114,8 +115,18 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
     ctx.route.component = componentName
 
     /* beforeRender */
+    ctx.queue(
+      normalizeConfig(ctx, routeConfig.component)
+        .then((normalizedConfig) => {
+          if (isNamedComponent(normalizedConfig)) {
+
+          } else {
+            initializeComponent(normalizedConfig)
+          }
+        })
+    )
     if (typeof componentAccessor === 'function') {
-      const p = fetchComponent(componentAccessor()).then(initializeComponent)
+      const p = fetchComponent(componentAccessor(ctx)).then(initializeComponent)
       ctx.component = p
       ctx.queue(p.then(() => {/* noop */}))
     } else if (typeof (componentAccessor as any).name === 'string') {
@@ -151,24 +162,30 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
   }
 }
 
-async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponentConfig> {
-  const component: IRoutedComponentConfig & { [k: string]: any } = {} as any
+async function normalizeConfig<T>(ctx: Context & IContext, obj: IRouteComponentConfig): Promise<{
+  template: NodeList
+  viewModel: IRoutedViewModelConstructor
+}> {
+  // resolve accessors and top-level promise
+  if (typeof obj === 'function') obj = await obj(ctx)
 
-  if (accessor instanceof Promise) {
-    Object.assign(component, await accessor)
-  } else {
-    const promises = Object
-      .keys(accessor)
-      .map(async (k) => {
-        const imports = await (accessor as any)[k]
-        if (typeof imports.default !== 'undefined') {
-          component[k] = imports.default
-        } else {
-          component[k] = imports
-        }
-      })
-    await Promise.all(promises)
+  // named components
+  if (typeof obj === 'string') {
+    return await new Promise((resolve) => ko.components.get(obj as string, resolve)) as any
   }
 
-  return component
+  // anonymous components, may have promised values
+  const ret: T = {} as any
+  await Promise.all(
+    Object
+      .keys(obj)
+      .map(async (k) => {
+        const v = await ret[k]
+        // support dynamic default imports OOTB (i.e. viewModel: import('./viewModel'))
+        ret[k] = typeof v.default !== 'undefined'
+          ? v.default
+          : v
+      })
+  )
+  return ret
 }
