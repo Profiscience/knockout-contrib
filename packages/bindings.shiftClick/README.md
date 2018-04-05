@@ -23,7 +23,7 @@
 
 Built-in [click binding][], filtered for shift+click
 
-__NOTE:__ Consider mobile users when using this binding
+__NOTE:__ Consider mobile users (where there is no access to shift) when using this binding
 
 ## Usage
 

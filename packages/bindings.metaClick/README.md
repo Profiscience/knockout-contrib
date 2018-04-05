@@ -23,7 +23,7 @@
 
 Built-in [click binding][], filtered for meta+click
 
-__NOTE:__ Consider MacOS (where meta+click is more intuitive) and mobile users (where there is no access to meta) when using this binding
+__NOTE:__ Consider mobile users (where there is no access to meta) when using this binding
 
 ## Usage
 
