@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-observable-fn-toggle",
   "description": "KnockoutJS Observable.fn.toggle()",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/observable.fn.toggle",

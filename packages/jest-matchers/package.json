@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-jest-matchers",
   "description": "Jest Matchers for Knockout JS",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/jest-matchers",

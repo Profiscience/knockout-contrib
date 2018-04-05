@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-scroll-position",
   "description": "@profiscience/knockout-contrib-router middleware to scroll to top when navigating to a new page and restore scroll position on forward/back navigation",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.middleware.scrollPosition",
@@ -11,10 +11,10 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-4",
+    "@profiscience/knockout-contrib-router": "^2.0.0-5",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-4"
+    "@profiscience/knockout-contrib-router": "^2.0.0-5"
   }
 }
