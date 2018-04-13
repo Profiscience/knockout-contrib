@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-authorization",
   "description": "Authorization Plugin for @profiscience/knockout-contrib-router",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.authorization",
@@ -11,11 +11,11 @@
   "module": "dist/default/index.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-5",
+    "@profiscience/knockout-contrib-router": "^2.0.0-6",
     "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.8",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-5"
+    "@profiscience/knockout-contrib-router": "^2.0.0-6"
   }
 }

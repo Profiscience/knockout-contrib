@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-component",
   "description": "Component Plugin for @profiscience/knockout-contrib-router",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.12",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.component",
@@ -19,10 +19,10 @@
     "spa"
   ],
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-5",
+    "@profiscience/knockout-contrib-router": "^2.0.0-6",
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-5"
+    "@profiscience/knockout-contrib-router": "^2.0.0-6"
   }
 }
