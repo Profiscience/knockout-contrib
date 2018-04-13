@@ -13,7 +13,7 @@ export const jqueryBindingHandler: KnockoutBindingHandler = {
   getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
-        const $el: JQuery<HTMLElement> & { [k: string]: (opts: any) => any } = $(el) as any
+        const $el: JQuery & { [k: string]: (opts: any) => any } = $(el) as any
         const value = allBindings.get('value')
         const changeHandler = allBindings.get('event.change') || (allBindings.get('event') || {}).change
         const opts = valueAccessor()

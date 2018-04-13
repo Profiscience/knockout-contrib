@@ -161,7 +161,7 @@ export class Router {
     const { pathname, childPath } = route.parse(path)
     const samePage = fromCtx.pathname === pathname
 
-    if (fromCtx.$child && samePage && !args.force) {
+    if (fromCtx.$child && childPath && samePage && !args.force) {
       return await fromCtx.$child.router.update(childPath + search + hash, args)
     }
 
