@@ -152,7 +152,7 @@ export function componentPlugin({ component: componentAccessor }: IRouteConfig) 
 }
 
 async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponentConfig> {
-  const component: IRoutedComponentConfig = {} as IRoutedComponentConfig
+  const component: IRoutedComponentConfig & { [k: string]: any } = {} as any
 
   if (accessor instanceof Promise) {
     Object.assign(component, await accessor)
@@ -160,7 +160,7 @@ async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponen
     const promises = Object
       .keys(accessor)
       .map(async (k) => {
-        const imports = await accessor[k]
+        const imports = await (accessor as any)[k]
         if (typeof imports.default !== 'undefined') {
           component[k] = imports.default
         } else {

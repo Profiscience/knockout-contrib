@@ -53,6 +53,12 @@ export function traversePath(router: Router, path: string) {
   } else {
     if (path.indexOf('./') === 0) {
       path = path.replace('./', '/')
+      if (!router.ctx.$child) {
+        throw new Error(
+          // tslint:disable-next-line:max-line-length
+          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${router.depth}) and ran out of children. Are you sure you want "./"?`
+        )
+      }
       router = router.ctx.$child.router
     }
     while (path && path.match(/\/?\.\./i) && !router.isRoot) {
@@ -68,7 +74,7 @@ export function resolveHref({ router, path }: { router: Router, path: string }) 
 }
 
 export function isActivePath({ router, path }: { router: Router, path: string }): boolean {
-  let ctx = router.ctx
+  let ctx: Context | void = router.ctx
   while (ctx) {
     // create dependency on isNavigating so that this works with nested routes inside a computed
     ctx.router.isNavigating()

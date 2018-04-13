@@ -26,7 +26,7 @@ export default function fromJS<T>(obj: T, mapArraysDeep = false): KnockoutObserv
   } else if (obj instanceof Object) {
     const obs = Object.create(Object.getPrototypeOf(obj))
     for (const p of Object.keys(obj)) {
-      obs[p] = fromJS(obj[p], mapArraysDeep)
+      obs[p] = fromJS((obj as any)[p], mapArraysDeep)
     }
     return obs
   } else {

@@ -1,4 +1,5 @@
 import * as ko from 'knockout'
+import { Context } from './context'
 import { Router } from './router'
 import { traversePath, log, noop } from './utils'
 
@@ -50,7 +51,7 @@ function createViewModel(params: { [k: string]: any }) {
     router = new Router(Router.getPathFromLocation(), undefined, params)
   } else {
     while (router.bound) {
-      router = router.ctx.$child.router
+      router = (router.ctx.$child as Context).router
     }
   }
   router.bound = true

@@ -4,6 +4,13 @@ import * as $ from 'jquery'
 
 import './index'
 
+declare global {
+  // tslint:disable-next-line:interface-name
+  interface JQuery {
+    myPlugin(opts: any): void
+  }
+}
+
 describe('bindings.jquery', () => {
   test('calls the jquery plugin on the bound element', (done) => {
     const actualEl = <div data-bind='jquery.myPlugin: {}'></div>
@@ -69,7 +76,7 @@ describe('bindings.jquery', () => {
   test('works with change event binding handler', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind='jquery.myPlugin: opts, event: { change: onChange }'></div>
-    const onChange = (e) => {
+    const onChange = (e: JQuery.Event) => {
       expect(e.target).toBe(el)
       done()
     }
@@ -83,7 +90,7 @@ describe('bindings.jquery', () => {
   test('works with namespaced binding syntax change handler', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind='jquery.myPlugin: opts, event.change: onChange'></div>
-    const onChange = (e) => {
+    const onChange = (e: JQuery.Event) => {
       expect(e.target).toBe(el)
       done()
     }

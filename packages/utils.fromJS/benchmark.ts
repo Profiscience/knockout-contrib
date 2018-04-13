@@ -34,7 +34,7 @@ suite
   .add(padEnd('mapping.fromJS', 30), () => {
     (ko as any).mapping.fromJS({ ...obj })
   })
-  .on('cycle', (e) => {
+  .on('cycle', (e: any) => {
     // tslint:disable:no-console
     if (e.target.error) {
       console.error(e.target.error)

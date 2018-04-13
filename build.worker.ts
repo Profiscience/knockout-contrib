@@ -5,7 +5,7 @@ import * as path from 'path'
 import * as babel from 'babel-core'
 import * as ts from 'typescript'
 
-const builds = {
+const builds: { [k: string]: babel.TransformOptions | false } = {
   default: {
     presets: [['env', { modules: false }]],
     plugins: ['transform-runtime']

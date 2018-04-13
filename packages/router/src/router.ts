@@ -69,8 +69,11 @@ export class Router {
   public static readonly isNavigating = ko.observable(true)
 
   private static readonly routes: Route[] = []
-  private static readonly events = {
-    click:  document.ontouchstart ? 'touchstart' : 'click',
+  private static readonly events: {
+    click: 'click'
+    popstate: 'popstate'
+  } = {
+    click:  document.ontouchstart ? 'touchstart' : 'click' as any,
     popstate: 'popstate'
   }
 
@@ -80,7 +83,7 @@ export class Router {
   public routes: Route[]
   public isRoot: boolean
   public ctx: Context & IContext
-  public bound: boolean
+  public bound = false
 
   constructor(
     url: string,
@@ -96,7 +99,7 @@ export class Router {
 
     if (this.isRoot) {
       Router.head = this
-      document.addEventListener(Router.events.click, Router.onclick)
+      document.addEventListener<'click'>(Router.events.click, Router.onclick)
       window.addEventListener(Router.events.popstate, Router.onpopstate)
     }
 
@@ -158,7 +161,7 @@ export class Router {
     const { pathname, childPath } = route.parse(path)
     const samePage = fromCtx.pathname === pathname
 
-    if (childPath && samePage && !args.force) {
+    if (fromCtx.$child && samePage && !args.force) {
       return await fromCtx.$child.router.update(childPath + search + hash, args)
     }
 
@@ -273,6 +276,12 @@ export class Router {
   public static get(i: number): Router {
     let router = Router.head
     while (i-- > 0) {
+      if (!router.ctx.$child) {
+        throw new Error(
+          // tslint:disable-next-line:max-line-length
+          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i + i} routers active (indicies are zero-based)`
+        )
+      }
       router = router.ctx.$child.router
     }
     return router

@@ -7,18 +7,24 @@ declare global {
   }
 }
 
-ko.observable.fn.toString = function(): string {
-  return toString(this, 'Observable')
+enum KnockoutObservableType {
+  Observable = 'Observable',
+  ObservableArray = 'ObservableArray',
+  Computed = 'Computed'
 }
 
-ko.observableArray.fn.toString = function(): string {
-  return toString(this, 'ObservableArray')
+ko.observable.fn.toString = function(this: KnockoutObservable<any>): string {
+  return toString(this, KnockoutObservableType.Observable)
 }
 
-ko.computed.fn.toString = function(): string {
-  return toString(this, 'Computed')
+ko.observableArray.fn.toString = function(this: KnockoutObservable<any>): string {
+  return toString(this, KnockoutObservableType.ObservableArray)
 }
 
-function toString(obs, type): string {
+ko.computed.fn.toString = function(this: KnockoutObservable<any>): string {
+  return toString(this, KnockoutObservableType.Computed)
+}
+
+function toString(obs: KnockoutObservable<any>, type: KnockoutObservableType): string {
   return `${type}(${ko.toJSON(obs())})`
 }

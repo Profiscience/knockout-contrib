@@ -10,7 +10,7 @@ declare global {
 export const shiftClickBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(el, {
-      click($data, e: MouseEvent) {
+      click($data: any, e: MouseEvent) {
         if (e.shiftKey) valueAccessor().call(this, $data, e)
       }
     })
