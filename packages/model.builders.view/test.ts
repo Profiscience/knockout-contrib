@@ -7,7 +7,7 @@ import { ViewModelConstructorBuilder } from './index'
 describe('model.builders.view', () => {
   test('uses SubscriptionDisposalMixin', () => {
     class FooModel extends ViewModelConstructorBuilder {
-      public readonly value: KnockoutObservable<string>
+      public readonly value!: KnockoutObservable<string>
     }
 
     const foo = new FooModel()

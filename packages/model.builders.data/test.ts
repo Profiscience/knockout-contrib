@@ -20,7 +20,7 @@ describe('model.builders.data', () => {
 
   test('uses initial data with constructor if provided', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {
-      public readonly value: KnockoutObservable<string>
+      public readonly value!: KnockoutObservable<string>
     }
     const foo = new FooModel({}, { value: 'value' })
 
@@ -36,7 +36,7 @@ describe('model.builders.data', () => {
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
       public readonly foo = ko.observable()
-      public readonly bar: string
+      public readonly bar!: string
 
       protected async fetch() {
         return { foo: 'foo', bar: 'bar' }
@@ -58,7 +58,7 @@ describe('model.builders.data', () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public readonly value: KnockoutObservable<string>
+      public readonly value!: KnockoutObservable<string>
 
       protected async fetch() {
         throw new Error()
@@ -72,7 +72,7 @@ describe('model.builders.data', () => {
     interface IFooParams { }
 
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public readonly value: KnockoutObservable<string>
+      public readonly value!: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'value' }
@@ -163,7 +163,7 @@ describe('model.builders.data', () => {
 
   test('.toJS() returns unwrapped data', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {
-      public value: KnockoutObservable<string>
+      public value!: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'foo' }
@@ -181,7 +181,7 @@ describe('model.builders.data', () => {
 
   test('.save() calls #updateAll()', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {
-      public value: KnockoutObservable<string>
+      public value!: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'foo' }
@@ -200,7 +200,7 @@ describe('model.builders.data', () => {
 
   test('.delete() disposes the instance, then updates', async () => {
     class FooModel extends DataModelConstructorBuilder<{}> {
-      public value: KnockoutObservable<string>
+      public value!: KnockoutObservable<string>
 
       protected async fetch() {
         return { value: 'foo' }

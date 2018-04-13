@@ -11,10 +11,10 @@ import {
 } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
-  public $child: Context & IContext
-  public route: Route
-  public params: { [k: string]: any }
-  public pathname: string
+  public $child?: Context & IContext
+  public route!: Route
+  public params!: { [k: string]: any }
+  public pathname!: string
   public _redirect?: string
   public _redirectArgs?: {
     push: false
@@ -115,7 +115,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: Context & IContext = this as any
+    let ctx: void | Context & IContext = this as any
     let callbacks: Callback<boolean | void>[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
@@ -126,7 +126,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public render() {
-    let ctx: Context & IContext = this as any
+    let ctx: void | Context & IContext = this as any
     while (ctx) {
       if (typeof ctx._redirect === 'undefined') {
         ctx.router.component(ctx.route.component)

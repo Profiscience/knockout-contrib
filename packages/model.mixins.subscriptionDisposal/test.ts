@@ -85,7 +85,7 @@ describe('model.mixins.subscriptionDisposal', () => {
       const instance = new (Subscribable(EmptyClass))()
       const obs = ko.observable('')
 
-      const fn = (v) => expect(v).toBe('foo')
+      const fn = (v: any) => expect(v).toBe('foo')
 
       instance.subscribe(obs, fn)
 
@@ -105,7 +105,7 @@ describe('model.mixins.subscriptionDisposal', () => {
       const obs = ko.observable('')
       const accessor = () => obs()
 
-      const fn = (v) => expect(v).toBe('foo')
+      const fn = (v: any) => expect(v).toBe('foo')
 
       instance.subscribe(accessor, fn)
 
@@ -126,7 +126,7 @@ describe('model.mixins.subscriptionDisposal', () => {
       const obs2 = ko.observable('')
       const tree = { obs1, obs2 }
 
-      const fn = (v) => expect(v.obs1).toBe('foo')
+      const fn = (v: any) => expect(v.obs1).toBe('foo')
 
       instance.subscribe(tree, fn)
 

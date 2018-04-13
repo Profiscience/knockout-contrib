@@ -30,7 +30,7 @@ describe('model.mixins.cache.memory', () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())<P> {
-      public foo: KnockoutObservable<string>
+      public foo!: KnockoutObservable<string>
     }
 
     const m1 = await DataModel.create({})
@@ -57,7 +57,7 @@ describe('model.mixins.cache.memory', () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())<P> {
-      public foo: KnockoutObservable<string>
+      public foo!: KnockoutObservable<string>
     }
 
     const m1 = new DataModel({})
@@ -88,7 +88,7 @@ describe('model.mixins.cache.memory', () => {
     class DataModel<P> extends DataModelConstructorBuilder
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())<P> {
-      public foo: KnockoutObservable<string>
+      public foo!: KnockoutObservable<string>
     }
 
     const m1 = new DataModel({})
@@ -186,14 +186,14 @@ describe('model.mixins.cache.memory', () => {
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())
       <{}> {
-      public foo: KnockoutObservable<string>
+      public foo!: KnockoutObservable<string>
     }
 
     class DataModel2 extends DataModelConstructorBuilder
       .Mixin(FetchMixin)
       .Mixin(InMemoryCacheMixin())
       <{}> {
-      public foo: KnockoutObservable<string>
+      public foo!: KnockoutObservable<string>
     }
 
     const m11 = await DataModel1.create({})

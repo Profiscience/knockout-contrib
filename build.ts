@@ -11,7 +11,7 @@ const PACKAGES_DIR = path.resolve(__dirname, 'packages')
 const workers = createWorkers(os.cpus().length - 2)
 
 function parseArgv() {
-  const hasFlag = (f) => process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
+  const hasFlag = (f: string) => process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
   return {
     watch: hasFlag('watch'),
     transpileOnly: hasFlag('transpile-only')
@@ -79,7 +79,7 @@ function startTypeChecker() {
   return proc
 }
 
-async function build(files: string[]) {
+async function build(files: string[]): Promise<number> {
   const [typeCheckResults, transpileAndLintResults] = await Promise.all<any>([
     argv.transpileOnly ? Promise.resolve() : pifyProc(startTypeChecker()),
     Promise.all(files.map(workers.doWork)).then((results) => {
@@ -91,15 +91,16 @@ async function build(files: string[]) {
   if (typeCheckResults && typeCheckResults.output) {
     typeCheckResults.output
       .split('\n')
-      .forEach((l) => console.error('[tsc]', l))
+      .forEach((l: string) => console.error('[tsc]', l))
     return 1
   }
-  if (transpileAndLintResults.find((r) => !!r.hasErrors)) {
+  if (transpileAndLintResults.find((r: any) => !!r.hasErrors)) {
     return 1
   }
+  return 0
 }
 
-async function watch(files: string[]) {
+async function watch(files: string[]): Promise<number> {
   if (!argv.transpileOnly) {
     const typeChecker = startTypeChecker()
     typeChecker.stdout.on('data', (buf) => {
@@ -120,7 +121,7 @@ async function watch(files: string[]) {
     workers.doWork(p).catch(() => { /* noop */ })
   })
 
-  return new Promise(() => {/* void */})
+  return new Promise<number>(() => {/* void */})
 }
 
 async function main() {

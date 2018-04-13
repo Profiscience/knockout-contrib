@@ -10,13 +10,13 @@ declare global {
 
 ko.observable.fn.increment =
 ko.computed.fn.increment =
-  function(amt?: number): void {
+  function(this: KnockoutObservable<number>, amt?: number): void {
     increment(this, amt)
   }
 
 ko.observable.fn.decrement =
 ko.computed.fn.decrement =
-  function(amt?: number): void {
+  function(this: KnockoutObservable<number>, amt?: number): void {
     decrement(this, amt)
   }
 

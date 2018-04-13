@@ -62,7 +62,7 @@ describe('model.mixins.rest', () => {
   test('implements .create() using POST', async () => {
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos!: KnockoutObservableArray<string>
     }
 
     const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
@@ -82,7 +82,7 @@ describe('model.mixins.rest', () => {
   test('implements .save() using PUT', async () => {
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos!: KnockoutObservableArray<string>
     }
 
     const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
@@ -102,7 +102,7 @@ describe('model.mixins.rest', () => {
   test('implements .delete() using DELETE', async () => {
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos!: KnockoutObservableArray<string>
     }
 
     const { mock } = fetch.mockResponse(JSON.stringify({ foos: FOOS })) as any
@@ -124,7 +124,7 @@ describe('model.mixins.rest', () => {
 
     const APIMixin = createRESTMixin({ baseURL: '/api' })
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(APIMixin('controller'))<P> {
-      public foos: KnockoutObservableArray<string>
+      public foos!: KnockoutObservableArray<string>
     }
 
     const model = await DataModel.create({})

@@ -10,7 +10,7 @@ export type RouteMap = {
   [path: string]: MaybeArray<IRouteConfig | string | Middleware | RouteMap>
 }
 
-export type RoutePlugin = (routeConfig: IRouteConfig) => MaybeArray<RouteConfig>
+export type RoutePlugin = (routeConfig: IRouteConfig) => MaybeArray<NativeRouteConfig> | void
 
 export type RouteConfig =
   | MaybeArray<IRouteConfig> // custom route config, used w/ plugins
@@ -22,6 +22,8 @@ export type RouteConfig =
    */
   // | MaybeArray<RouteMap>     // children, object shorthand
 
+export type NativeRouteConfig = string | Middleware | Route
+
 type NormalizedRouteConfig = {
   component?: string
   middleware?: Middleware[]
@@ -31,12 +33,12 @@ type NormalizedRouteConfig = {
 export class Route {
   private static readonly plugins: RoutePlugin[] = []
 
-  public component: string
-  public middleware: Middleware[]
-  public children: Route[]
-  public readonly keys: Key[]
+  public component!: string
+  public middleware!: Middleware[]
+  public children!: Route[]
+  public readonly keys!: Key[]
 
-  private readonly regexp: RegExp
+  private readonly regexp!: RegExp
 
   constructor(public path: string, ...config: RouteConfig[]) {
     Object.assign(this, Route.parseConfig(config))
@@ -106,9 +108,10 @@ export class Route {
       } else if (configEntry instanceof Route) {
         children.push(configEntry)
       } else {
+        // (probably one day) deprecated object syntax
         children.push(...
           Object.keys((configEntry as { [k: string]: RouteConfig[] }))
-            .map((childPath) => new Route(childPath, ...castArray(configEntry[childPath])))
+            .map((childPath) => new Route(childPath, ...castArray((configEntry as any)[childPath])))
         )
       }
     }
@@ -116,25 +119,28 @@ export class Route {
     return { component, middleware, children }
   }
 
-  private static runPlugins(config: RouteConfig[]): (string | Middleware | { [k: string]: RouteConfig[] })[] {
-    return config.reduce<(string | Middleware | { [k: string]: RouteConfig[] })[]>(
-      (routeStack, configEntry: RouteConfig & IRouteConfig) => {
-        const configViaPlugins = Route.plugins.reduce((allPluginsStack, plugin) => {
-          const pluginStack: IRouteConfig | undefined = plugin(configEntry) as any
-          return typeof pluginStack === 'undefined'
-            ? allPluginsStack
-            : [...allPluginsStack, ...flatten(castArray(pluginStack))]
-        }, [])
-        return [
-          ...routeStack,
-          ...(
-            configViaPlugins.length > 0
-              ? configViaPlugins
-              : flatten(castArray(configEntry as any))
-          )
-        ]
-      },
-    [])
+  private static runPlugins(rawConfig: RouteConfig[]): NativeRouteConfig[] {
+    const getRouteConfigForArgViaPlugins = (arg: any) => (accum: NativeRouteConfig[], plugin: RoutePlugin) => {
+      const pluginStack = plugin(arg)
+      return typeof pluginStack === 'undefined'
+        // this plugin does not act on this route config, in may be bare middleware or a component id
+        ? accum
+        // this plugin provided configuration with the given object, use it
+        : [...accum, ...flatten(castArray(pluginStack) as NativeRouteConfig[])]
+    }
+    // iterate through each argument passed to the route constructor, pass each to every plugin
+    const accumulateAllRouteArgs = (accum: NativeRouteConfig[], arg: RouteConfig) => {
+      const configViaPlugins = Route.plugins.reduce(getRouteConfigForArgViaPlugins(arg), [])
+      return [
+        ...accum,
+        ...(
+          configViaPlugins.length > 0
+            ? configViaPlugins
+            : flatten(castArray(arg as MaybeArray<NativeRouteConfig>))
+        )
+      ]
+    }
+    return rawConfig.reduce(accumulateAllRouteArgs, [])
   }
 
   private static parsePath(path: string, hasChildren: boolean) {

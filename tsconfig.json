@@ -5,6 +5,7 @@
     "sourceMap": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "strict": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

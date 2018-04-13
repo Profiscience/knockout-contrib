@@ -38,6 +38,6 @@ export default function merge<T extends { [k: string]: any }>(
   return dest
 }
 
-function isUndefined(foo): boolean {
+function isUndefined(foo: any): boolean {
   return typeof foo === 'undefined'
 }
