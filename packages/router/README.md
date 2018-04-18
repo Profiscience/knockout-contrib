@@ -47,7 +47,7 @@ Router.useRoutes([
  *  })
  */
 
-ko.component.register('home', {
+ko.components.register('home', {
   template: `<a data-bind="path: '/users'">Show users</a>`
 })
 
@@ -63,7 +63,7 @@ ko.components.register('users', {
   },
   template: `
     <ul data-bind="foreach: users">
-      <span data-bind="text: name, click: navigateToUser"></span>
+      <span data-bind="text: name, click: $parent.navigateToUser"></span>
     </ul>
   `
 })
