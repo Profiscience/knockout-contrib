@@ -8,7 +8,7 @@ import * as globby from 'globby'
 
 const argv = parseArgv()
 const PACKAGES_DIR = path.resolve(__dirname, 'packages')
-const workers = createWorkers(os.cpus().length - 2)
+const workers = createWorkers(Math.min(os.cpus().length - 2, 8))
 
 function parseArgv() {
   const hasFlag = (f: string) => process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
