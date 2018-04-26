@@ -5,10 +5,11 @@ import * as os from 'os'
 import * as path from 'path'
 import * as chokidar from 'chokidar'
 import * as globby from 'globby'
+import chalk from 'chalk'
 
 const argv = parseArgv()
 const PACKAGES_DIR = path.resolve(__dirname, 'packages')
-const workers = createWorkers(os.cpus().length - 2)
+const workers = createWorkers(Math.min(os.cpus().length - 2, 8))
 
 function parseArgv() {
   const hasFlag = (f: string) => process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
@@ -33,7 +34,7 @@ const getSourceFiles = () => globby([
 
 function createWorkers(size: number) {
   // tslint:disable no-console
-  console.info('Forking', size, 'worker processess')
+  console.info(chalk.cyan(`Forking ${size} worker processess`))
   const workerFile = path.resolve(__dirname, './build.worker.ts')
   const _workers: ChildProcess[] = []
   let i = 0
@@ -43,7 +44,10 @@ function createWorkers(size: number) {
       const worker = _workers[i++ % size]
       const p = new Promise<{ file: string, hasErrors?: boolean, hasWarnings?: boolean }>((resolve, reject) =>
         worker.on('message', (message: any) => {
-          if (file === message.file) resolve(message)
+          if (file === message.file) {
+            resolve(message)
+            console.log(chalk.dim(`Transpiled ${message.file}`))
+          }
         })
       )
       worker.send({ file })
@@ -72,10 +76,13 @@ function startTypeChecker() {
   // tslint:disable:no-console
   const stdio = ['pipe', 'pipe', 'pipe', 'ipc']
   const args: string[] = ['--pretty']
-  console.info('Forking type checker')
+  console.info(chalk.cyan('Forking type checker'))
   if (argv.watch) args.push('--watch')
   const proc = fork(path.resolve(__dirname, 'node_modules/.bin/tsc'), args, { stdio })
-  proc.on('close', (code) => console.info('Type checker exited with code', code))
+  proc.on('close', (code) => {
+    const color = code === 0 ? chalk.green : chalk.red
+    console.info(color(`Type checker exited with code ${code}`))
+  })
   return proc
 }
 
@@ -83,7 +90,7 @@ async function build(files: string[]): Promise<number> {
   const [typeCheckResults, transpileAndLintResults] = await Promise.all<any>([
     argv.transpileOnly ? Promise.resolve() : pifyProc(startTypeChecker()),
     Promise.all(files.map(workers.doWork)).then((results) => {
-      console.log('Transpilation completed without errors')
+      console.log(chalk.green('Transpilation completed without errors'))
       workers.destroy()
       return results
     })

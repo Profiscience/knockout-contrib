@@ -111,7 +111,7 @@ describe('router.plugins.authorization', () => {
 
     middleware(ctx)
 
-    await Promise.all(queue.mock.calls)
+    await Promise.all(queue.mock.calls.map(([p]) => p))
 
     expect(redirect).toBeCalled()
   })
@@ -189,7 +189,7 @@ describe('router.plugins.authorization', () => {
 
     middleware(ctx)
 
-    await Promise.all(queue.mock.calls)
+    await Promise.all(queue.mock.calls.map(([p]) => p))
 
     expect(redirect.mock.calls[0][0]).toBe('/bar')
   })

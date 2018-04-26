@@ -135,7 +135,12 @@ describe('model.mixins.pager', () => {
 
     await new Promise((resolve) => model.foos.subscribe(resolve))
 
-    expect(model.hasMore()).toBe(true)
+    await new Promise((resolve) => {
+      model.hasMore.subscribe((v) => {
+        expect(v).toBe(true)
+        resolve()
+      })
+    })
   })
 
   test('can use custom strategy', async () => {
