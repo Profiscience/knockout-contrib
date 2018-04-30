@@ -3,7 +3,8 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { componentPlugin, IRoutedComponentInstance } from './index'
+import { componentPlugin, IRoutedComponentInstance, disableUninstantiableViewModelWarning } from './index'
+import { LifecycleGeneratorMiddleware } from '../router/src/router'
 
 const uniqueComponentNames = (function*() {
   let i = 0
@@ -14,74 +15,115 @@ const uniqueComponentNames = (function*() {
   }
 })()
 
-let componentId: string
 const registerComponent = ko.components.register
-
-beforeEach(() => {
-  componentId = uniqueComponentNames.next().value
-})
 
 afterEach(() => {
   ko.components.register = registerComponent
 })
 
 describe('router.plugins.component', () => {
-  test('logs warning if viewModel is not newable', () => {
-    console.warn = jest.fn()
+  describe('warnings', () => {
+    test('non-class viewModel', async () => {
+      console.warn = jest.fn()
 
-    const template = 'Hello, World!'
-    const component = { template, viewModel: { instance: {} } }
-    const ctx = { route: {} } as Context & IContext
-    const routeConfig: IRouteConfig = { component } as any
-    const middleware = componentPlugin(routeConfig)
-    const lifecycle = middleware(ctx)
+      const template = 'Hello, World!'
+      const component = { template, viewModel: { createViewModel: () => ({}) } }
+      const ctx = createMockContext()
+      const routeConfig: IRouteConfig = { component } as any
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
+      const lifecycle = middleware(ctx)
 
-    lifecycle.next()
+      lifecycle.next()
 
-    expect(console.warn).toBeCalled()
+      await resolveQueue(ctx)
+
+      expect(console.warn).toBeCalled()
+    })
+
+    test('named components', async () => {
+      console.warn = jest.fn()
+
+      const template = 'Hello, World!'
+      const component = 'hello-world'
+      const ctx = createMockContext()
+      const routeConfig: IRouteConfig = { component } as any
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
+      const lifecycle = middleware(ctx)
+
+      lifecycle.next()
+
+      await resolveQueue(ctx)
+
+      expect(console.warn).toBeCalled()
+    })
+
+    test('can disable warning', async () => {
+      console.warn = jest.fn()
+
+      disableUninstantiableViewModelWarning()
+
+      const template = 'Hello, World!'
+      const component = { template, viewModel: { instance: {} } }
+      const ctx = createMockContext()
+      const routeConfig: IRouteConfig = { component } as any
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
+      const lifecycle = middleware(ctx)
+
+      await resolveQueue(ctx)
+
+      lifecycle.next()
+
+      expect(console.warn).not.toBeCalled()
+    })
   })
 
   describe('anonymous components', () => {
-    test('sync', () => {
+    test('sync', async () => {
       ko.components.register = jest.fn()
 
       class ViewModel {}
       const template = 'Hello, World!'
       const component = { template, viewModel: ViewModel }
-      const ctx = { route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
 
+      await resolveQueue(ctx)
+
       expect(ko.components.register).toBeCalled()
 
       const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
-      expect(ctx.route.component).toBe(componentId)
-      expect(registeredComponentName).toBe(componentId)
+      expect(ctx.route.component).toBe((ctx.component as IRoutedComponentInstance).name)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
       expect(registeredComponent.synchronous).toBe(true)
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
-    test('sync, template only', () => {
+    test('sync, template only', async () => {
       ko.components.register = jest.fn()
 
       const template = 'Hello, World!'
       const component = { template }
-      const ctx = { route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
 
+      await resolveQueue(ctx)
+
       expect(ko.components.register).toBeCalled()
 
       const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
-      expect(ctx.route.component).toBe(componentId)
-      expect(registeredComponentName).toBe(componentId)
+      expect(ctx.route.component).toBe((ctx.component as IRoutedComponentInstance).name)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
       expect(registeredComponent.synchronous).toBe(true)
     })
@@ -96,18 +138,19 @@ describe('router.plugins.component', () => {
         template: Promise.resolve(template),
         viewModel: Promise.resolve(ViewModel)
       })
-      const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component: getComponent }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
 
-      await ctx.component
+      await resolveQueue(ctx)
 
       const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
-      expect(ctx.route.component).toBe(componentId)
-      expect(registeredComponentName).toBe(componentId)
+      expect(ctx.route.component).toBe((ctx.component as IRoutedComponentInstance).name)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
       expect(registeredComponent.synchronous).toBe(true)
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
@@ -127,7 +170,7 @@ describe('router.plugins.component', () => {
       })
       const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
       const routeConfig: IRouteConfig = { component: getComponent }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
@@ -135,8 +178,9 @@ describe('router.plugins.component', () => {
       await ctx.component
 
       const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
-      expect(ctx.route.component).toBe(componentId)
-      expect(registeredComponentName).toBe(componentId)
+      expect(ctx.route.component).toBe((ctx.component as IRoutedComponentInstance).name)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
       expect(registeredComponent.synchronous).toBe(true)
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
@@ -154,7 +198,7 @@ describe('router.plugins.component', () => {
       })
       const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
       const routeConfig: IRouteConfig = { component: getComponent }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
@@ -162,14 +206,36 @@ describe('router.plugins.component', () => {
       await ctx.component
 
       const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
-      expect(ctx.route.component).toBe(componentId)
-      expect(registeredComponentName).toBe(componentId)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
       expect(registeredComponent.synchronous).toBe(true)
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
-    test('ctx.component.viewModel is viewModel instance', () => {
+    test('specifying component name', async () => {
+      ko.components.register = jest.fn()
+
+      class ViewModel {}
+      const template = 'Hello, World!'
+      const component = { template, viewModel: ViewModel, name: 'my-awesome-component' }
+      const ctx = createMockContext()
+      const routeConfig: IRouteConfig = { component }
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
+      const lifecycle = middleware(ctx)
+
+      lifecycle.next()
+
+      await resolveQueue(ctx)
+
+      expect(ko.components.register).toBeCalled()
+
+      const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
+      expect(ctx.route.component).toBe('my-awesome-component')
+      expect(registeredComponentName).toBe('my-awesome-component')
+    })
+
+    test('ctx.component.viewModel is viewModel instance', async () => {
       ko.components.register = jest.fn()
 
       class ViewModel {
@@ -177,237 +243,100 @@ describe('router.plugins.component', () => {
       }
       const template = 'Hello, World!'
       const component = { template, viewModel: ViewModel }
-      const ctx = { route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
 
       expect((ctx.component as IRoutedComponentInstance).viewModel.itsMe).toBe(true)
     })
 
-    test('patches viewModel dispose to run beforeDispose', () => {
-      const dispose = jest.fn()
-
-      class ViewModel {
-        public dispose = dispose
-      }
-
-      const template = 'Hello, World!'
-      const component = { template, viewModel: ViewModel }
-      const ctx = { route: {} } as Context & IContext
-      const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
-      const lifecycle = middleware(ctx)
-
-      lifecycle.next()
-      lifecycle.next()
-      expect(dispose).not.toBeCalled()
-      const instance = ctx.component as IRoutedComponentInstance
-      lifecycle.next()
-      expect(dispose).toHaveBeenCalledTimes(1)
-      instance.viewModel.dispose()
-      expect(dispose).toHaveBeenCalledTimes(1)
-    })
-
-    test('doesn\'t die if view model doesn\'t have dispose function', () => {
+    test('doesn\'t die if view model doesn\'t have dispose function', async () => {
       class ViewModel {}
 
       const template = 'Hello, World!'
       const component = { template, viewModel: ViewModel }
-      const ctx = { route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
       lifecycle.next()
       expect(() => lifecycle.next()).not.toThrow()
     })
 
-    test('disposes component registration after render', () => {
+    test('disposes component registration after render', async () => {
       ko.components.unregister = jest.fn()
 
       class ViewModel {}
       const template = 'Hello, World!'
       const component = { template, viewModel: ViewModel }
-      const ctx = { route: {} } as Context & IContext
+      const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component }
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
       lifecycle.next()
 
-      expect(ko.components.unregister).lastCalledWith(componentId)
+      expect(ko.components.unregister).lastCalledWith((ctx.component as IRoutedComponentInstance).name)
     })
   })
 
-  describe.only('named components', () => {
-    test('sync', (done) => {
-      expect.assertions(3)
-
-      const ctx = { route: {} } as Context & IContext
+  describe('named components', () => {
+    test('sync', async () => {
+      const ctx = createMockContext()
       const name = 'my-component-1'
-      const params = { foo: 'bar' }
-      const routeConfig: IRouteConfig = {
-        component: {
-          name,
-          params
-        }
-      }
-
-      ko.components.register(name, {
-        template: 'Hello, World!',
-        viewModel: class {
-          constructor(actual: any) {
-            expect(actual).toBe(params)
-            done()
-          }
-        }
-      })
-
-      const middleware = componentPlugin(routeConfig)
+      const routeConfig: IRouteConfig = { component: 'my-component-1' }
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
 
-      const wrapperComponentName = ctx.route.component
-      const el = document.createElement('div')
-
-      expect(ko.components.isRegistered(wrapperComponentName)).toBe(true)
-
-      ko.applyBindings({}, el)
-      ko.applyBindingsToNode(el, {
-        component: {
-          name: wrapperComponentName,
-          params: ctx
-        }
-      })
-
-      ko.components.unregister(name)
-
-      expect(el.firstChild).not.toBeNull()
+      expect(ctx.route.component).toBe(name)
     })
 
-    test('sync accessor', (done) => {
-      const ctx = { route: {} } as Context & IContext
+    test('sync accessor', async () => {
+      const ctx = createMockContext()
       const name = 'my-component-2'
-      const params = { foo: 'bar' }
       const routeConfig: IRouteConfig = {
         component: (_ctx) => {
           expect(_ctx).toEqual(ctx)
-          return {
-            name,
-            params
-          }
+          return name
         }
       }
-
-      ko.components.register(name, {
-        template: 'Hello, World!',
-        viewModel: class {
-          constructor(actual: any) {
-            expect(actual).toBe(params)
-            done()
-          }
-        }
-      })
-
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
 
-      const wrapperComponentName = ctx.route.component
-      const el = document.createElement('div')
-
-      expect(ko.components.isRegistered(wrapperComponentName)).toBe(true)
-
-      ko.applyBindings({}, el)
-      ko.applyBindingsToNode(el, {
-        component: {
-          name: wrapperComponentName,
-          params: ctx
-        }
-      })
-
-      ko.components.unregister(name)
-
-      expect(el.firstChild).not.toBeNull()
+      expect(ctx.route.component).toBe(name)
     })
 
-    test('disposes component registration after render', (done) => {
-      const ctx = { route: {} } as Context & IContext
+    test('async accessor', async () => {
+      const ctx = createMockContext()
       const name = 'my-component-3'
-      const params = { foo: 'bar' }
       const routeConfig: IRouteConfig = {
-        component: {
-          name,
-          params
+      component: (_ctx) => {
+          expect(_ctx).toEqual(ctx)
+          return Promise.resolve(name)
         }
       }
-
-      ko.components.register(name, {
-        template: 'Hello, World!',
-        viewModel: class {
-          constructor() {
-            ko.components.unregister(name)
-            expect(ko.components.isRegistered(wrapperComponentName)).toBe(false)
-            done()
-          }
-        }
-      })
-
-      const middleware = componentPlugin(routeConfig)
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
       const lifecycle = middleware(ctx)
 
       lifecycle.next()
+      await resolveQueue(ctx)
 
-      const wrapperComponentName = ctx.route.component
-      const el = document.createElement('div')
-
-      ko.applyBindings({}, el)
-      ko.applyBindingsToNode(el, { component: { name: wrapperComponentName } })
-    })
-
-    test('params are optional', (done) => {
-      const ctx = { route: {}, foo: 'foo' } as any
-      const name = 'my-component-4'
-      const routeConfig: IRouteConfig = {
-        component: {
-          name
-        }
-      }
-
-      ko.components.register(name, {
-        template: 'Hello, World!',
-        viewModel: class {
-          constructor(params: any) {
-            expect(params).toEqual({})
-            done()
-          }
-        }
-      })
-
-      const middleware = componentPlugin(routeConfig)
-      const lifecycle = middleware(ctx)
-
-      lifecycle.next()
-
-      const wrapperComponentName = ctx.route.component
-      const el = document.createElement('div')
-
-      ko.applyBindings({}, el)
-      ko.applyBindingsToNode(el, {
-        component: {
-          name: wrapperComponentName,
-          params: ctx
-        }
-      })
-
-      ko.components.unregister(name)
+      expect(ctx.route.component).toBe(name)
     })
   })
 
@@ -415,13 +344,16 @@ describe('router.plugins.component', () => {
     const ctx = {} as Context & IContext
     const routeConfig: IRouteConfig = {}
     const middleware = componentPlugin(routeConfig)
-    const lifecycle = middleware(ctx) as IterableIterator<void>
 
-    expect(() => {
-      lifecycle.next()
-      lifecycle.next()
-      lifecycle.next()
-      lifecycle.next()
-    }).not.toThrow()
+    expect(middleware).toBeUndefined()
   })
 })
+
+function createMockContext() {
+  return { route: {}, queue: jest.fn() as any } as Context & IContext
+}
+
+function resolveQueue(ctx: Context) {
+  const queue = ctx.queue as jest.Mock
+  return Promise.all(queue.mock.calls.map(([p]) => p))
+}
