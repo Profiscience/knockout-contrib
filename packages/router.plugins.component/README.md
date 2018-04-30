@@ -21,7 +21,7 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-plugins-component&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-plugins-component.svg?maxAge=2592000
 
-Sets the component for a route. Intended for use with dynamic imports for intuitive code-splitting/lazy-loading of views. Adds support for async `dispose` method, and provides plumbing for async initialization (for example with the [init plugin](../router.plugins.init)).
+Sets the component for a route. Intended for use with dynamic imports for intuitive code-splitting/lazy-loading of views.
 
 ## Installation
 
