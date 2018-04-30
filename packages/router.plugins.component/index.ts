@@ -6,7 +6,7 @@ let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
 
 type MaybePromise<T> = T | Promise<T>
 type MaybeDefaultExport<T> = T | { default: T }
-type MaybeAccessor<A, T> = T | ((A) => T)
+type MaybeAccessor<A, T> = T | ((arg: A) => T)
 
 declare module '@profiscience/knockout-contrib-router' {
   interface IContext {
@@ -166,7 +166,7 @@ async function normalizeConfig(
     Object
       .keys(obj)
       .map(async (k) => {
-        const v = await obj[k]
+        const v = await (obj as any)[k]
         // support dynamic default imports OOTB (i.e. viewModel: import('./viewModel'))
         ret[k] = typeof v.default !== 'undefined' ? v.default : v
       })
