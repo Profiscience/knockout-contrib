@@ -1,16 +1,21 @@
 import * as ko from 'knockout'
 import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import { LifecycleGeneratorMiddleware } from '../router/src/router'
+
+let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
+
+type MaybePromise<T> = T | Promise<T>
+type MaybeDefaultExport<T> = T | { default: T }
+type MaybeAccessor<A, T> = T | ((arg: A) => T)
 
 declare module '@profiscience/knockout-contrib-router' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IContext {
-    component: Promise<IRoutedComponentInstance> | IRoutedComponentInstance
+    component?: MaybePromise<IRoutedComponentInstance>
   }
 
-  // tslint:disable-next-line no-shadowed-variable
   interface IRouteConfig {
     /**
-     * Component accessor, intended for use with Webpack (with html-loader) for lazy-loading/code-splitting.
+     * Component accessor, intended for use with dynamic imports for lazy-loading.
      *
      * Example:
      *
@@ -21,16 +26,15 @@ declare module '@profiscience/knockout-contrib-router' {
      *  })
      * ```
      */
-    component?:
-      | LazyComponentAccessor
-      | IRoutedComponentConfig
-      | { name: string, params?: { [k: string]: any } | ((ctx: Context & IContext) => { [k: string]: any }) }
+    component?: IRouteComponentConfig
   }
 }
 
-export type LazyComponentAccessor = () => ILazyComponent
-
 export interface IRoutedComponentInstance {
+  /**
+   * Name component is registered with Knockout as
+   */
+  name: string
   /**
    * Route viewModel instance
    */
@@ -38,7 +42,7 @@ export interface IRoutedComponentInstance {
 }
 
 /**
- * Intended for use with Webpack (with html-loader) for lazy-loading/code-splitting
+ * Intended for use with dynamic imports for lazy-loading/code-splitting
  *
  * Example:
  *
@@ -49,15 +53,26 @@ export interface IRoutedComponentInstance {
  *  }
  * ```
  */
-export type ILazyComponent = Promise<{ template: string, viewModel: IRoutedViewModelConstructor }> | {
-  template: Promise<string | { default: string }>
-  viewModel?: Promise<{ default: IRoutedViewModelConstructor }>
+export type IRouteComponentConfig =
+  | MaybeAccessor<Context & IContext, MaybePromise<INamedComponent>>
+  | MaybeAccessor<Context & IContext, MaybePromise<MaybeLazy<IAnonymousComponent>>>
+
+export type MaybeLazy<T extends {}> = MaybePromise<{
+  [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>>
+}>
+
+export type INamedComponent = string
+
+export type IAnonymousComponent = {
+  template: string
+  name?: string
+  viewModel?: IRoutedViewModelConstructor
 }
 
 /**
- * View model class
+ * ViewModel Class
  *
- * Accepts router context as first and only argument in constructor
+ * Constructor accepts route context as first and only argument
  *
  * See @profiscience/knockout-contrib-router for context API
  */
@@ -65,110 +80,97 @@ export interface IRoutedViewModelConstructor {
   new(ctx: Context & IContext): any
 }
 
-export interface IRoutedComponentConfig {
-  template: string
-  viewModel?: { new(ctx: Context & IContext): any }
-  synchronous?: true
-}
-
 const uniqueComponentNames = (function*() {
   let i = 0
-  while (true) {
-    yield `__router_view_${i++}__`
-  }
+  while (true) yield `__router_view_${i++}__`
 })()
 
-export function componentPlugin({ component: componentAccessor }: IRouteConfig) {
-  const componentName = uniqueComponentNames.next().value
-  let viewModelInstance: any
+// @TODO (try to) make this type-safe, i.e. know it's void if routeConfig.component is void, and middleware if not
+export function componentPlugin({ component: componentAccessor }: IRouteConfig): void | LifecycleGeneratorMiddleware {
+  if (!componentAccessor) return
 
-  return function*(ctx: Context & IContext): IterableIterator<void> {
-    if (!componentAccessor) return
+  let componentName: string
 
-    function initializeComponent(componentConfig: IRoutedComponentConfig) {
-      if (componentConfig.viewModel) {
-        try {
-          viewModelInstance = new (componentConfig.viewModel as any)(ctx)
-          ctx.component = { viewModel: viewModelInstance }
-          ko.components.register(componentName, {
-            synchronous: true,
-            ...componentConfig,
-            viewModel: { instance: viewModelInstance }
-          })
-        } catch (e) {
-          // tslint:disable-next-line no-console max-line-length
-          console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to `new` viewModel. This may cause unexpected behavior.')
-          ctx.component = componentConfig
-          ko.components.register(componentName, componentConfig)
-        }
-      } else {
-        ctx.component = {}
-        ko.components.register(componentName, {
-          synchronous: true,
-          ...componentConfig
-        })
-      }
-      return ctx.component
-    }
+  return function*(ctx) {
+    let viewModelInstance: any
+    let resolveComponent: (componentInstance: IRoutedComponentInstance) => void
+    ctx.component = new Promise((_resolve) => resolveComponent = _resolve)
 
-    ctx.route.component = componentName
+    ctx.queue(
+      normalizeConfig(ctx, componentAccessor)
+        .then(async (normalizedConfig) => {
+          // named component
+          if (typeof normalizedConfig === 'string') {
+            componentName = normalizedConfig
+            resolveComponent({ name: componentName })
+            if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.') // tslint:disable-line max-line-length no-console
+          // anonymous component
+          } else {
+            componentName = normalizedConfig.name || uniqueComponentNames.next().value
 
-    /* beforeRender */
-    if (typeof componentAccessor === 'function') {
-      const p = fetchComponent(componentAccessor()).then(initializeComponent)
-      ctx.component = p
-      ctx.queue(p.then(() => {/* noop */}))
-    } else if (typeof (componentAccessor as any).name === 'string') {
-      let params: any = (componentAccessor as any).params || {}
-      if (typeof (componentAccessor as any).params === 'function') {
-        params = (componentAccessor as any).params(ctx)
-      }
-      ko.components.register(componentName, {
-        synchronous: true,
-        template: '<div data-bind="component: { name: name, params: params }"></div>',
-        viewModel: {
-          instance: {
-            name: (componentAccessor as any).name,
-            params
+            const routedComponentInstance: IRoutedComponentInstance = { name: componentName }
+            const templateConfig = normalizedConfig.template
+            let viewModelConfig: any
+
+            if (normalizedConfig.viewModel) {
+              try {
+                viewModelInstance = new normalizedConfig.viewModel(ctx)
+                viewModelConfig = { instance: viewModelInstance }
+                routedComponentInstance.viewModel = viewModelInstance
+              } catch (e) {
+                viewModelConfig = normalizedConfig.viewModel
+                if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.') // tslint:disable-line no-console max-line-length
+              }
+            }
+
+            resolveComponent(routedComponentInstance)
+            ctx.component = routedComponentInstance
+
+            ko.components.register(componentName, {
+              synchronous: true,
+              template: templateConfig,
+              viewModel: viewModelConfig
+            })
           }
-        }
-      })
-    } else {
-      initializeComponent(componentAccessor as IRoutedComponentConfig)
-    }
 
-    yield
-    /* afterRender */
+          ctx.route.component = componentName
+        })
+    )
 
-    ko.components.unregister(componentName)
+    yield // afterRender
 
-    yield
-    /* beforeDispose */
-    if (viewModelInstance && viewModelInstance.dispose) {
-      viewModelInstance.dispose()
-      viewModelInstance.dispose = () => { /* noop */ }
-    }
+    ko.components.unregister(ctx.route.component)
   }
 }
 
-async function fetchComponent(accessor: ILazyComponent): Promise<IRoutedComponentConfig> {
-  const component: IRoutedComponentConfig & { [k: string]: any } = {} as any
+export function disableUninstantiableViewModelWarning() {
+  UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = false
+}
 
-  if (accessor instanceof Promise) {
-    Object.assign(component, await accessor)
-  } else {
-    const promises = Object
-      .keys(accessor)
+async function normalizeConfig(
+  ctx: Context & IContext,
+  obj: IRouteComponentConfig
+): Promise<INamedComponent | IAnonymousComponent> {
+  // resolve accessors
+  if (typeof obj === 'function') obj = obj(ctx)
+
+  // resolve top-level promises
+  obj = await obj
+
+  // named components
+  if (typeof obj === 'string') return obj
+
+  // anonymous components, may have promised values
+  const ret = {} as any
+  await Promise.all(
+    Object
+      .keys(obj)
       .map(async (k) => {
-        const imports = await (accessor as any)[k]
-        if (typeof imports.default !== 'undefined') {
-          component[k] = imports.default
-        } else {
-          component[k] = imports
-        }
+        const v = await (obj as any)[k]
+        // support dynamic default imports OOTB (i.e. viewModel: import('./viewModel'))
+        ret[k] = typeof v.default !== 'undefined' ? v.default : v
       })
-    await Promise.all(promises)
-  }
+  )
 
-  return component
+  return ret
 }
