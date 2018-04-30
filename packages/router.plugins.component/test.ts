@@ -1,19 +1,9 @@
 /* tslint:disable max-classes-per-file */
 
 import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, IRouteConfig, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
 
 import { componentPlugin, IRoutedComponentInstance, disableUninstantiableViewModelWarning } from './index'
-import { LifecycleGeneratorMiddleware } from '../router/src/router'
-
-const uniqueComponentNames = (function*() {
-  let i = 0
-  while (true) {
-    const id = `__router_view_${i++}__`
-    if (ko.components.isRegistered(id)) continue
-    yield id
-  }
-})()
 
 const registerComponent = ko.components.register
 
@@ -43,7 +33,6 @@ describe('router.plugins.component', () => {
     test('named components', async () => {
       console.warn = jest.fn()
 
-      const template = 'Hello, World!'
       const component = 'hello-world'
       const ctx = createMockContext()
       const routeConfig: IRouteConfig = { component } as any
@@ -230,7 +219,7 @@ describe('router.plugins.component', () => {
 
       expect(ko.components.register).toBeCalled()
 
-      const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
+      const [registeredComponentName] = (ko.components.register as jest.Mock).mock.calls[0]
       expect(ctx.route.component).toBe('my-awesome-component')
       expect(registeredComponentName).toBe('my-awesome-component')
     })
@@ -341,10 +330,8 @@ describe('router.plugins.component', () => {
   })
 
   test('doesn\'t blow up when not used', () => {
-    const ctx = {} as Context & IContext
     const routeConfig: IRouteConfig = {}
     const middleware = componentPlugin(routeConfig)
-
     expect(middleware).toBeUndefined()
   })
 })
