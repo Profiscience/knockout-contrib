@@ -11,12 +11,14 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "keywords": [
-    "tko",
+    "ko",
+    "ko-component-router",
     "knockout",
     "knockoutjs",
-    "routing",
-    "router",
-    "spa"
+    "knockout-router",
+    "knockout-contrib",
+    "knockout-contrib-router",
+    "knockout-contrib-router-plugin"
   ],
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-6",

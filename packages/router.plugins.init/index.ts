@@ -9,13 +9,16 @@ export function initializerPlugin() {
 
     ctx.queue((async () => {
       const { viewModel } = await (ctx.component as Promise<IRoutedComponentInstance>)
+
       if (viewModel) {
-        await Promise.all(
-          Object
-            .keys(viewModel)
-            .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
-            .map((prop: any) => (viewModel as any)[prop][INITIALIZED])
-        )
+        const initializers = Object
+          .keys(viewModel)
+          .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
+          .map((prop: any) => (viewModel as any)[prop][INITIALIZED])
+
+        if (viewModel[INITIALIZED]) initializers.push(viewModel[INITIALIZED])
+
+        await Promise.all(initializers)
       }
     })())
   }

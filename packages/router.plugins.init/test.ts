@@ -11,7 +11,7 @@ Route
   .usePlugin(initializerPlugin)
 
 describe('router.plugins.init', () => {
-  test('works with router.plugins.component, initializes props with INITIALIZED prop on ViewModel', async () => {
+  test('works with router.plugins.component, initializes props with INITIALIZED key on ViewModel', async () => {
     const spy = jest.spyOn(Promise, 'all')
     const promise = Promise.resolve()
 
@@ -22,6 +22,36 @@ describe('router.plugins.init', () => {
           public data = {
             [INITIALIZED]: promise
           }
+        }
+      })
+    })
+
+    const queue = jest.fn()
+    const routeConfig: IRouteConfig = { component: getComponent }
+    const route = new Route('/', routeConfig)
+    const ctx = { queue: queue as any, route: {} } as Context & IContext
+
+    for (const middleware of route.middleware) {
+      const lifecycle = middleware(ctx) as IterableIterator<void>
+      if (lifecycle) lifecycle.next()
+    }
+
+    await Promise.all(queue.mock.calls.map(([p]) => p))
+
+    await ctx.component
+
+    expect(spy).toBeCalledWith([promise])
+  })
+
+  test('works with router.plugins.component, initializes INITIALIZED key on ViewModel', async () => {
+    const spy = jest.spyOn(Promise, 'all')
+    const promise = Promise.resolve()
+
+    const getComponent = () => ({
+      template: Promise.resolve({ default: 'Hello, World!' }),
+      viewModel: Promise.resolve({
+        default: class {
+          public [INITIALIZED] = promise
         }
       })
     })

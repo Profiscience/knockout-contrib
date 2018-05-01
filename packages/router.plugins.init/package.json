@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-init",
-  "description": "@profiscience/knockout-contrib-router plugin to initialize component before render",
+  "description": "@profiscience/knockout-contrib-router Component Initializer Plugin — Declarative Async ViewModels",
   "version": "1.0.0-alpha.11",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
@@ -22,5 +22,15 @@
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.6",
     "@profiscience/knockout-contrib-router": "^2.0.0-6",
     "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0-alpha.12"
-  }
+  },
+  "keywords": [
+    "ko",
+    "ko-component-router",
+    "knockout",
+    "knockoutjs",
+    "knockout-router",
+    "knockout-contrib",
+    "knockout-contrib-router",
+    "knockout-contrib-router-plugin"
+  ]
 }
