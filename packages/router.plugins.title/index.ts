@@ -1,4 +1,4 @@
-import { Context, IContext, IRouteConfig, Middleware } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
@@ -10,28 +10,28 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function titlePlugin({ title }: IRouteConfig): Middleware {
-  return function*(ctx: Context & IContext): IterableIterator<void> {
-    if (!title) return
+export function createTitlePlugin(compose = (ts: string[]) => ts.join(' | ')) {
+  const titles: string[] = []
 
-    /* beforeRender */
-    const prevTitle = document.title
+  return ({ title }: IRouteConfig) => {
+    return function*(ctx: Context & IContext): IterableIterator<void> {
+      yield
+      /* afterRender */
 
-    yield
-    /* afterRender */
+      if (title) {
+        titles.push(
+          typeof title === 'function'
+            ? title(ctx)
+            : title
+        )
+      }
 
-    if (typeof title === 'function') {
-      document.title = title(ctx)
-    } else {
-      document.title = title as string
+      if (!ctx.$child) document.title = compose(titles)
+
+      yield
+      /* beforeDispose */
+
+      if (title) titles.pop()
     }
-
-    yield
-    /* beforeDispose */
-
-    yield
-    /* afterDispose */
-
-    document.title = prevTitle
   }
 }

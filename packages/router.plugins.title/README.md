@@ -21,19 +21,51 @@
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-plugins-title&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-plugins-title.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-router-plugins metapackage](../router.plugins)
-
-@TODO description
+Set `document.title` for a route. Supports nesting/composition.
 
 ## Usage
 
 ```typescript
 import { Route } from '@profiscience/knockout-contrib-router'
-import { titlePlugin } from '@profiscience/knockout-contrib-router-plugins'
+import { createTitlePlugin } from '@profiscience/knockout-contrib-router-plugins'
 
-Route.usePlugin(titlePlugin)
+Route.usePlugin(createTitlePlugin())
 
+// Basic
 new Route('/', {
-  title: '@TODO'
+  title: 'Home'
 })
+
+// Accessor (Synchronous ONLY, use middleware to load async data if necessary)
+new Route('/profile', [loadUser], {
+  title: (ctx) => `Profile | ${ctx.user.name}`
+})
+```
+
+### Nested Routing
+
+If you have nested routes that both supply a title, by default they will be joined with "|"...
+
+```typescript
+new Route('/', {
+  title: 'My Awesome App',
+  children: [
+    new Route('/', {
+      title: 'Home'
+    }),
+    new Route('/profile', {
+      title: 'Profile'
+    })
+  ]
+})
+```
+
+If you land on `/` the title will be set to "My Awesome App | Home"; likewise navigating to `/profile` will update the title to "My Awesome App | Profile".
+
+### Using a Custom Formatter
+
+If you'd like to using something other than "|" to join your routes, you may pass a custom formatter function to `createTitlePlugin`.
+
+```typescript
+Route.usePlugin(createTitlePlugin((ts: string[]) => `My Awesome App | ${ts.join(' > ')}`))
 ```
