@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-component",
   "description": "Component Plugin for @profiscience/knockout-contrib-router",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.component",
@@ -11,12 +11,14 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "keywords": [
-    "tko",
+    "ko",
+    "ko-component-router",
     "knockout",
     "knockoutjs",
-    "routing",
-    "router",
-    "spa"
+    "knockout-router",
+    "knockout-contrib",
+    "knockout-contrib-router",
+    "knockout-contrib-router-plugin"
   ],
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-6",
