@@ -5,8 +5,15 @@
   "useWorkspaces": true,
   "commands": {
     "publish": {
-      "ignore": [
-        "*.md"
+      "ignoreChanges": [
+        "**/docs/**",
+        "**/examples/**",
+        "**/__tests__/**",
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/test.ts",
+        "**/test.tsx",
+        "**/*.md"
       ]
     }
   }
