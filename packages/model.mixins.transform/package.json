@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-transform",
   "description": "@profiscience/knockout-contrib-model-mixins-data fetch response transformer mixin",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.transform",
@@ -19,6 +19,6 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.26"
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.27"
   }
 }

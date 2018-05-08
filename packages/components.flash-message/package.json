@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
   "description": "Flash Message Component for KnockoutJS",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.32",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.flash-message",
@@ -21,10 +21,10 @@
     "knockout": "^3.5.0-beta"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.11",
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.0-alpha.12",
     "jsx-dom": "^6.0.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.10"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0-alpha.11"
   }
 }

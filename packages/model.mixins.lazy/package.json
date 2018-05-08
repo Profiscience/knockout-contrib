@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-lazy",
   "description": "@profiscience/knockout-contrib-model-builders-data lazy property initialization mixin",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.lazy",
@@ -18,6 +18,6 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.26"
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.27"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-cache-memory",
   "description": "In-Memory Caching Mixin for @profiscience/knockout-contrib-model-builders-*",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.cache.memory",
@@ -18,7 +18,7 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.6",
-    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.26"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.7",
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0-alpha.27"
   }
 }
