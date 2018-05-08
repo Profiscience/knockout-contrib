@@ -1,10 +1,10 @@
-import { Context, IContext } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
 
 export type ScrollPositionMiddlewareOpts = {
   scrollTo?(x: number, y: number): void
 }
 
-export function createScrollPositionMiddleware(opts: ScrollPositionMiddlewareOpts = {}) {
+export function createScrollPositionMiddleware(opts: ScrollPositionMiddlewareOpts = {}): LifecycleGeneratorMiddleware {
   const scrollTo = opts.scrollTo || window.scrollTo
 
   return function*(ctx: Context & IContext) {

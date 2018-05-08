@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import { Context, IContext } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
 
 export const FLASH_MESSAGE = Symbol('FLASH_MESSAGE')
 
@@ -15,7 +15,7 @@ declare module '@profiscience/knockout-contrib-router' {
 
 export const flashMessage: KnockoutObservable<boolean | string | IFlashMessage | undefined> = ko.observable(false)
 
-export function* flashMessageMiddleware(ctx: Context & IContext) {
+export function* flashMessageMiddleware(ctx: Context & IContext): IterableIterator<void> {
   /* beforeRender */
 
   yield

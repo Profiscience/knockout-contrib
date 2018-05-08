@@ -1,7 +1,7 @@
 import { ToProgress, ToProgressOptions } from 'toprogress2'
-import { Context, IContext } from '@profiscience/knockout-contrib-router'
+import { Context, IContext, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
 
-export function createProgressBarMiddleware(opts?: ToProgressOptions) {
+export function createProgressBarMiddleware(opts?: ToProgressOptions): LifecycleGeneratorMiddleware {
   const progressBar = new ToProgress(opts)
   let i = 0
 

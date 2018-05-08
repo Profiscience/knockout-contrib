@@ -1,6 +1,5 @@
 import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
-import { LifecycleGeneratorMiddleware } from '../router/src/router'
+import { Context, IContext, IRouteConfig, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
 
 let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
 
