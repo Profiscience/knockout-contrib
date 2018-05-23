@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-init",
   "description": "@profiscience/knockout-contrib-router Component Initializer Plugin — Declarative Async ViewModels",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.init",
@@ -19,9 +19,9 @@
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.7",
-    "@profiscience/knockout-contrib-router": "^2.0.0-7",
-    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.1"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.8",
+    "@profiscience/knockout-contrib-router": "^2.0.0-8",
+    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.2"
   },
   "keywords": [
     "ko",

@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-filters-date-format",
   "description": "Date formatting filter for KnockoutJS + Knockout-Punches",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/filters.date.format",

@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-querystring",
   "description": "Querystring Abstraction for KnockoutJS",
-  "version": "0.0.1-alpha.11",
+  "version": "0.0.1-alpha.12",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/querystring",
