@@ -54,7 +54,7 @@ export interface IRoutedComponentInstance {
  */
 export type IRouteComponentConfig =
   | MaybeAccessor<Context & IContext, MaybePromise<INamedComponent>>
-  | MaybeAccessor<Context & IContext, MaybePromise<MaybeLazy<IAnonymousComponent>>>
+  | MaybeAccessor<Context & IContext, MaybePromise<MaybeDefaultExport<MaybeLazy<IAnonymousComponent>>>>
 
 export type MaybeLazy<T extends {}> = MaybePromise<{
   [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>>
@@ -156,6 +156,9 @@ async function normalizeConfig(
   // resolve top-level promises
   obj = await obj
 
+  // top-level default exports
+  if (typeof (obj as any).default !== 'undefined') obj = (obj as any).default
+
   // named components
   if (typeof obj === 'string') return obj
 
@@ -166,7 +169,7 @@ async function normalizeConfig(
       .keys(obj)
       .map(async (k) => {
         const v = await (obj as any)[k]
-        // support dynamic default imports OOTB (i.e. viewModel: import('./viewModel'))
+        // property default exports
         ret[k] = typeof v.default !== 'undefined' ? v.default : v
       })
   )

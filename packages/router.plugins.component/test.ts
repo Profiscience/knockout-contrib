@@ -93,7 +93,7 @@ describe('router.plugins.component', () => {
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
-    test('sync, template only', async () => {
+    test('component: { template }', async () => {
       ko.components.register = jest.fn()
 
       const template = 'Hello, World!'
@@ -117,7 +117,7 @@ describe('router.plugins.component', () => {
       expect(registeredComponent.synchronous).toBe(true)
     })
 
-    test('sync accessor, async values', async () => {
+    test('component: () => ({ template: Promise<string>, viewModel: Promise<any> })', async () => {
       ko.components.register = jest.fn()
 
       class ViewModel {}
@@ -145,7 +145,7 @@ describe('router.plugins.component', () => {
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
-    test('sync accessor, async values, default imports', async () => {
+    test('component: () => { template: Promise<{ default: string>, viewModel: Promise<{ default: any }>  }', async () => {
       ko.components.register = jest.fn()
 
       class ViewModel {}
@@ -175,7 +175,38 @@ describe('router.plugins.component', () => {
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
-    test('async accessor', async () => {
+    test('component: () => Promise<{ default: { template, viewModel } }>', async () => {
+      ko.components.register = jest.fn()
+
+      class ViewModel {}
+      const template = 'Hello, World!'
+      const getComponent = () => Promise.resolve({
+        // e.g. `component: import('./component`)`, where component.ts is `export default { template, viewModel }`
+        // instead named template and viewModel exports
+        default: {
+          template,
+          viewModel: ViewModel
+        }
+      })
+      const ctx = { queue: jest.fn() as any, route: {} } as Context & IContext
+      const routeConfig: IRouteConfig = { component: getComponent }
+      const middleware = componentPlugin(routeConfig) as LifecycleGeneratorMiddleware
+      const lifecycle = middleware(ctx)
+
+      lifecycle.next()
+
+      await ctx.component
+
+      const [registeredComponentName, registeredComponent] = (ko.components.register as jest.Mock).mock.calls[0]
+      expect(ctx.route.component).toBe((ctx.component as IRoutedComponentInstance).name)
+      expect(ctx.route.component).toMatch(/__router_view_\d+__/)
+      expect(registeredComponentName).toMatch(/__router_view_\d+__/)
+      expect(registeredComponent.template).toBe(template)
+      expect(registeredComponent.synchronous).toBe(true)
+      expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
+    })
+
+    test('comopnent: () => Promise<{ template, viewModel }>', async () => {
       ko.components.register = jest.fn()
 
       class ViewModel {}
