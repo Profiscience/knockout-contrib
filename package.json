@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.6.1",
     "benchmark": "^2.1.4",
     "chokidar": "^2.0.2",
+    "cz-conventional-changelog": "^2.1.0",
     "fs-extra": "^6.0.0",
     "globby": "^8.0.1",
     "jest": "^22.0.1",
@@ -65,6 +66,11 @@
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.[tj]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
