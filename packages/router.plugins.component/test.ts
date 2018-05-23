@@ -145,6 +145,7 @@ describe('router.plugins.component', () => {
       expect(registeredComponent.viewModel.instance).toBeInstanceOf(ViewModel)
     })
 
+    // tslint:disable-next-line:max-line-length
     test('component: () => { template: Promise<{ default: string>, viewModel: Promise<{ default: any }>  }', async () => {
       ko.components.register = jest.fn()
 

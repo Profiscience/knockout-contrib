@@ -106,22 +106,22 @@ describe('router.plugins.init', () => {
 
   test('doesn\'nt blow up with defined properties w/ undefined values (see comment in test file)', async () => {
     /**
-     * It's not only possible, but common to have a property whose descriptor has been defined, but whose value is undefined.
-     * In this case, Object.keys and the like *still* return those property descriptors.
-     * 
+     * It's not only possible, but common to have a property whose descriptor has been defined, but
+     * whose value is undefined. In this case, Object.keys and the like *still* return those property descriptors.
+     *
      * If none of this makes any sense, this is what I'm talking about...
-     * 
+     *
      *  const obj = {
      *    foo: undefined
      *  }
-     * 
+     *
      *  Object.keys(obj) // ['foo']
      */
 
     const queue = jest.fn()
     const component = {
       template: 'Hello, World!',
-      viewModel: class { foo = undefined }
+      viewModel: class { public foo = undefined }
     }
     const routeConfig: IRouteConfig = { component }
     const route = new Route('/', routeConfig)
@@ -143,7 +143,7 @@ describe('router.plugins.init', () => {
     const queue = jest.fn()
     const component = {
       template: 'Hello, World!',
-      viewModel: class { foo = null }
+      viewModel: class { public foo = null }
     }
     const routeConfig: IRouteConfig = { component }
     const route = new Route('/', routeConfig)

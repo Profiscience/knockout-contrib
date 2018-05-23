@@ -389,6 +389,6 @@ export class Router {
 
   private static which(e: MouseEvent): number {
     e = e || window.event as MouseEvent
-    return e.which === null ? e.button : e.which // tslint:disable-line:strict-type-predicates
+    return e.which === null ? e.button : e.which // tslint:disable-line strict-type-predicates deprecation
   }
 }
