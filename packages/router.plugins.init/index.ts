@@ -13,7 +13,12 @@ export function initializerPlugin() {
       if (viewModel) {
         const initializers = Object
           .keys(viewModel)
-          .filter((prop: any) => (viewModel as any)[prop][INITIALIZED])
+          .filter((prop: any) => {
+            const v = (viewModel as any)[prop]
+            return typeof v === 'undefined' || v === null
+              ? false
+              : v[INITIALIZED]
+          })
           .map((prop: any) => (viewModel as any)[prop][INITIALIZED])
 
         if (viewModel[INITIALIZED]) initializers.push(viewModel[INITIALIZED])

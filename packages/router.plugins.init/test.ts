@@ -103,4 +103,57 @@ describe('router.plugins.init', () => {
       }
     }).not.toThrow()
   })
+
+  test('doesn\'nt blow up with defined properties w/ undefined values (see comment in test file)', async () => {
+    /**
+     * It's not only possible, but common to have a property whose descriptor has been defined, but whose value is undefined.
+     * In this case, Object.keys and the like *still* return those property descriptors.
+     * 
+     * If none of this makes any sense, this is what I'm talking about...
+     * 
+     *  const obj = {
+     *    foo: undefined
+     *  }
+     * 
+     *  Object.keys(obj) // ['foo']
+     */
+
+    const queue = jest.fn()
+    const component = {
+      template: 'Hello, World!',
+      viewModel: class { foo = undefined }
+    }
+    const routeConfig: IRouteConfig = { component }
+    const route = new Route('/', routeConfig)
+    const ctx = { queue: queue as any, route: {} } as Context & IContext
+
+    for (const middleware of route.middleware) {
+      const lifecycle = middleware(ctx) as IterableIterator<void>
+      if (lifecycle) lifecycle.next()
+    }
+
+    await expect(Promise.all(queue.mock.calls.map(([p]) => p))).resolves.toBeTruthy()
+  })
+
+  test('doesn\'nt blow up with null props', async () => {
+    /**
+     * `TypeError: Cannot read property 'foo` of null`
+     */
+
+    const queue = jest.fn()
+    const component = {
+      template: 'Hello, World!',
+      viewModel: class { foo = null }
+    }
+    const routeConfig: IRouteConfig = { component }
+    const route = new Route('/', routeConfig)
+    const ctx = { queue: queue as any, route: {} } as Context & IContext
+
+    for (const middleware of route.middleware) {
+      const lifecycle = middleware(ctx) as IterableIterator<void>
+      if (lifecycle) lifecycle.next()
+    }
+
+    await expect(Promise.all(queue.mock.calls.map(([p]) => p))).resolves.toBeTruthy()
+  })
 })
