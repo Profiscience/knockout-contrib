@@ -36,9 +36,14 @@ new Route('/', {
   title: 'Home'
 })
 
-// Accessor (Synchronous ONLY, use middleware to load async data if necessary)
+// Sync Accessor Function
 new Route('/profile', [loadUser], {
   title: (ctx) => `Profile | ${ctx.user.name}`
+})
+
+// Async Accessor Function
+new Route('/profile', {
+  title: async (ctx) => `Profile | ${await getUserName()}`
 })
 ```
 
