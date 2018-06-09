@@ -1,10 +1,10 @@
 {
-  "name": "@profiscience/knockout-contrib-bindings-click-meta",
-  "description": "KnockoutJS meta+Click Binding",
+  "name": "@profiscience/knockout-contrib-bindings-toggle",
+  "description": "Toggle Binding for KnockoutJS",
   "version": "1.0.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.click.meta",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.toggle",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
