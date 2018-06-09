@@ -1,0 +1,30 @@
+{
+  "name": "@profiscience/knockout-contrib",
+  "description": "KnockoutJS Goodies for building wicked awesome SPAs",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/_",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "binding",
+    "bindingHandler",
+    "tko",
+    "knockout-binding"
+  ],
+  "peerDependencies": {
+    "knockout": "^3.4.0 || 3.5.0-rc"
+  },
+  "dependencies": {
+    "@profiscience/knockout-contrib-bindings-click-alt": "X.X.X",
+    "@profiscience/knockout-contrib-bindings-click-ctrl": "X.X.X",
+    "@profiscience/knockout-contrib-bindings-click-meta": "X.X.X",
+    "@profiscience/knockout-contrib-bindings-click-shift": "X.X.X"
+  }
+}
