@@ -1,0 +1,25 @@
+{
+  "name": "@profiscience/knockout-contrib-jest-matchers",
+  "description": "Jest Matchers for Knockout JS",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/jest-matchers",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "src/index.ts",
+  "keywords": [
+    "knockout",
+    "knockoutjs",
+    "jest",
+    "jasmine",
+    "matchers",
+    "assertions"
+  ],
+  "peerDependencies": {
+    "jest": "X.X.X",
+    "knockout": "^3.4.0 || 3.5.0-beta"
+  }
+}
