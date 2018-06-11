@@ -29,7 +29,6 @@ script:
 - yarn build
 - yarn lint
 - yarn test
-- yarn test:router
 after_script:
 - npx codecov
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-upload
