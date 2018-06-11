@@ -19,7 +19,7 @@
     "@types/globby": "^6.1.0",
     "@types/jest": "^23.0.0",
     "@types/jquery": "^3.3.1",
-    "@types/jsdom": "^11.0.3",
+    "@types/jsdom": "11.0.4",
     "@types/knockout": "^3.4.0",
     "@types/lodash": "^4.14.80",
     "@types/node": "^10.3.2",
