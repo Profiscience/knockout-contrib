@@ -27,6 +27,7 @@
     "@profiscience/knockout-contrib-bindings-click-meta": "X.X.X",
     "@profiscience/knockout-contrib-bindings-click-shift": "X.X.X",
     "@profiscience/knockout-contrib-bindings-jquery": "X.X.X",
-    "@profiscience/knockout-contrib-bindings-toggle": "X.X.X"
+    "@profiscience/knockout-contrib-bindings-toggle": "X.X.X",
+    "@profiscience/knockout-contrib-types": "X.X.X"
   }
 }
