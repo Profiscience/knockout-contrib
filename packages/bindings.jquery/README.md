@@ -8,16 +8,12 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.jquery
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/bindings.jquery
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.jquery&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/bindings.jquery
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.jquery&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/bindings.jquery
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-bindings-jquery
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-bindings-jquery.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-jquery&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-jquery.svg?maxAge=2592000
 

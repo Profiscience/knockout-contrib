@@ -10,7 +10,9 @@ declare global {
 export const toggleBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     if (!ko.isWriteableObservable(valueAccessor())) {
-      throw new Error('[@profiscience/knockout-contrib-bindings-toggle] Value is not a writable observable')
+      throw new Error(
+        '[@profiscience/knockout-contrib-bindings-toggle] Value is not a writable observable'
+      )
     }
 
     ko.applyBindingsToNode(el, {

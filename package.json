@@ -3,8 +3,10 @@
   "scripts": {
     "build": "ts-node ./build.ts",
     "lint": "tslint -p ./tsconfig.json",
+    "format": "pretty-quick",
     "test": "jest",
-    "test:router": "cd packages/router && yarn test"
+    "test:router": "cd packages/router && yarn test",
+    "precommit": "yarn format --staged"
   },
   "workspaces": [
     "packages/*"
@@ -29,6 +31,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "fs-extra": "^6.0.0",
     "globby": "^8.0.1",
+    "husky": "^0.14.3",
     "jest": "^22.0.1",
     "jest-fetch-mock": "^1.5.0",
     "jest-jquery-matchers": "^2.0.0",
@@ -39,10 +42,13 @@
     "lerna": "^2.11.0",
     "lodash": "^4.17.4",
     "microtime": "^2.1.7",
+    "prettier": "^1.13.5",
+    "pretty-quick": "^1.6.0",
     "toprogress": "^0.1.3",
     "ts-jest": "^22.4.5",
     "ts-node": "^6.0.3",
     "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.8.0-rc"
   },
   "jest": {
@@ -65,6 +71,11 @@
     "transform": {
       "^.+\\.[tj]sx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     }
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "semi": false,
+    "singleQuote": true
   },
   "config": {
     "commitizen": {
