@@ -5,7 +5,6 @@
     "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
     "test": "jest",
-    "test:router": "cd packages/router && yarn test",
     "precommit": "yarn format --staged"
   },
   "workspaces": [
