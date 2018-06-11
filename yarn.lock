@@ -105,11 +105,10 @@
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.2.tgz#8700226bdde24b6f98e3a60126dbaab3b2a3ab41"
 
-"@types/jsdom@^11.0.3":
-  version "11.0.5"
-  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-11.0.5.tgz#b12fffc73eb3731b218e9665a50f023b6b84b5cb"
+"@types/jsdom@11.0.4":
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-11.0.4.tgz#a645db4704cf7e4f811f583926ad12525c719400"
   dependencies:
-    "@types/events" "*"
     "@types/node" "*"
     "@types/tough-cookie" "*"
     parse5 "^3.0.2"
