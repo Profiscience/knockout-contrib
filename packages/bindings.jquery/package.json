@@ -9,7 +9,7 @@
   "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
-  "types": "index.ts",
+  "types": "index.d.ts",
   "peerDependencies": {
     "jquery": "x.x.x",
     "knockout": "^3.4.0 || 3.5.0-rc",

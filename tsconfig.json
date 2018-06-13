@@ -9,19 +9,57 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
-    "lib": [
-      "dom",
-      "es5",
-      "es2015",
-      "esnext.asynciterable"
-    ]
+    "lib": ["dom", "es5", "es2015", "esnext.asynciterable"],
+    "baseUrl": ".",
+    "paths": {
+      /**
+       * These tell tsc to ignore the "types" property in the package.json
+       * of cross dependencies, since when running tsc on the entire repo at
+       * once those declaration files may not exist yet, and if they do they
+       * may be outdated. Also, if you editor has good TS support, you may opt
+       * not to run the type checker as part of the build (i.e. `--transpile-only`),
+       * in which case the declarations will not be built.
+       *
+       * This was a major headache to figure out, and until (if?) Typescript implements
+       * some sort of project/composite compilation, it's likely the best option without
+       * incurring the massive expense of reverting the build process to run tsc in each
+       * package individually.
+       */
+      "@profiscience/knockout-contrib-bindings-click-alt": [
+        "packages/bindings.click.alt/index.ts"
+      ],
+      "@profiscience/knockout-contrib-bindings-click-ctrl": [
+        "packages/bindings.click.ctrl/index.ts"
+      ],
+      "@profiscience/knockout-contrib-bindings-click-meta": [
+        "packages/bindings.click.meta/index.ts"
+      ],
+      "@profiscience/knockout-contrib-bindings-click-shift": [
+        "packages/bindings.click.shift/index.ts"
+      ],
+      "@profiscience/knockout-contrib-bindings-jquery": [
+        "packages/bindings.jquery/index.ts"
+      ],
+      "@profiscience/knockout-contrib-bindings-toggle": [
+        "packages/bindings.toggle/index.ts"
+      ],
+      "@profiscience/knockout-contrib-jest-matchers": [
+        "packages/jest-matchers/src/index.ts"
+      ]
+    }
   },
-  "include": [
-    "**/*"
-  ],
+  "include": ["**/*"],
   "exclude": [
+    "boiler.ts",
+    "build.ts",
+    "build.worker.ts",
     "**/dist",
     "**/examples",
-    "templates"
+    "**/__mocks__",
+    "**/__tests__",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/test.ts",
+    "**/test.tsx"
   ]
 }
