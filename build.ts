@@ -1,5 +1,21 @@
 #! node_modules/.bin/ts-node
 
+/**
+ * In a nutshell the build process is as follows...
+ *
+ * - match every source file in the packages dir using a glob
+ * - spawn (up to 8, but no more than 2 less than the total # of cpus) workers
+ * - round-robin the file paths to the workers
+ * - worker determines the dist path
+ * - worker transpiles with tsc, and emits to dist/esnext
+ * - worker uses esnext output to produce commonjs and es2015 builds via babel
+ *
+ * MEANWHILE
+ *
+ * - tsc is ran against the project as a whole with --emitDeclarationOnly to
+ *   type-check and build .d.ts and .d.ts.map files
+ */
+
 import { fork, ChildProcess } from 'child_process'
 import * as os from 'os'
 import * as path from 'path'
@@ -12,25 +28,32 @@ const PACKAGES_DIR = path.resolve(__dirname, 'packages')
 const workers = createWorkers(Math.min(os.cpus().length - 2, 8))
 
 function parseArgv() {
-  const hasFlag = (f: string) => process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
+  const hasFlag = (f: string) =>
+    process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
   return {
     watch: hasFlag('watch'),
     transpileOnly: hasFlag('transpile-only')
   }
 }
 
-const getSourceFiles = () => globby([
-  '**/*.ts',
-  '**/*.tsx',
-  '!**/examples/**/*',
-  '!**/node_modules/**/*',
-  '!**/__tests__/**/*',
-  '!**/test.ts',
-  '!**/test.tsx',
-  '!**/*.test.ts'
-], {
-  cwd: PACKAGES_DIR
-}).then((files) => files.map((f) => path.resolve(__dirname, 'packages', f)))
+const getSourceFiles = () =>
+  globby(
+    [
+      '**/*.ts',
+      '**/*.tsx',
+      '!**/dist/**/*',
+      '!**/examples/**/*',
+      '!**/node_modules/**/*',
+      '!**/__mocks__/**/*',
+      '!**/__tests__/**/*',
+      '!**/test.ts',
+      '!**/test.tsx',
+      '!**/*.test.ts'
+    ],
+    {
+      cwd: PACKAGES_DIR
+    }
+  ).then((files) => files.map((f) => path.resolve(__dirname, 'packages', f)))
 
 function createWorkers(size: number) {
   // tslint:disable no-console
@@ -42,7 +65,11 @@ function createWorkers(size: number) {
   return {
     doWork(file: string) {
       const worker = _workers[i++ % size]
-      const p = new Promise<{ file: string, hasErrors?: boolean, hasWarnings?: boolean }>((resolve, reject) =>
+      const p = new Promise<{
+        file: string
+        hasErrors?: boolean
+        hasWarnings?: boolean
+      }>((resolve, reject) =>
         worker.on('message', (message: any) => {
           if (file === message.file) {
             resolve(message)
@@ -54,7 +81,9 @@ function createWorkers(size: number) {
       return p
     },
     cull(numToKeep: number) {
-      for (let j = numToKeep; j < size; j++) (_workers.pop() as ChildProcess).kill()
+      for (let j = numToKeep; j < size; j++) {
+        ;(_workers.pop() as ChildProcess).kill()
+      }
       size = numToKeep
     },
     destroy() {
@@ -64,21 +93,32 @@ function createWorkers(size: number) {
 }
 
 function pifyProc(proc: ChildProcess) {
-  return new Promise<{ code: number, output: string }>((resolve, reject) => {
+  return new Promise<{ code: number; output: string }>((resolve, reject) => {
     let output = ''
-    proc.stdout.on('data', (buf) => output += buf.toString())
+    proc.stdout.on('data', (buf) => (output += buf.toString()))
     proc.on('close', (code) => resolve({ code, output }))
     proc.on('error', (err) => reject(err))
   })
 }
 
-function startTypeChecker() {
+/**
+ * This has the convenient side-effect of type checking the repo
+ */
+function buildDeclarations() {
   // tslint:disable:no-console
   const stdio = ['pipe', 'pipe', 'pipe', 'ipc']
-  const args: string[] = ['--pretty']
+  const args: string[] = [
+    '--declaration',
+    '--declarationMap',
+    '--emitDeclarationOnly',
+    '--noEmit',
+    'false'
+  ]
   console.info(chalk.cyan('Forking type checker'))
   if (argv.watch) args.push('--watch')
-  const proc = fork(path.resolve(__dirname, 'node_modules/.bin/tsc'), args, { stdio })
+  const proc = fork(path.resolve(__dirname, 'node_modules/.bin/tsc'), args, {
+    stdio
+  })
   proc.on('close', (code) => {
     const color = code === 0 ? chalk.green : chalk.red
     console.info(color(`Type checker exited with code ${code}`))
@@ -88,7 +128,7 @@ function startTypeChecker() {
 
 async function build(files: string[]): Promise<number> {
   const [typeCheckResults, transpileAndLintResults] = await Promise.all<any>([
-    argv.transpileOnly ? Promise.resolve() : pifyProc(startTypeChecker()),
+    argv.transpileOnly ? Promise.resolve() : pifyProc(buildDeclarations()),
     Promise.all(files.map(workers.doWork)).then((results) => {
       console.log(chalk.green('Transpilation completed without errors'))
       workers.destroy()
@@ -109,10 +149,13 @@ async function build(files: string[]): Promise<number> {
 
 async function watch(files: string[]): Promise<number> {
   if (!argv.transpileOnly) {
-    const typeChecker = startTypeChecker()
+    const typeChecker = buildDeclarations()
     typeChecker.stdout.on('data', (buf) => {
       const str = buf.toString().replace('\u001Bc', '')
-      str.split('\n').filter((l) => l.length > 0).map((l) => console.log('[tsc]', l))
+      str
+        .split('\n')
+        .filter((l) => l.length > 0)
+        .map((l) => console.log('[tsc]', l))
     })
   }
 
@@ -125,10 +168,14 @@ async function watch(files: string[]): Promise<number> {
   const watcher = chokidar.watch(files)
   watcher.on('change', (p) => {
     console.info('Change detected in', p)
-    workers.doWork(p).catch(() => { /* noop */ })
+    workers.doWork(p).catch(() => {
+      /* noop */
+    })
   })
 
-  return new Promise<number>(() => {/* void */})
+  return new Promise<number>(() => {
+    /* void */
+  })
 }
 
 async function main() {
@@ -150,4 +197,6 @@ main()
     workers.destroy()
     process.exit(code)
   })
-  .catch(() => { /* noop*/ })
+  .catch(() => {
+    /* noop*/
+  })

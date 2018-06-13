@@ -8,11 +8,13 @@ ko.bindingHandlers['click.alt'] = altClickBindingHandler
 const clickEvent = new Event('click')
 const altClickEvent = new Event('click')
 
-{ (altClickEvent as any).altKey = true }
+{
+  ;(altClickEvent as any).altKey = true
+}
 
 describe('bindings.altClick', () => {
   test('calls handler only when alt depressed', () => {
-    const actualEl = <div data-bind='click.alt: handler'></div>
+    const actualEl = <div data-bind="click.alt: handler" />
     const handler = jest.fn()
     ko.applyBindings({ handler }, actualEl)
 

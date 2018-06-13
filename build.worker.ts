@@ -4,6 +4,7 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as babel from 'babel-core'
 import * as ts from 'typescript'
+import * as JSON from 'json5'
 
 const builds: { [k: string]: babel.TransformOptions | false } = {
   default: {
@@ -11,7 +12,7 @@ const builds: { [k: string]: babel.TransformOptions | false } = {
     plugins: ['transform-runtime']
   },
   esnext: false,
-  node: { presets: [ ['env', { targets: { node: 'current' } }] ] }
+  node: { presets: [['env', { targets: { node: 'current' } }]] }
 }
 
 type FileMeta = {
@@ -26,17 +27,23 @@ type FileMeta = {
 }
 
 function parseFd(fd: string): FileMeta {
-  const [pkgName, ...fileSegments] = fd.replace(path.resolve(__dirname, 'packages') + '/', '').split('/')
+  const [pkgName, ...fileSegments] = fd
+    .replace(path.resolve(__dirname, 'packages') + '/', '')
+    .split('/')
   const pkgDir = path.join(__dirname, 'packages', pkgName)
   const outDir = path.join(pkgDir, 'dist')
   const hasExplicitSrcDir = fileSegments[0] === 'src'
-  const relativeFilePath = (hasExplicitSrcDir ? fileSegments.slice(1) : fileSegments).join('/')
+  const relativeFilePath = (hasExplicitSrcDir
+    ? fileSegments.slice(1)
+    : fileSegments
+  ).join('/')
   const outFilename = path.join(
     path.dirname(relativeFilePath),
     path.basename(relativeFilePath, path.extname(relativeFilePath)) + '.js'
   )
   const outFd = path.join(outDir, outFilename)
-  const mapFilename = path.basename(relativeFilePath, path.extname(relativeFilePath)) + '.js.map'
+  const mapFilename =
+    path.basename(relativeFilePath, path.extname(relativeFilePath)) + '.js.map'
   const mapSource = path.relative(path.join(outDir, relativeFilePath), fd)
   return {
     pkgName,
@@ -52,16 +59,24 @@ function parseFd(fd: string): FileMeta {
 
 function fixSourcemapMapping(meta: FileMeta, output: ts.TranspileOutput) {
   return {
-    code: output.outputText.replace('sourceMappingURL=module.js.map', `sourceMappingURL=${meta.mapFilename}`),
+    code: output.outputText.replace(
+      'sourceMappingURL=module.js.map',
+      `sourceMappingURL=${meta.mapFilename}`
+    ),
     map: {
-      ...(JSON.parse(output.sourceMapText as string)),
+      ...JSON.parse(output.sourceMapText as string),
       file: meta.mapFilename,
       sources: [meta.mapSource]
     }
   }
 }
 
-async function transpileTarget(meta: FileMeta, code: string, map: any, target: string) {
+async function transpileTarget(
+  meta: FileMeta,
+  code: string,
+  map: any,
+  target: string
+) {
   const dest = path.join(meta.outDir, target, meta.outFilename)
   const babelConfig = builds[target]
   if (babelConfig) {
@@ -78,12 +93,25 @@ async function transpileTarget(meta: FileMeta, code: string, map: any, target: s
   ])
 }
 
+// need to read JSON with comments -__-
+async function readJson5(relativePath: string) {
+  const fd = path.resolve(__dirname, relativePath)
+  const buf = await fs.readFile(fd)
+  const str = buf.toString()
+  return JSON.parse(str)
+}
+
 async function transpileFile(fd: string) {
-  const sourceCode = (await fs.readFile(fd)).toString()
+  const [sourceCode, tsconfig] = await Promise.all([
+    fs.readFile(fd).then((buf) => buf.toString()),
+    readJson5('./tsconfig.json')
+  ])
   const meta = parseFd(fd)
-  const tscResult = ts.transpileModule(sourceCode, require('./tsconfig.json'))
+  const tscResult = ts.transpileModule(sourceCode, tsconfig)
   const { code, map } = fixSourcemapMapping(meta, tscResult)
-  await Promise.all(Object.keys(builds).map((t) => transpileTarget(meta, code, map, t)))
+  await Promise.all(
+    Object.keys(builds).map((t) => transpileTarget(meta, code, map, t))
+  )
 }
 
 process.on('message', async ({ file }) => {
