@@ -53,9 +53,13 @@
     "boiler.ts",
     "build.ts",
     "build.worker.ts",
+    "**/dist",
+    "**/examples",
     "**/__mocks__",
     "**/__tests__",
-    "**/dist",
-    "**/examples"
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/test.ts",
+    "**/test.tsx"
   ]
 }
