@@ -1,0 +1,16 @@
+{
+  "name": "@profiscience/knockout-contrib-utils-modify",
+  "description": "KnockoutJS modify() utility fn",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.modify",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "knockout": "^3.0.0 || 3.5.0-rc"
+  }
+}

@@ -45,6 +45,21 @@
       ],
       "@profiscience/knockout-contrib-jest-matchers": [
         "packages/jest-matchers/src/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-increment": [
+        "packages/utils.increment/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-modify": [
+        "packages/utils.modify/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-once": [
+        "packages/utils.once/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-toggle": [
+        "packages/utils.toggle/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-to-string": [
+        "packages/utils.toString/index.ts"
       ]
     }
   },

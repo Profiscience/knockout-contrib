@@ -11,17 +11,18 @@
 
 import * as ko from 'knockout'
 
+/**
+ * Bindings
+ */
 import {
-  // import bindings
   altClickBindingHandler,
   ctrlClickBindingHandler,
   metaClickBindingHandler,
   shiftClickBindingHandler,
   jqueryBindingHandler,
   toggleBindingHandler
-} from '@profiscience/knockout-contrib'
+} from '@profiscience/knockout-contrib/bindings'
 
-// register bindings
 ko.bindingHandlers['click.alt'] = altClickBindingHandler
 ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
 ko.bindingHandlers['click.meta'] = metaClickBindingHandler
@@ -31,3 +32,48 @@ ko.bindingHandlers.jquery = jqueryBindingHandler
 ko.bindingHandlers.$ = jqueryBindingHandler // alias
 
 ko.bindingHandlers.toggle = toggleBindingHandler
+
+/**
+ * You may desire to attach some of the more used utilities to the observable prototype so that they
+ * may be used more easily.
+ *
+ * For example, instead of importing the increment utility wherever it is used, it may be attached
+ * to the prototype and invoked like `obs.increment()`.
+ *
+ * To enable this syntax, uncomment the following...
+ */
+// import {
+//   increment,
+//   decrement,
+//   modify,
+//   once,
+//   toggle
+// } from '@profiscience/knockout-contrib/utils'
+
+// function extendObservableProto(fnName: string, fn: (obs: KnockoutObservable<any>, ...rest: any[]) => any, arrays: boolean | 'only') {
+//   function protoWrapper(...args: any[]) { return fn(this, ...args) }
+//   if (arrays !== 'only') {
+//     ko.observable.fn[fnName] = protoWrapper
+//     ko.computed.fn[fnName] = protoWrapper
+//   }
+//   if (arrays) {
+//     ko.observableArray.fn[fnName] = protoWrapper
+//   }
+// }
+
+// extendObservableProto('increment', increment, false)
+// extendObservableProto('decrement', decrement, false)
+// extendObservableProto('modify', modify, true)
+// extendObservableProto('once', once, true)
+// extendObservableProto('toggle', toggle, false)
+
+// declare global {
+//   // tslint:disable-next-line:interface-name
+//   interface KnockoutObservableFunctions<T> {
+//     increment(num?: number): number
+//     decrement(num?: number): number
+//     modify(fn: (v: T) => T): T
+//     once(fn: (v: T) => void): KnockoutSubscription
+//     toggle(): boolean
+//   }
+// }
