@@ -1,0 +1,23 @@
+{
+  "name": "@profiscience/knockout-contrib-utils-from-js",
+  "description": "KnockoutJS fromJS() utility fn",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.fromJS",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "bench": "ts-node ./benchmark.ts"
+  },
+  "peerDependencies": {
+    "knockout": "^3.5.0-beta"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0",
+    "knockout-mapping": "^2.6.0"
+  }
+}

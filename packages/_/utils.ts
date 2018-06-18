@@ -1,3 +1,6 @@
+export * from '@profiscience/knockout-contrib-utils-assign'
+export * from '@profiscience/knockout-contrib-utils-defaults'
+export * from '@profiscience/knockout-contrib-utils-from-js'
 export * from '@profiscience/knockout-contrib-utils-increment'
 export * from '@profiscience/knockout-contrib-utils-modify'
 export * from '@profiscience/knockout-contrib-utils-once'

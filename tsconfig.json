@@ -46,6 +46,15 @@
       "@profiscience/knockout-contrib-jest-matchers": [
         "packages/jest-matchers/src/index.ts"
       ],
+      "@profiscience/knockout-contrib-utils-assign": [
+        "packages/utils.assign/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-defaults": [
+        "packages/utils.defaults/index.ts"
+      ],
+      "@profiscience/knockout-contrib-utils-from-js": [
+        "packages/utils.fromJS/index.ts"
+      ],
       "@profiscience/knockout-contrib-utils-increment": [
         "packages/utils.increment/index.ts"
       ],
