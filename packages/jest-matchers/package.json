@@ -9,7 +9,7 @@
   "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
-  "types": "src/index.d.ts",
+  "types": "src/index.ts",
   "keywords": [
     "knockout",
     "knockoutjs",

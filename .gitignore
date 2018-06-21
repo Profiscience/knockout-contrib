@@ -4,11 +4,16 @@
 package-lock.json
 
 *.map
-*.d.ts
+*.css.d.ts
 
+.cache/
+.chrome/
+.nyc_output/
 .vscode/
 coverage/
 dist/
 node_modules/
 
 packages/*/yarn.lock
+
+tasks/TASK_COUNT

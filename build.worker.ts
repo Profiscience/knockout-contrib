@@ -4,7 +4,6 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as babel from 'babel-core'
 import * as ts from 'typescript'
-import * as JSON from 'json5'
 
 const builds: { [k: string]: babel.TransformOptions | false } = {
   default: {
@@ -93,21 +92,10 @@ async function transpileTarget(
   ])
 }
 
-// need to read JSON with comments -__-
-async function readJson5(relativePath: string) {
-  const fd = path.resolve(__dirname, relativePath)
-  const buf = await fs.readFile(fd)
-  const str = buf.toString()
-  return JSON.parse(str)
-}
-
 async function transpileFile(fd: string) {
-  const [sourceCode, tsconfig] = await Promise.all([
-    fs.readFile(fd).then((buf) => buf.toString()),
-    readJson5('./tsconfig.json')
-  ])
+  const sourceCode = (await fs.readFile(fd)).toString()
   const meta = parseFd(fd)
-  const tscResult = ts.transpileModule(sourceCode, tsconfig)
+  const tscResult = ts.transpileModule(sourceCode, require('./tsconfig.json'))
   const { code, map } = fixSourcemapMapping(meta, tscResult)
   await Promise.all(
     Object.keys(builds).map((t) => transpileTarget(meta, code, map, t))

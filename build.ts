@@ -1,21 +1,5 @@
 #! node_modules/.bin/ts-node
 
-/**
- * In a nutshell the build process is as follows...
- *
- * - match every source file in the packages dir using a glob
- * - spawn (up to 8, but no more than 2 less than the total # of cpus) workers
- * - round-robin the file paths to the workers
- * - worker determines the dist path
- * - worker transpiles with tsc, and emits to dist/esnext
- * - worker uses esnext output to produce commonjs and es2015 builds via babel
- *
- * MEANWHILE
- *
- * - tsc is ran against the project as a whole with --emitDeclarationOnly to
- *   type-check and build .d.ts and .d.ts.map files
- */
-
 import { fork, ChildProcess } from 'child_process'
 import * as os from 'os'
 import * as path from 'path'
@@ -41,10 +25,8 @@ const getSourceFiles = () =>
     [
       '**/*.ts',
       '**/*.tsx',
-      '!**/dist/**/*',
       '!**/examples/**/*',
       '!**/node_modules/**/*',
-      '!**/__mocks__/**/*',
       '!**/__tests__/**/*',
       '!**/test.ts',
       '!**/test.tsx',
@@ -81,9 +63,8 @@ function createWorkers(size: number) {
       return p
     },
     cull(numToKeep: number) {
-      for (let j = numToKeep; j < size; j++) {
-        ;(_workers.pop() as ChildProcess).kill()
-      }
+      for (let j = numToKeep; j < size; j++)
+        (_workers.pop() as ChildProcess).kill()
       size = numToKeep
     },
     destroy() {
@@ -101,19 +82,10 @@ function pifyProc(proc: ChildProcess) {
   })
 }
 
-/**
- * This has the convenient side-effect of type checking the repo
- */
-function buildDeclarations() {
+function startTypeChecker() {
   // tslint:disable:no-console
   const stdio = ['pipe', 'pipe', 'pipe', 'ipc']
-  const args: string[] = [
-    '--declaration',
-    '--declarationMap',
-    '--emitDeclarationOnly',
-    '--noEmit',
-    'false'
-  ]
+  const args: string[] = ['--pretty']
   console.info(chalk.cyan('Forking type checker'))
   if (argv.watch) args.push('--watch')
   const proc = fork(path.resolve(__dirname, 'node_modules/.bin/tsc'), args, {
@@ -128,7 +100,7 @@ function buildDeclarations() {
 
 async function build(files: string[]): Promise<number> {
   const [typeCheckResults, transpileAndLintResults] = await Promise.all<any>([
-    argv.transpileOnly ? Promise.resolve() : pifyProc(buildDeclarations()),
+    argv.transpileOnly ? Promise.resolve() : pifyProc(startTypeChecker()),
     Promise.all(files.map(workers.doWork)).then((results) => {
       console.log(chalk.green('Transpilation completed without errors'))
       workers.destroy()
@@ -149,7 +121,7 @@ async function build(files: string[]): Promise<number> {
 
 async function watch(files: string[]): Promise<number> {
   if (!argv.transpileOnly) {
-    const typeChecker = buildDeclarations()
+    const typeChecker = startTypeChecker()
     typeChecker.stdout.on('data', (buf) => {
       const str = buf.toString().replace('\u001Bc', '')
       str
