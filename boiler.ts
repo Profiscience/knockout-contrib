@@ -50,7 +50,7 @@ ko.bindingHandlers.toggle = toggleBindingHandler
 //   toggle
 // } from '@profiscience/knockout-contrib/utils'
 
-// function extendObservableProto(fnName: string, fn: (obs: KnockoutObservable<any>, ...rest: any[]) => any, arrays: boolean | 'only') {
+// function extendObservableProto(fnName: string, fn: (obs: ko.Observable<any>, ...rest: any[]) => any, arrays: boolean | 'only') {
 //   function protoWrapper(...args: any[]) { return fn(this, ...args) }
 //   if (arrays !== 'only') {
 //     ko.observable.fn[fnName] = protoWrapper

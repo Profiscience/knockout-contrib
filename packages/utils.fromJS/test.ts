@@ -2,7 +2,6 @@
 
 import '@profiscience/knockout-contrib-jest-matchers'
 import * as ko from 'knockout'
-
 import { fromJS } from './index'
 
 describe('utils.fromJS', () => {
@@ -37,15 +36,15 @@ describe('utils.fromJS', () => {
     {
       // test type checking (not fool-proof)
       // tslint:disable:no-unused-variable
-      const num: KnockoutObservable<number> = actual.num
-      const str: KnockoutObservable<string> = actual.str
-      const date: KnockoutObservable<Date> = actual.date
-      const bool: KnockoutObservable<boolean> = actual.bool
+      const num: ko.Observable<number> = actual.num
+      const str: ko.Observable<string> = actual.str
+      const date: ko.Observable<Date> = actual.date
+      const bool: ko.Observable<boolean> = actual.bool
 
-      const arr: KnockoutObservableArray<string> = actual.arr
-      const regexp: KnockoutObservable<RegExp> = actual.regexp
-      const nestedStr: KnockoutObservable<string> = actual.obj.foo
-      const obs: KnockoutObservable<{ foo: string }> = actual.obs
+      const arr: ko.ObservableArray<string> = actual.arr
+      const regexp: ko.Observable<RegExp> = actual.regexp
+      const nestedStr: ko.Observable<string> = actual.obj.foo
+      const obs: ko.Observable<{ foo: string }> = actual.obs
       const func: () => void = actual.func
     }
 

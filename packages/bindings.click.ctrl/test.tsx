@@ -8,18 +8,21 @@ ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
 const clickEvent = new Event('click')
 const ctrlClickEvent = new Event('click')
 
-{ (ctrlClickEvent as any).ctrlKey = true }
+{
+  ;(ctrlClickEvent as any).ctrlKey = true
+}
 
 describe('bindings.ctrlClick', () => {
   test('calls handler only when ctrl depressed', () => {
-    const actualEl = <div data-bind='click.ctrl: handler'></div>
+    const actualEl = <div data-bind="click.ctrl: handler" />
     const handler = jest.fn()
-    ko.applyBindings({ handler }, actualEl)
+    const context = { handler }
+    ko.applyBindings(context, actualEl)
 
     actualEl.dispatchEvent(clickEvent)
-    actualEl.dispatchEvent(ctrlClickEvent)
+    expect(handler).not.toBeCalled()
 
-    expect(handler).not.toBeCalledWith(undefined, clickEvent)
-    expect(handler).toBeCalledWith(undefined, ctrlClickEvent)
+    actualEl.dispatchEvent(ctrlClickEvent)
+    expect(handler).toBeCalledWith(context, ctrlClickEvent)
   })
 })

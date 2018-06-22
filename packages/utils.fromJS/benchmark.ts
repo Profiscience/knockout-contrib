@@ -1,3 +1,4 @@
+import * as ko from 'knockout'
 import * as benchmark from 'benchmark'
 import 'knockout-mapping'
 import { padEnd } from 'lodash'
