@@ -1,14 +1,7 @@
 import 'knockout-punches'
 import $ from 'jquery'
 
-declare global {
-  // tslint:disable-next-line interface-name
-  interface KnockoutBindingHandlers {
-    jquery: KnockoutBindingHandler
-  }
-}
-
-export const jqueryBindingHandler: KnockoutBindingHandler = {
+export const jqueryBindingHandler = {
   getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
@@ -28,6 +21,6 @@ export const jqueryBindingHandler: KnockoutBindingHandler = {
 
         if (value) value(el.value)
       }
-    } as KnockoutBindingHandler
+    } as ko.BindingHandler
   }
-}
+} as ko.BindingHandler

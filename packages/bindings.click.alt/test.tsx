@@ -16,12 +16,13 @@ describe('bindings.altClick', () => {
   test('calls handler only when alt depressed', () => {
     const actualEl = <div data-bind="click.alt: handler" />
     const handler = jest.fn()
-    ko.applyBindings({ handler }, actualEl)
+    const context = { handler }
+    ko.applyBindings(context, actualEl)
 
     actualEl.dispatchEvent(clickEvent)
-    actualEl.dispatchEvent(altClickEvent)
+    expect(handler).not.toBeCalled()
 
-    expect(handler).not.toBeCalledWith(undefined, clickEvent)
-    expect(handler).toBeCalledWith(undefined, altClickEvent)
+    actualEl.dispatchEvent(altClickEvent)
+    expect(handler).toBeCalledWith(context, altClickEvent)
   })
 })

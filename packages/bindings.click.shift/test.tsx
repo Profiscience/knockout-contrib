@@ -8,18 +8,21 @@ ko.bindingHandlers['click.shift'] = shiftClickBindingHandler
 const clickEvent = new Event('click')
 const shiftClickEvent = new Event('click')
 
-{ (shiftClickEvent as any).shiftKey = true }
+{
+  ;(shiftClickEvent as any).shiftKey = true
+}
 
 describe('bindings.shiftClick', () => {
   test('calls handler only when shift depressed', () => {
-    const actualEl = <div data-bind='click.shift: handler'></div>
+    const actualEl = <div data-bind="click.shift: handler" />
     const handler = jest.fn()
-    ko.applyBindings({ handler }, actualEl)
+    const context = { handler }
+    ko.applyBindings(context, actualEl)
 
     actualEl.dispatchEvent(clickEvent)
-    actualEl.dispatchEvent(shiftClickEvent)
+    expect(handler).not.toBeCalled()
 
-    expect(handler).not.toBeCalledWith(undefined, clickEvent)
-    expect(handler).toBeCalledWith(undefined, shiftClickEvent)
+    actualEl.dispatchEvent(shiftClickEvent)
+    expect(handler).toBeCalledWith(context, shiftClickEvent)
   })
 })
