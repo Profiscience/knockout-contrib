@@ -28,7 +28,7 @@
     "@profiscience/knockout-contrib-bindings-click-shift": "X.X.X",
     "@profiscience/knockout-contrib-bindings-jquery": "X.X.X",
     "@profiscience/knockout-contrib-bindings-toggle": "X.X.X",
-    "@profiscience/knockout-contrib-types": "X.X.X",
+    "@profiscience/knockout-contrib-router": "X.X.X || 2.0.0-8",
     "@profiscience/knockout-contrib-utils-assign": "X.X.X",
     "@profiscience/knockout-contrib-utils-defaults": "X.X.X",
     "@profiscience/knockout-contrib-utils-from-js": "X.X.X",
