@@ -29,7 +29,7 @@ Take the following scenario...
 If both components are published together, you'd be required to update `components.a` before getting on with the work you set out to do with `components.b`. A monorepo grants the ability to avoid this nonsense while maintaining a unified build/test process.
 
 [knockoutjs]: https://knockoutjs.com
-[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--beta-red.svg
+[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--rc-red.svg
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
 [codecov]: https://codecov.io/gh/Profiscience/knockout-contrib
