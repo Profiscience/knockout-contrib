@@ -63,8 +63,9 @@ function createWorkers(size: number) {
       return p
     },
     cull(numToKeep: number) {
-      for (let j = numToKeep; j < size; j++)
-        (_workers.pop() as ChildProcess).kill()
+      for (let j = numToKeep; j < size; j++) {
+        ;(_workers.pop() as ChildProcess).kill()
+      }
       size = numToKeep
     },
     destroy() {
