@@ -1,1 +1,1 @@
-export { Router, Route } from '@profiscience/knockout-contrib-router'
+export * from '@profiscience/knockout-contrib-router'
