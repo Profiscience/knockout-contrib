@@ -1,8 +1,7 @@
 import { IContext } from './'
 import { Context } from './context'
-import { Router, Middleware } from './router'
+import { Router } from './router'
 
-export type Callback<T> = () => T
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 

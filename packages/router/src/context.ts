@@ -1,8 +1,8 @@
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
-import { Router, Middleware, LifecycleMiddleware } from './router'
-import { Callback, MaybePromise } from './utils'
+import { Router, Middleware } from './router'
+import { MaybePromise } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
   public $child?: Context & IContext
@@ -16,7 +16,9 @@ export class Context /* implements IContext, use Context & IContext */ {
     with?: { [prop: string]: any }
   }
 
-  private readonly _beforeNavigateCallbacks: Callback<void>[] = []
+  private readonly _beforeNavigateCallbacks: (() => MaybePromise<
+    void | false
+  >)[] = []
   private _queue: Promise<void>[] = []
   private _appMiddlewareLifecycles: DownstreamLifecycle[] = []
   private _routeMiddlewareLifecycles: DownstreamLifecycle[] = []
@@ -60,7 +62,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     }
   }
 
-  public addBeforeNavigateCallback(cb: Callback<void>) {
+  public addBeforeNavigateCallback(cb: () => MaybePromise<false | void>) {
     this._beforeNavigateCallbacks.unshift(cb)
   }
 
@@ -121,7 +123,7 @@ export class Context /* implements IContext, use Context & IContext */ {
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
     let ctx: void | Context & IContext = this as any
-    let callbacks: Callback<boolean | void>[] = []
+    let callbacks: (() => MaybePromise<boolean | void>)[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
       ctx = ctx.$child
