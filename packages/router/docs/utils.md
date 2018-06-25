@@ -2,9 +2,9 @@
 
 ## API
 
-#### isActivePath({ router, path })
+#### isActivePath({ router, path }): Computed<boolean>
 
-Returns `true` if `path` for `router` is currently active
+Returns computed which is `true` if `path` for `router` is currently active
 
 #### resolveHref({ router, path })
 

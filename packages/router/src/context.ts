@@ -1,7 +1,7 @@
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
-import { Router, Middleware } from './router'
+import { Router, Middleware, Lifecycle } from './router'
 import { MaybePromise } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
@@ -20,8 +20,8 @@ export class Context /* implements IContext, use Context & IContext */ {
     void | false
   >)[] = []
   private _queue: Promise<void>[] = []
-  private _appMiddlewareLifecycles: DownstreamLifecycle[] = []
-  private _routeMiddlewareLifecycles: DownstreamLifecycle[] = []
+  private _appMiddlewareLifecycles: Lifecycle[] = []
+  private _routeMiddlewareLifecycles: Lifecycle[] = []
 
   constructor(
     public router: Router,
@@ -217,8 +217,8 @@ export class Context /* implements IContext, use Context & IContext */ {
   private static async startLifecycle(
     middleware: Middleware[],
     ctx: Context & IContext
-  ): Promise<DownstreamLifecycle[]> {
-    const downstream: DownstreamLifecycle[] = []
+  ): Promise<Lifecycle[]> {
+    const downstream: Lifecycle[] = []
 
     for (const fn of middleware) {
       if (typeof ctx._redirect !== 'undefined') {
@@ -233,10 +233,4 @@ export class Context /* implements IContext, use Context & IContext */ {
 
     return downstream
   }
-}
-
-type DownstreamLifecycle = {
-  afterRender?(): MaybePromise<void>
-  beforeDispose?(): MaybePromise<void>
-  afterDispose?(): MaybePromise<void>
 }

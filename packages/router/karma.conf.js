@@ -83,7 +83,7 @@ module.exports = (config) => {
     reporters: karmaReporters,
 
     tapReporter: {
-      prettify: require('tap-diff')
+      // prettify: require('tap-diff')
     },
 
     rollupPreprocessor: {
