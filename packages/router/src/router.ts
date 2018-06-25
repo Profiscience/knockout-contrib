@@ -20,26 +20,16 @@ export type SimpleMiddleware =
   | ((ctx: Context & IContext) => MaybePromise<void>)
   | ((ctx: Context & IContext, done?: () => void) => void)
 
-export type LifecycleObjectMiddleware = (
+export type LifecycleMiddleware = (
   ctx: Context & IContext
-) => {
+) => MaybePromise<{
   beforeRender?: Callback<void>
   afterRender?: Callback<void>
   beforeDispose?: Callback<void>
   afterDispose?: Callback<void>
-}
+}>
 
-export type LifecycleGeneratorMiddleware = (
-  ctx: Context & IContext // sync generators yielding nothing or a promise
-) =>
-  | IterableIterator<void | Promise<void>>
-  // async generators (async/await in block, but yield nothing)
-  | AsyncIterableIterator<void>
-
-export type Middleware =
-  | SimpleMiddleware
-  | LifecycleObjectMiddleware
-  | LifecycleGeneratorMiddleware
+export type Middleware = SimpleMiddleware | LifecycleMiddleware
 
 export class Router {
   public static head: Router

@@ -9,8 +9,7 @@ ko.components.register('before-navigate-callbacks', {
       Router.useRoutes({
         '/': 'empty',
         '/sync': 'sync',
-        '/async-callback': 'async-callback',
-        '/async-promise': 'async-promise',
+        '/async': 'async',
         '/nested': [
           'nested',
           {
@@ -37,15 +36,7 @@ ko.components.register('before-navigate-callbacks', {
         }
       })
 
-      ko.components.register('async-callback', {
-        viewModel: class {
-          constructor(ctx) {
-            ctx.addBeforeNavigateCallback((done) => done(!block))
-          }
-        }
-      })
-
-      ko.components.register('async-promise', {
+      ko.components.register('async', {
         viewModel: class {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => Promise.resolve(!block))
@@ -69,12 +60,15 @@ ko.components.register('before-navigate-callbacks', {
       ko.components.register('nested-child', {
         viewModel: class {
           constructor(ctx) {
-            ctx.addBeforeNavigateCallback((done) => {
-              setTimeout(() => {
-                hit = true
-                done()
-              }, 200)
-            })
+            ctx.addBeforeNavigateCallback(
+              () =>
+                new Promise((resolve) => {
+                  setTimeout(() => {
+                    hit = true
+                    resolve()
+                  }, 200)
+                })
+            )
           }
         }
       })
@@ -91,19 +85,7 @@ ko.components.register('before-navigate-callbacks', {
         'returning !false should not prevent navigation'
       )
 
-      await Router.update('/async-callback')
-      block = true
-      t.notOk(
-        await Router.update('/'),
-        'calling the callback with false should prevent navigation'
-      )
-      block = false
-      t.ok(
-        await Router.update('/'),
-        'calling the callback with !false should not prevent navigation'
-      )
-
-      await Router.update('/async-promise')
+      await Router.update('/async')
       block = true
       t.notOk(
         await Router.update('/'),
