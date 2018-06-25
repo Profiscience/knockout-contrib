@@ -22,14 +22,16 @@ export type SimpleMiddleware =
 
 export type LifecycleMiddleware = (
   ctx: Context & IContext
-) => MaybePromise<{
+) => MaybePromise<Lifecycle>
+
+export type Middleware = SimpleMiddleware | LifecycleMiddleware
+
+export type Lifecycle = {
   beforeRender?(): MaybePromise<void>
   afterRender?(): MaybePromise<void>
   beforeDispose?(): MaybePromise<void>
   afterDispose?(): MaybePromise<void>
-}>
-
-export type Middleware = SimpleMiddleware | LifecycleMiddleware
+}
 
 export class Router {
   public static head: Router
