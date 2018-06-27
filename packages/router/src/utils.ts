@@ -46,15 +46,29 @@ export function traversePath(router: Router, path: string) {
   return { router, path }
 }
 
-export function resolveHref({ router, path }: { router: Router, path: string }) {
-  return router.ctx.base + path
+export function resolveHref({
+  router,
+  path
+}: {
+  router: Router
+  path: string
+}) {
+  return router.ctx.base + path.replace(/\/\*$/, '')
 }
 
-export function isActivePath({ router, path }: { router: Router, path: string }): boolean {
+export function isActivePath({
+  router,
+  path
+}: {
+  router: Router
+  path: string
+}): boolean {
   let ctx: Context | void = router.ctx
   while (ctx) {
     // create dependency on isNavigating so that this works with nested routes inside a computed
     ctx.router.isNavigating()
+
+    if (path === '/*') return true
 
     if (ctx.$child ? startsWith(path, ctx.pathname) : path === ctx.pathname) {
       path = path.substr(ctx.pathname.length) || '/'
