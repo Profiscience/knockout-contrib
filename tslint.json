@@ -1,12 +1,11 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
   "rules": {
     "array-type": [true, "array"],
     "await-promise": true,
     "curly": [true, "ignore-same-line"],
     "deprecation": true,
     "interface-over-type-literal": false,
-    "quotemark": [true, "single"],
     "member-ordering": [true, "instance-sandwich"],
     "no-boolean-literal-compare": true,
     "no-floating-promises": true,
@@ -17,17 +16,12 @@
     "ordered-imports": [false],
     "prefer-readonly": true,
     "restrict-plus-operands": true,
-    "semicolon": [true, "never"],
     "strict-type-predicates": true,
-    "trailing-comma": [true, "never"],
     "use-default-type-parameter": true,
-    "variable-name": [true, "allow-leading-underscore", "allow-trailing-underscore"]
-  },
-  "linterOptions": {
-    "exclude": [
-      "templates/**/*",
-      "**/*.js",
-      "**/*.d.ts"
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "allow-trailing-underscore"
     ]
   }
 }
