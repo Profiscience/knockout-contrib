@@ -1,12 +1,11 @@
-  - [Registering Middleware](#registering-middleware)
-    - [App Middleware](#app-middleware)
-    - [Route Middleware](#route-middleware)
-  - [Middleware Functions](#middleware-functions)
-    - [Lifecycle Object](#lifecycle-object)
-    - [Generator Middleware](#generator-middleware)
-  - [Execution Order](#execution-order)
-  - [Using with Nested Routing](#using-with-nested-routing)
-  - [@profiscience/knockout-contrib-router-middleware](../../router.middleware)
+- [Registering Middleware](#registering-middleware)
+  - [App Middleware](#app-middleware)
+  - [Route Middleware](#route-middleware)
+- [Middleware Functions](#middleware-functions)
+  - [Lifecycle Object](#lifecycle-object)
+- [Execution Order](#execution-order)
+- [Using with Nested Routing](#using-with-nested-routing)
+- [@profiscience/knockout-contrib-router-middleware](../../router.middleware)
 
 The real power and extensibility of the router comes in the form of middleware.
 In this case, middleware is a series of functions, sync or async, that compose a
@@ -150,64 +149,6 @@ Well, if you read the docs on nested routing, you'll see that you can define rou
 by passing an object to a route. To avoid _too much_ polymorphism that could cause
 confusion, this was the ideal approach. It also enables dynamic middleware and
 more meta-programming opportunities.
-
-### Generator Middleware
-Now for the real fun — in my humble opinion, of course —, generator middleware.
-
-If you're unfamiliar with generators, [read up](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*),
-but fear not. In short, they are functions that are able to suspend and resume
-execution.
-
-Let's write the same `monolithicMiddleware` with a generator, then walk through what is going on...
-
-```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
-import Query from 'ko-query'
-
-function * monolithicMiddleware(ctx) {
-  console.log('[router] navigating to', ctx.pathname)
-  ctx.query = new Query({}, ctx.pathname)
-  yield loadSomeAsyncData().then((data) => ctx.data = data)
-
-  console.log('[router] navigated to', ctx.pathname)
-  yield
-
-  console.log('[router] navigating away from', ctx.pathname)
-  yield
-
-  console.log('[router] navigated away from', ctx.pathname)
-  ctx.query.dispose()
-}
-
-Router.use(monolithicMiddleware)
-```
-
-_Hopefully_ it's pretty obvious what is going on here, but if not, I'll elaborate.
-
-Generator middleware is expected to yield up to 3 times, and will be resumed at
-the same points in the lifecycle: beforeRender, afterRender, beforeDispose, and afterDispose.
-
-Function entry to the first `yield` contains logic to be executed before the component
-is initialized, the second just after render, the third just before dispose, and the last
-just after.
-
-For async with generator middleware, yield a promise *or* use an async generator. The following
-are equivalent...
-
-```typescript
-function * middleware(ctx): IterableIterator<Promise<void>> {
-  yield
-  yield Promise.resolve()
-}
-
-async function * middleware(ctx): AsyncIterableIterator<void> {
-  yield
-  await Promise.resolve()
-  yield
-}
-```
-
-I :heart: future JS.
 
 ## Execution Order
 

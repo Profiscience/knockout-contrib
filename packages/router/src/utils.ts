@@ -1,23 +1,17 @@
 import { IContext } from './'
 import { Context } from './context'
-import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
+import { Router } from './router'
 
-export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
-export type SyncCallback<T> = () => T
-export type Callback<T> = AsyncCallback<T> | SyncCallback<T>
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 
-export const noop = () => { /* void */ }
-export const isPromise = (x: any = {}) => typeof x.then === 'function'
-export const isIterable = (x: any = {}) => typeof x[Symbol.iterator] === 'function'
-export const startsWith = (string: string, target: string) => string.indexOf(target) === 0
-export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] => flatten(xs.map(fn))
-export const promisify = (_fn: (...args: any[]) => any) => async (...args: any[]) => await (
-  _fn.length === args.length + 1
-    ? new Promise((r) => _fn(...args, r))
-    : _fn(...args)
-)
+export const noop = () => {
+  /* void */
+}
+export const startsWith = (string: string, target: string) =>
+  string.indexOf(target) === 0
+export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] =>
+  flatten(xs.map(fn))
 
 export function flatten<T>(xs: MaybeArray<T>[]): T[] {
   return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
@@ -25,23 +19,6 @@ export function flatten<T>(xs: MaybeArray<T>[]): T[] {
 
 export function castArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
-}
-
-export async function sequence(callbacks: Callback<boolean | void>[], ...args: any[]): Promise<{
-  count: number,
-  success: boolean
-}> {
-  let count = 0
-  let success = true
-  for (const _fn of callbacks) {
-    count++
-    const ret = await promisify(_fn)(...args)
-    if (ret === false) {
-      success = false
-      break
-    }
-  }
-  return { count, success }
 }
 
 export function traversePath(router: Router, path: string) {
@@ -89,23 +66,9 @@ export function isActivePath({ router, path }: { router: Router, path: string })
   return true
 }
 
-export function castLifecycleObjectMiddlewareToGenerator(fn: Middleware): LifecycleGeneratorMiddleware {
-  return async function*(ctx: Context & IContext) {
-    const ret = await promisify(fn)(ctx)
-    if (typeof ret === 'undefined') return
-    if (isIterable(ret)) {
-      for await (const v of ret) yield await v
-    } else {
-      if (isPromise(ret)) yield await ret
-      if (ret.beforeRender) yield await promisify(ret.beforeRender)()
-      if (ret.afterRender) yield await promisify(ret.afterRender)()
-      if (ret.beforeDispose) yield await promisify(ret.beforeDispose)()
-      if (ret.afterDispose) yield await promisify(ret.afterDispose)()
-    }
-  }
-}
-
-export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
+export function getRouterForBindingContext(
+  bindingCtx: ko.BindingContext
+): Router {
   while (true) {
     if (bindingCtx.$router) {
       return bindingCtx.$router

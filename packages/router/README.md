@@ -88,13 +88,6 @@ function loadingMiddleware(ctx) {
   }
 }
 
-// generators are also supported if you're a pioneer of sorts
-// function * loadingMiddleware(ctx) {
-//   loading(true)
-//   yield
-//   loading(false)
-// }
-
 // TypeScript? Good for you! Just add ~water~ these lines
 // declare module '@profiscience/knockout-contrib-router' {
 //   interface IContext {

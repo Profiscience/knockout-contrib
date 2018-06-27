@@ -15,6 +15,11 @@ For now it is published as `next`
 ### Added
 - Delay navigation complete until `descendantsComplete` (see [Knockout 3.5.0-beta][], [Knockout #2319][])
 
+### Removed
+
+- Generator middleware (no longer requires `Symbol.asyncIterator`) support
+- Async via `done` callbacks in middleware and beforeNavigate callbacks (use promises)
+
 ### Fixed
 - Static `Router.isNavigating` shouldn't throw if read before initialization
 - Use strict TypeScript checking (this is relevant if you use TypeScript with strict to consume, as the types declaration points to the source)

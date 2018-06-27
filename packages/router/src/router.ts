@@ -2,13 +2,7 @@ import * as ko from 'knockout'
 import { IContext } from './'
 import { Context } from './context'
 import { RoutePlugin, Route, RouteMap } from './route'
-import {
-  castArray,
-  Callback,
-  MaybePromise,
-  traversePath,
-  log
-} from './utils'
+import { castArray, MaybePromise, traversePath, log } from './utils'
 
 export type RouterConfig = {
   base?: string
@@ -26,20 +20,18 @@ export type SimpleMiddleware =
   | ((ctx: Context & IContext) => MaybePromise<void>)
   | ((ctx: Context & IContext, done?: () => void) => void)
 
-export type LifecycleObjectMiddleware = (ctx: Context & IContext) => {
-  beforeRender?: Callback<void>
-  afterRender ?: Callback<void>
-  beforeDispose?: Callback<void>
-  afterDispose?: Callback<void>
+export type LifecycleMiddleware = (
+  ctx: Context & IContext
+) => MaybePromise<Lifecycle>
+
+export type Middleware = SimpleMiddleware | LifecycleMiddleware
+
+export type Lifecycle = {
+  beforeRender?(): MaybePromise<void>
+  afterRender?(): MaybePromise<void>
+  beforeDispose?(): MaybePromise<void>
+  afterDispose?(): MaybePromise<void>
 }
-
-export type LifecycleGeneratorMiddleware = (ctx: Context & IContext) =>
-  // sync generators yielding nothing or a promise
-  | IterableIterator<void | Promise<void>>
-  // async generators (async/await in block, but yield nothing)
-  | AsyncIterableIterator<void>
-
-export type Middleware = SimpleMiddleware | LifecycleObjectMiddleware | LifecycleGeneratorMiddleware
 
 export class Router {
   public static head: Router
