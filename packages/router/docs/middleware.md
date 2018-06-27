@@ -69,12 +69,13 @@ To add middleware to a route, simply add it to the array...
 }
 ```
 
-__NOTE:__ Putting functions after the component will *not* cause the functions
+**NOTE:** Putting functions after the component will _not_ cause the functions
 to run after the component is rendered. For how to accomplish that, keep reading.
 
 ## Middleware Functions
 
 Middleware functions are passed 2 arguments:
+
 - `ctx`: the ctx object passed into the viewmodel
 - `done`: an optional callback for async functions\*; promises are also supported, and encouraged
 
@@ -111,6 +112,7 @@ have completed before render, you could use `ctx.queue`.
 Let's see how we can take some finer control. As has been the theme, you've got options...
 
 ### Lifecycle Object
+
 You can return an object from your middleware that contains functions to be executed
 at different points in the page lifecycle.
 
@@ -169,8 +171,8 @@ middleware is executed in the following order...
 - to/app: after render
 - to: after render
 
-*Why is the next page's before render middleware called before this one is disposed
-entirely!?*
+_Why is the next page's before render middleware called before this one is disposed
+entirely!?_
 
 Good question. This gives the best possible UX by preventing intermediate whitespace
 while asynchronous beforeRender middleware is executing. See the [loading-animation](../examples/loading-animation) example for more.

@@ -5,10 +5,18 @@ import { Router } from '../../'
 function assertStaticIsNavigating(ctx) {
   return () => ({
     beforeRender() {
-      ctx.t.equals(true, Router.isNavigating(), 'Router.isNavigating() is true when nested routers are navigating')
+      ctx.t.equals(
+        true,
+        Router.isNavigating(),
+        'Router.isNavigating() is true when nested routers are navigating'
+      )
     },
     afterRender() {
-      ctx.t.equals(false, Router.isNavigating(), 'Router.isNavigating() is false when all nested routers finish')
+      ctx.t.equals(
+        false,
+        Router.isNavigating(),
+        'Router.isNavigating() is false when all nested routers finish'
+      )
     }
   })
 }
@@ -31,7 +39,11 @@ ko.components.register('nested', {
           constructor(ctx) {
             t.equals(ctx.router.depth, 1, 'ctx.router.depth is correct')
             t.pass('initializes nested route')
-            t.equals(hLen, history.length, 'child route does not add history entry')
+            t.equals(
+              hLen,
+              history.length,
+              'child route does not add history entry'
+            )
             Router.update('/nested/a')
           }
         }
@@ -71,20 +83,42 @@ ko.components.register('nested', {
           constructor(ctx) {
             t.equals(ctx.router.depth, 2, 'ctx.router.depth is correct')
 
-            t.pass('works with implied router component (no specified component)')
+            t.pass(
+              'works with implied router component (no specified component)'
+            )
 
-            t.equals(ctx.$root.$child.router, Router.get(1), 'Router.get(n) works')
+            t.equals(
+              ctx.$root.$child.router,
+              Router.get(1),
+              'Router.get(n) works'
+            )
 
             t.equals(ctx.$root, Router.head.ctx, 'ctx.$root is Router.head.ctx')
-            t.equals(Router.head.ctx.$parent, undefined, 'root ctx.$parent is undefined')
+            t.equals(
+              Router.head.ctx.$parent,
+              undefined,
+              'root ctx.$parent is undefined'
+            )
 
             t.equals(parent.$child, ctx, 'ctx.$child is child ctx')
             t.equals(ctx.$parent, parent, 'ctx.$parent is parent ctx')
 
-            t.equals(ctx.$parents[0], parent, 'ctx.$parents is array of parents, 0=$parent')
-            t.equals(ctx.$parents[1], parent.$parent, 'ctx.$parents is array of parents, 1=$parent.$parent')
+            t.equals(
+              ctx.$parents[0],
+              parent,
+              'ctx.$parents is array of parents, 0=$parent'
+            )
+            t.equals(
+              ctx.$parents[1],
+              parent.$parent,
+              'ctx.$parents is array of parents, 1=$parent.$parent'
+            )
 
-            t.equals(parent.$children[0], ctx, 'ctx.$children is array of child ctxs')
+            t.equals(
+              parent.$children[0],
+              ctx,
+              'ctx.$children is array of child ctxs'
+            )
 
             done()
           }
@@ -97,7 +131,8 @@ ko.components.register('nested', {
 export const path = '/nested'
 
 export const routes = {
-  '/nested': ['nested',
+  '/nested': [
+    'nested',
     {
       '/': 'root',
       '/a': 'a',

@@ -65,13 +65,13 @@ export class Router {
     click: 'click'
     popstate: 'popstate'
   } = {
-    click:  document.ontouchstart ? 'touchstart' : 'click' as any,
+    click: document.ontouchstart ? 'touchstart' : ('click' as any),
     popstate: 'popstate'
   }
 
   public onInit: ((router: Router) => void)[] = []
-  public component: KnockoutObservable<null | string>
-  public isNavigating: KnockoutObservable<boolean>
+  public component: ko.Observable<null | string>
+  public isNavigating: ko.Observable<boolean>
   public routes: Route[]
   public isRoot: boolean
   public ctx: Context & IContext
@@ -95,7 +95,12 @@ export class Router {
       window.addEventListener(Router.events.popstate, Router.onpopstate)
     }
 
-    this.ctx = new Context(this, $parentCtx, Router.getPath(url), _with) as Context & IContext
+    this.ctx = new Context(
+      this,
+      $parentCtx,
+      Router.getPath(url),
+      _with
+    ) as Context & IContext
   }
 
   get initialized(): Promise<Router> {
@@ -112,7 +117,8 @@ export class Router {
 
   public init() {
     this.isNavigating(false)
-    this.ctx.runAfterRender()
+    this.ctx
+      .runAfterRender()
       .then(() => {
         this.ctx.router.onInit.forEach((resolve) => resolve(this))
       })
@@ -121,7 +127,8 @@ export class Router {
 
   public async update(
     url: string,
-    _args?: boolean | RouterUpdateOptions): Promise<boolean> {
+    _args?: boolean | RouterUpdateOptions
+  ): Promise<boolean> {
     let args
     if (typeof _args === 'boolean') {
       args = { push: _args as boolean }
@@ -146,7 +153,9 @@ export class Router {
     if (!route) {
       throw new Error(
         // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${path}", but no matching route was found`
+        `[@profiscience/knockout-contrib-router] Router@${
+          this.depth
+        } update() called with path "${path}", but no matching route was found`
       )
     }
 
@@ -194,7 +203,9 @@ export class Router {
     if (typeof toCtx._redirect !== 'undefined') {
       await toCtx.runAfterRender()
       const { router: r, path: p } = traversePath(toCtx.router, toCtx._redirect)
-      r.update(p, toCtx._redirectArgs).catch((err) => log.error('Error redirecting', err))
+      r.update(p, toCtx._redirectArgs).catch((err) =>
+        log.error('Error redirecting', err)
+      )
     }
 
     return true
@@ -208,8 +219,11 @@ export class Router {
       if (route.matches(path)) {
         if (route.keys.length === 0) {
           return route
-        } else if (fewestMatchingSegments === Infinity ||
-          (route.keys.length < fewestMatchingSegments && route.keys[0].pattern !== '.*')) {
+        } else if (
+          fewestMatchingSegments === Infinity ||
+          (route.keys.length < fewestMatchingSegments &&
+            route.keys[0].pattern !== '.*')
+        ) {
           fewestMatchingSegments = route.keys.length
           matchingRouteWithFewestDynamicSegments = route
         }
@@ -221,7 +235,11 @@ export class Router {
   public dispose() {
     if (this.isRoot) {
       document.removeEventListener(Router.events.click, Router.onclick, false)
-      window.removeEventListener(Router.events.popstate, Router.onpopstate, false)
+      window.removeEventListener(
+        Router.events.popstate,
+        Router.onpopstate,
+        false
+      )
       delete Router.head
     }
   }
@@ -258,9 +276,11 @@ export class Router {
     if (Array.isArray(routes)) {
       Router.routes.push(...routes)
     } else {
-      Router.routes.push(...Object
-        .keys(routes)
-        .map((path) => new Route(path, ...castArray(routes[path]))))
+      Router.routes.push(
+        ...Object.keys(routes).map(
+          (path) => new Route(path, ...castArray(routes[path]))
+        )
+      )
     }
     return this
   }
@@ -271,7 +291,8 @@ export class Router {
       if (!router.ctx.$child) {
         throw new Error(
           // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i + i} routers active (indicies are zero-based)`
+          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i +
+            i} routers active (indicies are zero-based)`
         )
       }
       router = router.ctx.$child.router
@@ -281,17 +302,23 @@ export class Router {
 
   public static async update(
     url: string,
-    _args?: boolean | {
-      push?: boolean
-      force?: boolean
-      with?: { [prop: string]: any }
-    }): Promise<boolean> {
+    _args?:
+      | boolean
+      | {
+          push?: boolean
+          force?: boolean
+          with?: { [prop: string]: any }
+        }
+  ): Promise<boolean> {
     return await Router.head.update(url, _args)
   }
 
   public static getPathFromLocation(): string {
     const path = location.pathname + location.search + location.hash
-    const baseWithOrWithoutHashbangRegexp = Router.config.base.replace('#!', '#?!?')
+    const baseWithOrWithoutHashbangRegexp = Router.config.base.replace(
+      '#!',
+      '#?!?'
+    )
     return path.replace(new RegExp(baseWithOrWithoutHashbangRegexp, 'i'), '')
   }
 
@@ -309,7 +336,10 @@ export class Router {
     }
 
     const { pathname, search, hash = '' } = el
-    const path = (pathname + search + hash).replace(new RegExp(Router.base, 'i'), '')
+    const path = (pathname + search + hash).replace(
+      new RegExp(Router.base, 'i'),
+      ''
+    )
 
     const isValidRoute = Router.hasRoute(path)
     const isCrossOrigin = !Router.sameOrigin(el.href)
@@ -321,24 +351,30 @@ export class Router {
     const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey
     const hasOtherTarget = el.hasAttribute('target')
 
-    if (!isValidRoute ||
-        isCrossOrigin ||
-        isDoubleClick ||
-        isDownload ||
-        isEmptyHash ||
-        isMailto ||
-        hasExternalRel ||
-        hasModifier ||
-        hasOtherTarget) {
+    if (
+      !isValidRoute ||
+      isCrossOrigin ||
+      isDoubleClick ||
+      isDownload ||
+      isEmptyHash ||
+      isMailto ||
+      hasExternalRel ||
+      hasModifier ||
+      hasOtherTarget
+    ) {
       return
     }
 
-    Router.update(path).catch((err) => log.error('Error occured during navigation', err))
+    Router.update(path).catch((err) =>
+      log.error('Error occured during navigation', err)
+    )
     e.preventDefault()
   }
 
   private static onpopstate(e: PopStateEvent) {
-    Router.update(Router.getPathFromLocation(), false).catch((err) => log.error('Error navigating back', err))
+    Router.update(Router.getPathFromLocation(), false).catch((err) =>
+      log.error('Error navigating back', err)
+    )
     e.preventDefault()
   }
 
@@ -355,9 +391,10 @@ export class Router {
     parser.href = Router.canonicalizePath(url)
     return {
       hash: parser.hash,
-      pathname: (parser.pathname.charAt(0) === '/')
-        ? parser.pathname
-        : '/' + parser.pathname,
+      pathname:
+        parser.pathname.charAt(0) === '/'
+          ? parser.pathname
+          : '/' + parser.pathname,
       search: parser.search
     }
   }
@@ -380,7 +417,7 @@ export class Router {
   }
 
   private static which(e: MouseEvent): number {
-    e = e || window.event as MouseEvent
+    e = e || (window.event as MouseEvent)
     return e.which === null ? e.button : e.which // tslint:disable-line strict-type-predicates deprecation
   }
 }

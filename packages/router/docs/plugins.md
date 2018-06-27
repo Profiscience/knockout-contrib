@@ -78,7 +78,7 @@ import { Route } from '@profiscience/knockout-contrib-router'
 
 Route.usePlugin((route) => {
   return [
-    (ctx) => route.loadData(ctx).then((data) => ctx.data = data),
+    (ctx) => route.loadData(ctx).then((data) => (ctx.data = data)),
     (ctx) => route.setTitle(ctx),
     route.routes,
     (ctx) => ({
@@ -86,7 +86,9 @@ Route.usePlugin((route) => {
         ko.components.register(ctx.pathname, route.component)
         ctx.route.component = ctx.pathname
       },
-      afterDispose() { ko.components.unregister(ctx.pathname) }
+      afterDispose() {
+        ko.components.unregister(ctx.pathname)
+      }
     })
   ]
 })
@@ -118,7 +120,7 @@ function nestedRoutePlugin(route) {
 }
 
 function loadDataPlugin(route) {
-  return (ctx) => route.loadData(ctx).then((data) => ctx.data = data)
+  return (ctx) => route.loadData(ctx).then((data) => (ctx.data = data))
 }
 
 Router.usePlugins(
@@ -131,7 +133,7 @@ Router.usePlugins(
 
 As you've seen, plugins are registered by using `Route.usePlugin(fn)`.
 
-Plugins must be registered *before* routes are instantiated.
+Plugins must be registered _before_ routes are instantiated.
 
 Plugins may return anything the router can make sense of, i.e. a middleware function,
 a component name, or a nested route object. They can also return an array of any combination

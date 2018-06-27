@@ -33,7 +33,9 @@ export function traversePath(router: Router, path: string) {
       if (!router.ctx.$child) {
         throw new Error(
           // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${router.depth}) and ran out of children. Are you sure you want "./"?`
+          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${
+            router.depth
+          }) and ran out of children. Are you sure you want "./"?`
         )
       }
       router = router.ctx.$child.router
@@ -89,14 +91,15 @@ export function getRouterForBindingContext(
     } else if (!bindingCtx.$parentContext) {
       return Router.head
     } else {
-      bindingCtx = bindingCtx.$parentContext as KnockoutBindingContext
+      bindingCtx = bindingCtx.$parentContext as ko.BindingContext
     }
   }
 }
 
 // tslint:disable-next-line no-console
 const _consoleLogger: any = console
-const _logger = (t: string) => (...ms: string[]) => _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
+const _logger = (t: string) => (...ms: string[]) =>
+  _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
 export const log = {
   error: _logger('error'),
   warn: _logger('warn')

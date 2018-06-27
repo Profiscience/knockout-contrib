@@ -30,12 +30,22 @@ ko.components.register('hashbang', {
         viewModel: class {
           constructor(ctx) {
             t.pass('initializes with hashbang')
-            t.true(location.href.indexOf('/base/#!/foo/foo') > -1, 'uses hash in url on init')
+            t.true(
+              location.href.indexOf('/base/#!/foo/foo') > -1,
+              'uses hash in url on init'
+            )
 
-            ctx.router.initialized.then(() => setTimeout(() => { // dirty hack for FF/TravisCI
-              t.equals($('#foo-link').attr('href'), '/base/#!/foo/foo', 'sets href correctly in path binding')
-              Router.update('/bar/bar')
-            }))
+            ctx.router.initialized.then(() =>
+              setTimeout(() => {
+                // dirty hack for FF/TravisCI
+                t.equals(
+                  $('#foo-link').attr('href'),
+                  '/base/#!/foo/foo',
+                  'sets href correctly in path binding'
+                )
+                Router.update('/bar/bar')
+              })
+            )
           }
         }
       })
@@ -44,7 +54,10 @@ ko.components.register('hashbang', {
         viewModel: class {
           constructor() {
             t.pass('navigates correctly with hashbang')
-            t.true(location.href.indexOf('/base/#!/bar/bar') > -1, 'uses hash in url on update')
+            t.true(
+              location.href.indexOf('/base/#!/bar/bar') > -1,
+              'uses hash in url on update'
+            )
 
             done()
           }

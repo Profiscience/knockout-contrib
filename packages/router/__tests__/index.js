@@ -71,7 +71,8 @@ class TestRunner {
           resolve()
         }
         this.test(test)
-      }))
+      })
+    )
   }
 }
 

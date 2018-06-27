@@ -35,7 +35,9 @@ ko.components.register('anchor', {
         template: '<a id="absolute-a" href="/a"></a>',
         viewModel: class {
           constructor() {
-            ko.tasks.schedule(() => document.getElementById('absolute-a').click())
+            ko.tasks.schedule(() =>
+              document.getElementById('absolute-a').click()
+            )
           }
         }
       })
@@ -45,7 +47,9 @@ ko.components.register('anchor', {
         viewModel: class {
           constructor() {
             t.pass('can handle anchors with absolute paths')
-            ko.tasks.schedule(() => document.getElementById('relative-b').click())
+            ko.tasks.schedule(() =>
+              document.getElementById('relative-b').click()
+            )
           }
         }
       })
@@ -54,7 +58,9 @@ ko.components.register('anchor', {
         viewModel: class {
           constructor() {
             t.pass('can handle anchors with relative paths')
-            ko.tasks.schedule(() => map(ignoredAnchors, (id) => document.getElementById(id).click()))
+            ko.tasks.schedule(() =>
+              map(ignoredAnchors, (id) => document.getElementById(id).click())
+            )
           }
         }
       })
@@ -62,7 +68,10 @@ ko.components.register('anchor', {
       let count = 0
       this.clickHandler = (e) => {
         if (!e.defaultPrevented) {
-          t.ok(ignoredAnchors.indexOf(e.target.id) > -1, `ignores ${e.target.id} anchors`)
+          t.ok(
+            ignoredAnchors.indexOf(e.target.id) > -1,
+            `ignores ${e.target.id} anchors`
+          )
           e.preventDefault()
 
           if (++count === ignoredAnchors.length) {

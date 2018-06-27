@@ -13,18 +13,17 @@ declare global {
 ko.components.register('router', {
   synchronous: true,
   viewModel: { createViewModel },
-  template:
-    `<div data-bind="if: component">
-      <div data-bind="let: { $router: $rawData }">
-        <div class="router-view" data-bind="__router__"></div>
-      </div>
-    </div>`
+  template: `
+    <div data-bind="if: component">
+      <div class="router-view" data-bind="__router__"></div>
+    </div>
+  `
 })
 
 ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    const $router = bindingCtx.$router
-    const bindingEvent: any = (ko as any).bindingEvent
+    const $router = bindingCtx.$rawData
+    const bindingEvent: any = ko.bindingEvent
 
     bindingEvent.subscribe(el, 'descendantsComplete', () => {
       if ($router.ctx.$parent) {
@@ -36,10 +35,14 @@ ko.bindingHandlers.__router__ = {
       }
     })
 
-    ko.applyBindingsToNode(el, {
-      component: { name: $router.component, params: $router.ctx },
-      css: $router.component
-    })
+    ko.applyBindingsToNode(
+      el,
+      {
+        component: { name: $router.component, params: $router.ctx },
+        css: $router.component
+      },
+      bindingCtx.extend({ $router })
+    )
 
     return { controlsDescendantBindings: true }
   }
@@ -57,15 +60,19 @@ function createViewModel(params: { [k: string]: any }) {
   router.bound = true
 
   if (router.isRoot) {
-    router.ctx.runBeforeRender()
+    router.ctx
+      .runBeforeRender()
       .then(() => {
         const redirectPath = router.ctx._redirect
         const redirectArgs = router.ctx._redirectArgs
         if (redirectPath) {
-          router.ctx.runAfterRender()
+          router.ctx
+            .runAfterRender()
             .then(() => {
               const { router: r, path: p } = traversePath(router, redirectPath)
-              r.update(p, redirectArgs).catch((err) => log.error('Error redirecting', err))
+              r.update(p, redirectArgs).catch((err) =>
+                log.error('Error redirecting', err)
+              )
             })
             .catch((err) => log.error('Error in afterRender middleware', err))
         } else {

@@ -35,17 +35,23 @@ export class Context /* implements IContext, use Context & IContext */ {
     if (!route) {
       throw new Error(
         // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${router.depth} context initialized with path ${path}, but no matching route was found`
+        `[@profiscience/knockout-contrib-router] Router@${
+          router.depth
+        } context initialized with path ${path}, but no matching route was found`
       )
     }
 
     const { params, pathname, childPath } = route.parse(path)
 
-    Object.assign(this, {
-      params,
-      pathname,
-      route
-    }, _with)
+    Object.assign(
+      this,
+      {
+        params,
+        pathname,
+        route
+      },
+      _with
+    )
 
     if ($parent) {
       $parent.$child = ctx
@@ -63,16 +69,21 @@ export class Context /* implements IContext, use Context & IContext */ {
   public get base(): string {
     return this.router.isRoot
       ? Router.base
-      : (this.$parent as Context & IContext).base + (this.$parent as Context & IContext).pathname
+      : (this.$parent as Context & IContext).base +
+          (this.$parent as Context & IContext).pathname
   }
 
   // full path w/o base
   public get canonicalPath() {
-    return this.base.replace(new RegExp(this.$root.base, 'i'), '') + this.pathname
+    return (
+      this.base.replace(new RegExp(this.$root.base, 'i'), '') + this.pathname
+    )
   }
 
   public get element() {
-    return this._redirect ? undefined : document.getElementsByClassName('router-view')[this.$parents.length]
+    return this._redirect
+      ? undefined
+      : document.getElementsByClassName('router-view')[this.$parents.length]
   }
 
   public get $root(): Context & IContext {

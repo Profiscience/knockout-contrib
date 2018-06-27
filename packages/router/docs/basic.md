@@ -1,18 +1,21 @@
 ## Installation
+
 ```bash
 $ yarn add @profiscience/knockout-contrib-router
 ```
-*or*
+
+_or_
+
 ```bash
 $ npm install @profiscience/knockout-contrib-router
 ```
 
 The following browser features are required:
 
-| Feature       | Browser Support     | Polyfill                              |
-| ------------- | ------------------- | ------------------------------------- |
-| Promises/A+   | [Link][promise]     | [es6-promise][promise-polyfill]       |
-| History       | [Link][history]     | [html5-history-api][history-polyfill] |
+| Feature     | Browser Support | Polyfill                              |
+| ----------- | --------------- | ------------------------------------- |
+| Promises/A+ | [Link][promise] | [es6-promise][promise-polyfill]       |
+| History     | [Link][history] | [html5-history-api][history-polyfill] |
 
 If using the above HTML5 history polyfill, be sure to configure the polyfill after loading;
 the polyfill must have the `!` path prefix registered via:
@@ -49,12 +52,13 @@ At its core, a route consists of a component name, middleware, and children. Any
 items may be omitted, or combined. There are two main ways to register routes.
 
 ### Object Syntax
+
 Routes may be objects with [express style routes](https://github.com/pillarjs/path-to-regexp)
 as keys, and a(n)
-  a) component name for the view
-  b) [middleware](./middleware.md) function
-  c) [nested route map](./nested-routing.md)
-  d) array containing any combination of the above
+a) component name for the view
+b) [middleware](./middleware.md) function
+c) [nested route map](./nested-routing.md)
+d) array containing any combination of the above
 
 ```typescript
 import { Router } from '@profiscience/knockout-contrib-router'
@@ -72,7 +76,8 @@ Router.useRoutes({
 
       '/:id': [
         loadUser, // middleware
-        { // nested route map
+        {
+          // nested route map
           '/': 'user-show', // component name
           '/edit': 'user-edit' // component name
         }
@@ -83,6 +88,7 @@ Router.useRoutes({
 ```
 
 ### Route Constructor Syntax
+
 Alternatively, you may use the `Route` constructor, create the route instances and
 register them directly.
 
@@ -112,18 +118,18 @@ site of your `.registerRoutes` call, and not where the error actually is. This e
 extremely verbose and deeply nested and can be a PITA to track down when your routes are scattered across
 multiple files (for example, you have a route which imports 3 routes, each of which are children).
 
-Using the Route constructor, each file that exports a route *knows* it's exporting a route, not just some
+Using the Route constructor, each file that exports a route _knows_ it's exporting a route, not just some
 arbitrary JS object. [See the PR that added Route Constructor syntax for more](https://github.com/Profiscience/knockout-contrib/pull/26).
 
 ---
 
-It should be noted, *both* of the above syntaxes are just the default, and you are encouraged to
+It should be noted, _both_ of the above syntaxes are just the default, and you are encouraged to
 use [plugins](./plugins.md) to set up an architecture that makes sense for your app. For more on
 this, see the [best practices](./best-practices.md) or check out [Ali](https://github.com/caseyWebb/ali).
 
 [Back](./README.md)
 
-[promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility  "MDN - Promise"
-[promise-polyfill]: https://github.com/stefanpenner/es6-promise "es6-promise"
-[history]: https://developer.mozilla.org/en-US/docs/Web/API/History_API#Browser_compatibility "MDN - History API"
-[history-polyfill]: https://github.com/devote/HTML5-History-API "HTML5-History-API"
+[promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility 'MDN - Promise'
+[promise-polyfill]: https://github.com/stefanpenner/es6-promise 'es6-promise'
+[history]: https://developer.mozilla.org/en-US/docs/Web/API/History_API#Browser_compatibility 'MDN - History API'
+[history-polyfill]: https://github.com/devote/HTML5-History-API 'HTML5-History-API'

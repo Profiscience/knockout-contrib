@@ -13,18 +13,30 @@ ko.components.register('element', {
               ctx.redirect('/foo')
             },
             afterRender() {
-              t.equals(ctx.element, undefined, 'ctx.element is undefined in redirection')
+              t.equals(
+                ctx.element,
+                undefined,
+                'ctx.element is undefined in redirection'
+              )
             }
           })
         ],
         '/foo': [
           (ctx) => ({
             beforeRender() {
-              t.equals(ctx.element, undefined, 'ctx.element is undefined before render')
+              t.equals(
+                ctx.element,
+                undefined,
+                'ctx.element is undefined before render'
+              )
             },
             afterRender() {
               const actual = document.getElementById('foo-view').parentElement
-              t.equals(ctx.element, actual, 'ctx.element is router-view container after render')
+              t.equals(
+                ctx.element,
+                actual,
+                'ctx.element is router-view container after render'
+              )
               done()
             }
           }),

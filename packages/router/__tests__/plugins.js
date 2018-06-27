@@ -19,8 +19,9 @@ ko.components.register('plugins', {
         (route) => {
           if (route.data) {
             return isPlainObject(route.data)
-              ? Object.entries(route.data).map(([k, v]) =>
-                (ctx) => v.then((_v) => merge(ctx, { data: { [k]: _v } })))
+              ? Object.entries(route.data).map(([k, v]) => (ctx) =>
+                  v.then((_v) => merge(ctx, { data: { [k]: _v } }))
+                )
               : (ctx) => route.data.then((v) => (ctx.data = v))
           }
         }
@@ -31,20 +32,26 @@ ko.components.register('plugins', {
           component: 'component'
         },
         // eslint-disable-next-line formatting/newline-object-in-array
-        '/data': ['data', {
-          data: Promise.resolve(true)
-        }],
-        // eslint-disable-next-line formatting/newline-object-in-array
-        '/data-multi': ['data-multi', {
-          data: {
-            true: Promise.resolve(true),
-            false: Promise.resolve(false)
+        '/data': [
+          'data',
+          {
+            data: Promise.resolve(true)
           }
-        }],
+        ],
+        // eslint-disable-next-line formatting/newline-object-in-array
+        '/data-multi': [
+          'data-multi',
+          {
+            data: {
+              true: Promise.resolve(true),
+              false: Promise.resolve(false)
+            }
+          }
+        ],
         '/composed': {
           component: 'composed',
           data: Promise.resolve(true)
-        },
+        }
       })
 
       Router.useRoutes([
@@ -66,7 +73,11 @@ ko.components.register('plugins', {
       ko.components.register('data', {
         viewModel: class {
           constructor(ctx) {
-            t.equals(true, ctx.data, 'plugin works with returned middleware func')
+            t.equals(
+              true,
+              ctx.data,
+              'plugin works with returned middleware func'
+            )
             Router.update('/data-multi')
           }
         }
@@ -75,7 +86,11 @@ ko.components.register('plugins', {
       ko.components.register('data-multi', {
         viewModel: class {
           constructor(ctx) {
-            t.deepEquals({ true: true, false: false }, ctx.data, 'plugin works with returned array of middleware funcs')
+            t.deepEquals(
+              { true: true, false: false },
+              ctx.data,
+              'plugin works with returned array of middleware funcs'
+            )
             Router.update('/composed')
           }
         }

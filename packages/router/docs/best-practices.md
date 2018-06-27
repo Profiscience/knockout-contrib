@@ -2,12 +2,13 @@
 
 Use plugins liberally to set up an architecture for your app. For example, create
 plugins for...
-  - setting the document title
-  - creating breadcrumbs (with nested routing)
-  - creating/attaching a scoped [querystring](https://github.com/Profiscience/ko-querystring) object
-  - loading components on demand
-  - loading data
-  - loading/disposing styles
+
+- setting the document title
+- creating breadcrumbs (with nested routing)
+- creating/attaching a scoped [querystring](https://github.com/Profiscience/ko-querystring) object
+- loading components on demand
+- loading data
+- loading/disposing styles
 
 ---
 
@@ -36,7 +37,7 @@ meaning no intermediate white space.
 
 When combined with a [querystring](https://github.com/Profiscience/ko-querystring),
 you can achieve very little boilerplate, convention-over-configuration views that
-*just have* their data with minimal effort from you.
+_just have_ their data with minimal effort from you.
 
 Note, this is a contrived example. A better method is to create a model class and a
 plugin that understands it. In our case, views look like...
@@ -84,9 +85,9 @@ export default collectionConstructorFactory({ api: '/api/courses' })
 Which sets up a class with a static `.factory(params)` function, and the
 collection plugin — `collection: () => import('./collection')` — is responsible
 for calling the function that
-  a) asynchronously loads the model js file via webpack & `import()`
-  b) calls the `factory` function with the route params and query
-  c) attaches the instantiated collection to `ctx.collection`
+a) asynchronously loads the model js file via webpack & `import()`
+b) calls the `factory` function with the route params and query
+c) attaches the instantiated collection to `ctx.collection`
 
 ---
 

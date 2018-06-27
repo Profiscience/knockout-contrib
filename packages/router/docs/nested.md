@@ -6,6 +6,7 @@ Nested routes are registered by
 - with object syntax by including another route map in the config
 
 ### Object Syntax
+
 ```typescript
 import * as ko from 'knockout'
 import { Router } from '@profiscience/knockout-contrib-router'
@@ -21,6 +22,7 @@ Router.useRoutes({
 ```
 
 ### Route Constructor Syntax
+
 ```typescript
 import * as ko from 'knockout'
 import { Route, Router } from '@profiscience/knockout-contrib-router'

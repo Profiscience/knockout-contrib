@@ -80,13 +80,22 @@ ko.components.register('before-navigate-callbacks', {
         'returning false should prevent navigation'
       )
       block = false
-      t.ok(await Router.update('/'), 'calling the callback with !false should not prevent navigation')
+      t.ok(
+        await Router.update('/'),
+        'returning !false should not prevent navigation'
+      )
 
       await Router.update('/async')
       block = true
-      t.notOk(await Router.update('/'), 'returning a promise that resolves false should prevent navigation')
+      t.notOk(
+        await Router.update('/'),
+        'returning a promise that resolves false should prevent navigation'
+      )
       block = false
-      t.ok(await Router.update('/'), 'returning a promise that resolves !false should prvent navigation')
+      t.ok(
+        await Router.update('/'),
+        'returning a promise that resolves !false should prvent navigation'
+      )
 
       await Router.update('/nested')
       await Router.update('/')

@@ -36,7 +36,7 @@ Router.use(async (ctx) => {
 
 That's it! If `fetchSomeData()` returns something of the wrong type, the compiler will throw an error, and in your component viewModels, you will have full autocomplete of your custom properties.
 
-**NOTE:** It's an interface prefixed with `I`, *not* the normal `Context` class. This is because TypeScript does not support declaration merging on classes.
+**NOTE:** It's an interface prefixed with `I`, _not_ the normal `Context` class. This is because TypeScript does not support declaration merging on classes.
 
 You may also take advantage of some types that are exported, namely `RouteConfig`, `RouteMap`, `Middleware`, and `RoutePlugin`. You can use these to specify types where the compiler cannot otherwise infer them. For example...
 

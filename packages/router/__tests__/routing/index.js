@@ -11,14 +11,7 @@ import * as similar from './similar'
 import * as ambiguous from './ambiguous'
 import * as routeConstructor from './route-constructor'
 
-const tests = [
-  basic,
-  params,
-  nested,
-  similar,
-  ambiguous,
-  routeConstructor
-]
+const tests = [basic, params, nested, similar, ambiguous, routeConstructor]
 
 const paths = map(tests, 'path')
 
@@ -32,10 +25,9 @@ ko.components.register('routing', {
       tests.forEach((test) => Router.useRoutes(test.routes))
 
       let resolve
-      new Promise((_resolve) => (resolve = _resolve))
-        .then(() => {
-          this.runTests(t).then(done)
-        })
+      new Promise((_resolve) => (resolve = _resolve)).then(() => {
+        this.runTests(t).then(done)
+      })
 
       this.t = t
       this.done = () => resolve()

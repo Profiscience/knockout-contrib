@@ -10,16 +10,21 @@
 Super-duper flexible component based router + middleware framework for developing wicked awesome single page apps with [KnockoutJS][]
 
 ### Installation
+
 ```bash
 $ npm install @profiscience/knockout-contrib-router
 ```
+
 ...or...
+
 ```bash
 $ yarn add @profiscience/knockout-contrib-router
 ```
 
 ### Usage
+
 _app.js_
+
 ```typescript
 import * as $ from 'jquery'
 import * as ko from 'knockout'
@@ -98,41 +103,37 @@ function loadingMiddleware(ctx) {
 
 function loadUsers(ctx) {
   // return promise for async middleware
-  return $.get('/api/users/').then((us) => ctx.users = us)
+  return $.get('/api/users/').then((us) => (ctx.users = us))
 }
 
 function loadUser(ctx) {
   // if not passed in via `with` from Users.navigateToUser
   if (!ctx.user) {
-    return $.get('/api/users/' + ctx.params.id).then((u) => ctx.user = u)
+    return $.get('/api/users/' + ctx.params.id).then((u) => (ctx.user = u))
   }
 }
 
 ko.applyBindings({ loading })
 ```
+
 _index.html_
+
 ```html
 <router data-bind="css: { opacity: loading() ? .5 : 1 }"></router>
 ```
 
 [More](./docs)
 
-[KnockoutJS]: https://knockoutjs.com
-
+[knockoutjs]: https://knockoutjs.com
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router.svg?maxAge=2592000
-
 [gitter]: https://gitter.im/Profiscience/ko-component-router
 [gitter-shield]: https://img.shields.io/gitter/room/profiscience/ko-component-router.svg

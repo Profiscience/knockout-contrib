@@ -29,13 +29,28 @@ ko.components.register('basepath', {
         viewModel: class {
           constructor(ctx) {
             t.pass('initializes with basepath')
-            t.equals(location.pathname, '/base/foo/foo', 'uses basepath in url on init')
-            t.equals(ctx.canonicalPath, '/foo/foo', 'ctx.canonicalPath is correct')
+            t.equals(
+              location.pathname,
+              '/base/foo/foo',
+              'uses basepath in url on init'
+            )
+            t.equals(
+              ctx.canonicalPath,
+              '/foo/foo',
+              'ctx.canonicalPath is correct'
+            )
 
-            ctx.router.initialized.then(() => setTimeout(() => { // Dirty hack for FF/TravisCI
-              t.equals($('#foo-link').attr('href'), '/base/foo/foo', 'sets href correctly in path binding')
-              Router.update('/bar/bar')
-            }))
+            ctx.router.initialized.then(() =>
+              setTimeout(() => {
+                // Dirty hack for FF/TravisCI
+                t.equals(
+                  $('#foo-link').attr('href'),
+                  '/base/foo/foo',
+                  'sets href correctly in path binding'
+                )
+                Router.update('/bar/bar')
+              })
+            )
           }
         }
       })
@@ -44,7 +59,11 @@ ko.components.register('basepath', {
         viewModel: class {
           constructor() {
             t.pass('navigates correctly with basepath')
-            t.equals('/base/bar/bar', location.pathname, 'uses basepath in url on update')
+            t.equals(
+              '/base/bar/bar',
+              location.pathname,
+              'uses basepath in url on update'
+            )
 
             done()
           }

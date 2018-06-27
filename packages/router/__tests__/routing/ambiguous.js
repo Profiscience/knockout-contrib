@@ -28,7 +28,8 @@ ko.components.register('ambiguous', {
 export const path = '/ambiguous/a/b/c'
 
 export const routes = {
-  '/ambiguous': ['ambiguous',
+  '/ambiguous': [
+    'ambiguous',
     {
       '/': {
         '/a': {

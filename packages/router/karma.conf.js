@@ -44,9 +44,7 @@ if (TRAVIS) {
   karmaReporters.push('karma-remap-istanbul')
   rollupPlugins.push(
     require('rollup-plugin-istanbul')({
-      include: [
-        'dist/**/*'
-      ]
+      include: ['dist/**/*']
     })
   )
 }
@@ -59,17 +57,13 @@ module.exports = (config) => {
 
     frameworks: ['tap'],
 
-    files: [
-      '__tests__/index.js'
-    ],
+    files: ['__tests__/index.js'],
 
     preprocessors: {
       '__tests__/index.js': 'rollup'
     },
 
-    browsers: [
-      '_Firefox'
-    ],
+    browsers: ['_Firefox'],
 
     browserConsoleLogOptions: {
       terminal: false
@@ -79,17 +73,17 @@ module.exports = (config) => {
       _Firefox: {
         base: 'Firefox',
         flags: ['-private']
-      },
+      }
     },
 
     // to debug, comment out singleRun, and uncomment autoWatch
     singleRun: !DEBUG,
-    autoWatch: !DEBUG,
+    autoWatch: DEBUG,
 
     reporters: karmaReporters,
 
     tapReporter: {
-      prettify: require('tap-diff')
+      // prettify: require('tap-diff')
     },
 
     rollupPreprocessor: {
