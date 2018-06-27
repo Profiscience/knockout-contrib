@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import './index'
+import { once } from './index'
 
 test('subscribes once, then disposes', () => {
   expect.assertions(4)
@@ -11,10 +11,10 @@ test('subscribes once, then disposes', () => {
 
   const hit = (v: any) => expect(v).toContain('foo')
 
-  observable.subscribeOnce(hit)
-  computed.subscribeOnce(hit)
-  pureComputed.subscribeOnce(hit)
-  observableArray.subscribeOnce(hit)
+  once(observable, hit)
+  once(computed, hit)
+  once(pureComputed, hit)
+  once(observableArray, hit)
 
   observable('foo')
   observableArray(['foo'])
@@ -22,4 +22,24 @@ test('subscribes once, then disposes', () => {
   // expect.assertions(4) would cause these to fail
   observable('bar')
   observableArray.push('bar')
+})
+
+test('returns the subscription', (done) => {
+  expect.assertions(1)
+
+  const observable = ko.observable('')
+  const hit = jest.fn()
+
+  const sub = once(observable, hit)
+
+  sub.dispose()
+
+  observable('foo')
+
+  once(observable, () => {
+    expect(hit).not.toBeCalled()
+    done()
+  })
+
+  observable('bar')
 })
