@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-utils-from-js",
-  "description": "Handy Utilities for Knockout JS",
-  "version": "1.0.0-alpha.10",
+  "description": "KnockoutJS fromJS() utility fn",
+  "version": "1.0.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.fromJS",
@@ -9,22 +9,15 @@
   "repository": "github:Profiscience/knockout-contrib",
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
-  "types": "index.ts",
-  "keywords": [
-    "knockout",
-    "knockoutjs",
-    "utils",
-    "helpers",
-    "utilities"
-  ],
+  "types": "index.d.ts",
   "scripts": {
     "bench": "ts-node ./benchmark.ts"
   },
   "peerDependencies": {
-    "knockout": "^3.5.0-beta"
+    "knockout": "^3.4.0 || 3.5.0-rc"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0-alpha.8",
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0",
     "knockout-mapping": "^2.6.0"
   }
 }

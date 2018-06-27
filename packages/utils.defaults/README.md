@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-utils-defaults
+# utils.defaults
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,30 +8,27 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.defaults
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/utils.defaults
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.defaults&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/utils.defaults
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/utils.defaults&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/utils.defaults
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-utils-defaults
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-utils-defaults.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-utils-defaults&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-utils-defaults.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-utils metapackage](../utils)
+> This package is intended for consumption via the [@profiscience/knockout-contrib] metapackage
 
 ## Usage
+
 > defaults(dest, defaultValues[, mapArrays = false])
 
-Creates observables for enumerable string properties of `defaultValues` where undefined in the destination object.
+Creates observables for enumerable properties of `defaultValues` where undefined in the destination object.
 
-If `mapArrays` is true, array elements will be created as mapped observables, else bare objects/primitives.
+If `mapArrayElements` is true, array elements will be created using [utils.fromJS](../utils.fromJS).
 
 ```javascript
-import { defaults } from '@profiscience/knockout-contrib-utils'
+import { defaults } from '@profiscience/knockout-contrib/utils'
 
 const foos = { foo: 'foo' }
 defaults(foos, { foo: 'bar', bar: 'bar' })

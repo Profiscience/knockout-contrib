@@ -1,6 +1,6 @@
-import '@profiscience/knockout-contrib-jest-matchers'
 import * as ko from 'knockout'
-import defaults from './index'
+import '@profiscience/knockout-contrib-jest-matchers'
+import { defaults } from './index'
 
 test('assigns default values', () => {
   const actual = {
@@ -13,7 +13,7 @@ test('assigns default values', () => {
     foo: 'default',
     bar: 'default',
     baz: 'default',
-    qux: 'default',
+    qux: 'default'
   })
 
   expect(actual.foo).toBe('foo')
@@ -22,7 +22,10 @@ test('assigns default values', () => {
   expect(actual.qux()).toBe('default')
 })
 
-const testArrays = (mapArraysArg: undefined | boolean | null, shouldMapArrays: boolean) => () => {
+const testArrays = (
+  mapArraysArg: undefined | boolean | null,
+  shouldMapArrays: boolean
+) => () => {
   const actual: any = {}
 
   defaults(actual, { foo: ['foo'] }, mapArraysArg as boolean)
@@ -30,13 +33,16 @@ const testArrays = (mapArraysArg: undefined | boolean | null, shouldMapArrays: b
   expect(actual.foo).toBeObservable()
 
   shouldMapArrays
-  ? expect(actual.foo()[0]).toBeObservable()
-  : expect(actual.foo()[0]).not.toBeObservable()
+    ? expect(actual.foo()[0]).toBeObservable()
+    : expect(actual.foo()[0]).not.toBeObservable()
 
   expect(ko.toJS(actual.foo()[0])).toBe('foo')
 }
 
-test('creates shallow arrays when 3rd arg is undefined', testArrays(undefined, false))
+test(
+  'creates shallow arrays when 3rd arg is undefined',
+  testArrays(undefined, false)
+)
 test('creates shallow arrays when 3rd arg is falsy', testArrays(null, false))
 test('creates shallow arrays when 3rd arg is false', testArrays(false, false))
 test('creates deep arrays when 3rd arg is true', testArrays(true, true))

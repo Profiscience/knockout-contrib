@@ -1,12 +1,12 @@
 import * as ko from 'knockout'
-import './index'
+import { toggle } from './index'
 
-describe('observable.fn.toggle', () => {
+describe('utils.toggle', () => {
   test('toggles boolean observable', () => {
     const bool = ko.observable(true)
-    bool.toggle()
+    toggle(bool)
     expect(bool()).toBe(false)
-    bool.toggle()
+    toggle(bool)
     expect(bool()).toBe(true)
   })
 
@@ -18,16 +18,21 @@ describe('observable.fn.toggle', () => {
         done()
       }
     })
-    bool.toggle()
+    toggle(bool)
   })
 
   test('throws with non writable computeds', () => {
     const bool = ko.pureComputed(() => true)
-    expect(bool.toggle).toThrow()
+    expect(() => toggle(bool)).toThrow()
   })
 
   test('throws with non booleans', () => {
     const num = ko.pureComputed(() => 0)
-    expect(num.toggle).toThrow()
+    expect(() => toggle(num as any)).toThrow()
+  })
+
+  test('returns the new value', () => {
+    const bool = ko.observable(true)
+    expect(toggle(bool)).toBe(false)
   })
 })

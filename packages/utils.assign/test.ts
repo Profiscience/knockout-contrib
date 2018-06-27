@@ -1,6 +1,6 @@
 import '@profiscience/knockout-contrib-jest-matchers'
 import * as ko from 'knockout'
-import merge from './index'
+import { assign } from './index'
 
 describe('utils.merge', () => {
   test('creates a deep observable tree', () => {
@@ -14,7 +14,7 @@ describe('utils.merge', () => {
       }
     } as any
 
-    merge(actual, {
+    assign(actual, {
       existingNonObservable: 'new',
       existingObservable: 'new',
       existingObject: {
@@ -52,32 +52,39 @@ describe('utils.merge', () => {
 
   test('does nothing when merging identical values', () => {
     const actual = { foo: ko.observable('foo') }
-    merge(actual, { foo: 'foo' })
+    assign(actual, { foo: 'foo' })
     expect(actual.foo).toBeObservable()
     expect(ko.toJS(actual)).toEqual({ foo: 'foo' })
   })
 
   test('unsets explicitly undefined properties', () => {
     const actual = { foo: 'foo' }
-    merge(actual, { foo: undefined })
+    assign(actual, { foo: undefined })
     expect(actual.foo).not.toBeObservable()
     expect(ko.toJS(actual)).toEqual({ foo: undefined })
   })
 
   test('supports null destination properties', () => {
     const dest: any = { foo: null }
-    merge(dest, { foo: null })
+    assign(dest, { foo: null })
     expect(dest.foo).toBeNull()
   })
 
-  const testArrays = (mapArraysArg?: boolean, shouldMapArrays?: boolean) => () => {
+  const testArrays = (
+    mapArraysArg?: boolean,
+    shouldMapArrays?: boolean
+  ) => () => {
     _test({})
     _test({ foo: ko.observableArray([]) })
 
     function _test(actual: any) {
-      merge(actual, { foo: ['foo'] }, {
-        deep: mapArraysArg
-      })
+      assign(
+        actual,
+        { foo: ['foo'] },
+        {
+          mapArrayElements: mapArraysArg
+        }
+      )
 
       expect(actual.foo).toBeObservable()
       expect(ko.toJS(actual.foo()[0])).toBe('foo')
@@ -87,9 +94,18 @@ describe('utils.merge', () => {
     }
   }
 
-  test('creates/sets shallow arrays when 3rd arg is undefined', testArrays(undefined, false))
-  test('creates/sets shallow arrays when 3rd arg is falsy', testArrays(null as any, false))
-  test('creates/sets shallow arrays when 3rd arg is false', testArrays(false, false))
+  test(
+    'creates/sets shallow arrays when 3rd arg is undefined',
+    testArrays(undefined, false)
+  )
+  test(
+    'creates/sets shallow arrays when 3rd arg is falsy',
+    testArrays(null as any, false)
+  )
+  test(
+    'creates/sets shallow arrays when 3rd arg is false',
+    testArrays(false, false)
+  )
   test('creates/sets deep arrays when 3rd arg is true', testArrays(true, true))
 
   test('strict only uses existing observables', () => {
@@ -107,7 +123,7 @@ describe('utils.merge', () => {
         bar: 'bar'
       }
     }
-    merge(dest, src, { strict: true })
+    assign(dest, src, { strict: true })
 
     expect(dest.foo).toBeObservable()
     expect(dest.bar).not.toBeObservable()

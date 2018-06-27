@@ -2,8 +2,7 @@
 
 import '@profiscience/knockout-contrib-jest-matchers'
 import * as ko from 'knockout'
-
-import fromJS from './index'
+import { fromJS } from './index'
 
 describe('utils.fromJS', () => {
   test('should create a deep observable tree', () => {
@@ -16,7 +15,7 @@ describe('utils.fromJS', () => {
       public obj = { foo: 'foo' }
       public obs = ko.observable({ foo: 'bar' })
       public regexp = /foo/
-      public func() { } // tslint:disable-line no-empty
+      public func() {} // tslint:disable-line no-empty
     }
 
     const raw = {
@@ -24,13 +23,11 @@ describe('utils.fromJS', () => {
       str: 'str',
       date: new Date(),
       bool: true,
-      arr: [
-        'foo'
-      ],
+      arr: ['foo'],
       regexp: /foo/,
       obj: { foo: 'foo' },
       obs: ko.observable({ foo: 'bar' }),
-      func() { }, // tslint:disable-line no-empty
+      func() {}, // tslint:disable-line no-empty
       class: new Clazz()
     }
 
@@ -39,15 +36,15 @@ describe('utils.fromJS', () => {
     {
       // test type checking (not fool-proof)
       // tslint:disable:no-unused-variable
-      const num: KnockoutObservable<number> = actual.num
-      const str: KnockoutObservable<string> = actual.str
-      const date: KnockoutObservable<Date> = actual.date
-      const bool: KnockoutObservable<boolean> = actual.bool
+      const num: ko.Observable<number> = actual.num
+      const str: ko.Observable<string> = actual.str
+      const date: ko.Observable<Date> = actual.date
+      const bool: ko.Observable<boolean> = actual.bool
 
-      const arr: KnockoutObservableArray<string> = actual.arr
-      const regexp: KnockoutObservable<RegExp> = actual.regexp
-      const nestedStr: KnockoutObservable<string> = actual.obj.foo
-      const obs: KnockoutObservable<{ foo: string }> = actual.obs
+      const arr: ko.ObservableArray<string> = actual.arr
+      const regexp: ko.Observable<RegExp> = actual.regexp
+      const nestedStr: ko.Observable<string> = actual.obj.foo
+      const obs: ko.Observable<{ foo: string }> = actual.obs
       const func: () => void = actual.func
     }
 
@@ -78,7 +75,10 @@ describe('utils.fromJS', () => {
     expect(ko.toJS(actual)).toEqual(ko.toJS(raw))
   })
 
-  const testArrays = (mapArraysArg: undefined | null | boolean, shouldMapArrays: boolean) => () => {
+  const testArrays = (
+    mapArraysArg: undefined | null | boolean,
+    shouldMapArrays: boolean
+  ) => () => {
     const actual = fromJS({ foo: ['foo'] }, mapArraysArg as boolean)
 
     expect(actual.foo).toBeObservable()
@@ -88,7 +88,10 @@ describe('utils.fromJS', () => {
       : expect(actual.foo()[0]).not.toBeObservable()
   }
 
-  test('creates shallow arrays when 2rd arg is undefined', testArrays(undefined, false))
+  test(
+    'creates shallow arrays when 2rd arg is undefined',
+    testArrays(undefined, false)
+  )
   test('creates shallow arrays when 2rd arg is falsy', testArrays(null, false))
   test('creates shallow arrays when 2rd arg is false', testArrays(false, false))
   test('creates deep arrays when 2rd arg is true', testArrays(true, true))
