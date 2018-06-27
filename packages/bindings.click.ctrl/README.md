@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-bindings-ctrl-click
+# bindings.click.ctrl
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -6,39 +6,30 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
-[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.ctrlClick
-[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/bindings.ctrlClick
+[david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.click.shift
+[david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/bindings.click.shift
+[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.click.shift&type=peer
+[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/bindings.click.shift
+[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.click.shift&type=dev
+[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/bindings.click.shift
+[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-bindings-click-shift
+[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-bindings-click-shift.svg
+[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-click-shift&author=&from=&to=
+[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-click-shift.svg?maxAge=2592000
 
-[david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.ctrlClick&type=peer
-[david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/bindings.ctrlClick
-
-[david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/bindings.ctrlClick&type=dev
-[david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/bindings.ctrlClick
-
-[npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-bindings-ctrl-click
-[npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-bindings-ctrl-click.svg
-
-[npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-bindings-ctrl-click&author=&from=&to=
-[npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-bindings-ctrl-click.svg?maxAge=2592000
+> This package is intended for consumption via the [@profiscience/knockout-contrib][] metapackage
 
 Built-in [click binding][], filtered for ctrl+click
 
-__NOTE:__ Consider MacOS (where meta+click is more intuitive) and mobile users (where there is no access to ctrl) when using this binding
+**NOTE:** Consider MacOS (where meta+click is more intuitive) and mobile users (where there is no access to ctrl) when using this binding
 
 ## Usage
 
-```typescript
-// register as "ctrlClick"
-import '@profiscience/knockout-contrib-bindings-ctrl-click'
-
-// register as custom name
-import * as ko from 'knockout'
-import { ctrlClickBindingHandler } from '@profiscience/knockout-contrib-bindings-ctrl-click'
-ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
-```
+Accepts a function with the same API as the built-in [click-binding][]
 
 ```html
-<div data-bind="ctrlClick: (event, data) => console.log(data)"></div>
+<div data-bind="click.ctrl: (event, data) => console.log(data)"></div>
 ```
 
+[@profiscience/knockout-contrib]: https://github.com/Profiscience/knockout-contrib
 [click binding]: https://knockoutjs.com/documentation/click-binding.html

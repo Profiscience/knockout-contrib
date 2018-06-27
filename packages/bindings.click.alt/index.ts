@@ -1,20 +1,15 @@
 import * as ko from 'knockout'
 
-declare global {
-  // tslint:disable-next-line interface-name
-  interface KnockoutBindingHandlers {
-    altClick: KnockoutBindingHandler
-  }
-}
-
-export const altClickBindingHandler: KnockoutBindingHandler = {
+export const altClickBindingHandler: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
-    ko.applyBindingsToNode(el, {
-      click($data: any, e: MouseEvent) {
-        if (e.altKey) valueAccessor().call(this, $data, e)
-      }
-    })
+    ko.applyBindingsToNode(
+      el,
+      {
+        click($data: any, e: MouseEvent) {
+          if (e.altKey) valueAccessor().call(this, $data, e)
+        }
+      },
+      bindingContext
+    )
   }
 }
-
-ko.bindingHandlers.altClick = altClickBindingHandler

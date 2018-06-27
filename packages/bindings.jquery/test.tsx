@@ -2,18 +2,20 @@ import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 import * as $ from 'jquery'
 
-import './index'
+import { jqueryBindingHandler } from './index'
+
+ko.bindingHandlers.$ = jqueryBindingHandler
 
 declare global {
   // tslint:disable-next-line:interface-name
-  interface JQuery {
-    myPlugin(opts: any): void
+  interface JQuery<TElement extends Node = HTMLElement> {
+    myPlugin(opts: any): any
   }
 }
 
 describe('bindings.jquery', () => {
   test('calls the jquery plugin on the bound element', (done) => {
-    const actualEl = <div data-bind='jquery.myPlugin: {}'></div>
+    const actualEl = <div data-bind="$.myPlugin: {}" />
     $.fn.myPlugin = function() {
       expect(this.get(0)).toEqual(actualEl)
       done()
@@ -23,7 +25,7 @@ describe('bindings.jquery', () => {
 
   test('calls the jquery plugin with the correct options', (done) => {
     const opts = { myOpts: true }
-    const el = <div data-bind='jquery.myPlugin: opts'></div>
+    const el = <div data-bind="$.myPlugin: opts" />
     // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       expect(_opts).toEqual(opts)
@@ -33,7 +35,7 @@ describe('bindings.jquery', () => {
   })
 
   test('options default to undefined', (done) => {
-    const el = <div data-bind='jquery.myPlugin'></div>
+    const el = <div data-bind="$.myPlugin" />
     // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       expect(_opts).toBeUndefined()
@@ -45,7 +47,7 @@ describe('bindings.jquery', () => {
   test('initializes value binding', (done) => {
     const val = ko.observable()
     const opts = { myOpts: true }
-    const el = <div data-bind='jquery.myPlugin: opts, value: val'></div>
+    const el = <div data-bind="$.myPlugin: opts, value: val" />
     // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       this.val('foobar')
@@ -60,7 +62,7 @@ describe('bindings.jquery', () => {
   test('updates value binding on change', (done) => {
     const val = ko.observable()
     const opts = { myOpts: true }
-    const el = <div data-bind='jquery.myPlugin: opts, value: val'></div>
+    const el = <div data-bind="$.myPlugin: opts, value: val" />
     // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       val.subscribe((v) => {
@@ -75,7 +77,7 @@ describe('bindings.jquery', () => {
 
   test('works with change event binding handler', (done) => {
     const opts = { myOpts: true }
-    const el = <div data-bind='jquery.myPlugin: opts, event: { change: onChange }'></div>
+    const el = <div data-bind="$.myPlugin: opts, event: { change: onChange }" />
     const onChange = (e: JQuery.Event) => {
       expect(e.target).toBe(el)
       done()
@@ -89,7 +91,7 @@ describe('bindings.jquery', () => {
 
   test('works with namespaced binding syntax change handler', (done) => {
     const opts = { myOpts: true }
-    const el = <div data-bind='jquery.myPlugin: opts, event.change: onChange'></div>
+    const el = <div data-bind="$.myPlugin: opts, event.change: onChange" />
     const onChange = (e: JQuery.Event) => {
       expect(e.target).toBe(el)
       done()

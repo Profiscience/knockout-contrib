@@ -1,23 +1,28 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './index'
+import { metaClickBindingHandler } from './index'
+
+ko.bindingHandlers['click.meta'] = metaClickBindingHandler
 
 const clickEvent = new Event('click')
 const metaClickEvent = new Event('click')
 
-{ (metaClickEvent as any).metaKey = true }
+{
+  ;(metaClickEvent as any).metaKey = true
+}
 
 describe('bindings.metaClick', () => {
   test('calls handler only when meta depressed', () => {
-    const actualEl = <div data-bind='metaClick: handler'></div>
+    const actualEl = <div data-bind="click.meta: handler" />
     const handler = jest.fn()
-    ko.applyBindings({ handler }, actualEl)
+    const context = { handler }
+    ko.applyBindings(context, actualEl)
 
     actualEl.dispatchEvent(clickEvent)
-    actualEl.dispatchEvent(metaClickEvent)
+    expect(handler).not.toBeCalled()
 
-    expect(handler).not.toBeCalledWith(undefined, clickEvent)
-    expect(handler).toBeCalledWith(undefined, metaClickEvent)
+    actualEl.dispatchEvent(metaClickEvent)
+    expect(handler).toBeCalledWith(context, metaClickEvent)
   })
 })

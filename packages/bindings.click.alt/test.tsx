@@ -1,23 +1,28 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
 
-import './index'
+import { altClickBindingHandler } from './index'
+
+ko.bindingHandlers['click.alt'] = altClickBindingHandler
 
 const clickEvent = new Event('click')
 const altClickEvent = new Event('click')
 
-{ (altClickEvent as any).altKey = true }
+{
+  ;(altClickEvent as any).altKey = true
+}
 
 describe('bindings.altClick', () => {
   test('calls handler only when alt depressed', () => {
-    const actualEl = <div data-bind='altClick: handler'></div>
+    const actualEl = <div data-bind="click.alt: handler" />
     const handler = jest.fn()
-    ko.applyBindings({ handler }, actualEl)
+    const context = { handler }
+    ko.applyBindings(context, actualEl)
 
     actualEl.dispatchEvent(clickEvent)
-    actualEl.dispatchEvent(altClickEvent)
+    expect(handler).not.toBeCalled()
 
-    expect(handler).not.toBeCalledWith(undefined, clickEvent)
-    expect(handler).toBeCalledWith(undefined, altClickEvent)
+    actualEl.dispatchEvent(altClickEvent)
+    expect(handler).toBeCalledWith(context, altClickEvent)
   })
 })

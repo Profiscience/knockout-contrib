@@ -1,21 +1,15 @@
-import * as ko from 'knockout'
 import 'knockout-punches'
 import $ from 'jquery'
 
-declare global {
-  // tslint:disable-next-line interface-name
-  interface KnockoutBindingHandlers {
-    jquery: KnockoutBindingHandler
-  }
-}
-
-export const jqueryBindingHandler: KnockoutBindingHandler = {
+export const jqueryBindingHandler = {
   getNamespacedHandler(pluginName: string) {
     return {
       init(el, valueAccessor, allBindings) {
         const $el: JQuery & { [k: string]: (opts: any) => any } = $(el) as any
         const value = allBindings.get('value')
-        const changeHandler = allBindings.get('event.change') || (allBindings.get('event') || {}).change
+        const changeHandler =
+          allBindings.get('event.change') ||
+          (allBindings.get('event') || {}).change
         const opts = valueAccessor()
 
         $el.on('change', (e) => {
@@ -27,8 +21,6 @@ export const jqueryBindingHandler: KnockoutBindingHandler = {
 
         if (value) value(el.value)
       }
-    } as KnockoutBindingHandler
+    } as ko.BindingHandler
   }
-}
-
-ko.bindingHandlers.jquery = jqueryBindingHandler
+} as ko.BindingHandler
