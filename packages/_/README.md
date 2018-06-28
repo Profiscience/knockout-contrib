@@ -126,7 +126,7 @@ Another is what is done here, and that is using a metapackage with _very_ lenien
 What this leads to is a behavior in which, by default, the latest version of each package will be installed. However, you may lock the version of any package by adding it explicitly to your `package.json`. Your package manager should resolve any cross-dependencies or version requirements from there.
 
 [knockoutjs]: https://knockoutjs.com
-[knockout-shield]: https://img.shields.io/badge/KnockoutJS-^3.4.0-red.svg
+[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--rc-red.svg
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
 [codecov]: https://codecov.io/gh/Profiscience/knockout-contrib
