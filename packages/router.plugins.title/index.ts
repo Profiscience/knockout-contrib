@@ -2,8 +2,7 @@ import {
   Context,
   IContext,
   IRouteConfig,
-  RoutePlugin,
-  Lifecycle
+  RoutePlugin
 } from '@profiscience/knockout-contrib-router'
 
 type MaybePromise<T> = T | Promise<T>
@@ -32,7 +31,7 @@ export function createTitlePlugin(
       afterRender() {
         if (typeof title === 'function') {
           const t = title(ctx)
-          if (t && typeof (t as Promise<string>).then === 'function') {
+          if (t && typeof (t as any).then === 'function') {
             async = true
             ctx.queue(t as Promise<any>)
           }
@@ -43,7 +42,11 @@ export function createTitlePlugin(
 
         if (!ctx.$child) {
           if (async) {
-            Promise.all(titles).then((ts) => (document.title = compose(ts)))
+            Promise.all(titles)
+              .then((ts) => (document.title = compose(ts)))
+              .catch((err) => {
+                throw new Error(`Error setting title: ${err}`)
+              })
           } else {
             document.title = compose(titles as string[])
           }

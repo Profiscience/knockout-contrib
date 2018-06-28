@@ -4,7 +4,6 @@ import {
   Context,
   Route,
   IContext,
-  IRouteConfig,
   Lifecycle
 } from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'

@@ -1,7 +1,6 @@
 import {
   Context,
   IContext,
-  IRouteConfig,
   Lifecycle,
   Route
 } from '@profiscience/knockout-contrib-router'

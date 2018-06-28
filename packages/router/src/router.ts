@@ -174,6 +174,7 @@ export class Router {
 
     const shouldNavigate = await fromCtx.runBeforeNavigateCallbacks()
     if (shouldNavigate === false) {
+      // tslint:disable-line
       return false
     }
 

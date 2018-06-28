@@ -1,9 +1,4 @@
-import {
-  Context,
-  IContext,
-  IRouteConfig,
-  Route
-} from '@profiscience/knockout-contrib-router'
+import { Context, IContext, Route } from '@profiscience/knockout-contrib-router'
 
 import { redirectPlugin } from './index'
 
@@ -71,7 +66,6 @@ describe('router.plugins.redirect', () => {
   })
 
   test("doesn't blow up if not used", async () => {
-    const ctx = { redirect: jest.fn() as any } as Context & IContext
     const route = new Route('/', {})
     expect(route.middleware.length).toBe(0)
   })

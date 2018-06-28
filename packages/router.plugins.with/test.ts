@@ -1,9 +1,4 @@
-import {
-  Context,
-  IContext,
-  IRouteConfig,
-  Route
-} from '@profiscience/knockout-contrib-router'
+import { Context, IContext, Route } from '@profiscience/knockout-contrib-router'
 import { withPlugin } from './index'
 
 const FOO = Symbol('foo')
