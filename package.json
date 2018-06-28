@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "ts-node ./build.ts; cd packages/router; tsc",
+    "build": "ts-node ./build.ts",
     "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
     "test": "jest",
