@@ -21,6 +21,6 @@ export const jqueryBindingHandler = {
 
         if (value) value(el.value)
       }
-    } as KnockoutBindingHandler
+    } as ko.BindingHandler
   }
-} as KnockoutBindingHandler
+} as ko.BindingHandler

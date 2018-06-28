@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 
-export const toggleBindingHandler: KnockoutBindingHandler = {
+export const toggleBindingHandler: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     if (!ko.isWriteableObservable(valueAccessor())) {
       throw new Error(

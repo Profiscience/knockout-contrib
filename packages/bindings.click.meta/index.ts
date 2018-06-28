@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 
-export const metaClickBindingHandler: KnockoutBindingHandler = {
+export const metaClickBindingHandler: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(
       el,
