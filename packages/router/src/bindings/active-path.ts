@@ -7,7 +7,7 @@ import {
   log
 } from '../utils'
 
-export const activePathBinding: KnockoutBindingHandler = {
+export const activePathBinding: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
     const activePathCSSClass =
       allBindings.get('pathActiveClass') || Router.config.activePathCSSClass
@@ -17,11 +17,15 @@ export const activePathBinding: KnockoutBindingHandler = {
       .then(() => {
         const router = getRouterForBindingContext(bindingCtx)
         const route = ko.pureComputed(() => traversePath(router, path))
-        ko.applyBindingsToNode(el, {
-          css: {
-            [activePathCSSClass]: ko.pureComputed(() => isActivePath(route()))
-          }
-        })
+        ko.applyBindingsToNode(
+          el,
+          {
+            css: {
+              [activePathCSSClass]: ko.pureComputed(() => isActivePath(route()))
+            }
+          },
+          bindingCtx
+        )
       })
       .catch((err) => log.error('Error initializing activePath binding', err))
   }

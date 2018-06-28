@@ -21,7 +21,7 @@ ko.components.register('router', {
 
 ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    const $router: Router = bindingCtx.$rawData
+    const $router = bindingCtx.$rawData
 
     ko.applyBindingsToNode(
       el,

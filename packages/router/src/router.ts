@@ -70,8 +70,8 @@ export class Router {
   }
 
   public onInit: (() => void)[] = []
-  public component: KnockoutObservable<string>
-  public isNavigating: KnockoutObservable<boolean>
+  public component: ko.Observable<null | string>
+  public isNavigating: ko.Observable<boolean>
   public routes: Route[]
   public isRoot: boolean
   public ctx: Context & IContext
