@@ -20,6 +20,6 @@
   ],
   "peerDependencies": {
     "jest": "X.X.X",
-    "knockout": "^3.4.0"
+    "knockout": "3.5.0-rc"
   }
 }
