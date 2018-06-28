@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-click-alt",
   "description": "KnockoutJS Alt+Click Binding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.click.alt",

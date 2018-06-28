@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-utils-assign",
   "description": "KnockoutJS assign() utility fn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.assign",
@@ -14,9 +14,9 @@
     "knockout": "^3.4.0"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "^1.0.0"
+    "@profiscience/knockout-contrib-utils-from-js": "^1.0.1"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.0"
+    "@profiscience/knockout-contrib-jest-matchers": "^1.0.1"
   }
 }

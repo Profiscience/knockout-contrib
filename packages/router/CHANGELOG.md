@@ -1,4 +1,20 @@
-# Changelog
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+      <a name="1.3.0"></a>
+# [1.3.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-7...@profiscience/knockout-contrib-router@1.3.0) (2018-06-28)
+
+
+### Features
+
+* **router:** Support wildcard matching for activePath binding (and path binding) ([f10f96a](https://github.com/Profiscience/knockout-contrib/commit/f10f96a))
+
+
+
+
+      # Changelog
 
 ## 1.2.0
 
@@ -156,8 +172,8 @@
 ### Changed
 
 - Middleware execution order; beforeRender middleware is now called _before_
-  preceding page's afterRender, preventing a blank page while async middleware is
-  executing
+preceding page's afterRender, preventing a blank page while async middleware is
+executing
 
 ### Fixed
 
