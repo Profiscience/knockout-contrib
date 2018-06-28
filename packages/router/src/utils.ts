@@ -104,64 +104,25 @@ export function isActivePath({
   return true
 }
 
-export function isThenable(x: any) {
-  return !isUndefined(x) && isFunction(x.then)
-}
-
-export function promisify(
-  _fn: (...args: any[]) => void = noop
-): (...args: any[]) => Promise<any> {
-  return async (...args) => {
-    const fn = () =>
-      _fn.length === args.length + 1
-        ? new Promise((r) => {
-            _fn(...args, r)
-          })
-        : _fn(...args)
-
-    const ret = fn()
-
-    return isThenable(ret) ? await ret : ret
-  }
-}
-
-export function castLifecycleObjectMiddlewareToGenerator(
-  fn: Middleware
-): LifecycleGeneratorMiddleware {
-  return async function*(ctx: Context & IContext) {
-    const ret = await promisify(fn)(ctx)
-    if (ret && isFunction(ret.next)) {
-      for await (const v of ret) {
-        yield await v
-      }
-    } else if (isPlainObject(ret)) {
-      yield await promisify(ret.beforeRender)()
-      yield await promisify(ret.afterRender)()
-      yield await promisify(ret.beforeDispose)()
-      yield await promisify(ret.afterDispose)()
-    } else {
-      yield ret
-    }
-  }
-}
-
-export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
-  while (!isUndefined(bindingCtx)) {
-    if (!isUndefined(bindingCtx.$router)) {
+export function getRouterForBindingContext(
+  bindingCtx: ko.BindingContext
+): Router {
+  while (true) {
+    if (bindingCtx.$router) {
       return bindingCtx.$router
+    } else if (!bindingCtx.$parentContext) {
+      return Router.head
+    } else {
+      bindingCtx = bindingCtx.$parentContext as ko.BindingContext
     }
-    bindingCtx = bindingCtx.$parentContext
   }
-  return Router.head
 }
 
+// tslint:disable-next-line no-console
+const _consoleLogger: any = console
+const _logger = (t: string) => (...ms: string[]) =>
+  _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
 export const log = {
-  error(...messages: string[]) {
-    // tslint:disable-next-line no-console
-    console.error('[@profiscience/knockout-contrib-router]', ...messages)
-  },
-  warn(...messages: string[]) {
-    // tslint:disable-next-line no-console
-    console.warn('[@profiscience/knockout-contrib-router]', ...messages)
-  }
+  error: _logger('error'),
+  warn: _logger('warn')
 }

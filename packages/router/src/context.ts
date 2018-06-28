@@ -1,14 +1,8 @@
-import 'core-js/es7/symbol'
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
-import { Router, Middleware } from './router'
-import {
-  Callback,
-  isThenable,
-  castLifecycleObjectMiddlewareToGenerator,
-  sequence
-} from './utils'
+import { Router, Middleware, Lifecycle } from './router'
+import { MaybePromise } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
   public $child: Context & IContext
@@ -22,10 +16,12 @@ export class Context /* implements IContext, use Context & IContext */ {
     with?: { [prop: string]: any }
   }
 
+  private readonly _beforeNavigateCallbacks: (() => MaybePromise<
+    void | false
+  >)[] = []
   private _queue: Promise<void>[] = []
-  private _beforeNavigateCallbacks: Callback<void>[] = []
-  private _appMiddlewareDownstream: Callback<void>[] = []
-  private _routeMiddlewareDownstream: Callback<void>[] = []
+  private _appMiddlewareLifecycles: Lifecycle[] = []
+  private _routeMiddlewareLifecycles: Lifecycle[] = []
 
   constructor(
     public router: Router,
@@ -55,7 +51,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     }
   }
 
-  public addBeforeNavigateCallback(cb: Callback<void>) {
+  public addBeforeNavigateCallback(cb: () => MaybePromise<false | void>) {
     this._beforeNavigateCallbacks.unshift(cb)
   }
 
@@ -119,14 +115,19 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: Context & IContext = this
-    let callbacks: Callback<boolean | void>[] = []
+    let ctx: void | Context & IContext = this as any
+    let callbacks: (() => MaybePromise<boolean | void>)[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
       ctx = ctx.$child
     }
-    const { success } = await sequence(callbacks)
-    return success
+    for (const cb of callbacks) {
+      const ret = await cb()
+      if (ret === false) {
+        return false
+      }
+    }
+    return true
   }
 
   public render() {
@@ -141,31 +142,15 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeRender(flush = true) {
-    const appMiddlewareDownstream = Context.runMiddleware(
+    const ctx: Context & IContext = this as any
+    this._appMiddlewareLifecycles = await Context.startLifecycle(
       Router.middleware,
-      this
+      ctx
     )
-    const routeMiddlewareDownstream = Context.runMiddleware(
+    this._routeMiddlewareLifecycles = await Context.startLifecycle(
       this.route.middleware,
-      this
+      ctx
     )
-
-    const { count: numAppMiddlewareRanPreRedirect } = await sequence(
-      appMiddlewareDownstream
-    )
-    const { count: numRouteMiddlewareRanPreRedirect } = await sequence(
-      routeMiddlewareDownstream
-    )
-
-    this._appMiddlewareDownstream = appMiddlewareDownstream.slice(
-      0,
-      numAppMiddlewareRanPreRedirect
-    )
-    this._routeMiddlewareDownstream = routeMiddlewareDownstream.slice(
-      0,
-      numRouteMiddlewareRanPreRedirect
-    )
-
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runBeforeRender(false)
     }
@@ -175,10 +160,12 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runAfterRender() {
-    await sequence([
-      ...this._appMiddlewareDownstream,
-      ...this._routeMiddlewareDownstream
-    ])
+    for (const l of [
+      ...this._appMiddlewareLifecycles,
+      ...this._routeMiddlewareLifecycles
+    ]) {
+      if (l.afterRender) await l.afterRender()
+    }
     await this.flushQueue()
   }
 
@@ -186,10 +173,12 @@ export class Context /* implements IContext, use Context & IContext */ {
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runBeforeDispose(false)
     }
-    await sequence([
-      ...this._routeMiddlewareDownstream,
-      ...this._appMiddlewareDownstream
-    ])
+    for (const l of [
+      ...this._routeMiddlewareLifecycles,
+      ...this._appMiddlewareLifecycles
+    ]) {
+      if (l.beforeDispose) await l.beforeDispose()
+    }
     if (flush) {
       await this.flushQueue()
     }
@@ -199,10 +188,12 @@ export class Context /* implements IContext, use Context & IContext */ {
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runAfterDispose(false)
     }
-    await sequence([
-      ...this._routeMiddlewareDownstream,
-      ...this._appMiddlewareDownstream
-    ])
+    for (const l of [
+      ...this._routeMiddlewareLifecycles,
+      ...this._appMiddlewareLifecycles
+    ]) {
+      if (l.afterDispose) await l.afterDispose()
+    }
     if (flush) {
       await this.flushQueue()
     }
@@ -216,31 +207,23 @@ export class Context /* implements IContext, use Context & IContext */ {
     await Promise.all<Promise<void>>([thisQueue, ...childQueues])
   }
 
-  private static runMiddleware(
+  private static async startLifecycle(
     middleware: Middleware[],
-    ctx: Context
-  ): Callback<void>[] {
-    return middleware.map((fn) => {
-      const runner = castLifecycleObjectMiddlewareToGenerator(fn)(ctx)
-      let beforeRender = true
-      return async () => {
-        const ret = runner.next()
-        if (isThenable(ret)) {
-          await ret
-        } else if (
-          isThenable((ret as IteratorResult<Promise<void> | void>).value)
-        ) {
-          await (ret as IteratorResult<Promise<void> | void>).value
-        }
-        if (beforeRender) {
-          // this should only block the sequence for the first call,
-          // and allow cleanup after the redirect
-          beforeRender = false
-          return typeof ctx._redirect === 'undefined'
-        } else {
-          return true
-        }
+    ctx: Context & IContext
+  ): Promise<Lifecycle[]> {
+    const downstream: Lifecycle[] = []
+
+    for (const fn of middleware) {
+      if (typeof ctx._redirect !== 'undefined') {
+        break
       }
-    })
+      const lifecycle = await fn(ctx)
+      if (lifecycle) {
+        if (lifecycle.beforeRender) await lifecycle.beforeRender()
+        downstream.push(lifecycle)
+      }
+    }
+
+    return downstream
   }
 }
