@@ -1,7 +1,14 @@
 import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  Route,
+  Lifecycle
+} from '@profiscience/knockout-contrib-router'
 
 import { componentsPlugin } from './index'
+
+Route.usePlugin(componentsPlugin)
 
 describe('router.plugins.components', () => {
   test('registers components before render', async () => {
@@ -11,36 +18,29 @@ describe('router.plugins.components', () => {
     const helloWorldComponent = { template: 'Hello, World!' }
     const queue = jest.fn()
     const ctx = { queue: queue as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       components: () => ({
         'hello-world': Promise.resolve(helloWorldComponent)
       })
-    }
-    const middleware = componentsPlugin(routeConfig)
-    const lifecycle = middleware(ctx) as IterableIterator<void>
+    })
+    const [middleware] = route.middleware
+    const lifecycle = middleware(ctx) as Lifecycle
 
-    lifecycle.next()
+    if (lifecycle.beforeRender) lifecycle.beforeRender()
     await queue.mock.calls[0][0]
     // beforeRender
-    expect(ko.components.register).lastCalledWith('hello-world', helloWorldComponent)
+    expect(ko.components.register).lastCalledWith(
+      'hello-world',
+      helloWorldComponent
+    )
 
-    lifecycle.next()
-    // afterRender
-
-    lifecycle.next()
+    if (lifecycle.beforeDispose) lifecycle.beforeDispose()
     // beforeDispose
     expect(ko.components.unregister).lastCalledWith('hello-world')
   })
 
-  test('doesn\'t blow up when not used', () => {
-    const ctx = {} as Context & IContext
-    const routeConfig: IRouteConfig = {}
-    const middleware = componentsPlugin(routeConfig)
-    const lifecycle = middleware(ctx) as IterableIterator<void>
-
-    lifecycle.next()
-    lifecycle.next()
-    lifecycle.next()
-    lifecycle.next()
+  test("doesn't blow up when not used", () => {
+    const route = new Route('/', {})
+    expect(route.middleware.length).toBe(0)
   })
 })

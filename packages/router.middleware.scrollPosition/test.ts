@@ -8,24 +8,33 @@ beforeEach(() => {
 describe('router.middleware.scrollPosition', () => {
   test('sets the scroll position to the top after render', () => {
     const ctx: Context & IContext = {} as Context & IContext
-    const lifecycle = createScrollPositionMiddleware()(ctx)
+    const lifecycle = createScrollPositionMiddleware()(ctx) as {
+      beforeRender: any
+      afterRender: any
+      beforeDispose: any
+    }
 
-    lifecycle.next()
     expect(window.scrollTo).not.toHaveBeenCalled()
 
-    lifecycle.next()
+    lifecycle.afterRender()
     expect(window.scrollTo).lastCalledWith(0, 0)
   })
 
   test('persists the scroll position to history.state before dispose', () => {
     const ctx: Context & IContext = {} as Context & IContext
-    const lifecycle = createScrollPositionMiddleware()(ctx)
+    const lifecycle = createScrollPositionMiddleware()(ctx) as {
+      beforeRender: any
+      afterRender: any
+      beforeDispose: any
+    }
 
-    lifecycle.next()
-    lifecycle.next();
-    (window as any).scrollY = 500
+    const _window = window as any
 
-    lifecycle.next()
+    lifecycle.afterRender()
+
+    _window.scrollY = 500
+
+    lifecycle.beforeDispose()
 
     expect(history.state.scrollPosition).toBe(500)
   })
@@ -33,10 +42,13 @@ describe('router.middleware.scrollPosition', () => {
   test('restores scroll position from history.state, disregarding hash if any', () => {
     history.replaceState({ scrollPosition: 999 }, document.title, '/#!/#foo')
     const ctx: Context & IContext = {} as Context & IContext
-    const lifecycle = createScrollPositionMiddleware()(ctx)
+    const lifecycle = createScrollPositionMiddleware()(ctx) as {
+      beforeRender: any
+      afterRender: any
+      beforeDispose: any
+    }
 
-    lifecycle.next()
-    lifecycle.next()
+    lifecycle.afterRender()
 
     expect(window.scrollTo).lastCalledWith(0, 999)
   })
@@ -51,10 +63,13 @@ describe('router.middleware.scrollPosition', () => {
     document.getElementById = jest.fn(() => el)
 
     const ctx: Context & IContext = {} as Context & IContext
-    const lifecycle = createScrollPositionMiddleware()(ctx)
+    const lifecycle = createScrollPositionMiddleware()(ctx) as {
+      beforeRender: any
+      afterRender: any
+      beforeDispose: any
+    }
 
-    lifecycle.next()
-    lifecycle.next()
+    lifecycle.afterRender()
 
     expect(document.getElementById).lastCalledWith('foo')
     expect(window.scrollTo).lastCalledWith(0, el.offsetTop)
@@ -66,10 +81,13 @@ describe('router.middleware.scrollPosition', () => {
     console.warn = jest.fn()
 
     const ctx: Context & IContext = {} as Context & IContext
-    const lifecycle = createScrollPositionMiddleware()(ctx)
+    const lifecycle = createScrollPositionMiddleware()(ctx) as {
+      beforeRender: any
+      afterRender: any
+      beforeDispose: any
+    }
 
-    lifecycle.next()
-    lifecycle.next()
+    lifecycle.afterRender()
 
     expect(console.warn).toBeCalled()
   })

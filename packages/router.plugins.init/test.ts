@@ -1,12 +1,17 @@
 /* tslint:disable max-classes-per-file */
 
-import { Context, Route, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  Route,
+  IContext,
+  IRouteConfig,
+  Lifecycle
+} from '@profiscience/knockout-contrib-router'
 import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
 import { initializerPlugin, INITIALIZED } from './index'
 
-Route
-  .usePlugin(componentPlugin)
+Route.usePlugin(componentPlugin)
   // must come after component plugin. b/c of this can not be registered with global middleware.
   .usePlugin(initializerPlugin)
 
@@ -27,13 +32,12 @@ describe('router.plugins.init', () => {
     })
 
     const queue = jest.fn()
-    const routeConfig: IRouteConfig = { component: getComponent }
-    const route = new Route('/', routeConfig)
-    const ctx = { queue: queue as any, route: {} } as Context & IContext
+    const route = new Route('/', { component: getComponent })
+    const ctx = { queue: queue as any, route } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx) as IterableIterator<void>
-      if (lifecycle) lifecycle.next()
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
     }
 
     await Promise.all(queue.mock.calls.map(([p]) => p))
@@ -57,13 +61,12 @@ describe('router.plugins.init', () => {
     })
 
     const queue = jest.fn()
-    const routeConfig: IRouteConfig = { component: getComponent }
-    const route = new Route('/', routeConfig)
-    const ctx = { queue: queue as any, route: {} } as Context & IContext
+    const route = new Route('/', { component: getComponent })
+    const ctx = { queue: queue as any, route } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx) as IterableIterator<void>
-      if (lifecycle) lifecycle.next()
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
     }
 
     await Promise.all(queue.mock.calls.map(([p]) => p))
@@ -73,38 +76,36 @@ describe('router.plugins.init', () => {
     expect(spy).toBeCalledWith([promise])
   })
 
-  test('doesn\'t blow up when no component', async () => {
+  test("doesn't blow up when no component", async () => {
     const queue = jest.fn()
-    const routeConfig: IRouteConfig = {}
-    const route = new Route('/', routeConfig)
-    const ctx = { queue: queue as any, route: {} } as Context & IContext
+    const route = new Route('/', {})
+    const ctx = { queue: queue as any, route } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx) as IterableIterator<void>
-      if (lifecycle) lifecycle.next()
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
     }
 
     expect(queue).not.toBeCalled()
   })
 
-  test('doesn\'t blow up when no viewModel', async () => {
+  test("doesn't blow up when no viewModel", async () => {
     const queue = jest.fn()
     const getComponent = () => ({
       template: Promise.resolve({ default: 'Hello, World!' })
     })
-    const routeConfig: IRouteConfig = { component: getComponent }
-    const route = new Route('/', routeConfig)
+    const route = new Route('/', { component: getComponent })
     const ctx = { queue: queue as any, route: {} } as Context & IContext
 
     expect(() => {
       for (const middleware of route.middleware) {
-        const lifecycle = middleware(ctx) as IterableIterator<void>
-        if (lifecycle) lifecycle.next()
+        const lifecycle = middleware(ctx) as Lifecycle
+        if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
       }
     }).not.toThrow()
   })
 
-  test('doesn\'nt blow up with defined properties w/ undefined values (see comment in test file)', async () => {
+  test("doesn'nt blow up with defined properties w/ undefined values (see comment in test file)", async () => {
     /**
      * It's not only possible, but common to have a property whose descriptor has been defined, but
      * whose value is undefined. In this case, Object.keys and the like *still* return those property descriptors.
@@ -121,21 +122,24 @@ describe('router.plugins.init', () => {
     const queue = jest.fn()
     const component = {
       template: 'Hello, World!',
-      viewModel: class { public foo = undefined }
+      viewModel: class {
+        public foo = undefined
+      }
     }
-    const routeConfig: IRouteConfig = { component }
-    const route = new Route('/', routeConfig)
-    const ctx = { queue: queue as any, route: {} } as Context & IContext
+    const route = new Route('/', { component })
+    const ctx = { queue: queue as any, route } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx) as IterableIterator<void>
-      if (lifecycle) lifecycle.next()
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
     }
 
-    await expect(Promise.all(queue.mock.calls.map(([p]) => p))).resolves.toBeTruthy()
+    await expect(
+      Promise.all(queue.mock.calls.map(([p]) => p))
+    ).resolves.toBeTruthy()
   })
 
-  test('doesn\'nt blow up with null props', async () => {
+  test("doesn'nt blow up with null props", async () => {
     /**
      * `TypeError: Cannot read property 'foo` of null`
      */
@@ -143,17 +147,20 @@ describe('router.plugins.init', () => {
     const queue = jest.fn()
     const component = {
       template: 'Hello, World!',
-      viewModel: class { public foo = null }
+      viewModel: class {
+        public foo = null
+      }
     }
-    const routeConfig: IRouteConfig = { component }
-    const route = new Route('/', routeConfig)
-    const ctx = { queue: queue as any, route: {} } as Context & IContext
+    const route = new Route('/', { component })
+    const ctx = { queue: queue as any, route } as Context & IContext
 
     for (const middleware of route.middleware) {
-      const lifecycle = middleware(ctx) as IterableIterator<void>
-      if (lifecycle) lifecycle.next()
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
     }
 
-    await expect(Promise.all(queue.mock.calls.map(([p]) => p))).resolves.toBeTruthy()
+    await expect(
+      Promise.all(queue.mock.calls.map(([p]) => p))
+    ).resolves.toBeTruthy()
   })
 })

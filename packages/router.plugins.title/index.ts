@@ -1,4 +1,10 @@
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig,
+  RoutePlugin,
+  Lifecycle
+} from '@profiscience/knockout-contrib-router'
 
 type MaybePromise<T> = T | Promise<T>
 
@@ -12,17 +18,18 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function createTitlePlugin(compose = (ts: string[]) => ts.join(' | ')) {
+export function createTitlePlugin(
+  compose = (ts: string[]) => ts.join(' | ')
+): RoutePlugin {
   const titles: MaybePromise<string>[] = []
 
   return ({ title }: IRouteConfig) => {
-    return function*(ctx: Context & IContext): IterableIterator<void> {
-      let async = false
+    if (!title) return
 
-      yield
-      /* afterRender */
+    let async = false
 
-      if (title) {
+    return (ctx: Context & IContext) => ({
+      afterRender() {
         if (typeof title === 'function') {
           const t = title(ctx)
           if (t && typeof (t as Promise<string>).then === 'function') {
@@ -33,20 +40,18 @@ export function createTitlePlugin(compose = (ts: string[]) => ts.join(' | ')) {
         } else {
           titles.push(title)
         }
-      }
 
-      if (!ctx.$child) {
-        if (async) {
-          Promise.all(titles).then((ts) => document.title = compose(ts))
-        } else {
-          document.title = compose(titles as string[])
+        if (!ctx.$child) {
+          if (async) {
+            Promise.all(titles).then((ts) => (document.title = compose(ts)))
+          } else {
+            document.title = compose(titles as string[])
+          }
         }
+      },
+      beforeDispose() {
+        titles.pop()
       }
-
-      yield
-      /* beforeDispose */
-
-      if (title) titles.pop()
-    }
+    })
   }
 }

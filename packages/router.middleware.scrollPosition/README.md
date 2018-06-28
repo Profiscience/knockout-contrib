@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-router-middleware-scroll-position
+# router.middleware.scrollPosition
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,31 +8,32 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.middleware.scrollPosition
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router.middleware.scrollPosition
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.middleware.scrollPosition&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router.middleware.scrollPosition
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.middleware.scrollPosition&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router.middleware.scrollPosition
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router-middleware-scroll-position
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router-middleware-scroll-position.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-middleware-scroll-position&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-middleware-scroll-position.svg?maxAge=2592000
 
-**NOTE:** It is recommended to use the [@profiscience/knockout-contrib-router-middleware metapackage](../router.middleware)
+Add support for:
 
-Add support for restoring scroll position on back-button navigation, and scrolling to anchors or the top on forward navigation.
+- restoring scroll position on back-button navigation
+- scrolling to anchors (#hash), or the top on forward navigation
 
 ## Usage
 
 ```typescript
-import { Router } from '@profiscience/knockout-contrib-router'
-import { createScrollPositionMiddleware } from '@profiscience/knockout-contrib-router-middleware'
+import {
+  Router,
+  createScrollPositionMiddleware
+} from '@profiscience/knockout-contrib/router'
 
-Router.use(createScrollPositionMiddleware({
-  // optionally supply a custom scroll function (add smooth scrolling, use Velocity, etc.)
-  scrollTo(x, y) { ... }
-}))
+Router.use(
+  createScrollPositionMiddleware({
+    // optionally supply a custom scroll function (add smooth scrolling, use Velocity, etc.)
+    scrollTo(x, y) { ... }
+  })
+)
 ```

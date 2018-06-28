@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-router-plugins-component
+# router.plugins.component
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,32 +8,21 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.component
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router.plugins.component
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.component&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router.plugins.component
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.component&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router.plugins.component
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router-plugins-component
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router-plugins-component.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-plugins-component&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-plugins-component.svg?maxAge=2592000
 
 Sets the component for a route. Intended for use with dynamic imports for intuitive code-splitting/lazy-loading of views.
 
-## Installation
-
-```bash
-$ yarn add @profiscience/knockout-contrib-router@next @profiscience/knockout-contrib-router-plugins-component
-```
-
 ## Usage
 
 ```typescript
-import { Route } from '@profiscience/knockout-contrib-router'
-import { componentPlugin } from '@profiscience/knockout-contrib-router-plugin-component'
+import { Route, componentPlugin } from '@profiscience/knockout-contrib/router'
 
 Route.usePlugin(componentPlugin)
 
@@ -69,7 +58,7 @@ new Route('/', {
 })
 ```
 
-**NOTE**: Custom component loaders will __NOT__ be used.
+**NOTE**: Custom component loaders will **NOT** be used.
 
 **NOTE**: Non-`class` viewModels are supported, but not recommended. See the caveats section below.
 
@@ -113,11 +102,11 @@ Several normalization passes are done on the supplied configuration to attempt t
 type MaybePromise<T> = T | Promise<T>
 type MaybeDefaultExport<T> = T | { default: T }
 type MaybeAccessor<A, T> = T | ((A) => T)
-type MaybeLazy<T extends {}> = MaybePromise<{
-  [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>>
-}>
+type MaybeLazy<T extends {}> = MaybePromise<
+  { [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>> }
+>
 interface IRoutedViewModelConstructor {
-  new(ctx: Context & IContext): any
+  new (ctx: Context & IContext): any
 }
 type IAnonymousComponent = {
   name?: string
@@ -129,7 +118,10 @@ interface IRouteConfig {
 }
 type IRouteComponentConfig =
   | MaybeAccessor<Context & IContext, MaybePromise<string>>
-  | MaybeAccessor<Context & IContext, MaybePromise<MaybeLazy<IAnonymousComponent>>>
+  | MaybeAccessor<
+      Context & IContext,
+      MaybePromise<MaybeLazy<IAnonymousComponent>>
+    >
 ```
 
 ## Caveats / Subtleties
@@ -173,3 +165,4 @@ You are seeing this warning because you have provided a a) viewModel that is som
 import { disableUninstantiableViewModelWarning } from '@profiscience/knockout-contrib-router-plugins-component'
 
 disableUninstantiableViewModelWarning()
+```

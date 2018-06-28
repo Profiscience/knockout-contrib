@@ -34,13 +34,12 @@ Router.setConfig({
   hashbang: true
 })
 
-Router.use(createScrollPositionMiddleware({
-  scrollTo: (x, y) => window.scroll({ top: y, behavior: 'smooth' })
-}))
+Router.use(
+  createScrollPositionMiddleware({
+    scrollTo: (x, y) => window.scroll({ top: y, behavior: 'smooth' })
+  })
+)
 
-Router.useRoutes([
-  new Route('/', 'view'),
-  new Route('/2', 'view')
-])
+Router.useRoutes([new Route('/', 'view'), new Route('/2', 'view')])
 
 ko.applyBindings()

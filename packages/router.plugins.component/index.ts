@@ -1,5 +1,10 @@
 import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig,
+  LifecycleMiddleware
+} from '@profiscience/knockout-contrib-router'
 
 let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
 
@@ -54,11 +59,14 @@ export interface IRoutedComponentInstance {
  */
 export type IRouteComponentConfig =
   | MaybeAccessor<Context & IContext, MaybePromise<INamedComponent>>
-  | MaybeAccessor<Context & IContext, MaybePromise<MaybeDefaultExport<MaybeLazy<IAnonymousComponent>>>>
+  | MaybeAccessor<
+      Context & IContext,
+      MaybePromise<MaybeDefaultExport<MaybeLazy<IAnonymousComponent>>>
+    >
 
-export type MaybeLazy<T extends {}> = MaybePromise<{
-  [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>>
-}>
+export type MaybeLazy<T extends {}> = MaybePromise<
+  { [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>> }
+>
 
 export type INamedComponent = string
 
@@ -76,7 +84,7 @@ export type IAnonymousComponent = {
  * See @profiscience/knockout-contrib-router for context API
  */
 export interface IRoutedViewModelConstructor {
-  new(ctx: Context & IContext): any
+  new (ctx: Context & IContext): any
 }
 
 const uniqueComponentNames = (function*() {
@@ -85,60 +93,90 @@ const uniqueComponentNames = (function*() {
 })()
 
 // @TODO (try to) make this type-safe, i.e. know it's void if routeConfig.component is void, and middleware if not
-export function componentPlugin({ component: componentAccessor }: IRouteConfig): void | LifecycleGeneratorMiddleware {
+export function componentPlugin({
+  component: componentAccessor
+}: IRouteConfig): void | LifecycleMiddleware {
   if (!componentAccessor) return
 
-  let componentName: string
+  return (ctx) => {
+    let isNamedComponent: boolean
 
-  return function*(ctx) {
-    let viewModelInstance: any
-    let resolveComponent: (componentInstance: IRoutedComponentInstance) => void
-    ctx.component = new Promise((_resolve) => resolveComponent = _resolve)
+    return {
+      beforeRender() {
+        let _resolve: (c: IRoutedComponentInstance) => void
+        const resolveComponent = (
+          name: string,
+          instance?: IRoutedComponentInstance
+        ) => {
+          const c = {
+            name,
+            ...(instance || {})
+          }
+          ctx.route.component = name
+          ctx.component = c
+          _resolve(c)
+        }
+        let viewModelInstance: any
+        ctx.component = new Promise((r) => (_resolve = r))
 
-    ctx.queue(
-      normalizeConfig(ctx, componentAccessor)
-        .then(async (normalizedConfig) => {
-          // named component
-          if (typeof normalizedConfig === 'string') {
-            componentName = normalizedConfig
-            resolveComponent({ name: componentName })
-            if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.') // tslint:disable-line max-line-length no-console
-          // anonymous component
-          } else {
-            componentName = normalizedConfig.name || uniqueComponentNames.next().value
+        ctx.queue(
+          normalizeConfig(ctx, componentAccessor).then(
+            async (normalizedConfig) => {
+              // named component
+              if (typeof normalizedConfig === 'string') {
+                isNamedComponent = true
+                resolveComponent(normalizedConfig)
+                if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
+                  // tslint:disable-next-line:no-console
+                  console.warn(
+                    '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.'
+                  )
+                }
+              } else {
+                // anonymous component
+                const componentName =
+                  normalizedConfig.name || uniqueComponentNames.next().value
 
-            const routedComponentInstance: IRoutedComponentInstance = { name: componentName }
-            const templateConfig = normalizedConfig.template
-            let viewModelConfig: any
+                const routedComponentInstance: IRoutedComponentInstance = {
+                  name: componentName
+                }
+                const templateConfig = normalizedConfig.template
+                let viewModelConfig: any
 
-            if (normalizedConfig.viewModel) {
-              try {
-                viewModelInstance = new normalizedConfig.viewModel(ctx)
-                viewModelConfig = { instance: viewModelInstance }
-                routedComponentInstance.viewModel = viewModelInstance
-              } catch (e) {
-                viewModelConfig = normalizedConfig.viewModel
-                if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) console.warn('[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.') // tslint:disable-line no-console max-line-length
+                if (normalizedConfig.viewModel) {
+                  try {
+                    viewModelInstance = new normalizedConfig.viewModel(ctx)
+                    viewModelConfig = { instance: viewModelInstance }
+                    routedComponentInstance.viewModel = viewModelInstance
+                  } catch (e) {
+                    viewModelConfig = normalizedConfig.viewModel
+                    if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
+                      // tslint:disable-next-line:no-console
+                      console.warn(
+                        '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.'
+                      )
+                    }
+                  }
+                }
+
+                resolveComponent(componentName, routedComponentInstance)
+
+                ko.components.register(componentName, {
+                  synchronous: true,
+                  template: templateConfig,
+                  viewModel: viewModelConfig
+                })
               }
             }
-
-            resolveComponent(routedComponentInstance)
-            ctx.component = routedComponentInstance
-
-            ko.components.register(componentName, {
-              synchronous: true,
-              template: templateConfig,
-              viewModel: viewModelConfig
-            })
-          }
-
-          ctx.route.component = componentName
-        })
-    )
-
-    yield // afterRender
-
-    ko.components.unregister(ctx.route.component)
+          )
+        )
+      },
+      afterRender() {
+        if (!isNamedComponent) {
+          ko.components.unregister(ctx.route.component)
+        }
+      }
+    }
   }
 }
 
@@ -165,13 +203,11 @@ async function normalizeConfig(
   // anonymous components, may have promised values
   const ret = {} as any
   await Promise.all(
-    Object
-      .keys(obj)
-      .map(async (k) => {
-        const v = await (obj as any)[k]
-        // property default exports
-        ret[k] = typeof v.default !== 'undefined' ? v.default : v
-      })
+    Object.keys(obj).map(async (k) => {
+      const v = await (obj as any)[k]
+      // property default exports
+      ret[k] = typeof v.default !== 'undefined' ? v.default : v
+    })
   )
 
   return ret

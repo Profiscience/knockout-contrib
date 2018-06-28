@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-router-plugins-init
+# router.plugins.init
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,29 +8,16 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.init
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router.plugins.init
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.init&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router.plugins.init
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.init&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router.plugins.init
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router-plugins-init
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router-plugins-init.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-plugins-init&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-plugins-init.svg?maxAge=2592000
 
-Works with [router.plugins.component](../router.plugins.component) to declaratively initialize a viewModel before rendering. Used by [model.builders.data](../model.builders.data).
-
-## Installation
-
-```bash
-$ yarn add \
-  @profiscience/knockout-contrib-router@next \
-  @profiscience/knockout-contrib-router-plugins-component \
-  @profiscience/knockout-contrib-router-plugins-init
-```
+Works with [router.plugins.component](../router.plugins.component) to declaratively initialize a viewModel before rendering.
 
 ## Usage
 
@@ -39,18 +26,21 @@ $ yarn add \
 - Profit :moneybag:
 
 ```typescript
-import { Route } from '@profiscience/knockout-contrib-router'
-import { componentPlugin } from '@profiscience/knockout-contrib-router-plugin-component'
-import { initializerPlugin, INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
+import {
+  Route,
+  componentPlugin,
+  initializerPlugin,
+  INITIALIZED
+} from '@profiscience/knockout-contrib/router'
 
-Route
-  .usePlugin(componentPlugin)
-  .usePlugin(initializerPlugin) // **MUST** come after component plugin
+Route.usePlugin(componentPlugin).usePlugin(initializerPlugin) // **MUST** come after component plugin
 
 class DataModel {
   public [INITIALIZED] = this.init()
 
-  public async init() { /* do some async init stuff */ }
+  public async init() {
+    /* do some async init stuff */
+  }
 }
 
 class ViewModel {
@@ -64,7 +54,9 @@ class ViewModel {
    */
   public data = new DataModel()
 
-  async init() { /* do some async init stuff */ }
+  async init() {
+    /* do some async init stuff */
+  }
 }
 ```
 

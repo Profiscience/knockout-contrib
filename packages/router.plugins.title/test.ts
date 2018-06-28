@@ -1,58 +1,65 @@
-import { Context, IContext, IRouteConfig, LifecycleGeneratorMiddleware } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig,
+  Lifecycle,
+  Route
+} from '@profiscience/knockout-contrib-router'
 
 import { createTitlePlugin } from './index'
 
+Route.usePlugin(createTitlePlugin())
+
 describe('router.plugins.title', () => {
   test('sets the title after render and reverts after dispose', () => {
-    const titlePlugin = createTitlePlugin()
+    // tslint:disable:no-shadowed-variable
+    // ^ This is erroneously being thrown below despite the code blocks
 
-    { // page 1
+    {
+      // page 1
       const ctx = {} as Context & IContext
-      const routeConfig: IRouteConfig = { title: 'foo' }
-      const middleware = titlePlugin(routeConfig) as LifecycleGeneratorMiddleware
-      const lifecycle = middleware(ctx)
+      const route = new Route('/', { title: 'foo' })
+      const [middleware] = route.middleware
+      const lifecycle = middleware(ctx) as Lifecycle
 
-      lifecycle.next()
-      lifecycle.next()
+      if (lifecycle.afterRender) lifecycle.afterRender()
       expect(document.title).toBe('foo')
-      lifecycle.next()
-      lifecycle.next()
+      if (lifecycle.beforeDispose) lifecycle.beforeDispose()
     }
 
-    { // page 2
+    {
+      // page 2
       const ctx = {} as Context & IContext
-      const routeConfig: IRouteConfig = { title: 'bar' }
-      const middleware = titlePlugin(routeConfig) as LifecycleGeneratorMiddleware
-      const lifecycle = middleware(ctx)
+      const route = new Route('/', { title: 'bar' })
+      const [middleware] = route.middleware
+      const lifecycle = middleware(ctx) as Lifecycle
 
-      lifecycle.next()
-      lifecycle.next()
+      if (lifecycle.afterRender) lifecycle.afterRender()
       expect(document.title).toBe('bar')
-      lifecycle.next()
-      lifecycle.next()
+      if (lifecycle.beforeDispose) lifecycle.beforeDispose()
     }
   })
 
   test('title works with sync getter function', () => {
     const ctx = {} as Context & IContext
-    const routeConfig: IRouteConfig = { title: () => 'foo' }
-    const middleware = createTitlePlugin()(routeConfig) as LifecycleGeneratorMiddleware
-    const lifecycle = middleware(ctx)
+    const route = new Route('/', { title: () => 'foo' })
+    const [middleware] = route.middleware
+    const lifecycle = middleware(ctx) as Lifecycle
 
-    lifecycle.next()
-    lifecycle.next()
+    if (lifecycle.afterRender) lifecycle.afterRender()
+    if (lifecycle.beforeDispose) lifecycle.beforeDispose()
     expect(document.title).toBe('foo')
   })
 
   test('title works with async getter function', async () => {
     const queue = jest.fn()
     const ctx = { queue: queue as any } as Context & IContext
-    const routeConfig: IRouteConfig = { title: () => Promise.resolve('foo') }
-    const middleware = createTitlePlugin()(routeConfig) as LifecycleGeneratorMiddleware
-    const lifecycle = middleware(ctx)
+    const route = new Route('/', { title: () => Promise.resolve('foo') })
+    const [middleware] = route.middleware
+    const lifecycle = middleware(ctx) as Lifecycle
 
-    lifecycle.next()
-    lifecycle.next()
+    if (lifecycle.afterRender) lifecycle.afterRender()
+    if (lifecycle.beforeDispose) lifecycle.beforeDispose()
 
     await Promise.all(queue.mock.calls.map(([p]) => p))
 
@@ -60,35 +67,28 @@ describe('router.plugins.title', () => {
   })
 
   test('composes nested titles using | by default', () => {
-    const titlePlugin = createTitlePlugin()
-
     const childCtx = {} as Context & IContext
-    const parentCtx = { $child: childCtx, $children: [childCtx] } as Context & IContext
-    const childRouteConfig: IRouteConfig = { title: 'child' }
-    const parentRouteConfig: IRouteConfig = { title: 'parent' }
-    const childMiddleware = titlePlugin(childRouteConfig) as LifecycleGeneratorMiddleware
-    const parentMiddleware = titlePlugin(parentRouteConfig) as LifecycleGeneratorMiddleware
+    const parentCtx = { $child: childCtx, $children: [childCtx] } as Context &
+      IContext
+    const childRoute = new Route('/', { title: 'child' })
+    const parentRoute = new Route('/', { title: 'parent' })
+    const [childMiddleware] = childRoute.middleware
+    const [parentMiddleware] = parentRoute.middleware
+    const parentLifecycle = parentMiddleware(parentCtx) as Lifecycle
+    const childLifecycle = childMiddleware(childCtx) as Lifecycle
 
-    const parentLifecycle = parentMiddleware(parentCtx)
-    const childLifecycle = childMiddleware(childCtx)
-
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
+    if (parentLifecycle.afterRender) parentLifecycle.afterRender()
+    if (childLifecycle.afterRender) childLifecycle.afterRender()
     expect(document.title).toBe('parent | child')
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
+    if (childLifecycle.beforeDispose) childLifecycle.beforeDispose()
+    if (parentLifecycle.beforeDispose) parentLifecycle.beforeDispose()
   })
 
   test('composes async getters in the correct order', async () => {
     function createAsyncGetter(v: string, seconds: number) {
-      return () => new Promise<string>((resolve) => setTimeout(() => resolve(v), seconds))
+      return () =>
+        new Promise<string>((resolve) => setTimeout(() => resolve(v), seconds))
     }
-
-    const titlePlugin = createTitlePlugin()
 
     const childCtxQueue = jest.fn()
     const childCtx = {
@@ -100,69 +100,66 @@ describe('router.plugins.title', () => {
       $child: childCtx,
       $children: [childCtx]
     } as Context & IContext
-    const childRouteConfig: IRouteConfig = { title: createAsyncGetter('child', 1000) }
-    const parentRouteConfig: IRouteConfig = { title: createAsyncGetter('parent', 500) }
-    const childMiddleware = titlePlugin(childRouteConfig) as LifecycleGeneratorMiddleware
-    const parentMiddleware = titlePlugin(parentRouteConfig) as LifecycleGeneratorMiddleware
-
-    const parentLifecycle = parentMiddleware(parentCtx)
-    const childLifecycle = childMiddleware(childCtx)
+    const childRoute = new Route('/', {
+      title: createAsyncGetter('child', 1000)
+    })
+    const parentRoute = new Route('/', {
+      title: createAsyncGetter('parent', 500)
+    })
+    const [childMiddleware] = childRoute.middleware
+    const [parentMiddleware] = parentRoute.middleware
+    const parentLifecycle = parentMiddleware(parentCtx) as Lifecycle
+    const childLifecycle = childMiddleware(childCtx) as Lifecycle
 
     jest.useFakeTimers()
 
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
+    if (parentLifecycle.afterRender) parentLifecycle.afterRender()
+    if (childLifecycle.afterRender) childLifecycle.afterRender()
 
     jest.runAllTimers()
-    await Promise.all([
-      ...childCtxQueue.mock.calls,
-      ...parentCtxQueue.mock.calls
-    ].map(([p]) => p))
+    await Promise.all(
+      [...childCtxQueue.mock.calls, ...parentCtxQueue.mock.calls].map(
+        ([p]) => p
+      )
+    )
 
     expect(document.title).toBe('parent | child')
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
+
+    if (childLifecycle.beforeDispose) childLifecycle.beforeDispose()
+    if (parentLifecycle.beforeDispose) parentLifecycle.beforeDispose()
   })
 
   test('can set custom composer', () => {
-    const titlePlugin = createTitlePlugin((ts) => `prefix | ${ts.join(' >> ')} | suffix`)
+    ;(Route as any).plugins = []
+
+    const customTitlePlugin = createTitlePlugin(
+      (ts) => `prefix | ${ts.join(' >> ')} | suffix`
+    )
+
+    Route.usePlugin(customTitlePlugin)
 
     const childCtx = {} as Context & IContext
-    const parentCtx = { $child: childCtx, $children: [childCtx] } as Context & IContext
-    const childRouteConfig: IRouteConfig = { title: 'child' }
-    const parentRouteConfig: IRouteConfig = { title: 'parent' }
-    const childMiddleware = titlePlugin(childRouteConfig) as LifecycleGeneratorMiddleware
-    const parentMiddleware = titlePlugin(parentRouteConfig) as LifecycleGeneratorMiddleware
+    const parentCtx = { $child: childCtx, $children: [childCtx] } as Context &
+      IContext
+    const childRoute = new Route('/', { title: 'child' })
+    const parentRoute = new Route('/', { title: 'parent' })
+    const [childMiddleware] = childRoute.middleware
+    const [parentMiddleware] = parentRoute.middleware
 
-    const parentLifecycle = parentMiddleware(parentCtx)
-    const childLifecycle = childMiddleware(childCtx)
+    const parentLifecycle = parentMiddleware(parentCtx) as Lifecycle
+    const childLifecycle = childMiddleware(childCtx) as Lifecycle
 
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
+    if (parentLifecycle.afterRender) parentLifecycle.afterRender()
+    if (childLifecycle.afterRender) childLifecycle.afterRender()
+
     expect(document.title).toBe('prefix | parent >> child | suffix')
-    childLifecycle.next()
-    parentLifecycle.next()
-    childLifecycle.next()
-    parentLifecycle.next()
+
+    if (childLifecycle.beforeDispose) childLifecycle.beforeDispose()
+    if (parentLifecycle.beforeDispose) parentLifecycle.beforeDispose()
   })
 
-  test('doesn\'t blow up when not used', () => {
-    const ctx = {} as Context & IContext
-    const routeConfig: IRouteConfig = {}
-    const middleware = createTitlePlugin()(routeConfig) as LifecycleGeneratorMiddleware
-    const lifecycle = middleware(ctx)
-
-    lifecycle.next()
-    lifecycle.next()
-    lifecycle.next()
-    lifecycle.next()
-
-    expect(document.title).toBe('')
+  test("doesn't blow up when not used", () => {
+    const middleware = createTitlePlugin()({})
+    expect(middleware).toBeUndefined()
   })
 })

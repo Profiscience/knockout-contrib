@@ -1,5 +1,10 @@
 import * as ko from 'knockout'
-import { Context, IContext, IRouteConfig, Middleware } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig,
+  LifecycleMiddleware
+} from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
@@ -11,37 +16,42 @@ declare module '@profiscience/knockout-contrib-router' {
 export type LazyComponentsAccessor = () => ILazyComponents
 
 export interface ILazyComponents {
-  [k: string]: Promise<{ template: string, viewModel?: KnockoutComponentTypes.ViewModelFunction }>
+  [k: string]: Promise<{
+    template: string
+    viewModel?: ko.components.ViewModelConstructor
+  }>
 }
 
 interface IComponentMap {
   [k: string]: {
-    template: string,
-    viewModel?: KnockoutComponentTypes.ViewModelFunction
+    template: string
+    viewModel?: ko.components.ViewModelConstructor
   }
 }
 
-export function componentsPlugin({ components }: IRouteConfig): Middleware {
-  return function*(ctx: Context & IContext): IterableIterator<void> {
-    if (!components) return
+export function componentsPlugin({
+  components
+}: IRouteConfig): LifecycleMiddleware | void {
+  if (!components) return
 
+  return (ctx: Context & IContext) => {
     let componentNames: string[] = []
 
-    /* beforeRender */
-    ctx.queue(fetchComponents(components).then((componentMap) => {
-      componentNames = Object.keys(componentMap)
-      componentNames.forEach((componentName) => {
-        ko.components.register(componentName, componentMap[componentName])
-      })
-    }))
-
-    yield
-    /* afterRender */
-
-    yield
-    /* beforeDispose */
-
-    componentNames.forEach((c) => ko.components.unregister(c))
+    return {
+      beforeRender() {
+        ctx.queue(
+          fetchComponents(components).then((componentMap) => {
+            componentNames = Object.keys(componentMap)
+            componentNames.forEach((componentName) => {
+              ko.components.register(componentName, componentMap[componentName])
+            })
+          })
+        )
+      },
+      beforeDispose() {
+        componentNames.forEach((c) => ko.components.unregister(c))
+      }
+    }
   }
 }
 
@@ -49,12 +59,10 @@ async function fetchComponents(componentsAccessor: LazyComponentsAccessor) {
   const lazyComponents = componentsAccessor()
   const components: IComponentMap = {}
   await Promise.all(
-    Object
-      .keys(lazyComponents)
-      .map(async (componentName) => {
-        const componentConfig = await lazyComponents[componentName]
-        components[componentName] = componentConfig
-      })
+    Object.keys(lazyComponents).map(async (componentName) => {
+      const componentConfig = await lazyComponents[componentName]
+      components[componentName] = componentConfig
+    })
   )
   return components
 }

@@ -1,72 +1,78 @@
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig,
+  Route
+} from '@profiscience/knockout-contrib-router'
 
 import { redirectPlugin } from './index'
+
+Route.usePlugin(redirectPlugin)
 
 describe('router.plugins.redirect', () => {
   test('calls ctx.redirect if function returns string', async () => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       redirect() {
         return '//'
       }
-    }
-    const middleware = redirectPlugin(routeConfig)
+    })
+    const [middleware] = route.middleware
     await middleware(ctx)
     expect(ctx.redirect).lastCalledWith('//')
   })
 
   test('does not call ctx.redirect if void', async () => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       redirect() {
         return
       }
-    }
-    const middleware = redirectPlugin(routeConfig)
+    })
+    const [middleware] = route.middleware
     await middleware(ctx)
     expect(ctx.redirect).not.toBeCalled()
   })
 
   test('calls ctx.redirect if function return Promise<string>', async () => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       redirect() {
         return Promise.resolve('//')
       }
-    }
-    const middleware = redirectPlugin(routeConfig)
+    })
+    const [middleware] = route.middleware
     await middleware(ctx)
     expect(ctx.redirect).lastCalledWith('//')
   })
 
   test('does not call ctx.redirect if function return Promise<void>', async () => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       redirect() {
         return Promise.resolve()
       }
-    }
-    const middleware = redirectPlugin(routeConfig)
+    })
+    const [middleware] = route.middleware
     await middleware(ctx)
     expect(ctx.redirect).not.toBeCalled()
   })
 
   test('calls fn with ctx', (done) => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {
+    const route = new Route('/', {
       redirect(actual) {
         expect(actual).toEqual(ctx)
         done()
       }
-    }
-    const middleware = redirectPlugin(routeConfig)
+    })
+    const [middleware] = route.middleware
     middleware(ctx)
   })
 
-  test('doesn\'t blow up if not used', async () => {
+  test("doesn't blow up if not used", async () => {
     const ctx = { redirect: jest.fn() as any } as Context & IContext
-    const routeConfig: IRouteConfig = {}
-    const middleware = redirectPlugin(routeConfig)
-    await expect(middleware(ctx)).resolves.toBeUndefined()
+    const route = new Route('/', {})
+    expect(route.middleware.length).toBe(0)
   })
 })

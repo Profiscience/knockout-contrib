@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-router-plugins-title
+# router.plugins.title
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -8,16 +8,12 @@
 
 [david-dm]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.title
 [david-dm-shield]: https://david-dm.org/Profiscience/knockout-contrib/status.svg?path=packages/router.plugins.title
-
 [david-dm-peer]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.title&type=peer
 [david-dm-peer-shield]: https://david-dm.org/Profiscience/knockout-contrib/peer-status.svg?path=packages/router.plugins.title
-
 [david-dm-dev]: https://david-dm.org/Profiscience/knockout-contrib?path=packages/router.plugins.title&type=dev
 [david-dm-dev-shield]: https://david-dm.org/Profiscience/knockout-contrib/dev-status.svg?path=packages/router.plugins.title
-
 [npm]: https://www.npmjs.com/package/@profiscience/knockout-contrib-router-plugins-title
 [npm-version-shield]: https://img.shields.io/npm/v/@profiscience/knockout-contrib-router-plugins-title.svg
-
 [npm-stats]: http://npm-stat.com/charts.html?package=@profiscience/knockout-contrib-router-plugins-title&author=&from=&to=
 [npm-stats-shield]: https://img.shields.io/npm/dt/@profiscience/knockout-contrib-router-plugins-title.svg?maxAge=2592000
 
@@ -72,5 +68,7 @@ If you land on `/` the title will be set to "My Awesome App | Home"; likewise na
 If you'd like to using something other than "|" to join your routes, you may pass a custom formatter function to `createTitlePlugin`.
 
 ```typescript
-Route.usePlugin(createTitlePlugin((ts: string[]) => `My Awesome App | ${ts.join(' > ')}`))
+Route.usePlugin(
+  createTitlePlugin((ts: string[]) => `My Awesome App | ${ts.join(' > ')}`)
+)
 ```

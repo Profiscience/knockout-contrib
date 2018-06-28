@@ -1,4 +1,10 @@
-import { Context, IContext, IRouteConfig } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  IRouteConfig
+} from '@profiscience/knockout-contrib-router'
+
+type MaybePromise<T> = T | Promise<T>
 
 declare module '@profiscience/knockout-contrib-router' {
   // tslint:disable-next-line no-shadowed-variable
@@ -12,12 +18,21 @@ declare module '@profiscience/knockout-contrib-router' {
      *  with: { params: { id: 0 } }
      * ```
      */
-    with?: Context | IContext
+    with?:
+      | Context
+      | IContext
+      | ((ctx: Context & IContext) => MaybePromise<Context | IContext>)
   }
 }
 
 export function withPlugin({ with: _with }: IRouteConfig) {
-  return (ctx: Context & IContext) => {
-    if (_with) Object.assign(ctx, _with)
+  if (!_with) return
+
+  return async (ctx: Context & IContext) => {
+    let src = _with
+    if (typeof _with === 'function') {
+      src = await _with(ctx)
+    }
+    Object.assign(ctx, src)
   }
 }
