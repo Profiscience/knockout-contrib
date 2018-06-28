@@ -10,14 +10,6 @@
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
   "types": "src/index.ts",
-  "keywords": [
-    "knockout",
-    "knockoutjs",
-    "jest",
-    "jasmine",
-    "matchers",
-    "assertions"
-  ],
   "peerDependencies": {
     "jest": "X.X.X",
     "knockout": "3.5.0-rc"

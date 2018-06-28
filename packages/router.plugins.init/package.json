@@ -23,16 +23,6 @@
     "@profiscience/knockout-contrib-router": "^1.3.0",
     "@profiscience/knockout-contrib-router-plugins-component": "^1.0.2"
   },
-  "keywords": [
-    "ko",
-    "ko-component-router",
-    "knockout",
-    "knockoutjs",
-    "knockout-router",
-    "knockout-contrib",
-    "knockout-contrib-router",
-    "knockout-contrib-router-plugin"
-  ],
   "publishConfig": {
     "access": "public"
   }

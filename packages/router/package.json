@@ -10,16 +10,6 @@
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
   "types": "src/index.ts",
-  "keywords": [
-    "knockoutjs",
-    "knockout",
-    "ko",
-    "component",
-    "router",
-    "routing",
-    "spa",
-    "framework"
-  ],
   "scripts": {
     "test": "karma start"
   },
