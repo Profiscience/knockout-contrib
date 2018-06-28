@@ -4,7 +4,6 @@
 [![Build Status][travis-ci-shield]][travis-ci]
 [![Coverage States][codecov-shield]][codecov]
 [![Gitter][gitter-shield]][gitter]
-[![Greenkeeper][greenkeeper-shield]][greenkeeper]
 
 [Metapackage][] containing all of the goodies from the [@profiscience/knockout-contrib][] monorepo. Everything you need to start building SPAs with KnockoutJS. Some bits are more opinionated than others, use however much/little as makes sense for your project. Publishing everything together as a metapackage is intended to a) reduce typing and b) increase discoverability.
 
