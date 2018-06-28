@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
 ko.components.register('before-navigate-callbacks', {
   template: '<router></router>',
@@ -9,7 +9,8 @@ ko.components.register('before-navigate-callbacks', {
       Router.useRoutes({
         '/': 'empty',
         '/sync': 'sync',
-        '/async': 'async',
+        '/async-callback': 'async-callback',
+        '/async-promise': 'async-promise',
         '/nested': [
           'nested',
           {
@@ -36,7 +37,15 @@ ko.components.register('before-navigate-callbacks', {
         }
       })
 
-      ko.components.register('async', {
+      ko.components.register('async-callback', {
+        viewModel: class {
+          constructor(ctx) {
+            ctx.addBeforeNavigateCallback((done) => done(!block))
+          }
+        }
+      })
+
+      ko.components.register('async-promise', {
         viewModel: class {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => Promise.resolve(!block))
@@ -60,15 +69,12 @@ ko.components.register('before-navigate-callbacks', {
       ko.components.register('nested-child', {
         viewModel: class {
           constructor(ctx) {
-            ctx.addBeforeNavigateCallback(
-              () =>
-                new Promise((resolve) => {
-                  setTimeout(() => {
-                    hit = true
-                    resolve()
-                  }, 200)
-                })
-            )
+            ctx.addBeforeNavigateCallback((done) => {
+              setTimeout(() => {
+                hit = true
+                done()
+              }, 200)
+            })
           }
         }
       })
@@ -85,7 +91,19 @@ ko.components.register('before-navigate-callbacks', {
         'returning !false should not prevent navigation'
       )
 
-      await Router.update('/async')
+      await Router.update('/async-callback')
+      block = true
+      t.notOk(
+        await Router.update('/'),
+        'calling the callback with false should prevent navigation'
+      )
+      block = false
+      t.ok(
+        await Router.update('/'),
+        'calling the callback with !false should not prevent navigation'
+      )
+
+      await Router.update('/async-promise')
       block = true
       t.notOk(
         await Router.update('/'),

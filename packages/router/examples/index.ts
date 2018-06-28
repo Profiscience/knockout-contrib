@@ -1,5 +1,5 @@
 import * as ko from 'knockout'
-import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-view'
+import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-framework'
 import { Router } from '@profiscience/knockout-contrib-router'
 
 location.hash = '!/'

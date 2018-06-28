@@ -1,10 +1,8 @@
 import * as ko from 'knockout'
-import { RoutePlugin, Router } from '@profiscience/knockout-contrib-router'
-
-// @ts-ignore
+import { Plugin, Router } from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
-const lazyLoadPlugin: RoutePlugin = (componentName: string) => [
+const lazyLoadPlugin: Plugin = (componentName: string) => [
   // we return an array that the router understands, so first we'll
   // include the name of the component
   componentName,
@@ -17,17 +15,21 @@ const lazyLoadPlugin: RoutePlugin = (componentName: string) => [
     }
 
     // https://webpack.js.org/guides/code-splitting-import/
-    return import('./views/' + componentName)
-      .then((exports) => ko.components.register(componentName, exports))
-      // tslint:disable-next-line no-console
-      .catch((err) => console.error('Error fetching component', componentName, err))
+    return (
+      import('./views/' + componentName)
+        .then((exports) => ko.components.register(componentName, exports))
+        // tslint:disable-next-line no-console
+        .catch((err) =>
+          console.error('Error fetching component', componentName, err)
+        )
+    )
   }
 ]
 
 Router.usePlugin(lazyLoadPlugin)
 
 Router.useRoutes({
-  '/':    'list',
+  '/': 'list',
   '/foo': 'foo',
   '/bar': 'bar',
   '/baz': 'baz',

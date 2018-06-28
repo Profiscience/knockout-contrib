@@ -55,27 +55,6 @@ path binding that resolves to the current page. To use a class other than
 <a data-bind="path: '/foo', pathActiveClass: 'foo-active'">
 ```
 
-If you _only_ need this fuctionality, you may use the `activePath` binding instead. This will behave almost exactly the same, however the href attribute will not be set.
-
-Partial matches are supported using `*`. For example, if you have a nested route structure such as...
-
-```typescript
-new Route('/foos', [
-  new Route('/foo', ...),
-  new Route('/bar', ...),
-  new Route('/baz', ...),
-  new Route('/qux', ...)
-])
-```
-
-And you would like to apply the `active-path` class to an element if the route is any of the child routes belonging to the "foos" route (i.e. '/foos/foo', '/foos/bar', etc.), use the following...
-
-```html
-<a data-bind="path: '/foos/*'">Foos</a>
-```
-
-The wildcard _must_ be the last character, and it _must_ be immediately preceeded by a `/`. It will be disregarded for the purposes of setting the href if used with the `path` binding.
-
 ---
 
 [Back](./)

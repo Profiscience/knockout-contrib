@@ -1,8 +1,12 @@
+import isBoolean from 'lodash/isBoolean'
+import isUndefined from 'lodash/isUndefined'
+import castArray from 'lodash/castArray'
+import map from 'lodash/map'
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Context } from './context'
 import { RoutePlugin, Route, RouteMap } from './route'
-import { castArray, MaybePromise, traversePath, log } from './utils'
+import { Callback, MaybePromise, traversePath, log } from './utils'
 
 export type RouterConfig = {
   base?: string
@@ -20,62 +24,58 @@ export type SimpleMiddleware =
   | ((ctx: Context & IContext) => MaybePromise<void>)
   | ((ctx: Context & IContext, done?: () => void) => void)
 
-export type LifecycleMiddleware = (
+export type LifecycleObjectMiddleware = (
   ctx: Context & IContext
-) => MaybePromise<Lifecycle>
-
-export type Middleware = SimpleMiddleware | LifecycleMiddleware
-
-export type Lifecycle = {
-  beforeRender?(): MaybePromise<void>
-  afterRender?(): MaybePromise<void>
-  beforeDispose?(): MaybePromise<void>
-  afterDispose?(): MaybePromise<void>
+) => {
+  beforeRender?: Callback<void>
+  afterRender?: Callback<void>
+  beforeDispose?: Callback<void>
+  afterDispose?: Callback<void>
 }
+
+export type LifecycleGeneratorMiddleware = (
+  ctx: Context & IContext
+) => // sync generators yielding nothing or a promise
+
+  | IterableIterator<void | Promise<void>>
+  // async generators (async/await in block, but yield nothing)
+  | AsyncIterableIterator<void>
+
+export type Middleware =
+  | SimpleMiddleware
+  | LifecycleObjectMiddleware
+  | LifecycleGeneratorMiddleware
 
 export class Router {
   public static head: Router
-  public static readonly onInit: ((router: Router) => void)[] = [
-    () => {
-      Router.isNavigating(Router._isNavigating())
-      Router._isNavigating.subscribe(Router.isNavigating)
-    }
-  ]
+  public static readonly onInit: ((router: Router) => void)[] = []
   public static readonly middleware: Middleware[] = []
   public static readonly config = {
     base: '',
     hashbang: false,
     activePathCSSClass: 'active-path'
   }
-
-  /**
-   * If router is not initialized, Router.head is undefined. See above onInit arr.
-   */
-  private static readonly _isNavigating = ko.pureComputed(() => {
+  public static readonly isNavigating = ko.pureComputed(() => {
     if (Router.head.isNavigating()) return true
     for (const ctx of Router.head.ctx.$children) {
       if (ctx.router.isNavigating()) return true
     }
     return false
   })
-  public static readonly isNavigating = ko.observable(true)
 
   private static readonly routes: Route[] = []
-  private static readonly events: {
-    click: 'click'
-    popstate: 'popstate'
-  } = {
-    click: document.ontouchstart ? 'touchstart' : ('click' as any),
+  private static readonly events = {
+    click: document.ontouchstart ? 'touchstart' : 'click',
     popstate: 'popstate'
   }
 
-  public onInit: ((router: Router) => void)[] = []
-  public component: ko.Observable<null | string>
-  public isNavigating: ko.Observable<boolean>
+  public onInit: (() => void)[] = []
+  public component: KnockoutObservable<string>
+  public isNavigating: KnockoutObservable<boolean>
   public routes: Route[]
   public isRoot: boolean
   public ctx: Context & IContext
-  public bound = false
+  public bound: boolean
 
   constructor(
     url: string,
@@ -84,23 +84,16 @@ export class Router {
   ) {
     this.component = ko.observable(null)
     this.isNavigating = ko.observable(true)
-    this.isRoot = typeof $parentCtx === 'undefined'
-    this.routes = this.isRoot
-      ? Router.routes
-      : ($parentCtx as Context & IContext).route.children
+    this.isRoot = isUndefined($parentCtx)
+    this.routes = this.isRoot ? Router.routes : $parentCtx.route.children
 
     if (this.isRoot) {
       Router.head = this
-      document.addEventListener<'click'>(Router.events.click, Router.onclick)
+      document.addEventListener(Router.events.click, Router.onclick)
       window.addEventListener(Router.events.popstate, Router.onpopstate)
     }
 
-    this.ctx = new Context(
-      this,
-      $parentCtx,
-      Router.getPath(url),
-      _with
-    ) as Context & IContext
+    this.ctx = new Context(this, $parentCtx, Router.getPath(url), _with)
   }
 
   get initialized(): Promise<Router> {
@@ -120,7 +113,14 @@ export class Router {
     this.ctx
       .runAfterRender()
       .then(() => {
-        this.ctx.router.onInit.forEach((resolve) => resolve(this))
+        const resolveRouter = (router: Router) => (
+          resolve: typeof Promise.resolve
+        ) => resolve(router)
+        let ctx = this.ctx
+        while (ctx) {
+          map(ctx.router.onInit, resolveRouter(ctx.router))
+          ctx = ctx.$child
+        }
       })
       .catch((err) => log.error('Error initializing router', err))
   }
@@ -130,18 +130,17 @@ export class Router {
     _args?: boolean | RouterUpdateOptions
   ): Promise<boolean> {
     let args
-    if (typeof _args === 'boolean') {
+    if (isBoolean(_args)) {
       args = { push: _args as boolean }
-    } else if (typeof _args === 'undefined') {
+    } else if (isUndefined(_args)) {
       args = {}
     } else {
       args = _args
     }
-
-    if (typeof args.push === 'undefined') {
+    if (isUndefined(args.push)) {
       args.push = true
     }
-    if (typeof args.with === 'undefined') {
+    if (isUndefined(args.with)) {
       args.with = {}
     }
 
@@ -149,20 +148,10 @@ export class Router {
     const { search, hash } = Router.parseUrl(url)
     const path = Router.getPath(url)
     const route = this.resolveRoute(path)
-
-    if (!route) {
-      throw new Error(
-        // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${
-          this.depth
-        } update() called with path "${path}", but no matching route was found`
-      )
-    }
-
     const { pathname, childPath } = route.parse(path)
     const samePage = fromCtx.pathname === pathname
 
-    if (fromCtx.$child && childPath && samePage && !args.force) {
+    if (fromCtx.$child && samePage && !args.force) {
       return await fromCtx.$child.router.update(childPath + search + hash, args)
     }
 
@@ -173,7 +162,7 @@ export class Router {
     }
 
     const shouldNavigate = await fromCtx.runBeforeNavigateCallbacks()
-    if (!shouldNavigate) {
+    if (shouldNavigate === false) {
       return false
     }
 
@@ -189,18 +178,18 @@ export class Router {
 
     await toCtx.runBeforeRender()
 
-    if (typeof toCtx._redirect === 'undefined') {
+    if (isUndefined(toCtx._redirect)) {
       this.component(null)
       ko.tasks.runEarly()
     }
 
-    this.ctx = toCtx as Context & IContext
+    this.ctx = toCtx
 
     await fromCtx.runAfterDispose()
 
     toCtx.render()
 
-    if (typeof toCtx._redirect !== 'undefined') {
+    if (!isUndefined(toCtx._redirect)) {
       await toCtx.runAfterRender()
       const { router: r, path: p } = traversePath(toCtx.router, toCtx._redirect)
       r.update(p, toCtx._redirectArgs).catch((err) =>
@@ -211,7 +200,7 @@ export class Router {
     return true
   }
 
-  public resolveRoute(path: string): Route | undefined {
+  public resolveRoute(path: string): Route {
     let matchingRouteWithFewestDynamicSegments
     let fewestMatchingSegments = Infinity
 
@@ -288,13 +277,6 @@ export class Router {
   public static get(i: number): Router {
     let router = Router.head
     while (i-- > 0) {
-      if (!router.ctx.$child) {
-        throw new Error(
-          // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i +
-            i} routers active (indicies are zero-based)`
-        )
-      }
       router = router.ctx.$child.router
     }
     return router
@@ -404,7 +386,7 @@ export class Router {
   }
 
   private static hasRoute(path: string) {
-    return typeof Router.head.resolveRoute(Router.getPath(path)) !== 'undefined'
+    return !isUndefined(Router.head.resolveRoute(Router.getPath(path)))
   }
 
   private static sameOrigin(href: string) {
@@ -418,6 +400,6 @@ export class Router {
 
   private static which(e: MouseEvent): number {
     e = e || (window.event as MouseEvent)
-    return e.which === null ? e.button : e.which // tslint:disable-line strict-type-predicates deprecation
+    return e.which === null ? e.button : e.which
   }
 }

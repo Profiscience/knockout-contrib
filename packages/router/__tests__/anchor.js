@@ -1,7 +1,7 @@
 import map from 'lodash/map'
 import ko from 'knockout'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
 const ignoredAnchors = [
   'x-origin',

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "es2015",
+    "declaration": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.core",
+      "es2015.iterable",
+      "es2015.promise",
+      "es2017.object",
+      "esnext.asynciterable"
+    ],
+    "downlevelIteration": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true
+  },
+  "include": ["src/**/*"],
+  "exclude": []
+}

@@ -1,46 +1,39 @@
+import 'core-js/es7/symbol'
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
-import { Router, Middleware, Lifecycle } from './router'
-import { MaybePromise } from './utils'
+import { Router, Middleware } from './router'
+import {
+  Callback,
+  isThenable,
+  castLifecycleObjectMiddlewareToGenerator,
+  sequence
+} from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
-  public $child?: Context & IContext
-  public route!: Route
-  public params!: { [k: string]: any }
-  public pathname!: string
-  public _redirect?: string
-  public _redirectArgs?: {
+  public $child: Context & IContext
+  public route: Route
+  public params: { [k: string]: any }
+  public pathname: string
+  public _redirect: string
+  public _redirectArgs: {
     push: false
     force?: boolean
     with?: { [prop: string]: any }
   }
 
-  private readonly _beforeNavigateCallbacks: (() => MaybePromise<
-    void | false
-  >)[] = []
   private _queue: Promise<void>[] = []
-  private _appMiddlewareLifecycles: Lifecycle[] = []
-  private _routeMiddlewareLifecycles: Lifecycle[] = []
+  private _beforeNavigateCallbacks: Callback<void>[] = []
+  private _appMiddlewareDownstream: Callback<void>[] = []
+  private _routeMiddlewareDownstream: Callback<void>[] = []
 
   constructor(
     public router: Router,
-    public $parent: undefined | Context & IContext,
+    public $parent: Context,
     public path: string,
     _with: { [key: string]: any } = {}
   ) {
-    const ctx: Context & IContext = this as any
     const route = router.resolveRoute(path)
-
-    if (!route) {
-      throw new Error(
-        // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${
-          router.depth
-        } context initialized with path ${path}, but no matching route was found`
-      )
-    }
-
     const { params, pathname, childPath } = route.parse(path)
 
     Object.assign(
@@ -54,23 +47,22 @@ export class Context /* implements IContext, use Context & IContext */ {
     )
 
     if ($parent) {
-      $parent.$child = ctx
+      $parent.$child = this
     }
     if (childPath) {
       // tslint:disable-next-line no-unused-expression
-      new Router(childPath, ctx).ctx
+      new Router(childPath, this).ctx
     }
   }
 
-  public addBeforeNavigateCallback(cb: () => MaybePromise<false | void>) {
+  public addBeforeNavigateCallback(cb: Callback<void>) {
     this._beforeNavigateCallbacks.unshift(cb)
   }
 
   public get base(): string {
     return this.router.isRoot
       ? Router.base
-      : (this.$parent as Context & IContext).base +
-          (this.$parent as Context & IContext).pathname
+      : this.$parent.base + this.$parent.pathname
   }
 
   // full path w/o base
@@ -87,13 +79,18 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $root(): Context & IContext {
-    let ctx: Context & IContext = this as any
-    while (ctx.$parent) ctx = ctx.$parent
-    return ctx
+    let ctx: Context & IContext = this
+    while (ctx) {
+      if (ctx.$parent) {
+        ctx = ctx.$parent
+      } else {
+        return ctx
+      }
+    }
   }
 
   public get $parents(): (Context & IContext)[] {
-    const parents: (Context & IContext)[] = []
+    const parents = []
     let parent = this.$parent
     while (parent) {
       parents.push(parent)
@@ -103,7 +100,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $children(): (Context & IContext)[] {
-    const children: (Context & IContext)[] = []
+    const children = []
     let child = this.$child
     while (child) {
       children.push(child)
@@ -122,23 +119,18 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: void | Context & IContext = this as any
-    let callbacks: (() => MaybePromise<boolean | void>)[] = []
+    let ctx: Context & IContext = this
+    let callbacks: Callback<boolean | void>[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
       ctx = ctx.$child
     }
-    for (const cb of callbacks) {
-      const ret = await cb()
-      if (ret === false) {
-        return false
-      }
-    }
-    return true
+    const { success } = await sequence(callbacks)
+    return success
   }
 
   public render() {
-    let ctx: void | Context & IContext = this as any
+    let ctx: Context & IContext = this
     while (ctx) {
       if (typeof ctx._redirect === 'undefined') {
         ctx.router.component(ctx.route.component)
@@ -149,15 +141,31 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeRender(flush = true) {
-    const ctx: Context & IContext = this as any
-    this._appMiddlewareLifecycles = await Context.startLifecycle(
+    const appMiddlewareDownstream = Context.runMiddleware(
       Router.middleware,
-      ctx
+      this
     )
-    this._routeMiddlewareLifecycles = await Context.startLifecycle(
+    const routeMiddlewareDownstream = Context.runMiddleware(
       this.route.middleware,
-      ctx
+      this
     )
+
+    const { count: numAppMiddlewareRanPreRedirect } = await sequence(
+      appMiddlewareDownstream
+    )
+    const { count: numRouteMiddlewareRanPreRedirect } = await sequence(
+      routeMiddlewareDownstream
+    )
+
+    this._appMiddlewareDownstream = appMiddlewareDownstream.slice(
+      0,
+      numAppMiddlewareRanPreRedirect
+    )
+    this._routeMiddlewareDownstream = routeMiddlewareDownstream.slice(
+      0,
+      numRouteMiddlewareRanPreRedirect
+    )
+
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runBeforeRender(false)
     }
@@ -167,12 +175,10 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runAfterRender() {
-    for (const l of [
-      ...this._appMiddlewareLifecycles,
-      ...this._routeMiddlewareLifecycles
-    ]) {
-      if (l.afterRender) await l.afterRender()
-    }
+    await sequence([
+      ...this._appMiddlewareDownstream,
+      ...this._routeMiddlewareDownstream
+    ])
     await this.flushQueue()
   }
 
@@ -180,12 +186,10 @@ export class Context /* implements IContext, use Context & IContext */ {
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runBeforeDispose(false)
     }
-    for (const l of [
-      ...this._routeMiddlewareLifecycles,
-      ...this._appMiddlewareLifecycles
-    ]) {
-      if (l.beforeDispose) await l.beforeDispose()
-    }
+    await sequence([
+      ...this._routeMiddlewareDownstream,
+      ...this._appMiddlewareDownstream
+    ])
     if (flush) {
       await this.flushQueue()
     }
@@ -195,12 +199,10 @@ export class Context /* implements IContext, use Context & IContext */ {
     if (this.$child && typeof this._redirect === 'undefined') {
       await this.$child.runAfterDispose(false)
     }
-    for (const l of [
-      ...this._routeMiddlewareLifecycles,
-      ...this._appMiddlewareLifecycles
-    ]) {
-      if (l.afterDispose) await l.afterDispose()
-    }
+    await sequence([
+      ...this._routeMiddlewareDownstream,
+      ...this._appMiddlewareDownstream
+    ])
     if (flush) {
       await this.flushQueue()
     }
@@ -214,23 +216,31 @@ export class Context /* implements IContext, use Context & IContext */ {
     await Promise.all<Promise<void>>([thisQueue, ...childQueues])
   }
 
-  private static async startLifecycle(
+  private static runMiddleware(
     middleware: Middleware[],
-    ctx: Context & IContext
-  ): Promise<Lifecycle[]> {
-    const downstream: Lifecycle[] = []
-
-    for (const fn of middleware) {
-      if (typeof ctx._redirect !== 'undefined') {
-        break
+    ctx: Context
+  ): Callback<void>[] {
+    return middleware.map((fn) => {
+      const runner = castLifecycleObjectMiddlewareToGenerator(fn)(ctx)
+      let beforeRender = true
+      return async () => {
+        const ret = runner.next()
+        if (isThenable(ret)) {
+          await ret
+        } else if (
+          isThenable((ret as IteratorResult<Promise<void> | void>).value)
+        ) {
+          await (ret as IteratorResult<Promise<void> | void>).value
+        }
+        if (beforeRender) {
+          // this should only block the sequence for the first call,
+          // and allow cleanup after the redirect
+          beforeRender = false
+          return typeof ctx._redirect === 'undefined'
+        } else {
+          return true
+        }
       }
-      const lifecycle = await fn(ctx)
-      if (lifecycle) {
-        if (lifecycle.beforeRender) await lifecycle.beforeRender()
-        downstream.push(lifecycle)
-      }
-    }
-
-    return downstream
+    })
   }
 }

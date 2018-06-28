@@ -1,50 +1,73 @@
+import isFunction from 'lodash/isFunction'
+import isPlainObject from 'lodash/isPlainObject'
+import isUndefined from 'lodash/isUndefined'
+import noop from 'lodash/noop'
+import startsWith from 'lodash/startsWith'
 import { IContext } from './'
 import { Context } from './context'
-import { Router } from './router'
+import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
 
+export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
+export type SyncCallback<T> = () => T
+export type Callback<T> = AsyncCallback<T> | SyncCallback<T>
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 
-export const noop = () => {
-  /* void */
+export function flatMap<T, R>(
+  collection: T[],
+  fn: (t: T) => MaybeArray<R>
+): R[] {
+  const flattened = []
+  for (const i of collection) {
+    const ret = fn(i)
+    if (Array.isArray(ret)) {
+      flattened.push(...ret)
+    } else {
+      flattened.push(ret)
+    }
+  }
+  return flattened
 }
-export const startsWith = (string: string, target: string) =>
-  string.indexOf(target) === 0
-export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] =>
-  flatten(xs.map(fn))
 
-export function flatten<T>(xs: MaybeArray<T>[]): T[] {
-  return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
-}
-
-export function castArray<T>(x: MaybeArray<T>): T[] {
-  return Array.isArray(x) ? x : [x]
+export async function sequence(
+  callbacks: Callback<boolean | void>[],
+  ...args: any[]
+): Promise<{
+  count: number
+  success: boolean
+}> {
+  let count = 0
+  let success = true
+  for (const _fn of callbacks) {
+    count++
+    const ret = await promisify(_fn)(...args)
+    if (ret === false) {
+      success = false
+      break
+    }
+  }
+  return { count, success }
 }
 
 export function traversePath(router: Router, path: string) {
   if (path.indexOf('//') === 0) {
     path = path.replace('//', '/')
+
     while (!router.isRoot) {
-      router = (router.ctx.$parent as Context & IContext).router
+      router = router.ctx.$parent.router
     }
   } else {
     if (path.indexOf('./') === 0) {
       path = path.replace('./', '/')
-      if (!router.ctx.$child) {
-        throw new Error(
-          // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${
-            router.depth
-          }) and ran out of children. Are you sure you want "./"?`
-        )
-      }
       router = router.ctx.$child.router
     }
+
     while (path && path.match(/\/?\.\./i) && !router.isRoot) {
-      router = (router.ctx.$parent as Context & IContext).router
+      router = router.ctx.$parent.router
       path = path.replace(/\/?\.\./i, '')
     }
   }
+
   return { router, path }
 }
 
@@ -55,7 +78,7 @@ export function resolveHref({
   router: Router
   path: string
 }) {
-  return router.ctx.base + path.replace(/\/\*$/, '')
+  return router.ctx.base + path
 }
 
 export function isActivePath({
@@ -65,12 +88,11 @@ export function isActivePath({
   router: Router
   path: string
 }): boolean {
-  let ctx: Context | void = router.ctx
+  let ctx = router.ctx
   while (ctx) {
-    // create dependency on isNavigating so that this works with nested routes inside a computed
+    // create dependency on isNavigating so that this works with nested routes
+    // inside a computed
     ctx.router.isNavigating()
-
-    if (path === '/*') return true
 
     if (ctx.$child ? startsWith(path, ctx.pathname) : path === ctx.pathname) {
       path = path.substr(ctx.pathname.length) || '/'
@@ -82,25 +104,64 @@ export function isActivePath({
   return true
 }
 
-export function getRouterForBindingContext(
-  bindingCtx: ko.BindingContext
-): Router {
-  while (true) {
-    if (bindingCtx.$router) {
-      return bindingCtx.$router
-    } else if (!bindingCtx.$parentContext) {
-      return Router.head
+export function isThenable(x: any) {
+  return !isUndefined(x) && isFunction(x.then)
+}
+
+export function promisify(
+  _fn: (...args: any[]) => void = noop
+): (...args: any[]) => Promise<any> {
+  return async (...args) => {
+    const fn = () =>
+      _fn.length === args.length + 1
+        ? new Promise((r) => {
+            _fn(...args, r)
+          })
+        : _fn(...args)
+
+    const ret = fn()
+
+    return isThenable(ret) ? await ret : ret
+  }
+}
+
+export function castLifecycleObjectMiddlewareToGenerator(
+  fn: Middleware
+): LifecycleGeneratorMiddleware {
+  return async function*(ctx: Context & IContext) {
+    const ret = await promisify(fn)(ctx)
+    if (ret && isFunction(ret.next)) {
+      for await (const v of ret) {
+        yield await v
+      }
+    } else if (isPlainObject(ret)) {
+      yield await promisify(ret.beforeRender)()
+      yield await promisify(ret.afterRender)()
+      yield await promisify(ret.beforeDispose)()
+      yield await promisify(ret.afterDispose)()
     } else {
-      bindingCtx = bindingCtx.$parentContext as ko.BindingContext
+      yield ret
     }
   }
 }
 
-// tslint:disable-next-line no-console
-const _consoleLogger: any = console
-const _logger = (t: string) => (...ms: string[]) =>
-  _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
+export function getRouterForBindingContext(bindingCtx: KnockoutBindingContext) {
+  while (!isUndefined(bindingCtx)) {
+    if (!isUndefined(bindingCtx.$router)) {
+      return bindingCtx.$router
+    }
+    bindingCtx = bindingCtx.$parentContext
+  }
+  return Router.head
+}
+
 export const log = {
-  error: _logger('error'),
-  warn: _logger('warn')
+  error(...messages: string[]) {
+    // tslint:disable-next-line no-console
+    console.error('[@profiscience/knockout-contrib-router]', ...messages)
+  },
+  warn(...messages: string[]) {
+    // tslint:disable-next-line no-console
+    console.warn('[@profiscience/knockout-contrib-router]', ...messages)
+  }
 }

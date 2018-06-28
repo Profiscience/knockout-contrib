@@ -1,25 +1,20 @@
 import ko from 'knockout'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
 ko.components.register('middleware', {
   template: '<router></router>',
   viewModel: class MiddlewareTest {
     constructor({ t, done }) {
-      Router.use((ctx) => ({
-        beforeRender() {
-          ctx.beforeRenderGlobalMiddlewareHit = true
-        },
-        afterRender() {
-          ctx.afterRenderGlobalMiddlewareHit = true
-        },
-        beforeDispose() {
-          ctx.beforeDisposeGlobalMiddlewareHit = true
-        },
-        afterDispose() {
-          ctx.afterDisposeGlobalMiddlewareHit = true
-        }
-      }))
+      Router.use(function*(ctx) {
+        ctx.beforeRenderGlobalMiddlewareHit = true
+        yield
+        ctx.afterRenderGlobalMiddlewareHit = true
+        yield
+        ctx.beforeDisposeGlobalMiddlewareHit = true
+        yield
+        ctx.afterDisposeGlobalMiddlewareHit = true
+      })
 
       history.replaceState(null, null, '/sync')
 
@@ -34,7 +29,14 @@ ko.components.register('middleware', {
         ],
 
         '/async': [
+          (ctx, _done) => {
+            setTimeout(() => {
+              ctx.waitOver = true
+              _done()
+            }, 200)
+          },
           (ctx) => {
+            t.ok(ctx.waitOver, 'async middleware works with done callback')
             ctx.waitOver = false
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -47,11 +49,65 @@ ko.components.register('middleware', {
             t.ok(ctx.waitOver, 'async middleware works with promise')
             ctx.waitOver = false
 
-            Router.update('/lifecycle')
+            Router.update('/generator')
           }
         ],
 
-        '/lifecycle': [
+        '/generator': [
+          function*(ctx) {
+            t.pass('generator middleware is called')
+
+            t.ok(
+              ctx.beforeRenderGlobalMiddlewareHit,
+              'global middleware before render middleware is executed'
+            )
+            t.ok(
+              ctx.beforeRenderGlobalMiddlewareHit,
+              'route before before render middleware is called after global before render middleware'
+            )
+
+            yield new Promise((resolve) => {
+              setTimeout(() => {
+                ctx.waitOver = true
+                resolve()
+              }, 200)
+            })
+
+            t.ok(
+              ctx.afterRenderGlobalMiddlewareHit,
+              'route after render middleware is called after global after render middleware'
+            )
+
+            Router.update('/object')
+
+            yield
+
+            t.ok(
+              ctx.beforeNavigateHit,
+              'before dispose middleware is called after before navigate callbacks'
+            )
+            t.notOk(
+              ctx.beforeDisposeGlobalMiddlewareHit,
+              'route before dispose middleware is called before global before dispose middleware'
+            )
+
+            yield
+
+            t.notOk(
+              ctx.afterDisposeGlobalMiddlewareHit,
+              'route after dispose middleware is called before global after dispose middleware'
+            )
+          },
+          (ctx) => {
+            t.ok(
+              ctx.waitOver,
+              'generator middleware works with yield-ed promise'
+            )
+          },
+          'generator'
+        ],
+
+        '/object': [
           (ctx) => ({
             beforeRender() {
               t.pass('object middleware is called')
@@ -72,18 +128,16 @@ ko.components.register('middleware', {
                 }, 200)
               })
             },
-            afterRender() {
+            afterRender(done) {
               t.ok(
                 ctx.afterRenderGlobalMiddlewareHit,
                 'route after render middleware is called after global after render middleware'
               )
 
-              return new Promise((resolve) =>
-                setTimeout(() => {
-                  ctx.callbackWaitOver = true
-                  resolve()
-                }, 200)
-              )
+              setTimeout(() => {
+                ctx.callbackWaitOver = true
+                done()
+              }, 200)
             },
             beforeDispose() {
               t.ok(
@@ -117,11 +171,19 @@ ko.components.register('middleware', {
               done()
             }
           }),
-          'lifecycle'
+          'object'
         ]
       })
 
-      ko.components.register('lifecycle', {
+      ko.components.register('generator', {
+        viewModel: class {
+          constructor(ctx) {
+            ctx.addBeforeNavigateCallback(() => (ctx.beforeNavigateHit = true))
+          }
+        }
+      })
+
+      ko.components.register('object', {
         viewModel: class {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => (ctx.beforeNavigateHit = true))

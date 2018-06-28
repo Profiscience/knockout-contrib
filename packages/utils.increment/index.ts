@@ -1,5 +1,5 @@
 export function increment(
-  obs: ko.Observable<number> | ko.Computed<number>,
+  obs: KnockoutObservable<number> | KnockoutComputed<number>,
   amt = 1
 ): number {
   const v = obs() + amt
@@ -8,7 +8,7 @@ export function increment(
 }
 
 export function decrement(
-  obs: ko.Observable<number> | ko.Computed<number>,
+  obs: KnockoutObservable<number> | KnockoutComputed<number>,
   amt = 1
 ): number {
   return increment(obs, -amt)

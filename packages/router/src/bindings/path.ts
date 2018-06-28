@@ -8,32 +8,21 @@ import {
 } from '../utils'
 import { activePathBinding } from './active-path'
 
-export const pathBinding: ko.BindingHandler = {
+export const pathBinding: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    ;(activePathBinding.init as any).call(
-      this,
-      el,
-      valueAccessor,
-      allBindings,
-      viewModel,
-      bindingCtx
-    )
-
     const path = ko.unwrap(valueAccessor())
+
+    activePathBinding.init.apply(this, arguments)
 
     Router.initialized
       .then(() => {
         const router = getRouterForBindingContext(bindingCtx)
         const route = ko.pureComputed(() => traversePath(router, path))
-        ko.applyBindingsToNode(
-          el,
-          {
-            attr: {
-              href: ko.pureComputed(() => resolveHref(route()))
-            }
-          },
-          bindingCtx
-        )
+        ko.applyBindingsToNode(el, {
+          attr: {
+            href: ko.pureComputed(() => resolveHref(route()))
+          }
+        })
       })
       .catch((err) => log.error('Error initializing path binding', err))
   }

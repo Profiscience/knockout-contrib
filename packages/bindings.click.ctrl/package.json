@@ -11,6 +11,6 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "peerDependencies": {
-    "knockout": "^3.4.0 || 3.5.0-rc"
+    "knockout": "^3.4.0"
   }
 }

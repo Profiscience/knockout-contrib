@@ -8,7 +8,7 @@ ko.bindingHandlers.$ = jqueryBindingHandler
 
 declare global {
   // tslint:disable-next-line:interface-name
-  interface JQuery<TElement extends Node = HTMLElement> {
+  interface JQuery<TElement = HTMLElement> extends Iterable<TElement> {
     myPlugin(opts: any): any
   }
 }

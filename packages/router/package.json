@@ -1,15 +1,21 @@
 {
   "name": "@profiscience/knockout-contrib-router",
+  "version": "1.2.0",
   "description": "Component-based routing for KnockoutJS",
-  "version": "2.0.0-8",
+  "author": "Casey Webb <notcaseywebb@gmail.com>",
   "license": "WTFPL",
-  "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
-  "repository": "github:Profiscience/knockout-contrib",
-  "main": "dist/node/index.js",
-  "module": "dist/default/index.js",
-  "types": "src/index.ts",
+  "repository": "Profiscience/knockout-contrib",
+  "main": "dist/knockout-contrib-router.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "test": "karma start"
+  },
   "keywords": [
     "knockoutjs",
     "knockout",
@@ -20,33 +26,25 @@
     "spa",
     "framework"
   ],
-  "publishConfig": {
-    "tag": "next"
-  },
-  "scripts": {
-    "test": "karma start"
-  },
-  "peerDependencies": {
-    "knockout": "^3.4.0 || 3.5.0-rc"
-  },
   "dependencies": {
+    "core-js": "^2.3.0",
     "path-to-regexp": "^2.0.0",
     "tslib": "^1.7.0"
+  },
+  "peerDependencies": {
+    "knockout": "^3.4.0"
   },
   "devDependencies": {
     "karma": "^2.0.0",
     "karma-firefox-launcher": "^1.0.1",
     "karma-remap-istanbul": "^0.6.0",
-    "karma-rollup-preprocessor": "^6.0.0",
-    "karma-tap": "^4.0.0",
-    "karma-tap-pretty-reporter": "^4.0.0",
-    "rollup": "^0.59.2",
-    "rollup-plugin-commonjs": "^9.1.0",
+    "karma-rollup-preprocessor": "^5.1.1",
+    "karma-tap": "^3.1.1",
+    "karma-tap-pretty-reporter": "^3.0.5",
     "rollup-plugin-istanbul": "^2.0.0",
-    "rollup-plugin-json": "^3.0.0",
+    "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.0",
     "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
     "tap-diff": "^0.1.1",
     "tape": "^4.8.0"
   }

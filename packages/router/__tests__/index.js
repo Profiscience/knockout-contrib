@@ -2,7 +2,7 @@ import ko from 'knockout'
 import $ from 'jquery'
 import tape from 'tape'
 
-import { Router } from '../'
+import { Router } from '../dist'
 
 import './helpers/ko-overwrite-component-registration'
 

@@ -1,4 +1,4 @@
-# @profiscience/knockout-contrib-router
+# @profiscience/knockout-contrib/router
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -28,7 +28,7 @@ _app.js_
 ```typescript
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Route, Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib/router'
 
 const loading = ko.observable(true)
 
@@ -52,7 +52,7 @@ Router.useRoutes([
  *  })
  */
 
-ko.components.register('home', {
+ko.component.register('home', {
   template: `<a data-bind="path: '/users'">Show users</a>`
 })
 
@@ -68,7 +68,7 @@ ko.components.register('users', {
   },
   template: `
     <ul data-bind="foreach: users">
-      <span data-bind="text: name, click: $parent.navigateToUser"></span>
+      <span data-bind="text: name, click: navigateToUser"></span>
     </ul>
   `
 })
@@ -92,6 +92,13 @@ function loadingMiddleware(ctx) {
     }
   }
 }
+
+// generators are also supported if you're a pioneer of sorts
+// function * loadingMiddleware(ctx) {
+//   loading(true)
+//   yield
+//   loading(false)
+// }
 
 // TypeScript? Good for you! Just add ~water~ these lines
 // declare module '@profiscience/knockout-contrib-router' {

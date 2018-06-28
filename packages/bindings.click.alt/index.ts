@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 
-export const altClickBindingHandler: ko.BindingHandler = {
+export const altClickBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(
       el,

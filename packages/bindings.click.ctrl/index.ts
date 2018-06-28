@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 
-export const ctrlClickBindingHandler: ko.BindingHandler = {
+export const ctrlClickBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(
       el,

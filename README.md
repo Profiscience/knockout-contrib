@@ -11,7 +11,7 @@ Goodies for building modern SPAs and rich UIs with [KnockoutJS][knockoutjs]
 [Docs](./packages/_)
 
 [knockoutjs]: https://knockoutjs.com
-[knockout-shield]: https://img.shields.io/badge/KnockoutJS-^3.4.0--rc-red.svg
+[knockout-shield]: https://img.shields.io/badge/KnockoutJS-^3.4.0-red.svg
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
 [codecov]: https://codecov.io/gh/Profiscience/knockout-contrib

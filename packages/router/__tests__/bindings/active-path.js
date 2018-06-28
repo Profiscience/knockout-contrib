@@ -1,28 +1,29 @@
 import ko from 'knockout'
 import $ from 'jquery'
 
-import { Router } from '../../'
+import { Router } from '../../dist'
 
 ko.components.register('bindings-active-path', {
   template: `
-    <a id="custom-class" data-bind="activePath: '/a/b', pathActiveClass: 'custom-active-class'"></a>
-    <a id="outer-absolute" data-bind="activePath: '//a/b'"></a>
-    <a id="outer-absolute-partial" data-bind="activePath: '//a/*'"></a>
-    <a id="outer" data-bind="activePath: '/a/b'"></a>
-    <a id="outer-partial" data-bind="activePath: '/a/*'"></a>
+    <a id="custom-class" data-bind="activePath: '/a/a', pathActiveClass: 'custom-active-class'"></a>
+    <a id="outer-relative-a" data-bind="activePath: '/a/a'"></a>
+    <a id="outer-deep" data-bind="activePath: '/a/a'"></a>
+    <a id="outer-relative-b" data-bind="activePath: '/b'"></a>
+    <a id="outer-absolute-b" data-bind="activePath: '//b'"></a>
     <router></router>
   `,
   viewModel: class BindingTest {
     constructor({ t, done }) {
-      history.replaceState(null, null, '/a/b')
+      history.replaceState(null, null, '/a/a')
 
       Router.useRoutes({
         '/a': [
           'a',
           {
-            '/b': 'b'
+            '/a': 'a-inner'
           }
-        ]
+        ],
+        '/b': 'b'
       })
 
       ko.components.register('a', {
@@ -34,89 +35,49 @@ ko.components.register('bindings-active-path', {
                 $('#custom-class').hasClass('custom-active-class'),
                 'should apply custom active class when used with pathActiveClass binding'
               )
-
               t.ok(
-                $('#outer-absolute').hasClass('active-path'),
-                'should apply active class on elements outside routers with absolute path'
-              )
-              t.ok(
-                $('#outer-absolute-partial').hasClass('active-path'),
-                'should apply active class on elements outsite routers with partial absolute path'
-              )
-              t.ok(
-                $('#outer').hasClass('active-path'),
-                'should apply active class on elements outsite routers with local path'
-              )
-              t.ok(
-                $('#outer-partial').hasClass('active-path'),
-                'should apply active class on elements outsite routers with partial local path'
-              )
-
-              t.ok(
-                $('#inner-local').hasClass('active-path'),
-                'should apply active class on local path'
-              )
-              t.ok(
-                $('#inner-local-partial').hasClass('active-path'),
-                'should apply active class on partial local path'
+                $('#outer-relative-a').hasClass('active-path'),
+                'should apply active class on elements outside routers'
               )
               t.ok(
                 $('#inner-relative').hasClass('active-path'),
-                'should apply active class on relative path'
+                'should apply active class on relative paths inside routers'
               )
-              t.ok(
-                $('#inner-absolute').hasClass('active-path'),
-                'should apply active class on absolute path'
-              )
-              t.ok(
-                $('#inner-absolute-partial').hasClass('active-path'),
-                'should apply active class on partial absolute path'
-              )
-
               t.ok(
                 $('#nested-relative').hasClass('active-path'),
-                'should apply active class on local path in nested route'
+                'should apply active class on nested relative paths'
               )
               t.ok(
-                $('#nested-relative-up').hasClass('active-path'),
-                'should apply active class on relative path to parent'
-              )
-              t.ok(
-                $('#nested-relative-up-partial').hasClass('active-path'),
-                'should apply active class on partial relative path to parent'
-              )
-              t.ok(
-                $('#nested-absolute').hasClass('active-path'),
-                'should apply active class on nested absolute path'
-              )
-              t.ok(
-                $('#nested-absolute-partial').hasClass('active-path'),
-                'should apply active class on partial nested absolute path'
+                $('#outer-deep').hasClass('active-path'),
+                'should apply active class on deep paths'
               )
 
-              done()
+              Router.update('/b')
             })
           }
         },
         template: `
-          <a id="inner-local" data-bind="activePath: '/a/b'"></a>
-          <a id="inner-local-partial" data-bind="activePath: '/a/*'"></a>
-          <a id="inner-relative" data-bind="activePath: './b'"></a>
-          <a id="inner-absolute" data-bind="activePath: '//a/b'"></a>
-          <a id="inner-absolute-partial" data-bind="activePath: '//a/*'"></a>
+          <a id="inner-relative" data-bind="activePath: './a'"></a>
+          <a id="inner-absolute" data-bind="activePath: '//a'"></a>
           <router></router>
         `
       })
 
-      ko.components.register('b', {
+      ko.components.register('a-inner', {
         synchronous: true,
         template: `
-          <a id="nested-relative" data-bind="activePath: '/b'"></a>
-          <a id="nested-relative-up" data-bind="activePath: '../a/b'"></a>
-          <a id="nested-relative-up-partial" data-bind="activePath: '../a/*'"></a>
-          <a id="nested-absolute" data-bind="activePath: '//a/b'"></a>
-          <a id="nested-absolute-partial" data-bind="activePath: '//a/*'"></a>
+          <a id="nested-relative" data-bind="activePath: '/a'"></a>
+          <a id="nested-relative-up" data-bind="activePath: '../a'"></a>
+          <a id="nested-absolute" data-bind="activePath: '//a'"></a>
         `
+      })
+
+      ko.components.register('b', {
+        viewModel: class {
+          constructor() {
+            done()
+          }
+        }
       })
     }
   }

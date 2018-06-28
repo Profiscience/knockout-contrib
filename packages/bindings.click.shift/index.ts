@@ -1,6 +1,6 @@
 import * as ko from 'knockout'
 
-export const shiftClickBindingHandler: ko.BindingHandler = {
+export const shiftClickBindingHandler: KnockoutBindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingContext) {
     ko.applyBindingsToNode(
       el,

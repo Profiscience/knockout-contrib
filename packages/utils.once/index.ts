@@ -1,7 +1,7 @@
 export function once<T>(
-  obs: ko.Observable<T> | ko.Computed<T>,
+  obs: KnockoutObservable<T> | KnockoutComputed<T>,
   fn: (v: T) => void
-): ko.Subscription {
+): KnockoutSubscription {
   const killMe = obs.subscribe((v) => {
     killMe.dispose()
     fn(v)

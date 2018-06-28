@@ -1,12 +1,11 @@
 import ko from 'knockout'
 import $ from 'jquery'
 
-import { Router } from '../../'
+import { Router } from '../../dist'
 
 ko.components.register('bindings-path', {
   template: `
     <a id="custom-class" data-bind="path: '/a/a', pathActiveClass: 'custom-active-class'"></a>
-    <a id="partial" data-bind="path: '/a/*'"></a>
     <a id="outer-relative-a" data-bind="path: '/a/a'"></a>
     <a id="outer-deep" data-bind="path: '/a/a'"></a>
     <a id="outer-relative-b" data-bind="path: '/b'"></a>
@@ -40,12 +39,6 @@ ko.components.register('bindings-path', {
               t.equals('/a/a', $('#nested-relative').attr('href'))
               t.equals('/a', $('#nested-relative-up').attr('href'))
               t.equals('/a', $('#nested-absolute').attr('href'))
-
-              t.equals(
-                '/a',
-                $('#partial').attr('href'),
-                'ignores * in path (partial match for active class)'
-              )
 
               t.ok(
                 $('#custom-class').hasClass('custom-active-class'),

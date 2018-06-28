@@ -1,5 +1,5 @@
 export function toggle(
-  obs: ko.Observable<boolean> | ko.Computed<boolean>
+  obs: KnockoutObservable<boolean> | KnockoutComputed<boolean>
 ): boolean {
   const orig = obs()
   const v = !orig
