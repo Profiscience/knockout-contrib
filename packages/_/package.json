@@ -25,7 +25,8 @@
     "knockout": "3.5.0-rc"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "rc"
   },
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-click-alt": "^1.0.1",
