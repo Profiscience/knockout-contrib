@@ -24,6 +24,9 @@
   "peerDependencies": {
     "knockout": "3.5.0-rc"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-click-alt": "^1.0.1",
     "@profiscience/knockout-contrib-bindings-click-ctrl": "^1.0.1",

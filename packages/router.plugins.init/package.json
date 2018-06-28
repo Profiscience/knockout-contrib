@@ -32,5 +32,8 @@
     "knockout-contrib",
     "knockout-contrib-router",
     "knockout-contrib-router-plugin"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

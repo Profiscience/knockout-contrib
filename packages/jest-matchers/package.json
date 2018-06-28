@@ -21,5 +21,8 @@
   "peerDependencies": {
     "jest": "X.X.X",
     "knockout": "3.5.0-rc"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

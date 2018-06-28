@@ -12,5 +12,8 @@
   "types": "index.d.ts",
   "peerDependencies": {
     "knockout": "3.5.0-rc"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -19,5 +19,8 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^1.0.1",
     "knockout-mapping": "^2.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

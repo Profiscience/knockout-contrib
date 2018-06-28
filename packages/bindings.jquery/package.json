@@ -14,5 +14,8 @@
     "jquery": "x.x.x",
     "knockout": "3.5.0-rc",
     "knockout-punches": "^0.5.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
