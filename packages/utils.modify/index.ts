@@ -1,5 +1,5 @@
 export function modify<T>(
-  obs: KnockoutObservable<T> | KnockoutComputed<T>,
+  obs: ko.Observable<T> | ko.Computed<T>,
   fn: (v: T) => T
 ): T {
   const v = fn(obs())

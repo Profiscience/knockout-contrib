@@ -2,9 +2,7 @@ import * as ko from 'knockout'
 import { fromJS } from '@profiscience/knockout-contrib-utils-from-js'
 
 export function defaults<
-  T extends {
-    [k: string]: any | KnockoutObservable<any> | KnockoutComputed<any> | void
-  }
+  T extends { [k: string]: any | ko.Observable<any> | ko.Computed<any> | void }
 >(dest: T, defaultValues: { [k: string]: any }, mapArraysDeep = false): T {
   for (const prop in defaultValues) {
     if (isUndefined(dest[prop])) {
