@@ -23,6 +23,20 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@profiscience/knockout-contrib-router-plugins-components@X.X.X":
+  version "1.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-router-plugins-components/-/knockout-contrib-router-plugins-components-1.0.0-alpha.9.tgz#4163bad96f24be56670169224b68006d9c1f734d"
+
+"@profiscience/knockout-contrib-router-plugins-title@X.X.X":
+  version "1.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-router-plugins-title/-/knockout-contrib-router-plugins-title-1.0.0-alpha.9.tgz#bb61bc7f23f73af016d461352e0d98c19a509864"
+
+"@profiscience/knockout-contrib-router@^2.0.0":
+  version "2.0.0-8"
+  dependencies:
+    path-to-regexp "^2.0.0"
+    tslib "^1.7.0"
+
 "@types/babel-core@^6.25.3":
   version "6.25.4"
   resolved "https://registry.yarnpkg.com/@types/babel-core/-/babel-core-6.25.4.tgz#de72e73fd72905d3269e4a6243983db4ca01e812"
@@ -1967,6 +1981,10 @@ data-urls@^1.0.0:
     abab "^1.0.4"
     whatwg-mimetype "^2.0.0"
     whatwg-url "^6.4.0"
+
+date-fns@^2.0.0-alpha.8:
+  version "2.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.11.tgz#586e855107dc4717ba4d9f2c41cf12c3b72512c0"
 
 date-format@^1.2.0:
   version "1.2.0"

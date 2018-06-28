@@ -8,20 +8,8 @@
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "noEmit": true,
-    "lib": [
-      "dom",
-      "es5",
-      "es2015",
-      "esnext.asynciterable"
-    ]
+    "noEmit": true
   },
-  "include": [
-    "**/*"
-  ],
-  "exclude": [
-    "**/dist",
-    "**/examples",
-    "templates"
-  ]
+  "include": ["**/*"],
+  "exclude": ["**/dist", "**/examples", "templates"]
 }

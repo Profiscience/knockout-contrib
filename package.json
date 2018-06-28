@@ -36,7 +36,7 @@
     "jest-jquery-matchers": "^2.0.0",
     "jquery": "^3.2.1",
     "jsx-dom": "^6.1.1",
-    "knockout": "^3.5.0-beta",
+    "knockout": "^3.5.0-rc",
     "knockout-punches": "^0.5.1",
     "lerna": "^2.11.0",
     "lodash": "^4.17.4",
@@ -54,7 +54,8 @@
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "/dist/",
-      "/node_modules/"
+      "/node_modules/",
+      "/router/__tests__/"
     ],
     "coverageReporters": [
       "lcov",
