@@ -5,12 +5,12 @@ import { Router, Middleware, Lifecycle } from './router'
 import { MaybePromise } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
-  public $child: Context & IContext
-  public route: Route
-  public params: { [k: string]: any }
-  public pathname: string
-  public _redirect: string
-  public _redirectArgs: {
+  public $child?: Context & IContext
+  public route!: Route
+  public params!: { [k: string]: any }
+  public pathname!: string
+  public _redirect?: string
+  public _redirectArgs?: {
     push: false
     force?: boolean
     with?: { [prop: string]: any }
@@ -25,11 +25,22 @@ export class Context /* implements IContext, use Context & IContext */ {
 
   constructor(
     public router: Router,
-    public $parent: Context,
+    public $parent: undefined | Context & IContext,
     public path: string,
     _with: { [key: string]: any } = {}
   ) {
+    const ctx: Context & IContext = this as any
     const route = router.resolveRoute(path)
+
+    if (!route) {
+      throw new Error(
+        // tslint:disable-next-line:max-line-length
+        `[@profiscience/knockout-contrib-router] Router@${
+          router.depth
+        } context initialized with path ${path}, but no matching route was found`
+      )
+    }
+
     const { params, pathname, childPath } = route.parse(path)
 
     Object.assign(
@@ -43,11 +54,11 @@ export class Context /* implements IContext, use Context & IContext */ {
     )
 
     if ($parent) {
-      $parent.$child = this
+      $parent.$child = ctx
     }
     if (childPath) {
       // tslint:disable-next-line no-unused-expression
-      new Router(childPath, this).ctx
+      new Router(childPath, ctx).ctx
     }
   }
 
@@ -58,7 +69,8 @@ export class Context /* implements IContext, use Context & IContext */ {
   public get base(): string {
     return this.router.isRoot
       ? Router.base
-      : this.$parent.base + this.$parent.pathname
+      : (this.$parent as Context & IContext).base +
+          (this.$parent as Context & IContext).pathname
   }
 
   // full path w/o base
@@ -75,18 +87,13 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $root(): Context & IContext {
-    let ctx: Context & IContext = this
-    while (ctx) {
-      if (ctx.$parent) {
-        ctx = ctx.$parent
-      } else {
-        return ctx
-      }
-    }
+    let ctx: Context & IContext = this as any
+    while (ctx.$parent) ctx = ctx.$parent
+    return ctx
   }
 
   public get $parents(): (Context & IContext)[] {
-    const parents = []
+    const parents: (Context & IContext)[] = []
     let parent = this.$parent
     while (parent) {
       parents.push(parent)
@@ -96,7 +103,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public get $children(): (Context & IContext)[] {
-    const children = []
+    const children: (Context & IContext)[] = []
     let child = this.$child
     while (child) {
       children.push(child)
@@ -131,7 +138,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public render() {
-    let ctx: Context & IContext = this
+    let ctx: void | Context & IContext = this as any
     while (ctx) {
       if (typeof ctx._redirect === 'undefined') {
         ctx.router.component(ctx.route.component)

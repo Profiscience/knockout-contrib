@@ -119,7 +119,7 @@ from executing.
 
 #### ctx.redirect(path)
 
-Only to be used in plain middleware, or the `beforeRender` phase of a lifecycle/generator middleware,
+Only to be used in plain middleware, or the `beforeRender` phase of a lifecycle middleware,
 this function short circuits the middleware execution, prevents an intermediate render
 and runs and downstream lifecycle middleware to clean up, then navigates to a new route.
 

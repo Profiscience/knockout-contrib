@@ -10,9 +10,16 @@ import { activePathBinding } from './active-path'
 
 export const pathBinding: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    const path = ko.unwrap(valueAccessor())
+    ;(activePathBinding.init as any).call(
+      this,
+      el,
+      valueAccessor,
+      allBindings,
+      viewModel,
+      bindingCtx
+    )
 
-    activePathBinding.init.apply(this, arguments)
+    const path = ko.unwrap(valueAccessor())
 
     Router.initialized
       .then(() => {

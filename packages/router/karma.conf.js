@@ -20,6 +20,7 @@ const rollupPlugins = [
       knockout: [
         'applyBindings',
         'applyBindingsToNode',
+        'bindingEvent',
         'bindingHandlers',
         'components',
         'observable',
@@ -77,12 +78,12 @@ module.exports = (config) => {
 
     // to debug, comment out singleRun, and uncomment autoWatch
     singleRun: !DEBUG,
-    autoWatch: !DEBUG,
+    autoWatch: DEBUG,
 
     reporters: karmaReporters,
 
     tapReporter: {
-      prettify: require('tap-diff')
+      // prettify: require('tap-diff')
     },
 
     rollupPreprocessor: {

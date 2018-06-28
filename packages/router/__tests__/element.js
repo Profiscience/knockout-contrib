@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-import { Router } from '../dist'
+import { Router } from '../'
 
 ko.components.register('element', {
   template: '<router></router>',

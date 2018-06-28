@@ -1,73 +1,50 @@
-import isFunction from 'lodash/isFunction'
-import isPlainObject from 'lodash/isPlainObject'
-import isUndefined from 'lodash/isUndefined'
-import noop from 'lodash/noop'
-import startsWith from 'lodash/startsWith'
 import { IContext } from './'
 import { Context } from './context'
-import { Router, Middleware, LifecycleGeneratorMiddleware } from './router'
+import { Router } from './router'
 
-export type AsyncCallback<T> = (done?: (t: T) => void) => Promise<T> | void
-export type SyncCallback<T> = () => T
-export type Callback<T> = AsyncCallback<T> | SyncCallback<T>
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 
-export function flatMap<T, R>(
-  collection: T[],
-  fn: (t: T) => MaybeArray<R>
-): R[] {
-  const flattened = []
-  for (const i of collection) {
-    const ret = fn(i)
-    if (Array.isArray(ret)) {
-      flattened.push(...ret)
-    } else {
-      flattened.push(ret)
-    }
-  }
-  return flattened
+export const noop = () => {
+  /* void */
+}
+export const startsWith = (string: string, target: string) =>
+  string.indexOf(target) === 0
+export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] =>
+  flatten(xs.map(fn))
+
+export function flatten<T>(xs: MaybeArray<T>[]): T[] {
+  return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
 }
 
-export async function sequence(
-  callbacks: Callback<boolean | void>[],
-  ...args: any[]
-): Promise<{
-  count: number
-  success: boolean
-}> {
-  let count = 0
-  let success = true
-  for (const _fn of callbacks) {
-    count++
-    const ret = await promisify(_fn)(...args)
-    if (ret === false) {
-      success = false
-      break
-    }
-  }
-  return { count, success }
+export function castArray<T>(x: MaybeArray<T>): T[] {
+  return Array.isArray(x) ? x : [x]
 }
 
 export function traversePath(router: Router, path: string) {
   if (path.indexOf('//') === 0) {
     path = path.replace('//', '/')
-
     while (!router.isRoot) {
-      router = router.ctx.$parent.router
+      router = (router.ctx.$parent as Context & IContext).router
     }
   } else {
     if (path.indexOf('./') === 0) {
       path = path.replace('./', '/')
+      if (!router.ctx.$child) {
+        throw new Error(
+          // tslint:disable-next-line:max-line-length
+          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${
+            router.depth
+          }) and ran out of children. Are you sure you want "./"?`
+        )
+      }
       router = router.ctx.$child.router
     }
-
     while (path && path.match(/\/?\.\./i) && !router.isRoot) {
-      router = router.ctx.$parent.router
+      router = (router.ctx.$parent as Context & IContext).router
       path = path.replace(/\/?\.\./i, '')
     }
   }
-
   return { router, path }
 }
 

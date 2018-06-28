@@ -5,15 +5,10 @@
     "sourceMap": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "strict": false,
+    "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "noEmit": true,
-    "baseUrl": "./",
-    "lib": ["dom", "es5", "es2015", "esnext.asynciterable"],
-    "paths": {
-      "@profiscience/knockout-contrib-router": ["./packages/router/src"]
-    }
+    "noEmit": true
   },
   "include": ["**/*"],
   "exclude": ["**/dist", "**/examples", "templates"]
