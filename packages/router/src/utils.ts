@@ -78,7 +78,7 @@ export function resolveHref({
   router: Router
   path: string
 }) {
-  return router.ctx.base + path
+  return router.ctx.base + path.replace(/\/\*$/, '')
 }
 
 export function isActivePath({
@@ -88,11 +88,12 @@ export function isActivePath({
   router: Router
   path: string
 }): boolean {
-  let ctx = router.ctx
+  let ctx: Context | void = router.ctx
   while (ctx) {
-    // create dependency on isNavigating so that this works with nested routes
-    // inside a computed
+    // create dependency on isNavigating so that this works with nested routes inside a computed
     ctx.router.isNavigating()
+
+    if (path === '/*') return true
 
     if (ctx.$child ? startsWith(path, ctx.pathname) : path === ctx.pathname) {
       path = path.substr(ctx.pathname.length) || '/'
