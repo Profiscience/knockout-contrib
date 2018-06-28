@@ -3,7 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="1.3.0"></a>
+  <a name="2.0.0-rc.0"></a>
+# [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@1.3.0...@profiscience/knockout-contrib-router@2.0.0-rc.0) (2018-06-28)
+
+
+### Chores
+
+* **router:** Upgrade to KnockoutJS 3.5.0-rc ([be14d20](https://github.com/Profiscience/knockout-contrib/commit/be14d20))
+
+
+### Features
+
+* **router:** Path binding partial matching ([cdd026c](https://github.com/Profiscience/knockout-contrib/commit/cdd026c)), closes [#64](https://github.com/Profiscience/knockout-contrib/issues/64)
+* **router:** Use new descendantsComplete binding event to delay afterRender until all descendants c ([ccc6b74](https://github.com/Profiscience/knockout-contrib/commit/ccc6b74))
+
+
+### Reverts
+
+* **router:** Focus middleware API (remove done callback syntax and generator middleware support) ([800625c](https://github.com/Profiscience/knockout-contrib/commit/800625c))
+
+
+### BREAKING CHANGES
+
+* **router:** Removed generator middleware API and `done` callback support for async in
+middleware and beforeNavigateCallbacks
+* **router:** Requires KnockoutJS 3.5.0-rc
+* **router:** Require KnockoutJS 3.5.0-rc for TypeScript consumers
+
+
+
+
+  <a name="1.3.0"></a>
 # [1.3.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-7...@profiscience/knockout-contrib-router@1.3.0) (2018-06-28)
 
 
@@ -14,7 +44,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      # Changelog
+# Changelog
 
 ## 1.2.0
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0-rc.0"></a>
+# [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@1.0.0...@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.0) (2018-06-28)
+
+
+### Chores
+
+* **filters.*:** Upgrade to KnockoutJS 3.5.0-rc ([9cfea8e](https://github.com/Profiscience/knockout-contrib/commit/9cfea8e))
+
+
+### BREAKING CHANGES
+
+* **filters.*:** Require KnockoutJS 3.5.0-rc (or better) for TypeScript consumers
+
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@0.0.2...@profiscience/knockout-contrib-filters-date-format@1.0.0) (2018-06-28)
 

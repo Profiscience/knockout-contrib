@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-utils-defaults",
   "description": "Knockout JS defaults() utility fn",
-  "version": "1.0.1",
+  "version": "2.0.0-rc.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.defaults",
@@ -14,10 +14,10 @@
     "knockout": "3.5.0-rc"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "^1.0.1"
+    "@profiscience/knockout-contrib-utils-from-js": "^2.0.0-rc.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^1.0.1"
+    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0"
   },
   "publishConfig": {
     "access": "public"

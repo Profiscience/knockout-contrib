@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-scroll-position",
-  "version": "1.0.0",
+  "version": "2.0.0-rc.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.middleware.scrollPosition",
@@ -14,7 +14,7 @@
     "knockout": "3.5.0-rc"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.3.0"
+    "@profiscience/knockout-contrib-router": "^2.0.0-rc.0"
   },
   "publishConfig": {
     "access": "public"
