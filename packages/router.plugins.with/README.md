@@ -22,9 +22,9 @@ Allows extending the context for a route with arbitrary data
 ## Usage
 
 ```typescript
-import { Route, withPlugin } from '@profiscience/knockout-contrib'
+import { Route, withRoutePlugin } from '@profiscience/knockout-contrib'
 
-Route.usePlugin(withPlugin)
+Route.usePlugin(withRoutePlugin)
 
 // Sync
 new Route('/', {

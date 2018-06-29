@@ -1,8 +1,8 @@
 import { Route, IRouteConfig } from '@profiscience/knockout-contrib-router'
 
-import { childrenPlugin } from './index'
+import { childrenRoutePlugin } from './index'
 
-Route.usePlugin(childrenPlugin)
+Route.usePlugin(childrenRoutePlugin)
 
 describe('router.plugins.children', () => {
   test('allows registering children with children property', () => {
@@ -30,6 +30,6 @@ describe('router.plugins.children', () => {
 
   test("doesn't blow up when not used", () => {
     const routeConfig: IRouteConfig = {}
-    expect(() => childrenPlugin(routeConfig)).not.toThrow()
+    expect(() => childrenRoutePlugin(routeConfig)).not.toThrow()
   })
 })

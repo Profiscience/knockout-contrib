@@ -1,5 +1,5 @@
 import { Context, IContext, Route } from '@profiscience/knockout-contrib-router'
-import { withPlugin } from './index'
+import { withRoutePlugin } from './index'
 
 const FOO = Symbol('foo')
 
@@ -11,7 +11,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-Route.usePlugin(withPlugin)
+Route.usePlugin(withRoutePlugin)
 
 describe('router.plugins.with', () => {
   test('extends context with object passed to with', () => {
@@ -68,7 +68,7 @@ describe('router.plugins.with', () => {
   })
 
   test("doesn't blow up when not used", () => {
-    const middleware = withPlugin({})
+    const middleware = withRoutePlugin({})
     expect(middleware).toBeUndefined()
   })
 })

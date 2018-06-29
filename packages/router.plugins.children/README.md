@@ -24,10 +24,10 @@ Idiomatically set child/nested routes
 ```typescript
 import {
   Route,
-  childrenPlugin
+  childrenRoutePlugin
 } from '@profiscience/knockout-contrib'
 
-Route.usePlugin(childrenPlugin)
+Route.usePlugin(childrenRoutePlugin)
 
 new Route('/users', {
   children: [

@@ -38,19 +38,17 @@ import {
   shiftClickBindingHandler,
   jqueryBindingHandler,
   toggleBindingHandler,
-
   formateDateFilter,
-
   Route,
   Router,
   createScrollPositionMiddleware,
-  childrenPlugin,
-  componentPlugin,
-  componentsPlugin,
-  initializerPlugin,
-  redirectPlugin,
-  createtitlePlugin,
-  withPlugin
+  childrenRoutePlugin,
+  componentRoutePlugin,
+  componentsRoutePlugin,
+  componentInitializerRoutePlugin,
+  redirectRoutePlugin,
+  createtitleRoutePlugin,
+  withRoutePlugin
 } from '@profiscience/knockout-contrib'
 
 /**
@@ -89,15 +87,15 @@ Router.use(createScrollPositionMiddleware())
 // remember that ES imports are hoisted, so the file that registers these plugins _must_ be imported
 // before are file that instatiates a route.
 Route.usePlugin(
-  withPlugin, // should _probably_ be first (so addt'l values are available everywhere)
-  redirectPlugin, // should also _probably_ be towards the top of the list (to prevent unneccesary work)
-  componentPlugin,
-  initializerPlugin, // **MUST** come after component plugin
+  withRoutePlugin, // should _probably_ be first (so addt'l values are available everywhere)
+  redirectRoutePlugin, // should also _probably_ be towards the top of the list (to prevent unneccesary work)
+  componentRoutePlugin,
+  componentInitializerRoutePlugin, // **MUST** come after component plugin
 
   // for the rest of these, the order is irrelevant
-  childrenPlugin,
-  componentsPlugin,
-  createTitlePlugin(
+  childrenRoutePlugin,
+  componentsRoutePlugin,
+  createtitleRoutePlugin(
     (titleSegments: string[]) => `My App | ${titleSegments.join(' > ')}`
   )
 )

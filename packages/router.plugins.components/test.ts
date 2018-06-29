@@ -6,9 +6,9 @@ import {
   Lifecycle
 } from '@profiscience/knockout-contrib-router'
 
-import { componentsPlugin } from './index'
+import { componentsRoutePlugin } from './index'
 
-Route.usePlugin(componentsPlugin)
+Route.usePlugin(componentsRoutePlugin)
 
 describe('router.plugins.components', () => {
   test('registers components before render', async () => {

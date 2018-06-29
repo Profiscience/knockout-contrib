@@ -10,12 +10,12 @@ import {
 } from '@profiscience/knockout-contrib-router'
 
 import {
-  componentPlugin,
+  componentRoutePlugin,
   IRoutedComponentInstance,
   disableUninstantiableViewModelWarning
 } from './index'
 
-Route.usePlugin(componentPlugin)
+Route.usePlugin(componentRoutePlugin)
 
 const registerComponent = ko.components.register
 afterEach(() => {
@@ -406,7 +406,7 @@ describe('router.plugins.component', () => {
 
   test("doesn't blow up when not used", () => {
     const routeConfig: IRouteConfig = {}
-    const middleware = componentPlugin(routeConfig)
+    const middleware = componentRoutePlugin(routeConfig)
     expect(middleware).toBeUndefined()
   })
 })

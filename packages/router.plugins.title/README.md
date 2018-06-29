@@ -22,12 +22,9 @@ Set `document.title` for a route. Supports nesting/composition.
 ## Usage
 
 ```typescript
-import {
-  Route,
-  createTitlePlugin
-} from '@profiscience/knockout-contrib'
+import { Route, createTitleRoutePlugin } from '@profiscience/knockout-contrib'
 
-Route.usePlugin(createTitlePlugin())
+Route.usePlugin(createTitleRoutePlugin())
 
 // Basic
 new Route('/', {
@@ -67,10 +64,10 @@ If you land on `/` the title will be set to "My Awesome App | Home"; likewise na
 
 ### Using a Custom Formatter
 
-If you'd like to using something other than "|" to join your routes, you may pass a custom formatter function to `createTitlePlugin`.
+If you'd like to using something other than "|" to join your routes, you may pass a custom formatter function to `createTitleRoutePlugin`.
 
 ```typescript
 Route.usePlugin(
-  createTitlePlugin((ts: string[]) => `My Awesome App | ${ts.join(' > ')}`)
+  createTitleRoutePlugin((ts: string[]) => `My Awesome App | ${ts.join(' > ')}`)
 )
 ```

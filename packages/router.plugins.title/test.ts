@@ -5,9 +5,9 @@ import {
   Route
 } from '@profiscience/knockout-contrib-router'
 
-import { createTitlePlugin } from './index'
+import { createTitleRoutePlugin } from './index'
 
-Route.usePlugin(createTitlePlugin())
+Route.usePlugin(createTitleRoutePlugin())
 
 describe('router.plugins.title', () => {
   test('sets the title after render and reverts after dispose', () => {
@@ -131,11 +131,11 @@ describe('router.plugins.title', () => {
   test('can set custom composer', () => {
     ;(Route as any).plugins = []
 
-    const customTitlePlugin = createTitlePlugin(
+    const customtitleRoutePlugin = createTitleRoutePlugin(
       (ts) => `prefix | ${ts.join(' >> ')} | suffix`
     )
 
-    Route.usePlugin(customTitlePlugin)
+    Route.usePlugin(customtitleRoutePlugin)
 
     const childCtx = {} as Context & IContext
     const parentCtx = { $child: childCtx, $children: [childCtx] } as Context &
@@ -158,7 +158,7 @@ describe('router.plugins.title', () => {
   })
 
   test("doesn't blow up when not used", () => {
-    const middleware = createTitlePlugin()({})
+    const middleware = createTitleRoutePlugin()({})
     expect(middleware).toBeUndefined()
   })
 })

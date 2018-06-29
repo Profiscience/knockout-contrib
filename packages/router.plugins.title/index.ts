@@ -17,7 +17,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function createTitlePlugin(
+export function createTitleRoutePlugin(
   compose = (ts: string[]) => ts.join(' | ')
 ): RoutePlugin {
   const titles: MaybePromise<string>[] = []

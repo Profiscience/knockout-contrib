@@ -28,12 +28,12 @@ Works with [router.plugins.component](../router.plugins.component) to declarativ
 ```typescript
 import {
   Route,
-  componentPlugin,
-  initializerPlugin,
+  componentRoutePlugin,
+  componentInitializerRoutePlugin,
   INITIALIZED
 } from '@profiscience/knockout-contrib'
 
-Route.usePlugin(componentPlugin).usePlugin(initializerPlugin) // **MUST** come after component plugin
+Route.usePlugin(componentRoutePlugin).usePlugin(componentInitializerRoutePlugin) // **MUST** come after component plugin
 
 class DataModel {
   public [INITIALIZED] = this.init()

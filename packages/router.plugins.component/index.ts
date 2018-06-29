@@ -93,7 +93,7 @@ const uniqueComponentNames = (function*() {
 })()
 
 // @TODO (try to) make this type-safe, i.e. know it's void if routeConfig.component is void, and middleware if not
-export function componentPlugin({
+export function componentRoutePlugin({
   component: componentAccessor
 }: IRouteConfig): void | LifecycleMiddleware {
   if (!componentAccessor) return

@@ -10,6 +10,6 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function childrenPlugin({ children }: IRouteConfig) {
+export function childrenRoutePlugin({ children }: IRouteConfig) {
   return children || []
 }

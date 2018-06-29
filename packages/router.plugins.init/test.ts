@@ -6,13 +6,13 @@ import {
   IContext,
   Lifecycle
 } from '@profiscience/knockout-contrib-router'
-import { componentPlugin } from '@profiscience/knockout-contrib-router-plugins-component'
+import { componentRoutePlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
-import { initializerPlugin, INITIALIZED } from './index'
+import { componentInitializerRoutePlugin, INITIALIZED } from './index'
 
-Route.usePlugin(componentPlugin)
+Route.usePlugin(componentRoutePlugin)
   // must come after component plugin. b/c of this can not be registered with global middleware.
-  .usePlugin(initializerPlugin)
+  .usePlugin(componentInitializerRoutePlugin)
 
 describe('router.plugins.init', () => {
   test('works with router.plugins.component, initializes props with INITIALIZED key on ViewModel', async () => {

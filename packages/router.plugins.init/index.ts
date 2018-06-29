@@ -8,7 +8,7 @@ import { IRoutedComponentInstance } from '@profiscience/knockout-contrib-router-
 
 export const INITIALIZED = Symbol('INITIALIZED')
 
-export function initializerPlugin(
+export function componentInitializerRoutePlugin(
   routeConfig: IRouteConfig
 ): SimpleMiddleware | void {
   if (!routeConfig.component) return

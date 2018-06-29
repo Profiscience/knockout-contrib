@@ -14,7 +14,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function redirectPlugin({ redirect }: IRouteConfig): Middleware | void {
+export function redirectRoutePlugin({ redirect }: IRouteConfig): Middleware | void {
   if (!redirect) return
 
   return async (ctx: Context & IContext) => {

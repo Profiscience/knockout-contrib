@@ -29,7 +29,7 @@ interface IComponentMap {
   }
 }
 
-export function componentsPlugin({
+export function componentsRoutePlugin({
   components
 }: IRouteConfig): LifecycleMiddleware | void {
   if (!components) return

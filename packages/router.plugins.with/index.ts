@@ -25,7 +25,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function withPlugin({ with: _with }: IRouteConfig) {
+export function withRoutePlugin({ with: _with }: IRouteConfig) {
   if (!_with) return
 
   return async (ctx: Context & IContext) => {

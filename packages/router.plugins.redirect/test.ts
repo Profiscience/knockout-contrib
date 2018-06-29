@@ -1,8 +1,8 @@
 import { Context, IContext, Route } from '@profiscience/knockout-contrib-router'
 
-import { redirectPlugin } from './index'
+import { redirectRoutePlugin } from './index'
 
-Route.usePlugin(redirectPlugin)
+Route.usePlugin(redirectRoutePlugin)
 
 describe('router.plugins.redirect', () => {
   test('calls ctx.redirect if function returns string', async () => {
