@@ -25,10 +25,7 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-update
 script:
-- yarn build
-- yarn lint
-- yarn test
-- yarn test:router
+- yarn ci
 after_script:
 - npx codecov
 - npx -p greenkeeper-lockfile@1 greenkeeper-lockfile-upload

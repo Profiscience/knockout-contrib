@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "ts-node ./build.ts",
+    "ci": "yarn lint; yarn build; yarn test; yarn test:router",
     "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
     "test": "jest",
