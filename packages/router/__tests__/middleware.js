@@ -51,6 +51,60 @@ ko.components.register('middleware', {
           }
         ],
 
+        '/generator': [
+          function*(ctx) {
+            t.pass('generator middleware is called')
+
+            t.ok(
+              ctx.beforeRenderGlobalMiddlewareHit,
+              'global middleware before render middleware is executed'
+            )
+            t.ok(
+              ctx.beforeRenderGlobalMiddlewareHit,
+              'route before before render middleware is called after global before render middleware'
+            )
+
+            yield new Promise((resolve) => {
+              setTimeout(() => {
+                ctx.waitOver = true
+                resolve()
+              }, 200)
+            })
+
+            t.ok(
+              ctx.afterRenderGlobalMiddlewareHit,
+              'route after render middleware is called after global after render middleware'
+            )
+
+            Router.update('/lifecycle')
+
+            yield
+
+            t.ok(
+              ctx.beforeNavigateHit,
+              'before dispose middleware is called after before navigate callbacks'
+            )
+            t.notOk(
+              ctx.beforeDisposeGlobalMiddlewareHit,
+              'route before dispose middleware is called before global before dispose middleware'
+            )
+
+            yield
+
+            t.notOk(
+              ctx.afterDisposeGlobalMiddlewareHit,
+              'route after dispose middleware is called before global after dispose middleware'
+            )
+          },
+          (ctx) => {
+            t.ok(
+              ctx.waitOver,
+              'generator middleware works with yield-ed promise'
+            )
+          },
+          'generator'
+        ],
+
         '/lifecycle': [
           (ctx) => ({
             beforeRender() {
@@ -119,6 +173,14 @@ ko.components.register('middleware', {
           }),
           'lifecycle'
         ]
+      })
+
+      ko.components.register('generator', {
+        viewModel: class {
+          constructor(ctx) {
+            ctx.addBeforeNavigateCallback(() => (ctx.beforeNavigateHit = true))
+          }
+        }
       })
 
       ko.components.register('lifecycle', {

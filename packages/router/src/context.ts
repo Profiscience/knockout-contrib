@@ -219,13 +219,27 @@ export class Context /* implements IContext, use Context & IContext */ {
     ctx: Context & IContext
   ): Promise<Lifecycle[]> {
     const downstream: Lifecycle[] = []
-
     for (const fn of middleware) {
-      if (typeof ctx._redirect !== 'undefined') {
-        break
-      }
-      const lifecycle = await fn(ctx)
-      if (lifecycle) {
+      if (typeof ctx._redirect !== 'undefined') break
+
+      let lifecycle: Lifecycle
+      const ret = await fn(ctx) // tslint:disable-line:await-promise
+
+      if (ret) {
+        // iterable (generator)
+        if (typeof (ret as IterableIterator<any>).next === 'function') {
+          // tslint:disable-line:strict-type-predicates
+          const iterator = ret as IterableIterator<any>
+          lifecycle = {
+            beforeRender: () => iterator.next().value,
+            afterRender: () => iterator.next().value,
+            beforeDispose: () => iterator.next().value,
+            afterDispose: () => iterator.next().value
+          }
+        } else {
+          lifecycle = ret as Lifecycle
+        }
+
         if (lifecycle.beforeRender) await lifecycle.beforeRender()
         downstream.push(lifecycle)
       }

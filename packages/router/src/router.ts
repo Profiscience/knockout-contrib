@@ -24,7 +24,16 @@ export type LifecycleMiddleware = (
   ctx: Context & IContext
 ) => MaybePromise<Lifecycle>
 
-export type Middleware = SimpleMiddleware | LifecycleMiddleware
+export type GeneratorMiddleware = (
+  ctx: Context & IContext
+) =>
+  | IterableIterator<MaybePromise<void>> // sync generators yielding nothing or a promise
+  | AsyncIterableIterator<void> // async generator
+
+export type Middleware =
+  | SimpleMiddleware
+  | LifecycleMiddleware
+  | GeneratorMiddleware
 
 export type Lifecycle = {
   beforeRender?(): MaybePromise<void>
