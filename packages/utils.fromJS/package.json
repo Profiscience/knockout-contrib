@@ -17,7 +17,7 @@
     "knockout": "3.5.0-rc"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0",
+    "@profiscience/knockout-contrib-jest-matchers": ">=2.0.0-rc.0",
     "knockout-mapping": "^2.6.0"
   },
   "publishConfig": {

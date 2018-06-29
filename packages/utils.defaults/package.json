@@ -14,10 +14,10 @@
     "knockout": "3.5.0-rc"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "^2.0.0-rc.0"
+    "@profiscience/knockout-contrib-utils-from-js": ">=2.0.0-rc.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0"
+    "@profiscience/knockout-contrib-jest-matchers": ">=2.0.0-rc.0"
   },
   "publishConfig": {
     "access": "public"
