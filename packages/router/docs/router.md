@@ -3,13 +3,13 @@
 _ES2015_
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 ```
 
 _CommonJS_
 
 ```javascript
-const { Router } = require('@profiscience/knockout-contrib-router')
+const { Router } = require('@profiscience/knockout-contrib')
 ```
 
 _Browser Globals_

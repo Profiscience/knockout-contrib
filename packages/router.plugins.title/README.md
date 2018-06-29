@@ -22,8 +22,10 @@ Set `document.title` for a route. Supports nesting/composition.
 ## Usage
 
 ```typescript
-import { Route } from '@profiscience/knockout-contrib-router'
-import { createTitlePlugin } from '@profiscience/knockout-contrib-router-plugins'
+import {
+  Route,
+  createTitlePlugin
+} from '@profiscience/knockout-contrib'
 
 Route.usePlugin(createTitlePlugin())
 

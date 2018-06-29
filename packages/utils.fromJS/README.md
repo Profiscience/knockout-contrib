@@ -30,7 +30,7 @@ If `mapArrayElements` is true, array elements will be passed to `fromJS` as well
 The much needed inverse to the undocumented `ko.toJS` function; a dumb version of [ko.mapping.fromJS](http://knockoutjs.com/documentation/plugins-mapping.html) that is [_a lot faster_](#benchmark).
 
 ```javascript
-import { fromJS } from '@profiscience/knockout-contrib/utils'
+import { fromJS } from '@profiscience/knockout-contrib'
 
 const foos = {
   foo: 'foo',

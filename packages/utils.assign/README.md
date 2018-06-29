@@ -43,7 +43,7 @@ probably want [ko.mapping](http://knockoutjs.com/documentation/plugins-mapping.h
 but far slower.
 
 ```javascript
-import { assign } from '@profiscience/knockout-contrib/utils'
+import { assign } from '@profiscience/knockout-contrib'
 
 const foos = {
   foo: ko.observable('foo'),

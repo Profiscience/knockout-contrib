@@ -25,7 +25,7 @@ Idiomatically set child/nested routes
 import {
   Route,
   childrenPlugin
-} from '@profiscience/knockout-contrib/router'
+} from '@profiscience/knockout-contrib'
 
 Route.usePlugin(childrenPlugin)
 

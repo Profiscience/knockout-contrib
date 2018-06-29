@@ -31,7 +31,7 @@ import {
   componentPlugin,
   initializerPlugin,
   INITIALIZED
-} from '@profiscience/knockout-contrib/router'
+} from '@profiscience/knockout-contrib'
 
 Route.usePlugin(componentPlugin).usePlugin(initializerPlugin) // **MUST** come after component plugin
 

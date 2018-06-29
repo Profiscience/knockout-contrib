@@ -22,7 +22,7 @@ Sets the component for a route. Intended for use with dynamic imports for intuit
 ## Usage
 
 ```typescript
-import { Route, componentPlugin } from '@profiscience/knockout-contrib/router'
+import { Route, componentPlugin } from '@profiscience/knockout-contrib'
 
 Route.usePlugin(componentPlugin)
 

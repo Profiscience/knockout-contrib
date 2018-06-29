@@ -9,7 +9,7 @@ Nested routes are registered by
 
 ```typescript
 import * as ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes({
   '/user': {
@@ -25,7 +25,7 @@ Router.useRoutes({
 
 ```typescript
 import * as ko from 'knockout'
-import { Route, Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes([
   new Route('/user', [
@@ -41,7 +41,7 @@ You can also mix-and-match, should you find it appropriate...
 
 ```typescript
 import * as ko from 'knockout'
-import { Route, Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes([
   new Route('/user', {
@@ -61,7 +61,7 @@ in that component.
 
 ```javascript
 import ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes({
   '/user': [

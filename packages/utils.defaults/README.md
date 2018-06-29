@@ -28,7 +28,7 @@ Creates observables for enumerable properties of `defaultValues` where undefined
 If `mapArrayElements` is true, array elements will be created using [utils.fromJS](../utils.fromJS).
 
 ```javascript
-import { defaults } from '@profiscience/knockout-contrib/utils'
+import { defaults } from '@profiscience/knockout-contrib'
 
 const foos = { foo: 'foo' }
 defaults(foos, { foo: 'bar', bar: 'bar' })

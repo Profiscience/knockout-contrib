@@ -24,7 +24,7 @@ Allows breaking views into multiple components while helping to avoid naming con
 ## Usage
 
 ```typescript
-import { Route, componentsPlugin } from '@profiscience/knockout-contrib/router'
+import { Route, componentsPlugin } from '@profiscience/knockout-contrib'
 
 Route.usePlugin(componentsPlugin)
 

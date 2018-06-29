@@ -21,7 +21,7 @@ and keep your viewModel as slim as possible (think skinny controllers, fat model
 App middleware is ran for every route and is registered using `Router.use`
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.use(fn)
 ```
@@ -84,7 +84,7 @@ Middleware functions are passed 2 arguments:
 Let's look at some example logging middleware...
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.use((ctx) => console.log('[router] navigating to', ctx.pathname))
 ```

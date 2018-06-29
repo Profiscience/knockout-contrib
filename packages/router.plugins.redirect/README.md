@@ -24,7 +24,7 @@ Support `redirect` option in route configurations.
 Redirects to the returned path, if any. Supports async via promise.
 
 ```typescript
-import { Route, redirectPlugin } from '@profiscience/knockout-contrib/router'
+import { Route, redirectPlugin } from '@profiscience/knockout-contrib'
 
 Route.usePlugin(redirectPlugin)
 

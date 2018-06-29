@@ -7,7 +7,7 @@ That being said, it isn't immediately obvious how to take advantage of type-safe
 Let's say you want to have some middleware that sets a `data` property on the context, like so...
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.use(async (ctx) => {
   ctx.data = await fetchSomeData()
@@ -21,7 +21,7 @@ Because `ctx` is strongly-typed, we get an error as expected...
 We could use the dirty `(ctx as any).data = ...` hack that anyone who has used TypeScript for more than a day has undoubtedly had to use, but it would be way better if we could let the compiler know about the new property so we get all the benefits type-safety brings to the table like autocompletion. To do this, it's as simple as adding a `declare` statement to our middleware file, like so...
 
 ```typescript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 declare module '@profiscience/knockout-contrib-router' {
   interface IContext {
@@ -41,7 +41,7 @@ That's it! If `fetchSomeData()` returns something of the wrong type, the compile
 You may also take advantage of some types that are exported, namely `RouteConfig`, `RouteMap`, `Middleware`, and `RoutePlugin`. You can use these to specify types where the compiler cannot otherwise infer them. For example...
 
 ```typescript
-import { Plugin } from '@profiscience/knockout-contrib-router'
+import { Plugin } from '@profiscience/knockout-contrib'
 
 declare module '@profiscience/knockout-contrib-router' {
   interface IContext {
@@ -62,7 +62,7 @@ export default apiPlugin
 Note, we also augment `IRouteConfig` so that we can get type-safety with the route constructor, i.e.
 
 ```typescript
-import { Route } from '@profiscience/knockout-contrib-router'
+import { Route } from '@profiscience/knockout-contrib'
 
 new Route('/', {
   // this is type-safe!

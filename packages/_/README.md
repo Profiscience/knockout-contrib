@@ -29,18 +29,33 @@ Then somewhere in your app _before_ you kick off `ko.applyBindings()`, add the f
  */
 
 import * as ko from 'knockout'
+import 'knockout-punches'
 
-/**
- * Bindings
- */
 import {
   altClickBindingHandler,
   ctrlClickBindingHandler,
   metaClickBindingHandler,
   shiftClickBindingHandler,
   jqueryBindingHandler,
-  toggleBindingHandler
-} from '@profiscience/knockout-contrib/bindings'
+  toggleBindingHandler,
+
+  formateDateFilter,
+
+  Route,
+  Router,
+  createScrollPositionMiddleware,
+  childrenPlugin,
+  componentPlugin,
+  componentsPlugin,
+  initializerPlugin,
+  redirectPlugin,
+  createtitlePlugin,
+  withPlugin
+} from '@profiscience/knockout-contrib'
+
+/**
+ * BINDINGS
+ */
 
 ko.bindingHandlers['click.alt'] = altClickBindingHandler
 ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
@@ -53,10 +68,8 @@ ko.bindingHandlers.$ = jqueryBindingHandler // alias
 ko.bindingHandlers.toggle = toggleBindingHandler
 
 /**
- * Filters (knockout.punches)
+ * FILTERS
  */
-import 'knockout-punches'
-import { formatDateFilter } from '@profiscience/knockout-contrib/filters'
 
 // punches does not have type definitions...
 const _ko: any = ko
@@ -68,21 +81,8 @@ _ko.punches.textFilter.enableForBinding('attr')
 _ko.filters['date.format'] = formatDateFilter
 
 /**
- * Routing / "Framework"
+ * ROUTING / "FRAMEWORK"
  */
-import {
-  Route,
-  Router,
-  createScrollPositionMiddleware,
-  childrenPlugin,
-  componentPlugin,
-  componentsPlugin,
-  initializerPlugin,
-  redirectPlugin,
-  createTitlePlugin,
-  withPlugin
-} from '@profiscience/knockout-contrib/router'
-
 Router.use(createScrollPositionMiddleware())
 
 // NOTE: This _must_ be executed _before_ any routes are instantiated. If you're having issues,

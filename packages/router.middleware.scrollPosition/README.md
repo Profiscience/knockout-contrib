@@ -28,7 +28,7 @@ Add support for:
 import {
   Router,
   createScrollPositionMiddleware
-} from '@profiscience/knockout-contrib/router'
+} from '@profiscience/knockout-contrib'
 
 Router.use(
   createScrollPositionMiddleware({

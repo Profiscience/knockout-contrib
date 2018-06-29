@@ -28,7 +28,7 @@ _app.js_
 ```typescript
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Route, Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib'
 
 const loading = ko.observable(true)
 

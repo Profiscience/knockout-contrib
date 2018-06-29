@@ -29,7 +29,7 @@ window.history.setup('/', '!/', null)
 Configuration is set using the static `.setConfig` method on the `Router` class
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.setConfig({
   // base path app runs under, i.e. '/app'
@@ -61,7 +61,7 @@ c) [nested route map](./nested-routing.md)
 d) array containing any combination of the above
 
 ```typescript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes({
   routes: {
@@ -93,7 +93,7 @@ Alternatively, you may use the `Route` constructor, create the route instances a
 register them directly.
 
 ```typescript
-import { Route, Router } from '@profiscience/knockout-contrib-router'
+import { Route, Router } from '@profiscience/knockout-contrib'
 
 Router.useRoutes([
   new Route('/', 'home'),

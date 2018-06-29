@@ -22,7 +22,7 @@ For a contrived example of this, you could create a data plugin that enables you
 to have route configs like...
 
 ```typescript
-import { Route } from '@profiscience/knockout-contrib-router'
+import { Route } from '@profiscience/knockout-contrib'
 
 export default new Route('/', {
   component: 'component-name',

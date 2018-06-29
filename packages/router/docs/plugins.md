@@ -10,7 +10,7 @@ For example say you wanted to refactor this...
 
 ```javascript
 import ko from 'knockout'
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 import loadData from './utils/loadData'
 
 ko.components.register('foo', {
@@ -34,7 +34,7 @@ Router.useRoutes({
 ...into a much more readable...
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 import loadData from './utils/loadData'
 
 Router.useRoutes({
@@ -74,7 +74,7 @@ We could do this by registering a plugin that essentially takes the latter, and
 returns the former.
 
 ```javascript
-import { Route } from '@profiscience/knockout-contrib-router'
+import { Route } from '@profiscience/knockout-contrib'
 
 Route.usePlugin((route) => {
   return [
@@ -97,7 +97,7 @@ Route.usePlugin((route) => {
 Better yet, plugins can be composed as such...
 
 ```javascript
-import { Router } from '@profiscience/knockout-contrib-router'
+import { Router } from '@profiscience/knockout-contrib'
 
 function componentPlugin(route) {
   return (ctx) => ({
