@@ -75,12 +75,7 @@ to run after the component is rendered. For how to accomplish that, keep reading
 
 ## Middleware Functions
 
-Middleware functions are passed 2 arguments:
-
-- `ctx`: the ctx object passed into the viewmodel
-- `done`: an optional callback for async functions\*; promises are also supported, and encouraged
-
-\*that should wait for completion before continuing middleware, otherwise use `ctx.queue()`
+Middleware functions are passed a context object as the first and only argument, and may optionally return a promise that will delay execution of the next middleware until resolved (to run middleware concurrently, call `ctx.queue` with the promise instead of returning it).
 
 Let's look at some example logging middleware...
 
@@ -122,15 +117,12 @@ import Query from 'ko-query'
 
 export default function(ctx) {
   return {
-    beforeRender(/* done */) {
+    beforeRender() {
       console.log('[router] navigating to', ctx.pathname)
       ctx.query = new Query({}, ctx.pathname)
 
       return loadSomeAsyncData.then((data) => {
         ctx.data = data
-
-        // callbacks are also supported
-        // done()
       })
     },
     afterRender() {

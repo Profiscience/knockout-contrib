@@ -59,18 +59,17 @@ Child context accessor
 
 Array of child contexts
 
-#### ctx.addBeforeNavigateCallback(([done]) => done(boolean|null) | Promise<boolean|null>)
+#### ctx.addBeforeNavigateCallback(() => MaybePromise<boolean | null>)
 
 Adds a function to be executed before the page is navigated away from, and potentially
 block navigation. This may be used to show a save confirmation, for example.
 
-Async is supported via promises or an optional `done` callback.
+Async is supported via promises.
 
 To prevent navigation, the beforeNavigate callback may
 a) return `false`
 b) return a Promise that resolves `false`
 c) return a rejected Promise
-d) call the optional `done` callback with `false`
 
 Callbacks are executed LIFO; async functions will be ran in series. If a callback
 prevents navigation by one of the above methods, no more callbacks will be executed.
