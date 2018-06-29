@@ -119,7 +119,7 @@ If both components are published together, you'd be required to update `componen
 
 One option is to require the installation of each individual package by the consumer, however this can lead to a lot of extra typing (especially with the length/verbosity of `@profiscience/knockout-contrib-*`).
 
-Another is what is done here, and that is using a metapackage with _very_ lenient version ranges. Actually, the most lenient... if you check this package's [package.json](./package.json), you will see it merely lists each package with a `X.X.X` version number.
+Another is to provide a default metapackage which installs all of the independent packages without enforcing strict versioning, as is done here.
 
 What this leads to is a behavior in which, by default, the latest version of each package will be installed. However, you may lock the version of any package by adding it explicitly to your `package.json`. Your package manager should resolve any cross-dependencies or version requirements from there.
 

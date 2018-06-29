@@ -11,17 +11,17 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": "^1.3.0",
-    "@profiscience/knockout-contrib-router-plugins-component": "^1.0.0",
+    "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
+    "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0",
     "knockout": "^3.5.0-rc"
   },
   "dependencies": {
     "tslib": "^1.8.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0",
-    "@profiscience/knockout-contrib-router": "^2.0.0-rc.0",
-    "@profiscience/knockout-contrib-router-plugins-component": "^2.0.0-rc.0"
+    "@profiscience/knockout-contrib-jest-matchers": ">=2.0.0-rc.0",
+    "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
+    "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0"
   },
   "publishConfig": {
     "access": "public"
