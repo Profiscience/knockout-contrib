@@ -3,10 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="2.0.0-rc.0"></a>
-# [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-redirect@0.0.6...@profiscience/knockout-contrib-router-plugins-redirect@2.0.0-rc.0) (2018-06-28)
+<a name="2.0.0-rc.1"></a>
 
+# [2.0.0-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-redirect@2.0.0-rc.0...@profiscience/knockout-contrib-router-plugins-redirect@2.0.0-rc.1) (2018-06-29)
+
+### Code Refactoring
+
+- **router.plugins.\*:** Make named exports more explicit (componentPlugin => componentRoutePlugi ([2c25bc9](https://github.com/Profiscience/knockout-contrib/commit/2c25bc9))
+
+### BREAKING CHANGES
+
+- **router.plugins.\*:** Exported name has changed. View README for updated name(s).
+
+<a name="2.0.0-rc.0"></a>
+
+# [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-redirect@0.0.6...@profiscience/knockout-contrib-router-plugins-redirect@2.0.0-rc.0) (2018-06-28)
 
 ### Features
 
-* **router.*:** Add base middleware and plugin packages ([96fac42](https://github.com/Profiscience/knockout-contrib/commit/96fac42))
+- **router.\*:** Add base middleware and plugin packages ([96fac42](https://github.com/Profiscience/knockout-contrib/commit/96fac42))
