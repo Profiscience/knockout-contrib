@@ -45,7 +45,7 @@
     "prettier": "^1.13.5",
     "pretty-quick": "^1.6.0",
     "toprogress": "^0.1.3",
-    "ts-jest": "^22.4.5",
+    "ts-jest": "^23.0.0",
     "ts-node": "^7.0.0",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
