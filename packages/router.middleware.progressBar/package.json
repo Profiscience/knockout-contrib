@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-progress-bar",
-  "version": "1.0.0",
+  "version": "1.0.1-next.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.middleware.progressBar",
@@ -17,6 +17,6 @@
     "toprogress2": "^2.0.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-next.0"
+    "@profiscience/knockout-contrib-router": "^2.0.0-next.1"
   }
 }

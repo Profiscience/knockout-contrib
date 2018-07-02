@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-data",
-  "version": "1.0.1-next.1",
+  "version": "1.0.1-next.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.data",
@@ -16,12 +16,12 @@
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^1.0.1-next.0",
     "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^1.0.1-next.0",
-    "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.1-next.0",
+    "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.1-next.1",
     "@profiscience/knockout-contrib-utils-assign": "^2.0.0-rc.0",
     "tslib": "^1.8.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0",
-    "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-next.1"
+    "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-next.2"
   }
 }

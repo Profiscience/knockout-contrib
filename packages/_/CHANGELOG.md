@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.0.0-next.1"></a>
+      <a name="2.0.0-next.2"></a>
+# [2.0.0-next.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.1...@profiscience/knockout-contrib@2.0.0-next.2) (2018-07-02)
+
+
+### Features
+
+* **router.middleware.progressBar:** Init ([efb789f](https://github.com/Profiscience/knockout-contrib/commit/efb789f))
+
+
+
+
+      <a name="2.0.0-next.1"></a>
 # [2.0.0-next.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.0...@profiscience/knockout-contrib@2.0.0-next.1) (2018-07-02)
 
 
@@ -19,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="2.0.0-next.0"></a>
+<a name="2.0.0-next.0"></a>
 # [2.0.0-next.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-next.0) (2018-07-02)
 
 
