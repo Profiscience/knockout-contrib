@@ -1,0 +1,23 @@
+{
+  "name": "@profiscience/knockout-contrib-components-flash-message",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/components.flash-message",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.tsx",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0",
+    "knockout": "^3.5.0-rc"
+  },
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-builders-view": "^1.0.1-next.0",
+    "jsx-dom": "^6.0.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.0"
+  }
+}

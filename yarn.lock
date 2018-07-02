@@ -4196,7 +4196,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsx-dom@^6.1.1:
+jsx-dom@^6.0.0, jsx-dom@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.1.1.tgz#ed7c4ad72144dd450cba92ce34adf1bcc92c25a5"
   dependencies:
