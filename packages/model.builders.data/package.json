@@ -1,0 +1,27 @@
+{
+  "name": "@profiscience/knockout-contrib-model-builders-data",
+  "version": "1.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.data",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-router-plugins-init": ">=2.0.0-rc.1",
+    "knockout": "3.5.0-rc"
+  },
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.0",
+    "@profiscience/knockout-contrib-model-mixins-disposal-aggregator": "^1.0.0",
+    "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.0",
+    "@profiscience/knockout-contrib-utils-assign": "^2.0.0-rc.0",
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0",
+    "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-rc.1"
+  }
+}
