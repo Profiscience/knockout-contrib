@@ -3,7 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-next.0"></a>
+  <a name="2.0.0-next.1"></a>
+# [2.0.0-next.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.0...@profiscience/knockout-contrib@2.0.0-next.1) (2018-07-02)
+
+
+### Bug Fixes
+
+* **meta:** Export end-user model builders and mixins ([c35a70a](https://github.com/Profiscience/knockout-contrib/commit/c35a70a))
+
+
+### Features
+
+* **flash message:** Add middleware and component, export from metapackage ([012300d](https://github.com/Profiscience/knockout-contrib/commit/012300d))
+
+
+
+
+  <a name="2.0.0-next.0"></a>
 # [2.0.0-next.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-next.0) (2018-07-02)
 
 
@@ -24,7 +40,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.0.0-rc.2"></a>
+<a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.1...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
 
