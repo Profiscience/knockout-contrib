@@ -11,8 +11,8 @@
   "module": "dist/default/index.js",
   "types": "index.ts",
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
-    "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0",
+    "@profiscience/knockout-contrib-router": ">=2.0.0-next.0",
+    "@profiscience/knockout-contrib-router-plugins-component": ">=2.0.0-next.0",
     "knockout": "^3.5.0-rc"
   },
   "dependencies": {
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-router": "^2.0.0-next.0",
-    "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0"
+    "@profiscience/knockout-contrib-router-plugins-component": ">=2.0.0-next.0"
   },
   "publishConfig": {
     "access": "public"

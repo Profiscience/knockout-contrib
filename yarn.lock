@@ -27,10 +27,6 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@profiscience/knockout-contrib-router-plugins-component@>=1.0.0-rc.0":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@profiscience/knockout-contrib-router-plugins-component/-/knockout-contrib-router-plugins-component-1.0.2.tgz#63eb940143279f2be3291dabd7aac23a8dd6e445"
-
 "@types/babel-core@^6.25.3":
   version "6.25.5"
   resolved "https://registry.yarnpkg.com/@types/babel-core/-/babel-core-6.25.5.tgz#7598b1287c2cb5a8e9150d60e4d4a8f2dbe29982"
