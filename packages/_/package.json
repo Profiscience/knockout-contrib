@@ -44,6 +44,7 @@
     "@profiscience/knockout-contrib-model-mixins-pager": "^1.0.1-next.2",
     "@profiscience/knockout-contrib-model-mixins-subscription-disposal": "^1.0.1-next.1",
     "@profiscience/knockout-contrib-model-mixins-transform": "^1.0.1-next.2",
+    "@profiscience/knockout-contrib-query": "1.0.0",
     "@profiscience/knockout-contrib-router": "^2.0.0-next.1",
     "@profiscience/knockout-contrib-router-middleware-flash-message": "^1.0.1-next.1",
     "@profiscience/knockout-contrib-router-middleware-progress-bar": "^1.0.1-next.0",

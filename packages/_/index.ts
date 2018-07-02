@@ -14,6 +14,8 @@ export * from '@profiscience/knockout-contrib-model-builders-view'
 export * from '@profiscience/knockout-contrib-model-mixins-pager'
 export * from '@profiscience/knockout-contrib-model-mixins-transform'
 
+export * from '@profiscience/knockout-contrib-query'
+
 export * from '@profiscience/knockout-contrib-router'
 export * from '@profiscience/knockout-contrib-router-middleware-flash-message'
 export * from '@profiscience/knockout-contrib-router-middleware-progress-bar'
