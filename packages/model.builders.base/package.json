@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-base",
-  "version": "1.0.0",
+  "version": "1.0.1-next.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.base",

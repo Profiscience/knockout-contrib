@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib-router",
   "description": "Component-based routing for KnockoutJS",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-next.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router",

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0-next.0"></a>
+# [2.0.0-next.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.0...@profiscience/knockout-contrib-router-plugins-title@2.0.0-next.0) (2018-07-02)
+
+
+### Code Refactoring
+
+* **router.plugins.*:** Make named exports more explicit (componentPlugin => componentRoutePlugi ([2c25bc9](https://github.com/Profiscience/knockout-contrib/commit/2c25bc9))
+
+
+### Features
+
+* **model.*:** Add model.* packages ([b7f634a](https://github.com/Profiscience/knockout-contrib/commit/b7f634a))
+
+
+### BREAKING CHANGES
+
+* **router.plugins.*:** Exported name has changed. View README for updated name(s).
+
+
+
+
 <a name="2.0.0-rc.1"></a>
 
 # [2.0.0-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.0...@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.1) (2018-06-29)
