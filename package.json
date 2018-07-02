@@ -7,7 +7,8 @@
     "format": "pretty-quick",
     "test": "jest",
     "test:router": "cd packages/router; yarn test",
-    "precommit": "yarn format --staged"
+    "precommit": "yarn format --staged",
+    "publish:next": "lerna publish --conventional-commits --npm-tag=next --cd-version prerelease --preid=next"
   },
   "workspaces": [
     "packages/*"
