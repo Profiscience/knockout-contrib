@@ -26,7 +26,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "tag": "rc"
+    "tag": "next"
   },
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-click-alt": ">=2.0.0-rc.0",
