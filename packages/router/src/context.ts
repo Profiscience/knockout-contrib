@@ -227,7 +227,7 @@ export class Context /* implements IContext, use Context & IContext */ {
 
       if (ret) {
         // iterable (generator)
-        if (typeof (ret as IterableIterator<any>).next === 'function') {
+        if (typeof (ret as any | IterableIterator<any>).next === 'function') {
           // tslint:disable-line:strict-type-predicates
           const iterator = ret as IterableIterator<any>
           lifecycle = {

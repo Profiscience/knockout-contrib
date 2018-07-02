@@ -81,7 +81,9 @@ export function SubscriptionDisposalMixin<
     }
 
     private addSubscription(arg: any, fn: any, sub: ko.Subscription) {
-      if (!this[SUBSCRIPTIONS].has(arg)) this[SUBSCRIPTIONS].set(arg, new Map())
+      if (!this[SUBSCRIPTIONS].has(arg)) {
+        this[SUBSCRIPTIONS].set(arg, new Map())
+      }
       ;(this[SUBSCRIPTIONS].get(arg) as Map<any, ko.Subscription>).set(fn, sub)
     }
 

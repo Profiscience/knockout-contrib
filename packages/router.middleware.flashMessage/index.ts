@@ -1,9 +1,5 @@
 import * as ko from 'knockout'
-import {
-  Context,
-  IContext,
-  LifecycleMiddleware
-} from '@profiscience/knockout-contrib-router'
+import { LifecycleMiddleware } from '@profiscience/knockout-contrib-router'
 
 export const FLASH_MESSAGE = Symbol('FLASH_MESSAGE')
 
