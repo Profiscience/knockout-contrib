@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+      <a name="2.0.0-rc.3"></a>
+# [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-rc.3) (2018-07-03)
+
+
+### Code Refactoring
+
+* **router.plugins.*:** Make named exports more explicit (componentPlugin => componentRoutePlugi ([2c25bc9](https://github.com/Profiscience/knockout-contrib/commit/2c25bc9))
+
+
+### BREAKING CHANGES
+
+* **router.plugins.*:** Exported name has changed. View README for updated name(s).
+
+
+
+
       <a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.1...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
@@ -10,7 +26,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Reverts
 
 - **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
-  <a name="2.0.0-rc.2"></a>
+<a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
 
