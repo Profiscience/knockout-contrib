@@ -1,0 +1,23 @@
+{
+  "name": "@profiscience/knockout-contrib-model-mixins-pager",
+  "version": "2.0.0-rc.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.pager",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": ">=2.0.0-rc.0",
+    "knockout": "3.5.0-rc"
+  },
+  "dependencies": {
+    "core-js": "^2.5.3",
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.0"
+  }
+}
