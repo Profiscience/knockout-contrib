@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0-next.3"></a>
+# [2.0.0-next.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@2.0.0-next.2...@profiscience/knockout-contrib-router-plugins-init@2.0.0-next.3) (2018-07-03)
+
+
+### Bug Fixes
+
+* **router.plugins.init:** Fix plugin, fix false positive test ([ffd0457](https://github.com/Profiscience/knockout-contrib/commit/ffd0457))
+
+
+
+
 <a name="2.0.0-next.2"></a>
 # [2.0.0-next.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@2.0.0-next.1...@profiscience/knockout-contrib-router-plugins-init@2.0.0-next.2) (2018-07-02)
 
