@@ -3,7 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-rc.3"></a>
+  <a name="2.0.0-rc.4"></a>
+# [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.3...@profiscience/knockout-contrib@2.0.0-rc.4) (2018-07-03)
+
+
+### Features
+
+* **flash-message:** Add flash message middleware and component ([d7acca7](https://github.com/Profiscience/knockout-contrib/commit/d7acca7))
+* **model.*:** Add model builders and preliminary mixins ([d494eb3](https://github.com/Profiscience/knockout-contrib/commit/d494eb3))
+* **progress bar:** Add progress bar middleware ([b87decf](https://github.com/Profiscience/knockout-contrib/commit/b87decf))
+* **query:** Add query(string) package ([faf5ab0](https://github.com/Profiscience/knockout-contrib/commit/faf5ab0))
+
+
+
+
+  <a name="2.0.0-rc.3"></a>
 # [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-rc.3) (2018-07-03)
 
 
@@ -19,7 +33,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.0.0-rc.2"></a>
+<a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.1...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
 

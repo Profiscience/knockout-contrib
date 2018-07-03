@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0-rc.1"></a>
+# [2.0.0-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-flash-message@1.0.0-alpha.11...@profiscience/knockout-contrib-router-middleware-flash-message@2.0.0-rc.1) (2018-07-03)
+
+
+### Features
+
+* **flash-message:** Add flash message middleware and component ([d7acca7](https://github.com/Profiscience/knockout-contrib/commit/d7acca7))
+
+
+### Reverts
+
+* **router.*:** Remove unstable middleware/plugin packages from master branch ([ac042f2](https://github.com/Profiscience/knockout-contrib/commit/ac042f2))
+
+
+
+
 <a name="1.0.1-next.1"></a>
 
 ## [1.0.1-next.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-flash-message@1.0.1-next.0...@profiscience/knockout-contrib-router-middleware-flash-message@1.0.1-next.1) (2018-07-02)
