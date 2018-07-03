@@ -19,6 +19,7 @@ export * from '@profiscience/knockout-contrib-query'
 
 export * from '@profiscience/knockout-contrib-router'
 export * from '@profiscience/knockout-contrib-router-middleware-flash-message'
+export * from '@profiscience/knockout-contrib-router-middleware-progress-bar'
 export * from '@profiscience/knockout-contrib-router-middleware-scroll-position'
 export * from '@profiscience/knockout-contrib-router-plugins-children'
 export * from '@profiscience/knockout-contrib-router-plugins-component'
