@@ -7,6 +7,8 @@ export * from '@profiscience/knockout-contrib-bindings-toggle'
 
 export * from '@profiscience/knockout-contrib-filters-date-format'
 
+export * from '@profiscience/knockout-contrib-query'
+
 export * from '@profiscience/knockout-contrib-router'
 export * from '@profiscience/knockout-contrib-router-middleware-scroll-position'
 export * from '@profiscience/knockout-contrib-router-plugins-children'

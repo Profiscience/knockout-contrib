@@ -36,6 +36,7 @@
     "@profiscience/knockout-contrib-bindings-jquery": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-bindings-toggle": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-filters-date-format": ">=2.0.0-rc.0",
+    "@profiscience/knockout-contrib-query": "^2.0.0-rc.0",
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.2",
     "@profiscience/knockout-contrib-router-middleware-scroll-position": "^2.0.0-rc.1",
     "@profiscience/knockout-contrib-router-plugins-children": "^2.0.0-rc.2",
