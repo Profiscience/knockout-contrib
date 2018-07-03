@@ -17,7 +17,7 @@ Route.usePlugin(componentRoutePlugin)
 describe('router.plugins.init', () => {
   test('works with router.plugins.component, initializes props with INITIALIZED key on ViewModel', async () => {
     const spy = jest.spyOn(Promise, 'all')
-    const promise = Promise.resolve()
+    const promise = Symbol()
 
     const getComponent = () => ({
       template: Promise.resolve({ default: 'Hello, World!' }),
@@ -48,7 +48,7 @@ describe('router.plugins.init', () => {
 
   test('works with router.plugins.component, initializes INITIALIZED key on ViewModel', async () => {
     const spy = jest.spyOn(Promise, 'all')
-    const promise = Promise.resolve()
+    const promise = Symbol()
 
     const getComponent = () => ({
       template: Promise.resolve({ default: 'Hello, World!' }),
@@ -102,6 +102,10 @@ describe('router.plugins.init', () => {
         if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
       }
     }).not.toThrow()
+
+    await expect(
+      Promise.all(queue.mock.calls.map(([p]) => p))
+    ).resolves.toBeTruthy()
   })
 
   test("doesn'nt blow up with defined properties w/ undefined values (see comment in test file)", async () => {
