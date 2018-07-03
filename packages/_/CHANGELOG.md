@@ -3,14 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-rc.2"></a>
+  <a name="2.0.0-next.3"></a>
+# [2.0.0-next.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.2...@profiscience/knockout-contrib@2.0.0-next.3) (2018-07-02)
+
+
+### Features
+
+* **query:** Init ([5515ed8](https://github.com/Profiscience/knockout-contrib/commit/5515ed8))
+
+
+
+
+  <a name="2.0.0-next.2"></a>
+# [2.0.0-next.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.1...@profiscience/knockout-contrib@2.0.0-next.2) (2018-07-02)
+
+
+### Features
+
+* **router.middleware.progressBar:** Init ([efb789f](https://github.com/Profiscience/knockout-contrib/commit/efb789f))
+
+
+
+
+<a name="2.0.0-next.1"></a>
+# [2.0.0-next.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-next.0...@profiscience/knockout-contrib@2.0.0-next.1) (2018-07-02)
+
+
+### Bug Fixes
+
+* **meta:** Export end-user model builders and mixins ([c35a70a](https://github.com/Profiscience/knockout-contrib/commit/c35a70a))
+
+
+### Features
+
+* **flash message:** Add middleware and component, export from metapackage ([012300d](https://github.com/Profiscience/knockout-contrib/commit/012300d))
+
+
+
+
+<a name="2.0.0-next.0"></a>
+# [2.0.0-next.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-next.0) (2018-07-02)
+
+
+### Code Refactoring
+
+* **router.plugins.*:** Make named exports more explicit (componentPlugin => componentRoutePlugi ([2c25bc9](https://github.com/Profiscience/knockout-contrib/commit/2c25bc9))
+
+
+### Features
+
+* **model.*:** Add model.* packages ([b7f634a](https://github.com/Profiscience/knockout-contrib/commit/b7f634a))
+
+
+### BREAKING CHANGES
+
+* **router.plugins.*:** Exported name has changed. View README for updated name(s).
+
+
+
+
+<a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.1...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
 
 ### Reverts
 
 - **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
-  <a name="2.0.0-rc.2"></a>
+<a name="2.0.0-rc.2"></a>
 
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-rc.2) (2018-06-29)
 

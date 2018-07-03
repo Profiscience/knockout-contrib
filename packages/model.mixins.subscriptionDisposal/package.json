@@ -1,0 +1,19 @@
+{
+  "name": "@profiscience/knockout-contrib-model-mixins-subscription-disposal",
+  "version": "1.0.1-next.1",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.subscriptionDisposal",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "peerDependencies": {
+    "knockout": "3.5.0-rc"
+  },
+  "dependencies": {
+    "@profiscience/knockout-contrib-model-builders-base": "^1.0.1-next.0",
+    "tslib": "^1.8.0"
+  }
+}

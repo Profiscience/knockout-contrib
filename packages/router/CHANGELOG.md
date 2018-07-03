@@ -3,7 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-rc.1"></a>
+    <a name="2.0.0-next.1"></a>
+# [2.0.0-next.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-next.0...@profiscience/knockout-contrib-router@2.0.0-next.1) (2018-07-02)
+
+
+
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router
+
+    <a name="2.0.0-next.0"></a>
+# [2.0.0-next.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-next.0) (2018-07-02)
+
+
+### Features
+
+* **model.*:** Add model.* packages ([b7f634a](https://github.com/Profiscience/knockout-contrib/commit/b7f634a))
+
+
+### Reverts
+
+* **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
+
+
+
+
+  <a name="2.0.0-rc.1"></a>
 
 # [2.0.0-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-rc.1) (2018-06-29)
 
@@ -12,7 +36,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
 
 
-      <a name="2.0.0-rc.0"></a>
+<a name="2.0.0-rc.0"></a>
 
 # [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@1.3.0...@profiscience/knockout-contrib-router@2.0.0-rc.0) (2018-06-28)
 
@@ -32,7 +56,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 - **router:** Removed generator middleware API and `done` callback support for async in
-  middleware and beforeNavigateCallbacks
+middleware and beforeNavigateCallbacks
 - **router:** Requires KnockoutJS 3.5.0-rc
 - **router:** Require KnockoutJS 3.5.0-rc for TypeScript consumers
 
@@ -202,8 +226,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Changed
 
 - Middleware execution order; beforeRender middleware is now called _before_
-  preceding page's afterRender, preventing a blank page while async middleware is
-  executing
+preceding page's afterRender, preventing a blank page while async middleware is
+executing
 
 ### Fixed
 

@@ -1,0 +1,22 @@
+{
+  "name": "@profiscience/knockout-contrib-model-mixins-transform",
+  "version": "1.0.1-next.2",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.transform",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "types": "index.ts",
+  "peerDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.0",
+    "knockout": "3.5.0-rc"
+  },
+  "dependencies": {
+    "tslib": "^1.8.0"
+  },
+  "devDependencies": {
+    "@profiscience/knockout-contrib-model-builders-data": "^1.0.1-next.2"
+  }
+}
