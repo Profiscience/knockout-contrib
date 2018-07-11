@@ -13,19 +13,19 @@ import {
 export type IQueryParam<T> = ko.Computed<T | undefined> & {
   isDefault(): boolean
   clear(): void
-  set(v: T | IQueryParamConfig): void
+  set(v: T | IQueryParamConfig<any>): void
 }
 
 type IQuery<T> = { [P in keyof T]: IQueryParam<T[P]> }
 
-export interface IQueryParamConfig {
-  default: MaybeArray<Primitive>
-  initial?: MaybeArray<Primitive>
-  coerce?(v: any): MaybeArray<Primitive>
+export interface IQueryParamConfig<T extends MaybeArray<Primitive>> {
+  default: T
+  initial?: T
+  coerce?(v: any): T
 }
 
 export interface IQueryConfig {
-  [k: string]: MaybeArray<Primitive> | IQueryParamConfig
+  [k: string]: MaybeArray<Primitive> | IQueryParamConfig<any>
 }
 
 export interface IQueryParser {
@@ -47,8 +47,6 @@ export class Query {
 
   private readonly _group?: string
 
-  [k: string]: any
-
   constructor(config: IQueryConfig, group?: string) {
     this._group = group as string
 
@@ -68,24 +66,23 @@ export class Query {
     const fromQS = Query.fromQS(group)
 
     entries(config).forEach(([name, paramConfig = {}]) => {
-      this[name] = Query._raw[group][name]
+      const query: Query & IQuery<any> = this as any
+      query[name] = Query._raw[group][name]
 
-      if (isUndefined(this[name])) {
+      if (isUndefined(query[name])) {
         const _default = defaults[name]
         const coerce = paramConfig.coerce || ((x: any) => x)
         const init = !isUndefined(fromQS[name])
           ? fromQS[name]
           : paramConfig.initial
 
-        this[name] = Query._raw[group][name] = Query.createQueryParam(
-          group,
-          name,
+        query[name] = Query._raw[group][name] = Query.createQueryParam(
           _default,
           init,
           coerce
         )
       } else {
-        this[name].set(paramConfig)
+        query[name].set(paramConfig)
       }
     })
 
@@ -222,22 +219,20 @@ export class Query {
     return this._queuedUpdate
   }
 
-  private static createQueryParam(
-    group: string,
-    name: string,
-    __default: MaybeArray<Primitive>, // tslint:disable-line variable-name
-    init: MaybeArray<Primitive>,
-    coerce: (x: any) => MaybeArray<Primitive>
-  ) {
+  private static createQueryParam<T extends MaybeArray<Primitive>>(
+    __default: T, // tslint:disable-line variable-name
+    init: T,
+    coerce: (x: any) => T
+  ): IQueryParam<T> {
     const _default = ko.observable(ko.toJS(__default))
     const _p = ko.observable(isUndefined(init) ? _default() : init)
     const isDefault = ko.pureComputed(() => p() === _default())
 
-    let p = ko.pureComputed({
+    const p: IQueryParam<T> = ko.pureComputed({
       read() {
         return _p()
       },
-      write(v: MaybeArray<Primitive>) {
+      write(v: MaybeArray<T>) {
         if (isUndefined(v)) {
           v = _default()
         }
@@ -245,27 +240,26 @@ export class Query {
           v = coerce(v)
         }
         _p(v as string)
-        Query.queueQueryStringWrite()
-          // tslint:disable-next-line no-console
-          .catch((err) =>
-            console.error(
-              '[@profiscience/knockout-contrib-querystring] error queueing write'
-            )
+        Query.queueQueryStringWrite().catch((err) =>
+          // tslint:disable-next-line:no-console
+          console.error(
+            '[@profiscience/knockout-contrib-querystring] error queueing write'
           )
+        )
       }
-    })
+    }) as any
 
     Object.assign(p, {
       isDefault,
-      set: (d: IQueryParamConfig | MaybeArray<Primitive>) => {
+      set: (d: IQueryParamConfig<T> | MaybeArray<T>) => {
         if (!this.isParamConfigObject(d)) {
-          d = d as MaybeArray<Primitive>
+          d = d as MaybeArray<T>
           if (isDefault() || isUndefined(p())) {
-            p(d)
+            p(d as any)
           }
           _default(d as string)
         } else {
-          d = d as IQueryParamConfig
+          d = d as IQueryParamConfig<T>
           if (d.coerce) {
             coerce = d.coerce
           }
