@@ -1,4 +1,4 @@
-# querystring
+# query
 
 [![Version][npm-version-shield]][npm]
 [![Dependency Status][david-dm-shield]][david-dm]
@@ -6,22 +6,9 @@
 [![Dev Dependency Status][david-dm-dev-shield]][david-dm-dev]
 [![Downloads][npm-stats-shield]][npm-stats]
 
+> This package is intended for consumption via the [@profiscience/knockout-contrib](../_) metapackage
+
 Easy-peasy Querystrings for Knockout
-
-## Installation
-
-```bash
-$ yarn add @profiscience/knockout-contrib-querystring
-```
-
-_or_
-
-```bash
-$ npm install @profiscience/knockout-contrib-querystring
-```
-
-Typing are included, but have the caveat that query params that are **observable arrays**
-will only be typed as **observables**. This is due to a limitation with mapped types in TypeScript.
 
 ## Basic Usage
 
