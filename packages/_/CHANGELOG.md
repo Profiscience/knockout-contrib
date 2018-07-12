@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.0.0-rc.4"></a>
+      <a name="2.0.0-rc.5"></a>
+# [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.4...@profiscience/knockout-contrib@2.0.0-rc.5) (2018-07-12)
+
+
+### Features
+
+* **model.mixins.query:** Add QueryMixin for use wl DataModelConstructorBuilder ([4e09bb1](https://github.com/Profiscience/knockout-contrib/commit/4e09bb1))
+
+
+
+
+      <a name="2.0.0-rc.4"></a>
 # [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.3...@profiscience/knockout-contrib@2.0.0-rc.4) (2018-07-03)
 
 
@@ -17,7 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-  <a name="2.0.0-rc.3"></a>
+<a name="2.0.0-rc.3"></a>
 # [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.0...@profiscience/knockout-contrib@2.0.0-rc.3) (2018-07-03)
 
 
