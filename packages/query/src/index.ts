@@ -18,7 +18,7 @@ export type IQueryParam<T> = ko.Computed<T | undefined> & {
   set(v: T | IQueryParamConfig<any>): void
 }
 
-type IQuery<T> = { [P in keyof T]: IQueryParam<T[P]> }
+export type IQuery<T> = { [P in keyof T]: IQueryParam<T[P]> }
 
 export interface IQueryParamConfig<T extends MaybeArray<Primitive>> {
   default: T

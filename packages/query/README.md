@@ -8,7 +8,7 @@
 
 > This package is intended for consumption via the [@profiscience/knockout-contrib](../_) metapackage
 
-Easy-peasy Querystrings for Knockout
+Persistent, stateless read/write querystring abstraction for KnockoutJS.
 
 ## Basic Usage
 
