@@ -13,6 +13,7 @@ export * from '@profiscience/knockout-contrib-model-builders-data'
 export * from '@profiscience/knockout-contrib-model-builders-view'
 
 export * from '@profiscience/knockout-contrib-model-mixins-pager'
+export * from '@profiscience/knockout-contrib-model-mixins-query'
 export * from '@profiscience/knockout-contrib-model-mixins-transform'
 
 export * from '@profiscience/knockout-contrib-query'
