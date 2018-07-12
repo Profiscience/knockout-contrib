@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib",
   "description": "KnockoutJS Goodies for building wicked awesome SPAs",
-  "version": "2.0.0-rc.5",
+  "version": "2.0.0-rc.6",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/_",
@@ -39,7 +39,7 @@
     "@profiscience/knockout-contrib-filters-date-format": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.1",
     "@profiscience/knockout-contrib-model-builders-view": "^2.0.0-rc.1",
-    "@profiscience/knockout-contrib-model-mixins-memoize": "^1.0.0",
+    "@profiscience/knockout-contrib-model-mixins-memoize": "^1.0.1-rc.0",
     "@profiscience/knockout-contrib-model-mixins-pager": "^2.0.0-rc.1",
     "@profiscience/knockout-contrib-model-mixins-query": "^1.0.1-rc.0",
     "@profiscience/knockout-contrib-model-mixins-transform": "^2.0.0-rc.1",

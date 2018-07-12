@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-rc.5"></a>
+  <a name="2.0.0-rc.6"></a>
+# [2.0.0-rc.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.5...@profiscience/knockout-contrib@2.0.0-rc.6) (2018-07-12)
+
+
+### Features
+
+* **model.mixins.memoize:** Export MemoizeMixin from metapackage ([b422221](https://github.com/Profiscience/knockout-contrib/commit/b422221))
+
+
+
+
+  <a name="2.0.0-rc.5"></a>
 # [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.4...@profiscience/knockout-contrib@2.0.0-rc.5) (2018-07-12)
 
 
@@ -14,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.0.0-rc.4"></a>
+<a name="2.0.0-rc.4"></a>
 # [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.3...@profiscience/knockout-contrib@2.0.0-rc.4) (2018-07-03)
 
 
