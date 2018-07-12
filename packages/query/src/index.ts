@@ -45,10 +45,13 @@ export class Query {
         : encodeURIComponent(JSON.stringify(obj))
   }
 
-  private readonly _group?: string
+  private readonly _group!: string
 
   constructor(config: IQueryConfig, group?: string) {
-    this._group = group as string
+    Object.defineProperty(this, '_group', {
+      enumerable: false,
+      get: () => group
+    })
 
     if (isUndefined(Query._raw[this._group])) {
       Query._raw[this._group] = {}
