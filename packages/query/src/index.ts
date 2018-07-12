@@ -10,6 +10,8 @@ import {
   omit
 } from './utils'
 
+const VIA_FACTORY = Symbol('VIA_FACTORY')
+
 export type IQueryParam<T> = ko.Computed<T | undefined> & {
   isDefault(): boolean
   clear(): void
@@ -47,7 +49,14 @@ export class Query {
 
   private readonly _group!: string
 
-  constructor(config: IQueryConfig, group?: string) {
+  constructor(config: IQueryConfig, group?: string, isViaFactory?: symbol) {
+    if (isViaFactory !== VIA_FACTORY) {
+      // tslint:disable-next-line:no-console
+      console.warn(
+        '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
+      )
+    }
+
     Object.defineProperty(this, '_group', {
       enumerable: false,
       get: () => group
@@ -132,7 +141,10 @@ export class Query {
     config: T,
     group?: string
   ): IQuery<T> & Query {
-    return new Query(config, group) as any
+    // use an internal symbol to ensure that the factory function is used
+    // (and can't be faked). If the constructo is used directly, type-checking
+    // will suffer.
+    return new Query(config, group, VIA_FACTORY) as any
   }
 
   public static setParser(parser: IQueryParser) {

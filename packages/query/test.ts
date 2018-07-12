@@ -398,4 +398,14 @@ describe('querystring', () => {
 
     expect(Query.fromQS()).toEqual({ foo: 'foo' })
   })
+
+  test('logs a warning if the constructor is used directly', () => {
+    console.warn = jest.fn()
+
+    const query = new Query({ foo: 'foo' })
+
+    expect(console.warn).toHaveBeenLastCalledWith(
+      '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
+    )
+  })
 })
