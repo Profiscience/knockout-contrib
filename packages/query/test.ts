@@ -407,5 +407,7 @@ describe('querystring', () => {
     expect(console.warn).toHaveBeenLastCalledWith(
       '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
     )
+
+    query.dispose()
   })
 })

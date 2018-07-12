@@ -1,6 +1,5 @@
 // tslint:disable:max-classes-per-file
 
-import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 import { Query } from '@profiscience/knockout-contrib-query'
 import '@profiscience/knockout-contrib-jest-matchers'
