@@ -1,22 +1,22 @@
 {
   "name": "@profiscience/knockout-contrib-bindings-jquery",
-  "description": "jQuery plugin binding for KnockoutJS",
   "version": "2.0.0-rc.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/bindings.jquery",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/bindings.jquery",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
   "types": "index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "jquery": "x.x.x",
     "knockout": "3.5.0-rc",
     "knockout-punches": "^0.5.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": false
+  }
 }

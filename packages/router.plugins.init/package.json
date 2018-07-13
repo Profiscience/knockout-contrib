@@ -1,15 +1,19 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-init",
-  "description": "@profiscience/knockout-contrib-router Component Initializer Plugin — Declarative Async ViewModels",
   "version": "2.0.0-rc.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.plugins.init",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/router.plugins.init",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
   "types": "index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0",
@@ -22,9 +26,5 @@
     "@profiscience/knockout-contrib-jest-matchers": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.2",
     "@profiscience/knockout-contrib-router-plugins-component": ">=1.0.0-rc.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": false
+  }
 }

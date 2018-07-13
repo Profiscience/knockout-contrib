@@ -1,20 +1,20 @@
 {
   "name": "@profiscience/knockout-contrib-utils-once",
-  "description": "KnockoutJS once() utility fn",
   "version": "2.0.0-rc.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/utils.once",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/utils.once",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
-  "main": "dist/node/index.js",
-  "module": "dist/default/index.js",
-  "types": "index.d.ts",
-  "peerDependencies": {
-    "knockout": "3.5.0-rc"
-  },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "knockout": "3.5.0-rc"
+  }
 }

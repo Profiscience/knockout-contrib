@@ -3,21 +3,22 @@
   "version": "2.0.0-rc.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/router.middleware.scrollPosition",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/router.middleware.scrollPosition",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
   "types": "index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
     "knockout": "3.5.0-rc"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.2"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": false
+  }
 }

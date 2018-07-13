@@ -3,18 +3,22 @@
   "version": "2.0.0-rc.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.mixins.disposalAggregator",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.mixins.disposalAggregator",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
   "types": "index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "knockout": "3.5.0-rc"
   },
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^2.0.0-rc.1",
     "tslib": "^1.8.0"
-  },
-  "sideEffects": false
+  }
 }

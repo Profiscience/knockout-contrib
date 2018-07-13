@@ -3,12 +3,17 @@
   "version": "2.0.0-rc.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
-  "homepage": "https://github.com/Profiscience/knockout-contrib/tree/master/packages/model.builders.data",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.builders.data",
   "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
   "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/node/index.js",
   "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
   "types": "index.ts",
+  "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-router-plugins-init": ">=2.0.0-next.0",
     "knockout": "3.5.0-rc"
@@ -23,6 +28,5 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0",
     "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-rc.2"
-  },
-  "sideEffects": false
+  }
 }
