@@ -20,5 +20,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.0"
-  }
+  },
+  "sideEffects": false
 }

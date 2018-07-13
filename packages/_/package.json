@@ -62,5 +62,6 @@
     "@profiscience/knockout-contrib-utils-modify": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-utils-once": ">=2.0.0-rc.0",
     "@profiscience/knockout-contrib-utils-toggle": ">=2.0.0-rc.0"
-  }
+  },
+  "sideEffects": false
 }

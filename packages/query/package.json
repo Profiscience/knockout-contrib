@@ -11,5 +11,6 @@
   "types": "src/index.ts",
   "peerDependencies": {
     "knockout": "3.5.0-rc"
-  }
+  },
+  "sideEffects": false
 }

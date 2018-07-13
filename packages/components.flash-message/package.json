@@ -19,5 +19,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.1"
-  }
+  },
+  "sideEffects": false
 }

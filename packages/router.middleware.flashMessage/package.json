@@ -15,5 +15,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.2"
-  }
+  },
+  "sideEffects": false
 }

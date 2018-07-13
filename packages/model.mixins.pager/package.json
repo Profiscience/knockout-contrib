@@ -19,5 +19,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.1"
-  }
+  },
+  "sideEffects": false
 }
