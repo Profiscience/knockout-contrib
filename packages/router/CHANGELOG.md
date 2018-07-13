@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-      <a name="2.0.0-rc.2"></a>
+    <a name="2.0.0-rc.3"></a>
+# [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.2...@profiscience/knockout-contrib-router@2.0.0-rc.3) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router
+
+    <a name="2.0.0-rc.2"></a>
 # [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-rc.2) (2018-07-03)
 
 
@@ -14,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-      <a name="2.0.0-rc.1"></a>
+  <a name="2.0.0-rc.1"></a>
 
 # [2.0.0-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-rc.1) (2018-06-29)
 
@@ -23,7 +31,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
 
 
-    <a name="2.0.0-rc.0"></a>
+<a name="2.0.0-rc.0"></a>
 
 # [2.0.0-rc.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@1.3.0...@profiscience/knockout-contrib-router@2.0.0-rc.0) (2018-06-28)
 

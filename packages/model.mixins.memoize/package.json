@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-memoize",
-  "version": "1.0.1-rc.0",
+  "version": "1.0.1-rc.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.mixins.memoize",
@@ -19,6 +19,6 @@
     "knockout": "3.5.0-rc"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.1"
+    "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.2"
   }
 }
