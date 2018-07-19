@@ -313,14 +313,7 @@ export class Router {
 
   public static async update(
     url: string,
-    _args?:
-      | boolean
-      | {
-          push?: boolean
-          force?: boolean
-          state?: { [prop: string]: any }
-          with?: { [prop: string]: any }
-        }
+    _args?: boolean | RouterUpdateOptions
   ): Promise<boolean> {
     return await Router.head.update(url, _args)
   }
