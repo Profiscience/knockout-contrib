@@ -76,7 +76,7 @@ describe('querystring', () => {
     const query = Query.create({ foo: '' })
 
     query.foo('foo')
-    query.foo(undefined)
+    query.foo(undefined as any)
     ko.tasks.runEarly()
 
     expect(location.pathname).toBe(location.pathname + location.search)
@@ -113,7 +113,7 @@ describe('querystring', () => {
 
     const query = Query.create({ foo: 'foo' })
 
-    query.foo(undefined)
+    query.foo(undefined as any)
 
     expect(query.toJS().foo).toBe('foo')
 
@@ -411,3 +411,13 @@ describe('querystring', () => {
     query.dispose()
   })
 })
+
+// test type definitions
+{
+  const q = Query.create({ foo: { default: '' } })
+
+  // the following line should not throw a compiler error
+  const foo: string = q.foo()
+
+  q.dispose()
+}

@@ -12,13 +12,17 @@ import {
 
 const VIA_FACTORY = Symbol('VIA_FACTORY')
 
-export type IQueryParam<T> = ko.Computed<T | undefined> & {
+export type IQueryParam<T> = ko.Computed<T> & {
   isDefault(): boolean
   clear(): void
   set(v: T | IQueryParamConfig<any>): void
 }
 
-export type IQuery<T> = { [P in keyof T]: IQueryParam<T[P]> }
+export type IQuery<T> = {
+  [P in keyof T]: T[P] extends IQueryParamConfig<any>
+    ? IQueryParam<T[P]['default']>
+    : IQueryParam<T[P]>
+}
 
 export interface IQueryParamConfig<T extends MaybeArray<Primitive>> {
   default: T
@@ -279,7 +283,7 @@ export class Query {
             coerce = d.coerce
           }
           if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
-            p(isUndefined(d.initial) ? d.default : d.initial)
+            p(typeof d.initial !== 'undefined' ? d.initial : d.default)
           }
           if (d.default) {
             _default(d.default)
