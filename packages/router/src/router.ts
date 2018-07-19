@@ -13,6 +13,7 @@ export type RouterConfig = {
 export type RouterUpdateOptions = {
   push?: boolean
   force?: boolean
+  state?: { [prop: string]: any }
   with?: { [prop: string]: any }
 }
 
@@ -150,6 +151,9 @@ export class Router {
     if (typeof args.push === 'undefined') {
       args.push = true
     }
+    if (typeof args.state === 'undefined') {
+      args.state = history.state
+    }
     if (typeof args.with === 'undefined') {
       args.with = {}
     }
@@ -189,7 +193,7 @@ export class Router {
     await fromCtx.runBeforeDispose()
 
     history[args.push ? 'pushState' : 'replaceState'](
-      args.push ? {} : history.state,
+      args.state,
       document.title,
       toCtx.base + toCtx.path + search + hash
     )
@@ -314,6 +318,7 @@ export class Router {
       | {
           push?: boolean
           force?: boolean
+          state?: { [prop: string]: any }
           with?: { [prop: string]: any }
         }
   ): Promise<boolean> {
@@ -379,9 +384,10 @@ export class Router {
   }
 
   private static onpopstate(e: PopStateEvent) {
-    Router.update(Router.getPathFromLocation(), false).catch((err) =>
-      log.error('Error navigating back', err)
-    )
+    Router.update(Router.getPathFromLocation(), {
+      push: false,
+      state: e.state
+    }).catch((err) => log.error('Error navigating back', err))
     e.preventDefault()
   }
 
