@@ -417,6 +417,7 @@ describe('querystring', () => {
   const q = Query.create({ foo: { default: '' } })
 
   // the following line should not throw a compiler error
+  // tslint:disable-next-line:no-unused-variable
   const foo: string = q.foo()
 
   q.dispose()
