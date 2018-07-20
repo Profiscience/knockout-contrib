@@ -6,7 +6,6 @@ import * as path from 'path'
 import * as chokidar from 'chokidar'
 import * as globby from 'globby'
 import chalk from 'chalk'
-import { FLASH_MESSAGE } from './packages/_'
 
 const argv = parseArgv()
 const PACKAGES_DIR = path.resolve(__dirname, 'packages')
@@ -68,8 +67,9 @@ function createWorkers(size: number) {
       return p
     },
     cull(numToKeep: number) {
-      for (let j = numToKeep; j < size; j++)
-        (_workers.pop() as ChildProcess).kill()
+      for (let j = numToKeep; j < size; j++) {
+        ;(_workers.pop() as ChildProcess).kill()
+      }
       size = numToKeep
     },
     destroy() {

@@ -113,7 +113,7 @@ process.on('message', async ({ file }) => {
     console.error(
       err.message
         .split('\n')
-        .map((l: string) => '\t' + chalk.red(l))
+        .map((l: string) => chalk`\t{red ${l}}`)
         .join('\n'),
       '\n'
     )
