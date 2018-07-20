@@ -103,25 +103,57 @@ Route.usePlugin(
 
 View the documentation for individual [packages](../packages) to see what they do / how to use them.
 
-## Monorepo/Metapackage Rationale (i.e. Why is everything published as a separate package?)
+## Using the ESNext build
 
-_tl;dr it keeps you out of dependency hell_
+> This assumes you are using webpack. It is likely possible with most other modern bundlers, but that's on you to figure out. If you would like to contribute documentation, PRs are accepted.
 
-Publishing a independent packages instead of a single package utilizing tree-shaking or nested imports (i.e. `import 'components/markdown'`) allows each package to have its own semver.
+The default build is transpiled to ES5 in order to be compatible in older browsers (_\*cough\* IE_).
 
-Take the following scenario...
+However, if you only need to support modern runtimes, you can use the esnext build. This build has much less transpilation overhead and does not require any additional runtime libraries (_e.g._ `babel-runtime`). This can have a pretty decent impact on the size of your builds when used with [babel-minify](https://github.com/babel/minify), and provides for a much nicer debugging experience should you find yourself digging through the stack somewhere in this library; transpiled code can be very difficult to reason about.
 
-> - you're using `components.a`
-> - breaking changes are introduced into `components.a`
-> - `components.b` is added, and now you want to use it
+This library uses the [proposed `esnext` package.json field](https://github.com/stereobooster/package.json#esnext).
 
-If both components are published together, you'd be required to update `components.a` before getting on with the work you set out to do with `components.b`. A monorepo grants the ability to avoid this nonsense while maintaining a unified build/test process.
+Add `esnext` to [`resolve.mainFields`](https://webpack.js.org/configuration/resolve/#resolve-mainfields) in your webpack config to use this build.
 
-One option is to require the installation of each individual package by the consumer, however this can lead to a lot of extra typing (especially with the length/verbosity of `@profiscience/knockout-contrib-*`).
+_e.g._
 
-Another is to provide a default metapackage which installs all of the independent packages without enforcing strict versioning, as is done here.
+```javascript
+module.exports = {
+  resolve: {
+    mainFields: [
+      'esnext', // es2017+esm (resolves to <package>/dist/esnext)
 
-What this leads to is a behavior in which, by default, the latest version of each package will be installed. However, you may lock the version of any package by adding it explicitly to your `package.json`. Your package manager should resolve any cross-dependencies or version requirements from there.
+      // these are the default values
+      'module', // es5+esm  (resolves to <package>/dist/default)
+      'main' // es5+cjs  (resolves to <package>/dist/node)
+    ]
+  }
+}
+```
+
+## TypeScript Caveats
+
+For reasons that are mostly related to my own development comfort, TypeScript is configured to point at the source instead of built definitions. What this comes down to is allowing parallel transpilation, however there is also the very real restriction that TypeScript refuses to emit a declaration for a mixin that uses a `private` or `protected` property.
+
+That said, using this library with TypeScript requires a few properties to be set in your `tsconfig.json`.
+
+```
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "h",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015",
+      "esnext.asynciterable"
+    ]
+  }
+}
+```
+
+You may omit `jsx` and `jsxFactory` if you are not using any component packages.
 
 [knockoutjs]: https://knockoutjs.com
 [knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--rc-red.svg
