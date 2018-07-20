@@ -23,5 +23,8 @@
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.1",
     "knockout-mapping": "^2.6.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
   }
 }

@@ -16,5 +16,8 @@
   "sideEffects": false,
   "peerDependencies": {
     "knockout": "3.5.0-rc"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
   }
 }

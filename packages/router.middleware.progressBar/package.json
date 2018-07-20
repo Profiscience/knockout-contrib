@@ -19,7 +19,8 @@
     "knockout": "3.5.0-rc"
   },
   "dependencies": {
-    "toprogress2": "^2.0.0"
+    "toprogress2": "^2.0.0",
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.3"

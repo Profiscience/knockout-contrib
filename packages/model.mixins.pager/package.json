@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "core-js": "^2.5.3",
-    "tslib": "^1.8.0"
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.2"

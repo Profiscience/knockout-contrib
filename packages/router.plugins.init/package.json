@@ -20,7 +20,7 @@
     "knockout": "^3.5.0-rc"
   },
   "dependencies": {
-    "tslib": "^1.8.0"
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.1",

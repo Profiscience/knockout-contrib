@@ -19,6 +19,7 @@
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {
-    "date-fns": "^2.0.0-alpha.8"
+    "date-fns": "^2.0.0-alpha.8",
+    "babel-runtime": "^6.26.0"
   }
 }

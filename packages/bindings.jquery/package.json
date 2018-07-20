@@ -18,5 +18,8 @@
     "jquery": "x.x.x",
     "knockout": "3.5.0-rc",
     "knockout-punches": "^0.5.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
   }
 }

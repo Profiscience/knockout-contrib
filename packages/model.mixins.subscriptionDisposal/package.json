@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "@profiscience/knockout-contrib-model-builders-base": "^2.0.0-rc.2",
-    "tslib": "^1.8.0"
+    "babel-runtime": "^6.26.0"
   }
 }

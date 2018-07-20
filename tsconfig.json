@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "importHelpers": true,
     "sourceMap": true,
     "jsx": "react",
     "jsxFactory": "h",

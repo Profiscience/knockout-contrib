@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "path-to-regexp": "^2.0.0",
-    "tslib": "^1.7.0"
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "karma": "^2.0.0",
