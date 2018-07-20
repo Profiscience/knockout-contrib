@@ -6,7 +6,7 @@
     "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
     "test": "jest",
-    "test:router": "cd packages/router; yarn test",
+    "test:router": "lerna run --scope @profiscience/knockout-contrib-router test",
     "precommit": "yarn format --staged"
   },
   "workspaces": [
