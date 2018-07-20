@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-filters-date-format",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/filters.date.format",
@@ -19,7 +19,7 @@
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {
-    "date-fns": "^2.0.0-alpha.8",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "date-fns": "^2.0.0-alpha.8"
   }
 }

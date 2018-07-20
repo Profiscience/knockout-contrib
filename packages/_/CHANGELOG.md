@@ -3,7 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-  <a name="2.0.0-rc.8"></a>
+      <a name="2.0.0-rc.9"></a>
+# [2.0.0-rc.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.8...@profiscience/knockout-contrib@2.0.0-rc.9) (2018-07-20)
+
+
+
+
+**Note:** Version bump only for package @profiscience/knockout-contrib
+
+      <a name="2.0.0-rc.8"></a>
 # [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.7...@profiscience/knockout-contrib@2.0.0-rc.8) (2018-07-18)
 
 
@@ -11,7 +19,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-  <a name="2.0.0-rc.7"></a>
+<a name="2.0.0-rc.7"></a>
 # [2.0.0-rc.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.0-rc.6...@profiscience/knockout-contrib@2.0.0-rc.7) (2018-07-13)
 
 

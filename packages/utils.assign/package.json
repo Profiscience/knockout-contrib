@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils-assign",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/utils.assign",
@@ -18,10 +18,10 @@
     "knockout": "3.5.0-rc"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-utils-from-js": "^2.0.0-rc.1",
+    "@profiscience/knockout-contrib-utils-from-js": "^2.0.0-rc.2",
     "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.1"
+    "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.2"
   }
 }
