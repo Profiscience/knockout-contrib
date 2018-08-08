@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0-rc.4",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/components.flash-message",
@@ -19,11 +19,11 @@
     "knockout": "^3.5.0-rc"
   },
   "dependencies": {
-    "@profiscience/knockout-contrib-model-builders-view": "^2.0.0-rc.3",
+    "@profiscience/knockout-contrib-model-builders-view": "^2.0.0-rc.4",
     "babel-runtime": "^6.26.0",
     "jsx-dom": "^6.0.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.3"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.4"
   }
 }
