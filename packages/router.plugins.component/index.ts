@@ -175,6 +175,17 @@ export function componentRoutePlugin({
         if (!isNamedComponent) {
           ko.components.unregister(ctx.route.component)
         }
+      },
+      beforeDispose() {
+        if (!isNamedComponent && ctx.component) {
+          const c = ctx.component as IRoutedComponentInstance
+          if (c.viewModel.dispose) {
+            c.viewModel.dispose()
+            c.viewModel.dispose = () => {
+              /* noop */
+            }
+          }
+        }
       }
     }
   }

@@ -106,6 +106,7 @@ describe('router.plugins.component', () => {
       expect(route.component).toBe(
         (ctx.component as IRoutedComponentInstance).name
       )
+
       expect(route.component).toMatch(/__router_view_\d+__/)
       expect(registeredComponentName).toMatch(/__router_view_\d+__/)
       expect(registeredComponent.template).toBe(template)
@@ -337,6 +338,69 @@ describe('router.plugins.component', () => {
       expect(ko.components.unregister).lastCalledWith(
         (ctx.component as IRoutedComponentInstance).name
       )
+    })
+
+    test('patches viewModel dispose to run beforeDispose', async () => {
+      const dispose = jest.fn()
+
+      class ViewModel {
+        public dispose = dispose
+      }
+
+      const template = 'Hello, World!'
+      const component = { template, viewModel: ViewModel }
+      const route = new Route('/', { component })
+      const queue = jest.fn()
+      const ctx = { queue: queue as any, route } as any
+
+      const lifecycles = route.middleware.map((m) => m(ctx)) as Lifecycle[]
+
+      for (const lifecycle of lifecycles) {
+        if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
+      }
+      await Promise.all(queue.mock.calls.map(([p]) => p))
+
+      for (const lifecycle of lifecycles) {
+        if (lifecycle && lifecycle.afterRender) lifecycle.afterRender()
+      }
+
+      expect(dispose).not.toBeCalled()
+
+      for (const lifecycle of lifecycles) {
+        if (lifecycle && lifecycle.beforeDispose) lifecycle.beforeDispose()
+      }
+
+      expect(dispose).toHaveBeenCalledTimes(1)
+      ctx.component.viewModel.dispose()
+      expect(dispose).toHaveBeenCalledTimes(1)
+    })
+
+    test("doesn't die if view model doesn't have dispose function", async () => {
+      class ViewModel {}
+
+      const template = 'Hello, World!'
+      const component = { template, viewModel: ViewModel }
+      const route = new Route('/', { component })
+      const queue = jest.fn()
+      const ctx = { queue: queue as any, route } as any
+
+      for (const middleware of route.middleware) {
+        const lifecycle = middleware(ctx) as Lifecycle
+        if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
+      }
+      await Promise.all(queue.mock.calls.map(([p]) => p))
+
+      for (const middleware of route.middleware) {
+        const lifecycle = middleware(ctx) as Lifecycle
+        if (lifecycle && lifecycle.afterRender) lifecycle.afterRender()
+      }
+
+      expect(() => {
+        for (const middleware of route.middleware) {
+          const lifecycle = middleware(ctx) as Lifecycle
+          if (lifecycle && lifecycle.beforeDispose) lifecycle.beforeDispose()
+        }
+      }).not.toThrow()
     })
   })
 
