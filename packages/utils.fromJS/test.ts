@@ -1,7 +1,8 @@
 // tslint:disable max-classes-per-file
 
-import '@profiscience/knockout-contrib-jest-matchers'
+import { noop } from 'lodash'
 import * as ko from 'knockout'
+import '@profiscience/knockout-contrib-jest-matchers'
 import { fromJS } from './index'
 
 describe('utils.fromJS', () => {
@@ -35,7 +36,6 @@ describe('utils.fromJS', () => {
 
     {
       // test type checking (not fool-proof)
-      // tslint:disable:no-unused-variable
       const num: ko.Observable<number> = actual.num
       const str: ko.Observable<string> = actual.str
       const date: ko.Observable<Date> = actual.date
@@ -46,6 +46,16 @@ describe('utils.fromJS', () => {
       const nestedStr: ko.Observable<string> = actual.obj.foo
       const obs: ko.Observable<{ foo: string }> = actual.obs
       const func: () => void = actual.func
+
+      noop(num)
+      noop(str)
+      noop(date)
+      noop(bool)
+      noop(arr)
+      noop(regexp)
+      noop(nestedStr)
+      noop(obs)
+      noop(func)
     }
 
     expect(actual.num).toBeObservable()

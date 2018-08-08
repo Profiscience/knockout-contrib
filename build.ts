@@ -4,7 +4,7 @@ import { fork, ChildProcess } from 'child_process'
 import * as os from 'os'
 import * as path from 'path'
 import * as chokidar from 'chokidar'
-import * as globby from 'globby'
+import globby from 'globby'
 import chalk from 'chalk'
 
 const argv = parseArgv()
@@ -133,7 +133,7 @@ async function build(files: string[]): Promise<number> {
 async function watch(files: string[]): Promise<number> {
   if (!argv.transpileOnly) {
     const typeChecker = startTypeChecker()
-    typeChecker.stdout.on('data', (buf) => {
+    typeChecker.stdout.on('data', (buf: Buffer) => {
       const str = buf.toString().replace('\u001Bc', '')
       str
         .split('\n')
@@ -173,7 +173,7 @@ async function main() {
 main()
   .catch((err) => {
     // tslint:disable:no-console
-    // if (err.message) console.error(err.message)
+    if (err.message) console.error(err.message)
     return 1
   })
   .then((code: number) => {

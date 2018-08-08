@@ -25,6 +25,7 @@ afterEach(() => {
 describe('router.plugins.component', () => {
   describe('warnings', () => {
     test('non-class viewModel', async () => {
+      // tslint:disable-next-line:no-console
       console.warn = jest.fn()
 
       const template = 'Hello, World!'
@@ -38,10 +39,12 @@ describe('router.plugins.component', () => {
 
       await resolveQueue(ctx)
 
+      // tslint:disable-next-line:no-console
       expect(console.warn).toBeCalled()
     })
 
     test('named components', async () => {
+      // tslint:disable-next-line:no-console
       console.warn = jest.fn()
 
       const component = 'hello-world'
@@ -54,10 +57,12 @@ describe('router.plugins.component', () => {
 
       await resolveQueue(ctx)
 
+      // tslint:disable-next-line:no-console
       expect(console.warn).toBeCalled()
     })
 
     test('can disable warning', async () => {
+      // tslint:disable-next-line:no-console
       console.warn = jest.fn()
 
       disableUninstantiableViewModelWarning()
@@ -73,6 +78,7 @@ describe('router.plugins.component', () => {
 
       if (lifecycle.beforeRender) lifecycle.beforeRender()
 
+      // tslint:disable-next-line:no-console
       expect(console.warn).not.toBeCalled()
     })
   })

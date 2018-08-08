@@ -6,11 +6,11 @@ type ObservableTree<T> = T extends any[]
     ? ko.Observable<Date>
     : T extends RegExp
       ? ko.Observable<RegExp>
-      : T extends ko.Observable<any>
+      : T extends ko.Observable
         ? T
-        : T extends ko.ObservableArray<any>
+        : T extends ko.ObservableArray
           ? T
-          : T extends ko.Computed<any>
+          : T extends ko.Computed
             ? T
             : T extends (...args: any[]) => any
               ? T

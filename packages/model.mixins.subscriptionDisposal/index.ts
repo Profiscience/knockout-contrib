@@ -39,7 +39,7 @@ export function SubscriptionDisposalMixin<
     ): ko.Subscription
     public subscribe(tree: any, fn: (newVal: any) => void): ko.Subscription
     public subscribe<T2>(arg: any, fn: any) {
-      let obs: ko.MaybeComputed<any>
+      let obs: ko.MaybeComputed
 
       if (ko.isObservable(arg)) {
         obs = arg
@@ -67,7 +67,7 @@ export function SubscriptionDisposalMixin<
     public unsubscribe<T2>(accessor: () => T2, fn: (newVal: T2) => void): void
     public unsubscribe(tree: any, fn: (newVal: any) => void): void
     public unsubscribe(sub: ko.Subscription): void
-    public unsubscribe<T2>(arg: any, fn?: any) {
+    public unsubscribe(arg: any, fn?: any) {
       if (typeof arg.dispose === 'function') arg.dispose()
       else this.removeSubscription(arg, fn)
     }

@@ -262,7 +262,8 @@ export class Query {
         Query.queueQueryStringWrite().catch((err) =>
           // tslint:disable-next-line:no-console
           console.error(
-            '[@profiscience/knockout-contrib-querystring] error queueing write'
+            '[@profiscience/knockout-contrib-querystring] error queueing write',
+            err
           )
         )
       }

@@ -1,5 +1,5 @@
+import { noop } from 'lodash'
 import * as ko from 'knockout'
-// import * as jsdom from 'jsdom'
 import { Query } from './src'
 
 describe('querystring', () => {
@@ -400,10 +400,12 @@ describe('querystring', () => {
   })
 
   test('logs a warning if the constructor is used directly', () => {
+    // tslint:disable-next-line:no-console
     console.warn = jest.fn()
 
     const query = new Query({ foo: 'foo' })
 
+    // tslint:disable-next-line:no-console
     expect(console.warn).toHaveBeenLastCalledWith(
       '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
     )
@@ -417,8 +419,9 @@ describe('querystring', () => {
   const q = Query.create({ foo: { default: '' } })
 
   // the following line should not throw a compiler error
-  // tslint:disable-next-line:no-unused-variable
   const foo: string = q.foo()
+
+  noop(foo)
 
   q.dispose()
 }
