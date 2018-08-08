@@ -137,29 +137,8 @@ export class Router {
 
   public async update(
     url: string,
-    _args?: boolean | RouterUpdateOptions
+    args?: boolean | RouterUpdateOptions
   ): Promise<boolean> {
-    let args
-    if (typeof _args === 'boolean') {
-      args = { push: _args as boolean }
-    } else if (typeof _args === 'undefined') {
-      args = {}
-    } else {
-      args = _args
-    }
-
-    if (typeof args.push === 'undefined') {
-      args.push = true
-    }
-    if (typeof args.state === 'undefined') {
-      args.state = history.state
-    }
-    if (typeof args.with === 'undefined') {
-      args.with = {}
-    }
-
-    const fromCtx = this.ctx
-    const { search, hash } = Router.parseUrl(url)
     const path = Router.getPath(url)
     const route = this.resolveRoute(path)
 
@@ -172,28 +151,35 @@ export class Router {
       )
     }
 
+    const opts = Router.normalizeUpdateOptions(args)
+    const fromCtx = this.ctx
     const { pathname, childPath } = route.parse(path)
+    const { search, hash } = Router.parseUrl(url)
     const samePage = fromCtx.pathname === pathname
 
-    if (fromCtx.$child && childPath && samePage && !args.force) {
-      return await fromCtx.$child.router.update(childPath + search + hash, args)
-    }
-
-    const toCtx = new Context(this, this.ctx.$parent, path, args.with)
-
-    if (!toCtx.route) {
-      return false
+    if (samePage && !opts.force) {
+      if (fromCtx.$child && childPath) {
+        return await fromCtx.$child.router.update(
+          childPath + search + hash,
+          opts
+        )
+      } else {
+        return false
+      }
     }
 
     const shouldNavigate = await fromCtx.runBeforeNavigateCallbacks()
+
     if (!shouldNavigate) return false
+
+    const toCtx = new Context(this, this.ctx.$parent, path, opts.with)
 
     this.isNavigating(true)
 
     await fromCtx.runBeforeDispose()
 
-    history[args.push ? 'pushState' : 'replaceState'](
-      args.state,
+    history[opts.push ? 'pushState' : 'replaceState'](
+      opts.state,
       document.title,
       toCtx.base + toCtx.path + search + hash
     )
@@ -205,7 +191,7 @@ export class Router {
       ko.tasks.runEarly()
     }
 
-    this.ctx = toCtx as Context & IContext
+    this.ctx = toCtx
 
     await fromCtx.runAfterDispose()
 
@@ -386,6 +372,29 @@ export class Router {
 
   private static canonicalizePath(path: string) {
     return path.replace(new RegExp('^/?(?:#!)?/?'), '/')
+  }
+
+  private static normalizeUpdateOptions(
+    args?: boolean | RouterUpdateOptions
+  ): RouterUpdateOptions {
+    let options: RouterUpdateOptions
+    if (typeof args === 'boolean') {
+      options = { push: args as boolean }
+    } else if (typeof args === 'undefined') {
+      options = {}
+    } else {
+      options = args
+    }
+    if (typeof options.push === 'undefined') {
+      options.push = true
+    }
+    if (typeof options.state === 'undefined') {
+      options.state = history.state
+    }
+    if (typeof options.with === 'undefined') {
+      options.with = {}
+    }
+    return options
   }
 
   private static parseUrl(url: string) {
