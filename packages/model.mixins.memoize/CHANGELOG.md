@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.1-rc.5"></a>
+## [1.0.1-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-memoize@1.0.1-rc.4...@profiscience/knockout-contrib-model-mixins-memoize@1.0.1-rc.5) (2018-08-08)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-memoize
+
+
+
+
+
 <a name="1.0.1-rc.4"></a>
 ## [1.0.1-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-memoize@1.0.1-rc.3...@profiscience/knockout-contrib-model-mixins-memoize@1.0.1-rc.4) (2018-08-08)
 
