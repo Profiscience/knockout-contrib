@@ -155,7 +155,12 @@ export class Router {
     const fromCtx = this.ctx
     const { pathname, childPath } = route.parse(path)
     const { search, hash } = Router.parseUrl(url)
-    const samePage = fromCtx.pathname === pathname
+    const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
+
+    const samePage =
+      pathname === fromCtx.pathname &&
+      search === currentUrlFragments.search &&
+      hash === currentUrlFragments.hash
 
     if (samePage && !opts.force) {
       if (fromCtx.$child && childPath) {
