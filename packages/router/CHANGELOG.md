@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0-rc.6"></a>
+# [2.0.0-rc.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.5...@profiscience/knockout-contrib-router@2.0.0-rc.6) (2018-08-08)
+
+
+### Bug Fixes
+
+* **router:** Don't block navigation if same path but diff search/hash ([3af60b8](https://github.com/Profiscience/knockout-contrib/commit/3af60b8))
+
+
+
+
+
 <a name="2.0.0-rc.5"></a>
 # [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.4...@profiscience/knockout-contrib-router@2.0.0-rc.5) (2018-08-08)
 

@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-components-flash-message",
-  "version": "2.0.0-rc.4",
+  "version": "2.0.0-rc.5",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/components.flash-message",
@@ -24,6 +24,6 @@
     "jsx-dom": "^6.0.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.4"
+    "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.5"
   }
 }
