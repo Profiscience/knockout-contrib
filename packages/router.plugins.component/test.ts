@@ -402,6 +402,32 @@ describe('router.plugins.component', () => {
         }
       }).not.toThrow()
     })
+
+    test("doesn't die if component doesn't have viewModel", async () => {
+      const template = 'Hello, World!'
+      const component = { template }
+      const route = new Route('/', { component })
+      const queue = jest.fn()
+      const ctx = { queue: queue as any, route } as any
+
+      for (const middleware of route.middleware) {
+        const lifecycle = middleware(ctx) as Lifecycle
+        if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
+      }
+      await Promise.all(queue.mock.calls.map(([p]) => p))
+
+      for (const middleware of route.middleware) {
+        const lifecycle = middleware(ctx) as Lifecycle
+        if (lifecycle && lifecycle.afterRender) lifecycle.afterRender()
+      }
+
+      expect(() => {
+        for (const middleware of route.middleware) {
+          const lifecycle = middleware(ctx) as Lifecycle
+          if (lifecycle && lifecycle.beforeDispose) lifecycle.beforeDispose()
+        }
+      }).not.toThrow()
+    })
   })
 
   describe('named components', () => {

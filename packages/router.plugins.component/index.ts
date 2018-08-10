@@ -179,7 +179,7 @@ export function componentRoutePlugin({
       beforeDispose() {
         if (!isNamedComponent && ctx.component) {
           const c = ctx.component as IRoutedComponentInstance
-          if (c.viewModel.dispose) {
+          if (c.viewModel && c.viewModel.dispose) {
             c.viewModel.dispose()
             c.viewModel.dispose = () => {
               /* noop */
