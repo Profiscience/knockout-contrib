@@ -16,7 +16,6 @@
   "module": "dist/default/index.js",
   "esnext": "dist/esnext/index.js",
   "types": "src/index.ts",
-  "sideEffects": false,
   "peerDependencies": {
     "knockout": "3.5.0-rc"
   },
