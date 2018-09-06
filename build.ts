@@ -89,14 +89,13 @@ function pifyProc(proc: ChildProcess) {
 
 function startTypeChecker() {
   // tslint:disable:no-console
-  const stdio = ['pipe', 'pipe', 'pipe', 'ipc']
   const args: string[] = ['--pretty']
   console.info(chalk.cyan('Forking type checker'))
   if (argv.watch) args.push('--watch')
   const proc = fork(
     path.resolve(__dirname, 'node_modules/typescript/bin/tsc'),
     args,
-    { stdio }
+    { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] }
   )
   proc.stderr.pipe(process.stderr)
   proc.on('close', (code) => {
