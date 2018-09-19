@@ -4501,9 +4501,9 @@ knockout-punches@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
 
-knockout@^3.5.0-rc:
-  version "3.5.0-rc"
-  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0-rc.tgz#5944a70d496eab2d2d4a729525a51fa2f1094efb"
+knockout@^3.5.0-rc2:
+  version "3.5.0-rc2"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0-rc2.tgz#298249c1acac3f2f65432f4edb4fd3d0cde338f1"
 
 lazy-cache@^1.0.3:
   version "1.0.4"

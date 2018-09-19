@@ -16,7 +16,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": ">=2.0.0-rc.0",
-    "knockout": "3.5.0-rc"
+    "knockout": "3.5.0-rc2"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.8"
