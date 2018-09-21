@@ -41,7 +41,7 @@
     "jsx-dom": "^6.1.1",
     "knockout": "^3.5.0-rc2",
     "knockout-punches": "^0.5.1",
-    "lerna": "^3.0.0-rc.0",
+    "lerna": "^3.4.0",
     "lodash": "^4.17.11",
     "microtime": "^2.1.7",
     "prettier": "^1.14.3",
