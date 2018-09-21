@@ -62,6 +62,12 @@
     "@profiscience/knockout-contrib-utils-increment": "^2.0.0-rc.2",
     "@profiscience/knockout-contrib-utils-modify": "^2.0.0-rc.2",
     "@profiscience/knockout-contrib-utils-once": "^2.0.0-rc.2",
-    "@profiscience/knockout-contrib-utils-toggle": "^2.0.0-rc.2"
-  }
+    "@profiscience/knockout-contrib-utils-toggle": "^2.0.0-rc.2",
+    "snyk": "^1.96.0"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
