@@ -16,7 +16,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "jquery": "x.x.x",
-    "knockout": "3.5.0-rc",
+    "knockout": "3.5.0-rc2",
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {

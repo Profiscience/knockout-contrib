@@ -27,7 +27,7 @@
   "types": "index.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "knockout": "3.5.0-rc"
+    "knockout": "3.5.0-rc2"
   },
   "dependencies": {
     "@profiscience/knockout-contrib-bindings-click-alt": "^2.0.0-rc.2",
