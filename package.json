@@ -33,7 +33,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "fs-extra": "^7.0.0",
     "globby": "^8.0.1",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "jest": "^23.6.0",
     "jest-fetch-mock": "^1.6.6",
     "jest-jquery-matchers": "^2.0.0",
