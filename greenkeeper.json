@@ -17,7 +17,6 @@
         "packages/model.builders.data/package.json",
         "packages/model.builders.view/package.json",
         "packages/model.mixins.disposalAggregator/package.json",
-        "packages/model.mixins.memoize/package.json",
         "packages/model.mixins.pager/package.json",
         "packages/model.mixins.query/package.json",
         "packages/model.mixins.subscriptionDisposal/package.json",

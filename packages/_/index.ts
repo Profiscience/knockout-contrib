@@ -12,7 +12,6 @@ export * from '@profiscience/knockout-contrib-filters-date-format'
 export * from '@profiscience/knockout-contrib-model-builders-data'
 export * from '@profiscience/knockout-contrib-model-builders-view'
 
-export * from '@profiscience/knockout-contrib-model-mixins-memoize'
 export * from '@profiscience/knockout-contrib-model-mixins-pager'
 export * from '@profiscience/knockout-contrib-model-mixins-query'
 export * from '@profiscience/knockout-contrib-model-mixins-transform'
