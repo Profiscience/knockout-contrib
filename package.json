@@ -6,8 +6,7 @@
     "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
     "test": "jest",
-    "test:router": "lerna run --scope @profiscience/knockout-contrib-router test",
-    "precommit": "yarn format --staged"
+    "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
   },
   "workspaces": [
     "packages/*"
@@ -33,7 +32,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "fs-extra": "^7.0.0",
     "globby": "^8.0.1",
-    "husky": "^0.14.3",
+    "husky": "^1.0.1",
     "jest": "^23.6.0",
     "jest-fetch-mock": "^1.6.6",
     "jest-jquery-matchers": "^2.0.0",
@@ -83,6 +82,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format --staged"
     }
   }
 }
