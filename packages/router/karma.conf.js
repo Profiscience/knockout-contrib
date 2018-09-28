@@ -2,51 +2,22 @@
 
 'use strict'
 
+const path = require('path')
+
 const { TRAVIS, DEBUG } = process.env
 
 const karmaPlugins = [
   require('karma-firefox-launcher'),
   require('karma-tap-pretty-reporter'),
-  require('karma-rollup-preprocessor'),
-  require('karma-tap')
+  require('karma-tap'),
+  require('karma-webpack')
 ]
 
 const karmaReporters = ['tap-pretty']
 
-const rollupPlugins = [
-  require('rollup-plugin-json')(),
-  require('rollup-plugin-commonjs')({
-    namedExports: {
-      knockout: [
-        'applyBindings',
-        'applyBindingsToNode',
-        'bindingEvent',
-        'bindingHandlers',
-        'components',
-        'observable',
-        'pureComputed',
-        'tasks',
-        'unwrap'
-      ]
-    }
-  }),
-  require('rollup-plugin-node-globals')(),
-  require('rollup-plugin-node-builtins')(),
-  require('rollup-plugin-node-resolve')({
-    preferBuiltins: true
-  })
-]
-
-let cache
-
 if (TRAVIS) {
   karmaPlugins.push(require('karma-remap-istanbul'))
   karmaReporters.push('karma-remap-istanbul')
-  rollupPlugins.push(
-    require('rollup-plugin-istanbul')({
-      include: ['dist/**/*']
-    })
-  )
 }
 
 module.exports = (config) => {
@@ -60,7 +31,7 @@ module.exports = (config) => {
     files: ['__tests__/index.js'],
 
     preprocessors: {
-      '__tests__/index.js': 'rollup'
+      '__tests__/index.js': 'webpack'
     },
 
     browsers: ['_Firefox'],
@@ -86,20 +57,31 @@ module.exports = (config) => {
       // prettify: require('tap-diff')
     },
 
-    rollupPreprocessor: {
-      treeshake: false,
-      cache,
-      plugins: rollupPlugins,
-      output: {
-        format: 'iife',
-        sourcemap: 'inline'
-      }
-    },
-
     remapIstanbulReporter: {
       reports: {
         lcovonly: 'coverage/lcov.info',
         html: 'coverage/html'
+      }
+    },
+
+    webpack: {
+      context: __dirname,
+      mode: 'development',
+      node: {
+        fs: 'empty'
+      },
+      devtool: 'inline-source-map',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            use: {
+              loader: 'istanbul-instrumenter-loader',
+              options: { esModules: true }
+            },
+            include: path.resolve('dist')
+          }
+        ]
       }
     }
   })
