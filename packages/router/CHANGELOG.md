@@ -3,76 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="2.0.0-rc.7"></a>
-# [2.0.0-rc.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.6...@profiscience/knockout-contrib-router@2.0.0-rc.7) (2018-08-16)
+<a name="2.0.0-rc.8"></a>
 
-
-### Bug Fixes
-
-* **router:** Remove "sideEffects: false" from package.json ([88a0533](https://github.com/Profiscience/knockout-contrib/commit/88a0533))
-
-
-
-
-
-<a name="2.0.0-rc.6"></a>
-# [2.0.0-rc.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.5...@profiscience/knockout-contrib-router@2.0.0-rc.6) (2018-08-08)
-
-
-### Bug Fixes
-
-* **router:** Don't block navigation if same path but diff search/hash ([3af60b8](https://github.com/Profiscience/knockout-contrib/commit/3af60b8))
-
-
-
-
-
-<a name="2.0.0-rc.5"></a>
-# [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.4...@profiscience/knockout-contrib-router@2.0.0-rc.5) (2018-08-08)
-
-
-### Bug Fixes
-
-* **router:** Prevent re-render for same-page navigation ([332154c](https://github.com/Profiscience/knockout-contrib/commit/332154c)), closes [#97](https://github.com/Profiscience/knockout-contrib/issues/97)
-
-
-
-
-
-<a name="2.0.0-rc.4"></a>
-# [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.3...@profiscience/knockout-contrib-router@2.0.0-rc.4) (2018-07-20)
-
-
-### Bug Fixes
-
-* Add babel-runtime dep, remove unnecessary tslib dep ([9fca55a](https://github.com/Profiscience/knockout-contrib/commit/9fca55a))
-
-
-### Features
-
-* **router:** Add state option for Router.update(); Use popstate event's state on back navigation ([6eedb5d](https://github.com/Profiscience/knockout-contrib/commit/6eedb5d)), closes [#107](https://github.com/Profiscience/knockout-contrib/issues/107)
-
-
-
-
-      <a name="2.0.0-rc.3"></a>
-# [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.2...@profiscience/knockout-contrib-router@2.0.0-rc.3) (2018-07-13)
-
-
-
+# [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.7...@profiscience/knockout-contrib-router@2.0.0-rc.8) (2018-10-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
 
-  <a name="2.0.0-rc.2"></a>
-# [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-rc.2) (2018-07-03)
+<a name="2.0.0-rc.7"></a>
 
+# [2.0.0-rc.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.6...@profiscience/knockout-contrib-router@2.0.0-rc.7) (2018-08-16)
+
+### Bug Fixes
+
+- **router:** Remove "sideEffects: false" from package.json ([88a0533](https://github.com/Profiscience/knockout-contrib/commit/88a0533))
+
+<a name="2.0.0-rc.6"></a>
+
+# [2.0.0-rc.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.5...@profiscience/knockout-contrib-router@2.0.0-rc.6) (2018-08-08)
+
+### Bug Fixes
+
+- **router:** Don't block navigation if same path but diff search/hash ([3af60b8](https://github.com/Profiscience/knockout-contrib/commit/3af60b8))
+
+<a name="2.0.0-rc.5"></a>
+
+# [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.4...@profiscience/knockout-contrib-router@2.0.0-rc.5) (2018-08-08)
+
+### Bug Fixes
+
+- **router:** Prevent re-render for same-page navigation ([332154c](https://github.com/Profiscience/knockout-contrib/commit/332154c)), closes [#97](https://github.com/Profiscience/knockout-contrib/issues/97)
+
+<a name="2.0.0-rc.4"></a>
+
+# [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.3...@profiscience/knockout-contrib-router@2.0.0-rc.4) (2018-07-20)
+
+### Bug Fixes
+
+- Add babel-runtime dep, remove unnecessary tslib dep ([9fca55a](https://github.com/Profiscience/knockout-contrib/commit/9fca55a))
+
+### Features
+
+- **router:** Add state option for Router.update(); Use popstate event's state on back navigation ([6eedb5d](https://github.com/Profiscience/knockout-contrib/commit/6eedb5d)), closes [#107](https://github.com/Profiscience/knockout-contrib/issues/107)
+
+
+      <a name="2.0.0-rc.3"></a>
+
+# [2.0.0-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.2...@profiscience/knockout-contrib-router@2.0.0-rc.3) (2018-07-13)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router
+
+<a name="2.0.0-rc.2"></a>
+
+# [2.0.0-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.0...@profiscience/knockout-contrib-router@2.0.0-rc.2) (2018-07-03)
 
 ### Reverts
 
-* **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
-
-
-
+- **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
 
 <a name="2.0.0-rc.1"></a>
 
@@ -81,7 +67,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Reverts
 
 - **router:** Add back support for generator/iterator middleware ([a1daf07](https://github.com/Profiscience/knockout-contrib/commit/a1daf07))
-
 
 <a name="2.0.0-rc.0"></a>
 
@@ -103,7 +88,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 - **router:** Removed generator middleware API and `done` callback support for async in
-middleware and beforeNavigateCallbacks
+  middleware and beforeNavigateCallbacks
 - **router:** Requires KnockoutJS 3.5.0-rc
 - **router:** Require KnockoutJS 3.5.0-rc for TypeScript consumers
 
@@ -273,8 +258,8 @@ middleware and beforeNavigateCallbacks
 ### Changed
 
 - Middleware execution order; beforeRender middleware is now called _before_
-preceding page's afterRender, preventing a blank page while async middleware is
-executing
+  preceding page's afterRender, preventing a blank page while async middleware is
+  executing
 
 ### Fixed
 
