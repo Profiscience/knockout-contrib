@@ -38,6 +38,28 @@ describe('model.mixins.pager', () => {
     expect(ko.toJS(model.foos())).toEqual(FOOS)
   })
 
+  test('.getMore() method has bound "this" value', async () => {
+    class DataModel<P> extends DataModelConstructorBuilder.Mixin(
+      PagerMixin('foos')
+    )<P> {
+      public foos = ko.observableArray()
+
+      protected async fetch(): Promise<any> {
+        return {
+          foos: [FOOS[this.params.page - 1]]
+        }
+      }
+    }
+
+    const model = await DataModel.create({})
+
+    expect(ko.toJS(model.foos())).toEqual(FOOS.slice(0, 1))
+
+    await model.getMore.call(null)
+
+    expect(ko.toJS(model.foos())).toEqual(FOOS.slice(0, 2))
+  })
+
   test('.hasMore() is observable', async () => {
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(
       PagerMixin('foos')

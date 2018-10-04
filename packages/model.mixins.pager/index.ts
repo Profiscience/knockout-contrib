@@ -45,6 +45,9 @@ export function PagerMixin<PaginationParams = { page: number }>(
         this[PAGER] = this[CREATE_PAGER]()
         this.hasMore = ko.observable(true)
 
+        // ensure method is called with correct "this" value
+        this.getMore = this.getMore.bind(this)
+
         const initialized = this[INITIALIZED]
         this[INITIALIZED] = initialized
           // @TODO unchain this when proper error handling is implemented
