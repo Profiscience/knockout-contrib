@@ -330,6 +330,19 @@ describe('querystring', () => {
     expect(Query.parse(location.search.substring(1))).toEqual({})
   })
 
+  test('Query#reload', () => {
+    const query = Query.create({ foo: '' })
+    expect(query.foo()).toBe('')
+
+    history.replaceState(null, '', location.pathname + '?{"foo": "bar"}')
+
+    Query.reload()
+
+    expect(query.foo()).toBe('bar')
+
+    query.dispose()
+  })
+
   test('grouped/multiple queries', () => {
     const a = Query.create({ foo: '' }, 'a')
     const b = Query.create({ foo: '' }, 'b')

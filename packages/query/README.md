@@ -56,6 +56,10 @@ to be set to "qux" instead.
 **NOTE:** Params that are equal to their default will _not_ be displayed in the
 querystring. Less === More.
 
+### Query.reload()
+
+Reload query instances if external changes occur (e.g. querystring modified via pushState/replaceState). Usually you don't need to call this directly, as long as you include the [query router middleware](../router.middleware.query), if you are using the [router](../router).
+
 ### Query.fromQS([group])
 
 Returns JS object containing current query from URL — for group if any.

@@ -12,6 +12,8 @@ import {
 
 const VIA_FACTORY = Symbol('VIA_FACTORY')
 
+const instances = new Set<Query>()
+
 export type IQueryParam<T> = ko.Computed<T> & {
   isDefault(): boolean
   clear(): void
@@ -54,6 +56,8 @@ export class Query {
   private readonly _group!: string
 
   constructor(config: IQueryConfig, group?: string, isViaFactory?: symbol) {
+    instances.add(this)
+
     if (isViaFactory !== VIA_FACTORY) {
       // tslint:disable-next-line:no-console
       console.warn(
@@ -124,12 +128,23 @@ export class Query {
   }
 
   public dispose() {
+    instances.delete(this)
     const group = this._group as string
     if (--Query._refs[group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       delete current[group]
       Query.writeQueryString(current)
       delete Query._raw[group]
+    }
+  }
+
+  private reload(fromQS: { [k: string]: any }) {
+    if (this._group) fromQS = fromQS[this._group]
+    if (fromQS) {
+      Object.keys(fromQS).forEach((k) => {
+        const v = fromQS[k]
+        ;(this as any)[k](v)
+      })
     }
   }
 
@@ -149,6 +164,11 @@ export class Query {
     // (and can't be faked). If the constructo is used directly, type-checking
     // will suffer.
     return new Query(config, group, VIA_FACTORY) as any
+  }
+
+  public static reload() {
+    const fromQS = Query.fromQS()
+    for (const i of instances.values()) i.reload(fromQS)
   }
 
   public static setParser(parser: IQueryParser) {
