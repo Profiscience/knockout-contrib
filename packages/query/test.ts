@@ -330,13 +330,11 @@ describe('querystring', () => {
     expect(Query.parse(location.search.substring(1))).toEqual({})
   })
 
-  test('Query#reload', () => {
+  test('reacts to external history api changes', () => {
     const query = Query.create({ foo: '' })
     expect(query.foo()).toBe('')
 
     history.replaceState(null, '', location.pathname + '?{"foo": "bar"}')
-
-    Query.reload()
 
     expect(query.foo()).toBe('bar')
 
@@ -387,12 +385,12 @@ describe('querystring', () => {
   })
 
   test('Query#setParser({ parse, stringify })', () => {
-    history.replaceState(null, '', location.pathname + '?foo=foo')
-
     Query.setParser({
       parse: (str) => ({ foo: str.replace('foo=', '') }),
       stringify: (obj: { foo: string }) => 'foo=' + obj.foo
     })
+
+    history.replaceState(null, '', location.pathname + '?foo=foo')
 
     const q = Query.create({ foo: '' })
 

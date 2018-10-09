@@ -13,6 +13,7 @@ import {
 const VIA_FACTORY = Symbol('VIA_FACTORY')
 
 const instances = new Set<Query>()
+let historyApiSpied = false
 
 export type IQueryParam<T> = ko.Computed<T> & {
   isDefault(): boolean
@@ -63,6 +64,11 @@ export class Query {
       console.warn(
         '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
       )
+    }
+
+    if (!historyApiSpied) {
+      spyOnHistoryApi()
+      historyApiSpied = true
     }
 
     Object.defineProperty(this, '_group', {
@@ -327,5 +333,20 @@ export class Query {
       ([k, v]) => (defaults[k] = this.isParamConfigObject(v) ? v.default : v)
     )
     return defaults
+  }
+}
+
+function spyOnHistoryApi() {
+  spyOnHistoryApiMethod('pushState')
+  spyOnHistoryApiMethod('replaceState')
+}
+
+function spyOnHistoryApiMethod(methodName: string) {
+  const h: any = history
+  const orig = h[methodName].bind(h)
+  h[methodName] = (...args: any[]) => {
+    const ret = orig(...args)
+    Query.reload()
+    return ret
   }
 }
