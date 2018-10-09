@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.7...@profiscience/knockout-contrib-query@2.0.0-rc.8) (2018-10-09)
+
+### Bug Fixes
+
+- **query:** React to history API changes ([5614aad](https://github.com/Profiscience/knockout-contrib/commit/5614aad))
+
+### Features
+
+- **query:** Add static .reload() method to updated after external changes ([4960517](https://github.com/Profiscience/knockout-contrib/commit/4960517))
+
 <a name="2.0.0-rc.7"></a>
 
 # [2.0.0-rc.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.6...@profiscience/knockout-contrib-query@2.0.0-rc.7) (2018-10-04)
