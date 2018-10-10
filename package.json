@@ -19,7 +19,7 @@
     "@types/globby": "^8.0.0",
     "@types/jest": "^23.3.3",
     "@types/jquery": "^3.3.11",
-    "@types/jsdom": "^11.12.0",
+    "@types/jsdom": "^12.2.0",
     "@types/lodash": "^4.14.116",
     "@types/node": "^10.11.4",
     "babel-core": "^6.26.3",
