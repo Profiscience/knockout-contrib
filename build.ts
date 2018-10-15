@@ -44,6 +44,7 @@ function createWorkers(size: number) {
   const _workers: ChildProcess[] = []
   let i = 0
   while (i++ < size) _workers.push(fork(workerFile))
+  let numListeners = 0
   return {
     doWork(file: string) {
       const worker = _workers[i++ % size]
@@ -51,7 +52,9 @@ function createWorkers(size: number) {
         file: string
         hasErrors?: boolean
         hasWarnings?: boolean
-      }>((resolve, reject) =>
+      }>((resolve, reject) => {
+        worker.setMaxListeners(++numListeners)
+
         worker.on('message', (message: any) => {
           if (file === message.file) {
             if (message.hasErrors) {
@@ -62,7 +65,7 @@ function createWorkers(size: number) {
             }
           }
         })
-      )
+      })
       worker.send({ file })
       return p
     },
