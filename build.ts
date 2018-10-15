@@ -9,7 +9,7 @@ import chalk from 'chalk'
 
 const argv = parseArgv()
 const PACKAGES_DIR = path.resolve(__dirname, 'packages')
-const workers = createWorkers(Math.min(os.cpus().length - 2, 8))
+const workers = createWorkers(Math.max(Math.min(os.cpus().length - 2, 8), 1))
 
 function parseArgv() {
   const hasFlag = (f: string) =>

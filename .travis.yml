@@ -16,8 +16,6 @@ cache:
   yarn: true
   directories:
     - node_modules
-install:
-  - yarn install --ignore-engines
 before_script:
   - sh -e /etc/init.d/xvfb start
 script:
