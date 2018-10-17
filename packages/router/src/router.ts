@@ -158,7 +158,7 @@ export class Router {
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
 
     const samePage =
-      pathname === fromCtx.pathname &&
+      fromCtx.route === route &&
       search === currentUrlFragments.search &&
       hash === currentUrlFragments.hash
 
