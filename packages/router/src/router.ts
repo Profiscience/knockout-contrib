@@ -153,7 +153,7 @@ export class Router {
 
     const opts = Router.normalizeUpdateOptions(args)
     const fromCtx = this.ctx
-    const { pathname, childPath } = route.parse(path)
+    const { childPath } = route.parse(path)
     const { search, hash } = Router.parseUrl(url)
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
 
