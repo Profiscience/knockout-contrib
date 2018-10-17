@@ -682,10 +682,10 @@
   resolved "https://registry.npmjs.org/@types/jest/-/jest-23.3.5.tgz#870a1434208b60603745bfd214fc3fc675142364"
   integrity sha512-3LI+vUC3Wju28vbjIjsTKakhMB8HC4l+tMz+Z8WRzVK+kmvezE5jcOvKtBpznWSI5KDLFo+FouUhpTKoekadCA==
 
-"@types/jquery@^3.3.17":
-  version "3.3.17"
-  resolved "https://registry.npmjs.org/@types/jquery/-/jquery-3.3.17.tgz#0903a65889625facd424f19c6c0a03fddf00b4c6"
-  integrity sha512-4KeUvF8TCKc6akcKVqS8ld0nY4uILk1wBdK6/2Zlz3AjNNXhVimVL04X+sAIgm+c3Wy2KNXI0ANXFkezMNSq5Q==
+"@types/jquery@^3.3.20":
+  version "3.3.20"
+  resolved "https://registry.npmjs.org/@types/jquery/-/jquery-3.3.20.tgz#cd9133448ed9824c8869dd23254e01a9cc112bc7"
+  integrity sha512-KhSivq+f6wlxFW5sW+894kJtUe7xlmRCSRkDGpvnP2u/a5ppVIlwxZdMqsr8mqSoFGANbtj8yZgDwau5/Keg3Q==
   dependencies:
     "@types/sizzle" "*"
 
