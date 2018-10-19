@@ -3,8 +3,9 @@
   "scripts": {
     "build": "ts-node ./build.ts",
     "ci": "yarn lint && yarn build && yarn test && yarn test:router",
-    "lint": "tslint -p ./tsconfig.json",
     "format": "pretty-quick",
+    "lint": "tslint -p ./tsconfig.json",
+    "publish-rc": "yarn ci && lerna publish --conventional-commits --npm-tag=rc --cd-version prerelease --preid=rc",
     "test": "jest",
     "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
   },
