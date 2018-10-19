@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.8...@profiscience/knockout-contrib-router@2.0.0-rc.9) (2018-10-19)
+
+### Bug Fixes
+
+- **router:** Correctly handle ambiguous routing when route appears to be the same, but isn't ([#141](https://github.com/Profiscience/knockout-contrib/issues/141)) ([6c06eb3](https://github.com/Profiscience/knockout-contrib/commit/6c06eb3))
+
 <a name="2.0.0-rc.8"></a>
 
 # [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.7...@profiscience/knockout-contrib-router@2.0.0-rc.8) (2018-10-04)
