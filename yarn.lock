@@ -2805,10 +2805,10 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.1.0"
     whatwg-url "^7.0.0"
 
-date-fns@^2.0.0-alpha.22:
-  version "2.0.0-alpha.22"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.0.0-alpha.22.tgz#c65f5dd7e959c59f8ea5591e458afc76a2a0d8d0"
-  integrity sha512-ovlz0I0OFhyn9bgTfqFAUvJvo8VS9mUuOxZ6cwKwBjSx42lMpXPGolcINYZoTNAG2M4YJ3QoApiQQljQEuy/Uw==
+date-fns@^2.0.0-alpha.23:
+  version "2.0.0-alpha.23"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.0.0-alpha.23.tgz#d3384f4628de78a4819fb3292286c8fa77cb175d"
+  integrity sha512-KeTgG5mbk+o9UbMXqxOvW+G46mWOWqJdjQDOP8t82E6Q28oH2ObcBvdRQbNFR55cun4QUg359PeE/KDBWJlk9g==
 
 date-format@^1.2.0:
   version "1.2.0"
