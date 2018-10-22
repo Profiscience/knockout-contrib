@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-scroll-position@2.0.0-rc.8...@profiscience/knockout-contrib-router-middleware-scroll-position@2.0.0-rc.9) (2018-10-22)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router-middleware-scroll-position
+
 # [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-scroll-position@2.0.0-rc.7...@profiscience/knockout-contrib-router-middleware-scroll-position@2.0.0-rc.8) (2018-10-19)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-middleware-scroll-position
