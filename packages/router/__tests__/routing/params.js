@@ -7,9 +7,21 @@ import ko from 'knockout'
 
 ko.components.register('params', {
   viewModel: class ParamsTest {
-    constructor({ t, done, params }) {
-      t.equal('foo', params.foo, 'parses param to ctx.params')
-      done()
+    constructor(ctx) {
+      const { t, done, params } = ctx
+      if (ctx.firstRun !== false) {
+        t.equal('foo', params.foo, 'parses param to ctx.params')
+        ctx.router.update('/params/bar', {
+          with: { t, done, firstRun: false }
+        })
+      } else {
+        t.equal(
+          'bar',
+          params.foo,
+          're-initializes component if navigated to w/ different params'
+        )
+        done()
+      }
     }
   }
 })
