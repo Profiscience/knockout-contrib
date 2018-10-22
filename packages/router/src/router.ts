@@ -153,12 +153,13 @@ export class Router {
 
     const opts = Router.normalizeUpdateOptions(args)
     const fromCtx = this.ctx
-    const { childPath } = route.parse(path)
+    const { pathname, childPath } = route.parse(path)
     const { search, hash } = Router.parseUrl(url)
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
 
     const samePage =
-      fromCtx.route === route &&
+      fromCtx.route === route && // divergent children (ambiguous route trees)
+      pathname === fromCtx.pathname && // same route, different params
       search === currentUrlFragments.search &&
       hash === currentUrlFragments.hash
 
