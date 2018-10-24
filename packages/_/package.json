@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib",
   "description": "KnockoutJS Goodies for building wicked awesome SPAs",
-  "version": "2.0.0-rc.20",
+  "version": "2.0.0-rc.21",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/_",
@@ -46,7 +46,7 @@
     "@profiscience/knockout-contrib-query": "^2.0.0-rc.8",
     "@profiscience/knockout-contrib-router": "^2.0.0-rc.10",
     "@profiscience/knockout-contrib-router-middleware-flash-message": "^2.0.0-rc.9",
-    "@profiscience/knockout-contrib-router-middleware-progress-bar": "^2.0.0-rc.10",
+    "@profiscience/knockout-contrib-router-middleware-progress-bar": "^2.0.0-rc.11",
     "@profiscience/knockout-contrib-router-middleware-scroll-position": "^2.0.0-rc.9",
     "@profiscience/knockout-contrib-router-plugins-children": "^2.0.0-rc.10",
     "@profiscience/knockout-contrib-router-plugins-component": "^2.0.0-rc.12",
