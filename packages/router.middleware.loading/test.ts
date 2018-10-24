@@ -56,4 +56,41 @@ describe('router.middleware.middleware', () => {
     bottomLifecycle.afterRender()
     expect(end).toHaveBeenCalledTimes(1)
   })
+  test('waits to call end until <minDuration> ms have passed', async () => {
+    jest.useFakeTimers()
+
+    const topCtx: Context & IContext = {
+      $child: {},
+      router: {
+        isRoot: true
+      }
+    } as Context & IContext
+    const bottomCtx: Context & IContext = {
+      router: {
+        isRoot: false
+      },
+      $child: undefined
+    } as any
+    const minDuration = 5000
+    const end = jest.fn()
+    const middleware = createLoadingMiddleware({
+      minDuration,
+      start: () => {
+        // noop
+      },
+      end
+    })
+    const topLifecycle = middleware(topCtx) as any
+    const bottomLifecycle = middleware(bottomCtx) as any
+    topLifecycle.beforeRender()
+    bottomLifecycle.beforeRender()
+    topLifecycle.afterRender()
+    bottomLifecycle.afterRender()
+
+    expect(end).not.toBeCalled()
+
+    await jest.advanceTimersByTime(minDuration)
+
+    expect(end).toHaveBeenCalledTimes(1)
+  })
 })
