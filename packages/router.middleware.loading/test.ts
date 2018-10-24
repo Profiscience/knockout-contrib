@@ -56,7 +56,7 @@ describe('router.middleware.middleware', () => {
     bottomLifecycle.afterRender()
     expect(end).toHaveBeenCalledTimes(1)
   })
-  test('waits to call end until <minDuration> ms have passed', async () => {
+  test('waits to call end until <minDuration> ms have passed', () => {
     jest.useFakeTimers()
 
     const topCtx: Context & IContext = {
@@ -89,7 +89,7 @@ describe('router.middleware.middleware', () => {
 
     expect(end).not.toBeCalled()
 
-    await jest.advanceTimersByTime(minDuration)
+    jest.advanceTimersByTime(minDuration)
 
     expect(end).toHaveBeenCalledTimes(1)
   })
