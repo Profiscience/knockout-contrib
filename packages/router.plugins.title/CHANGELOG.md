@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.10...@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.11) (2018-10-25)
+
+### Bug Fixes
+
+- **router.plugins.title:** Compose mixed async/sync titles correctly ([dc9f17b](https://github.com/Profiscience/knockout-contrib/commit/dc9f17b))
+
 # [2.0.0-rc.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.9...@profiscience/knockout-contrib-router-plugins-title@2.0.0-rc.10) (2018-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title

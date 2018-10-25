@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.1...@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.2) (2018-10-25)
+
+### Bug Fixes
+
+- **router.middleware.loading:** Ensure end fn called when minDuration used, but exceeded ([f4b9fc2](https://github.com/Profiscience/knockout-contrib/commit/f4b9fc2))
+
 ## [1.0.1-rc.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.0...@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.1) (2018-10-24)
 
 ### Bug Fixes
