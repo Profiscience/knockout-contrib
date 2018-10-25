@@ -28,9 +28,8 @@ export function createLoadingMiddleware({
         if (minDuration) {
           const elapsed = Date.now() - startTime
           const delay = minDuration - elapsed
-          if (elapsed < minDuration) {
-            setTimeout(() => end(ctx), delay)
-          }
+          // negative delay will be called immediately
+          setTimeout(() => end(ctx), delay)
         } else {
           end(ctx)
         }
