@@ -25,31 +25,20 @@ export function createTitleRoutePlugin(
   return ({ title }: IRouteConfig) => {
     if (!title) return
 
-    let async = false
-
     return (ctx: Context & IContext) => ({
       afterRender() {
-        if (typeof title === 'function') {
-          const t = title(ctx)
-          if (t && typeof (t as any).then === 'function') {
-            async = true
-            ctx.queue(t as Promise<any>)
-          }
-          titles.push(t)
-        } else {
-          titles.push(title)
-        }
+        titles.push(typeof title === 'function' ? title(ctx) : title)
 
         if (!ctx.$child) {
-          if (async) {
+          ctx.queue(
             Promise.all(titles)
-              .then((ts) => (document.title = compose(ts)))
+              .then((ts) => {
+                document.title = compose(ts)
+              })
               .catch((err) => {
                 throw new Error(`Error setting title: ${err}`)
               })
-          } else {
-            document.title = compose(titles as string[])
-          }
+          )
         }
       },
       beforeDispose() {
