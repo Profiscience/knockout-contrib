@@ -149,7 +149,10 @@ export class Query {
     if (fromQS) {
       Object.keys(fromQS).forEach((k) => {
         const v = fromQS[k]
-        ;(this as any)[k](v)
+        const query = this as any
+        if (ko.isObservable(query[k])) {
+          query[k](v)
+        }
       })
     }
   }
