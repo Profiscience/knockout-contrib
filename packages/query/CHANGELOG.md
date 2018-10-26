@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.8...@profiscience/knockout-contrib-query@2.0.0-rc.9) (2018-10-26)
+
+### Bug Fixes
+
+- **query:** Prevent JS error when reloading query and actual/expected mismatch ([cdb4f01](https://github.com/Profiscience/knockout-contrib/commit/cdb4f01))
+
 # [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.7...@profiscience/knockout-contrib-query@2.0.0-rc.8) (2018-10-09)
 
 ### Bug Fixes
