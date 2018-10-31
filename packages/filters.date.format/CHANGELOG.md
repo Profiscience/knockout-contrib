@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.6...@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.7) (2018-10-31)
+
+### Bug Fixes
+
+- **filters.date.format:** Loosen date-fns dependency version range ([4aa9ba6](https://github.com/Profiscience/knockout-contrib/commit/4aa9ba6))
+
 # [2.0.0-rc.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.5...@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.6) (2018-10-19)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-filters-date-format
