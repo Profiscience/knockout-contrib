@@ -40,7 +40,13 @@ Router.setConfig({
 
   // CSS class added to elements with a path binding that resolves to the current
   // page — useful for styling navbars and tabs
-  activePathCSSClass: 'active-path'
+  activePathCSSClass: 'active-path',
+
+  // If you're using the query package (or something like it) where the querystring
+  // is managed externally and independently from routing, set this to true so that
+  // query objects shared across sibling routes will not be reset when navigating
+  // between the two.
+  preserveQueryStringOnNavigation: false
 })
 ```
 

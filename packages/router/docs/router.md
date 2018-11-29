@@ -74,7 +74,7 @@ Observable value which is true if _any_ routers are navigating, including nested
 
 #### Router.setConfig({ base = '', hashbang = false, activePathCSSClass = 'active-path' })
 
-Sets router configuration
+Sets router configuration. See [Basic Usage](./basic.md) for more.
 
 #### Router.use(...fns)
 

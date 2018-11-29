@@ -20,6 +20,7 @@ import './redirect'
 import './before-navigate-callbacks'
 import './element'
 import './plugins'
+import './preserve-query'
 
 const tests = [
   'routing',
@@ -36,7 +37,8 @@ const tests = [
   'redirect',
   'before-navigate-callbacks',
   'element',
-  'plugins'
+  'plugins',
+  'preserve-query'
 ]
 
 class TestRunner {

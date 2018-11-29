@@ -8,6 +8,7 @@ export type RouterConfig = {
   base?: string
   hashbang?: boolean
   activePathCSSClass?: string
+  preserveQueryStringOnNavigation?: boolean
 }
 
 export type RouterUpdateOptions = {
@@ -55,7 +56,8 @@ export class Router {
   public static readonly config = {
     base: '',
     hashbang: false,
-    activePathCSSClass: 'active-path'
+    activePathCSSClass: 'active-path',
+    preserveQueryStringOnNavigation: false
   }
 
   /**
@@ -154,8 +156,14 @@ export class Router {
     const opts = Router.normalizeUpdateOptions(args)
     const fromCtx = this.ctx
     const { pathname, childPath } = route.parse(path)
-    const { search, hash } = Router.parseUrl(url)
+    const toUrlFragments = Router.parseUrl(url)
+    const { hash } = toUrlFragments
+    let { search } = toUrlFragments
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
+
+    if (Router.config.preserveQueryStringOnNavigation && !search) {
+      search = currentUrlFragments.search
+    }
 
     const samePage =
       fromCtx.route === route && // divergent children (ambiguous route trees)

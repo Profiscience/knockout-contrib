@@ -13,11 +13,18 @@ Persistent, stateless read/write querystring abstraction for KnockoutJS.
 ## Basic Usage
 
 ```javascript
-import { Query } from '@profiscience/knockout-contrib'
+import { Query, Router } from '@profiscience/knockout-contrib'
 
 const query = Query.create({ sort: 'alpha' })
 
 query.sort() // alpha
+
+// If you are using this package with the router from knockout-contrib as well,
+// you probably want to configure it to preserve the querystring between navigation
+// since we're managing it externally.
+Router.setConfig({
+  preserveQueryStringOnNavigation: true
+})
 ```
 
 ## API
