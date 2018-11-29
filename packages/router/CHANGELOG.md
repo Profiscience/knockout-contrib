@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.10...@profiscience/knockout-contrib-router@2.0.0-rc.11) (2018-11-29)
+
+### Features
+
+- **router/query:** Add preserveQueryString configuration option to improve interop ([09fe11e](https://github.com/Profiscience/knockout-contrib/commit/09fe11e))
+
 # [2.0.0-rc.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.9...@profiscience/knockout-contrib-router@2.0.0-rc.10) (2018-10-22)
 
 ### Bug Fixes

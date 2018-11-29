@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1-rc.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.2...@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.3) (2018-11-29)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router-middleware-loading
+
 ## [1.0.1-rc.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.1...@profiscience/knockout-contrib-router-middleware-loading@1.0.1-rc.2) (2018-10-25)
 
 ### Bug Fixes
