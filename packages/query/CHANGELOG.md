@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.9...@profiscience/knockout-contrib-query@2.0.0-rc.10) (2018-12-13)
+
+### Bug Fixes
+
+- **query:** Restore on back-button navigation ([65df9a0](https://github.com/Profiscience/knockout-contrib/commit/65df9a0))
+
+### Features
+
+- **router/query:** Add preserveQueryString configuration option to improve interop ([09fe11e](https://github.com/Profiscience/knockout-contrib/commit/09fe11e))
+
 # [2.0.0-rc.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.8...@profiscience/knockout-contrib-query@2.0.0-rc.9) (2018-10-26)
 
 ### Bug Fixes
