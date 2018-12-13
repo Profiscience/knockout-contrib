@@ -83,6 +83,20 @@ export class Query {
       Query._refs[this._group]++
     }
 
+    // restore querystring on back-button navigation (stored by .dispose() method)
+    if (
+      history.state &&
+      history.state.__query &&
+      history.state.__query[this._group]
+    ) {
+      const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
+      Query.writeQueryString({
+        ...current,
+        [this._group]: history.state.__query[this._group]
+      })
+      delete history.state.__query[this._group]
+    }
+
     this.set(config)
   }
 
@@ -138,6 +152,9 @@ export class Query {
     const group = this._group as string
     if (--Query._refs[group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
+      const state = history.state || {}
+      state.__query = state.__query || {}
+      state.__query[group] = current[group]
       delete current[group]
       Query.writeQueryString(current)
       delete Query._raw[group]
