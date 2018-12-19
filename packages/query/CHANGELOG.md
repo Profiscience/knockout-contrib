@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.10...@profiscience/knockout-contrib-query@2.0.0-rc.11) (2018-12-19)
+
+### Bug Fixes
+
+- **query:** 65df9a0, but for IE... ([c92625a](https://github.com/Profiscience/knockout-contrib/commit/c92625a))
+
 # [2.0.0-rc.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0-rc.9...@profiscience/knockout-contrib-query@2.0.0-rc.10) (2018-12-13)
 
 ### Bug Fixes

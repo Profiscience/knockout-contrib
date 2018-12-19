@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-query",
-  "version": "1.0.1-rc.15",
+  "version": "1.0.1-rc.16",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.mixins.query",
@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": "^2.0.0-rc.12",
-    "@profiscience/knockout-contrib-query": "^2.0.0-rc.10"
+    "@profiscience/knockout-contrib-query": "^2.0.0-rc.11"
   }
 }
