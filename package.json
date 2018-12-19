@@ -6,6 +6,7 @@
     "format": "pretty-quick",
     "lint": "tslint -p ./tsconfig.json",
     "publish-rc": "yarn ci && lerna publish --conventional-commits --npm-tag=rc --cd-version prerelease --preid=rc",
+    "link:all": "lerna exec -- \"yarn link && cd $REPO && yarn link \\$LERNA_PACKAGE_NAME\"",
     "test": "jest",
     "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
   },
