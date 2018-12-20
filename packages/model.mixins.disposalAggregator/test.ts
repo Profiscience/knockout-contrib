@@ -2,7 +2,7 @@
 
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
-import { DisposalAggregatorMixin } from './index'
+import { DisposalAggregatorMixin, noAutoDispose } from './index'
 
 describe('model.mixins.disposalAggregator', () => {
   test('.dispose() calls .dispose() on every property that has it', () => {
@@ -21,6 +21,19 @@ describe('model.mixins.disposalAggregator', () => {
 
     expect(m.foo.dispose).toBeCalled()
     expect(m.bar.dispose).toBeCalled()
+  })
+
+  test('noAutoDispose helper prevents property from being disposed', () => {
+    class FooModel extends ConstructorBuilder.Mixin(DisposalAggregatorMixin) {
+      public foo = { dispose: jest.fn() }
+      public bar = noAutoDispose({ dispose: jest.fn() })
+    }
+
+    const m = new FooModel()
+    m.dispose()
+
+    expect(m.foo.dispose).toBeCalled()
+    expect(m.bar.dispose).not.toBeCalled()
   })
 
   test('.dispose() calls super.dispose()', () => {
