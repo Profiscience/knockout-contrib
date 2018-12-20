@@ -3,7 +3,7 @@ import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-mode
 export function TransformMixin<P extends {}>(
   transform: (fetchData: any, params: P) => any
 ) {
-  return <T extends { new (...args: any[]): DataModelConstructorBuilder<P> }>(
+  return <T extends new (...args: any[]) => DataModelConstructorBuilder<P>>(
     ctor: T
   ) =>
     class extends ctor {

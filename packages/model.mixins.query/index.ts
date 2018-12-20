@@ -8,7 +8,7 @@ import {
 export function QueryMixin<Q extends IQueryConfig>(opts: Q) {
   return <
     P extends IQuery<Q>,
-    T extends { new (...args: any[]): DataModelConstructorBuilder<P> }
+    T extends new (...args: any[]) => DataModelConstructorBuilder<P>
   >(
     ctor: T
   ) =>

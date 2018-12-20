@@ -11,7 +11,7 @@ export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
  * @param ctor BaseModel
  */
 export function SubscriptionDisposalMixin<
-  T extends { new (...args: any[]): ConstructorBuilder }
+  T extends new (...args: any[]) => ConstructorBuilder
 >(ctor: T) {
   return class Subscribable extends ctor {
     private [SUBSCRIPTIONS] = new Map<any, Map<any, ko.Subscription>>()

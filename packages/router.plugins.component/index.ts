@@ -83,9 +83,7 @@ export type IAnonymousComponent = {
  *
  * See @profiscience/knockout-contrib-router for context API
  */
-export interface IRoutedViewModelConstructor {
-  new (ctx: Context & IContext): any
-}
+export type IRoutedViewModelConstructor = new (ctx: Context & IContext) => any
 
 const uniqueComponentNames = (function*() {
   let i = 0

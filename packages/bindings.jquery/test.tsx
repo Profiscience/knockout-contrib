@@ -78,7 +78,7 @@ describe('bindings.jquery', () => {
   test('works with change event binding handler', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, event: { change: onChange }" />
-    const onChange = (e: JQuery.Event) => {
+    const onChange = (e: JQuery.ChangeEvent) => {
       expect(e.target).toBe(el)
       done()
     }
@@ -92,7 +92,7 @@ describe('bindings.jquery', () => {
   test('works with namespaced binding syntax change handler', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, event.change: onChange" />
-    const onChange = (e: JQuery.Event) => {
+    const onChange = (e: JQuery.ChangeEvent) => {
       expect(e.target).toBe(el)
       done()
     }

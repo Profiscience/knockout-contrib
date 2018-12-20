@@ -28,7 +28,7 @@ export function PagerMixin<PaginationParams = { page: number }>(
 ) {
   return <
     P extends PaginationParams,
-    T extends { new (...args: any[]): DataModelConstructorBuilder<P> }
+    T extends new (...args: any[]) => DataModelConstructorBuilder<P>
   >(
     ctor: T
   ) =>

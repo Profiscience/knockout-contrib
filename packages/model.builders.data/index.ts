@@ -45,7 +45,7 @@ const INSTANCES = new Map<symbol, DataModelConstructorBuilder<any>>()
 export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
   SubscriptionDisposalMixin
 ).Mixin(DisposalAggregatorMixin) {
-  protected readonly INSTANCE_ID = Symbol('DATA_MODEL_INSTANCE');
+  protected readonly INSTANCE_ID = Symbol('DATA_MODEL_INSTANCE')
 
   public [INITIALIZED]: Promise<void>
 
@@ -140,7 +140,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
    * @param params (Optionally) observable parameters for this instance. Will be passed to the constructor.
    */
   public static async create<T>(
-    this: { new (params: any): T },
+    this: new (params: any) => T,
     params: any,
     initData?: any
   ): Promise<T> {

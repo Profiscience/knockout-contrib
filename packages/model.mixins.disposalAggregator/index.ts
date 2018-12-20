@@ -1,7 +1,7 @@
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
 export function DisposalAggregatorMixin<
-  T extends { new (...args: any[]): ConstructorBuilder }
+  T extends new (...args: any[]) => ConstructorBuilder
 >(ctor: T) {
   return class extends ctor {
     public dispose() {

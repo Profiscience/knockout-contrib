@@ -4,7 +4,7 @@ import { ConstructorBuilder } from './index'
 
 describe('model.builders.base', () => {
   test('ConstructorBuilder.Mixin(m: Mixin) returns mixed-in constructor', async () => {
-    function fetchMixin<T extends { new (...args: any[]): ConstructorBuilder }>(
+    function fetchMixin<T extends new (...args: any[]) => ConstructorBuilder>(
       ctor: T
     ) {
       return class FetchMixin extends ctor {

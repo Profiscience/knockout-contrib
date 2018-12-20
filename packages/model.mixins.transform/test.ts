@@ -17,7 +17,7 @@ function reverse(arr: any[]) {
 
 function FoosMixin<
   P extends { page: number },
-  T extends { new (...args: any[]): DataModelConstructorBuilder<P> }
+  T extends new (...args: any[]) => DataModelConstructorBuilder<P>
 >(ctor: T) {
   return class extends ctor {
     public foos = ko.observableArray()
