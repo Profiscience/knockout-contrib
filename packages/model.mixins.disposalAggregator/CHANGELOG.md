@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-disposal-aggregator@2.0.0-rc.4...@profiscience/knockout-contrib-model-mixins-disposal-aggregator@2.0.0-rc.5) (2018-12-20)
+
+### Features
+
+- **model.mixins.disposalAggregator:** Add `noAutoDispose` helper ([15e671a](https://github.com/Profiscience/knockout-contrib/commit/15e671a))
+
 <a name="2.0.0-rc.4"></a>
 
 # [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-disposal-aggregator@2.0.0-rc.3...@profiscience/knockout-contrib-model-mixins-disposal-aggregator@2.0.0-rc.4) (2018-10-04)
