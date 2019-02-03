@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-plugins-title",
-  "version": "2.0.0-rc.12",
+  "version": "2.0.0-rc.13",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/router.plugins.title",
@@ -19,7 +19,7 @@
     "knockout": "^3.5.0-beta"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.0.0-rc.11"
+    "@profiscience/knockout-contrib-router": "^2.0.0-rc.12"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0"

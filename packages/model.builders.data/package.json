@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-builders-data",
-  "version": "2.0.0-rc.13",
+  "version": "2.0.0-rc.14",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.builders.data",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-jest-matchers": "^2.0.0-rc.3",
-    "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-rc.14"
+    "@profiscience/knockout-contrib-router-plugins-init": "^2.0.0-rc.15"
   }
 }

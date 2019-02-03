@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.11...@profiscience/knockout-contrib-router@2.0.0-rc.12) (2019-02-03)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router
+
 # [2.0.0-rc.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.10...@profiscience/knockout-contrib-router@2.0.0-rc.11) (2018-11-29)
 
 ### Features
@@ -249,10 +253,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - Router.setConfig
 - Router.useRoutes
-- router.$parents
-- ctx.$parents
-- router.$children
-- ctx.$children
+- router.\$parents
+- ctx.\$parents
+- router.\$children
+- ctx.\$children
 
 ### Fixed
 
