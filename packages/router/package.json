@@ -25,14 +25,14 @@
   },
   "devDependencies": {
     "istanbul-instrumenter-loader": "^3.0.1",
-    "karma": "^3.0.0",
+    "karma": "^4.0.0",
     "karma-firefox-launcher": "^1.0.1",
     "karma-remap-istanbul": "^0.6.0",
     "karma-tap": "^4.0.0",
     "karma-tap-pretty-reporter": "^4.0.0",
     "karma-webpack": "^3.0.5",
     "tap-diff": "^0.1.1",
-    "tape": "^4.8.0",
-    "webpack": "^4.21.0"
+    "tape": "^4.9.2",
+    "webpack": "^4.29.0"
   }
 }
