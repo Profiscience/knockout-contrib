@@ -43,7 +43,7 @@
     "knockout-punches": "^0.5.1",
     "lerna": "^3.10.8",
     "lodash": "^4.17.11",
-    "microtime": "^2.1.9",
+    "microtime": "^3.0.0",
     "prettier": "^1.16.3",
     "pretty-quick": "^1.10.0",
     "toprogress": "^0.1.3",
