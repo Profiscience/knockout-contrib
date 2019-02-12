@@ -24,7 +24,7 @@
     "@types/jquery": "^3.3.29",
     "@types/jsdom": "^12.2.1",
     "@types/lodash": "^4.14.120",
-    "@types/node": "^10.12.21",
+    "@types/node": "^11.9.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
