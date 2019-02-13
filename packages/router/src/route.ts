@@ -168,8 +168,8 @@ export class Route {
       path = path.replace(/\/?!?$/, '/!')
     }
 
-    if (path.endsWith('!')) {
-      path = path.replace('!', ':__child_path__(\\S*)?')
+    if (path[path.length - 1] === '!') {
+      path = path.replace('!', ':__child_path__(.*)?')
     } else {
       path = path.replace(/\(?\*\)?/, '(.*)')
     }
