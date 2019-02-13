@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-components-flash-message@2.0.0-rc.12...@profiscience/knockout-contrib-components-flash-message@2.0.0-rc.13) (2019-02-13)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-components-flash-message
+
 # [2.0.0-rc.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-components-flash-message@2.0.0-rc.11...@profiscience/knockout-contrib-components-flash-message@2.0.0-rc.12) (2019-02-03)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-components-flash-message

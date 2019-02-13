@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.12...@profiscience/knockout-contrib-router@2.0.0-rc.13) (2019-02-13)
+
+### Bug Fixes
+
+- **router:** Bug w/ nested routing re: updated path-to-regexp version ([53e5f03](https://github.com/Profiscience/knockout-contrib/commit/53e5f03))
+- **router:** Handle race-condition navigation (navigating while middleware is executing) ([1bbaf3e](https://github.com/Profiscience/knockout-contrib/commit/1bbaf3e))
+
 # [2.0.0-rc.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.11...@profiscience/knockout-contrib-router@2.0.0-rc.12) (2019-02-03)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
