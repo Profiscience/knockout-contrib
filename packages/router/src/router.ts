@@ -190,6 +190,13 @@ export class Router {
 
     this.isNavigating(true)
 
+    const _update = this.update.bind(this)
+
+    this.update = (_url: string, _args?: boolean | RouterUpdateOptions) => {
+      toCtx.redirect(_url, typeof _args === 'boolean' ? undefined : _args)
+      return Promise.resolve(true)
+    }
+
     await fromCtx.runBeforeDispose()
 
     history[opts.push ? 'pushState' : 'replaceState'](
@@ -206,6 +213,7 @@ export class Router {
     }
 
     this.ctx = toCtx
+    this.update = _update
 
     await fromCtx.runAfterDispose()
 
