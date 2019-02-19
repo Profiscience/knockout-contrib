@@ -8,6 +8,7 @@ ko.components.register('redirect', {
     constructor({ t, done }) {
       const fooPre = {}
       const barPre = {}
+      const bazPreChild = {}
 
       history.pushState(null, null, '/notfoo')
 
@@ -108,7 +109,45 @@ ko.components.register('redirect', {
             }
           })
         ],
-        '/bar': 'bar'
+        '/bar': 'bar',
+        '/notbaz': [
+          (ctx) => {
+            ctx.queue(
+              new Promise((resolve) =>
+                setTimeout(() => {
+                  ctx.redirect('/baz')
+                  resolve()
+                })
+              )
+            )
+          },
+          {
+            '/': [
+              'notbaz',
+              () => ({
+                beforeRender() {
+                  bazPreChild.beforeRender = true
+                },
+                async afterRender() {
+                  await new Promise((resolve) => {
+                    setTimeout(() => {
+                      bazPreChild.afterRender = true
+                      resolve()
+                    })
+                  })
+                },
+                beforeDispose() {
+                  bazPreChild.beforeDispose = true
+                },
+                afterDispose() {
+                  bazPreChild.afterDispose = true
+                }
+              })
+            ]
+          }
+        ],
+        '/baz': 'baz',
+        '/qux': 'qux'
       })
 
       ko.components.register('notfoo', {
@@ -166,6 +205,34 @@ ko.components.register('redirect', {
             t.true(
               barPre.afterDispose,
               'pre route redirect afterDispose is ran'
+            )
+
+            Router.update('/notbaz')
+          }
+        }
+      })
+
+      ko.components.register('baz', {
+        synchronous: true,
+        viewModel: class {
+          constructor() {
+            t.true(
+              bazPreChild.beforeRender && bazPreChild.afterRender,
+              'child afterRender middleware is handled correctly w/ late (queued promise) redirect in parent'
+            )
+
+            Router.update('/qux')
+          }
+        }
+      })
+
+      ko.components.register('qux', {
+        synchronous: true,
+        viewModel: class {
+          constructor() {
+            t.true(
+              bazPreChild.beforeDispose && bazPreChild.afterDispose,
+              'child disposal middleware is handled correctly w/ late (queued promise) redirect in parent'
             )
 
             done()

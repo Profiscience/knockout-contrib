@@ -167,17 +167,22 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runAfterRender() {
-    for (const l of [
-      ...this._appMiddlewareLifecycles,
-      ...this._routeMiddlewareLifecycles
-    ]) {
-      if (l.afterRender) await l.afterRender()
-    }
+    const isRedirecting = typeof this._redirect !== 'undefined'
+    let ctx: Context | undefined = this
+    do {
+      for (const l of [
+        ...ctx._appMiddlewareLifecycles,
+        ...ctx._routeMiddlewareLifecycles
+      ]) {
+        if (l.afterRender) await l.afterRender()
+      }
+      ctx = ctx.$child
+    } while (isRedirecting && ctx)
     await this.flushQueue()
   }
 
   public async runBeforeDispose(flush = true) {
-    if (this.$child && typeof this._redirect === 'undefined') {
+    if (this.$child) {
       await this.$child.runBeforeDispose(false)
     }
     for (const l of [
@@ -192,7 +197,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runAfterDispose(flush = true) {
-    if (this.$child && typeof this._redirect === 'undefined') {
+    if (this.$child) {
       await this.$child.runAfterDispose(false)
     }
     for (const l of [
