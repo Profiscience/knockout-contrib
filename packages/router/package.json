@@ -32,7 +32,7 @@
     "karma-tap-pretty-reporter": "^4.0.0",
     "karma-webpack": "^3.0.5",
     "tap-diff": "^0.1.1",
-    "tape": "^4.9.2",
-    "webpack": "^4.29.0"
+    "tape": "^4.10.1",
+    "webpack": "^4.29.5"
   }
 }
