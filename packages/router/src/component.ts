@@ -68,6 +68,12 @@ function createViewModel(params: { [k: string]: any }) {
         if (redirectPath) {
           router.ctx
             .runAfterRender()
+            .catch((e) => {
+              log.warn(
+                'Error in afterRender middleware during redirection. This may be caused by attempting to use ctx.component (or a property thereof), or the DOM in the middleware. Because redirection occured, no component was actually rendered. You may wish to add a guard in your middleware to handle this case.'
+              )
+              log.error(e)
+            })
             .then(() => {
               const { router: r, path: p } = traversePath(router, redirectPath)
               r.update(p, redirectArgs).catch((err) =>
