@@ -15,7 +15,7 @@
   "types": "index.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "knockout": "3.5.0-rc2"
+    "knockout": "3.5.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0"
