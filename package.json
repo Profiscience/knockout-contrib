@@ -40,7 +40,7 @@
     "jest-jquery-matchers": "^2.0.0",
     "jquery": "^3.2.1",
     "jsx-dom": "^6.1.1",
-    "knockout": "^3.5.0-rc2",
+    "knockout": "^3.5.0",
     "knockout-punches": "^0.5.1",
     "lerna": "^3.13.0",
     "lodash": "^4.17.11",
