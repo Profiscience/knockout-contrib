@@ -3108,6 +3108,11 @@ cssstyle@^1.0.0:
   dependencies:
     cssom "0.3.x"
 
+csstype@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.2.tgz#3043d5e065454579afc7478a18de41909c8a2f01"
+  integrity sha512-Rl7PvTae0pflc1YtxtKbiSqq20Ts6vpIYOD5WBafl4y123DyHUeLrRdQP66sQW8/6gmX8jrYJLXwNeMqYVJcow==
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -5733,11 +5738,19 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsx-dom@^6.0.0, jsx-dom@^6.1.1:
+jsx-dom@^6.0.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.2.1.tgz#776fb13c3b8163b4c9f9eedf7b283ee88da56246"
   integrity sha512-Du+PYNZK4DxYnKhQhVThiODoLfS6Jue7DZRAmekngAqBPtjhj7CtQpHjtaRASNtYmMvPWgkrydrgFtbAdjzQog==
   dependencies:
+    tslib "^1.9.3"
+
+jsx-dom@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.3.0.tgz#d4ae3448a3dc96294e2776f1f5b724acc0bfeaa5"
+  integrity sha512-zTjhvXb0N8K2UVS83liThAe4HQth/+oFqOr9CL2mXaDm+64kL6/mDTriAANREplAtnNAnIpJlE4dSabIv8RRmg==
+  dependencies:
+    csstype "^2.6.2"
     tslib "^1.9.3"
 
 karma-firefox-launcher@^1.0.1:
@@ -9070,10 +9083,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3.tgz#f1657fc7daa27e1a8930758ace9ae8da31403221"
-  integrity sha512-Y21Xqe54TBVp+VDSNbuDYdGw0BpoR/Q6wo/+35M8PAU0vipahnyduJWirxxdxjsAkS7hue53x2zp8gz7F05u0A==
+typescript@^3.3.3333:
+  version "3.3.3333"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3333.tgz#171b2c5af66c59e9431199117a3bcadc66fdcfd6"
+  integrity sha512-JjSKsAfuHBE/fB2oZ8NxtRTk5iGcg6hkYXMnZ3Wc+b2RSqejEqTaem11mHASMnFilHrax3sLK0GDzcJrekZYLw==
 
 uglify-js@^3.1.4:
   version "3.4.9"

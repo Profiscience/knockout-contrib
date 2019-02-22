@@ -39,7 +39,7 @@
     "jest": "^24.1.0",
     "jest-jquery-matchers": "^2.0.0",
     "jquery": "^3.2.1",
-    "jsx-dom": "^6.1.1",
+    "jsx-dom": "^6.3.0",
     "knockout": "^3.5.0-rc2",
     "knockout-punches": "^0.5.1",
     "lerna": "^3.13.0",
@@ -52,7 +52,7 @@
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3333"
   },
   "jest": {
     "collectCoverage": true,
