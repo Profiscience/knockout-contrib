@@ -168,7 +168,7 @@ That said, using this library with TypeScript requires a few properties to be se
 You may omit `jsx` and `jsxFactory` if you are not using any component packages.
 
 [knockoutjs]: https://knockoutjs.com
-[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0--rc2-red.svg
+[knockout-shield]: https://img.shields.io/badge/KnockoutJS-v3.5.0-red.svg
 [travis-ci]: https://travis-ci.org/Profiscience/knockout-contrib/
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
 [codecov]: https://codecov.io/gh/Profiscience/knockout-contrib
