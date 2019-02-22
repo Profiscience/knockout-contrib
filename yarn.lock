@@ -5738,13 +5738,6 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsx-dom@^6.0.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.2.1.tgz#776fb13c3b8163b4c9f9eedf7b283ee88da56246"
-  integrity sha512-Du+PYNZK4DxYnKhQhVThiODoLfS6Jue7DZRAmekngAqBPtjhj7CtQpHjtaRASNtYmMvPWgkrydrgFtbAdjzQog==
-  dependencies:
-    tslib "^1.9.3"
-
 jsx-dom@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.3.0.tgz#d4ae3448a3dc96294e2776f1f5b724acc0bfeaa5"
