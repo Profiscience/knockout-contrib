@@ -16,7 +16,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-model-builders-data": ">=2.0.0-rc.0",
-    "knockout": "3.5.0-rc2"
+    "knockout": "3.5.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",

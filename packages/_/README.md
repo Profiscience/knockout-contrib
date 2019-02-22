@@ -113,7 +113,7 @@ However, if you only need to support modern runtimes, you can use the esnext bui
 
 This library uses the [proposed `esnext` package.json field](https://github.com/stereobooster/package.json#esnext).
 
-Add `esnext` to [`resolve.mainFields`](https://webpack.js.org/configuration/resolve/#resolve-mainfields) in your webpack config to use this build.
+Add `esnext` to [`resolve.mainFields`](https://webpack.js.org/configuration/resolve/#resolve-mainfields) in your webpack config to use this build. Additionally, you'll need to configure an additional rule so that this field is used transitively. See [Webpack #6796](https://github.com/webpack/webpack/issues/6796).
 
 _e.g._
 
@@ -126,6 +126,18 @@ module.exports = {
       // these are the default values
       'module', // es5+esm  (resolves to <package>/dist/default)
       'main' // es5+cjs  (resolves to <package>/dist/node)
+    ]
+  },
+
+  module: {
+    rules: [
+      {
+        // https://github.com/webpack/webpack/issues/6796
+        test: path.resolve(__dirname, 'node_modules'),
+        resolve: {
+          mainFields: ['esnext', 'es2015', 'module', 'main']
+        }
+      }
     ]
   }
 }

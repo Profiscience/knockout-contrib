@@ -5856,10 +5856,10 @@ knockout-punches@^0.5.1:
   resolved "https://registry.yarnpkg.com/knockout-punches/-/knockout-punches-0.5.1.tgz#b42c49590c53f39516d873a331e3d814fd3d2cdd"
   integrity sha1-tCxJWQxT85UW2HOjMePYFP09LN0=
 
-knockout@^3.5.0-rc2:
-  version "3.5.0-rc2"
-  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0-rc2.tgz#298249c1acac3f2f65432f4edb4fd3d0cde338f1"
-  integrity sha512-ncKkcfOX5hV6QyvNLMLe+s9uYbP+jRKljj01Fcg/BPk3PvfcdZF3dV52qkfpR0IC0iRh0AAP7NXFJEt0ofy14g==
+knockout@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.0.tgz#6d3e19bf53b1dc4d8de81c97a5ba9672443dc292"
+  integrity sha512-vBUF/IsBDzaejHkNpiquKdc5uPrImXuQ4Mb9lEfNNJ5cyHGI8ThDupR+h3eMFZhfmPE/brfwcIAn/fm0yOvJUg==
 
 lcid@^2.0.0:
   version "2.0.0"
