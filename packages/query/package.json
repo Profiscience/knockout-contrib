@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-query",
-  "version": "2.0.0-rc.11",
+  "version": "2.0.0",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/query",

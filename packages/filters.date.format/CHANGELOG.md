@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.8...@profiscience/knockout-contrib-filters-date-format@2.0.0) (2019-02-22)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-filters-date-format
+
 # [2.0.0-rc.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.7...@profiscience/knockout-contrib-filters-date-format@2.0.0-rc.8) (2019-02-03)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-filters-date-format
