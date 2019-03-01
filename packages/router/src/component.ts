@@ -68,19 +68,14 @@ function createViewModel(params: { [k: string]: any }) {
         if (redirectPath) {
           router.ctx
             .runAfterRender()
-            .catch((e) => {
-              log.warn(
-                'Error in afterRender middleware during redirection. This may be caused by attempting to use ctx.component (or a property thereof), or the DOM in the middleware. Because redirection occured, no component was actually rendered. You may wish to add a guard in your middleware to handle this case.'
-              )
-              log.error(e)
-            })
+            .catch(catchRedirectAfterRenderMiddleware)
             .then(() => {
+              // tslint:disable-line:no-floating-promises
               const { router: r, path: p } = traversePath(router, redirectPath)
               r.update(p, redirectArgs).catch((err) =>
                 log.error('Error redirecting', err)
               )
             })
-            .catch((err) => log.error('Error in afterRender middleware', err))
         } else {
           router.ctx.render()
           Router.onInit.forEach((resolve) => resolve(router))
@@ -89,8 +84,21 @@ function createViewModel(params: { [k: string]: any }) {
       .catch((err) => log.error('Error in beforeRender middleware', err))
   } else if (router.ctx._redirect) {
     const { router: r, path: p } = traversePath(router, router.ctx._redirect)
-    setTimeout(() => r.update(p, router.ctx._redirectArgs))
+    router.ctx
+      .runAfterRender()
+      .catch(catchRedirectAfterRenderMiddleware)
+      .then(() => {
+        // tslint:disable-line:no-floating-promises
+        setTimeout(() => r.update(p, router.ctx._redirectArgs))
+      })
   }
 
   return router
+}
+
+function catchRedirectAfterRenderMiddleware(err: Error) {
+  log.warn(
+    'Error in afterRender middleware during redirection. This may be caused by attempting to use ctx.component (or a property thereof), or the DOM in the middleware. Because redirection occured, no component was actually rendered. You may wish to add a guard in your middleware to handle this case.'
+  )
+  log.error(err)
 }

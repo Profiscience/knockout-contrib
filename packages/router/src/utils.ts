@@ -98,7 +98,7 @@ export function getRouterForBindingContext(
 
 // tslint:disable-next-line no-console
 const _consoleLogger: any = console
-const _logger = (t: string) => (...ms: string[]) =>
+const _logger = (t: string) => (...ms: (string | Error)[]) =>
   _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
 export const log = {
   error: _logger('error'),
