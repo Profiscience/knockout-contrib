@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0...@profiscience/knockout-contrib-router@2.0.1) (2019-03-01)
+
+### Bug Fixes
+
+- **router:** afterRender middleware not ran during redirect in nested intermediate routes ([e79616f](https://github.com/Profiscience/knockout-contrib/commit/e79616f))
+
 # [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0-rc.14...@profiscience/knockout-contrib-router@2.0.0) (2019-02-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
