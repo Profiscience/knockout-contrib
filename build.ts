@@ -84,7 +84,7 @@ function createWorkers(size: number) {
 function pifyProc(proc: ChildProcess) {
   return new Promise<{ code: number; output: string }>((resolve, reject) => {
     let output = ''
-    proc.stdout.on('data', (buf) => (output += buf.toString()))
+    if (proc.stdout) proc.stdout.on('data', (buf) => (output += buf.toString()))
     proc.on('close', (code) => resolve({ code, output }))
     proc.on('error', (err) => reject(err))
   })
@@ -100,7 +100,7 @@ function startTypeChecker() {
     args,
     { stdio: ['pipe', 'pipe', 'pipe', 'ipc'] }
   )
-  proc.stderr.pipe(process.stderr)
+  if (proc.stderr) proc.stderr.pipe(process.stderr)
   proc.on('close', (code) => {
     const color = code === 0 ? chalk.green : chalk.red
     console.info(color(`\nType checker exited with code ${code}`))
@@ -134,14 +134,16 @@ async function build(files: string[]): Promise<number> {
 
 async function watch(files: string[]): Promise<number> {
   if (!argv.transpileOnly) {
-    const typeChecker = startTypeChecker()
-    typeChecker.stdout.on('data', (buf: Buffer) => {
-      const str = buf.toString().replace('\u001Bc', '')
-      str
-        .split('\n')
-        .filter((l) => l.length > 0)
-        .map((l) => console.log('[tsc]', l))
-    })
+    const proc = startTypeChecker()
+    if (proc.stdout) {
+      proc.stdout.on('data', (buf: Buffer) => {
+        const str = buf.toString().replace('\u001Bc', '')
+        str
+          .split('\n')
+          .filter((l) => l.length > 0)
+          .map((l) => console.log('[tsc]', l))
+      })
+    }
   }
 
   await Promise.all(files.map(workers.doWork))
