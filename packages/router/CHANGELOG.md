@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.1...@profiscience/knockout-contrib-router@2.0.2) (2019-03-14)
+
+### Bug Fixes
+
+- **router:** Don't preserve history.state on navigation (by default) ([82a658a](https://github.com/Profiscience/knockout-contrib/commit/82a658a))
+
 ## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.0...@profiscience/knockout-contrib-router@2.0.1) (2019-03-01)
 
 ### Bug Fixes
