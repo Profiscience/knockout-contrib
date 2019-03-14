@@ -8,6 +8,7 @@ export type RouterConfig = {
   base?: string
   hashbang?: boolean
   activePathCSSClass?: string
+  preserveHistoryStateOnNavigation?: boolean
   preserveQueryStringOnNavigation?: boolean
 }
 
@@ -57,6 +58,7 @@ export class Router {
     base: '',
     hashbang: false,
     activePathCSSClass: 'active-path',
+    preserveHistoryStateOnNavigation: false,
     preserveQueryStringOnNavigation: false
   }
 
@@ -418,7 +420,9 @@ export class Router {
       options.push = true
     }
     if (typeof options.state === 'undefined') {
-      options.state = history.state
+      options.state = Router.config.preserveHistoryStateOnNavigation
+        ? history.state
+        : {}
     }
     if (typeof options.with === 'undefined') {
       options.with = {}

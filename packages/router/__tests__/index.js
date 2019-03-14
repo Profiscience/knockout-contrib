@@ -21,6 +21,7 @@ import './before-navigate-callbacks'
 import './element'
 import './plugins'
 import './preserve-query'
+import './preserve-state'
 
 const tests = [
   'routing',
@@ -38,7 +39,8 @@ const tests = [
   'before-navigate-callbacks',
   'element',
   'plugins',
-  'preserve-query'
+  'preserve-query',
+  'preserve-state'
 ]
 
 class TestRunner {
