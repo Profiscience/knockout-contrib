@@ -42,6 +42,11 @@ Router.setConfig({
   // page — useful for styling navbars and tabs
   activePathCSSClass: 'active-path',
 
+  // Set to true to preserve history.state during navigation. state can still be
+  // overridden with Router.update('/', { state: myState }). This was the default
+  // behaviour <2.0.2
+  preserveHistoryStateOnNavigation: false,
+
   // If you're using the query package (or something like it) where the querystring
   // is managed externally and independently from routing, set this to true so that
   // query objects shared across sibling routes will not be reset when navigating
