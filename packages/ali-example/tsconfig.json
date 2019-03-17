@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "esnext",
+    "sourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "strict": true,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "lib": ["dom", "es5", "es2015", "esnext.asynciterable"],
+    "typeRoots": ["@types", "../../node_modules/@types"]
+  },
+  "include": ["**/*"],
+  "exclude": ["**/dist"]
+}
