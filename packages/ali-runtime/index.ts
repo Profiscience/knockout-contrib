@@ -18,9 +18,9 @@ export class App {
 
   constructor(...keys: string[]) {
     ko.options.deferUpdates = true
-    
+
     _ko.punches.enableAll()
-    
+
     Route.usePlugin(
       childrenRoutePlugin,
       componentRoutePlugin,
@@ -28,33 +28,13 @@ export class App {
       redirectRoutePlugin,
       withRoutePlugin
     )
-
-    if (keys.length === 0) {
-      keys.push('Default')
-    }
-    this.configs = keys.map((k) => {
-      const v = _window[Symbol.for(`ALI_CONFIG:${k}`)]
-      if (!v) {
-        throw new Error(`[ali] Configuration for "${k}" not found! Did you forget to install/configure @ali/build?`)
-      }
-      return v
-    })
-
-    this.configs.forEach((c) => {
-      if (!c.strict) {
-        c.bindings.forEach((b) => b.)
-      }
-    })
   }
 
   public start() {
     if (!document.body) document.append(document.createElement('body'))
-    
+
     ko.applyBindings({}, document.body)
   }
 }
-
-
-
 
 export { Route, Router }

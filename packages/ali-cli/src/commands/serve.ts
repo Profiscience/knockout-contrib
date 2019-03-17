@@ -1,8 +1,8 @@
 import * as path from 'path'
+import { pick } from 'lodash'
 import { CommandModule, Options } from 'yargs'
-import config from '../lib/config'
-import { BuildScopes, inAtLeastOneScope } from '../lib/scopes'
-import { DevServerRunner } from '../lib/webpack/server'
+import config, { projectRoot } from '../config'
+import { DevServerRunner } from '../runners/server'
 
 type DevServerOption =
   | 'compat'
@@ -47,9 +47,8 @@ const options: { [key in DevServerOption]: Options } = {
   entries: {
     describe: 'limit the build scope for faster development',
     array: true,
-    // see check below, you can combine with 'api', but can't use alone
-    choices: Object.keys(BuildScopes).map((k) => BuildScopes[k]),
-    coerce: (vs) => vs.map((v) => v.toLowerCase())
+    choices: Object.keys(config.entry),
+    coerce: (vs: string[]) => vs.map((v) => v.toLowerCase())
   },
   check: {
     describe: 'Enable TypeScript type-checking',
@@ -62,20 +61,17 @@ const options: { [key in DevServerOption]: Options } = {
 export const serveCommand: CommandModule<{}, DevServerOptions> = {
   command: 'serve',
   describe: 'start development server',
-  builder: (yargs) =>
-    yargs
-      .options(options)
-      .check((argv: any) =>
-        inAtLeastOneScope(
-          argv,
-          BuildScopes.CLE,
-          BuildScopes.Instructor,
-          BuildScopes.Login,
-          BuildScopes.Legacy
-        )
-      ),
+  builder: (yargs) => yargs.options(options),
   async handler(argv: DevServerOptions) {
-    const server = new DevServerRunner(argv)
+    const server = new DevServerRunner({
+      ...argv,
+      context: projectRoot,
+      entry:
+        argv.entries && argv.entries.length > 0
+          ? pick(config.entry, argv.entries)
+          : config.entry,
+      outDir: config.outDir
+    })
     await server.run()
   }
 }

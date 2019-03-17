@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import * as elegantSpinner from 'elegant-spinner'
+import elegantSpinner from 'elegant-spinner'
 import * as cursor from 'cli-cursor'
 import { getErrors, getWarnings } from './raw'
 

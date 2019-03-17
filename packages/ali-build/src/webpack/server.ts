@@ -15,9 +15,10 @@ import { createWebpackConfig } from './config'
 
 let ready: boolean
 
-type DevServerOptions = {
+export type DevServerOptions = {
   context: string
   entry: webpack.Entry
+  outDir: string
   compat?: boolean
   port?: number
   proxy?: any // @todo
@@ -26,11 +27,11 @@ type DevServerOptions = {
   verbose?: boolean
 }
 
-export async function initDevServer(opts: DevServerOptions) {
+export async function startDevelopmentServer(opts: DevServerOptions) {
   ;(process as any).noDeprecation = true
 
   return new Observable((observer) => {
-    const config = merge(createWebpackConfig({ ...opts, outDir: '' }), {
+    const config = merge(createWebpackConfig(opts), {
       output: {
         path: opts.context,
         publicPath: '/hot/'
@@ -93,26 +94,8 @@ export async function initDevServer(opts: DevServerOptions) {
           const router = new Router()
 
           // styles built independently from webpack, play nice with path
-          router.get('/hot/styles.Common.css', (ctx: koa.Context) =>
-            serveFile(
-              opts.context,
-              ctx,
-              'SupportSite/_dist/DEV/styles.Common.css'
-            )
-          )
-          router.get('/hot/styles.Login.css', (ctx: koa.Context) =>
-            serveFile(
-              opts.context,
-              ctx,
-              'SupportSite/_dist/DEV/styles.Login.css'
-            )
-          )
-          router.get('/hot/fonts/:file*', (ctx: koa.Context) =>
-            serveFile(
-              opts.context,
-              ctx,
-              path.join('SupportSite/_dist/DEV/fonts', ctx.params.file)
-            )
+          router.get('/hot/styles.css', (ctx: koa.Context) =>
+            serveFile(opts.context, ctx, path.join(opts.outDir, '/styles.css'))
           )
 
           // optimization.splitChunks disabled in development
@@ -122,6 +105,15 @@ export async function initDevServer(opts: DevServerOptions) {
           router.get('/hot/chunk.vendors.js', (ctx: koa.Context) => {
             ctx.body = ''
           })
+
+          // fonts, images, etc.
+          router.get('/hot/:file*', (ctx: koa.Context) =>
+            serveFile(
+              opts.context,
+              ctx,
+              path.join(opts.outDir, ctx.params.file)
+            )
+          )
 
           app.use(router.routes())
 

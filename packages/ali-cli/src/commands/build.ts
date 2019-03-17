@@ -1,8 +1,9 @@
 import * as path from 'path'
+import { pick } from 'lodash'
 import chalk from 'chalk'
 import { CommandModule, Options } from 'yargs'
-import { SPABuildRunner, StylesBuildRunner } from '../runners'
-import { TaskRunner } from '../task-runner'
+import config from '../config'
+import { BuildRunner } from '../runners'
 
 type BuildOption =
   | 'production'
@@ -63,8 +64,8 @@ const options: { [key in BuildOption]: Options } = {
   entries: {
     describe: 'limit the build scope for faster development',
     array: true,
-    choices: Object.keys(BuildScopes).map((k) => BuildScopes[k]),
-    coerce: (vs) => vs.map((v) => v.toLowerCase())
+    choices: Object.keys(config.entry),
+    coerce: (vs: string[]) => vs.map((v) => v.toLowerCase())
   },
   check: {
     describe: 'Enable TypeScript type-checking',
@@ -83,23 +84,13 @@ export const buildCommand: CommandModule<{}, BuildOptions> = {
       process.env.NODE_ENV = 'production'
     }
 
-    const tasks = new TaskRunner(
-      [
-        {
-          title: 'Apps',
-          task: () => new SPABuildRunner(argv)
-        },
-        {
-          title: 'Styles',
-          task: () => new StylesBuildRunner(argv)
-        }
-      ],
-      {
-        concurrent: true,
-        verbose: argv.verbose,
-        json: argv.json
-      }
-    )
+    const tasks = new BuildRunner({
+      ...argv,
+      entry:
+        argv.entries && argv.entries.length > 0
+          ? pick(config.entry, argv.entries)
+          : config.entry
+    })
 
     if (argv.production && !argv.compat) {
       // tslint:disable-next-line:no-console

@@ -21,7 +21,7 @@ export interface IWebpackBuildEvent {
   complete?: boolean
 }
 
-export function runWebpack(opts: IWebpackConfigOptions) {
+export function buildApps(opts: IWebpackConfigOptions) {
   const proc = fork(path.resolve(__dirname, './worker.js'), [
     JSON.stringify(opts)
   ])

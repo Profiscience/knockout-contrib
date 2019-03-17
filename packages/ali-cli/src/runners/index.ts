@@ -1,2 +1,2 @@
-export { SPABuildRunner } from './apps'
-export { StylesBuildRunner } from './styles'
+export { BuildRunner } from './build'
+export { DevServerRunner } from './server'

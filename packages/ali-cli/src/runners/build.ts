@@ -1,16 +1,19 @@
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import * as git from 'git-rev-sync'
-import paths from '../paths'
+import { castArray } from 'lodash'
+import * as webpack from 'webpack'
+import { buildStyles, buildApps } from '@ali/build'
+import config, { projectRoot } from '../config'
 import { TaskRunner } from '../task-runner'
-import { buildStyles } from '../postcss'
 
 interface ISPABuildOptions {
+  entry: webpack.Entry
   production?: boolean
   watch?: boolean
   compat?: boolean
   profile?: boolean
   verbose?: boolean
+  json?: string
   check?: boolean
 }
 
@@ -21,25 +24,25 @@ export class BuildRunner extends TaskRunner {
         {
           title: 'Apps',
           task: () =>
-            runWebpack(
-              {
-                watch: opts.watch,
-                compat: opts.compat,
-                production: opts.production,
-                profile: opts.profile,
-                scope: opts.scope,
-                check: opts.check
-              },
-              opts.verbose
-            )
+            buildApps({
+              context: projectRoot,
+              entry: opts.entry,
+              outDir: config.outDir,
+              watch: opts.watch,
+              compat: opts.compat,
+              production: opts.production,
+              profile: opts.profile,
+              check: opts.check
+            })
         },
         {
           title: 'Shared Styles',
           task: () =>
             buildStyles({
+              outDir: config.outDir,
               production: opts.production,
               watch: opts.watch,
-              files: [paths.styles],
+              files: castArray(config.styles),
               cacheId: 'shared_styles',
               outFile: 'styles.shared.css'
             })
@@ -48,17 +51,19 @@ export class BuildRunner extends TaskRunner {
           title: 'Assets',
           task: () =>
             Promise.all([
-              fs.copy(paths.fonts, path.join(paths.dist, 'fonts'), {
+              fs.copy(config.fonts, path.join(config.outDir, 'fonts'), {
                 overwrite: true
               }),
-              fs.copy(paths.images, path.join(paths.dist, 'images'), {
+              fs.copy(config.images, path.join(config.outDir, 'images'), {
                 overwrite: true
               })
             ])
         }
       ],
       {
-        concurrent: true
+        concurrent: true,
+        verbose: opts.verbose,
+        json: opts.json
       }
     )
   }

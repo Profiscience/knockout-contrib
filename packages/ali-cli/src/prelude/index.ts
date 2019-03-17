@@ -7,5 +7,4 @@ export default (async () => {
   if (argv.indexOf('--no-install') < 0) {
     await ensureNpmDeps()
   }
-  await import('./perf')
 })()
