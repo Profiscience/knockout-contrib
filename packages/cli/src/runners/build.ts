@@ -51,12 +51,16 @@ export class BuildRunner extends TaskRunner {
           title: 'Assets',
           task: () =>
             Promise.all([
-              fs.copy(config.fonts, path.join(config.outDir, 'fonts'), {
-                overwrite: true
-              }),
-              fs.copy(config.images, path.join(config.outDir, 'images'), {
-                overwrite: true
-              })
+              fs.existsSync(config.fonts)
+                ? fs.copy(config.fonts, path.join(config.outDir, 'fonts'), {
+                    overwrite: true
+                  })
+                : Promise.resolve(),
+              fs.existsSync(config.images)
+                ? fs.copy(config.images, path.join(config.outDir, 'images'), {
+                    overwrite: true
+                  })
+                : Promise.resolve()
             ]).then(() => {
               // noop
             })

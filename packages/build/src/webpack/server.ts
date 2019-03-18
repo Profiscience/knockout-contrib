@@ -9,7 +9,6 @@ import Router from 'koa-router'
 import * as webpack from 'webpack'
 import serve from 'webpack-serve'
 // @ts-ignore
-import { Server } from 'webpack-dev-server/lib/Server'
 import { Observable } from 'rxjs'
 import { createWebpackConfig } from './config'
 

@@ -4,7 +4,7 @@ import * as path from 'path'
 import { merge } from 'lodash'
 import * as webpack from 'webpack'
 // @ts-ignore
-import * as trueCasePathSync from 'true-case-path'
+import trueCasePathSync from 'true-case-path'
 
 export const projectRoot = getProjectRoot()
 

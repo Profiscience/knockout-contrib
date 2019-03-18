@@ -31,6 +31,7 @@ export async function ensureNpmDeps() {
   if (!upToDate) {
     logLine =
       'Dependency integrity check failed... reinstalling node_modules...'
+    process.exit()
     const proc = yarnInstall()
     await new Promise((resolve, reject) =>
       proc.on('exit', (code) =>

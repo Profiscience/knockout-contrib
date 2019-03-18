@@ -1,11 +1,11 @@
-import * as gulp from 'gulp'
+import gulp from 'gulp'
 import cache from 'gulp-cached'
 import concat from 'gulp-concat'
 // @ts-ignore
-import * as cssmin from 'gulp-cssmin'
+import cssmin from 'gulp-cssmin'
 import _if from 'gulp-if'
 // @ts-ignore
-import * as postcss from 'gulp-postcss'
+import postcss from 'gulp-postcss'
 import remember from 'gulp-remember'
 import { Observable } from 'rxjs'
 import { ILongRunningTaskPayload } from './task-payload'
@@ -21,7 +21,7 @@ export function buildStyles(opts: {
   const build = () =>
     promisifyStream(
       gulp
-        .src(opts.files)
+        .src(opts.files, { allowEmpty: true })
         .pipe(_if(opts.watch as boolean, cache(opts.cacheId)))
         .pipe(postcss())
         .pipe(_if(opts.watch as boolean, remember(opts.cacheId)))
