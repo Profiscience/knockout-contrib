@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "@ali/example",
+  "version": "0.0.0",
+  "module": "index.ts",
+  "scripts": {
+    "develop": "ali serve",
+    "start": "ali serve --production",
+    "build": "ali build --production",
+    "develop:lazy": "ali serve --config lazy",
+    "start:lazy": "ali serve --production --config lazy",
+    "build:lazy": "ali build --production --config lazy"
+  },
+  "ali": {
+    "strict": true,
+    "entry": "./src/index.ts"
+  },
+  "ali:lazy": {
+    "strict": false,
+    "entry": "./src/index.ts",
+    "bindings": "./",
+    "components": "./",
+    "extenders": "./",
+    "filters": "./",
+    "views": "./"
+  },
+  "dependencies": {
+    "@ali/cli": "^0.0.0",
+    "@ali/runtime": "^0.0.0",
+    "@profiscience/knockout-contrib": "^2.0.2",
+    "knockout": "^3.5.0"
+  },
+  "devDependencies": {
+    "@ali/cli": "^0.0.0"
+  }
+}

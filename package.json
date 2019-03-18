@@ -1,53 +1,23 @@
 {
   "private": true,
   "scripts": {
-    "build": "ts-node ./build.ts",
-    "ci": "yarn lint && yarn build && yarn test && yarn test:router",
+    "build": "lerna run build",
+    "ci": "yarn lint && yarn build && yarn test",
     "format": "pretty-quick",
     "lint": "tslint -p ./tsconfig.json",
     "release": "yarn ci && lerna publish --conventional-commits",
-    "link:all": "lerna exec -- \"yarn link && cd $REPO && yarn link \\$LERNA_PACKAGE_NAME\"",
-    "test": "jest",
-    "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
+    "test": "jest"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@types/babel-core": "^6.25.6",
-    "@types/benchmark": "^1.0.31",
-    "@types/chokidar": "^1.7.5",
-    "@types/fs-extra": "^5.0.5",
-    "@types/globby": "^8.0.0",
-    "@types/jest": "^24.0.6",
-    "@types/jquery": "^3.3.29",
-    "@types/jsdom": "^12.2.2",
-    "@types/lodash": "^4.14.121",
-    "@types/node": "^11.9.4",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^24.1.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "benchmark": "^2.1.4",
-    "chalk": "^2.4.2",
-    "chokidar": "^2.1.2",
     "cz-conventional-changelog": "^2.1.0",
-    "fs-extra": "^7.0.1",
-    "globby": "^9.0.0",
     "husky": "^1.3.1",
     "jest": "^24.1.0",
-    "jest-jquery-matchers": "^2.0.0",
-    "jquery": "^3.2.1",
-    "jsx-dom": "^6.3.0",
-    "knockout": "^3.5.0",
-    "knockout-punches": "^0.5.1",
     "lerna": "^3.13.0",
-    "lodash": "^4.17.11",
-    "microtime": "^3.0.0",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
-    "toprogress": "^0.1.3",
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
@@ -58,8 +28,7 @@
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "/dist/",
-      "/node_modules/",
-      "/router/__tests__/"
+      "/node_modules/"
     ],
     "coverageReporters": [
       "lcov",
@@ -67,10 +36,9 @@
     ],
     "moduleFileExtensions": [
       "js",
-      "ts",
-      "tsx"
+      "ts"
     ],
-    "testRegex": "packages/[^/]+/(__tests__/[^_]*|[^_]*test)\\.tsx?$",
+    "testRegex": "packages/[^/]+/(__tests__/[^_]*|[^_]*test)\\.ts$",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

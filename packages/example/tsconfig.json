@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "./dist",
+    "jsx": "preserve",
+    "typeRoots": ["@types", "../../node_modules/@types"]
+  }
+}
