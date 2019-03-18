@@ -2,11 +2,6 @@
 
 import * as ko from 'knockout'
 
-export type IUseableStyle = {
-  use(): void
-  unuse(): void
-}
-
 /**
  * Monolithic loader that registers an entire component directory using the webpack
  * require context. Supports lazy-loading and style registration/disposal.
@@ -81,7 +76,7 @@ function patchStyles(config: any) {
 }
 
 function ViewModelStylesMixin<T extends { new (...args: any[]): any }>(
-  styles: IUseableStyle,
+  styles: { use(): void; unuse(): void },
   ctor: T
 ) {
   return class extends ctor {

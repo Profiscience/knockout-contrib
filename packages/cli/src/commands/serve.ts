@@ -65,12 +65,18 @@ export const serveCommand: CommandModule<{}, DevServerOptions> = {
   async handler(argv: DevServerOptions) {
     const server = new DevServerRunner({
       ...argv,
-      context: projectRoot,
       entry:
         argv.entries && argv.entries.length > 0
           ? pick(config.entry, argv.entries)
           : config.entry,
-      outDir: config.outDir
+      outDir: config.outDir,
+      strict: config.strict,
+      tsconfig: path.join(projectRoot, 'tsconfig.json'),
+      bindings: config.binding,
+      components: config.components,
+      extenders: config.extenders,
+      filters: config.filters,
+      views: config.views
     })
     await server.run()
   }

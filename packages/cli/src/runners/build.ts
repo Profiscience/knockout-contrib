@@ -19,6 +19,8 @@ interface ISPABuildOptions {
 
 export class BuildRunner extends TaskRunner {
   constructor(opts: ISPABuildOptions) {
+    const hasFonts = fs.existsSync(config.fonts)
+    const hasImages = fs.existsSync(config.images)
     super(
       [
         {
@@ -28,6 +30,12 @@ export class BuildRunner extends TaskRunner {
               context: projectRoot,
               entry: opts.entry,
               outDir: config.outDir,
+              strict: config.strict,
+              bindings: config.binding,
+              components: config.components,
+              extenders: config.extenders,
+              filters: config.filters,
+              views: config.views,
               watch: opts.watch,
               compat: opts.compat,
               production: opts.production,
@@ -37,6 +45,9 @@ export class BuildRunner extends TaskRunner {
         },
         {
           title: 'Shared Styles',
+          skip: () => {
+            if (!fs.existsSync(config.styles)) return 'No styles directory'
+          },
           task: () =>
             buildStyles({
               outDir: config.outDir,
@@ -49,14 +60,17 @@ export class BuildRunner extends TaskRunner {
         },
         {
           title: 'Assets',
+          skip: () => {
+            if (!hasFonts && !hasImages) return 'No assets'
+          },
           task: () =>
             Promise.all([
-              fs.existsSync(config.fonts)
+              hasFonts
                 ? fs.copy(config.fonts, path.join(config.outDir, 'fonts'), {
                     overwrite: true
                   })
                 : Promise.resolve(),
-              fs.existsSync(config.images)
+              hasImages
                 ? fs.copy(config.images, path.join(config.outDir, 'images'), {
                     overwrite: true
                   })

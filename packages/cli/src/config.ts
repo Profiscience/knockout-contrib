@@ -9,9 +9,11 @@ import trueCasePathSync from 'true-case-path'
 export const projectRoot = getProjectRoot()
 
 class Config {
+  public strict = true
+
   public tmp = getTmpDir()
 
-  public entry!: webpack.Entry
+  public entry!: { [k: string]: string }
 
   public outDir = path.join(projectRoot, 'dist')
 
@@ -33,7 +35,7 @@ class Config {
       const projectConfig =
         require(path.join(projectRoot, 'package.json')).ali || {}
       if (!projectConfig.entry) {
-        projectConfig.entry = path.join(projectRoot, 'index.ts')
+        projectConfig.entry = { app: path.join(projectRoot, 'index.ts') }
       }
       merge(this, projectConfig)
     } catch (e) {

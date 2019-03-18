@@ -13,7 +13,7 @@
   },
   "ali": {
     "strict": true,
-    "entry": "./src/index.ts"
+    "context": "./src"
   },
   "ali:lazy": {
     "strict": false,

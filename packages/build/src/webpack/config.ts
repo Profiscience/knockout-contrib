@@ -8,6 +8,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ScriptExtPlugin from 'script-ext-html-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import NotificationPlugin from 'webpack-notifier'
+import { generateAliAppEntry } from '../generate-entry'
 
 const AVAILABLE_CPUS = Math.min(Math.max(os.cpus().length - 2, 2), 4)
 
@@ -59,7 +60,7 @@ const loaders = {
     loader: 'thread-loader',
     options: {
       workers,
-      workerNodeArgs: ['--require', path.resolve('../perf')],
+      workerNodeArgs: ['--require', path.resolve(__dirname, '../perf')],
       workerParallelJobs: 20,
       poolParallelJobs: workers * 20,
       poolTimeout: watch ? Infinity : 2000
@@ -67,10 +68,19 @@ const loaders = {
   })
 }
 
+type MaybeArray<T> = T | T[]
+
 export interface IWebpackConfigOptions {
-  context: string
-  entry: webpack.Entry
+  entry: { [k: string]: string }
+  sourceDir: string
   outDir: string
+  strict: boolean
+  tsconfig: string
+  bindings: MaybeArray<string>
+  components: MaybeArray<string>
+  extenders: MaybeArray<string>
+  filters: MaybeArray<string>
+  views: MaybeArray<string>
   compat?: boolean
   production?: boolean
   watch?: boolean
@@ -79,32 +89,51 @@ export interface IWebpackConfigOptions {
 }
 
 export function createWebpackConfig({
-  context,
   entry,
+  sourceDir,
   outDir,
+  strict,
+  tsconfig,
+  bindings,
+  components,
+  extenders,
+  filters,
+  views,
   production,
   watch,
   compat,
   profile,
   check
 }: IWebpackConfigOptions): webpack.Configuration {
-  if (compat) {
-    entry = mapValues(entry, (v) => ['@ali/polyfill', v]) as webpack.Entry
-  }
+  Object.keys(entry).forEach((k) => {
+    const v = entry[k] as string
+    generateAliAppEntry({
+      entry: v,
+      strict,
+      bindings,
+      components,
+      extenders,
+      filters,
+      views
+    })
+  })
 
   const config: webpack.Configuration = {
-    context,
-
     mode: production ? 'production' : 'development',
 
     devtool: production || compat ? false : 'source-map',
 
-    entry,
+    entry: mapValues(entry, (v) => {
+      const files = [path.resolve(__dirname, '../../../../__apps', `${v}.js`)]
+      if (compat) files.push('@ali/polyfill')
+      // if (!production) files.push('@ali/debug')
+      return files
+    }),
 
     output: {
       path: outDir,
-      filename: 'entry.[name].[chunkHash].js',
-      chunkFilename: 'chunk.[chunkHash].js'
+      filename: 'entry.[name].[hash].js',
+      chunkFilename: 'chunk.[contentHash].js'
     },
 
     watch,
@@ -121,7 +150,7 @@ export function createWebpackConfig({
         {
           test: /\.ts$/,
           use: [
-            loaders.cache('ts'),
+            loaders.cache('.cache/ts'),
             loaders.thread(AVAILABLE_CPUS, watch),
             loaders.typescript({ compat })
           ]
@@ -129,7 +158,7 @@ export function createWebpackConfig({
         {
           test: /\.css$/,
           use: [
-            loaders.cache('css'),
+            loaders.cache('.cache/css'),
             loaders.style,
             loaders.css,
             loaders.postcss
@@ -203,11 +232,11 @@ export function createWebpackConfig({
       }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
-      new HtmlWebpackPlugin({
-        template: fs.existsSync(path.join(context, 'index.html'))
-          ? path.join(context, 'index.html')
+      new HtmlWebpackPlugin(
+        fs.existsSync(path.join(sourceDir, 'index.html'))
+          ? { template: path.join(sourceDir, 'index.html') }
           : undefined
-      }),
+      ),
 
       ...(production
         ? [
@@ -248,7 +277,7 @@ export function createWebpackConfig({
          * import 'utils/handy-dandy-screwdriver'
          * import 'components/my-awesome-component'
          */
-        context,
+        sourceDir,
         'node_modules'
       ],
       extensions: ['.js', '.ts', '.tsx']
@@ -263,10 +292,10 @@ export function createWebpackConfig({
           async: false,
           silent: true,
           checkSyntacticErrors: true,
-          tsconfig: path.join(context, 'tsconfig.json'),
+          tsconfig,
           watch: [
-            path.join(context, '**/*.ts'),
-            path.join(context, '**/*.tsx')
+            path.join(sourceDir, '**/*.ts'),
+            path.join(sourceDir, '**/*.tsx')
           ],
           workers: 1
         })

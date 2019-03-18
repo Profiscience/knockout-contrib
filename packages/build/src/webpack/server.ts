@@ -2,27 +2,22 @@ import * as path from 'path'
 import * as fs from 'fs-extra'
 import { merge, throttle } from 'lodash'
 import proxy from 'http-proxy-middleware'
-import * as koa from 'koa'
+import koa from 'koa'
 // @ts-ignore
-import * as connect from 'koa-connect'
+import connect from 'koa-connect'
 import Router from 'koa-router'
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import serve from 'webpack-serve'
 // @ts-ignore
 import { Observable } from 'rxjs'
-import { createWebpackConfig } from './config'
+import { createWebpackConfig, IWebpackConfigOptions } from './config'
 
 let ready: boolean
 
-export type DevServerOptions = {
-  context: string
-  entry: webpack.Entry
-  outDir: string
-  compat?: boolean
+export type DevServerOptions = IWebpackConfigOptions & {
   port?: number
-  proxy?: any // @todo
+  proxy?: string
   public?: boolean
-  check?: boolean
   verbose?: boolean
 }
 
@@ -30,10 +25,13 @@ export async function startDevelopmentServer(opts: DevServerOptions) {
   ;(process as any).noDeprecation = true
 
   return new Observable((observer) => {
-    const config = merge(createWebpackConfig(opts), {
+    const defaultConfig = createWebpackConfig(opts)
+    const { filename, chunkFilename } = defaultConfig.output as any
+    const config = merge(defaultConfig, {
       output: {
-        path: opts.context,
-        publicPath: '/hot/'
+        filename: path.join('hot', filename),
+        chunkFilename: path.join('hot', chunkFilename),
+        publicPath: '/'
       }
     })
 
@@ -79,7 +77,7 @@ export async function startDevelopmentServer(opts: DevServerOptions) {
         port: opts.port,
         devMiddleware: {
           logLevel: 'silent',
-          publicPath: '/hot/'
+          publicPath: '/'
         },
         hotClient: {
           allEntries: true,
@@ -94,7 +92,7 @@ export async function startDevelopmentServer(opts: DevServerOptions) {
 
           // styles built independently from webpack, play nice with path
           router.get('/hot/styles.css', (ctx: koa.Context) =>
-            serveFile(opts.context, ctx, path.join(opts.outDir, '/styles.css'))
+            serveFile(ctx, path.join(opts.outDir, '/styles.css'))
           )
 
           // optimization.splitChunks disabled in development
@@ -107,11 +105,7 @@ export async function startDevelopmentServer(opts: DevServerOptions) {
 
           // fonts, images, etc.
           router.get('/hot/:file*', (ctx: koa.Context) =>
-            serveFile(
-              opts.context,
-              ctx,
-              path.join(opts.outDir, ctx.params.file)
-            )
+            serveFile(ctx, path.join(opts.outDir, ctx.params.file))
           )
 
           app.use(router.routes())
@@ -132,17 +126,12 @@ export async function startDevelopmentServer(opts: DevServerOptions) {
   })
 }
 
-async function serveFile(
-  projectRoot: string,
-  ctx: koa.Context,
-  rootRelativeFd: string
-) {
-  const fd = path.join(projectRoot, rootRelativeFd)
-  if (fs.existsSync(fd)) {
-    const stats = await fs.stat(fd)
+async function serveFile(ctx: koa.Context, file: string) {
+  if (fs.existsSync(file)) {
+    const stats = await fs.stat(file)
     ctx.status = 200
     ctx.set('Content-Length', stats.size.toString())
-    ctx.type = path.extname(fd)
-    ctx.body = fs.createReadStream(fd)
+    ctx.type = path.extname(file)
+    ctx.body = fs.createReadStream(file)
   }
 }

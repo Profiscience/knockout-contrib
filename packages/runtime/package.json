@@ -8,7 +8,8 @@
     "knockout": "^3.5.0"
   },
   "dependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "knockout-punches": "^0.5.1"
   },
   "devDependencies": {
     "@types/jquery": "^3.3.29"

@@ -6,5 +6,5 @@ prelude
   .then(() => import('./cli'))
   .catch((err) => {
     process.stderr.write(err.message)
-    process.exit(1)
+    process.exitCode = 1
   })
