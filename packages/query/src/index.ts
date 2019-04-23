@@ -122,7 +122,7 @@ export class Query {
         const _default = defaults[name]
         const coerce = paramConfig.coerce || ((x: any) => x)
         const init =
-          paramConfig.sticky && fromLocalStorage[name]
+          paramConfig.sticky && !isUndefined(fromLocalStorage[name])
             ? fromLocalStorage[name]
             : !isUndefined(fromQS[name])
             ? fromQS[name]

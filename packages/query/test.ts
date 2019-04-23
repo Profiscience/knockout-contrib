@@ -124,31 +124,31 @@ describe('querystring', () => {
     const createQuery = () =>
       Query.create({
         stickyParam: {
-          default: 'foo',
+          default: true,
           sticky: true
         },
         notStickyParam: {
-          default: 'foo',
+          default: true,
           sticky: false
         }
       })
 
     let query = createQuery()
 
-    query.stickyParam('bar')
-    query.notStickyParam('bar')
+    query.stickyParam(false)
+    query.notStickyParam(false)
 
     query.dispose()
 
-    query.stickyParam('baz') // stop tracking after dispose
+    query.stickyParam('foo') // stop tracking after dispose
 
     history.replaceState(null, '', location.pathname)
 
     query = createQuery()
 
-    expect(query.stickyParam()).toBe('bar')
+    expect(query.stickyParam()).toBe(false)
     // sanity check
-    expect(query.notStickyParam()).toBe('foo')
+    expect(query.notStickyParam()).toBe(true)
 
     query.dispose()
   })
