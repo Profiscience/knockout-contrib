@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.0...@profiscience/knockout-contrib-query@2.1.1) (2019-04-23)
+
+### Bug Fixes
+
+- **query:** Fix sticky query params with falsy values ([9c00b02](https://github.com/Profiscience/knockout-contrib/commit/9c00b02))
+
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.0.0...@profiscience/knockout-contrib-query@2.1.0) (2019-04-23)
 
 ### Features
