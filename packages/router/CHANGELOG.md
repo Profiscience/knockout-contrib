@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.3...@profiscience/knockout-contrib-router@2.0.4) (2019-04-23)
+
+### Bug Fixes
+
+- **router:** whoops. ([86f238b](https://github.com/Profiscience/knockout-contrib/commit/86f238b))
+
 ## [2.0.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.2...@profiscience/knockout-contrib-router@2.0.3) (2019-04-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router

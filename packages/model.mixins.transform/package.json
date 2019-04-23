@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-model-mixins-transform",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/model.mixins.transform",
@@ -22,6 +22,6 @@
     "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-model-builders-data": "^2.0.3"
+    "@profiscience/knockout-contrib-model-builders-data": "^2.0.4"
   }
 }
