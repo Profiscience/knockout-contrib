@@ -120,6 +120,39 @@ describe('querystring', () => {
     query.dispose()
   })
 
+  test('sticky', () => {
+    const createQuery = () =>
+      Query.create({
+        stickyParam: {
+          default: 'foo',
+          sticky: true
+        },
+        notStickyParam: {
+          default: 'foo',
+          sticky: false
+        }
+      })
+
+    let query = createQuery()
+
+    query.stickyParam('bar')
+    query.notStickyParam('bar')
+
+    query.dispose()
+
+    query.stickyParam('baz') // stop tracking after dispose
+
+    history.replaceState(null, '', location.pathname)
+
+    query = createQuery()
+
+    expect(query.stickyParam()).toBe('bar')
+    // sanity check
+    expect(query.notStickyParam()).toBe('foo')
+
+    query.dispose()
+  })
+
   test('advanced', () => {
     history.replaceState(null, '', location.pathname + '?{"foo": "notfoo"}')
 
