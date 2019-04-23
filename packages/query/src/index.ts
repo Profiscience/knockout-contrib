@@ -31,6 +31,7 @@ export interface IQueryParamConfig<T extends MaybeArray<Primitive>> {
   default: T
   initial?: T
   coerce?(v: any): T
+  sticky?: boolean
 }
 
 export interface IQueryConfig {
@@ -55,6 +56,7 @@ export class Query {
   }
 
   private readonly _group!: string
+  private readonly _subs: ko.Subscription[] = []
 
   constructor(config: IQueryConfig, group?: string, isViaFactory?: symbol) {
     instances.add(this)
@@ -72,8 +74,15 @@ export class Query {
     }
 
     Object.defineProperty(this, '_group', {
+      configurable: false,
       enumerable: false,
       get: () => group
+    })
+
+    Object.defineProperty(this, '_subs', {
+      configurable: false,
+      enumerable: false,
+      writable: false
     })
 
     if (isUndefined(Query._raw[this._group])) {
@@ -102,6 +111,8 @@ export class Query {
     const defaults = Object.assign({}, Query.getDefaults(config))
     const group = this._group as string
     const fromQS = Query.fromQS(group)
+    const localStorageKey = Query.getLocalStorageKey(group)
+    const fromLocalStorage = Query.fromLocalStorage(localStorageKey)
 
     entries(config).forEach(([name, paramConfig = {}]) => {
       const query: Query & IQuery<any> = this as any
@@ -110,15 +121,28 @@ export class Query {
       if (isUndefined(query[name])) {
         const _default = defaults[name]
         const coerce = paramConfig.coerce || ((x: any) => x)
-        const init = !isUndefined(fromQS[name])
-          ? fromQS[name]
-          : paramConfig.initial
+        const init =
+          paramConfig.sticky && fromLocalStorage[name]
+            ? fromLocalStorage[name]
+            : !isUndefined(fromQS[name])
+            ? fromQS[name]
+            : paramConfig.initial
 
         query[name] = Query._raw[group][name] = Query.createQueryParam(
           _default,
           init,
           coerce
         )
+
+        if (paramConfig.sticky) {
+          this._subs.push(
+            query[name].subscribe((newVal) => {
+              const store = Query.fromLocalStorage(localStorageKey)
+              store[name] = newVal
+              localStorage.setItem(localStorageKey, JSON.stringify(store))
+            })
+          )
+        }
       } else {
         query[name].set(paramConfig)
       }
@@ -148,6 +172,7 @@ export class Query {
   public dispose() {
     instances.delete(this)
     const group = this._group as string
+    this._subs.map((s) => s.dispose())
     if (--Query._refs[group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       const state = history.state || {}
@@ -208,6 +233,25 @@ export class Query {
   public static fromQS(group?: string) {
     const query = this.parse(this.getQueryString())
     return (isUndefined(group) ? query : query[group as string]) || {}
+  }
+
+  public static fromLocalStorage(key: string) {
+    const raw = localStorage.getItem(key)
+    if (typeof raw === 'string') {
+      try {
+        return JSON.parse(raw)
+      } catch {
+        return {}
+      }
+    } else {
+      return {}
+    }
+  }
+
+  private static getLocalStorageKey(group?: string) {
+    let key = 'knockout_contrib_query'
+    if (group) key += `/${group}`
+    return key
   }
 
   private static getCleanQuery() {
