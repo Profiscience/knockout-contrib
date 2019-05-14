@@ -387,7 +387,7 @@ export class Query {
   }
 
   private static isParamConfigObject(c: any) {
-    return c && (c.default || c.initial || c.coerce)
+    return c && c.hasOwnProperty('default')
   }
 
   private static getDefaults(config: IQueryConfig) {
