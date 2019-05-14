@@ -21,15 +21,25 @@ export function createTitleRoutePlugin(
   compose = (ts: string[]) => ts.join(' | ')
 ): RoutePlugin {
   const titles: MaybePromise<string>[] = []
+  let terminalTitledRouteContext: null | (Context & IContext)
 
-  return ({ title }: IRouteConfig) => {
-    if (!title) return
+  return (routeConfig: IRouteConfig) => {
+    const titleOrAccessor = routeConfig.title
+
+    if (!titleOrAccessor) return
 
     return (ctx: Context & IContext) => ({
+      beforeRender() {
+        terminalTitledRouteContext = ctx
+      },
       afterRender() {
-        titles.push(typeof title === 'function' ? title(ctx) : title)
-
-        if (!ctx.$child) {
+        titles.push(
+          typeof titleOrAccessor === 'function'
+            ? titleOrAccessor(ctx)
+            : titleOrAccessor
+        )
+        if (ctx === terminalTitledRouteContext) {
+          terminalTitledRouteContext = null
           ctx.queue(
             Promise.all(titles)
               .then((ts) => {

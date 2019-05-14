@@ -31,6 +31,7 @@ describe('router.plugins.title', () => {
       const [middleware] = route.middleware
       const lifecycle = middleware(ctx) as Lifecycle
 
+      if (lifecycle.beforeRender) lifecycle.beforeRender()
       if (lifecycle.afterRender) lifecycle.afterRender()
       await runQueue(queue)
       expect(document.title).toBe('foo')
@@ -45,6 +46,7 @@ describe('router.plugins.title', () => {
       const [middleware] = route.middleware
       const lifecycle = middleware(ctx) as Lifecycle
 
+      if (lifecycle.beforeRender) lifecycle.beforeRender()
       if (lifecycle.afterRender) lifecycle.afterRender()
       await runQueue(queue)
       expect(document.title).toBe('bar')
@@ -59,6 +61,7 @@ describe('router.plugins.title', () => {
     const [middleware] = route.middleware
     const lifecycle = middleware(ctx) as Lifecycle
 
+    if (lifecycle.beforeRender) lifecycle.beforeRender()
     if (lifecycle.afterRender) lifecycle.afterRender()
     await runQueue(queue)
     if (lifecycle.beforeDispose) lifecycle.beforeDispose()
@@ -72,6 +75,7 @@ describe('router.plugins.title', () => {
     const [middleware] = route.middleware
     const lifecycle = middleware(ctx) as Lifecycle
 
+    if (lifecycle.beforeRender) lifecycle.beforeRender()
     if (lifecycle.afterRender) lifecycle.afterRender()
     if (lifecycle.beforeDispose) lifecycle.beforeDispose()
 
@@ -96,6 +100,8 @@ describe('router.plugins.title', () => {
     const parentLifecycle = parentMiddleware(parentCtx) as Lifecycle
     const childLifecycle = childMiddleware(childCtx) as Lifecycle
 
+    if (parentLifecycle.beforeRender) parentLifecycle.beforeRender()
+    if (childLifecycle.beforeRender) childLifecycle.beforeRender()
     if (parentLifecycle.afterRender) parentLifecycle.afterRender()
     if (childLifecycle.afterRender) childLifecycle.afterRender()
     await runQueue(childQueue, parentQueue)
@@ -133,6 +139,8 @@ describe('router.plugins.title', () => {
 
     jest.useFakeTimers()
 
+    if (parentLifecycle.beforeRender) parentLifecycle.beforeRender()
+    if (childLifecycle.beforeRender) childLifecycle.beforeRender()
     if (parentLifecycle.afterRender) parentLifecycle.afterRender()
     if (childLifecycle.afterRender) childLifecycle.afterRender()
 
@@ -174,6 +182,8 @@ describe('router.plugins.title', () => {
 
     jest.useFakeTimers()
 
+    if (parentLifecycle.beforeRender) parentLifecycle.beforeRender()
+    if (childLifecycle.beforeRender) childLifecycle.beforeRender()
     if (parentLifecycle.afterRender) parentLifecycle.afterRender()
     if (childLifecycle.afterRender) childLifecycle.afterRender()
 
@@ -211,6 +221,8 @@ describe('router.plugins.title', () => {
     const parentLifecycle = parentMiddleware(parentCtx) as Lifecycle
     const childLifecycle = childMiddleware(childCtx) as Lifecycle
 
+    if (parentLifecycle.beforeRender) parentLifecycle.beforeRender()
+    if (childLifecycle.beforeRender) childLifecycle.beforeRender()
     if (parentLifecycle.afterRender) parentLifecycle.afterRender()
     if (childLifecycle.afterRender) childLifecycle.afterRender()
 
