@@ -187,6 +187,42 @@ describe('querystring', () => {
     query.dispose()
   })
 
+  test('advanced (falsy configuration values)', () => {
+    history.replaceState(null, '', location.pathname)
+
+    const query = Query.create({
+      foo: {
+        default: null,
+        initial: false
+      },
+      bar: {
+        default: undefined,
+        initial: 0
+      },
+      baz: {
+        default: '',
+        initial: NaN
+      }
+    })
+
+    let q = query.toJS()
+
+    expect(q.foo).toBe(false)
+    expect(q.bar).toBe(0)
+    expect(q.baz).toBe(NaN)
+
+    query.clear()
+    ko.tasks.runEarly()
+
+    q = query.toJS()
+
+    expect(q.foo).toBe(null)
+    expect(q.bar).toBe(undefined)
+    expect(q.baz).toBe('')
+
+    query.dispose()
+  })
+
   test('query[param]#isDefault', () => {
     history.replaceState(null, '', location.pathname + '?{"foo": "bar"}')
 
