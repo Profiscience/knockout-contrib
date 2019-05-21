@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.0.7...@profiscience/knockout-contrib-model-mixins-query@1.1.0) (2019-05-21)
+
+### Features
+
+- **model.mixins.query:** Add support for query groups ([7e46b13](https://github.com/Profiscience/knockout-contrib/commit/7e46b13))
+
 ## [1.0.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.0.6...@profiscience/knockout-contrib-model-mixins-query@1.0.7) (2019-05-14)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
