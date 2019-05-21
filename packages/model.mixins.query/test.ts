@@ -88,4 +88,51 @@ describe('model.mixins.query', () => {
 
     expect(model.query.dispose).toHaveBeenCalled()
   })
+
+  test('can optionally use query group', async () => {
+    class FooModel<P> extends DataModelConstructorBuilder.Mixin(
+      QueryMixin({ myQueryParam: '' }, 'foo')
+    )<P> {
+      protected async fetch(): Promise<any> {
+        return {
+          foos: ['foo', 'bar', 'baz', 'qux']
+        }
+      }
+    }
+
+    class Foo2Model<P> extends DataModelConstructorBuilder.Mixin(
+      QueryMixin({ myQueryParam: '' }, 'foo')
+    )<P> {
+      protected async fetch(): Promise<any> {
+        return {
+          foos: ['foo', 'bar', 'baz', 'qux']
+        }
+      }
+    }
+
+    class BarModel<P> extends DataModelConstructorBuilder.Mixin(
+      QueryMixin({ myQueryParam: '' }, 'bar')
+    )<P> {
+      protected async fetch(): Promise<any> {
+        return {
+          foos: ['foo', 'bar', 'baz', 'qux']
+        }
+      }
+    }
+
+    const [foo, foo2, bar] = await Promise.all([
+      FooModel.create({}),
+      Foo2Model.create({}),
+      BarModel.create({})
+    ])
+
+    foo.query.myQueryParam('foo')
+
+    expect(foo2.query.myQueryParam()).toBe('foo')
+    expect(bar.query.myQueryParam()).toBe('')
+
+    foo.dispose()
+    foo2.dispose()
+    bar.dispose()
+  })
 })
