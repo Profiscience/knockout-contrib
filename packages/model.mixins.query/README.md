@@ -18,7 +18,8 @@ import {
 
 class MyDataModel extends DataModelConstructorBuilder.Mixin(
   QueryMixin(
-    { someQuerystringParameter: '' } /* Query options (see query package) */
+    { someQuerystringParameter: '' } /* Query options (see query package) */,
+    'my-data-model' /* (optionally) supply a query group */
   )
 )<any> {}
 
