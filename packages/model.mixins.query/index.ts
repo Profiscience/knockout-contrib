@@ -25,7 +25,7 @@ export function QueryMixin<Q extends IQueryConfig>(opts: Q, group?: string) {
           nonenumerable(this, 'query')
           Object.assign(this.params, query)
         }
-        super.init()
+        return super.init()
       }
     }
 }
