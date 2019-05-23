@@ -53,6 +53,28 @@ describe('model.builders.data', () => {
     model.dispose()
   })
 
+  test('runs .init() before .fetch()', async () => {
+    interface IFooParams {}
+
+    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+      public foo!: string
+
+      protected async init() {
+        this.foo = 'foo'
+      }
+
+      protected async fetch() {
+        return { foo: this.foo }
+      }
+    }
+
+    const model = await FooModel.create({})
+
+    expect(model.foo).toBe('foo')
+
+    model.dispose()
+  })
+
   test('throws and logs error on .fetch() rejection', async () => {
     interface IFooParams {}
 

@@ -79,11 +79,13 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
       INSTANCES.set(this.INSTANCE_ID, this)
     }
 
-    this[INITIALIZED] = this.fetch(initData).then((res) => {
-      assign(this, res, { strict: true })
-      this.loading(false)
-      this.subscribe(this.params, () => this.update())
-    })
+    this[INITIALIZED] = this.init().then(() =>
+      this.fetch(initData).then((res) => {
+        assign(this, res, { strict: true })
+        this.loading(false)
+        this.subscribe(this.params, () => this.update())
+      })
+    )
   }
 
   /**
@@ -110,6 +112,14 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
     this.loading(true)
     assign(this, await this.fetch(), { strict: true })
     this.loading(false)
+  }
+
+  /**
+   * Abstract method that provides hook for mixins to perform initialization when
+   * the constructor is not suitable (async, requires access to `this` before fetch)
+   */
+  protected async init(): Promise<void> {
+    // noop
   }
 
   /**
