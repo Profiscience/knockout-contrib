@@ -135,4 +135,28 @@ describe('model.mixins.query', () => {
     foo2.dispose()
     bar.dispose()
   })
+
+  test('subclass can use different query', async () => {
+    class FooModel<P> extends DataModelConstructorBuilder.Mixin(
+      QueryMixin({ foo: 'foo' }, 'foo')
+    )<P> {
+      protected async fetch(): Promise<any> {
+        return this.params
+      }
+    }
+
+    class BarModel<P> extends FooModel.Mixin(QueryMixin({ bar: 'bar' }, 'bar'))<
+      P
+    > {
+      protected async fetch(): Promise<any> {
+        return this.params
+      }
+    }
+
+    const bar = await BarModel.create({})
+
+    expect(bar.toJS()).toEqual({
+      bar: 'bar'
+    })
+  })
 })

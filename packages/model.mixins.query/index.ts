@@ -1,4 +1,7 @@
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
+import {
+  DataModelConstructorBuilder,
+  nonenumerable
+} from '@profiscience/knockout-contrib-model-builders-data'
 import {
   Query,
   IQuery,
@@ -13,14 +16,16 @@ export function QueryMixin<Q extends IQueryConfig>(opts: Q, group?: string) {
     ctor: T
   ) =>
     class extends ctor {
-      public query: Query & IQuery<Q>
+      public query!: Query & IQuery<Q>
 
-      constructor(...args: any[]) {
-        const query = Query.create<Q>(opts, group)
-        Object.assign(args[0], query)
-        super(...args)
-
-        this.query = query
+      public async init() {
+        if (!this.query) {
+          const query = Query.create<Q>(opts, group)
+          this.query = query
+          nonenumerable(this, 'query')
+          Object.assign(this.params, query)
+        }
+        super.init()
       }
     }
 }
