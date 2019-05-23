@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.0...@profiscience/knockout-contrib-model-mixins-query@1.1.1) (2019-05-23)
+
+### Bug Fixes
+
+- **model.mixins.query:** Allow overwriting query in subclass ([9a16dca](https://github.com/Profiscience/knockout-contrib/commit/9a16dca))
+
 # [1.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.0.7...@profiscience/knockout-contrib-model-mixins-query@1.1.0) (2019-05-21)
 
 ### Features
