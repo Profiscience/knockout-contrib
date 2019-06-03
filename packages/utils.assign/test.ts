@@ -130,4 +130,18 @@ describe('utils.merge', () => {
     expect(dest.deep.foo).toBeObservable()
     expect(dest.deep.bar).not.toBeObservable()
   })
+
+  test('does not blow up with non-writable computeds', () => {
+    const dest: any = {
+      foo: ko.pureComputed(() => 'foo'),
+      bar: ko.observable('bar')
+    }
+    const src = {
+      foo: 'notfoo',
+      bar: 'notbar'
+    }
+    expect(() => assign(dest, src)).not.toThrow()
+    expect(dest.foo()).toBe('foo')
+    expect(dest.bar()).toBe('notbar')
+  })
 })

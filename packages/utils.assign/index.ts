@@ -24,6 +24,10 @@ export function assign<T extends { [k: string]: any }>(
         )
       }
     } else if (ko.isObservable(dest[prop])) {
+      // skip non-writable computeds
+      if (!ko.isWriteableObservable(dest[prop])) {
+        continue
+      }
       dest[prop](
         src[prop] instanceof Array && opts.mapArrayElements
           ? ko.unwrap(fromJS(src[prop], true))

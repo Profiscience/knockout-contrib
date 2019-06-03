@@ -42,6 +42,8 @@ If `mapArrayElements` is true, array elements will be created as mapped observab
 probably want [ko.mapping](http://knockoutjs.com/documentation/plugins-mapping.html) which is much more powerful,
 but far slower.
 
+**NOTE**: Non-writable observables on the destination (computeds w/o write functions) will be silently ignored
+
 ```javascript
 import { assign } from '@profiscience/knockout-contrib'
 
