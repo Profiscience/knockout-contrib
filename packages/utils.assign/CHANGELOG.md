@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.0...@profiscience/knockout-contrib-utils-assign@2.0.1) (2019-06-04)
+
+### Bug Fixes
+
+- **utils.assign:** Don't blow up if destination computed is not writable ([83de657](https://github.com/Profiscience/knockout-contrib/commit/83de657))
+
 # [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.0-rc.4...@profiscience/knockout-contrib-utils-assign@2.0.0) (2019-02-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-assign
