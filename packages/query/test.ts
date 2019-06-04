@@ -124,7 +124,7 @@ describe('querystring', () => {
     const createQuery = () =>
       Query.create({
         stickyParam: {
-          default: true,
+          default: true as boolean | string,
           sticky: true
         },
         notStickyParam: {

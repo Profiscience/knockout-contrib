@@ -6,43 +6,46 @@ export type MergeOptions = {
   strict?: boolean
 }
 
-export function assign<T extends { [k: string]: any }>(
-  dest: T,
-  src: { [k: string]: any },
+export function assign<
+  TSrc extends Record<string, any>,
+  TDest extends Record<string, any>
+>(
+  dest: TDest,
+  src: TSrc,
   opts: MergeOptions = { mapArrayElements: false, strict: false }
-): T {
-  const props = Object.keys(src)
+): Record<keyof TDest | keyof TSrc, any> {
+  const props = Object.keys(src) as (keyof TSrc)[]
+
+  const ret = dest as Record<keyof TDest | keyof TSrc, any>
 
   for (const prop of props) {
-    if (isUndefined(dest[prop])) {
+    if (isUndefined(ret[prop])) {
       if (opts.strict) {
-        dest[prop] = src[prop]
+        ret[prop] = src[prop]
       } else {
-        dest[prop] = fromJS(
+        ret[prop] = fromJS(
           src[prop],
-          src[prop] instanceof Array && opts.mapArrayElements
+          (src[prop] as any) instanceof Array && opts.mapArrayElements
         )
       }
-    } else if (ko.isObservable(dest[prop])) {
+    } else if (ko.isObservable(ret[prop])) {
       // skip non-writable computeds
-      if (!ko.isWriteableObservable(dest[prop])) {
+      if (!ko.isWriteableObservable(ret[prop])) {
         continue
       }
-      dest[prop](
-        src[prop] instanceof Array && opts.mapArrayElements
+      ret[prop](
+        (src[prop] as any) instanceof Array && opts.mapArrayElements
           ? ko.unwrap(fromJS(src[prop], true))
           : src[prop]
       )
-    } else if (isUndefined(src[prop]) || src[prop] === null) {
-      dest[prop] = src[prop]
-    } else if (src[prop].constructor === Object) {
-      assign(dest[prop], src[prop], opts)
+    } else if (src[prop] && src[prop].constructor === Object) {
+      assign(ret[prop], src[prop], opts)
     } else {
-      dest[prop] = src[prop]
+      ret[prop] = src[prop]
     }
   }
 
-  return dest
+  return ret
 }
 
 function isUndefined(foo: any): boolean {
