@@ -6,6 +6,8 @@ export function formatDateFilter(
   format: string
 ) {
   return formatDate(ko.unwrap(value), format, {
-    awareOfUnicodeTokens: true // see https://gist.github.com/kossnocorp/a307a464760b405bb78ef5020a4ab136#changed
+    // see https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+    useAdditionalDayOfYearTokens: true,
+    useAdditionalWeekYearTokens: true
   } as any)
 }
