@@ -30,7 +30,7 @@
     "karma-remap-istanbul": "^0.6.0",
     "karma-tap": "^4.0.0",
     "karma-tap-pretty-reporter": "^4.0.0",
-    "karma-webpack": "^3.0.5",
+    "karma-webpack": "^4.0.0",
     "tap-diff": "^0.1.1",
     "tape": "^4.10.2",
     "webpack": "^4.33.0"
