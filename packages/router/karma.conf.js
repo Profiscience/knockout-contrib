@@ -83,6 +83,8 @@ module.exports = (config) => {
           }
         ]
       }
-    }
+    },
+
+    webpackMiddleware: {}
   })
 }
