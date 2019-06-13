@@ -34,6 +34,7 @@
     "@profiscience/knockout-contrib-bindings-click-ctrl": "^2.0.0",
     "@profiscience/knockout-contrib-bindings-click-meta": "^2.0.0",
     "@profiscience/knockout-contrib-bindings-click-shift": "^2.0.0",
+    "@profiscience/knockout-contrib-bindings-draggable": "^1.0.0",
     "@profiscience/knockout-contrib-bindings-jquery": "^2.0.0",
     "@profiscience/knockout-contrib-bindings-toggle": "^2.0.0",
     "@profiscience/knockout-contrib-components-flash-message": "^2.0.5",
