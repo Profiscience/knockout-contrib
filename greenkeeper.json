@@ -8,6 +8,7 @@
         "packages/bindings.click.ctrl/package.json",
         "packages/bindings.click.meta/package.json",
         "packages/bindings.click.shift/package.json",
+        "packages/bindings.draggable/package.json",
         "packages/bindings.jquery/package.json",
         "packages/bindings.toggle/package.json",
         "packages/components.flash-message/package.json",
