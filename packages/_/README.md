@@ -36,6 +36,7 @@ import {
   ctrlClickBindingHandler,
   metaClickBindingHandler,
   shiftClickBindingHandler,
+  draggableBindingHandler,
   jqueryBindingHandler,
   toggleBindingHandler,
   formateDateFilter,
@@ -59,6 +60,8 @@ ko.bindingHandlers['click.alt'] = altClickBindingHandler
 ko.bindingHandlers['click.ctrl'] = ctrlClickBindingHandler
 ko.bindingHandlers['click.meta'] = metaClickBindingHandler
 ko.bindingHandlers['click.shift'] = shiftClickBindingHandler
+
+ko.bindingHandlers.draggable = draggableBindingHandler
 
 ko.bindingHandlers.jquery = jqueryBindingHandler
 ko.bindingHandlers.$ = jqueryBindingHandler // alias
