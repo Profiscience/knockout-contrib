@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.12...@profiscience/knockout-contrib@2.0.13) (2019-06-13)
+
+### Bug Fixes
+
+- **bindings.draggable:** Export from metapackage ([9769770](https://github.com/Profiscience/knockout-contrib/commit/9769770))
+
 ## [2.0.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.11...@profiscience/knockout-contrib@2.0.12) (2019-06-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
