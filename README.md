@@ -15,5 +15,5 @@ Goodies for building modern SPAs and rich UIs with [KnockoutJS][knockoutjs]
 [travis-ci-shield]: https://img.shields.io/travis/Profiscience/knockout-contrib/master.svg
 [codecov]: https://codecov.io/gh/Profiscience/knockout-contrib
 [codecov-shield]: https://img.shields.io/codecov/c/github/Profiscience/knockout-contrib.svg
-[gitter]: https://gitter.im/Profiscience/knockout-contrib
-[gitter-shield]: https://img.shields.io/gitter/room/profiscience/knockout-contrib.svg
+[gitter]: https://gitter.im/Profiscience/ko-component-router
+[gitter-shield]: https://img.shields.io/gitter/room/profiscience/ko-component-router.svg
