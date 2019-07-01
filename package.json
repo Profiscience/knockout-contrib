@@ -33,7 +33,7 @@
     "chokidar": "^3.0.1",
     "cz-conventional-changelog": "^2.1.0",
     "fs-extra": "^8.0.1",
-    "globby": "^9.2.0",
+    "globby": "^10.0.0",
     "husky": "^2.4.0",
     "jest": "^24.8.0",
     "jest-jquery-matchers": "^2.0.0",
