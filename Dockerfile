@@ -4,5 +4,5 @@ WORKDIR /repo
 COPY . .
 RUN yarn config set cache-folder /tmp/cache/yarn
 RUN yarn install --pure-lockfile && rm -rf node_modules packages/*/node_modules
-ENTRYPOINT ["/src/support/xvfb_entrypoint.sh"]
+ENTRYPOINT ["/repo/support/xvfb_entrypoint.sh"]
 CMD /bin/sh
