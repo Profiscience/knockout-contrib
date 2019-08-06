@@ -1,25 +1,39 @@
-kind: pipeline
-name: default
+pipeline: &pipeline
+  kind: pipeline
+  
+  steps:
+    - name: dependencies
+      image: profiscience/knockout-contrib
+      commands:
+        - yarn install
 
-steps:
-  - name: dependencies
-    image: profiscience/knockout-contrib
-    commands:
-      - yarn install
+    - name: lint
+      image: profiscience/knockout-contrib
+      commands:
+        - yarn lint
 
-  - name: lint
-    image: profiscience/knockout-contrib
-    commands:
-      - yarn lint
+    - name: build
+      image: profiscience/knockout-contrib
+      commands:
+        - yarn build
 
-  - name: build
-    image: profiscience/knockout-contrib
-    commands:
-      - yarn build
+    - name: test
+      image: profiscience/knockout-contrib
+      commands:
+        - yarn test
+        - source ./support/xvfb_entrypoint.sh
+        - yarn test:router
 
-  - name: test
-    image: profiscience/knockout-contrib
-    commands:
-      - yarn test
-      - source ./support/xvfb_entrypoint.sh
-      - yarn test:router
+<<: *pipeline
+name: master
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
+<<: *pipeline
+name: pull request
+trigger:
+  event:
+    - pull_request
