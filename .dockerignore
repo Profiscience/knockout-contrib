@@ -1,0 +1,7 @@
+*
+
+!support/
+!yarn.lock
+!package.json
+!packages/
+!packages/*/package.json
