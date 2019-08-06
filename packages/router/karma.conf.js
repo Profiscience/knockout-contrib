@@ -4,7 +4,7 @@
 
 const path = require('path')
 
-const { TRAVIS, DEBUG } = process.env
+const { DRONE, DEBUG } = process.env
 
 const karmaPlugins = [
   require('karma-firefox-launcher'),
@@ -15,7 +15,7 @@ const karmaPlugins = [
 
 const karmaReporters = ['tap-pretty']
 
-if (TRAVIS) {
+if (DRONE) {
   karmaPlugins.push(require('karma-remap-istanbul'))
   karmaReporters.push('karma-remap-istanbul')
 }
