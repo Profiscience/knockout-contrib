@@ -37,7 +37,7 @@ ko.components.register('hashbang', {
 
             ctx.router.initialized.then(() =>
               setTimeout(() => {
-                // dirty hack for FF/TravisCI
+                // dirty hack for CI
                 t.equals(
                   $('#foo-link').attr('href'),
                   '/base/#!/foo/foo',

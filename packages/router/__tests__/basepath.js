@@ -42,7 +42,7 @@ ko.components.register('basepath', {
 
             ctx.router.initialized.then(() =>
               setTimeout(() => {
-                // Dirty hack for FF/TravisCI
+                // Dirty hack for CI
                 t.equals(
                   $('#foo-link').attr('href'),
                   '/base/foo/foo',
