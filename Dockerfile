@@ -1,10 +1,8 @@
-FROM node:lts-alpine as cache
-WORKDIR /tmp/dependencies
-COPY . .
-RUN yarn install --cache-folder /tmp/cache/yarn
-
-FROM node:lts-alpine as devenv
+FROM node:lts-alpine
 RUN apk add --no-cache firefox-esr xvfb
-COPY --from=builder /tmp/cache/yarn /tmp/cache/yarn
+WORKDIR /repo
+COPY . .
 RUN yarn config set cache-folder /tmp/cache/yarn
+RUN yarn install --pure-lockfile && rm -rf node_modules packages/*/node_modules
 ENTRYPOINT ["/src/support/xvfb_entrypoint.sh"]
+CMD /bin/sh
