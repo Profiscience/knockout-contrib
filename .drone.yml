@@ -1,28 +1,24 @@
 kind: pipeline
 name: default
 
-image_pull_secrets:
-  - docker_pull_secrets
-
 steps:
   - name: Dependencies
-    image: plugins/docker
-    when:
-      branch:
-        - master
-    settings:
-      repo: containers.caseywebb.xyz/knockout-contrib/cache
-      target: cache
-      cache_from: containers.caseywebb.xzy/knockout-contrib/cache
-      registry: containers.caseywebb.xyz
-      username:
-        from_secret: docker_user
-      password:
-        from_secret: docker_pass
+    image: profiscience/knockout-contrib
     commands:
       - yarn install
 
+  - name: Lint
+    image: profiscience/knockout-contrib
+    commands:
+      - yarn lint
+
   - name: Build
-    image: containers.caseywebb.xyz/knockout-contrib/cache
+    image: profiscience/knockout-contrib
     commands:
       - yarn build
+
+  - name: Test
+    image: profiscience/knockout-contrib
+    commands:
+      - yarn test
+      - yarn test:router
