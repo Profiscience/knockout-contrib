@@ -2,22 +2,22 @@ kind: pipeline
 name: default
 
 steps:
-  - name: Dependencies
+  - name: dependencies
     image: profiscience/knockout-contrib
     commands:
       - yarn install
 
-  - name: Lint
+  - name: lint
     image: profiscience/knockout-contrib
     commands:
       - yarn lint
 
-  - name: Build
+  - name: build
     image: profiscience/knockout-contrib
     commands:
       - yarn build
 
-  - name: Test
+  - name: test
     image: profiscience/knockout-contrib
     commands:
       - yarn test
