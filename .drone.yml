@@ -1,11 +1,28 @@
 kind: pipeline
 name: default
 
+image_pull_secrets:
+  - docker_pull_secrets
+
 steps:
-  - name: test
-    image: node
+  - name: Dependencies
+    image: plugins/docker
+    when:
+      branch:
+        - master
+    settings:
+      repo: containers.caseywebb.xyz/knockout-contrib/cache
+      target: cache
+      cache_from: containers.caseywebb.xzy/knockout-contrib/cache
+      registry: containers.caseywebb.xyz
+      username:
+        from_secret: docker_user
+      password:
+        from_secret: docker_pass
     commands:
       - yarn install
-      - yarn lint
+
+  - name: Build
+    image: containers.caseywebb.xyz/knockout-contrib/cache
+    commands:
       - yarn build
-      - yarn test
