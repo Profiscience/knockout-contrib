@@ -38,13 +38,13 @@ pipeline: &pipeline
         - yarn test:router
 
 <<: *pipeline
-name: default
+name: master
 trigger:
   branch:
     - master
 
 <<: *pipeline
-name: default
+name: pr
 trigger:
   event:
     - pull_request
