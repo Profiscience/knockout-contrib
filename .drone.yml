@@ -76,7 +76,7 @@ steps:
       CODECOV_TOKEN:
         from_secret: CODECOV_TOKEN
     commands:
-      - npx codecov -t $CODECOV_TOKEN
+      - npx codecov -t $$CODECOV_TOKEN
 
 ---
 kind: secret
