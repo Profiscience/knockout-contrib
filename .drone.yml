@@ -6,7 +6,7 @@ kind: pipeline
 name: default
 
 image_pull_secrets:
-  - ENCRYPTED_DOCKER_CONFIG_JSON
+  - DOCKER_CONFIG_JSON
 
 trigger:
   ref:
@@ -17,8 +17,10 @@ steps:
   - name: environment
     image: plugins/docker
     when:
-      branch:
-        - master
+      ref:
+        - refs/heads/master
+      event:
+        - push
     settings:
       repo: containers.caseywebb.xyz/profiscience/knockout-contrib
       registry: containers.caseywebb.xyz
@@ -80,11 +82,6 @@ steps:
 kind: secret
 name: CODECOV_TOKEN
 data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVzZg/mOKFkfm/A==
-
----
-kind: secret
-name: ENCRYPTED_DOCKER_CONFIG_JSON
-data: LCK88zuHT/seZeclfGqBeAEleF6Nf3WYbRcgJERWp/5UQZpw7nklWWQPRgbx935ZlEEKnq7AI5TyoGStLvRLWDM/ai1t9dxiSD8fzjVCNCKx0bQSQWuzDq1auz+kO5bJsDMiPCzYsu0+mE4PDQm29cNzz8a60AYYaX3820CW/IugqKAX6zKGEoBYvs4nxA==
 
 ---
 kind: secret
