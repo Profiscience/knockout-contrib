@@ -1,47 +1,50 @@
-kind: pipeline
-name: default
+pipeline: &pipeline
+  kind: pipeline
+  steps:
+    - name: dependencies
+      image: profiscience/knockout-contrib
+      commands:
+        - yarn install
 
+    - name: lint
+      image: profiscience/knockout-contrib
+      depends_on:
+        - dependencies
+      commands:
+        - yarn lint
+
+    - name: build
+      image: profiscience/knockout-contrib
+      depends_on:
+        - dependencies
+      commands:
+        - yarn build
+
+    - name: test:jest
+      image: profiscience/knockout-contrib
+      depends_on:
+        - dependencies
+        - build
+      commands:
+        - yarn test
+
+    - name: test:karma
+      image: profiscience/knockout-contrib
+      depends_on:
+        - dependencies
+        - build
+      commands:
+        - source ./support/xvfb_entrypoint.sh
+        - yarn test:router
+
+<<: *pipeline
+name: default
 trigger:
   branch:
     - master
 
+<<: *pipeline
+name: default
 trigger:
   event:
     - pull_request
-
-steps:
-  - name: dependencies
-    image: profiscience/knockout-contrib
-    commands:
-      - yarn install
-
-  - name: lint
-    image: profiscience/knockout-contrib
-    depends_on:
-      - dependencies
-    commands:
-      - yarn lint
-
-  - name: build
-    image: profiscience/knockout-contrib
-    depends_on:
-      - dependencies
-    commands:
-      - yarn build
-
-  - name: test:jest
-    image: profiscience/knockout-contrib
-    depends_on:
-      - dependencies
-      - build
-    commands:
-      - yarn test
-
-  - name: test:karma
-    image: profiscience/knockout-contrib
-    depends_on:
-      - dependencies
-      - build
-    commands:
-      - source ./support/xvfb_entrypoint.sh
-      - yarn test:router
