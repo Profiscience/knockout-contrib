@@ -84,7 +84,7 @@ data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVz
 ---
 kind: secret
 name: DOCKER_CONFIG_JSON
-data: NslRsng9Nw6ocbWGMXI96zRVB4K0uoFKt/MfcyrN/cd4IvbsJXYxAHVwefN6+BZtMVB4+wxj90GtnelUsHFkQyXKSXA4finUGH1GzQghOSV9zP3Q73ylgX4f1R9UgBt13Ug5rfxlU1zyPphJb/fOczJjlIWqisYqa/dj+qudtwEvT07IuhCSzlHbcDhCdQ==
+data: CEmtr89awOQOgnQrvPsKjbDxAMTOAXaoWrujGG44HL3m2af8p4WISosJBJe4ijdPJcZ1UxgsTARhfsTUQvxzQO+7xs7KjksRWaZctCm8JqTlP7DVPYyawYvMIe44s1RKTkv61uy9k1uBuW5/dhrpZeH1hyOO8m+RWhq29mzbv/hkfQ9DDQN5kbmrU04eRQ==
 
 ---
 kind: secret
