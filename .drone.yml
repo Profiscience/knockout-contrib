@@ -42,3 +42,11 @@ steps:
     commands:
       - source ./support/xvfb_entrypoint.sh
       - yarn test:router
+
+  - name: coverage
+    image: profiscience/knockout-contrib
+    depends_on:
+      - test:jest
+      - test:karma
+    commands:
+      - npx codecov
