@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.7...@profiscience/knockout-contrib-model-mixins-pager@2.0.8) (2019-08-07)
+
+### Bug Fixes
+
+- **model.mixins.pager:** Use correct version core-js import ([97e6dd2](https://github.com/Profiscience/knockout-contrib/commit/97e6dd2))
+
 ## [2.0.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.6...@profiscience/knockout-contrib-model-mixins-pager@2.0.7) (2019-06-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager

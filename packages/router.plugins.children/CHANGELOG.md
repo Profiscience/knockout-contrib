@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-children@2.0.6...@profiscience/knockout-contrib-router-plugins-children@2.0.7) (2019-08-07)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-children
+
 ## [2.0.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-children@2.0.5...@profiscience/knockout-contrib-router-plugins-children@2.0.6) (2019-06-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-children
