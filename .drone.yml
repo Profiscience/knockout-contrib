@@ -2,6 +2,13 @@ devenv_container: &devenv_container
   image: containers.caseywebb.xyz/profiscience/knockout-contrib
   pull: true
 
+when_master: &when_master
+  when:
+    ref:
+      - refs/heads/master
+    event:
+      - push
+
 kind: pipeline
 name: default
 
@@ -16,11 +23,7 @@ trigger:
 steps:
   - name: environment
     image: plugins/docker
-    when:
-      ref:
-        - refs/heads/master
-      event:
-        - push
+    <<: *when_master
     settings:
       repo: containers.caseywebb.xyz/profiscience/knockout-contrib
       registry: containers.caseywebb.xyz
@@ -78,7 +81,25 @@ steps:
     commands:
       - npx codecov
 
+  - name: publish:npm
+    <<: *devenv_container
+    <<: *when_master
+    depends_on:
+      - build
+      - test:*
+    environment:
+      NPM_TOKEN:
+        from_secret: npm_token
+    commands:
+      - echo "//registry.npmjs.org/:_authToken=$${NPM_TOKEN}" >> .npmrc
+      - npx lerna publish from-package --no-git-reset --yes
+
 ---
 kind: secret
 name: DOCKER_REGISTRY_PASSWORD
 data: v6yir3VO2XionyT+YWoem5S+wym0os/nO4byNXkLILkmK7mWlc9sv1yEUBnxI/rlliSMCOk=
+
+---
+kind: secret
+name: NPM_TOKEN
+data: Jed1nG51yLt4bB+Vv1Zhu1M0a8h0LeUYwoiMG8RKwxH1KdfKot/RZnm5ewCTZdIm74gIfGO2bUWZAuf5gAV4cQ==
