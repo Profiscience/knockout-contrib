@@ -8,26 +8,26 @@ trigger:
 
 steps:
   - name: dependencies
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     commands:
       - yarn install
 
   - name: lint
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     depends_on:
       - dependencies
     commands:
       - yarn lint
 
   - name: build
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     depends_on:
       - dependencies
     commands:
       - yarn build
 
   - name: test:jest
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     depends_on:
       - dependencies
       - build
@@ -35,7 +35,7 @@ steps:
       - yarn test
 
   - name: test:karma
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     depends_on:
       - dependencies
       - build
@@ -44,7 +44,7 @@ steps:
       - yarn test:router
 
   - name: coverage
-    image: profiscience/knockout-contrib
+    image: profiscience/knockout-contrib:latest
     depends_on:
       - test:jest
       - test:karma
