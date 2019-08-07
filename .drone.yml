@@ -78,13 +78,6 @@ steps:
     commands:
       - npx codecov
 
-  - name: pages
-    image: plugins/gh-pages
-    settings:
-      pages_directory: ./
-      ssh_key:
-        from_secret: GH_PAGES_DEPLOY_KEY_TEST
-
 ---
 kind: secret
 name: DOCKER_REGISTRY_PASSWORD
