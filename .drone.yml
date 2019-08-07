@@ -86,7 +86,8 @@ steps:
     <<: *when_master
     depends_on:
       - build
-      - test:*
+      - test:jest
+      - test:karma
     environment:
       NPM_TOKEN:
         from_secret: npm_token
