@@ -4,7 +4,7 @@ name: default
 trigger:
   ref:
     - refs/heads/master
-    - refs/pulls/*/merge
+    - refs/pull/*/head
 
 steps:
   - name: dependencies
