@@ -19,16 +19,23 @@ steps:
 
   - name: lint
     image: profiscience/knockout-contrib
+    depends_on:
+      - dependencies
     commands:
       - yarn lint
 
   - name: build
     image: profiscience/knockout-contrib
+    depends_on:
+      - dependencies
     commands:
       - yarn build
 
   - name: test
     image: profiscience/knockout-contrib
+    depends_on:
+      - dependencies
+      - build
     commands:
       - yarn test
       - source ./support/xvfb_entrypoint.sh
