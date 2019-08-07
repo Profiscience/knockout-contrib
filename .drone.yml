@@ -29,6 +29,8 @@ steps:
 
   - name: dependencies
     <<: *devenv_container
+    depends_on:
+      - environment
     commands:
       - yarn install
 
