@@ -31,12 +31,19 @@ steps:
     commands:
       - yarn build
 
-  - name: test
+  - name: test:jest
     image: profiscience/knockout-contrib
     depends_on:
       - dependencies
       - build
     commands:
       - yarn test
+
+  - name: test:karma
+    image: profiscience/knockout-contrib
+    depends_on:
+      - dependencies
+      - build
+    commands:
       - source ./support/xvfb_entrypoint.sh
       - yarn test:router
