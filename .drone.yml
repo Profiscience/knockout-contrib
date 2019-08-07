@@ -25,6 +25,7 @@ pipeline: &pipeline
         - yarn test:router
 
 <<: *pipeline
+name: default
 trigger:
   branch:
     - master
@@ -32,6 +33,7 @@ trigger:
     - push
 
 <<: *pipeline
+name: default
 trigger:
   event:
     - pull_request
