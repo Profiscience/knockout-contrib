@@ -44,10 +44,18 @@ steps:
       - source ./support/xvfb_entrypoint.sh
       - yarn test:router
 
-  - name: coverage
+  - name: report:coverage
     image: profiscience/knockout-contrib
     depends_on:
       - test:jest
       - test:karma
+    environment:
+      CODECOV_TOKEN:
+        from_secret: CODECOV_TOKEN
     commands:
-      - npx codecov
+      - npx codecov -t $CODECOV_TOKEN
+
+---
+kind: secret
+name: CODECOV_TOKEN
+data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVzZg/mOKFkfm/A==
