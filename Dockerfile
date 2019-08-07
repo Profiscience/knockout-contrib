@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-RUN apk add --no-cache firefox-esr xvfb
+RUN apk add --no-cache firefox-esr git xvfb
 WORKDIR /repo
 COPY . .
 RUN yarn config set cache-folder /tmp/cache/yarn
