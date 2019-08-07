@@ -1,5 +1,12 @@
+devenv_container: &devenv_container
+  image: containers.caseywebb.xyz/profiscience/knockout-contrib
+  pull: true
+
 kind: pipeline
 name: default
+
+image_pull_secrets:
+  - DOCKER_CONFIG_JSON
 
 trigger:
   ref:
@@ -7,28 +14,40 @@ trigger:
     - refs/pull/*/head
 
 steps:
+  - name: environment
+    image: plugins/docker
+    when:
+      branch:
+        - master
+    settings:
+      repo: containers.caseywebb.xyz/profiscience/knockout-contrib
+      registry: containers.caseywebb.xyz
+      cache_from: containers.caseywebb.xyz/profiscience/knockout-contrib
+      username: profiscience-buildbot
+      password:
+        from_secret: DOCKER_REGISTRY_PASSWORD
+
   - name: dependencies
-    image: profiscience/knockout-contrib
-    pull: true
+    <<: *devenv_container
     commands:
       - yarn install
 
   - name: lint
-    image: profiscience/knockout-contrib
+    <<: *devenv_container
     depends_on:
       - dependencies
     commands:
       - yarn lint
 
   - name: build
-    image: profiscience/knockout-contrib
+    <<: *devenv_container
     depends_on:
       - dependencies
     commands:
       - yarn build
 
   - name: test:jest
-    image: profiscience/knockout-contrib
+    <<: *devenv_container
     depends_on:
       - dependencies
       - build
@@ -36,7 +55,7 @@ steps:
       - yarn test
 
   - name: test:karma
-    image: profiscience/knockout-contrib
+    <<: *devenv_container
     depends_on:
       - dependencies
       - build
@@ -45,7 +64,7 @@ steps:
       - yarn test:router
 
   - name: report:coverage
-    image: profiscience/knockout-contrib
+    <<: *devenv_container
     depends_on:
       - test:jest
       - test:karma
@@ -59,3 +78,13 @@ steps:
 kind: secret
 name: CODECOV_TOKEN
 data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVzZg/mOKFkfm/A==
+
+---
+kind: secret
+name: DOCKER_CONFIG_JSON
+data: NslRsng9Nw6ocbWGMXI96zRVB4K0uoFKt/MfcyrN/cd4IvbsJXYxAHVwefN6+BZtMVB4+wxj90GtnelUsHFkQyXKSXA4finUGH1GzQghOSV9zP3Q73ylgX4f1R9UgBt13Ug5rfxlU1zyPphJb/fOczJjlIWqisYqa/dj+qudtwEvT07IuhCSzlHbcDhCdQ==
+
+---
+kind: secret
+name: DOCKER_REGISTRY_PASSWORD
+data: v6yir3VO2XionyT+YWoem5S+wym0os/nO4byNXkLILkmK7mWlc9sv1yEUBnxI/rlliSMCOk=
