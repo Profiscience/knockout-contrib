@@ -80,10 +80,5 @@ steps:
 
 ---
 kind: secret
-name: CODECOV_TOKEN
-data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVzZg/mOKFkfm/A==
-
----
-kind: secret
 name: DOCKER_REGISTRY_PASSWORD
 data: v6yir3VO2XionyT+YWoem5S+wym0os/nO4byNXkLILkmK7mWlc9sv1yEUBnxI/rlliSMCOk=
