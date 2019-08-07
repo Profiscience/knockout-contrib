@@ -1,4 +1,4 @@
-import 'core-js/es7/symbol'
+import 'core-js/es/symbol'
 
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
