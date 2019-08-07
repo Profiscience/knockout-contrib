@@ -83,10 +83,5 @@ data: sDltPEjpOCwZIQD0I3phbquSJLZ2rKvrUdnyLWH0TTRq7nk4dodP0NPdwGGdhfgSYZETIcisVz
 
 ---
 kind: secret
-name: DOCKER_CONFIG_JSON
-data: CEmtr89awOQOgnQrvPsKjbDxAMTOAXaoWrujGG44HL3m2af8p4WISosJBJe4ijdPJcZ1UxgsTARhfsTUQvxzQO+7xs7KjksRWaZctCm8JqTlP7DVPYyawYvMIe44s1RKTkv61uy9k1uBuW5/dhrpZeH1hyOO8m+RWhq29mzbv/hkfQ9DDQN5kbmrU04eRQ==
-
----
-kind: secret
 name: DOCKER_REGISTRY_PASSWORD
 data: v6yir3VO2XionyT+YWoem5S+wym0os/nO4byNXkLILkmK7mWlc9sv1yEUBnxI/rlliSMCOk=
