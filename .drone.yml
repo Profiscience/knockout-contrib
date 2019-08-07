@@ -1,8 +1,3 @@
-dev_env: &dev_env
-  image: plugins/docker
-  settings:
-    cache_from: profiscience/knockout-contrib
-
 kind: pipeline
 name: default
 
@@ -13,26 +8,27 @@ trigger:
 
 steps:
   - name: dependencies
-    <<: *dev_env
+    image: profiscience/knockout-contrib
+    pull: true
     commands:
       - yarn install
 
   - name: lint
-    <<: *dev_env
+    image: profiscience/knockout-contrib
     depends_on:
       - dependencies
     commands:
       - yarn lint
 
   - name: build
-    <<: *dev_env
+    image: profiscience/knockout-contrib
     depends_on:
       - dependencies
     commands:
       - yarn build
 
   - name: test:jest
-    <<: *dev_env
+    image: profiscience/knockout-contrib
     depends_on:
       - dependencies
       - build
@@ -40,7 +36,7 @@ steps:
       - yarn test
 
   - name: test:karma
-    <<: *dev_env
+    image: profiscience/knockout-contrib
     depends_on:
       - dependencies
       - build
@@ -49,7 +45,7 @@ steps:
       - yarn test:router
 
   - name: report:coverage
-    <<: *dev_env
+    image: profiscience/knockout-contrib
     depends_on:
       - test:jest
       - test:karma
