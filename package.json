@@ -103,5 +103,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn format --staged"
     }
-  }
+  },
+  "version": "0.0.0"
 }
