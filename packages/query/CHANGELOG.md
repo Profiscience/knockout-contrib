@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.2...@profiscience/knockout-contrib-query@2.1.3) (2019-08-14)
+
+
+### Bug Fixes
+
+* **query:** infinite looping issue w/ deeply nested async viewModels ([fd3b0ab](https://github.com/Profiscience/knockout-contrib/commit/fd3b0ab))
+
+
+
+
+
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.1...@profiscience/knockout-contrib-query@2.1.2) (2019-05-14)
 
 ### Bug Fixes
