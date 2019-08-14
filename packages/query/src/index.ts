@@ -13,7 +13,9 @@ import {
 const VIA_FACTORY = Symbol('VIA_FACTORY')
 
 const instances = new Set<Query>()
+
 let historyApiSpied = false
+let replaceState: typeof history.replaceState
 
 export type IQueryParam<T> = ko.Computed<T> & {
   isDefault(): boolean
@@ -69,8 +71,9 @@ export class Query {
     }
 
     if (!historyApiSpied) {
-      spyOnHistoryApi()
       historyApiSpied = true
+      replaceState = spyOnHistoryApiMethod('replaceState')
+      spyOnHistoryApiMethod('pushState')
     }
 
     Object.defineProperty(this, '_group', {
@@ -101,7 +104,7 @@ export class Query {
         [this._group]: state.__query[this._group]
       })
       delete state.__query[this._group]
-      history.replaceState(state, document.title, location.href)
+      replaceState(state, document.title, location.href)
     }
 
     this.set(config)
@@ -178,7 +181,7 @@ export class Query {
       const state = history.state || {}
       state.__query = state.__query || {}
       state.__query[group] = current[group]
-      history.replaceState(state, document.title, location.href)
+      replaceState(state, document.title, location.href)
       delete current[group]
       Query.writeQueryString(current)
       delete Query._raw[group]
@@ -310,7 +313,7 @@ export class Query {
       }
     }
 
-    history.replaceState(history.state, document.title, newUrl)
+    replaceState(history.state, document.title, newUrl)
   }
 
   private static queueQueryStringWrite() {
@@ -399,11 +402,6 @@ export class Query {
   }
 }
 
-function spyOnHistoryApi() {
-  spyOnHistoryApiMethod('pushState')
-  spyOnHistoryApiMethod('replaceState')
-}
-
 function spyOnHistoryApiMethod(methodName: string) {
   const h: any = history
   const orig = h[methodName].bind(h)
@@ -412,4 +410,5 @@ function spyOnHistoryApiMethod(methodName: string) {
     Query.reload()
     return ret
   }
+  return orig
 }
