@@ -1,9 +1,11 @@
+import { noAutoDispose } from '@profiscience/knockout-contrib-model-mixins-disposal-aggregator'
+
 /**
  * See Constructor Builders concept in the README
  */
 export class ConstructorBuilder {
   public dispose() {
-    /* noop */
+    noAutoDispose(this)
   }
 
   /**
