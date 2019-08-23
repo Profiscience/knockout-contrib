@@ -3,7 +3,7 @@ import {
   ViewModelConstructorBuilder
 } from '@profiscience/knockout-contrib'
 
-test("DisposalAggregatorMixin doesn't re-dispose deleted data model", () => {
+test("DisposalAggregatorMixin doesn't re-dispose deleted data model", async () => {
   const spy = jest.fn()
 
   class DataModel extends DataModelConstructorBuilder<void> {
@@ -19,7 +19,7 @@ test("DisposalAggregatorMixin doesn't re-dispose deleted data model", () => {
 
   const vm = new ViewModel()
 
-  vm.data.delete()
+  await vm.data.delete()
 
   vm.dispose()
 
