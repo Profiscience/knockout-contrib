@@ -71,7 +71,7 @@
       "ts",
       "tsx"
     ],
-    "testRegex": "packages/[^/]+/(__tests__/[^_]*|[^_]*test)\\.tsx?$",
+    "testRegex": "(__tests__/[^_]*|[^_]*test)\\.tsx?$",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
