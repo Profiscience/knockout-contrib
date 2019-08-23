@@ -6,6 +6,7 @@
     "curly": [true, "ignore-same-line"],
     "deprecation": true,
     "interface-over-type-literal": false,
+    "max-classes-per-file": false,
     "member-ordering": [true, "instance-sandwich"],
     "no-boolean-literal-compare": true,
     "no-floating-promises": true,
