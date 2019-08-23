@@ -15,8 +15,8 @@
   "types": "index.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "@profiscience/knockout-contrib-router": ">=2.0.0-rc.0",
-    "@profiscience/knockout-contrib-router-plugins-component": ">=2.0.0-rc.0",
+    "@profiscience/knockout-contrib-router": ">=2.0.0",
+    "@profiscience/knockout-contrib-router-plugins-component": ">=2.0.0",
     "knockout": "^3.5.0"
   },
   "dependencies": {
