@@ -6,6 +6,7 @@
     "format": "pretty-quick",
     "release": "lerna version --conventional-commits --no-commit-hooks",
     "link:all": "lerna exec -- \"yarn link && cd $REPO && yarn link \\$LERNA_PACKAGE_NAME\"",
+    "lint": "esw --color --ignore-path .gitignore --ext .js,.ts,.tsx ./",
     "test": "jest",
     "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
   },
@@ -32,6 +33,9 @@
     "chalk": "^3.0.0",
     "chokidar": "^3.0.1",
     "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^6.2.2",
+    "eslint-config-profiscience": "^4.0.10",
+    "eslint-watch": "^6.0.0",
     "fs-extra": "^8.0.1",
     "globby": "^11.0.0",
     "husky": "^4.0.0",
@@ -59,6 +63,14 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "profiscience"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
     }
   },
   "husky": {
