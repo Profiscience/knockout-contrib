@@ -1,5 +1,3 @@
-/* tslint:disable max-classes-per-file no-empty-interface */
-
 import * as ko from 'knockout'
 import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 import '@profiscience/knockout-contrib-jest-matchers'

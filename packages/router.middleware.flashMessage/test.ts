@@ -7,7 +7,6 @@ import {
 } from './index'
 
 declare module './index' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IFlashMessage {
     text: string
   }

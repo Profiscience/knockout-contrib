@@ -1,5 +1,3 @@
-/* tslint:disable max-classes-per-file */
-
 import { ConstructorBuilder } from './index'
 
 describe('model.builders.base', () => {

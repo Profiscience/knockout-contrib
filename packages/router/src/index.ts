@@ -1,5 +1,3 @@
-/* tslint:disable no-empty-interface */
-
 import './bindings'
 import './component'
 

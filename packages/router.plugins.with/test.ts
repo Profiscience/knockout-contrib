@@ -4,7 +4,6 @@ import { withRoutePlugin } from './index'
 const FOO = Symbol('foo')
 
 declare module '@profiscience/knockout-contrib-router' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IContext {
     foo?: string
     [FOO]?: string

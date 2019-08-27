@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 

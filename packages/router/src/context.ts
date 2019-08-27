@@ -38,7 +38,6 @@ export class Context /* implements IContext, use Context & IContext */ {
 
     if (!route) {
       throw new Error(
-        // tslint:disable-next-line:max-line-length
         `[@profiscience/knockout-contrib-router] Router@${router.depth} context initialized with path ${path}, but no matching route was found`
       )
     }
@@ -62,7 +61,6 @@ export class Context /* implements IContext, use Context & IContext */ {
       $parent.$child = ctx
     }
     if (childPath) {
-      // tslint:disable-next-line no-unused-expression
       new Router(childPath + search + hash, ctx).ctx
     }
   }
@@ -233,12 +231,11 @@ export class Context /* implements IContext, use Context & IContext */ {
       if (typeof ctx._redirect !== 'undefined') break
 
       let lifecycle: Lifecycle
-      const ret = await fn(ctx) // tslint:disable-line:await-promise
+      const ret = await fn(ctx)
 
       if (ret) {
         // iterable (generator)
         if (typeof (ret as any).next === 'function') {
-          // tslint:disable-line:strict-type-predicates
           const iterator = ret as IterableIterator<any>
           lifecycle = {
             beforeRender: () => iterator.next().value,

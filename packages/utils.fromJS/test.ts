@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import { noop } from 'lodash'
 import * as ko from 'knockout'
 import '@profiscience/knockout-contrib-jest-matchers'
@@ -16,7 +14,7 @@ describe('utils.fromJS', () => {
       public obj = { foo: 'foo' }
       public obs = ko.observable({ foo: 'bar' })
       public regexp = /foo/
-      public func() {} // tslint:disable-line no-empty
+      public func() {}
     }
 
     const raw = {
@@ -28,7 +26,7 @@ describe('utils.fromJS', () => {
       regexp: /foo/,
       obj: { foo: 'foo' },
       obs: ko.observable({ foo: 'bar' }),
-      func() {}, // tslint:disable-line no-empty
+      func() {},
       class: new Clazz()
     }
 

@@ -53,7 +53,6 @@ import { Router, flashMessage } from '@profiscience/knockout-contrib'
 
 // If using TypeScript, define the interface for your flash message
 declare module '@profiscience/knockout-contrib-router-middleware-flash-message' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IFlashMessage {
     text: string
     type?: string

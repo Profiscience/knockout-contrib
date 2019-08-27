@@ -7,7 +7,6 @@ import {
 type MaybePromise<T> = T | Promise<T>
 
 declare module '@profiscience/knockout-contrib-router' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IRouteConfig {
     /**
      * Additional data to extend context with.

@@ -78,7 +78,6 @@ describe('router.middleware.scrollPosition', () => {
   test('logs warning if anchor for hash does not exist and scrolls to top', () => {
     history.replaceState({}, document.title, '/#!/#foo')
     document.getElementById = jest.fn(() => null)
-    // tslint:disable-next-line:no-console
     console.warn = jest.fn()
 
     const ctx: Context & IContext = {} as Context & IContext
@@ -90,7 +89,6 @@ describe('router.middleware.scrollPosition', () => {
 
     lifecycle.afterRender()
 
-    // tslint:disable-next-line:no-console
     expect(console.warn).toBeCalled()
   })
 })

@@ -20,7 +20,6 @@ async function runQueue(...queues: jest.Mock[]) {
 
 describe('router.plugins.title', () => {
   test('sets the title after render and reverts after dispose', async () => {
-    // tslint:disable:no-shadowed-variable
     // ^ This is erroneously being thrown below despite the code blocks
 
     {

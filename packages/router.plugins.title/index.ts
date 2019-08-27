@@ -8,7 +8,6 @@ import {
 type MaybePromise<T> = T | Promise<T>
 
 declare module '@profiscience/knockout-contrib-router' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IRouteConfig {
     /**
      * Document title for view, can be async or sync accessor function

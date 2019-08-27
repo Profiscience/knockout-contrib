@@ -6,7 +6,6 @@ import {
 } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IRouteConfig {
     redirect?: (
       ctx: Context & IContext
@@ -14,7 +13,9 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function redirectRoutePlugin({ redirect }: IRouteConfig): Middleware | void {
+export function redirectRoutePlugin({
+  redirect
+}: IRouteConfig): Middleware | void {
   if (!redirect) return
 
   return async (ctx: Context & IContext) => {

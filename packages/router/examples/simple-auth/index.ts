@@ -1,5 +1,10 @@
 import * as ko from 'knockout'
-import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  Middleware,
+  Router
+} from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
 const authMiddleware: Middleware = (ctx: Context & IContext) => {
@@ -33,7 +38,7 @@ ko.components.register('login', {
   viewModel: class {
     public login() {
       sessionStorage.setItem('authenticated', 'true')
-      Router.update('/').catch((err) => console.error('Error navigating', err)) // tslint:disable-line no-console
+      Router.update('/').catch((err) => console.error('Error navigating', err))
     }
   },
   template: `

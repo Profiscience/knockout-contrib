@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 
@@ -31,7 +29,7 @@ function FoosMixin<
 describe('model.mixins.transform', () => {
   test('transforms the response from mixed in fetch', async () => {
     const reverseFoos = (obj: any) => ({ ...obj, foos: reverse(obj.foos) })
-    const ReverseFoosMixin = TransformMixin(reverseFoos) // tslint:disable-line variable-name
+    const ReverseFoosMixin = TransformMixin(reverseFoos)
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(
       FoosMixin
     ).Mixin(ReverseFoosMixin)<P> {}
@@ -45,7 +43,7 @@ describe('model.mixins.transform', () => {
 
   test('transforms initData', async () => {
     const reverseFoos = (obj: any) => ({ ...obj, foos: reverse(obj.foos) })
-    const ReverseFoosMixin = TransformMixin(reverseFoos) // tslint:disable-line variable-name
+    const ReverseFoosMixin = TransformMixin(reverseFoos)
     class DataModel<P> extends DataModelConstructorBuilder.Mixin(
       ReverseFoosMixin
     )<P> {

@@ -38,7 +38,6 @@ const getSourceFiles = () =>
   ).then((files) => files.map((f) => path.resolve(__dirname, 'packages', f)))
 
 function createWorkers(size: number) {
-  // tslint:disable no-console
   console.info(chalk.cyan(`Forking ${size} worker processess`))
   const workerFile = path.resolve(__dirname, './build.worker.ts')
   const _workers: ChildProcess[] = []
@@ -91,7 +90,6 @@ function pifyProc(proc: ChildProcess) {
 }
 
 function startTypeChecker() {
-  // tslint:disable:no-console
   const args: string[] = ['--pretty']
   console.info(chalk.cyan('Forking type checker'))
   if (argv.watch) args.push('--watch')
@@ -176,7 +174,6 @@ async function main() {
 
 main()
   .catch((err) => {
-    // tslint:disable:no-console
     if (err.message) console.error(err.message)
     return 1
   })

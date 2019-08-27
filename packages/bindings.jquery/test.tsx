@@ -7,7 +7,6 @@ import { jqueryBindingHandler } from './index'
 ko.bindingHandlers.$ = jqueryBindingHandler
 
 declare global {
-  // tslint:disable-next-line:interface-name
   interface JQuery<TElement> {
     myPlugin(opts: any): any
   }
@@ -26,7 +25,6 @@ describe('bindings.jquery', () => {
   test('calls the jquery plugin with the correct options', (done) => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts" />
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       expect(_opts).toEqual(opts)
       done()
@@ -36,7 +34,6 @@ describe('bindings.jquery', () => {
 
   test('options default to undefined', (done) => {
     const el = <div data-bind="$.myPlugin" />
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       expect(_opts).toBeUndefined()
       done()
@@ -48,7 +45,6 @@ describe('bindings.jquery', () => {
     const val = ko.observable()
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, value: val" />
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       this.val('foobar')
     }
@@ -63,7 +59,6 @@ describe('bindings.jquery', () => {
     const val = ko.observable()
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, value: val" />
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       val.subscribe((v) => {
         expect(v).toBe('foobar')
@@ -82,7 +77,6 @@ describe('bindings.jquery', () => {
       expect(e.target).toBe(el)
       done()
     }
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       this.trigger('change')
     }
@@ -96,7 +90,6 @@ describe('bindings.jquery', () => {
       expect(e.target).toBe(el)
       done()
     }
-    // tslint:disable-next-line only-arrow-functions
     $.fn.myPlugin = function(_opts: any) {
       this.trigger('change')
     }

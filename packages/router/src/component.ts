@@ -4,7 +4,6 @@ import { Router } from './router'
 import { traversePath, log, noop } from './utils'
 
 declare global {
-  // tslint:disable-next-line interface-name
   interface KnockoutBindingContext {
     $router: Router
   }
@@ -70,7 +69,6 @@ function createViewModel(params: { [k: string]: any }) {
             .runAfterRender()
             .catch(catchRedirectAfterRenderMiddleware)
             .then(() => {
-              // tslint:disable-line:no-floating-promises
               const { router: r, path: p } = traversePath(router, redirectPath)
               r.update(p, redirectArgs).catch((err) =>
                 log.error('Error redirecting', err)
@@ -88,7 +86,6 @@ function createViewModel(params: { [k: string]: any }) {
       .runAfterRender()
       .catch(catchRedirectAfterRenderMiddleware)
       .then(() => {
-        // tslint:disable-line:no-floating-promises
         setTimeout(() => r.update(p, router.ctx._redirectArgs))
       })
   }

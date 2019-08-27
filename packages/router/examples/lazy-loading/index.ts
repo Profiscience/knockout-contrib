@@ -17,14 +17,11 @@ const lazyLoadPlugin: RoutePlugin = (componentName: string) => [
     }
 
     // https://webpack.js.org/guides/code-splitting-import/
-    return (
-      import('./views/' + componentName)
-        .then((exports) => ko.components.register(componentName, exports))
-        // tslint:disable-next-line no-console
-        .catch((err) =>
-          console.error('Error fetching component', componentName, err)
-        )
-    )
+    return import('./views/' + componentName)
+      .then((exports) => ko.components.register(componentName, exports))
+      .catch((err) =>
+        console.error('Error fetching component', componentName, err)
+      )
   }
 ]
 

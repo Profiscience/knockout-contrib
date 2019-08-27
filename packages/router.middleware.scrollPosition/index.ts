@@ -26,7 +26,6 @@ export function createScrollPositionMiddleware(
         if (anchor !== null) {
           y = anchor.offsetTop
         } else {
-          // tslint:disable-next-line no-console
           console.warn(
             '[@profiscience/knockout-contrib-middleware-scroll-position]',
             `Navigated to page with #${hash}, but no element with id ${hash} found.`

@@ -1,5 +1,3 @@
-// tslint:disable max-classes-per-file
-
 import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-base'
 
 import { DisposalAggregatorMixin, noAutoDispose } from './index'

@@ -125,7 +125,6 @@ export function componentRoutePlugin({
                 isNamedComponent = true
                 resolveComponent(normalizedConfig)
                 if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
-                  // tslint:disable-next-line:no-console
                   console.warn(
                     '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.'
                   )
@@ -149,7 +148,6 @@ export function componentRoutePlugin({
                   } catch (e) {
                     viewModelConfig = normalizedConfig.viewModel
                     if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
-                      // tslint:disable-next-line:no-console
                       console.warn(
                         '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.'
                       )

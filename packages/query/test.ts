@@ -480,12 +480,10 @@ describe('querystring', () => {
   })
 
   test('logs a warning if the constructor is used directly', () => {
-    // tslint:disable-next-line:no-console
     console.warn = jest.fn()
 
     const query = new Query({ foo: 'foo' })
 
-    // tslint:disable-next-line:no-console
     expect(console.warn).toHaveBeenLastCalledWith(
       '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
     )

@@ -5,7 +5,6 @@ import { ViewModelConstructorBuilder } from '@profiscience/knockout-contrib-mode
 import { flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
 declare module '@profiscience/knockout-contrib-router-middleware-flash-message' {
-  // tslint:disable-next-line no-shadowed-variable
   interface IFlashMessage {
     text: string
     type?: string

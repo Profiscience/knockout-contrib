@@ -64,7 +64,6 @@ export class Query {
     instances.add(this)
 
     if (isViaFactory !== VIA_FACTORY) {
-      // tslint:disable-next-line:no-console
       console.warn(
         '[@profiscience/knockout-contrib] Use the Query.create() factory function instead of `new`'
       )
@@ -331,7 +330,7 @@ export class Query {
   }
 
   private static createQueryParam<T extends MaybeArray<Primitive>>(
-    __default: T, // tslint:disable-line variable-name
+    __default: T,
     init: T,
     coerce: (x: any) => T
   ): IQueryParam<T> {
@@ -352,7 +351,6 @@ export class Query {
         }
         _p(v)
         Query.queueQueryStringWrite().catch((err) =>
-          // tslint:disable-next-line:no-console
           console.error(
             '[@profiscience/knockout-contrib-querystring] error queueing write',
             err

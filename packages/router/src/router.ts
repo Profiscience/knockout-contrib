@@ -154,7 +154,6 @@ export class Router {
 
     if (!route) {
       throw new Error(
-        // tslint:disable-next-line:max-line-length
         `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${toUrlFragments.path}", but no matching route was found`
       )
     }
@@ -326,7 +325,6 @@ export class Router {
     while (i-- > 0) {
       if (!router.ctx.$child) {
         throw new Error(
-          // tslint:disable-next-line:max-line-length
           `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i +
             i} routers active (indicies are zero-based)`
         )
@@ -465,7 +463,7 @@ export class Router {
   }
 
   private static which(e: MouseEvent): number {
-    e = e || (window.event as MouseEvent) // tslint:disable-line deprecation
-    return e.which === null ? e.button : e.which // tslint:disable-line strict-type-predicates deprecation
+    e = e || (window.event as MouseEvent)
+    return e.which === null ? e.button : e.which
   }
 }

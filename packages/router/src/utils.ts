@@ -32,7 +32,6 @@ export function traversePath(router: Router, path: string) {
       path = path.replace('./', '/')
       if (!router.ctx.$child) {
         throw new Error(
-          // tslint:disable-next-line:max-line-length
           `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${router.depth}) and ran out of children. Are you sure you want "./"?`
         )
       }
@@ -108,7 +107,6 @@ export function getRouterForBindingContext(
   }
 }
 
-// tslint:disable-next-line no-console
 const _consoleLogger: any = console
 const _logger = (t: string) => (...ms: (string | Error)[]) =>
   _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
