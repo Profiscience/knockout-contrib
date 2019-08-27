@@ -51,6 +51,22 @@
     "ts-node": "^8.2.0",
     "typescript": "3.7.5"
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn format --staged"
+    }
+  },
   "jest": {
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
@@ -82,21 +98,5 @@
     "arrowParens": "always",
     "semi": false,
     "singleQuote": true
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn format --staged"
-    }
   }
 }
