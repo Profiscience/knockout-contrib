@@ -140,7 +140,7 @@ export class Route {
         ? // this plugin does not act on this route config, in may be bare middleware or a component id
           accum
         : // this plugin provided configuration with the given object, use it
-          [...accum, ...flatten(castArray(pluginStack) as NativeRouteConfig[])]
+          [...accum, ...flatten(castArray(pluginStack))]
     }
     // iterate through each argument passed to the route constructor, pass each to every plugin
     const accumulateAllRouteArgs = (
@@ -166,7 +166,7 @@ export class Route {
       path = path.replace(/\/?!?$/, '/!')
     }
 
-    if (path[path.length - 1] === '!') {
+    if (path.endsWith('!')) {
       path = path.replace('!', ':__child_path__(.*)?')
     } else {
       path = path.replace(/\(?\*\)?/, '(.*)')

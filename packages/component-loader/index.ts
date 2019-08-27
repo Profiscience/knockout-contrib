@@ -38,7 +38,7 @@ export class ComponentLoader<T = ko.components.Config>
     const c: T =
       typeof loadComponent === 'function'
         ? await (loadComponent as () => MaybePromise<T>)()
-        : await (loadComponent as MaybePromise<T>)
+        : await (loadComponent)
     cb(this.options.transform ? await this.options.transform(c) : c)
   }
 

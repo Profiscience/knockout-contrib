@@ -371,7 +371,7 @@ export class Router {
     const isDoubleClick = Router.which(e) !== 1
     const isDownload = el.hasAttribute('download')
     const isEmptyHash = el.getAttribute('href') === '#'
-    const isMailto = (el.getAttribute('href') || '').indexOf('mailto:') === 0
+    const isMailto = (el.getAttribute('href') || '').startsWith('mailto:')
     const hasExternalRel = el.getAttribute('rel') === 'external'
     const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey
     const hasOtherTarget = el.hasAttribute('target')
@@ -413,7 +413,7 @@ export class Router {
   ): RouterUpdateOptions {
     let options: RouterUpdateOptions
     if (typeof args === 'boolean') {
-      options = { push: args as boolean }
+      options = { push: args }
     } else if (typeof args === 'undefined') {
       options = {}
     } else {
@@ -439,7 +439,7 @@ export class Router {
     return {
       hash: parser.hash,
       path:
-        parser.pathname.charAt(0) === '/'
+        parser.pathname.startsWith('/')
           ? parser.pathname
           : '/' + parser.pathname,
       search: parser.search
@@ -459,7 +459,7 @@ export class Router {
     if (port) {
       origin += ':' + port
     }
-    return href && href.indexOf(origin) === 0
+    return href && href.startsWith(origin)
   }
 
   private static which(e: MouseEvent): number {

@@ -13,7 +13,7 @@ const workers = createWorkers(Math.max(Math.min(os.cpus().length - 2, 8), 1))
 
 function parseArgv() {
   const hasFlag = (f: string) =>
-    process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
+    process.argv.includes(`--${f}`) || process.argv.includes(`-${f[0]}`)
   return {
     watch: hasFlag('watch'),
     transpileOnly: hasFlag('transpile-only')

@@ -237,7 +237,7 @@ describe('model.builders.data', () => {
   })
 
   test('#updateAll() updates all registered instances', async () => {
-    let value: string = 'foo'
+    let value = 'foo'
 
     class M1 extends DataModelConstructorBuilder<{}> {
       public value = ko.observable()

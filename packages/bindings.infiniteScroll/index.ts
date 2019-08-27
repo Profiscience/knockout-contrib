@@ -19,7 +19,7 @@ export const infiniteScrollBindingHandler: ko.BindingHandler<InfiniteScrollBindi
     const $el = $(el)
     const $window = $(window)
 
-    let prevScrolledDist: number = 0
+    let prevScrolledDist = 0
 
     const handleScroll = throttle((e) => {
       const windowScrollTop = $window.scrollTop()

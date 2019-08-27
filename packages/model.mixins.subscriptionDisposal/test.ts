@@ -12,13 +12,13 @@ describe('model.mixins.subscriptionDisposal', () => {
   describe('.subscribe()', () => {
     test('.subscribe(obs, fn) is equivalent to obs.subscribe(fn)', async () => {
       const instance = new (Subscribable(EmptyClass))()
-      const obs = ko.observable() as ko.Observable<string>
+      const obs = ko.observable()
 
       const p = new Promise((resolve) =>
         instance.subscribe(
           obs,
           // check type safety
-          (newval) => resolve(newval as string)
+          (newval) => resolve(newval)
         )
       )
 

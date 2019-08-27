@@ -9,12 +9,12 @@ export const noop = () => {
   /* void */
 }
 export const startsWith = (string: string, target: string) =>
-  string.indexOf(target) === 0
+  string.startsWith(target)
 export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] =>
   flatten(xs.map(fn))
 
 export function flatten<T>(xs: MaybeArray<T>[]): T[] {
-  return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], []) as T[]
+  return xs.reduce((arr: T[], x) => [...arr, ...castArray(x)], [])
 }
 
 export function castArray<T>(x: MaybeArray<T>): T[] {
@@ -22,13 +22,13 @@ export function castArray<T>(x: MaybeArray<T>): T[] {
 }
 
 export function traversePath(router: Router, path: string) {
-  if (path.indexOf('//') === 0) {
+  if (path.startsWith('//')) {
     path = path.replace('//', '/')
     while (!router.isRoot) {
       router = (router.ctx.$parent as Context & IContext).router
     }
   } else {
-    if (path.indexOf('./') === 0) {
+    if (path.startsWith('./')) {
       path = path.replace('./', '/')
       if (!router.ctx.$child) {
         throw new Error(
@@ -102,7 +102,7 @@ export function getRouterForBindingContext(
     } else if (!bindingCtx.$parentContext) {
       return Router.head
     } else {
-      bindingCtx = bindingCtx.$parentContext as ko.BindingContext
+      bindingCtx = bindingCtx.$parentContext
     }
   }
 }

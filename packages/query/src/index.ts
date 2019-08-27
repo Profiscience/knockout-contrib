@@ -111,7 +111,7 @@ export class Query {
 
   public set(config: IQueryConfig) {
     const defaults = Object.assign({}, Query.getDefaults(config))
-    const group = this._group as string
+    const group = this._group
     const fromQS = Query.fromQS(group)
     const localStorageKey = Query.getLocalStorageKey(group)
     const fromLocalStorage = Query.fromLocalStorage(localStorageKey)
@@ -154,7 +154,7 @@ export class Query {
   }
 
   public toJS() {
-    return omit(ko.toJS(Query._raw[this._group as string]), isUndefined)
+    return omit(ko.toJS(Query._raw[this._group]), isUndefined)
   }
 
   public toString() {
@@ -166,14 +166,14 @@ export class Query {
   }
 
   public clear() {
-    Object.keys(Query._raw[this._group as string]).forEach((k) =>
-      Query._raw[this._group as string][k].clear()
+    Object.keys(Query._raw[this._group]).forEach((k) =>
+      Query._raw[this._group][k].clear()
     )
   }
 
   public dispose() {
     instances.delete(this)
-    const group = this._group as string
+    const group = this._group
     this._subs.map((s) => s.dispose())
     if (--Query._refs[group] === 0) {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
@@ -286,7 +286,7 @@ export class Query {
     const qs = Query.stringify(_query)
 
     const currentUrl = location.pathname + location.search + location.hash
-    const hashbang = currentUrl.indexOf('#!') > -1
+    const hashbang = currentUrl.includes('#!')
     let newUrl
 
     if (hashbang) {
