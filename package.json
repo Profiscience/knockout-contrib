@@ -6,7 +6,7 @@
     "format": "pretty-quick",
     "release": "lerna version --conventional-commits --no-commit-hooks",
     "link:all": "lerna exec -- \"yarn link && cd $REPO && yarn link \\$LERNA_PACKAGE_NAME\"",
-    "lint": "esw --color --ignore-path .gitignore --ext .js,.ts,.tsx ./",
+    "lint": "esw --color --ignore-path .gitignore --ext .js,.ts,.tsx --format codeframe ./",
     "test": "jest",
     "test:router": "lerna run --scope @profiscience/knockout-contrib-router test"
   },
