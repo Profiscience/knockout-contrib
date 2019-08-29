@@ -34,7 +34,7 @@
     "chokidar": "^3.0.1",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.2.2",
-    "eslint-config-profiscience": "^4.0.10",
+    "eslint-config-profiscience": "^4.0.12",
     "eslint-watch": "^6.0.0",
     "fs-extra": "^8.0.1",
     "globby": "^11.0.0",
@@ -71,14 +71,6 @@
     ],
     "parserOptions": {
       "project": "./tsconfig.json"
-    },
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": [
-        "warn",
-        {
-          "allowExpressions": true
-        }
-      ]
     }
   },
   "husky": {
