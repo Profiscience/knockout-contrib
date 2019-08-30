@@ -8,6 +8,7 @@ import {
 type MaybePromise<T> = T | Promise<T>
 
 declare module '@profiscience/knockout-contrib-router' {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     /**
      * Document title for view, can be async or sync accessor function

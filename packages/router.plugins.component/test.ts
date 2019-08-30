@@ -23,6 +23,7 @@ afterEach(() => {
 describe('router.plugins.component', () => {
   describe('warnings', () => {
     test('non-class viewModel', async () => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       console.warn = jest.fn()
 
       const template = 'Hello, World!'
@@ -36,10 +37,12 @@ describe('router.plugins.component', () => {
 
       await resolveQueue(ctx)
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(console.warn).toBeCalled()
     })
 
     test('named components', async () => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       console.warn = jest.fn()
 
       const component = 'hello-world'
@@ -52,10 +55,12 @@ describe('router.plugins.component', () => {
 
       await resolveQueue(ctx)
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(console.warn).toBeCalled()
     })
 
     test('can disable warning', async () => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       console.warn = jest.fn()
 
       disableUninstantiableViewModelWarning()
@@ -71,6 +76,7 @@ describe('router.plugins.component', () => {
 
       if (lifecycle.beforeRender) lifecycle.beforeRender()
 
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(console.warn).not.toBeCalled()
     })
   })
@@ -439,14 +445,16 @@ describe('router.plugins.component', () => {
     test('sync accessor', async () => {
       const name = 'my-component-2'
       const route = new Route('/', {
-        component: (_ctx) => {
-          expect(_ctx).toEqual(ctx)
-          return name
-        }
+        component: componentAccessor
       })
       const ctx = createMockContext(route)
       const [middleware] = route.middleware
       const lifecycle = middleware(ctx) as Lifecycle
+
+      function componentAccessor(_ctx: Context & IContext) {
+        expect(_ctx).toEqual(ctx)
+        return name
+      }
 
       if (lifecycle.beforeRender) lifecycle.beforeRender()
       await resolveQueue(ctx)
@@ -457,14 +465,16 @@ describe('router.plugins.component', () => {
     test('async accessor', async () => {
       const name = 'my-component-3'
       const route = new Route('/', {
-        component: (_ctx) => {
-          expect(_ctx).toEqual(ctx)
-          return Promise.resolve(name)
-        }
+        component: componentAccessor
       })
       const ctx = createMockContext(route)
       const [middleware] = route.middleware
       const lifecycle = middleware(ctx) as Lifecycle
+
+      function componentAccessor(_ctx: Context & IContext): Promise<string> {
+        expect(_ctx).toEqual(ctx)
+        return Promise.resolve(name)
+      }
 
       if (lifecycle.beforeRender) lifecycle.beforeRender()
       await resolveQueue(ctx)
@@ -503,6 +513,6 @@ function createMockContext(route: Route) {
 }
 
 function resolveQueue(ctx: Context) {
-  const queue = ctx.queue as jest.Mock
+  const queue = (ctx as any).queue as jest.Mock
   return Promise.all(queue.mock.calls.map(([p]) => p))
 }

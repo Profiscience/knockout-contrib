@@ -6,7 +6,8 @@ Route.usePlugin(redirectRoutePlugin)
 
 describe('router.plugins.redirect', () => {
   test('calls ctx.redirect if function returns string', async () => {
-    const ctx = { redirect: jest.fn() as any } as Context & IContext
+    const redirect = jest.fn()
+    const ctx = ({ redirect } as unknown) as Context & IContext
     const route = new Route('/', {
       redirect() {
         return '//'
@@ -14,11 +15,12 @@ describe('router.plugins.redirect', () => {
     })
     const [middleware] = route.middleware
     await middleware(ctx)
-    expect(ctx.redirect).lastCalledWith('//')
+    expect(redirect).lastCalledWith('//')
   })
 
   test('does not call ctx.redirect if void', async () => {
-    const ctx = { redirect: jest.fn() as any } as Context & IContext
+    const redirect = jest.fn()
+    const ctx = ({ redirect } as unknown) as Context & IContext
     const route = new Route('/', {
       redirect() {
         return
@@ -26,11 +28,12 @@ describe('router.plugins.redirect', () => {
     })
     const [middleware] = route.middleware
     await middleware(ctx)
-    expect(ctx.redirect).not.toBeCalled()
+    expect(redirect).not.toBeCalled()
   })
 
   test('calls ctx.redirect if function return Promise<string>', async () => {
-    const ctx = { redirect: jest.fn() as any } as Context & IContext
+    const redirect = jest.fn()
+    const ctx = ({ redirect } as unknown) as Context & IContext
     const route = new Route('/', {
       redirect() {
         return Promise.resolve('//')
@@ -38,11 +41,12 @@ describe('router.plugins.redirect', () => {
     })
     const [middleware] = route.middleware
     await middleware(ctx)
-    expect(ctx.redirect).lastCalledWith('//')
+    expect(redirect).lastCalledWith('//')
   })
 
   test('does not call ctx.redirect if function return Promise<void>', async () => {
-    const ctx = { redirect: jest.fn() as any } as Context & IContext
+    const redirect = jest.fn()
+    const ctx = ({ redirect } as unknown) as Context & IContext
     const route = new Route('/', {
       redirect() {
         return Promise.resolve()
@@ -50,7 +54,7 @@ describe('router.plugins.redirect', () => {
     })
     const [middleware] = route.middleware
     await middleware(ctx)
-    expect(ctx.redirect).not.toBeCalled()
+    expect(redirect).not.toBeCalled()
   })
 
   test('calls fn with ctx', (done) => {
@@ -65,7 +69,7 @@ describe('router.plugins.redirect', () => {
     middleware(ctx)
   })
 
-  test("doesn't blow up if not used", async () => {
+  test("doesn't blow up if not used", () => {
     const route = new Route('/', {})
     expect(route.middleware.length).toBe(0)
   })

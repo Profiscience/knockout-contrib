@@ -25,14 +25,15 @@ suite
     fromJS({ ...obj }, true)
   })
   .add(padEnd('mapping.fromJS', 40), () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(ko as any).mapping.fromJS({ ...obj })
   })
-  .on('cycle', (e: any) => {
+  .on('cycle', (e: { target: { error?: string } }) => {
     if (e.target.error) {
       console.error(e.target.error)
       process.exit(1)
       return
     }
-    console.log(e.target.toString())
+    console.info(e.target.toString())
   })
   .run()

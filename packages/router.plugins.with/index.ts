@@ -1,12 +1,14 @@
 import {
   Context,
   IContext,
-  IRouteConfig
+  IRouteConfig,
+  Middleware
 } from '@profiscience/knockout-contrib-router'
 
 type MaybePromise<T> = T | Promise<T>
 
 declare module '@profiscience/knockout-contrib-router' {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     /**
      * Additional data to extend context with.
@@ -24,7 +26,9 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function withRoutePlugin({ with: _with }: IRouteConfig) {
+export function withRoutePlugin({
+  with: _with
+}: IRouteConfig): void | Middleware {
   if (!_with) return
 
   return async (ctx: Context & IContext) => {

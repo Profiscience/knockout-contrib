@@ -6,7 +6,7 @@ import { DataModelConstructorBuilder, nonenumerable } from './index'
 
 describe('model.builders.data', () => {
   test('requires .fetch() implementation if no initial data', async () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {}
+    class FooModel extends DataModelConstructorBuilder {}
 
     const foo: any = new FooModel({})
 
@@ -16,7 +16,7 @@ describe('model.builders.data', () => {
   })
 
   test('uses initial data with constructor if provided', async () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public readonly value!: ko.Observable<string>
     }
     const foo = new FooModel({}, { value: 'value' })
@@ -29,9 +29,7 @@ describe('model.builders.data', () => {
   })
 
   test('uses .fetch() to initialize data and merges w/ strict', async () => {
-    interface IFooParams {}
-
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+    class FooModel extends DataModelConstructorBuilder {
       public readonly foo = ko.observable()
       public readonly bar!: string
 
@@ -52,9 +50,7 @@ describe('model.builders.data', () => {
   })
 
   test('runs .init() before .fetch()', async () => {
-    interface IFooParams {}
-
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+    class FooModel extends DataModelConstructorBuilder {
       public foo!: string
 
       protected async init() {
@@ -74,49 +70,45 @@ describe('model.builders.data', () => {
   })
 
   test('throws and logs error on .fetch() rejection', async () => {
-    interface IFooParams {}
-
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+    class FooModel extends DataModelConstructorBuilder {
       public readonly value!: ko.Observable<string>
 
-      protected async fetch() {
-        throw new Error()
+      protected fetch() {
+        return Promise.reject()
       }
     }
 
-    await expect(FooModel.create({})).rejects.toBeTruthy()
+    await expect(FooModel.create()).rejects.toBeTruthy()
   })
 
   test('uses SubscriptionDisposalMixin', () => {
-    interface IFooParams {}
-
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {
+    class FooModel extends DataModelConstructorBuilder {
       public readonly value!: ko.Observable<string>
 
-      protected async fetch() {
-        return { value: 'value' }
+      protected fetch() {
+        return Promise.resolve({ value: 'value' })
       }
     }
 
-    const foo = new FooModel({})
+    const foo = new FooModel()
 
-    expect(foo.subscribe).toBeDefined()
-    expect(foo.dispose).toBeDefined()
+    expect(foo.subscribe.bind(jest.fn)).toBeDefined()
+    expect(foo.dispose.bind(jest.fn)).toBeDefined()
 
     foo.dispose()
   })
 
   test('.dispose() calls .dispose() on every property that has it', () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public foo = { dispose: jest.fn() }
       public bar = { dispose: jest.fn() }
       public baz = {}
       constructor() {
-        super({})
+        super()
         nonenumerable(this, 'bar')
       }
-      protected async fetch() {
-        return {}
+      protected fetch() {
+        return Promise.resolve({})
       }
     }
 
@@ -129,14 +121,14 @@ describe('model.builders.data', () => {
 
   test('.dispose() calls super.dispose()', () => {
     const mock = jest.fn()
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public foo = ko.observable('foo')
       constructor() {
-        super({})
+        super()
         this.subscribe(this.foo, mock)
       }
-      protected async fetch() {
-        return {}
+      protected fetch() {
+        return Promise.resolve({})
       }
     }
 
@@ -148,19 +140,19 @@ describe('model.builders.data', () => {
   })
 
   test('updates model when params are changed', async () => {
-    interface IFooParams {
+    interface FooParams {
       valueIn: ko.Observable<string>
     }
 
-    class FooModel extends DataModelConstructorBuilder<IFooParams> {
-      public readonly value = ko.observable()
+    class FooModel extends DataModelConstructorBuilder<FooParams> {
+      public readonly value = ko.observable<string>()
 
-      protected async fetch() {
-        return { value: this.params.valueIn() }
+      protected fetch() {
+        return Promise.resolve({ value: this.params.valueIn() })
       }
     }
 
-    const params: IFooParams = { valueIn: ko.observable('foo') }
+    const params: FooParams = { valueIn: ko.observable('foo') }
     const foo = await FooModel.create(params)
 
     expect(foo.value()).toBe('foo')
@@ -181,11 +173,11 @@ describe('model.builders.data', () => {
   })
 
   test('.toJS() returns unwrapped data', async () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public value!: ko.Observable<string>
 
-      protected async fetch() {
-        return { value: 'foo' }
+      protected fetch() {
+        return Promise.resolve({ value: 'foo' })
       }
     }
 
@@ -199,11 +191,11 @@ describe('model.builders.data', () => {
   })
 
   test('.save() calls #updateAll()', async () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public value!: ko.Observable<string>
 
-      protected async fetch() {
-        return { value: 'foo' }
+      protected fetch() {
+        return Promise.resolve({ value: 'foo' })
       }
     }
 
@@ -218,15 +210,15 @@ describe('model.builders.data', () => {
   })
 
   test('.delete() disposes the instance, then updates', async () => {
-    class FooModel extends DataModelConstructorBuilder<{}> {
+    class FooModel extends DataModelConstructorBuilder {
       public value!: ko.Observable<string>
 
-      protected async fetch() {
-        return { value: 'foo' }
+      protected fetch() {
+        return Promise.resolve({ value: 'foo' })
       }
     }
 
-    const foo = await FooModel.create({})
+    const foo = await FooModel.create()
     const dispose = jest.spyOn(foo, 'dispose')
     const updateAll = jest.spyOn(DataModelConstructorBuilder, 'updateAll')
 
@@ -239,16 +231,16 @@ describe('model.builders.data', () => {
   test('#updateAll() updates all registered instances', async () => {
     let value = 'foo'
 
-    class M1 extends DataModelConstructorBuilder<{}> {
+    class M1 extends DataModelConstructorBuilder {
       public value = ko.observable()
-      protected async fetch() {
-        return { value }
+      protected fetch() {
+        return Promise.resolve({ value })
       }
     }
-    class M2 extends DataModelConstructorBuilder<{}> {
+    class M2 extends DataModelConstructorBuilder {
       public value = ko.observable()
-      protected async fetch() {
-        return { value }
+      protected fetch() {
+        return Promise.resolve({ value })
       }
     }
 

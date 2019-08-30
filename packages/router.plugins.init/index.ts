@@ -23,13 +23,13 @@ export function componentInitializerRoutePlugin(
         if (!viewModel) return
 
         const initializers = Object.keys(viewModel)
-          .filter((prop: any) => {
+          .filter((prop) => {
             const v = viewModel[prop]
             return typeof v === 'undefined' || v === null
               ? false
               : v[INITIALIZED]
           })
-          .map((prop: any) => viewModel[prop][INITIALIZED])
+          .map((prop) => viewModel[prop][INITIALIZED])
 
         if (viewModel[INITIALIZED]) initializers.push(viewModel[INITIALIZED])
 

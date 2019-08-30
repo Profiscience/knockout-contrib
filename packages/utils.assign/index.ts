@@ -7,16 +7,16 @@ export type MergeOptions = {
 }
 
 export function assign<
-  TSrc extends Record<string, any>,
-  TDest extends Record<string, any>
+  TSrc extends Record<string, unknown>,
+  TDest extends Record<string, unknown>
 >(
   dest: TDest,
   src: TSrc,
   opts: MergeOptions = { mapArrayElements: false, strict: false }
-): Record<keyof TDest | keyof TSrc, any> {
+): Record<keyof TDest | keyof TSrc, unknown> {
   const props = Object.keys(src) as (keyof TSrc)[]
 
-  const ret = dest as Record<keyof TDest | keyof TSrc, any>
+  const ret = dest as Record<keyof TDest | keyof TSrc, unknown>
 
   for (const prop of props) {
     if (isUndefined(ret[prop])) {
@@ -25,7 +25,7 @@ export function assign<
       } else {
         ret[prop] = fromJS(
           src[prop],
-          (src[prop] as any) instanceof Array && opts.mapArrayElements
+          src[prop] instanceof Array && opts.mapArrayElements
         )
       }
     } else if (ko.isObservable(ret[prop])) {
@@ -33,8 +33,8 @@ export function assign<
       if (!ko.isWriteableObservable(ret[prop])) {
         continue
       }
-      ret[prop](
-        (src[prop] as any) instanceof Array && opts.mapArrayElements
+      ;(ret[prop] as ko.Observable<unknown>)(
+        src[prop] instanceof Array && opts.mapArrayElements
           ? ko.unwrap(fromJS(src[prop], true))
           : src[prop]
       )
@@ -51,6 +51,6 @@ export function assign<
   return ret
 }
 
-function isUndefined(foo: any): boolean {
+function isUndefined(foo: unknown): boolean {
   return typeof foo === 'undefined'
 }

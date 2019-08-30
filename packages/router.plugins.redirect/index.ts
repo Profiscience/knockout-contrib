@@ -6,6 +6,7 @@ import {
 } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     redirect?: (
       ctx: Context & IContext

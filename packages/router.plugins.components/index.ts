@@ -7,6 +7,7 @@ import {
 } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     components?: LazyComponentsAccessor
   }
@@ -14,6 +15,7 @@ declare module '@profiscience/knockout-contrib-router' {
 
 export type LazyComponentsAccessor = () => ILazyComponents
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface ILazyComponents {
   [k: string]: Promise<{
     template: string
@@ -21,6 +23,7 @@ export interface ILazyComponents {
   }>
 }
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 interface IComponentMap {
   [k: string]: {
     template: string
@@ -54,7 +57,9 @@ export function componentsRoutePlugin({
   }
 }
 
-async function fetchComponents(componentsAccessor: LazyComponentsAccessor) {
+async function fetchComponents(
+  componentsAccessor: LazyComponentsAccessor
+): Promise<IComponentMap> {
   const lazyComponents = componentsAccessor()
   const components: IComponentMap = {}
   await Promise.all(

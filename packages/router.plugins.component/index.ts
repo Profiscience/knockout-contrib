@@ -1,3 +1,4 @@
+import { IAnonymousComponent } from './index'
 import * as ko from 'knockout'
 import {
   Context,
@@ -8,15 +9,19 @@ import {
 
 let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
 
+type Accessor<A, T> = (arg: A) => T
+type DefaultExport<T> = { default: T; __esModule: true }
 type MaybePromise<T> = T | Promise<T>
-type MaybeDefaultExport<T> = T | { default: T }
-type MaybeAccessor<A, T> = T | ((arg: A) => T)
+type MaybeDefaultExport<T> = T | DefaultExport<T>
+type MaybeAccessor<A, T> = T | Accessor<A, T>
 
 declare module '@profiscience/knockout-contrib-router' {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IContext {
     component?: MaybePromise<IRoutedComponentInstance>
   }
 
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     /**
      * Component accessor, intended for use with dynamic imports for lazy-loading.
@@ -34,6 +39,7 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IRoutedComponentInstance {
   /**
    * Name component is registered with Knockout as
@@ -57,12 +63,12 @@ export interface IRoutedComponentInstance {
  *  }
  * ```
  */
-export type IRouteComponentConfig =
-  | MaybeAccessor<Context & IContext, MaybePromise<INamedComponent>>
-  | MaybeAccessor<
-      Context & IContext,
-      MaybePromise<MaybeDefaultExport<MaybeLazy<IAnonymousComponent>>>
-    >
+export type IRouteComponentConfig = MaybeAccessor<
+  Context & IContext,
+  MaybePromise<
+    MaybeDefaultExport<INamedComponent | MaybeLazy<IAnonymousComponent>>
+  >
+>
 
 export type MaybeLazy<T extends {}> = MaybePromise<
   { [P in keyof T]: MaybePromise<MaybeDefaultExport<T[P]>> }
@@ -90,7 +96,12 @@ const uniqueComponentNames = (function*() {
   while (true) yield `__router_view_${i++}__`
 })()
 
-// @TODO (try to) make this type-safe, i.e. know it's void if routeConfig.component is void, and middleware if not
+export function componentRoutePlugin(routeConfig: {
+  component?: undefined
+}): void
+export function componentRoutePlugin(routeConfig: {
+  component: IRouteComponentConfig
+}): LifecycleMiddleware
 export function componentRoutePlugin({
   component: componentAccessor
 }: IRouteConfig): void | LifecycleMiddleware {
@@ -105,7 +116,7 @@ export function componentRoutePlugin({
         const resolveComponent = (
           name: string,
           instance?: IRoutedComponentInstance
-        ) => {
+        ): void => {
           const c = {
             name,
             ...(instance || {})
@@ -118,53 +129,51 @@ export function componentRoutePlugin({
         ctx.component = new Promise((r) => (_resolve = r))
 
         ctx.queue(
-          normalizeConfig(ctx, componentAccessor).then(
-            async (normalizedConfig) => {
-              // named component
-              if (typeof normalizedConfig === 'string') {
-                isNamedComponent = true
-                resolveComponent(normalizedConfig)
-                if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
-                  console.warn(
-                    '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.'
-                  )
-                }
-              } else {
-                // anonymous component
-                const componentName =
-                  normalizedConfig.name || uniqueComponentNames.next().value
+          normalizeConfig(ctx, componentAccessor).then((normalizedConfig) => {
+            // named component
+            if (typeof normalizedConfig === 'string') {
+              isNamedComponent = true
+              resolveComponent(normalizedConfig)
+              if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
+                console.warn(
+                  '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel when using named components. This may cause unexpected behavior. View "Subtleties/Caveats" in the documentation.'
+                )
+              }
+            } else {
+              // anonymous component
+              const componentName =
+                normalizedConfig.name || uniqueComponentNames.next().value
 
-                const routedComponentInstance: IRoutedComponentInstance = {
-                  name: componentName
-                }
-                const templateConfig = normalizedConfig.template
-                let viewModelConfig: any
+              const routedComponentInstance: IRoutedComponentInstance = {
+                name: componentName
+              }
+              const templateConfig = normalizedConfig.template
+              let viewModelConfig: any
 
-                if (normalizedConfig.viewModel) {
-                  try {
-                    viewModelInstance = new normalizedConfig.viewModel(ctx)
-                    viewModelConfig = { instance: viewModelInstance }
-                    routedComponentInstance.viewModel = viewModelInstance
-                  } catch (e) {
-                    viewModelConfig = normalizedConfig.viewModel
-                    if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
-                      console.warn(
-                        '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.'
-                      )
-                    }
+              if (normalizedConfig.viewModel) {
+                try {
+                  viewModelInstance = new normalizedConfig.viewModel(ctx)
+                  viewModelConfig = { instance: viewModelInstance }
+                  routedComponentInstance.viewModel = viewModelInstance
+                } catch (e) {
+                  viewModelConfig = normalizedConfig.viewModel
+                  if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
+                    console.warn(
+                      '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.'
+                    )
                   }
                 }
-
-                resolveComponent(componentName, routedComponentInstance)
-
-                ko.components.register(componentName, {
-                  synchronous: true,
-                  template: templateConfig,
-                  viewModel: viewModelConfig
-                })
               }
+
+              resolveComponent(componentName, routedComponentInstance)
+
+              ko.components.register(componentName, {
+                synchronous: true,
+                template: templateConfig,
+                viewModel: viewModelConfig
+              })
             }
-          )
+          })
         )
       },
       afterRender() {
@@ -187,35 +196,52 @@ export function componentRoutePlugin({
   }
 }
 
-export function disableUninstantiableViewModelWarning() {
+export function disableUninstantiableViewModelWarning(): void {
   UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = false
 }
 
 async function normalizeConfig(
   ctx: Context & IContext,
-  obj: IRouteComponentConfig
+  maybeAccessor: IRouteComponentConfig
 ): Promise<INamedComponent | IAnonymousComponent> {
-  // resolve accessors
-  if (typeof obj === 'function') obj = obj(ctx)
+  // one day...
+  // const obj = resolveAccessor(maybeAccessor, ctx) |> resolvePromise |> resolveDefaultExport
 
-  // resolve top-level promises
-  obj = await obj
-
-  // top-level default exports
-  if (typeof (obj as any).default !== 'undefined') obj = (obj as any).default
+  const obj = await resolveDefaultExport(
+    await resolvePromise(resolveAccessor(maybeAccessor, ctx))
+  )
 
   // named components
   if (typeof obj === 'string') return obj
 
   // anonymous components, may have promised values
-  const ret = {} as any
+  const ret = {} as IAnonymousComponent
   await Promise.all(
-    Object.keys(obj).map(async (k) => {
-      const v = await (obj as any)[k]
-      // property default exports
-      ret[k] = typeof v.default !== 'undefined' ? v.default : v
+    Object.keys(obj).map(async (k: unknown) => {
+      // this is fucking stupid -__-
+      ret[k as keyof typeof obj] = resolveDefaultExport(
+        await resolvePromise(obj[k as keyof typeof obj] as MaybePromise<
+          string & IRoutedViewModelConstructor
+        >)
+      )
     })
   )
 
   return ret
+}
+
+function resolveAccessor<T, A>(maybeAccessor: MaybeAccessor<A, T>, arg: A): T {
+  return typeof maybeAccessor === 'function'
+    ? (maybeAccessor as Accessor<A, T>)(arg)
+    : maybeAccessor
+}
+
+async function resolvePromise<T>(maybePromise: MaybePromise<T>): Promise<T> {
+  return maybePromise
+}
+
+function resolveDefaultExport<T>(maybeDefaultExport: MaybeDefaultExport<T>): T {
+  return Object.hasOwnProperty.call(maybeDefaultExport, '__esModule')
+    ? (maybeDefaultExport as DefaultExport<T>).default
+    : (maybeDefaultExport as T)
 }
