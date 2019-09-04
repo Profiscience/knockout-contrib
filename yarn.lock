@@ -6297,11 +6297,9 @@ jsprim@^1.2.2:
     verror "1.10.0"
 
 jsx-dom@^6.3.1:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.3.1.tgz#ebc1682a2e13d44ac3f48fc9f410762ff8598f94"
-  integrity sha512-dbHDtI43ezlHxIm+dw0DYP/HRSYdkhHP1z7p019UB6butVe+7v3mByvIHpj4CcJZWmO6L0jkB85NNd4+Ty1dvA==
-  dependencies:
-    tslib "^1.9.3"
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.4.0.tgz#5d0385cd7b1abe85ea38767d2c488e207b03d9cd"
+  integrity sha512-ypNJOdBan6fNxwL2bdGt9uXDv2YfTpwBeGBInsQPMKolPZb2k4RMDGl1CqVjL+4z0vjL9RRs4IAaqukPZZrl0Q==
 
 karma-firefox-launcher@^1.0.1:
   version "1.2.0"
@@ -9702,7 +9700,7 @@ ts-node@^8.2.0:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
-tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
