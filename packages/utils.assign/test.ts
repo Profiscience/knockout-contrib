@@ -131,6 +131,16 @@ describe('utils.merge', () => {
     expect(dest.deep.bar).not.toBeObservable()
   })
 
+  test('creates object on destination if null', () => {
+    const dest: any = {
+      foo: null
+    }
+    const src = {
+      foo: { bar: 'bar' }
+    }
+    expect(() => assign(dest, src)).not.toThrow()
+  })
+
   test('does not blow up with non-writable computeds', () => {
     const dest: any = {
       foo: ko.pureComputed(() => 'foo'),

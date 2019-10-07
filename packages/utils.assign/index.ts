@@ -39,6 +39,9 @@ export function assign<
           : src[prop]
       )
     } else if (src[prop] && src[prop].constructor === Object) {
+      if (ret[prop] === null) {
+        ret[prop] = {}
+      }
       assign(ret[prop], src[prop], opts)
     } else {
       ret[prop] = src[prop]
