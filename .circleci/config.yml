@@ -74,7 +74,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
       - run: npx lerna publish from-package --no-git-reset --yes
 
 workflows:
