@@ -55,7 +55,7 @@ jobs:
             JEST_JUNIT_OUTPUT_NAME: results.xml
           command: yarn test --maxWorkers 4 --reporters default --reporters jest-junit
       - store_test_results:
-          path: .test_output/jest/results.xml
+          path: .test_output
 
 workflows:
   version: 2
