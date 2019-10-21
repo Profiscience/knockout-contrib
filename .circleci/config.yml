@@ -44,7 +44,7 @@ jobs:
           at: ~/repo
       - run: yarn lint
 
-  test_unit:
+  jest:
     executor: node
     steps:
       - attach_workspace:
@@ -68,6 +68,6 @@ workflows:
       - lint:
           requires:
             - dependencies
-      - test_unit:
+      - jest:
           requires:
             - build
