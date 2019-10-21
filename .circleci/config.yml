@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:lts
+      - image: circleci/node:lts-browsers
     working_directory: ~/repo
 
 jobs:
@@ -54,9 +54,15 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: .test_output/jest
             JEST_JUNIT_OUTPUT_NAME: results.xml
           command: yarn test --maxWorkers 4 --reporters default --reporters jest-junit
-      - run: ls .test_output/jest
       - store_test_results:
           path: .test_output
+
+  karma:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn test:router
 
 workflows:
   version: 2
@@ -70,5 +76,8 @@ workflows:
           requires:
             - dependencies
       - jest:
+          requires:
+            - build
+      - karma:
           requires:
             - build
