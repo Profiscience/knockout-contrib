@@ -1,0 +1,67 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+
+jobs:
+  dependencies:
+    executor: node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node_modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - node_modules-{{ .Branch }}-
+            - node_modules-
+      - run: yarn install --pure-lockfile
+      - save_cache:
+          paths:
+            - node_modules
+          key: node_modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./
+
+  build:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./
+
+  lint:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn lint
+
+  test:jest:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn test
+
+workflows:
+  version: 2
+  build_lint_test_publish:
+    jobs:
+      - dependencies
+      - build:
+          requires:
+            - dependencies
+      - lint:
+          requires:
+            - dependencies
+      - test:jest:
+          requires:
+            - build
