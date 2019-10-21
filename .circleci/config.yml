@@ -71,6 +71,14 @@ jobs:
       - codecov/upload:
           file: packages/router/coverage/lcov.info
 
+  deploy:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo
+      - run: npx lerna publish from-package --no-git-reset --yes
+
 workflows:
   version: 2
   build_lint_test_publish:
@@ -88,3 +96,11 @@ workflows:
       - karma:
           requires:
             - build
+      - deploy:
+          requires:
+            - build
+            - jest
+            - karma
+          filters:
+            branches:
+              only: master
