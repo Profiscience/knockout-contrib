@@ -52,13 +52,13 @@ jobs:
           at: ~/repo
       - run:
           environment:
-            JEST_JUNIT_OUTPUT_DIR: .test_output/jest
-            JEST_JUNIT_OUTPUT_NAME: results.xml
-          command: yarn test --maxWorkers 4 --reporters default --reporters jest-junit
+            JEST_JUNIT_OUTPUT_DIR: test_output
+            JEST_JUNIT_OUTPUT_NAME: jest.xml
+          command: yarn test --ci --runInBand --reporters=default --reporters=jest-junit
       - codecov/upload:
           file: coverage/lcov.info
       - store_test_results:
-          path: .test_output
+          path: test_output
 
   karma:
     executor: node
