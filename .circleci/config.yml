@@ -16,7 +16,7 @@ jobs:
             - node_modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - node_modules-{{ .Branch }}-
             - node_modules-
-      - run: yarn install --pure-lockfile
+      - run: yarn install --frozen-lockfile
       - save_cache:
           paths:
             - node_modules
