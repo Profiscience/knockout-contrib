@@ -4,27 +4,19 @@
 
 const path = require('path')
 
-const { DRONE, DEBUG } = process.env
-
-const karmaPlugins = [
-  require('karma-firefox-launcher'),
-  require('karma-tap-pretty-reporter'),
-  require('karma-tap'),
-  require('karma-webpack')
-]
-
-const karmaReporters = ['tap-pretty']
-
-if (DRONE) {
-  karmaPlugins.push(require('karma-remap-istanbul'))
-  karmaReporters.push('karma-remap-istanbul')
-}
+const { DEBUG } = process.env
 
 module.exports = (config) => {
   config.set({
     basePath: __dirname,
 
-    plugins: karmaPlugins,
+    plugins: [
+      require('karma-firefox-launcher'),
+      require('karma-tap-pretty-reporter'),
+      require('karma-tap'),
+      require('karma-webpack'),
+      require('karma-remap-istanbul')
+    ],
 
     frameworks: ['tap'],
 
@@ -51,7 +43,7 @@ module.exports = (config) => {
     singleRun: !DEBUG,
     autoWatch: DEBUG,
 
-    reporters: karmaReporters,
+    reporters: ['tap-pretty', 'karma-remap-istanbul'],
 
     tapReporter: {
       // prettify: require('tap-diff')
