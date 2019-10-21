@@ -6,6 +6,9 @@ executors:
       - image: circleci/node:lts-browsers
     working_directory: ~/repo
 
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 jobs:
   dependencies:
     executor: node
@@ -54,6 +57,8 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: .test_output/jest
             JEST_JUNIT_OUTPUT_NAME: results.xml
           command: yarn test --maxWorkers 4 --reporters default --reporters jest-junit
+      - codecov/upload:
+          file: coverage/lcov.info
       - store_test_results:
           path: .test_output
 
@@ -63,6 +68,8 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: yarn test:router
+      - codecov/upload:
+          file: packages/router/coverage/lcov.info
 
 workflows:
   version: 2

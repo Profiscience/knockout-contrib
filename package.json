@@ -63,8 +63,7 @@
       "/router/__tests__/"
     ],
     "coverageReporters": [
-      "lcov",
-      "html"
+      "lcov"
     ],
     "moduleFileExtensions": [
       "js",
