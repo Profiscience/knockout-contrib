@@ -27,47 +27,27 @@ jobs:
           paths:
             - ./
 
-  build:
+  default:
     executor: node
     steps:
       - attach_workspace:
           at: ~/repo
       - run: yarn build
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - ./
-
-  lint:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: ~/repo
       - run: yarn lint
-
-  jest:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: ~/repo
       - run:
           environment:
             JEST_JUNIT_OUTPUT_DIR: test_output
             JEST_JUNIT_OUTPUT_NAME: jest.xml
           command: yarn test --ci --runInBand --reporters=default --reporters=jest-junit
-      - codecov/upload:
-          file: coverage/lcov.info
-      - store_test_results:
-          path: test_output
-
-  karma:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: ~/repo
       - run: yarn test:router
       - codecov/upload:
+          file: coverage/lcov.info
+      - codecov/upload:
           file: packages/router/coverage/lcov.info
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./
 
   deploy:
     executor: node
@@ -79,26 +59,15 @@ jobs:
 
 workflows:
   version: 2
-  build_lint_test_publish:
+  default:
     jobs:
       - dependencies
-      - build:
+      - default:
           requires:
             - dependencies
-      - lint:
-          requires:
-            - dependencies
-      - jest:
-          requires:
-            - build
-      - karma:
-          requires:
-            - build
       - deploy:
           requires:
-            - build
-            - jest
-            - karma
+            - default
           filters:
             branches:
               only: master
