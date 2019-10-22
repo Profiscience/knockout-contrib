@@ -39,6 +39,7 @@ export function assign<
           : src[prop]
       )
     } else if (src[prop] && src[prop].constructor === Object) {
+      // tslint:disable-next-line
       if (ret[prop] === null) {
         ret[prop] = {}
       }
