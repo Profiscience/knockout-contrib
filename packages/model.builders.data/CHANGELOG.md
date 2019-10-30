@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.2.0...@profiscience/knockout-contrib-model-builders-data@2.2.1) (2019-10-30)
+
+
+### Bug Fixes
+
+* **model.builders.data:** improve typing on #create ([3013350](https://github.com/Profiscience/knockout-contrib/commit/3013350))
+
+
+
+
+
 # [2.2.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.5...@profiscience/knockout-contrib-model-builders-data@2.2.0) (2019-10-30)
 
 
