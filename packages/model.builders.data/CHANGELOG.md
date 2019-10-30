@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.5...@profiscience/knockout-contrib-model-builders-data@2.2.0) (2019-10-30)
+
+
+### Features
+
+* **model.builders.data:** allow passing additional args via #create ([fe1a5ec](https://github.com/Profiscience/knockout-contrib/commit/fe1a5ec))
+
+
+
+
+
 ## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.4...@profiscience/knockout-contrib-model-builders-data@2.1.5) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
