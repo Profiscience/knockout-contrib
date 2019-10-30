@@ -149,13 +149,11 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
    *
    * @param params (Optionally) observable parameters for this instance. Will be passed to the constructor.
    */
-  public static async create<T>(
-    this: new (params: any) => T,
-    params: any,
-    initData?: any,
-    ...args: any[]
+  public static async create<T, TArgs extends any[]>(
+    this: new (...args: TArgs) => T,
+    ...args: TArgs
   ): Promise<T> {
-    const instance = Reflect.construct(this, [params, initData, ...args])
+    const instance = Reflect.construct(this, args)
     try {
       await instance[INITIALIZED]
     } catch (e) {
