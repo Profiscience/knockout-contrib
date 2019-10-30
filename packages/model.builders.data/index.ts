@@ -152,9 +152,10 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
   public static async create<T>(
     this: new (params: any) => T,
     params: any,
-    initData?: any
+    initData?: any,
+    ...args: any[]
   ): Promise<T> {
-    const instance = Reflect.construct(this, [params, initData])
+    const instance = Reflect.construct(this, [params, initData, ...args])
     try {
       await instance[INITIALIZED]
     } catch (e) {
