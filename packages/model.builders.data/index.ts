@@ -43,7 +43,7 @@ const INSTANCES = new Map<symbol, DataModelConstructorBuilder<any>>()
  * ```
  */
 export class DataModelConstructorBuilder<
-  TParams
+  TParams = void
 > extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin).Mixin(
   DisposalAggregatorMixin
 ) {
@@ -62,7 +62,7 @@ export class DataModelConstructorBuilder<
    * @param params Parameters for the current model state. If observable, will trigger
    *  updates to observable properties when modified
    */
-  constructor(protected params: TParams, initData?: { [k: string]: any }) {
+  constructor(protected params?: TParams, initData?: { [k: string]: any }) {
     super()
 
     nonenumerable(this, 'INSTANCE_ID')
