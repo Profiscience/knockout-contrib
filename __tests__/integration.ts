@@ -6,7 +6,7 @@ import {
 test("DisposalAggregatorMixin doesn't re-dispose deleted data model", async () => {
   const spy = jest.fn()
 
-  class DataModel extends DataModelConstructorBuilder<void> {
+  class DataModel extends DataModelConstructorBuilder {
     public fetch = async () => ({})
     public dispose() {
       spy()
