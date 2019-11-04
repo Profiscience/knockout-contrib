@@ -1,0 +1,20 @@
+{
+  "name": "@profiscience/knockout-contrib-types",
+  "version": "0.0.0",
+  "license": "WTFPL",
+  "author": "Casey Webb (https://caseyWebb.xyz)",
+  "homepage": "https://profiscience.github.io/knockout-contrib/packages/types",
+  "bugs": "https://github.com/Profiscience/knockout-contrib/issues",
+  "repository": "github:Profiscience/knockout-contrib",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/node/index.js",
+  "module": "dist/default/index.js",
+  "esnext": "dist/esnext/index.js",
+  "types": "index.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "knockout": "3.5.0"
+  }
+}
