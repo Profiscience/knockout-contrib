@@ -4,7 +4,7 @@ import * as ko from 'knockout'
 import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 import { INITIALIZED } from '@profiscience/knockout-contrib-router-plugins-init'
 
-export type PaginationStrategy<T extends { [k: string]: any }> = (
+export type PaginationStrategy<T extends Record<string, any>> = (
   page: number
 ) => T
 
@@ -20,15 +20,20 @@ const PAGER = Symbol('PAGER')
 const CREATE_PAGER = Symbol('CREATE_PAGER')
 const PRIME_PAGER = Symbol('PRIME_PAGER')
 
-export function PagerMixin<PaginationParams = { page: number }>(
-  property: string,
-  strategy: PaginationStrategy<PaginationParams> = ((page: number) => ({
+export function PagerMixin<
+  TParams extends Record<string, any> = { page: number },
+  TData extends Record<string, any> = Record<string, any>
+>(
+  property: keyof TData,
+  strategy: PaginationStrategy<TParams> = ((page: number) => ({
     page
   })) as PaginationStrategy<any>
 ) {
   return <
-    P extends PaginationParams,
-    T extends new (...args: any[]) => DataModelConstructorBuilder<P>
+    T extends new (...args: any[]) => DataModelConstructorBuilder<
+      TParams,
+      TData
+    >
   >(
     ctor: T
   ) =>
