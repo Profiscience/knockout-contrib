@@ -43,7 +43,8 @@ const INSTANCES = new Map<symbol, DataModelConstructorBuilder<any>>()
  * ```
  */
 export class DataModelConstructorBuilder<
-  TParams = void
+  TParams extends void | Record<string, any> = void,
+  TData extends Record<string, any> = Record<string, any>
 > extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin).Mixin(
   DisposalAggregatorMixin
 ) {
@@ -62,7 +63,7 @@ export class DataModelConstructorBuilder<
    * @param params Parameters for the current model state. If observable, will trigger
    *  updates to observable properties when modified
    */
-  constructor(protected params?: TParams, initData?: { [k: string]: any }) {
+  constructor(protected params: TParams, initData?: TData) {
     super()
 
     nonenumerable(this, 'INSTANCE_ID')
@@ -131,7 +132,7 @@ export class DataModelConstructorBuilder<
    *
    * @abstract
    */
-  protected async fetch(initData?: any): Promise<any> {
+  protected async fetch(initData?: TData): Promise<any> {
     if (initData) {
       return initData
     } else {
