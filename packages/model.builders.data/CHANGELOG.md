@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.2.1...@profiscience/knockout-contrib-model-builders-data@2.3.0) (2019-11-04)
+
+
+### Features
+
+* **model.builders.data:** add TData generic ([dc265e1](https://github.com/Profiscience/knockout-contrib/commit/dc265e1))
+
+
+
+
+
 ## [2.2.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.2.0...@profiscience/knockout-contrib-model-builders-data@2.2.1) (2019-10-30)
 
 
