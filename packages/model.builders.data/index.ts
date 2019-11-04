@@ -42,9 +42,11 @@ const INSTANCES = new Map<symbol, DataModelConstructorBuilder<any>>()
  * model.dispose()
  * ```
  */
-export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
-  SubscriptionDisposalMixin
-).Mixin(DisposalAggregatorMixin) {
+export class DataModelConstructorBuilder<
+  TParams
+> extends ConstructorBuilder.Mixin(SubscriptionDisposalMixin).Mixin(
+  DisposalAggregatorMixin
+) {
   protected readonly INSTANCE_ID = Symbol('DATA_MODEL_INSTANCE')
 
   public [INITIALIZED]: Promise<void>
@@ -60,7 +62,7 @@ export class DataModelConstructorBuilder<P> extends ConstructorBuilder.Mixin(
    * @param params Parameters for the current model state. If observable, will trigger
    *  updates to observable properties when modified
    */
-  constructor(protected params: P, initData?: { [k: string]: any }) {
+  constructor(protected params: TParams, initData?: { [k: string]: any }) {
     super()
 
     nonenumerable(this, 'INSTANCE_ID')
