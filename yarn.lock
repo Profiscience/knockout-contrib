@@ -7819,10 +7819,10 @@ path-parse@^1.0.6:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
-path-to-regexp@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-3.1.0.tgz#f45a9cc4dc6331ae8f131e0ce4fde8607f802367"
-  integrity sha512-PtHLisEvUOepjc+sStXxJ/pDV/s5UBTOKWJY2SOz3e6E/iN/jLknY9WL72kTwRrwXDUbZTEAtSnJbz2fF127DA==
+path-to-regexp@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-4.0.1.tgz#119a9a7f0aa0b8f7048593ee0b7fca1512460caa"
+  integrity sha512-gdAzunCn/o8fI5Fc1M9Ri+qgJSLKKEbfkoDij79QSOsRQVK/cOlWxzSlYJqLkGo3YCLm9ECDxJo53lWEVSp+Ug==
 
 path-type@^1.0.0:
   version "1.1.0"
