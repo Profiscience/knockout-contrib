@@ -1,6 +1,6 @@
 // this prevents `import pathToRegexp from 'path-to-regexp' from ending up in the
 // declaration files so consumers don't need `allowSyntheticDefaultImports`
-import pathToRegexp from 'path-to-regexp'
+import { pathToRegexp } from 'path-to-regexp'
 import { Key } from 'path-to-regexp'
 import { IRouteConfig } from './'
 import { Middleware } from './router'
@@ -77,9 +77,7 @@ export class Route {
 
     if (!matches) {
       throw new Error(
-        `[@profiscience/knockout-contrib-router] Failed to parse "${path}" with route "${
-          this.path
-        }"`
+        `[@profiscience/knockout-contrib-router] Failed to parse "${path}" with route "${this.path}"`
       )
     }
 
