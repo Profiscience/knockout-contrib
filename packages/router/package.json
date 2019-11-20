@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "path-to-regexp": "^5.0.0"
+    "path-to-regexp": "^6.0.0"
   },
   "devDependencies": {
     "istanbul-instrumenter-loader": "^3.0.1",
