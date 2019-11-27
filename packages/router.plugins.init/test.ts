@@ -1,5 +1,6 @@
 /* tslint:disable max-classes-per-file */
 
+import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 import {
   Context,
   Route,
@@ -73,6 +74,43 @@ describe('router.plugins.init', () => {
     await ctx.component
 
     expect(spy).toBeCalledWith([promise])
+  })
+
+  test('calls init method after all initializer promises have completed', async () => {
+    expect.assertions(1)
+
+    const getComponent = () => ({
+      template: Promise.resolve({ default: 'Hello, World!' }),
+      viewModel: Promise.resolve({
+        default: class {
+          private initialized = false
+
+          public [INITIALIZED] = new Promise((resolve) => {
+            setTimeout(() => {
+              this.initialized = true
+              resolve()
+            }, 2000)
+          })
+
+          public init() {
+            expect(this.initialized).toBe(true)
+          }
+        }
+      })
+    })
+
+    const queue = jest.fn()
+    const route = new Route('/', { component: getComponent })
+    const ctx = { queue: queue as any, route } as Context & IContext
+
+    for (const middleware of route.middleware) {
+      const lifecycle = middleware(ctx) as Lifecycle
+      if (lifecycle && lifecycle.beforeRender) lifecycle.beforeRender()
+    }
+
+    await Promise.all(queue.mock.calls.map(([p]) => p))
+
+    await ctx.component
   })
 
   test("doesn't blow up when no component", async () => {
