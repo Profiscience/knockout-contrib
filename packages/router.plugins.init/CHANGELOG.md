@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@2.0.9...@profiscience/knockout-contrib-router-plugins-init@3.0.0) (2019-11-27)
+
+
+### Features
+
+* **router.plugins.init:** add init method support ([7e36e3a](https://github.com/Profiscience/knockout-contrib/commit/7e36e3a))
+
+
+### BREAKING CHANGES
+
+* **router.plugins.init:** Potentially breaking. If you already have an init method being called manually, it
+will be called twice. Remove your invocation or rename the method.
+
+
+
+
+
 ## [2.0.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@2.0.8...@profiscience/knockout-contrib-router-plugins-init@2.0.9) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-init
