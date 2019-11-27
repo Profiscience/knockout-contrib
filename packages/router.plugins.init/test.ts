@@ -1,6 +1,5 @@
 /* tslint:disable max-classes-per-file */
 
-import { DataModelConstructorBuilder } from '@profiscience/knockout-contrib-model-builders-data'
 import {
   Context,
   Route,
