@@ -34,6 +34,10 @@ export function componentInitializerRoutePlugin(
         if (viewModel[INITIALIZED]) initializers.push(viewModel[INITIALIZED])
 
         await Promise.all(initializers)
+
+        if (viewModel.init) {
+          await viewModel.init()
+        }
       })()
     )
   }
