@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.3...@profiscience/knockout-contrib-query@2.1.4) (2019-12-06)
+
+
+### Bug Fixes
+
+* **query:** ensure param opts.initial is written to url ([e0ecfe4](https://github.com/Profiscience/knockout-contrib/commit/e0ecfe4))
+
+
+
+
+
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.2...@profiscience/knockout-contrib-query@2.1.3) (2019-08-14)
 
 

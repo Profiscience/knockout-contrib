@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.9...@profiscience/knockout-contrib-router@2.0.10) (2019-12-06)
+
+
+### Bug Fixes
+
+* **router:** allow querystring modification in beforeDispose middleware ([2ae85e1](https://github.com/Profiscience/knockout-contrib/commit/2ae85e1))
+
+
+
+
+
 ## [2.0.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.8...@profiscience/knockout-contrib-router@2.0.9) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
