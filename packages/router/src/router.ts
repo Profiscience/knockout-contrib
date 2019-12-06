@@ -149,9 +149,7 @@ export class Router {
     if (!route) {
       throw new Error(
         // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${
-          this.depth
-        } update() called with path "${path}", but no matching route was found`
+        `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${path}", but no matching route was found`
       )
     }
 
@@ -159,24 +157,22 @@ export class Router {
     const fromCtx = this.ctx
     const { pathname, childPath } = route.parse(path)
     const toUrlFragments = Router.parseUrl(url)
-    const { hash } = toUrlFragments
-    let { search } = toUrlFragments
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
-
-    if (Router.config.preserveQueryStringOnNavigation && !search) {
-      search = currentUrlFragments.search
-    }
+    const useCurrentQueryString =
+      Router.config.preserveQueryStringOnNavigation && !toUrlFragments.search
 
     const samePage =
       fromCtx.route === route && // divergent children (ambiguous route trees)
       pathname === fromCtx.pathname && // same route, different params
-      search === currentUrlFragments.search &&
-      hash === currentUrlFragments.hash
+      (useCurrentQueryString
+        ? true
+        : currentUrlFragments.search === toUrlFragments.search) &&
+      toUrlFragments.hash === currentUrlFragments.hash
 
     if (samePage && !opts.force) {
       if (fromCtx.$child && childPath) {
         return await fromCtx.$child.router.update(
-          childPath + search + hash,
+          childPath + toUrlFragments.search + toUrlFragments.hash,
           opts
         )
       } else {
@@ -194,6 +190,7 @@ export class Router {
 
     const _update = this.update.bind(this)
 
+    // handle race-condition of navigating while awaiting async middleware
     this.update = (_url: string, _args?: boolean | RouterUpdateOptions) => {
       toCtx.redirect(_url, typeof _args === 'boolean' ? undefined : _args)
       return Promise.resolve(true)
@@ -201,10 +198,16 @@ export class Router {
 
     await fromCtx.runBeforeDispose()
 
+    // disposal logic in runBeforeDispose may modify querystring,
+    // ensure that doesn't get wiped out by re-parsing the actual window.location
+    const search = useCurrentQueryString
+      ? Router.parseUrl(Router.getPathFromLocation()).search
+      : toUrlFragments.search
+
     history[opts.push ? 'pushState' : 'replaceState'](
       opts.state,
       document.title,
-      toCtx.base + toCtx.path + search + hash
+      toCtx.base + toCtx.path + search + toUrlFragments.hash
     )
 
     await toCtx.runBeforeRender()
