@@ -336,7 +336,7 @@ export class Query {
     coerce: (x: any) => T
   ): IQueryParam<T> {
     const _default = ko.observable(ko.toJS(__default))
-    const _p = ko.observable(isUndefined(init) ? _default() : init)
+    const _p = ko.observable(_default())
     const isDefault = ko.pureComputed(() => p() === _default())
 
     const p: IQueryParam<T> = ko.pureComputed({
@@ -385,6 +385,8 @@ export class Query {
       },
       clear: () => p(_default())
     })
+
+    if (!isUndefined(init)) p(init)
 
     return p
   }
