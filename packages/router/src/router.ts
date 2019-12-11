@@ -45,6 +45,12 @@ export type Lifecycle = {
   afterDispose?(): MaybePromise<void>
 }
 
+export type UrlFragments = {
+  path: string
+  search: string
+  hash: string
+}
+
 export class Router {
   public static head: Router
   public static readonly onInit: ((router: Router) => void)[] = [
@@ -112,7 +118,7 @@ export class Router {
     this.ctx = new Context(
       this,
       $parentCtx,
-      Router.getPath(url),
+      Router.parseUrl(url),
       _with
     ) as Context & IContext
   }
@@ -143,20 +149,19 @@ export class Router {
     url: string,
     args?: boolean | RouterUpdateOptions
   ): Promise<boolean> {
-    const path = Router.getPath(url)
-    const route = this.resolveRoute(path)
+    const toUrlFragments = Router.parseUrl(url)
+    const route = this.resolveRoute(toUrlFragments.path)
 
     if (!route) {
       throw new Error(
         // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${path}", but no matching route was found`
+        `[@profiscience/knockout-contrib-router] Router@${this.depth} update() called with path "${toUrlFragments.path}", but no matching route was found`
       )
     }
 
     const opts = Router.normalizeUpdateOptions(args)
     const fromCtx = this.ctx
-    const { pathname, childPath } = route.parse(path)
-    const toUrlFragments = Router.parseUrl(url)
+    const { pathname, childPath } = route.parse(toUrlFragments.path)
     const currentUrlFragments = Router.parseUrl(Router.getPathFromLocation())
     const useCurrentQueryString =
       Router.config.preserveQueryStringOnNavigation && !toUrlFragments.search
@@ -184,7 +189,7 @@ export class Router {
 
     if (!shouldNavigate) return false
 
-    const toCtx = new Context(this, this.ctx.$parent, path, opts.with)
+    const toCtx = new Context(this, this.ctx.$parent, toUrlFragments, opts.with)
 
     this.isNavigating(true)
 
@@ -433,7 +438,7 @@ export class Router {
     return options
   }
 
-  private static parseUrl(url: string) {
+  private static parseUrl(url: string): UrlFragments {
     const parser = document.createElement('a')
     const b = Router.base.toLowerCase()
     if (b && url.toLowerCase().indexOf(b) === 0) {
@@ -442,7 +447,7 @@ export class Router {
     parser.href = Router.canonicalizePath(url)
     return {
       hash: parser.hash,
-      pathname:
+      path:
         parser.pathname.charAt(0) === '/'
           ? parser.pathname
           : '/' + parser.pathname,
@@ -451,7 +456,7 @@ export class Router {
   }
 
   private static getPath(url: string) {
-    return Router.parseUrl(url).pathname
+    return Router.parseUrl(url).path
   }
 
   private static hasRoute(path: string) {

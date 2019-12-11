@@ -1,14 +1,17 @@
 import * as ko from 'knockout'
 import { IContext } from './'
 import { Route } from './route'
-import { Router, Middleware, Lifecycle } from './router'
+import { Router, Middleware, Lifecycle, UrlFragments } from './router'
 import { MaybePromise } from './utils'
 
 export class Context /* implements IContext, use Context & IContext */ {
   public $child?: Context & IContext
   public route!: Route
   public params!: { [k: string]: any }
+  public path!: string
   public pathname!: string
+  public search!: string
+  public hash!: string
   public _redirect?: string
   public _redirectArgs?: {
     push: false
@@ -25,19 +28,18 @@ export class Context /* implements IContext, use Context & IContext */ {
 
   constructor(
     public router: Router,
-    public $parent: undefined | Context & IContext,
-    public path: string,
+    public $parent: undefined | (Context & IContext),
+    urlFragments: UrlFragments,
     _with: { [key: string]: any } = {}
   ) {
     const ctx: Context & IContext = this as any
+    const { path, search, hash } = urlFragments
     const route = router.resolveRoute(path)
 
     if (!route) {
       throw new Error(
         // tslint:disable-next-line:max-line-length
-        `[@profiscience/knockout-contrib-router] Router@${
-          router.depth
-        } context initialized with path ${path}, but no matching route was found`
+        `[@profiscience/knockout-contrib-router] Router@${router.depth} context initialized with path ${path}, but no matching route was found`
       )
     }
 
@@ -46,9 +48,12 @@ export class Context /* implements IContext, use Context & IContext */ {
     Object.assign(
       this,
       {
+        hash,
+        path,
         params,
         pathname,
-        route
+        route,
+        search
       },
       _with
     )
@@ -122,7 +127,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public async runBeforeNavigateCallbacks(): Promise<boolean> {
-    let ctx: void | Context & IContext = this as any
+    let ctx: void | (Context & IContext) = this as any
     let callbacks: (() => MaybePromise<boolean | void>)[] = []
     while (ctx) {
       callbacks = [...ctx._beforeNavigateCallbacks, ...callbacks]
@@ -138,7 +143,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   }
 
   public render() {
-    let ctx: void | Context & IContext = this as any
+    let ctx: void | (Context & IContext) = this as any
     while (ctx) {
       if (typeof ctx._redirect === 'undefined') {
         ctx.router.component(ctx.route.component)
