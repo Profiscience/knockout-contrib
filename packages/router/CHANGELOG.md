@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.10...@profiscience/knockout-contrib-router@2.1.0) (2019-12-11)
+
+
+### Features
+
+* **router:** add ctx.search and ctx.hash ([7186c3e](https://github.com/Profiscience/knockout-contrib/commit/7186c3e))
+
+
+
+
+
 ## [2.0.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.9...@profiscience/knockout-contrib-router@2.0.10) (2019-12-06)
 
 
