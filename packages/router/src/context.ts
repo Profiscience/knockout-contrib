@@ -63,7 +63,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     }
     if (childPath) {
       // tslint:disable-next-line no-unused-expression
-      new Router(childPath, ctx).ctx
+      new Router(childPath + search + hash, ctx).ctx
     }
   }
 
