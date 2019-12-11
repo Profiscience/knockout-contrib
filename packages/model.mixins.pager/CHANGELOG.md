@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.3...@profiscience/knockout-contrib-model-mixins-pager@2.1.4) (2019-12-11)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
+
+
+
+
+
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.2...@profiscience/knockout-contrib-model-mixins-pager@2.1.3) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager

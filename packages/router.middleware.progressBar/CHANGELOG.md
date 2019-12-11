@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-progress-bar@2.0.12...@profiscience/knockout-contrib-router-middleware-progress-bar@2.0.13) (2019-12-11)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router-middleware-progress-bar
+
+
+
+
+
 ## [2.0.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-middleware-progress-bar@2.0.11...@profiscience/knockout-contrib-router-middleware-progress-bar@2.0.12) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-middleware-progress-bar
