@@ -8,9 +8,11 @@ import ko from 'knockout'
 ko.components.register('params', {
   viewModel: class ParamsTest {
     constructor(ctx) {
-      const { t, done, params } = ctx
+      const { t, done, params, search, hash } = ctx
       if (ctx.firstRun !== false) {
         t.equal('foo', params.foo, 'parses param to ctx.params')
+        t.equals('?bar=bar', search, 'adds querystring to ctx.search')
+        t.equals('#baz', hash, 'adds hash to ctx.hash')
         ctx.router.update('/params/bar', {
           with: { t, done, firstRun: false }
         })
@@ -26,7 +28,7 @@ ko.components.register('params', {
   }
 })
 
-export const path = '/params/foo'
+export const path = '/params/foo?bar=bar#baz'
 
 export const routes = {
   '/params/:foo': 'params'

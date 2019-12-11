@@ -39,23 +39,31 @@ The current path, including parent, excluding app base, excluding child path
 
 Object containing route parameters
 
-#### ctx.$root
+#### ctx.search
+
+Identical to `location.search`, but allows use in beforeNavigate middleware
+
+#### ctx.hash
+
+Identical to `location.hash`, but allows use in beforeNavigate middleware
+
+#### ctx.\$root
 
 Root context accessor
 
-#### ctx.$parent
+#### ctx.\$parent
 
 Parent context accessor
 
-#### ctx.$parents
+#### ctx.\$parents
 
 Array of parent contexts
 
-#### ctx.$child
+#### ctx.\$child
 
 Child context accessor
 
-#### ctx.$children
+#### ctx.\$children
 
 Array of child contexts
 
