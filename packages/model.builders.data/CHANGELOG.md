@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.4...@profiscience/knockout-contrib-model-builders-data@2.3.6) (2019-12-12)
+
+
+### Bug Fixes
+
+* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
+
+
+
+
+
 ## [2.3.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.4...@profiscience/knockout-contrib-model-builders-data@2.3.5) (2019-12-12)
 
 
