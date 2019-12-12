@@ -17,7 +17,7 @@ const instances = new Set<Query>()
 let historyApiSpied = false
 let replaceState: typeof history.replaceState
 
-export type IQueryParam<T> = ko.Computed<T> & {
+export type IQueryParam<T> = ko.PureComputed<T> & {
   isDefault(): boolean
   clear(): void
   set(v: T | IQueryParamConfig<any>): void
@@ -335,22 +335,22 @@ export class Query {
     init: T,
     coerce: (x: any) => T
   ): IQueryParam<T> {
-    const _default = ko.observable(ko.toJS(__default))
+    const _default = ko.observable<T>(ko.toJS(__default) as T)
     const _p = ko.observable(_default())
     const isDefault = ko.pureComputed(() => p() === _default())
 
-    const p: IQueryParam<T> = ko.pureComputed({
+    const p = ko.pureComputed<T>({
       read() {
         return _p()
       },
-      write(v: MaybeArray<T>) {
+      write(v) {
         if (isUndefined(v)) {
           v = _default()
         }
         if (coerce) {
           v = coerce(v)
         }
-        _p(v as string)
+        _p(v)
         Query.queueQueryStringWrite().catch((err) =>
           // tslint:disable-next-line:no-console
           console.error(
@@ -359,17 +359,16 @@ export class Query {
           )
         )
       }
-    }) as any
+    }) as IQueryParam<T>
 
     Object.assign(p, {
       isDefault,
-      set: (d: IQueryParamConfig<T> | MaybeArray<T>) => {
+      set: (d: IQueryParamConfig<T> | T) => {
         if (!this.isParamConfigObject(d)) {
-          d = d as MaybeArray<T>
           if (isDefault() || isUndefined(p())) {
             p(d as any)
           }
-          _default(d as string)
+          _default(d as T)
         } else {
           d = d as IQueryParamConfig<T>
           if (d.coerce) {

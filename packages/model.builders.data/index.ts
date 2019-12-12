@@ -55,7 +55,7 @@ export class DataModelConstructorBuilder<
   /**
    * True if pending `.fetch()` response
    */
-  public loading: ko.Observable<boolean> = ko.observable()
+  public loading = ko.observable<boolean>()
 
   /**
    * Constructs a new DataModel instance
