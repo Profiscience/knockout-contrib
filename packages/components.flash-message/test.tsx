@@ -1,20 +1,17 @@
 import { h } from 'jsx-dom'
 import * as ko from 'knockout'
-import 'jest-jquery-matchers' // import type defs
 import { flashMessage } from '@profiscience/knockout-contrib-router-middleware-flash-message'
 
 import { flashMessageComponentConfig } from './index'
 
 ko.components.register('contrib-flash-message', flashMessageComponentConfig)
 
-jest.addMatchers(require('jest-jquery-matchers')) // tslint:disable-line no-var-requires
-
 let $el: HTMLDivElement
 
 describe('flash-message component', () => {
   beforeAll(() => {
     $el = (
-      <div data-bind="component: &quot;contrib-flash-message&quot;" />
+      <div data-bind='component: "contrib-flash-message"' />
     ) as HTMLDivElement
     ko.applyBindings({}, $el)
   })
@@ -22,13 +19,13 @@ describe('flash-message component', () => {
   test('displays the correct text when flashMessage() is string', () => {
     const v = 'string text'
     flashMessage(v)
-    expect($el).toHaveText(v)
+    expect($el.textContent).toContain(v)
   })
 
   test('displays the correct text with expanded options', () => {
     const v = { text: 'expanded' }
     flashMessage(v)
-    expect($el).toHaveText(v.text)
+    expect($el.textContent).toContain(v.text)
   })
 
   test('does not display when flashMessage() is false', () => {
@@ -38,14 +35,16 @@ describe('flash-message component', () => {
 
   test('default type is info', () => {
     const v = 'foo'
+    const $firstChild = $el.firstChild as HTMLDivElement
     flashMessage(v)
-    expect($el.firstChild).toHaveClass('alert-info')
+    expect($firstChild.classList.contains('alert-info')).toBeTruthy()
   })
 
   test('type specified in options is used with alert-* prefix', () => {
     const v = { text: 'foo', type: 'warning' }
+    const $firstChild = $el.firstChild as HTMLDivElement
     flashMessage(v)
-    expect($el.firstChild).toHaveClass('alert-warning')
+    expect($firstChild.classList.contains('alert-warning')).toBeTruthy()
   })
 
   test('shows dismiss button when dismiss is true', () => {

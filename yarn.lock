@@ -5943,11 +5943,6 @@ jest-jasmine2@^24.9.0:
     pretty-format "^24.9.0"
     throat "^4.0.0"
 
-jest-jquery-matchers@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-jquery-matchers/-/jest-jquery-matchers-2.1.0.tgz#b56d19c460f6e57b17e6ddcce6f905d28b0ec532"
-  integrity sha512-gbCptZOPFv4m7CJenRJcp7OTmQ432yakCDGup6gExrIwbNq8hBfxU+llXO2IXOpFuLmI0c8A+JdGMUNXe6LV9A==
-
 jest-junit@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-10.0.0.tgz#c94b91c24920a327c9d2a075e897b2dba4af494b"

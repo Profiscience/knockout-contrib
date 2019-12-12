@@ -37,7 +37,6 @@
     "globby": "^10.0.0",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
-    "jest-jquery-matchers": "^2.0.0",
     "jest-junit": "^10.0.0",
     "jquery": "^3.4.1",
     "jsx-dom": "^6.3.1",
