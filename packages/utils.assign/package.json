@@ -15,7 +15,7 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "knockout": "3.5.0"
+    "knockout": "3.5.1"
   },
   "dependencies": {
     "@profiscience/knockout-contrib-utils-from-js": "^2.0.2",

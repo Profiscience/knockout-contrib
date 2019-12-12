@@ -15,7 +15,7 @@
   "types": "index.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "knockout": "3.5.0",
+    "knockout": "3.5.1",
     "knockout-punches": "^0.5.1"
   },
   "dependencies": {

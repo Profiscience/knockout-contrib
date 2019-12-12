@@ -16,7 +16,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@profiscience/knockout-contrib-router": ">=2.0.0",
-    "knockout": "^3.5.0"
+    "knockout": "3.5.1"
   },
   "devDependencies": {
     "@profiscience/knockout-contrib-router": "^2.1.1"
