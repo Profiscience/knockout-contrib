@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.4...@profiscience/knockout-contrib-query@2.1.5) (2019-12-12)
+
+
+### Bug Fixes
+
+* ts compilation errors ([2bf60cf](https://github.com/Profiscience/knockout-contrib/commit/2bf60cf8f6ca74e5605c0b2b62bc860816d1ddb0))
+
+
+
+
+
 ## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.3...@profiscience/knockout-contrib-query@2.1.4) (2019-12-06)
 
 

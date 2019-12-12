@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.3...@profiscience/knockout-contrib-utils-assign@2.0.3) (2019-12-12)
+
+
+### Reverts
+
+* Revert "Publish" ([a4ac1d6](https://github.com/Profiscience/knockout-contrib/commit/a4ac1d6f397dffeb6dd30da440912bddda186ffb))
+
+
+
+
+
 ## [2.0.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.1...@profiscience/knockout-contrib-utils-assign@2.0.2) (2019-10-22)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-transform@2.1.5...@profiscience/knockout-contrib-model-mixins-transform@2.1.5) (2019-12-12)
+
+
+### Reverts
+
+* Revert "Publish" ([a4ac1d6](https://github.com/Profiscience/knockout-contrib/commit/a4ac1d6f397dffeb6dd30da440912bddda186ffb))
+
+
+
+
+
 ## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-transform@2.1.3...@profiscience/knockout-contrib-model-mixins-transform@2.1.4) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-transform
