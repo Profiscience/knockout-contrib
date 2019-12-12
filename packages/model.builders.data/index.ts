@@ -94,7 +94,7 @@ export class DataModelConstructorBuilder<
   /**
    * Return enumerable properties, unwrapped
    */
-  public toJS(): any {
+  public toJS<T>(this: T): ko.Unwrapped<T> {
     const obj: any = {}
     for (const k of Object.keys(this)) {
       obj[k] = (this as any)[k]
