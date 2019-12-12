@@ -60,8 +60,8 @@ describe('model.mixins.subscriptionDisposal', () => {
       expect.assertions(3)
 
       const instance = new (Subscribable(EmptyClass))()
-      const obs1: ko.Observable<string> = ko.observable()
-      const obs2: ko.Observable<string> = ko.observable()
+      const obs1 = ko.observable<string>()
+      const obs2 = ko.observable<string>()
       const tree = {
         obs1,
         obs2
