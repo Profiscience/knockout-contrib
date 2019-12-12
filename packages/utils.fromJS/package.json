@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-utils-from-js",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/utils.fromJS",
@@ -21,7 +21,7 @@
     "knockout": "3.5.1"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-jest-matchers": "^2.0.2",
+    "@profiscience/knockout-contrib-jest-matchers": "^2.0.3",
     "knockout-mapping": "^2.6.0"
   },
   "dependencies": {

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.6...@profiscience/knockout-contrib-model-builders-data@2.3.7) (2019-12-12)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
+
+
+
+
+
 ## [2.3.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.4...@profiscience/knockout-contrib-model-builders-data@2.3.6) (2019-12-12)
 
 

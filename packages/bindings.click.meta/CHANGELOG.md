@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-bindings-click-meta@2.0.0...@profiscience/knockout-contrib-bindings-click-meta@2.0.1) (2019-12-12)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-bindings-click-meta
+
+
+
+
+
 # [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-bindings-click-meta@2.0.0-rc.3...@profiscience/knockout-contrib-bindings-click-meta@2.0.0) (2019-02-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-bindings-click-meta

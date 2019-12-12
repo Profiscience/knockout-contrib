@@ -1,6 +1,6 @@
 {
   "name": "@profiscience/knockout-contrib-router-middleware-loading",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/router.middleware.loading",
@@ -22,6 +22,6 @@
     "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
-    "@profiscience/knockout-contrib-router": "^2.1.1"
+    "@profiscience/knockout-contrib-router": "^2.1.2"
   }
 }
