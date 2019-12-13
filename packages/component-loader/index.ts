@@ -4,7 +4,7 @@ type MaybePromise<T> = T | Promise<T>
 
 export type ComponentLoaderManifest<T = ko.components.Config> = Record<
   string,
-  () => Promise<T>
+  () => MaybePromise<T>
 >
 
 export type ComponentLoaderOptions<T = ko.components.Config> = {
@@ -28,15 +28,14 @@ export class LazyComponentLoader<T = ko.components.Config>
     )
   }
 
-  public getConfig(
+  public async getConfig(
     name: string,
     cb: (config: ko.components.Config) => void
-  ): void {
+  ): Promise<void> {
     const loadComponent = this.manifest[name]
     if (!loadComponent) return cb((null as unknown) as ko.components.Config) // bad types -__-
-    loadComponent().then(async (_c) => {
-      cb(this.options.transform ? await this.options.transform(_c) : _c)
-    })
+    const c = await loadComponent()
+    cb(this.options.transform ? await this.options.transform(c) : c)
   }
 
   public static fromRequireContext(
