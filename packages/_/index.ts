@@ -6,6 +6,8 @@ export * from '@profiscience/knockout-contrib-bindings-draggable'
 export * from '@profiscience/knockout-contrib-bindings-jquery'
 export * from '@profiscience/knockout-contrib-bindings-toggle'
 
+export * from '@profiscience/knockout-contrib-component-loader'
+
 export * from '@profiscience/knockout-contrib-components-flash-message'
 
 export * from '@profiscience/knockout-contrib-filters-date-format'

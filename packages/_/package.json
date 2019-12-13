@@ -37,6 +37,7 @@
     "@profiscience/knockout-contrib-bindings-draggable": "^1.1.1",
     "@profiscience/knockout-contrib-bindings-jquery": "^2.0.1",
     "@profiscience/knockout-contrib-bindings-toggle": "^2.0.1",
+    "@profiscience/knockout-contrib-component-loader": "^1.0.0",
     "@profiscience/knockout-contrib-components-flash-message": "^2.0.16",
     "@profiscience/knockout-contrib-filters-date-format": "^2.0.3",
     "@profiscience/knockout-contrib-model-builders-data": "^2.3.7",
