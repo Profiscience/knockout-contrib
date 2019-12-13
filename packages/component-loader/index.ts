@@ -1,10 +1,11 @@
 import * as ko from 'knockout'
 
+type MaybeAccessor<T> = T | (() => T)
 type MaybePromise<T> = T | Promise<T>
 
 export type ComponentLoaderManifest<T = ko.components.Config> = Record<
   string,
-  () => MaybePromise<T>
+  MaybeAccessor<MaybePromise<T>>
 >
 
 export type ComponentLoaderOptions<T = ko.components.Config> = {
@@ -16,7 +17,7 @@ type RequireContext = {
   keys(): any[]
 }
 
-export class LazyComponentLoader<T = ko.components.Config>
+export class ComponentLoader<T = ko.components.Config>
   implements ko.components.Loader {
   constructor(
     private manifest: ComponentLoaderManifest<T>,
@@ -34,14 +35,15 @@ export class LazyComponentLoader<T = ko.components.Config>
   ): Promise<void> {
     const loadComponent = this.manifest[name]
     if (!loadComponent) return cb((null as unknown) as ko.components.Config) // bad types -__-
-    const c = await loadComponent()
+    const c: T =
+      typeof loadComponent === 'function'
+        ? await (loadComponent as () => MaybePromise<T>)()
+        : await (loadComponent as MaybePromise<T>)
     cb(this.options.transform ? await this.options.transform(c) : c)
   }
 
-  public static fromRequireContext(
-    _require: RequireContext
-  ): LazyComponentLoader {
-    return new LazyComponentLoader(
+  public static fromRequireContext(_require: RequireContext): ComponentLoader {
+    return new ComponentLoader(
       _require
         .keys()
         .map((k) => ({
