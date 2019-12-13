@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.18](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.17...@profiscience/knockout-contrib-model-mixins-query@1.1.18) (2019-12-13)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
+
+
+
+
+
 ## [1.1.17](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.16...@profiscience/knockout-contrib-model-mixins-query@1.1.17) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query

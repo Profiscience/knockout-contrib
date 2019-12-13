@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.7...@profiscience/knockout-contrib-model-builders-data@2.3.8) (2019-12-13)
+
+
+### Bug Fixes
+
+* add strict typing to data model .toJS() method ([8e4042f](https://github.com/Profiscience/knockout-contrib/commit/8e4042f4fb1d4a48b51d760d47d549e3d00f0588))
+
+
+
+
+
 ## [2.3.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.6...@profiscience/knockout-contrib-model-builders-data@2.3.7) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
