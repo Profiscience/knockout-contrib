@@ -1,3 +1,5 @@
+// tslint:disable:no-floating-promises
+
 import { ComponentLoader } from './'
 
 describe('component-loader', () => {

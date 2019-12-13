@@ -20,8 +20,8 @@ type RequireContext = {
 export class ComponentLoader<T = ko.components.Config>
   implements ko.components.Loader {
   constructor(
-    private manifest: ComponentLoaderManifest<T>,
-    private options: ComponentLoaderOptions<T> = {}
+    private readonly manifest: ComponentLoaderManifest<T>,
+    private readonly options: ComponentLoaderOptions<T> = {}
   ) {
     Object.keys(manifest).forEach((name) =>
       // see http://knockoutjs.com/documentation/component-custom-elements.html#registering-custom-elements
