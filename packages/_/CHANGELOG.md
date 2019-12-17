@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.28...@profiscience/knockout-contrib@2.1.0) (2019-12-17)
+
+
+### Features
+
+* **bindings.infinitescroll:** initial commit ([7df2d84](https://github.com/Profiscience/knockout-contrib/commit/7df2d84994f1956577290b4fe4142038021d4c22))
+
+
+
+
+
 ## [2.0.28](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.27...@profiscience/knockout-contrib@2.0.28) (2019-12-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
