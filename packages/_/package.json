@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib",
   "description": "KnockoutJS Goodies for building wicked awesome SPAs",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/_",
@@ -35,7 +35,7 @@
     "@profiscience/knockout-contrib-bindings-click-meta": "^2.0.1",
     "@profiscience/knockout-contrib-bindings-click-shift": "^2.0.1",
     "@profiscience/knockout-contrib-bindings-draggable": "^1.1.1",
-    "@profiscience/knockout-contrib-bindings-infinite-scroll": "^1.1.0",
+    "@profiscience/knockout-contrib-bindings-infinite-scroll": "^1.1.1",
     "@profiscience/knockout-contrib-bindings-jquery": "^2.0.1",
     "@profiscience/knockout-contrib-bindings-toggle": "^2.0.1",
     "@profiscience/knockout-contrib-component-loader": "^1.1.0",
