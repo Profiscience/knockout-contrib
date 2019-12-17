@@ -54,12 +54,14 @@ export const infiniteScrollBindingHandler: ko.BindingHandler<InfiniteScrollBindi
 
       if (scrolledDist < triggerPoint) return
 
-      const promise: void | Promise<void> = handler.call(bindingContext.$data)
+      const promise: any | Promise<void> = handler.call(bindingContext.$data)
 
       disarmTrigger()
 
       if (promise && typeof promise.then === 'function') {
-        promise.then(armTrigger)
+        promise.then(armTrigger).catch((err: Error) => {
+          throw err
+        })
       } else {
         requestAnimationFrame(armTrigger)
       }
