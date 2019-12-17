@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.1.0...@profiscience/knockout-contrib@2.1.1) (2019-12-17)
+
+
+### Bug Fixes
+
+* **metapackage:** actually re-export bindings.infiniteScroll ([c372774](https://github.com/Profiscience/knockout-contrib/commit/c372774aae2bf62fe298ac0d1178ea1c285a6cba))
+
+
+
+
+
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.28...@profiscience/knockout-contrib@2.1.0) (2019-12-17)
 
 

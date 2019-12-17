@@ -1,7 +1,7 @@
 {
   "name": "@profiscience/knockout-contrib",
   "description": "KnockoutJS Goodies for building wicked awesome SPAs",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "license": "WTFPL",
   "author": "Casey Webb (https://caseyWebb.xyz)",
   "homepage": "https://profiscience.github.io/knockout-contrib/packages/_",
