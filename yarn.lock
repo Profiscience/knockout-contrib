@@ -6416,9 +6416,9 @@ karma-remap-istanbul@^0.6.0:
     remap-istanbul "^0.9.0"
 
 karma-tap-pretty-reporter@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/karma-tap-pretty-reporter/-/karma-tap-pretty-reporter-4.1.0.tgz#04ec1eb2839fc99a378def9fa713679335a7a795"
-  integrity sha512-YyNjPuPVkI55meJ969ZO0VuLxI+RLurMCM8dcL31xXZbVW/w1S3d5e73P6ysdFskk00Wy8osE+qxilOgLid7Vw==
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/karma-tap-pretty-reporter/-/karma-tap-pretty-reporter-4.2.0.tgz#6f2c228c1fd1d16e0e0c10d46ae911772dbc1ac0"
+  integrity sha512-1lgkmw+KWLhyfGV/AHEvesHmd4VHyIkNtpgpRgpyfSPJWZAr2smhlYOP28i9To6JypB/rtFtSoU9V90rqiqqew==
 
 karma-tap@^4.0.0:
   version "4.1.4"
