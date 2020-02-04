@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@3.0.6...@profiscience/knockout-contrib-router-plugins-init@3.0.7) (2020-02-04)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-init
+
+
+
+
+
 ## [3.0.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-init@3.0.5...@profiscience/knockout-contrib-router-plugins-init@3.0.6) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-init

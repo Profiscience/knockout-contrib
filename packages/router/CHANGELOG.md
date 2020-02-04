@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.1.2...@profiscience/knockout-contrib-router@2.1.3) (2020-02-04)
+
+
+### Bug Fixes
+
+* **router:** anchor tag descendant click regression ([57b0828](https://github.com/Profiscience/knockout-contrib/commit/57b082842b03ecbbfc72c7aa3175833f9b56b505))
+* **router:** correctly parse path when it contains base path ([817a242](https://github.com/Profiscience/knockout-contrib/commit/817a242b086bf8f255d5a4bae6ecb5359f0f1d53))
+
+
+
+
+
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.1.1...@profiscience/knockout-contrib-router@2.1.2) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
