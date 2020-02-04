@@ -6563,9 +6563,9 @@ jsprim@^1.2.2:
     verror "1.10.0"
 
 jsx-dom@^6.3.1:
-  version "6.4.4"
-  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.4.4.tgz#466a34a321f790b7abe455413e721f14b5d589bc"
-  integrity sha512-YuBjvPFLgy85UFJiK1wMaUXS9C6HDV8Q6/GUwOZv7l6R2os5Ajh8ypqpNvBF5lR36JqBXGwhcgKoXI6WMUkUMA==
+  version "6.4.6"
+  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.4.6.tgz#80ba1cc05eb15adb945d258a700d61e3753f4d69"
+  integrity sha512-C7lFc5Bsuy5qEZGAJSuJd/iiK89AOlR6lWJm3nrzIpJtcnBr/TJBrEfJiFmj68d6MVTqdoHFyCDESrXDKbFU4w==
 
 karma-firefox-launcher@^1.0.1:
   version "1.3.0"
