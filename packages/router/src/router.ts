@@ -2,7 +2,7 @@ import * as ko from 'knockout'
 import { IContext } from './'
 import { Context } from './context'
 import { RoutePlugin, Route, RouteMap } from './route'
-import { castArray, MaybePromise, traversePath, log } from './utils'
+import { castArray, MaybePromise, traversePath, log, isAnchor } from './utils'
 
 export type RouterConfig = {
   base?: string
@@ -349,25 +349,22 @@ export class Router {
       '#!',
       '#?!?'
     )
-    return path.replace(new RegExp(baseWithOrWithoutHashbangRegexp, 'i'), '')
+    return path.replace(
+      new RegExp(`^${baseWithOrWithoutHashbangRegexp}`, 'i'),
+      ''
+    )
   }
 
   private static onclick(e: MouseEvent) {
-    if (e.defaultPrevented) {
-      return
-    }
+    const el = e.target as Node
 
-    let el: HTMLAnchorElement = e.target as HTMLAnchorElement
-    while (el && el.nodeName !== 'A') {
-      el = el.parentNode as HTMLAnchorElement
-    }
-    if (!el || el.nodeName !== 'A') {
+    if (e.defaultPrevented || !isAnchor(el)) {
       return
     }
 
     const { pathname, search, hash = '' } = el
     const path = (pathname + search + hash).replace(
-      new RegExp(Router.base, 'i'),
+      new RegExp(`^${Router.base}`, 'i'),
       ''
     )
 
@@ -396,7 +393,7 @@ export class Router {
     }
 
     Router.update(path).catch((err) =>
-      log.error('Error occured during navigation', err)
+      log.error('Error occurred during navigation', err)
     )
     e.preventDefault()
   }
@@ -440,10 +437,6 @@ export class Router {
 
   private static parseUrl(url: string): UrlFragments {
     const parser = document.createElement('a')
-    const b = Router.base.toLowerCase()
-    if (b && url.toLowerCase().indexOf(b) === 0) {
-      url = url.replace(new RegExp(b, 'i'), '') || '/'
-    }
     parser.href = Router.canonicalizePath(url)
     return {
       hash: parser.hash,
@@ -455,12 +448,11 @@ export class Router {
     }
   }
 
-  private static getPath(url: string) {
-    return Router.parseUrl(url).path
-  }
-
   private static hasRoute(path: string) {
-    return typeof Router.head.resolveRoute(Router.getPath(path)) !== 'undefined'
+    return (
+      typeof Router.head.resolveRoute(Router.parseUrl(path).path) !==
+      'undefined'
+    )
   }
 
   private static sameOrigin(href: string) {
