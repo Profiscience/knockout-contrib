@@ -2,7 +2,7 @@ import * as ko from 'knockout'
 import { IContext } from './'
 import { Context } from './context'
 import { RoutePlugin, Route, RouteMap } from './route'
-import { castArray, MaybePromise, traversePath, log, isAnchor } from './utils'
+import { castArray, MaybePromise, traversePath, log, getAnchor } from './utils'
 
 export type RouterConfig = {
   base?: string
@@ -356,9 +356,9 @@ export class Router {
   }
 
   private static onclick(e: MouseEvent) {
-    const el = e.target as Node
+    const el = getAnchor(e.target as Node)
 
-    if (e.defaultPrevented || !isAnchor(el)) {
+    if (e.defaultPrevented || !el) {
       return
     }
 
