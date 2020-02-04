@@ -46,14 +46,18 @@ export function traversePath(router: Router, path: string) {
   return { router, path }
 }
 
-export function isAnchor(el: Node | null): el is HTMLAnchorElement {
-  while (el && el.nodeName !== 'A') {
-    el = el.parentNode
+export function getAnchor(el: Node | null): HTMLAnchorElement | void {
+  while (el) {
+    if (isAnchor(el)) {
+      return el
+    } else {
+      el = el.parentNode
+    }
   }
-  if (!el || el.nodeName !== 'A') {
-    return false
-  }
-  return true
+}
+
+function isAnchor(el: Node): el is HTMLAnchorElement {
+  return el.nodeName === 'A'
 }
 
 export function resolveHref({
