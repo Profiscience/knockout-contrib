@@ -33,9 +33,7 @@ export function traversePath(router: Router, path: string) {
       if (!router.ctx.$child) {
         throw new Error(
           // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${
-            router.depth
-          }) and ran out of children. Are you sure you want "./"?`
+          `[@profiscience/knockout-contrib-router] Attempted to traverse path "${path}" from router@(${router.depth}) and ran out of children. Are you sure you want "./"?`
         )
       }
       router = router.ctx.$child.router
@@ -46,6 +44,16 @@ export function traversePath(router: Router, path: string) {
     }
   }
   return { router, path }
+}
+
+export function isAnchor(el: Node | null): el is HTMLAnchorElement {
+  while (el && el.nodeName !== 'A') {
+    el = el.parentNode
+  }
+  if (!el || el.nodeName !== 'A') {
+    return false
+  }
+  return true
 }
 
 export function resolveHref({

@@ -81,7 +81,7 @@ export class Context /* implements IContext, use Context & IContext */ {
   // full path w/o base
   public get canonicalPath() {
     return (
-      this.base.replace(new RegExp(this.$root.base, 'i'), '') + this.pathname
+      this.base.replace(new RegExp(`^${Router.base}`, 'i'), '') + this.pathname
     )
   }
 
