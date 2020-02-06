@@ -110,7 +110,7 @@ describe('router.plugins.init', () => {
     await ctx.component
   })
 
-  test("doesn't blow up when no component", async () => {
+  test("doesn't blow up when no component", () => {
     const queue = jest.fn()
     const route = new Route('/', {})
     const ctx = { queue: queue as any, route } as Context & IContext

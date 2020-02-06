@@ -1,7 +1,5 @@
 import * as ko from 'knockout'
 import { RoutePlugin, Router } from '@profiscience/knockout-contrib-router'
-
-// @ts-ignore
 import template from './index.html'
 
 const lazyLoadPlugin: RoutePlugin = (componentName: string) => [

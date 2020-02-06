@@ -31,7 +31,7 @@ ko.components.register('hashbang', {
           constructor(ctx) {
             t.pass('initializes with hashbang')
             t.true(
-              location.href.indexOf('/base/#!/foo/foo') > -1,
+              location.href.includes('/base/#!/foo/foo'),
               'uses hash in url on init'
             )
 
@@ -55,7 +55,7 @@ ko.components.register('hashbang', {
           constructor() {
             t.pass('navigates correctly with hashbang')
             t.true(
-              location.href.indexOf('/base/#!/bar/bar') > -1,
+              location.href.includes('/base/#!/bar/bar'),
               'uses hash in url on update'
             )
 

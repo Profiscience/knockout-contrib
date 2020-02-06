@@ -71,7 +71,35 @@
     ],
     "parserOptions": {
       "project": "./tsconfig.lint.json"
-    }
+    },
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": [
+        1,
+        {
+          "allowExpressions": true
+        }
+      ],
+      "@typescript-eslint/interface-name-prefix": [
+        2,
+        {
+          "prefixWithI": "always"
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/**/*",
+          "**/test.*"
+        ],
+        "rules": {
+          "@typescript-eslint/unbound-method": 0,
+          "@typescript-eslint/no-explicit-any": 0,
+          "@typescript-eslint/explicit-function-return-type": 0,
+          "@typescript-eslint/no-empty-function": 0
+        }
+      }
+    ]
   },
   "husky": {
     "hooks": {

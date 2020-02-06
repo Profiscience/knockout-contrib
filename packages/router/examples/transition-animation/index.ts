@@ -1,9 +1,16 @@
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  Middleware,
+  Router
+} from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
-const transitionAnimationMiddleware: Middleware = function*(ctx: Context & IContext): IterableIterator<Promise<void>> {
+const transitionAnimationMiddleware: Middleware = function*(
+  ctx: Context & IContext
+): IterableIterator<Promise<void>> {
   // ctx.element does not exist before render, for obvious reasons.
   yield
 
@@ -37,7 +44,7 @@ const transitionAnimationMiddleware: Middleware = function*(ctx: Context & ICont
 Router.use(transitionAnimationMiddleware)
 
 Router.useRoutes({
-  '/': (ctx: any) => ctx.redirect('/foo'),
+  '/': (ctx) => ctx.redirect('/foo'),
   '/foo': 'foo',
   '/bar': 'bar'
 })

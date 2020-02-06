@@ -5,10 +5,10 @@ import { Router } from './router'
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 
-export const noop = () => {
+export const noop = (): void => {
   /* void */
 }
-export const startsWith = (string: string, target: string) =>
+export const startsWith = (string: string, target: string): boolean =>
   string.startsWith(target)
 export const flatMap = <T, R>(xs: T[], fn: (t: T) => MaybeArray<R>): R[] =>
   flatten(xs.map(fn))
@@ -21,7 +21,10 @@ export function castArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
 }
 
-export function traversePath(router: Router, path: string) {
+export function traversePath(
+  router: Router,
+  path: string
+): { router: Router; path: string } {
   if (path.startsWith('//')) {
     path = path.replace('//', '/')
     while (!router.isRoot) {
@@ -37,7 +40,8 @@ export function traversePath(router: Router, path: string) {
       }
       router = router.ctx.$child.router
     }
-    while (path && path.match(/\/?\.\./i) && !router.isRoot) {
+    const dotDotSlash = /\/?\.\./i
+    while (path && dotDotSlash.test(path) && !router.isRoot) {
       router = (router.ctx.$parent as Context & IContext).router
       path = path.replace(/\/?\.\./i, '')
     }
@@ -65,7 +69,7 @@ export function resolveHref({
 }: {
   router: Router
   path: string
-}) {
+}): string {
   return router.ctx.base + path.replace(/\/\*$/, '')
 }
 
@@ -96,6 +100,7 @@ export function isActivePath({
 export function getRouterForBindingContext(
   bindingCtx: ko.BindingContext
 ): Router {
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     if (bindingCtx.$router) {
       return bindingCtx.$router
@@ -107,10 +112,13 @@ export function getRouterForBindingContext(
   }
 }
 
-const _consoleLogger: any = console
-const _logger = (t: string) => (...ms: (string | Error)[]) =>
+type LogLevel = 'error' | 'warn'
+type LogMessage = string | Error
+type Logger = (...msgs: LogMessage[]) => void
+const _consoleLogger: Record<LogLevel, Logger> = console
+const _logger = (t: LogLevel) => (...ms: LogMessage[]) =>
   _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
-export const log = {
+export const log: Record<LogLevel, Logger> = {
   error: _logger('error'),
   warn: _logger('warn')
 }

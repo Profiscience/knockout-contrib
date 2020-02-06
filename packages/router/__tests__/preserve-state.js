@@ -36,7 +36,7 @@ ko.components.register('preserve-state', {
 
       ko.components.register('bar', {
         viewModel: class {
-          constructor(ctx) {
+          constructor() {
             t.deepEquals(history.state, { bar: 'bar' }, 'works as described')
 
             history.replaceState({ baz: 'notbaz' }, document.title)
@@ -48,7 +48,7 @@ ko.components.register('preserve-state', {
 
       ko.components.register('baz', {
         viewModel: class {
-          constructor(ctx) {
+          constructor() {
             t.deepEquals(
               history.state,
               { baz: 'baz' },

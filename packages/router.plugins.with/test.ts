@@ -4,7 +4,6 @@ import { withRoutePlugin } from './index'
 const FOO = Symbol('foo')
 
 declare module '@profiscience/knockout-contrib-router' {
-  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IContext {
     foo?: string
     [FOO]?: string

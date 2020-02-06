@@ -12,7 +12,7 @@ import {
 
 const VIA_FACTORY = Symbol('VIA_FACTORY')
 
-const instances = new Set<Query>()
+const instances = new Set<Query<unknown>>()
 
 let historyApiSpied = false
 let replaceState: typeof history.replaceState
@@ -32,7 +32,7 @@ export type IQuery<T> = {
 export interface IQueryParamConfig<T extends MaybeArray<Primitive>> {
   default: T
   initial?: T
-  coerce?(v: any): T
+  coerce?(v: unknown): T
   sticky?: boolean
 }
 
@@ -45,7 +45,7 @@ export interface IQueryParser {
   stringify(obj: { [k: string]: any }): string
 }
 
-export class Query {
+export class Query<T> {
   private static readonly _raw = {} as { [k: string]: any }
   private static readonly _refs = {} as { [k: string]: any }
   private static _queuedUpdate: Promise<void> | false
@@ -109,7 +109,7 @@ export class Query {
     this.set(config)
   }
 
-  public set(config: IQueryConfig) {
+  public set(config: IQueryConfig): void {
     const defaults = Object.assign({}, Query.getDefaults(config))
     const group = this._group
     const fromQS = Query.fromQS(group)
@@ -153,7 +153,7 @@ export class Query {
     ko.tasks.runEarly()
   }
 
-  public toJS() {
+  public toJS(): ko.Unwrapped<IQuery<T>> {
     return omit(ko.toJS(Query._raw[this._group]), isUndefined)
   }
 
@@ -165,13 +165,13 @@ export class Query {
     return ko.pureComputed(() => this.toJS())
   }
 
-  public clear() {
+  public clear(): void {
     Object.keys(Query._raw[this._group]).forEach((k) =>
       Query._raw[this._group][k].clear()
     )
   }
 
-  public dispose() {
+  public dispose(): void {
     instances.delete(this)
     const group = this._group
     this._subs.map((s) => s.dispose())
@@ -187,7 +187,7 @@ export class Query {
     }
   }
 
-  private reload(fromQS: { [k: string]: any }) {
+  private reload(fromQS: { [k: string]: any }): void {
     if (this._group) fromQS = fromQS[this._group]
     if (fromQS) {
       Object.keys(fromQS).forEach((k) => {
@@ -218,16 +218,16 @@ export class Query {
     return new Query(config, group, VIA_FACTORY) as any
   }
 
-  public static reload() {
+  public static reload(): void {
     const fromQS = Query.fromQS()
     for (const i of instances.values()) i.reload(fromQS)
   }
 
-  public static setParser(parser: IQueryParser) {
+  public static setParser(parser: IQueryParser): void {
     Query._parser = parser
   }
 
-  public static getQueryString() {
+  public static getQueryString(): string {
     const matches = /\?([^#]*)/.exec(location.search + location.hash)
     return matches ? matches[1] : ''
   }
@@ -250,7 +250,7 @@ export class Query {
     }
   }
 
-  private static getLocalStorageKey(group?: string) {
+  private static getLocalStorageKey(group?: string): string {
     let key = 'knockout_contrib_query'
     if (group) key += `/${group}`
     return key
@@ -278,7 +278,7 @@ export class Query {
     return _query
   }
 
-  private static writeQueryString(_query?: any) {
+  private static writeQueryString(_query?: any): void {
     if (!_query) {
       _query = this.getCleanQuery()
     }
@@ -315,7 +315,7 @@ export class Query {
     replaceState(history.state, document.title, newUrl)
   }
 
-  private static queueQueryStringWrite() {
+  private static queueQueryStringWrite(): Promise<void> {
     if (!this._queuedUpdate) {
       this._queuedUpdate = new Promise((resolve) => {
         ko.tasks.schedule(() => {
@@ -336,7 +336,6 @@ export class Query {
   ): IQueryParam<T> {
     const _default = ko.observable<T>(ko.toJS(__default) as T)
     const _p = ko.observable(_default())
-    const isDefault = ko.pureComputed(() => p() === _default())
 
     const p = ko.pureComputed<T>({
       read() {
@@ -359,18 +358,19 @@ export class Query {
       }
     }) as IQueryParam<T>
 
+    const isDefault = ko.pureComputed(() => p() === _default())
+
     Object.assign(p, {
       isDefault,
       set: (d: IQueryParamConfig<T> | T) => {
         if (!this.isParamConfigObject(d)) {
           if (isDefault() || isUndefined(p())) {
-            p(d as any)
+            p(d)
           }
-          _default(d as T)
+          _default(d)
         } else {
-          d = d as IQueryParamConfig<T>
           if (d.coerce) {
-            coerce = d.coerce
+            coerce = (v: unknown) => d.coerce(v)
           }
           if (isDefault() || isUndefined(p()) || !isUndefined(d.initial)) {
             p(typeof d.initial !== 'undefined' ? d.initial : d.default)
@@ -388,8 +388,10 @@ export class Query {
     return p
   }
 
-  private static isParamConfigObject(c: any) {
-    return c && c.hasOwnProperty('default')
+  private static isParamConfigObject<T extends MaybeArray<Primitive>>(
+    c: T | IQueryParamConfig<T>
+  ): c is IQueryParamConfig<T> {
+    return c && Object.hasOwnProperty.call(c, 'default')
   }
 
   private static getDefaults(config: IQueryConfig) {
@@ -401,10 +403,12 @@ export class Query {
   }
 }
 
-function spyOnHistoryApiMethod(methodName: string) {
-  const h: any = history
+function spyOnHistoryApiMethod(
+  methodName: 'pushState' | 'replaceState'
+): typeof history.pushState {
+  const h = history
   const orig = h[methodName].bind(h)
-  h[methodName] = (...args: any[]) => {
+  h[methodName] = (...args: Parameters<typeof history.pushState>) => {
     const ret = orig(...args)
     Query.reload()
     return ret

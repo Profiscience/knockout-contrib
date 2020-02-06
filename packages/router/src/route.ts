@@ -50,7 +50,7 @@ export class Route {
     }
   }
 
-  public matches(path: string) {
+  public matches(path: string): boolean {
     const matches = this.regexp.exec(path)
     if (matches === null) {
       return false
@@ -69,10 +69,10 @@ export class Route {
 
   public parse(
     path: string
-  ): { params: { [k: string]: any }; pathname: string; childPath?: string } {
+  ): { params: Record<string, unknown>; pathname: string; childPath?: string } {
     let childPath: string | undefined
     let pathname = path
-    const params: { [k: string]: any } = {}
+    const params: Record<string, unknown> = {}
     const matches = this.regexp.exec(path)
 
     if (!matches) {
@@ -120,6 +120,7 @@ export class Route {
             (childPath) =>
               new Route(
                 childPath,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ...castArray((configEntry as any)[childPath])
               )
           )
@@ -131,10 +132,9 @@ export class Route {
   }
 
   private static runPlugins(rawConfig: RouteConfig[]): NativeRouteConfig[] {
-    const getRouteConfigForArgViaPlugins = (arg: any) => (
-      accum: NativeRouteConfig[],
-      plugin: RoutePlugin
-    ) => {
+    const getRouteConfigForArgViaPlugins = (
+      arg: RouteConfig & IRouteConfig
+    ) => (accum: NativeRouteConfig[], plugin: RoutePlugin) => {
       const pluginStack = plugin(arg)
       return typeof pluginStack === 'undefined'
         ? // this plugin does not act on this route config, in may be bare middleware or a component id
@@ -146,7 +146,7 @@ export class Route {
     const accumulateAllRouteArgs = (
       accum: NativeRouteConfig[],
       arg: RouteConfig
-    ) => {
+    ): NativeRouteConfig[] => {
       const configViaPlugins = Route.plugins.reduce(
         getRouteConfigForArgViaPlugins(arg),
         []
@@ -161,7 +161,10 @@ export class Route {
     return rawConfig.reduce(accumulateAllRouteArgs, [])
   }
 
-  private static parsePath(path: string, hasChildren: boolean) {
+  private static parsePath(
+    path: string,
+    hasChildren: boolean
+  ): { keys: Key[]; regexp: RegExp } {
     if (hasChildren) {
       path = path.replace(/\/?!?$/, '/!')
     }

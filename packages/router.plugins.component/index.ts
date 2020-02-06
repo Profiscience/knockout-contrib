@@ -1,4 +1,3 @@
-import { IAnonymousComponent } from './index'
 import * as ko from 'knockout'
 import {
   Context,
@@ -16,12 +15,10 @@ type MaybeDefaultExport<T> = T | DefaultExport<T>
 type MaybeAccessor<A, T> = T | Accessor<A, T>
 
 declare module '@profiscience/knockout-contrib-router' {
-  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IContext {
     component?: MaybePromise<IRoutedComponentInstance>
   }
 
-  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface IRouteConfig {
     /**
      * Component accessor, intended for use with dynamic imports for lazy-loading.
@@ -39,7 +36,6 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IRoutedComponentInstance {
   /**
    * Name component is registered with Knockout as
@@ -48,7 +44,7 @@ export interface IRoutedComponentInstance {
   /**
    * Route viewModel instance
    */
-  viewModel?: any
+  viewModel?: ko.components.ViewModel
 }
 
 /**
@@ -89,7 +85,9 @@ export type IAnonymousComponent = {
  *
  * See @profiscience/knockout-contrib-router for context API
  */
-export type IRoutedViewModelConstructor = new (ctx: Context & IContext) => any
+export type IRoutedViewModelConstructor = new (
+  ctx: Context & IContext
+) => ko.components.ViewModel
 
 const uniqueComponentNames = (function*() {
   let i = 0
@@ -125,7 +123,7 @@ export function componentRoutePlugin({
           ctx.component = c
           _resolve(c)
         }
-        let viewModelInstance: any
+        let viewModelInstance: ko.components.ViewModel
         ctx.component = new Promise((r) => (_resolve = r))
 
         ctx.queue(
@@ -148,7 +146,7 @@ export function componentRoutePlugin({
                 name: componentName
               }
               const templateConfig = normalizedConfig.template
-              let viewModelConfig: any
+              let viewModelConfig: ko.components.ViewModelConfig | undefined
 
               if (normalizedConfig.viewModel) {
                 try {
@@ -156,7 +154,7 @@ export function componentRoutePlugin({
                   viewModelConfig = { instance: viewModelInstance }
                   routedComponentInstance.viewModel = viewModelInstance
                 } catch (e) {
-                  viewModelConfig = normalizedConfig.viewModel
+                  viewModelConfig = normalizedConfig.viewModel as ko.components.ViewModelConfig
                   if (UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED) {
                     console.warn(
                       '[@profiscience/knockout-contrib-router-plugins-component] Unable to instantiate viewModel using `new`. This may cause unexpected behavior. See "Subtleties/Caveats" in the documentation.'
@@ -220,9 +218,11 @@ async function normalizeConfig(
     Object.keys(obj).map(async (k: unknown) => {
       // this is fucking stupid -__-
       ret[k as keyof typeof obj] = resolveDefaultExport(
-        await resolvePromise(obj[k as keyof typeof obj] as MaybePromise<
-          string & IRoutedViewModelConstructor
-        >)
+        await resolvePromise(
+          obj[k as keyof typeof obj] as MaybePromise<
+            string & IRoutedViewModelConstructor
+          >
+        )
       )
     })
   )

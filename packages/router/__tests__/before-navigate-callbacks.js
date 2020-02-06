@@ -20,7 +20,9 @@ ko.components.register('before-navigate-callbacks', {
 
       ko.components.register('empty', {})
 
-      setTimeout(() => this.runTests(t).then(done))
+      setTimeout(() => {
+        this.runTests(t).then(done)
+      })
     }
 
     async runTests(t) {

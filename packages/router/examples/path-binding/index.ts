@@ -2,7 +2,7 @@ import ko from 'knockout'
 import { Router } from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
-function createOuterTemplate(foo) {
+function createOuterTemplate(foo): string {
   return `
     <h1>${foo}</h1>
 
@@ -29,7 +29,7 @@ function createOuterTemplate(foo) {
   `
 }
 
-function createInnerTemplate(foo) {
+function createInnerTemplate(foo): string {
   return `
     <h2>${foo}</h2>
 
@@ -49,14 +49,16 @@ ko.components.register('qux', { template: createInnerTemplate('qux') })
 
 Router.useRoutes({
   '/': 'empty',
-  '/foo': ['foo',
+  '/foo': [
+    'foo',
     {
       '/': 'empty',
       '/baz': 'baz',
       '/qux': 'qux'
     }
   ],
-  '/bar': ['bar',
+  '/bar': [
+    'bar',
     {
       '/': 'empty',
       '/baz': 'baz',

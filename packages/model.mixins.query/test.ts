@@ -10,9 +10,9 @@ describe('model.mixins.query', () => {
       QueryMixin({ myQueryParam: '' })
     )<P> {
       protected async fetch(): Promise<any> {
-        return {
+        return Promise.resolve({
           foos: ['foo', 'bar', 'baz', 'qux']
-        }
+        })
       }
     }
 
@@ -31,7 +31,7 @@ describe('model.mixins.query', () => {
       protected async fetch(): Promise<any> {
         expect(this.params.searchText).toBeObservable()
         expect(this.params.searchText()).toBe('')
-        return []
+        return Promise.resolve([])
       }
     }
 
@@ -48,7 +48,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch() {
         fetch()
-        return ''
+        return Promise.resolve('')
       }
     }
 
@@ -75,7 +75,7 @@ describe('model.mixins.query', () => {
       }
       protected async fetch() {
         fetch()
-        return ''
+        return Promise.resolve('')
       }
     }
 
@@ -92,9 +92,9 @@ describe('model.mixins.query', () => {
       QueryMixin({ myQueryParam: '' }, 'foo')
     )<P> {
       protected async fetch(): Promise<any> {
-        return {
+        return Promise.resolve({
           foos: ['foo', 'bar', 'baz', 'qux']
-        }
+        })
       }
     }
 
@@ -102,9 +102,9 @@ describe('model.mixins.query', () => {
       QueryMixin({ myQueryParam: '' }, 'foo')
     )<P> {
       protected async fetch(): Promise<any> {
-        return {
+        return Promise.resolve({
           foos: ['foo', 'bar', 'baz', 'qux']
-        }
+        })
       }
     }
 
@@ -112,9 +112,9 @@ describe('model.mixins.query', () => {
       QueryMixin({ myQueryParam: '' }, 'bar')
     )<P> {
       protected async fetch(): Promise<any> {
-        return {
+        return Promise.resolve({
           foos: ['foo', 'bar', 'baz', 'qux']
-        }
+        })
       }
     }
 
@@ -139,7 +139,7 @@ describe('model.mixins.query', () => {
       QueryMixin({ foo: 'foo' }, 'foo')
     )<P> {
       protected async fetch(): Promise<any> {
-        return this.params
+        return Promise.resolve(this.params)
       }
     }
 
@@ -147,7 +147,7 @@ describe('model.mixins.query', () => {
       P
     > {
       protected async fetch(): Promise<any> {
-        return this.params
+        return Promise.resolve(this.params)
       }
     }
 

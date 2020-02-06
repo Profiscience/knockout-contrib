@@ -15,8 +15,8 @@ export type RouterConfig = {
 export type RouterUpdateOptions = {
   push?: boolean
   force?: boolean
-  state?: { [prop: string]: any }
-  with?: { [prop: string]: any }
+  state?: Record<string, unknown>
+  with?: Record<string, unknown>
 }
 
 export type SimpleMiddleware =
@@ -85,7 +85,7 @@ export class Router {
     click: 'click'
     popstate: 'popstate'
   } = {
-    click: document.ontouchstart ? 'touchstart' : ('click' as any),
+    click: (document.ontouchstart ? 'touchstart' : 'click') as 'click',
     popstate: 'popstate'
   }
 
@@ -100,7 +100,7 @@ export class Router {
   constructor(
     url: string,
     $parentCtx?: Context & IContext,
-    _with: { [k: string]: any } = {}
+    _with: Record<string, unknown> = {}
   ) {
     this.component = ko.observable(null)
     this.isNavigating = ko.observable(true)
@@ -111,8 +111,14 @@ export class Router {
 
     if (this.isRoot) {
       Router.head = this
-      document.addEventListener<'click'>(Router.events.click, Router.onclick)
-      window.addEventListener(Router.events.popstate, Router.onpopstate)
+      document.addEventListener<'click'>(
+        Router.events.click,
+        Router.onclick.bind(Router)
+      )
+      window.addEventListener(
+        Router.events.popstate,
+        Router.onpopstate.bind(Router)
+      )
     }
 
     this.ctx = new Context(
@@ -135,7 +141,7 @@ export class Router {
     return this.ctx.$parents.length
   }
 
-  public init() {
+  public init(): void {
     this.isNavigating(false)
     this.ctx
       .runAfterRender()
@@ -195,6 +201,7 @@ export class Router {
     const _update = this.update.bind(this)
 
     // handle race-condition of navigating while awaiting async middleware
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.update = (_url: string, _args?: boolean | RouterUpdateOptions) => {
       toCtx.redirect(_url, typeof _args === 'boolean' ? undefined : _args)
       return Promise.resolve(true)
@@ -222,6 +229,7 @@ export class Router {
     }
 
     this.ctx = toCtx
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.update = _update
 
     await fromCtx.runAfterDispose()
@@ -267,12 +275,16 @@ export class Router {
     return matchingRouteWithFewestDynamicSegments
   }
 
-  public dispose() {
+  public dispose(): void {
     if (this.isRoot) {
-      document.removeEventListener(Router.events.click, Router.onclick, false)
+      document.removeEventListener(
+        Router.events.click,
+        Router.onclick.bind(Router),
+        false
+      )
       window.removeEventListener(
         Router.events.popstate,
-        Router.onpopstate,
+        Router.onpopstate.bind(Router),
         false
       )
       delete Router.head
@@ -353,7 +365,7 @@ export class Router {
     )
   }
 
-  private static onclick(e: MouseEvent) {
+  private static onclick(e: MouseEvent): void {
     const el = getAnchor(e.target as Node)
 
     if (e.defaultPrevented || !el) {
@@ -396,7 +408,7 @@ export class Router {
     e.preventDefault()
   }
 
-  private static onpopstate(e: PopStateEvent) {
+  private static onpopstate(e: PopStateEvent): void {
     Router.update(Router.getPathFromLocation(), {
       push: false,
       state: e.state
@@ -404,7 +416,7 @@ export class Router {
     e.preventDefault()
   }
 
-  private static canonicalizePath(path: string) {
+  private static canonicalizePath(path: string): string {
     return path.replace(new RegExp('^/?(?:#!)?/?'), '/')
   }
 
@@ -438,28 +450,27 @@ export class Router {
     parser.href = Router.canonicalizePath(url)
     return {
       hash: parser.hash,
-      path:
-        parser.pathname.startsWith('/')
-          ? parser.pathname
-          : '/' + parser.pathname,
+      path: parser.pathname.startsWith('/')
+        ? parser.pathname
+        : '/' + parser.pathname,
       search: parser.search
     }
   }
 
-  private static hasRoute(path: string) {
+  private static hasRoute(path: string): boolean {
     return (
       typeof Router.head.resolveRoute(Router.parseUrl(path).path) !==
       'undefined'
     )
   }
 
-  private static sameOrigin(href: string) {
+  private static sameOrigin(href: string): boolean {
     const { hostname, port, protocol } = location
     let origin = protocol + '//' + hostname
     if (port) {
       origin += ':' + port
     }
-    return href && href.startsWith(origin)
+    return !!(href && href.startsWith(origin))
   }
 
   private static which(e: MouseEvent): number {

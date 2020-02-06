@@ -18,9 +18,8 @@ class ViewModel extends ViewModelConstructorBuilder {
   constructor() {
     super()
 
-    this.subscribe(this.selectedExample, async (v) => {
-      await import(`./${v}`)
-      this.exampleComponent(v)
+    this.subscribe(this.selectedExample, (v) => {
+      import(`./${v}`).then(() => this.exampleComponent(v))
     })
   }
 }

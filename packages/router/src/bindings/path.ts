@@ -10,7 +10,7 @@ import { activePathBinding } from './active-path'
 
 export const pathBinding: ko.BindingHandler = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    ;(activePathBinding.init as any).call(
+    activePathBinding.init?.call(
       this,
       el,
       valueAccessor,

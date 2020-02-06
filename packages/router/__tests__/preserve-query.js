@@ -28,7 +28,7 @@ ko.components.register('preserve-query', {
 
       ko.components.register('bar', {
         viewModel: class {
-          constructor(ctx) {
+          constructor() {
             t.equals(window.location.search, '?qux=qux', 'works as described')
             Router.update('/baz?qux=notqux')
           }
@@ -37,7 +37,7 @@ ko.components.register('preserve-query', {
 
       ko.components.register('baz', {
         viewModel: class {
-          constructor(ctx) {
+          constructor() {
             t.equals(
               window.location.search,
               '?qux=notqux',

@@ -3,6 +3,7 @@ import { LifecycleMiddleware } from '@profiscience/knockout-contrib-router'
 
 export const FLASH_MESSAGE = Symbol('FLASH_MESSAGE')
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IFlashMessage {}
 
 declare module '@profiscience/knockout-contrib-router' {

@@ -4,6 +4,7 @@ import { Router } from './router'
 import { traversePath, log, noop } from './utils'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   interface KnockoutBindingContext {
     $router: Router
   }
@@ -22,7 +23,7 @@ ko.components.register('router', {
 ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
     const $router = bindingCtx.$rawData
-    const bindingEvent: any = ko.bindingEvent
+    const bindingEvent = ko.bindingEvent
 
     bindingEvent.subscribe(el, 'descendantsComplete', () => {
       if ($router.ctx.$parent) {
@@ -47,7 +48,7 @@ ko.bindingHandlers.__router__ = {
   }
 }
 
-function createViewModel(params: { [k: string]: any }) {
+function createViewModel(params: Record<string, unknown>): Router {
   let router = Router.head
   if (!router) {
     router = new Router(Router.getPathFromLocation(), undefined, params)
@@ -86,14 +87,16 @@ function createViewModel(params: { [k: string]: any }) {
       .runAfterRender()
       .catch(catchRedirectAfterRenderMiddleware)
       .then(() => {
-        setTimeout(() => r.update(p, router.ctx._redirectArgs))
+        setTimeout(() => {
+          r.update(p, router.ctx._redirectArgs)
+        })
       })
   }
 
   return router
 }
 
-function catchRedirectAfterRenderMiddleware(err: Error) {
+function catchRedirectAfterRenderMiddleware(err: Error): void {
   log.warn(
     'Error in afterRender middleware during redirection. This may be caused by attempting to use ctx.component (or a property thereof), or the DOM in the middleware. Because redirection occured, no component was actually rendered. You may wish to add a guard in your middleware to handle this case.'
   )

@@ -69,7 +69,7 @@ ko.components.register('anchor', {
       this.clickHandler = (e) => {
         if (!e.defaultPrevented) {
           t.ok(
-            ignoredAnchors.indexOf(e.target.id) > -1,
+            ignoredAnchors.includes(e.target.id),
             `ignores ${e.target.id} anchors`
           )
           e.preventDefault()

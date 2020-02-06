@@ -36,7 +36,7 @@ ko.components.register('home', {
 
 ko.components.register('login', {
   viewModel: class {
-    public login() {
+    public login(): void {
       sessionStorage.setItem('authenticated', 'true')
       Router.update('/').catch((err) => console.error('Error navigating', err))
     }

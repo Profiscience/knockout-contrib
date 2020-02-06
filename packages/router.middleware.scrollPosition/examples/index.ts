@@ -2,7 +2,7 @@ import * as ko from 'knockout'
 import { Context, Route, Router } from '@profiscience/knockout-contrib-router'
 import { createScrollPositionMiddleware } from '@profiscience/knockout-contrib-router-middleware-scroll-position'
 
-function range(n: number) {
+function range(n: number): number[] {
   const nums = []
   for (let i = 0; i < n; i++) nums.push(i)
   return nums
@@ -42,4 +42,4 @@ Router.use(
 
 Router.useRoutes([new Route('/', 'view'), new Route('/2', 'view')])
 
-ko.applyBindings()
+ko.applyBindings(document.body)

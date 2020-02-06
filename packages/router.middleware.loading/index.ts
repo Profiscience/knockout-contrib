@@ -11,8 +11,8 @@ export function createLoadingMiddleware({
   end,
   minDuration
 }: {
-  start: (ctx: Context & IContext) => any
-  end: (ctx: Context & IContext) => any
+  start: (ctx: Context & IContext) => unknown
+  end: (ctx: Context & IContext) => unknown
   minDuration?: number
 }): LifecycleMiddleware {
   let i = 0

@@ -43,4 +43,4 @@ Router.useRoutes([
   new Route('/10s', { delay: 10000 })
 ])
 
-ko.applyBindings()
+ko.applyBindings(document.body)
