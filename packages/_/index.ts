@@ -5,6 +5,7 @@ export * from '@profiscience/knockout-contrib-bindings-click-shift'
 export * from '@profiscience/knockout-contrib-bindings-draggable'
 export * from '@profiscience/knockout-contrib-bindings-infinite-scroll'
 export * from '@profiscience/knockout-contrib-bindings-jquery'
+export * from '@profiscience/knockout-contrib-bindings-repeat'
 export * from '@profiscience/knockout-contrib-bindings-toggle'
 
 export * from '@profiscience/knockout-contrib-component-loader'
