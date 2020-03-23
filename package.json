@@ -45,7 +45,7 @@
     "lerna": "^3.14.1",
     "lodash": "^4.17.11",
     "microtime": "^3.0.0",
-    "prettier": "^1.17.1",
+    "prettier": "^2.0.1",
     "pretty-quick": "^2.0.0",
     "toprogress": "^0.1.3",
     "ts-jest": "^25.0.0",
