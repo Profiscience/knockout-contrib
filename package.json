@@ -15,7 +15,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@commitlint/cli": "^8.1.0",
+    "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^8.1.0",
     "@types/babel-core": "^6.25.6",
     "@types/benchmark": "^1.0.31",
