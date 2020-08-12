@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-transform@2.1.9...@profiscience/knockout-contrib-model-mixins-transform@2.1.10) (2020-08-12)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-transform
+
+
+
+
+
 ## [2.1.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-transform@2.1.8...@profiscience/knockout-contrib-model-mixins-transform@2.1.9) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-transform

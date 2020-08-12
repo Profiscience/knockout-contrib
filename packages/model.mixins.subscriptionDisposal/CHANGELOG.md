@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.2...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.1.0) (2020-08-12)
+
+
+### Features
+
+* **model.mixins.subscriptiondisposal:** improve typings ([c583bc0](https://github.com/Profiscience/knockout-contrib/commit/c583bc08b71871eee45699242f682576a22c9b16))
+
+
+
+
+
 ## [2.0.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.1...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.2) (2019-12-12)
 
 
