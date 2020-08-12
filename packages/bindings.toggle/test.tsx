@@ -7,7 +7,7 @@ ko.bindingHandlers.toggle = toggleBindingHandler
 
 describe('bindings.toggle', () => {
   test('toggles observable', () => {
-    const actualEl = <div data-bind="toggle: bool" />
+    const actualEl = (<div data-bind="toggle: bool" />) as HTMLDivElement
     const bool = ko.observable(true)
     ko.applyBindings({ bool }, actualEl)
     actualEl.click()
@@ -23,7 +23,7 @@ describe('bindings.toggle', () => {
   test('can disable toggle with companion toggleDisable binding', () => {
     const actualEl = (
       <div data-bind="toggle: bool, toggleDisable: disableToggle" />
-    )
+    ) as HTMLDivElement
     const bool = ko.observable(true)
     const disableToggle = ko.observable(false)
 
