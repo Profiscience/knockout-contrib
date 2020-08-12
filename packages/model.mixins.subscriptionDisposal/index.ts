@@ -3,6 +3,8 @@ import { ConstructorBuilder } from '@profiscience/knockout-contrib-model-builder
 
 export const SUBSCRIPTIONS = Symbol('SUBSCRIPTIONS')
 
+type Callback<T> = (v: T) => unknown
+
 /**
  * Adds .subscribe(obs, fn) and .dispose() methods with subscription tracking to prevent leaks
  *
@@ -31,13 +33,16 @@ export function SubscriptionDisposalMixin<
      */
     public subscribe<T2>(
       obs: ko.Observable<T2>,
-      fn: (newVal: T2) => void
+      fn: Callback<T2>
     ): ko.Subscription
     public subscribe<T2>(
       accessor: () => T2,
-      fn: (newVal: T2) => void
+      fn: (newVal: T2) => unknown
     ): ko.Subscription
-    public subscribe(tree: any, fn: (newVal: any) => void): ko.Subscription
+    public subscribe<T2>(
+      tree: T2,
+      fn: Callback<ko.Unwrapped<T2>>
+    ): ko.Subscription
     public subscribe<T2>(arg: any, fn: any) {
       let obs: ko.MaybeComputed
 
@@ -60,12 +65,9 @@ export function SubscriptionDisposalMixin<
     /**
      * Disposes a single subscription
      */
-    public unsubscribe<T2>(
-      obs: ko.Observable<T2>,
-      fn: (newVal: T2) => void
-    ): void
-    public unsubscribe<T2>(accessor: () => T2, fn: (newVal: T2) => void): void
-    public unsubscribe(tree: any, fn: (newVal: any) => void): void
+    public unsubscribe<T2>(obs: ko.Observable<T2>, fn: Callback<T2>): void
+    public unsubscribe<T2>(accessor: () => T2, fn: Callback<T2>): void
+    public unsubscribe<T2>(tree: T2, fn: Callback<ko.Unwrapped<T2>>): void
     public unsubscribe(sub: ko.Subscription): void
     public unsubscribe(arg: any, fn?: any) {
       if (typeof arg.dispose === 'function') arg.dispose()
