@@ -50,7 +50,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch() {
         fetch()
-        return ''
+        return {}
       }
     }
 
@@ -77,7 +77,7 @@ describe('model.mixins.query', () => {
       }
       protected async fetch() {
         fetch()
-        return ''
+        return {}
       }
     }
 

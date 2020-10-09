@@ -132,7 +132,7 @@ export class DataModelConstructorBuilder<
    *
    * @abstract
    */
-  protected async fetch(initData?: TData): Promise<any> {
+  protected async fetch(initData?: TData): Promise<TData> {
     if (initData) {
       return initData
     } else {

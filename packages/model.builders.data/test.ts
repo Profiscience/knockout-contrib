@@ -81,7 +81,7 @@ describe('model.builders.data', () => {
     class FooModel extends DataModelConstructorBuilder<IFooParams> {
       public readonly value!: ko.Observable<string>
 
-      protected async fetch() {
+      protected async fetch(): Promise<Record<string, unknown>> {
         throw new Error()
       }
     }
