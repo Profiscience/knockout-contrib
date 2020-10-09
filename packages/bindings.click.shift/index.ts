@@ -7,9 +7,9 @@ export const shiftClickBindingHandler: ko.BindingHandler = {
       {
         click($data: any, e: MouseEvent) {
           if (e.shiftKey) valueAccessor().call(this, $data, e)
-        }
+        },
       },
       bindingContext
     )
-  }
+  },
 }

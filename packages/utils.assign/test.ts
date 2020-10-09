@@ -10,8 +10,8 @@ describe('utils.merge', () => {
       existingObservable: ko.observable('old'),
       existingObject: {
         existingUntouched: 'old',
-        existingNonObservable: 'old'
-      }
+        existingNonObservable: 'old',
+      },
     } as any
 
     assign(actual, {
@@ -21,10 +21,10 @@ describe('utils.merge', () => {
         existingNonObservable: 'new',
         newProperty: 'new',
         newObject: {
-          foo: 'foo'
-        }
+          foo: 'foo',
+        },
       },
-      newProperty: 'new'
+      newProperty: 'new',
     })
 
     expect(actual.existingNonObservable).not.toBeObservable()
@@ -43,10 +43,10 @@ describe('utils.merge', () => {
         existingNonObservable: 'new',
         newProperty: 'new',
         newObject: {
-          foo: 'foo'
-        }
+          foo: 'foo',
+        },
       },
-      newProperty: 'new'
+      newProperty: 'new',
     })
   })
 
@@ -82,7 +82,7 @@ describe('utils.merge', () => {
         actual,
         { foo: ['foo'] },
         {
-          mapArrayElements: mapArraysArg
+          mapArrayElements: mapArraysArg,
         }
       )
 
@@ -112,16 +112,16 @@ describe('utils.merge', () => {
     const dest: any = {
       foo: ko.observable(),
       deep: {
-        foo: ko.observable()
-      }
+        foo: ko.observable(),
+      },
     }
     const src = {
       foo: 'foo',
       bar: 'bar',
       deep: {
         foo: 'foo',
-        bar: 'bar'
-      }
+        bar: 'bar',
+      },
     }
     assign(dest, src, { strict: true })
 
@@ -133,10 +133,10 @@ describe('utils.merge', () => {
 
   test('creates object on destination if null', () => {
     const dest: any = {
-      foo: null
+      foo: null,
     }
     const src = {
-      foo: { bar: 'bar' }
+      foo: { bar: 'bar' },
     }
     expect(() => assign(dest, src)).not.toThrow()
   })
@@ -144,11 +144,11 @@ describe('utils.merge', () => {
   test('does not blow up with non-writable computeds', () => {
     const dest: any = {
       foo: ko.pureComputed(() => 'foo'),
-      bar: ko.observable('bar')
+      bar: ko.observable('bar'),
     }
     const src = {
       foo: 'notfoo',
-      bar: 'notbar'
+      bar: 'notbar',
     }
     expect(() => assign(dest, src)).not.toThrow()
     expect(dest.foo()).toBe('foo')

@@ -7,7 +7,7 @@ import {
   isNumber,
   isUndefined,
   entries,
-  omit
+  omit,
 } from './utils'
 
 const VIA_FACTORY = Symbol('VIA_FACTORY')
@@ -54,7 +54,7 @@ export class Query {
     stringify: (obj) =>
       JSON.stringify(obj) === '{}'
         ? ''
-        : encodeURIComponent(JSON.stringify(obj))
+        : encodeURIComponent(JSON.stringify(obj)),
   }
 
   private readonly _group!: string
@@ -79,13 +79,13 @@ export class Query {
     Object.defineProperty(this, '_group', {
       configurable: false,
       enumerable: false,
-      get: () => group
+      get: () => group,
     })
 
     Object.defineProperty(this, '_subs', {
       configurable: false,
       enumerable: false,
-      writable: false
+      writable: false,
     })
 
     if (isUndefined(Query._raw[this._group])) {
@@ -101,7 +101,7 @@ export class Query {
       const current = Object.assign({}, Query.fromQS(), Query.getCleanQuery())
       Query.writeQueryString({
         ...current,
-        [this._group]: state.__query[this._group]
+        [this._group]: state.__query[this._group],
       })
       delete state.__query[this._group]
       replaceState(state, document.title, location.href)
@@ -358,7 +358,7 @@ export class Query {
             err
           )
         )
-      }
+      },
     }) as IQueryParam<T>
 
     Object.assign(p, {
@@ -382,7 +382,7 @@ export class Query {
           }
         }
       },
-      clear: () => p(_default())
+      clear: () => p(_default()),
     })
 
     if (!isUndefined(init)) p(init)

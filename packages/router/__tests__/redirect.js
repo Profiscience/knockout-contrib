@@ -25,7 +25,7 @@ ko.components.register('redirect', {
           },
           afterDispose() {
             fooPre.afterDispose = true
-          }
+          },
         }),
         (ctx) => {
           if (ctx.pathname === '/notfoo') {
@@ -60,7 +60,7 @@ ko.components.register('redirect', {
                 'afterDispose middleware after redirect in global middleware should not be executed'
               )
             }
-          }
+          },
         })
       )
 
@@ -81,7 +81,7 @@ ko.components.register('redirect', {
             },
             afterDispose() {
               barPre.afterDispose = true
-            }
+            },
           }),
           (ctx) => {
             ctx.redirect('/bar')
@@ -106,8 +106,8 @@ ko.components.register('redirect', {
               t.fail(
                 'afterDispose middleware after redirect in route middleware should not be executed'
               )
-            }
-          })
+            },
+          }),
         ],
         '/bar': 'bar',
         '/notbaz': [
@@ -141,13 +141,13 @@ ko.components.register('redirect', {
                 },
                 afterDispose() {
                   bazPreChild.afterDispose = true
-                }
-              })
-            ]
-          }
+                },
+              }),
+            ],
+          },
         ],
         '/baz': 'baz',
-        '/qux': 'qux'
+        '/qux': 'qux',
       })
 
       ko.components.register('notfoo', {
@@ -155,7 +155,7 @@ ko.components.register('redirect', {
           constructor() {
             t.fail('global redirect should not have intermediate render')
           }
-        }
+        },
       })
 
       ko.components.register('notbar', {
@@ -163,7 +163,7 @@ ko.components.register('redirect', {
           constructor() {
             t.fail('route redirect should not have intermediate render')
           }
-        }
+        },
       })
 
       ko.components.register('foo', {
@@ -186,7 +186,7 @@ ko.components.register('redirect', {
 
             Router.update('/notbar')
           }
-        }
+        },
       })
 
       ko.components.register('bar', {
@@ -209,7 +209,7 @@ ko.components.register('redirect', {
 
             Router.update('/notbaz')
           }
-        }
+        },
       })
 
       ko.components.register('baz', {
@@ -223,7 +223,7 @@ ko.components.register('redirect', {
 
             Router.update('/qux')
           }
-        }
+        },
       })
 
       ko.components.register('qux', {
@@ -237,8 +237,8 @@ ko.components.register('redirect', {
 
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

@@ -6,21 +6,21 @@ describe('router.middleware.middleware', () => {
     const topCtx: Context & IContext = {
       $child: {},
       router: {
-        isRoot: true
-      }
+        isRoot: true,
+      },
     } as Context & IContext
     const bottomCtx: Context & IContext = {
       router: {
-        isRoot: false
+        isRoot: false,
       },
-      $child: undefined
+      $child: undefined,
     } as any
     const start = jest.fn()
     const middleware = createLoadingMiddleware({
       start,
       end: () => {
         // noop
-      }
+      },
     })
     const topLifecycle = middleware(topCtx) as any
     const bottomLifecycle = middleware(bottomCtx) as any
@@ -32,21 +32,21 @@ describe('router.middleware.middleware', () => {
     const topCtx: Context & IContext = {
       $child: {},
       router: {
-        isRoot: true
-      }
+        isRoot: true,
+      },
     } as Context & IContext
     const bottomCtx: Context & IContext = {
       router: {
-        isRoot: false
+        isRoot: false,
       },
-      $child: undefined
+      $child: undefined,
     } as any
     const end = jest.fn()
     const middleware = createLoadingMiddleware({
       start: () => {
         // noop
       },
-      end
+      end,
     })
     const topLifecycle = middleware(topCtx) as any
     const bottomLifecycle = middleware(bottomCtx) as any
@@ -62,14 +62,14 @@ describe('router.middleware.middleware', () => {
     const topCtx: Context & IContext = {
       $child: {},
       router: {
-        isRoot: true
-      }
+        isRoot: true,
+      },
     } as Context & IContext
     const bottomCtx: Context & IContext = {
       router: {
-        isRoot: false
+        isRoot: false,
       },
-      $child: undefined
+      $child: undefined,
     } as any
     const minDuration = 5000
     const end = jest.fn()
@@ -78,7 +78,7 @@ describe('router.middleware.middleware', () => {
       start: () => {
         // noop
       },
-      end
+      end,
     })
     const topLifecycle = middleware(topCtx) as any
     const bottomLifecycle = middleware(bottomCtx) as any

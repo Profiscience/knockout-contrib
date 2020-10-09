@@ -36,13 +36,13 @@ function shouldRedirect(ctx) {
 new Route('/', {
   redirect: (ctx) => {
     if (shouldRedirect(ctx)) return '//redirect/to/this/route'
-  }
+  },
 })
 
 // Async
 new Route('/', {
   redirect: async (ctx) => {
     if (await shouldRedirect(ctx)) return '//redirect/to/this/route'
-  }
+  },
 })
 ```

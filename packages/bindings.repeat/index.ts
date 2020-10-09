@@ -11,10 +11,10 @@ export const repeatBindingHandler: ko.BindingHandler = {
     ko.applyBindingsToNode(
       el,
       {
-        foreach: indexes
+        foreach: indexes,
       },
       bindingContext
     )
     return { controlsDescendantBindings: true }
-  }
+  },
 }

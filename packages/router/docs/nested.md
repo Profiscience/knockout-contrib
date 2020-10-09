@@ -16,8 +16,8 @@ Router.useRoutes({
     '/': 'user-list',
     '/new': 'user-create',
     '/:id': 'user-show',
-    '/:id/edit': 'user-edit'
-  }
+    '/:id/edit': 'user-edit',
+  },
 })
 ```
 
@@ -32,8 +32,8 @@ Router.useRoutes([
     new Route('/', 'user-list'),
     new Route('/', 'user-create'),
     new Route('/:id', 'user-show'),
-    new Route('/:id/edit', 'user-edit')
-  ])
+    new Route('/:id/edit', 'user-edit'),
+  ]),
 ])
 ```
 
@@ -48,8 +48,8 @@ Router.useRoutes([
     '/': 'user-list',
     '/new': 'user-create',
     '/:id': 'user-show',
-    '/:id/edit': 'user-edit'
-  })
+    '/:id/edit': 'user-edit',
+  }),
 ])
 ```
 
@@ -70,9 +70,9 @@ Router.useRoutes({
       '/': 'user-list',
       '/new': 'user-create',
       '/:id': 'user-show',
-      '/:id/edit': 'user-edit'
-    }
-  ]
+      '/:id/edit': 'user-edit',
+    },
+  ],
 })
 
 ko.components.register('user-header', {
@@ -85,7 +85,7 @@ ko.components.register('user-header', {
     </a>
 
     <router></router>
-  `
+  `,
 })
 ```
 

@@ -23,5 +23,5 @@ export const flashMessageMiddleware: LifecycleMiddleware = (ctx) => ({
   },
   afterDispose() {
     flashMessage(false)
-  }
+  },
 })

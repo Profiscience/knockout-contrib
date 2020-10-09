@@ -125,12 +125,12 @@ describe('querystring', () => {
       Query.create({
         stickyParam: {
           default: true as boolean | string,
-          sticky: true
+          sticky: true,
         },
         notStickyParam: {
           default: true,
-          sticky: false
-        }
+          sticky: false,
+        },
       })
 
     let query = createQuery()
@@ -159,16 +159,16 @@ describe('querystring', () => {
     const query = Query.create({
       foo: {
         default: 'foo',
-        initial: 'bar'
+        initial: 'bar',
       },
       bar: {
         default: 'bar',
-        initial: 'notbar'
+        initial: 'notbar',
       },
       baz: {
         default: [],
-        coerce: (v) => (v.length === 0 ? ['baz'] : v)
-      }
+        coerce: (v) => (v.length === 0 ? ['baz'] : v),
+      },
     })
 
     let q = query.toJS()
@@ -193,16 +193,16 @@ describe('querystring', () => {
     const query = Query.create({
       foo: {
         default: null,
-        initial: false
+        initial: false,
       },
       bar: {
         default: undefined,
-        initial: 0
+        initial: 0,
       },
       baz: {
         default: '',
-        initial: NaN
-      }
+        initial: NaN,
+      },
     })
 
     let q = query.toJS()
@@ -256,7 +256,7 @@ describe('querystring', () => {
 
     query.set({
       foo: 'notfoo',
-      bar: 'notbar'
+      bar: 'notbar',
     })
 
     expect(query.foo()).toBe('notfoo')
@@ -294,7 +294,7 @@ describe('querystring', () => {
 
     query.foo.set({
       default: 'bar',
-      coerce: (foo: any) => (foo === 'foo' ? 'foo' : 'notfoo')
+      coerce: (foo: any) => (foo === 'foo' ? 'foo' : 'notfoo'),
     })
     query.bar.set({ default: 'notbar', initial: 'baz' })
 
@@ -390,7 +390,7 @@ describe('querystring', () => {
     ko.tasks.runEarly()
 
     expect(Query.parse(location.search.substring(1))).toEqual({
-      a: { foo: 'foo' }
+      a: { foo: 'foo' },
     })
 
     a2.dispose()
@@ -422,7 +422,7 @@ describe('querystring', () => {
     expect(b.foo()).toBe('notfoo')
     expect(Query.parse(location.search.substring(1))).toEqual({
       a: { foo: 'foo' },
-      b: { foo: 'notfoo' }
+      b: { foo: 'notfoo' },
     })
 
     a.dispose()
@@ -456,7 +456,7 @@ describe('querystring', () => {
   test('Query#setParser({ parse, stringify })', () => {
     Query.setParser({
       parse: (str) => ({ foo: str.replace('foo=', '') }),
-      stringify: (obj: { foo: string }) => 'foo=' + obj.foo
+      stringify: (obj: { foo: string }) => 'foo=' + obj.foo,
     })
 
     history.replaceState(null, '', location.pathname + '?foo=foo')

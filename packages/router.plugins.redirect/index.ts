@@ -2,7 +2,7 @@ import {
   Context,
   IContext,
   IRouteConfig,
-  Middleware
+  Middleware,
 } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
@@ -14,7 +14,9 @@ declare module '@profiscience/knockout-contrib-router' {
   }
 }
 
-export function redirectRoutePlugin({ redirect }: IRouteConfig): Middleware | void {
+export function redirectRoutePlugin({
+  redirect,
+}: IRouteConfig): Middleware | void {
   if (!redirect) return
 
   return async (ctx: Context & IContext) => {

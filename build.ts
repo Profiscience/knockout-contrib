@@ -16,7 +16,7 @@ function parseArgv() {
     process.argv.indexOf(`--${f}`) > -1 || process.argv.indexOf(`-${f[0]}`) > -1
   return {
     watch: hasFlag('watch'),
-    transpileOnly: hasFlag('transpile-only')
+    transpileOnly: hasFlag('transpile-only'),
   }
 }
 
@@ -30,10 +30,10 @@ const getSourceFiles = () =>
       '!**/__tests__/**/*',
       '!**/test.ts',
       '!**/test.tsx',
-      '!**/*.test.ts'
+      '!**/*.test.ts',
     ],
     {
-      cwd: PACKAGES_DIR
+      cwd: PACKAGES_DIR,
     }
   ).then((files) => files.map((f) => path.resolve(__dirname, 'packages', f)))
 
@@ -77,7 +77,7 @@ function createWorkers(size: number) {
     },
     destroy() {
       _workers.forEach((w) => w.kill())
-    }
+    },
   }
 }
 
@@ -115,7 +115,7 @@ async function build(files: string[]): Promise<number> {
       console.log(chalk.green('Transpilation completed without errors'))
       workers.destroy()
       return results
-    })
+    }),
     // .catch((message) => {
     //   console.error('Error:', message)
     // })

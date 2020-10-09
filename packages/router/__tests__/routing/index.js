@@ -40,5 +40,5 @@ ko.components.register('routing', {
         })
       }
     }
-  }
+  },
 })

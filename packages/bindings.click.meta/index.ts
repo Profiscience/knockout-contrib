@@ -7,9 +7,9 @@ export const metaClickBindingHandler: ko.BindingHandler = {
       {
         click($data: any, e: MouseEvent) {
           if (e.metaKey) valueAccessor().call(this, $data, e)
-        }
+        },
       },
       bindingContext
     )
-  }
+  },
 }

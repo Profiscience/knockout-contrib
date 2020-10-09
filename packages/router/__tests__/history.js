@@ -11,7 +11,7 @@ ko.components.register('history', {
         '/b': 'b', // update(path)
         '/c': 'c', // update(path, {})
         '/d': 'd', // update(path, false)
-        '/e': 'e' // update(path, { push: false })
+        '/e': 'e', // update(path, { push: false })
       })
 
       history.pushState(null, null, '/a')
@@ -35,7 +35,7 @@ ko.components.register('history', {
             )
             ctx.router.update('/b')
           }
-        }
+        },
       })
 
       ko.components.register('b', {
@@ -48,7 +48,7 @@ ko.components.register('history', {
             )
             ctx.router.update('/c', {})
           }
-        }
+        },
       })
 
       ko.components.register('c', {
@@ -61,7 +61,7 @@ ko.components.register('history', {
             )
             ctx.router.update('/d', false)
           }
-        }
+        },
       })
 
       ko.components.register('d', {
@@ -74,7 +74,7 @@ ko.components.register('history', {
             )
             ctx.router.update('/e', { push: false })
           }
-        }
+        },
       })
 
       ko.components.register('e', {
@@ -87,8 +87,8 @@ ko.components.register('history', {
             )
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

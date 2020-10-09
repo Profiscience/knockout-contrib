@@ -4,7 +4,7 @@ import {
   Context,
   Route,
   IContext,
-  Lifecycle
+  Lifecycle,
 } from '@profiscience/knockout-contrib-router'
 import { componentRoutePlugin } from '@profiscience/knockout-contrib-router-plugins-component'
 
@@ -24,10 +24,10 @@ describe('router.plugins.init', () => {
       viewModel: Promise.resolve({
         default: class {
           public data = {
-            [INITIALIZED]: promise
+            [INITIALIZED]: promise,
           }
-        }
-      })
+        },
+      }),
     })
 
     const queue = jest.fn()
@@ -55,8 +55,8 @@ describe('router.plugins.init', () => {
       viewModel: Promise.resolve({
         default: class {
           public [INITIALIZED] = promise
-        }
-      })
+        },
+      }),
     })
 
     const queue = jest.fn()
@@ -94,8 +94,8 @@ describe('router.plugins.init', () => {
           public init() {
             expect(this.initialized).toBe(true)
           }
-        }
-      })
+        },
+      }),
     })
 
     const queue = jest.fn()
@@ -128,7 +128,7 @@ describe('router.plugins.init', () => {
   test("doesn't blow up when no viewModel", async () => {
     const queue = jest.fn()
     const getComponent = () => ({
-      template: Promise.resolve({ default: 'Hello, World!' })
+      template: Promise.resolve({ default: 'Hello, World!' }),
     })
     const route = new Route('/', { component: getComponent })
     const ctx = { queue: queue as any, route: {} } as Context & IContext
@@ -164,7 +164,7 @@ describe('router.plugins.init', () => {
       template: 'Hello, World!',
       viewModel: class {
         public foo = undefined
-      }
+      },
     }
     const route = new Route('/', { component })
     const ctx = { queue: queue as any, route } as Context & IContext
@@ -189,7 +189,7 @@ describe('router.plugins.init', () => {
       template: 'Hello, World!',
       viewModel: class {
         public foo = null
-      }
+      },
     }
     const route = new Route('/', { component })
     const ctx = { queue: queue as any, route } as Context & IContext

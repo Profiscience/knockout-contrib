@@ -28,17 +28,17 @@ Route.usePlugin(createTitleRoutePlugin())
 
 // Basic
 new Route('/', {
-  title: 'Home'
+  title: 'Home',
 })
 
 // Sync Accessor Function
 new Route('/profile', [loadUser], {
-  title: (ctx) => `Profile | ${ctx.user.name}`
+  title: (ctx) => `Profile | ${ctx.user.name}`,
 })
 
 // Async Accessor Function
 new Route('/profile', {
-  title: async (ctx) => `Profile | ${await getUserName()}`
+  title: async (ctx) => `Profile | ${await getUserName()}`,
 })
 ```
 
@@ -51,12 +51,12 @@ new Route('/', {
   title: 'My Awesome App',
   children: [
     new Route('/', {
-      title: 'Home'
+      title: 'Home',
     }),
     new Route('/profile', {
-      title: 'Profile'
-    })
-  ]
+      title: 'Profile',
+    }),
+  ],
 })
 ```
 

@@ -6,12 +6,12 @@ ko.components.register('similar', {
       t.notOk(params.foo, 'should use most restrictive route')
       done()
     }
-  }
+  },
 })
 
 export const path = '/similar/foo/bar'
 
 export const routes = {
   '/similar/:foo/:bar': 'similar',
-  '/similar/foo/:bar': 'similar'
+  '/similar/foo/:bar': 'similar',
 }

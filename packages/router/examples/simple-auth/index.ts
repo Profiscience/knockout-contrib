@@ -1,5 +1,10 @@
 import * as ko from 'knockout'
-import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  Middleware,
+  Router,
+} from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
 const authMiddleware: Middleware = (ctx: Context & IContext) => {
@@ -22,11 +27,11 @@ Router.useRoutes({
   '/logout': (ctx) => {
     sessionStorage.removeItem('authenticated')
     ctx.redirect('/login')
-  }
+  },
 })
 
 ko.components.register('home', {
-  template: '<a data-bind="path: \'/logout\'">Logout</a>'
+  template: '<a data-bind="path: \'/logout\'">Logout</a>',
 })
 
 ko.components.register('login', {
@@ -39,7 +44,7 @@ ko.components.register('login', {
   template: `
     <h1>Login</h1>
     <button data-bind="click: login">Login</button>
-  `
+  `,
 })
 
 ko.components.register('simple-auth', { template })

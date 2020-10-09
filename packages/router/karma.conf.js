@@ -15,7 +15,7 @@ module.exports = (config) => {
       require('karma-tap-pretty-reporter'),
       require('karma-tap'),
       require('karma-webpack'),
-      require('karma-remap-istanbul')
+      require('karma-remap-istanbul'),
     ],
 
     frameworks: ['tap'],
@@ -23,20 +23,20 @@ module.exports = (config) => {
     files: ['__tests__/index.js'],
 
     preprocessors: {
-      '__tests__/index.js': 'webpack'
+      '__tests__/index.js': 'webpack',
     },
 
     browsers: ['_Firefox'],
 
     browserConsoleLogOptions: {
-      terminal: false
+      terminal: false,
     },
 
     customLaunchers: {
       _Firefox: {
         base: 'Firefox',
-        flags: ['-private']
-      }
+        flags: ['-private'],
+      },
     },
 
     // to debug, comment out singleRun, and uncomment autoWatch
@@ -52,15 +52,15 @@ module.exports = (config) => {
     remapIstanbulReporter: {
       reports: {
         lcovonly: 'coverage/lcov.info',
-        html: 'coverage/html'
-      }
+        html: 'coverage/html',
+      },
     },
 
     webpack: {
       context: __dirname,
       mode: 'development',
       node: {
-        fs: 'empty'
+        fs: 'empty',
       },
       devtool: 'inline-source-map',
       module: {
@@ -69,14 +69,14 @@ module.exports = (config) => {
             test: /\.js$/,
             use: {
               loader: 'istanbul-instrumenter-loader',
-              options: { esModules: true }
+              options: { esModules: true },
             },
-            include: path.resolve('dist')
-          }
-        ]
-      }
+            include: path.resolve('dist'),
+          },
+        ],
+      },
     },
 
-    webpackMiddleware: {}
+    webpackMiddleware: {},
   })
 }

@@ -115,7 +115,7 @@ at different points in the page lifecycle.
 ```javascript
 import Query from 'ko-query'
 
-export default function(ctx) {
+export default function (ctx) {
   return {
     beforeRender() {
       console.log('[router] navigating to', ctx.pathname)
@@ -133,7 +133,7 @@ export default function(ctx) {
     },
     afterDispose() {
       console.log('[router] navigated away from', ctx.pathname)
-    }
+    },
   }
 }
 ```

@@ -4,7 +4,7 @@ import {
   isActivePath,
   traversePath,
   getRouterForBindingContext,
-  log
+  log,
 } from '../utils'
 
 export const activePathBinding: ko.BindingHandler = {
@@ -21,14 +21,16 @@ export const activePathBinding: ko.BindingHandler = {
           el,
           {
             css: {
-              [activePathCSSClass]: ko.pureComputed(() => isActivePath(route()))
-            }
+              [activePathCSSClass]: ko.pureComputed(() =>
+                isActivePath(route())
+              ),
+            },
           },
           bindingCtx
         )
       })
       .catch((err) => log.error('Error initializing activePath binding', err))
-  }
+  },
 }
 
 ko.bindingHandlers.activePath = activePathBinding

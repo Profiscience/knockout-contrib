@@ -1,9 +1,16 @@
 import * as $ from 'jquery'
 import * as ko from 'knockout'
-import { Context, IContext, Middleware, Router } from '@profiscience/knockout-contrib-router'
+import {
+  Context,
+  IContext,
+  Middleware,
+  Router,
+} from '@profiscience/knockout-contrib-router'
 import template from './index.html'
 
-const transitionAnimationMiddleware: Middleware = function*(ctx: Context & IContext): IterableIterator<Promise<void>> {
+const transitionAnimationMiddleware: Middleware = function* (
+  ctx: Context & IContext
+): IterableIterator<Promise<void>> {
   // ctx.element does not exist before render, for obvious reasons.
   yield
 
@@ -39,7 +46,7 @@ Router.use(transitionAnimationMiddleware)
 Router.useRoutes({
   '/': (ctx: any) => ctx.redirect('/foo'),
   '/foo': 'foo',
-  '/bar': 'bar'
+  '/bar': 'bar',
 })
 
 ko.components.register('foo', {
@@ -49,7 +56,7 @@ ko.components.register('foo', {
     <hr>
 
     <a data-bind="path: '//bar'">go to bar</a>
-  `
+  `,
 })
 ko.components.register('bar', {
   template: `
@@ -58,7 +65,7 @@ ko.components.register('bar', {
     <hr>
 
     <a data-bind="path: '//'">go to foo</a>
-  `
+  `,
 })
 
 ko.components.register('transition-animation', { template })

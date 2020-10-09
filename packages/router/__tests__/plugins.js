@@ -29,14 +29,14 @@ ko.components.register('plugins', {
 
       Router.useRoutes({
         '/component': {
-          component: 'component'
+          component: 'component',
         },
         // eslint-disable-next-line formatting/newline-object-in-array
         '/data': [
           'data',
           {
-            data: Promise.resolve(true)
-          }
+            data: Promise.resolve(true),
+          },
         ],
         // eslint-disable-next-line formatting/newline-object-in-array
         '/data-multi': [
@@ -44,21 +44,21 @@ ko.components.register('plugins', {
           {
             data: {
               true: Promise.resolve(true),
-              false: Promise.resolve(false)
-            }
-          }
+              false: Promise.resolve(false),
+            },
+          },
         ],
         '/composed': {
           component: 'composed',
-          data: Promise.resolve(true)
-        }
+          data: Promise.resolve(true),
+        },
       })
 
       Router.useRoutes([
         new Route('/route-constructor', {
           component: 'route-constructor',
-          data: Promise.resolve(true)
-        })
+          data: Promise.resolve(true),
+        }),
       ])
 
       ko.components.register('component', {
@@ -67,7 +67,7 @@ ko.components.register('plugins', {
             t.pass('plugin works with returned string')
             Router.update('/data')
           }
-        }
+        },
       })
 
       ko.components.register('data', {
@@ -80,7 +80,7 @@ ko.components.register('plugins', {
             )
             Router.update('/data-multi')
           }
-        }
+        },
       })
 
       ko.components.register('data-multi', {
@@ -93,7 +93,7 @@ ko.components.register('plugins', {
             )
             Router.update('/composed')
           }
-        }
+        },
       })
 
       ko.components.register('composed', {
@@ -102,7 +102,7 @@ ko.components.register('plugins', {
             t.equals(true, ctx.data, 'plugins can be composed')
             Router.update('/route-constructor')
           }
-        }
+        },
       })
 
       ko.components.register('route-constructor', {
@@ -111,12 +111,12 @@ ko.components.register('plugins', {
             t.equals(true, ctx.data, 'plugins work with route constructor')
             done()
           }
-        }
+        },
       })
     }
 
     dispose() {
       Route.plugins = []
     }
-  }
+  },
 })

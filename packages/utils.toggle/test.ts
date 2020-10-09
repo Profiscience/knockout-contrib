@@ -16,7 +16,7 @@ describe('utils.toggle', () => {
       write: (v) => {
         expect(v).toBe(false)
         done()
-      }
+      },
     })
     toggle(bool)
   })

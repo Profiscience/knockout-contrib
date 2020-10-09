@@ -155,7 +155,7 @@ export class Route {
         ...accum,
         ...(configViaPlugins.length > 0
           ? configViaPlugins
-          : flatten(castArray(arg as MaybeArray<NativeRouteConfig>)))
+          : flatten(castArray(arg as MaybeArray<NativeRouteConfig>))),
       ]
     }
     return rawConfig.reduce(accumulateAllRouteArgs, [])

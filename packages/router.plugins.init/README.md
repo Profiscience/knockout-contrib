@@ -30,7 +30,7 @@ import {
   Route,
   componentRoutePlugin,
   componentInitializerRoutePlugin,
-  INITIALIZED
+  INITIALIZED,
 } from '@profiscience/knockout-contrib'
 
 Route.usePlugin(componentRoutePlugin).usePlugin(componentInitializerRoutePlugin) // **MUST** come after component plugin

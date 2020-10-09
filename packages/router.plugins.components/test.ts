@@ -3,7 +3,7 @@ import {
   Context,
   IContext,
   Route,
-  Lifecycle
+  Lifecycle,
 } from '@profiscience/knockout-contrib-router'
 
 import { componentsRoutePlugin } from './index'
@@ -20,8 +20,8 @@ describe('router.plugins.components', () => {
     const ctx = { queue: queue as any } as Context & IContext
     const route = new Route('/', {
       components: () => ({
-        'hello-world': Promise.resolve(helloWorldComponent)
-      })
+        'hello-world': Promise.resolve(helloWorldComponent),
+      }),
     })
     const [middleware] = route.middleware
     const lifecycle = middleware(ctx) as Lifecycle

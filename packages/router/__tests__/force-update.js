@@ -9,7 +9,7 @@ ko.components.register('force-update', {
       let count = 0
 
       Router.useRoutes({
-        '/': 'foo'
+        '/': 'foo',
       })
 
       history.pushState(null, null, '/')
@@ -24,8 +24,8 @@ ko.components.register('force-update', {
               done()
             }
           }
-        }
+        },
       })
     }
-  }
+  },
 })

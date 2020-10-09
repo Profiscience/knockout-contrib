@@ -6,7 +6,7 @@ describe('component-loader', () => {
   test('sync', (done) => {
     const foo = {
       template: '...',
-      viewModel: class {}
+      viewModel: class {},
     }
 
     const componentLoader = new ComponentLoader({ foo })
@@ -20,7 +20,7 @@ describe('component-loader', () => {
   test('accessor', (done) => {
     const bar = {
       template: '...',
-      viewModel: class {}
+      viewModel: class {},
     }
 
     const componentLoader = new ComponentLoader({ bar: () => bar })
@@ -34,7 +34,7 @@ describe('component-loader', () => {
   test('promise (lazy, prefetched)', (done) => {
     const baz = {
       template: '...',
-      viewModel: class {}
+      viewModel: class {},
     }
 
     const componentLoader = new ComponentLoader({ baz: Promise.resolve(baz) })
@@ -48,11 +48,11 @@ describe('component-loader', () => {
   test('async accessor (lazy)', (done) => {
     const qux = {
       template: '...',
-      viewModel: class {}
+      viewModel: class {},
     }
 
     const componentLoader = new ComponentLoader({
-      qux: () => Promise.resolve(qux)
+      qux: () => Promise.resolve(qux),
     })
 
     componentLoader.getConfig('qux', (c) => {
@@ -64,7 +64,7 @@ describe('component-loader', () => {
   test('require context', (done) => {
     const quux = { template: '...' }
     const components = {
-      './quux': quux
+      './quux': quux,
     }
     type RequireContext = {
       (key: string): any
@@ -84,7 +84,7 @@ describe('component-loader', () => {
 
   test('options.transform', (done) => {
     const myComponent = {
-      template: '...'
+      template: '...',
     }
 
     const componentLoader = new ComponentLoader(
@@ -93,7 +93,7 @@ describe('component-loader', () => {
         transform: (c) => {
           c.template = 'WORKS'
           return c
-        }
+        },
       }
     )
 

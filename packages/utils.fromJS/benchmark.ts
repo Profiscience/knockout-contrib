@@ -8,11 +8,11 @@ const obj = {
   foo: {
     bar: {
       baz: {
-        qux: true
-      }
-    }
+        qux: true,
+      },
+    },
   },
-  foos: [{ foo: true }, { bar: true }, { baz: true }, { qux: true }]
+  foos: [{ foo: true }, { bar: true }, { baz: true }, { qux: true }],
 }
 
 const suite = new benchmark.Suite()

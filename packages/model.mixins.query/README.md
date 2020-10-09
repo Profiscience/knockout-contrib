@@ -13,7 +13,7 @@ See the [query](../query) package for more details.
 ```typescript
 import {
   DataModelConstructorBuilder,
-  QueryMixin
+  QueryMixin,
 } from '@profiscience/knockout-contrib'
 
 class MyDataModel extends DataModelConstructorBuilder.Mixin(

@@ -78,10 +78,10 @@ ko.components.register('flash-message', {
         } else {
           return 'info'
         }
-      })
-    }
+      }),
+    },
   },
-  template: `<div class="flash-message" data-bind="text: text, css: css"><div>`
+  template: `<div class="flash-message" data-bind="text: text, css: css"><div>`,
 })
 ```
 

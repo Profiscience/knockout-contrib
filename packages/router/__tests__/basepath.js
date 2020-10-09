@@ -11,16 +11,16 @@ ko.components.register('basepath', {
   viewModel: class BasePath {
     constructor({ t, done }) {
       Router.setConfig({
-        base: '/base'
+        base: '/base',
       })
 
       Router.useRoutes({
         '/foo': {
-          '/foo': 'foo'
+          '/foo': 'foo',
         },
         '/bar': {
-          '/bar': 'bar'
-        }
+          '/bar': 'bar',
+        },
       })
 
       history.pushState(null, null, '/base/foo/foo')
@@ -52,7 +52,7 @@ ko.components.register('basepath', {
               })
             )
           }
-        }
+        },
       })
 
       ko.components.register('bar', {
@@ -67,14 +67,14 @@ ko.components.register('basepath', {
 
             done()
           }
-        }
+        },
       })
     }
 
     dispose() {
       Router.setConfig({
-        base: ''
+        base: '',
       })
     }
-  }
+  },
 })

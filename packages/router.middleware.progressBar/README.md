@@ -26,13 +26,13 @@ Displays a progress bar using [toprogress2][] during navigation. Accepts all top
 ```typescript
 import {
   Router,
-  createProgressBarMiddleware
+  createProgressBarMiddleware,
 } from '@profiscience/knockout-contrib'
 
 Router.use(
   createProgressBarMiddleware({
     color: '#fff',
-    height: '5px'
+    height: '5px',
     // ... any toprogress2 option
   })
 )

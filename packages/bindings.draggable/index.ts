@@ -7,12 +7,12 @@ export const draggableBindingHandler: ko.BindingHandler = {
       {
         event: {
           mousedown: (data: any, e: MouseEvent) =>
-            startDragging(e, valueAccessor())
-        }
+            startDragging(e, valueAccessor()),
+        },
       },
       bindingContext
     )
-  }
+  },
 }
 
 function startDragging<T>(
@@ -93,15 +93,12 @@ function reorder<T>(
   const currentIndex = list().indexOf(item)
   const offByOne = targetIndex > currentIndex
   if (targetIndex === -1 || targetIndex === currentIndex) return
-  const newOrder = startOrder.reduce(
-    (accum, q, i) => {
-      if (i === targetIndex + (offByOne ? 1 : 0)) {
-        accum.push(item)
-      }
-      return q === item ? accum : [...accum, q]
-    },
-    [] as T[]
-  )
+  const newOrder = startOrder.reduce((accum, q, i) => {
+    if (i === targetIndex + (offByOne ? 1 : 0)) {
+      accum.push(item)
+    }
+    return q === item ? accum : [...accum, q]
+  }, [] as T[])
   // if moving to end, the above reducer won't work
   if (targetIndex === list().length - 1) {
     newOrder.push(item)

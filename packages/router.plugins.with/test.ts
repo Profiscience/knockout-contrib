@@ -36,7 +36,7 @@ describe('router.plugins.with', () => {
 
   test('works with async accessor', async () => {
     const route = new Route('/', {
-      with: () => Promise.resolve({ foo: 'bar' })
+      with: () => Promise.resolve({ foo: 'bar' }),
     })
     const ctx = { route } as Context & IContext
     const [middleware] = route.middleware

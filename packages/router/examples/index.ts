@@ -10,7 +10,7 @@ class ViewModel extends ViewModelConstructorBuilder {
     'loading-animation',
     'path-binding',
     'simple-auth',
-    'transition-animation'
+    'transition-animation',
   ]
   public selectedExample = ko.observable('')
   public exampleComponent = ko.observable('')
@@ -27,7 +27,7 @@ class ViewModel extends ViewModelConstructorBuilder {
 
 Router.setConfig({
   base: '/router',
-  hashbang: true
+  hashbang: true,
 })
 
 ko.applyBindings(new ViewModel())

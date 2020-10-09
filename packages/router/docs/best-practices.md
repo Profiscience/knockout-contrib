@@ -26,7 +26,7 @@ import { Route } from '@profiscience/knockout-contrib'
 
 export default new Route('/', {
   component: 'component-name',
-  api: '/api/some/api/endpoint'
+  api: '/api/some/api/endpoint',
 })
 ```
 
@@ -47,13 +47,13 @@ const COURSE_TYPES = new Map([
   ['/', 0],
   ['/on-demand', 1],
   ['/live', 2],
-  ['/assessment', 4]
+  ['/assessment', 4],
 ])
 
 export default {
   query: {
     searchText: '',
-    sort: 'p'
+    sort: 'p',
   },
   routes: {
     '/:type': {
@@ -62,15 +62,15 @@ export default {
           const q = ctx.$parent.query
           q.set({ courseType: COURSE_TYPES.get(ctx.pathname) })
           return q
-        }
+        },
       },
       collection: () => import('./collection'),
       component: () => ({
         template: import('./Courses.html'),
-        viewModel: import('./Courses')
-      })
-    }
-  }
+        viewModel: import('./Courses'),
+      }),
+    },
+  },
 }
 ```
 

@@ -2,7 +2,7 @@ import {
   Context,
   IContext,
   IRouteConfig,
-  RoutePlugin
+  RoutePlugin,
 } from '@profiscience/knockout-contrib-router'
 
 type MaybePromise<T> = T | Promise<T>
@@ -53,7 +53,7 @@ export function createTitleRoutePlugin(
       },
       beforeDispose() {
         titles.pop()
-      }
+      },
     })
   }
 }

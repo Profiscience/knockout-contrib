@@ -7,139 +7,73 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.3.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.8...@profiscience/knockout-contrib-model-builders-data@2.3.9) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.3.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.7...@profiscience/knockout-contrib-model-builders-data@2.3.8) (2019-12-13)
-
 
 ### Bug Fixes
 
-* add strict typing to data model .toJS() method ([8e4042f](https://github.com/Profiscience/knockout-contrib/commit/8e4042f4fb1d4a48b51d760d47d549e3d00f0588))
-
-
-
-
+- add strict typing to data model .toJS() method ([8e4042f](https://github.com/Profiscience/knockout-contrib/commit/8e4042f4fb1d4a48b51d760d47d549e3d00f0588))
 
 ## [2.3.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.6...@profiscience/knockout-contrib-model-builders-data@2.3.7) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.3.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.4...@profiscience/knockout-contrib-model-builders-data@2.3.6) (2019-12-12)
-
 
 ### Bug Fixes
 
-* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
-
-
-
-
+- ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
 
 ## [2.3.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.4...@profiscience/knockout-contrib-model-builders-data@2.3.5) (2019-12-12)
 
-
 ### Bug Fixes
 
-* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
-
-
-
-
+- ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
 
 ## [2.3.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.3...@profiscience/knockout-contrib-model-builders-data@2.3.4) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.3.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.2...@profiscience/knockout-contrib-model-builders-data@2.3.3) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
-
-
-
-
 
 ## [2.3.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.1...@profiscience/knockout-contrib-model-builders-data@2.3.2) (2019-12-06)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.3.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.0...@profiscience/knockout-contrib-model-builders-data@2.3.1) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 # [2.3.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.2.1...@profiscience/knockout-contrib-model-builders-data@2.3.0) (2019-11-04)
-
 
 ### Features
 
-* **model.builders.data:** add TData generic ([dc265e1](https://github.com/Profiscience/knockout-contrib/commit/dc265e1))
-
-
-
-
+- **model.builders.data:** add TData generic ([dc265e1](https://github.com/Profiscience/knockout-contrib/commit/dc265e1))
 
 ## [2.2.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.2.0...@profiscience/knockout-contrib-model-builders-data@2.2.1) (2019-10-30)
 
-
 ### Bug Fixes
 
-* **model.builders.data:** improve typing on #create ([3013350](https://github.com/Profiscience/knockout-contrib/commit/3013350))
-
-
-
-
+- **model.builders.data:** improve typing on #create ([3013350](https://github.com/Profiscience/knockout-contrib/commit/3013350))
 
 # [2.2.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.5...@profiscience/knockout-contrib-model-builders-data@2.2.0) (2019-10-30)
 
-
 ### Features
 
-* **model.builders.data:** allow passing additional args via #create ([fe1a5ec](https://github.com/Profiscience/knockout-contrib/commit/fe1a5ec))
-
-
-
-
+- **model.builders.data:** allow passing additional args via #create ([fe1a5ec](https://github.com/Profiscience/knockout-contrib/commit/fe1a5ec))
 
 ## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.4...@profiscience/knockout-contrib-model-builders-data@2.1.5) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
 
-
-
-
-
 ## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.3...@profiscience/knockout-contrib-model-builders-data@2.1.4) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data
-
-
-
-
 
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.1.2...@profiscience/knockout-contrib-model-builders-data@2.1.3) (2019-08-07)
 

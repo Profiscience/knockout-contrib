@@ -12,16 +12,16 @@ ko.components.register('hashbang', {
     constructor({ t, done }) {
       Router.setConfig({
         hashbang: true,
-        base: '/base'
+        base: '/base',
       })
 
       Router.useRoutes({
         '/foo': {
-          '/foo': 'foo'
+          '/foo': 'foo',
         },
         '/bar': {
-          '/bar': 'bar'
-        }
+          '/bar': 'bar',
+        },
       })
 
       history.pushState(null, null, '/base/#!/foo/foo')
@@ -47,7 +47,7 @@ ko.components.register('hashbang', {
               })
             )
           }
-        }
+        },
       })
 
       ko.components.register('bar', {
@@ -61,15 +61,15 @@ ko.components.register('hashbang', {
 
             done()
           }
-        }
+        },
       })
     }
 
     dispose() {
       Router.setConfig({
         hashbang: false,
-        base: ''
+        base: '',
       })
     }
-  }
+  },
 })

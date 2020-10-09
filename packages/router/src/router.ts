@@ -64,7 +64,7 @@ export class Router {
     () => {
       Router.isNavigating(Router._isNavigating())
       Router._isNavigating.subscribe(Router.isNavigating)
-    }
+    },
   ]
   public static readonly middleware: Middleware[] = []
   public static readonly config = {
@@ -72,7 +72,7 @@ export class Router {
     hashbang: false,
     activePathCSSClass: 'active-path',
     preserveHistoryStateOnNavigation: false,
-    preserveQueryStringOnNavigation: false
+    preserveQueryStringOnNavigation: false,
   }
 
   /**
@@ -93,7 +93,7 @@ export class Router {
     popstate: 'popstate'
   } = {
     click: document.ontouchstart ? 'touchstart' : ('click' as any),
-    popstate: 'popstate'
+    popstate: 'popstate',
   }
 
   public onInit: ((router: Router) => void)[] = []
@@ -334,8 +334,9 @@ export class Router {
       if (!router.ctx.$child) {
         throw new Error(
           // tslint:disable-next-line:max-line-length
-          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${i +
-            i} routers active (indicies are zero-based)`
+          `[@profiscience/knockout-contrib-router] Router.get(${i}) is out of bounds (there are currently only ${
+            i + i
+          } routers active (indicies are zero-based)`
         )
       }
       router = router.ctx.$child.router
@@ -408,7 +409,7 @@ export class Router {
   private static onpopstate(e: PopStateEvent) {
     Router.update(Router.getPathFromLocation(), {
       push: false,
-      state: e.state
+      state: e.state,
     }).catch((err) => log.error('Error navigating back', err))
     e.preventDefault()
   }
@@ -451,7 +452,7 @@ export class Router {
         parser.pathname.charAt(0) === '/'
           ? parser.pathname
           : '/' + parser.pathname,
-      search: parser.search
+      search: parser.search,
     }
   }
 

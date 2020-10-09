@@ -77,5 +77,5 @@ export const infiniteScrollBindingHandler: ko.BindingHandler<InfiniteScrollBindi
 
     armTrigger()
     ko.utils.domNodeDisposal.addDisposeCallback(el, disarmTrigger)
-  }
+  },
 }

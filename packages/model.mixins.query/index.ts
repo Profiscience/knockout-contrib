@@ -1,11 +1,11 @@
 import {
   DataModelConstructorBuilder,
-  nonenumerable
+  nonenumerable,
 } from '@profiscience/knockout-contrib-model-builders-data'
 import {
   Query,
   IQuery,
-  IQueryConfig
+  IQueryConfig,
 } from '@profiscience/knockout-contrib-query'
 
 export function QueryMixin<Q extends IQueryConfig>(opts: Q, group?: string) {

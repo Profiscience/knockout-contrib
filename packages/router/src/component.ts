@@ -17,7 +17,7 @@ ko.components.register('router', {
     <div data-bind="if: component">
       <div class="router-view" data-bind="__router__"></div>
     </div>
-  `
+  `,
 })
 
 ko.bindingHandlers.__router__ = {
@@ -39,13 +39,13 @@ ko.bindingHandlers.__router__ = {
       el,
       {
         component: { name: $router.component, params: $router.ctx },
-        css: $router.component
+        css: $router.component,
       },
       bindingCtx.extend({ $router })
     )
 
     return { controlsDescendantBindings: true }
-  }
+  },
 }
 
 function createViewModel(params: { [k: string]: any }) {

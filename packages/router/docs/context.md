@@ -106,7 +106,7 @@ class ViewModel {
         text: 'Are you sure you want to leave this page?',
         type: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Discard Changes'
+        confirmButtonText: 'Discard Changes',
       })
     } catch (e) {
       return false

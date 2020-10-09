@@ -20,9 +20,9 @@ ko.components.register('bindings-active-path', {
         '/a': [
           'a',
           {
-            '/b': 'b'
-          }
-        ]
+            '/b': 'b',
+          },
+        ],
       })
 
       ko.components.register('a', {
@@ -105,7 +105,7 @@ ko.components.register('bindings-active-path', {
           <a id="inner-absolute" data-bind="activePath: '//a/b'"></a>
           <a id="inner-absolute-partial" data-bind="activePath: '//a/*'"></a>
           <router></router>
-        `
+        `,
       })
 
       ko.components.register('b', {
@@ -116,8 +116,8 @@ ko.components.register('bindings-active-path', {
           <a id="nested-relative-up-partial" data-bind="activePath: '../a/*'"></a>
           <a id="nested-absolute" data-bind="activePath: '//a/b'"></a>
           <a id="nested-absolute-partial" data-bind="activePath: '//a/*'"></a>
-        `
+        `,
       })
     }
-  }
+  },
 })

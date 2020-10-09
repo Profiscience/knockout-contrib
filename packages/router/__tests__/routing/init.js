@@ -6,11 +6,11 @@ ko.components.register('init', {
       t.pass('initializes')
       done()
     }
-  }
+  },
 })
 
 export const path = '/init'
 
 export const routes = {
-  '/init': 'init'
+  '/init': 'init',
 }

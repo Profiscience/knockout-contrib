@@ -12,7 +12,7 @@ Parses path using [utils.traversePath](./utils.md#traversePath)
 ### Local
 
 ```html
-<a data-bind="path: '/foo'">
+<a data-bind="path: '/foo'"></a>
 ```
 
 This will route to the `/foo` route on the current router (the one that this
@@ -21,7 +21,7 @@ page belongs to).
 ### Absolute
 
 ```html
-<a data-bind="path: '//foo'">
+<a data-bind="path: '//foo'"></a>
 ```
 
 This will route to the `/foo` route at the top-level router.
@@ -31,7 +31,7 @@ This will route to the `/foo` route at the top-level router.
 **parent**
 
 ```html
-<a data-bind="path: '../foo'">
+<a data-bind="path: '../foo'"></a>
 ```
 
 This will route to the `/foo` route at the parent router.
@@ -39,7 +39,7 @@ This will route to the `/foo` route at the parent router.
 **child**
 
 ```html
-<a data-bind="path: './foo'">
+<a data-bind="path: './foo'"></a>
 ```
 
 This will route to the `/foo` route at the child (adjacent) router.
@@ -52,7 +52,7 @@ path binding that resolves to the current page. To use a class other than
 `activePathCSSClass`, or use the supplementary `pathActiveClass` binding.
 
 ```html
-<a data-bind="path: '/foo', pathActiveClass: 'foo-active'">
+<a data-bind="path: '/foo', pathActiveClass: 'foo-active'"></a>
 ```
 
 If you _only_ need this fuctionality, you may use the `activePath` binding instead. This will behave almost exactly the same, however the href attribute will not be set.

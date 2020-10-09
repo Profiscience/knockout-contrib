@@ -8,7 +8,7 @@ ko.components.register('with', {
     constructor({ t, done }) {
       Router.useRoutes({
         '/a': 'a',
-        '/b': 'b'
+        '/b': 'b',
       })
 
       history.pushState(null, null, '/a')
@@ -18,7 +18,7 @@ ko.components.register('with', {
           constructor(ctx) {
             ctx.router.update('/b', { with: { foo: 'foo' } })
           }
-        }
+        },
       })
 
       ko.components.register('b', {
@@ -27,8 +27,8 @@ ko.components.register('with', {
             t.equals(ctx.foo, 'foo', 'can pass data using with')
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

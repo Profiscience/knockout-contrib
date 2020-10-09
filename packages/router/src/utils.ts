@@ -62,7 +62,7 @@ function isAnchor(el: Node): el is HTMLAnchorElement {
 
 export function resolveHref({
   router,
-  path
+  path,
 }: {
   router: Router
   path: string
@@ -72,7 +72,7 @@ export function resolveHref({
 
 export function isActivePath({
   router,
-  path
+  path,
 }: {
   router: Router
   path: string
@@ -114,5 +114,5 @@ const _logger = (t: string) => (...ms: (string | Error)[]) =>
   _consoleLogger[t]('[@profiscience/knockout-contrib-router]', ...ms)
 export const log = {
   error: _logger('error'),
-  warn: _logger('warn')
+  warn: _logger('warn'),
 }

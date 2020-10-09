@@ -7,13 +7,13 @@ ko.components.register('preserve-query', {
   viewModel: class ForceUpdate {
     constructor({ t, done }) {
       Router.setConfig({
-        preserveQueryStringOnNavigation: true
+        preserveQueryStringOnNavigation: true,
       })
 
       Router.useRoutes({
         '/foo': 'foo',
         '/bar': 'bar',
-        '/baz': 'baz'
+        '/baz': 'baz',
       })
 
       history.pushState(null, null, '/foo?qux=qux')
@@ -23,7 +23,7 @@ ko.components.register('preserve-query', {
           constructor(ctx) {
             ctx.router.update('/bar')
           }
-        }
+        },
       })
 
       ko.components.register('bar', {
@@ -32,7 +32,7 @@ ko.components.register('preserve-query', {
             t.equals(window.location.search, '?qux=qux', 'works as described')
             Router.update('/baz?qux=notqux')
           }
-        }
+        },
       })
 
       ko.components.register('baz', {
@@ -45,13 +45,13 @@ ko.components.register('preserve-query', {
             )
 
             Router.setConfig({
-              preserveQueryStringOnNavigation: false
+              preserveQueryStringOnNavigation: false,
             })
 
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

@@ -14,13 +14,13 @@ expect.extend({
     if (ko.isObservable(received)) {
       return {
         pass: true,
-        message: () => `expected ${received} not to be observable`
+        message: () => `expected ${received} not to be observable`,
       }
     } else {
       return {
         pass: false,
-        message: () => `expected ${received} to be observable`
+        message: () => `expected ${received} to be observable`,
       }
     }
-  }
+  },
 })

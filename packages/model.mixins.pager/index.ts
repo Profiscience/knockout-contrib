@@ -26,7 +26,7 @@ export function PagerMixin<
 >(
   property: keyof TData,
   strategy: PaginationStrategy<TParams> = ((page: number) => ({
-    page
+    page,
   })) as PaginationStrategy<any>
 ) {
   return <

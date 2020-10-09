@@ -49,7 +49,7 @@ import {
   componentInitializerRoutePlugin,
   redirectRoutePlugin,
   createtitleRoutePlugin,
-  withRoutePlugin
+  withRoutePlugin,
 } from '@profiscience/knockout-contrib'
 
 /**
@@ -128,8 +128,8 @@ module.exports = {
 
       // these are the default values
       'module', // es5+esm  (resolves to <package>/dist/default)
-      'main' // es5+cjs  (resolves to <package>/dist/node)
-    ]
+      'main', // es5+cjs  (resolves to <package>/dist/node)
+    ],
   },
 
   module: {
@@ -138,11 +138,11 @@ module.exports = {
         // https://github.com/webpack/webpack/issues/6796
         test: path.resolve(__dirname, 'node_modules'),
         resolve: {
-          mainFields: ['esnext', 'es2015', 'module', 'main']
-        }
-      }
-    ]
-  }
+          mainFields: ['esnext', 'es2015', 'module', 'main'],
+        },
+      },
+    ],
+  },
 }
 ```
 

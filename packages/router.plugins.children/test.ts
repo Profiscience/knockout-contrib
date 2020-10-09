@@ -19,7 +19,7 @@ describe('router.plugins.children', () => {
     // with TS, it must explicitly be the `any` type
     const children: any = {
       '/a': 'a',
-      '/b': 'b'
+      '/b': 'b',
     }
     const route = new Route('/', { children })
 

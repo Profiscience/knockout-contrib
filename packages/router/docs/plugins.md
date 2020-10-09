@@ -40,16 +40,16 @@ import loadData from './utils/loadData'
 Router.useRoutes({
   '/foo': {
     component: {
-      template: '<h1>FOO!</h1>'
+      template: '<h1>FOO!</h1>',
     },
     loadData,
     setTitle(ctx) {
       document.title = ctx.data.title
     },
     routes: {
-      '/bar': 'bar'
-    }
-  }
+      '/bar': 'bar',
+    },
+  },
 })
 
 // ...or
@@ -57,16 +57,16 @@ Router.useRoutes({
 Router.useRoutes([
   new Route('/foo', {
     component: {
-      template: '<h1>FOO!</h1>'
+      template: '<h1>FOO!</h1>',
     },
     loadData,
     setTitle(ctx) {
       document.title = ctx.data.title
     },
     routes: {
-      '/bar': 'bar'
-    }
-  })
+      '/bar': 'bar',
+    },
+  }),
 ])
 ```
 
@@ -88,8 +88,8 @@ Route.usePlugin((route) => {
       },
       afterDispose() {
         ko.components.unregister(ctx.pathname)
-      }
-    })
+      },
+    }),
   ]
 })
 ```
@@ -107,7 +107,7 @@ function componentPlugin(route) {
     },
     afterDispose() {
       ko.components.unregister(ctx.pathname)
-    }
+    },
   })
 }
 

@@ -7,9 +7,9 @@ export const altClickBindingHandler: ko.BindingHandler = {
       {
         click($data: any, e: MouseEvent) {
           if (e.altKey) valueAccessor().call(this, $data, e)
-        }
+        },
       },
       bindingContext
     )
-  }
+  },
 }

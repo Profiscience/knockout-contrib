@@ -11,7 +11,7 @@ ko.components.register('ambiguous', {
             t.fail('fails on ambiguous routes')
             done()
           }
-        }
+        },
       })
 
       ko.components.register('right-1', {
@@ -20,7 +20,7 @@ ko.components.register('ambiguous', {
             t.pass('handles navigating to ambiguous route from unique parent')
             Router.update('//ambiguous/a/b/c/d')
           }
-        }
+        },
       })
 
       ko.components.register('right-2', {
@@ -37,10 +37,10 @@ ko.components.register('ambiguous', {
             )
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })
 
 export const path = '/ambiguous/a/b/c'
@@ -50,7 +50,7 @@ export const routes = [
     new Route('/a', [new Route('/b', 'wrong')]),
     new Route('/a', [new Route('/b', [new Route('/c', 'right-1')])]),
     new Route('/a', [
-      new Route('/b', [new Route('/c', [new Route('/d', 'right-2')])])
-    ])
-  ])
+      new Route('/b', [new Route('/c', [new Route('/d', 'right-2')])]),
+    ]),
+  ]),
 ]

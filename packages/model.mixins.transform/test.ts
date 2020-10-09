@@ -23,7 +23,7 @@ function FoosMixin<
     public foos = ko.observableArray()
     protected async fetch(): Promise<any> {
       return {
-        foos: FOOS
+        foos: FOOS,
       }
     }
   }

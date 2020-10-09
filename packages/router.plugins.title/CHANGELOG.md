@@ -7,73 +7,37 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
 
-
-
-
-
 ## [2.0.16](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.15...@profiscience/knockout-contrib-router-plugins-title@2.0.16) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
-
-
-
-
 
 ## [2.0.15](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.14...@profiscience/knockout-contrib-router-plugins-title@2.0.15) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
 
-
-
-
-
 ## [2.0.14](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.13...@profiscience/knockout-contrib-router-plugins-title@2.0.14) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
-
-
-
-
 
 ## [2.0.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.12...@profiscience/knockout-contrib-router-plugins-title@2.0.13) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
 
-
-
-
-
 ## [2.0.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.11...@profiscience/knockout-contrib-router-plugins-title@2.0.12) (2019-12-06)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
-
-
-
-
 
 ## [2.0.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.10...@profiscience/knockout-contrib-router-plugins-title@2.0.11) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
 
-
-
-
-
 ## [2.0.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.9...@profiscience/knockout-contrib-router-plugins-title@2.0.10) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
 
-
-
-
-
 ## [2.0.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.8...@profiscience/knockout-contrib-router-plugins-title@2.0.9) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router-plugins-title
-
-
-
-
 
 ## [2.0.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router-plugins-title@2.0.7...@profiscience/knockout-contrib-router-plugins-title@2.0.8) (2019-08-07)
 

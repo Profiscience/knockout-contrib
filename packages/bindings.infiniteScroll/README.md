@@ -24,9 +24,7 @@ Call a function when the end of an element is reached
 ## Usage
 
 ```html
-<div data-bind="foreach: todos, infiniteScroll: fetchMoreTodos">
-  ...
-</div>
+<div data-bind="foreach: todos, infiniteScroll: fetchMoreTodos">...</div>
 ```
 
 **with a custom offset**

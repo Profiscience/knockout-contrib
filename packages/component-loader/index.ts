@@ -48,12 +48,12 @@ export class ComponentLoader<T = ko.components.Config>
         .keys()
         .map((k) => ({
           path: k,
-          name: k.match(/[\\\/]([^\\\/]+)/)[1]
+          name: k.match(/[\\\/]([^\\\/]+)/)[1],
         }))
         .reduce(
           (manifest, { name, path }) => ({
             ...manifest,
-            [name]: () => _require(path)
+            [name]: () => _require(path),
           }),
           {}
         )

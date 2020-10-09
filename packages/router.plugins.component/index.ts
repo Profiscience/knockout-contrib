@@ -3,7 +3,7 @@ import {
   Context,
   IContext,
   IRouteConfig,
-  LifecycleMiddleware
+  LifecycleMiddleware,
 } from '@profiscience/knockout-contrib-router'
 
 let UNINSTANTIABLE_VIEWMODEL_WARNING_ENABLED = true
@@ -85,14 +85,14 @@ export type IAnonymousComponent = {
  */
 export type IRoutedViewModelConstructor = new (ctx: Context & IContext) => any
 
-const uniqueComponentNames = (function*() {
+const uniqueComponentNames = (function* () {
   let i = 0
   while (true) yield `__router_view_${i++}__`
 })()
 
 // @TODO (try to) make this type-safe, i.e. know it's void if routeConfig.component is void, and middleware if not
 export function componentRoutePlugin({
-  component: componentAccessor
+  component: componentAccessor,
 }: IRouteConfig): void | LifecycleMiddleware {
   if (!componentAccessor) return
 
@@ -108,7 +108,7 @@ export function componentRoutePlugin({
         ) => {
           const c = {
             name,
-            ...(instance || {})
+            ...(instance || {}),
           }
           ctx.route.component = name
           ctx.component = c
@@ -136,7 +136,7 @@ export function componentRoutePlugin({
                   normalizedConfig.name || uniqueComponentNames.next().value
 
                 const routedComponentInstance: IRoutedComponentInstance = {
-                  name: componentName
+                  name: componentName,
                 }
                 const templateConfig = normalizedConfig.template
                 let viewModelConfig: any
@@ -162,7 +162,7 @@ export function componentRoutePlugin({
                 ko.components.register(componentName, {
                   synchronous: true,
                   template: templateConfig,
-                  viewModel: viewModelConfig
+                  viewModel: viewModelConfig,
                 })
               }
             }
@@ -184,7 +184,7 @@ export function componentRoutePlugin({
             }
           }
         }
-      }
+      },
     }
   }
 }

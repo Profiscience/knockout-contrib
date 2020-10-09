@@ -14,7 +14,7 @@ ko.components.register('params', {
         t.equals('?bar=bar', search, 'adds querystring to ctx.search')
         t.equals('#baz', hash, 'adds hash to ctx.hash')
         ctx.router.update('/params/bar', {
-          with: { t, done, firstRun: false }
+          with: { t, done, firstRun: false },
         })
       } else {
         t.equal(
@@ -25,11 +25,11 @@ ko.components.register('params', {
         done()
       }
     }
-  }
+  },
 })
 
 export const path = '/params/foo?bar=bar#baz'
 
 export const routes = {
-  '/params/:foo': 'params'
+  '/params/:foo': 'params',
 }

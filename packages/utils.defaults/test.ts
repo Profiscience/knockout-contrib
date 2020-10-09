@@ -6,14 +6,14 @@ test('assigns default values', () => {
   const actual = {
     foo: 'foo',
     bar: ko.observable('bar'),
-    qux: ko.observable(undefined)
+    qux: ko.observable(undefined),
   } as any
 
   defaults(actual, {
     foo: 'default',
     bar: 'default',
     baz: 'default',
-    qux: 'default'
+    qux: 'default',
   })
 
   expect(actual.foo).toBe('foo')

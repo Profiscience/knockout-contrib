@@ -7,124 +7,63 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.1.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.8...@profiscience/knockout-contrib-model-mixins-pager@2.1.9) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.1.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.7...@profiscience/knockout-contrib-model-mixins-pager@2.1.8) (2019-12-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.1.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.6...@profiscience/knockout-contrib-model-mixins-pager@2.1.7) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.1.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.4...@profiscience/knockout-contrib-model-mixins-pager@2.1.6) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.4...@profiscience/knockout-contrib-model-mixins-pager@2.1.5) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.3...@profiscience/knockout-contrib-model-mixins-pager@2.1.4) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.2...@profiscience/knockout-contrib-model-mixins-pager@2.1.3) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.1...@profiscience/knockout-contrib-model-mixins-pager@2.1.2) (2019-12-06)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.0...@profiscience/knockout-contrib-model-mixins-pager@2.1.1) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.12...@profiscience/knockout-contrib-model-mixins-pager@2.1.0) (2019-11-04)
-
 
 ### Features
 
-* **model.builders.data:** add TData generic ([dc265e1](https://github.com/Profiscience/knockout-contrib/commit/dc265e1))
-
-
-
-
+- **model.builders.data:** add TData generic ([dc265e1](https://github.com/Profiscience/knockout-contrib/commit/dc265e1))
 
 ## [2.0.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.11...@profiscience/knockout-contrib-model-mixins-pager@2.0.12) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.0.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.10...@profiscience/knockout-contrib-model-mixins-pager@2.0.11) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.0.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.9...@profiscience/knockout-contrib-model-mixins-pager@2.0.10) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
 
-
-
-
-
 ## [2.0.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.8...@profiscience/knockout-contrib-model-mixins-pager@2.0.9) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
-
-
-
-
 
 ## [2.0.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.0.7...@profiscience/knockout-contrib-model-mixins-pager@2.0.8) (2019-08-07)
 

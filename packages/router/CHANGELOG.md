@@ -7,78 +7,42 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
 
-
-
-
-
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.1.2...@profiscience/knockout-contrib-router@2.1.3) (2020-02-04)
-
 
 ### Bug Fixes
 
-* **router:** anchor tag descendant click regression ([57b0828](https://github.com/Profiscience/knockout-contrib/commit/57b082842b03ecbbfc72c7aa3175833f9b56b505))
-* **router:** correctly parse path when it contains base path ([817a242](https://github.com/Profiscience/knockout-contrib/commit/817a242b086bf8f255d5a4bae6ecb5359f0f1d53))
-
-
-
-
+- **router:** anchor tag descendant click regression ([57b0828](https://github.com/Profiscience/knockout-contrib/commit/57b082842b03ecbbfc72c7aa3175833f9b56b505))
+- **router:** correctly parse path when it contains base path ([817a242](https://github.com/Profiscience/knockout-contrib/commit/817a242b086bf8f255d5a4bae6ecb5359f0f1d53))
 
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.1.1...@profiscience/knockout-contrib-router@2.1.2) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
 
-
-
-
-
 ## [2.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.1.0...@profiscience/knockout-contrib-router@2.1.1) (2019-12-11)
-
 
 ### Bug Fixes
 
-* **router:** attach ctx.hash and ctx.search to all routers ([1e67d41](https://github.com/Profiscience/knockout-contrib/commit/1e67d41))
-
-
-
-
+- **router:** attach ctx.hash and ctx.search to all routers ([1e67d41](https://github.com/Profiscience/knockout-contrib/commit/1e67d41))
 
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.10...@profiscience/knockout-contrib-router@2.1.0) (2019-12-11)
 
-
 ### Features
 
-* **router:** add ctx.search and ctx.hash ([7186c3e](https://github.com/Profiscience/knockout-contrib/commit/7186c3e))
-
-
-
-
+- **router:** add ctx.search and ctx.hash ([7186c3e](https://github.com/Profiscience/knockout-contrib/commit/7186c3e))
 
 ## [2.0.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.9...@profiscience/knockout-contrib-router@2.0.10) (2019-12-06)
 
-
 ### Bug Fixes
 
-* **router:** allow querystring modification in beforeDispose middleware ([2ae85e1](https://github.com/Profiscience/knockout-contrib/commit/2ae85e1))
-
-
-
-
+- **router:** allow querystring modification in beforeDispose middleware ([2ae85e1](https://github.com/Profiscience/knockout-contrib/commit/2ae85e1))
 
 ## [2.0.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.8...@profiscience/knockout-contrib-router@2.0.9) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
 
-
-
-
-
 ## [2.0.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.7...@profiscience/knockout-contrib-router@2.0.8) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-router
-
-
-
-
 
 ## [2.0.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-router@2.0.6...@profiscience/knockout-contrib-router@2.0.7) (2019-08-07)
 
@@ -194,7 +158,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **router:** Add state option for Router.update(); Use popstate event's state on back navigation ([6eedb5d](https://github.com/Profiscience/knockout-contrib/commit/6eedb5d)), closes [#107](https://github.com/Profiscience/knockout-contrib/issues/107)
-
 
       <a name="2.0.0-rc.3"></a>
 

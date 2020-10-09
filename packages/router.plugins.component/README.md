@@ -30,8 +30,8 @@ Route.usePlugin(componentRoutePlugin)
 new Route('/', {
   component: () => ({
     template: import('./template.html'),
-    viewModel: import('./viewModel')
-  })
+    viewModel: import('./viewModel'),
+  }),
 })
 ```
 
@@ -42,8 +42,8 @@ Annymous components are registered/unregistered by the router as-needed. Simply 
 ```typescript
 new Route('/', {
   component: {
-    template: 'Hello, World!'
-  }
+    template: 'Hello, World!',
+  },
 })
 ```
 
@@ -53,8 +53,8 @@ By default, the component will be registered using a incrementing GUID (`__route
 new Route('/', {
   component: {
     name: 'hello-view',
-    template: 'Hello, World!'
-  }
+    template: 'Hello, World!',
+  },
 })
 ```
 
@@ -80,7 +80,7 @@ Named components are components that are _already_ registered with Knockout.
 ko.components.register('hello-component', { template: 'Hello, World!' })
 
 new Route('/', {
-  component: 'hello-component'
+  component: 'hello-component',
 })
 ```
 
@@ -90,7 +90,7 @@ If you need more control, you may use an accessor function. This function reciev
 
 ```typescript
 new Route('/', {
-  component: (ctx) => ({ template: 'Hello, World!' })
+  component: (ctx) => ({ template: 'Hello, World!' }),
 })
 ```
 
@@ -133,8 +133,8 @@ Take the following...
 ```typescript
 new Route('/', {
   component: async () => ({
-    viewModel: await import('./viewModel')
-  })
+    viewModel: await import('./viewModel'),
+  }),
 })
 ```
 
@@ -148,8 +148,8 @@ If your configuration is an object with promised value, you may forgo wrapping t
 new Route('/', {
   component: () => ({
     template: import('./template.html'),
-    viewModel: import('./viewModel')
-  })
+    viewModel: import('./viewModel'),
+  }),
 })
 ```
 

@@ -49,20 +49,22 @@ ko.components.register('qux', { template: createInnerTemplate('qux') })
 
 Router.useRoutes({
   '/': 'empty',
-  '/foo': ['foo',
+  '/foo': [
+    'foo',
     {
       '/': 'empty',
       '/baz': 'baz',
-      '/qux': 'qux'
-    }
+      '/qux': 'qux',
+    },
   ],
-  '/bar': ['bar',
+  '/bar': [
+    'bar',
     {
       '/': 'empty',
       '/baz': 'baz',
-      '/qux': 'qux'
-    }
-  ]
+      '/qux': 'qux',
+    },
+  ],
 })
 
 ko.components.register('path-binding', { template })

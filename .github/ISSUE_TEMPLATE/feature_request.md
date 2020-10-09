@@ -1,10 +1,10 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-
 ---
 
 **Package(s)**
+
 - [router, bindings.jquery, etc.]
 
 **Is your feature request related to a problem? Please describe.**

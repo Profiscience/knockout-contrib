@@ -3,20 +3,20 @@ import * as ko from 'knockout'
 type ObservableTree<T> = T extends any[]
   ? ko.ObservableArray<T[number]>
   : T extends Date
-    ? ko.Observable<Date>
-    : T extends RegExp
-      ? ko.Observable<RegExp>
-      : T extends ko.Observable
-        ? T
-        : T extends ko.ObservableArray
-          ? T
-          : T extends ko.Computed
-            ? T
-            : T extends (...args: any[]) => any
-              ? T
-              : T extends { [k: string]: any }
-                ? { readonly [P in keyof T]: ObservableTree<T[P]> }
-                : ko.Observable<T>
+  ? ko.Observable<Date>
+  : T extends RegExp
+  ? ko.Observable<RegExp>
+  : T extends ko.Observable
+  ? T
+  : T extends ko.ObservableArray
+  ? T
+  : T extends ko.Computed
+  ? T
+  : T extends (...args: any[]) => any
+  ? T
+  : T extends { [k: string]: any }
+  ? { readonly [P in keyof T]: ObservableTree<T[P]> }
+  : ko.Observable<T>
 
 export function fromJS<T>(obj: T, mapArrayElements = false): ObservableTree<T> {
   if (ko.isObservable(obj)) {

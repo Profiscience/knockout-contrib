@@ -15,9 +15,9 @@ export const toggleBindingHandler: ko.BindingHandler = {
           if (!ko.unwrap(allBindings.get('toggleDisable'))) {
             valueAccessor()(!valueAccessor()())
           }
-        }
+        },
       },
       bindingContext
     )
-  }
+  },
 }

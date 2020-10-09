@@ -36,8 +36,8 @@ const foos = {
   foo: 'foo',
   bar: {
     baz: 'baz',
-    qux: ['qux']
-  }
+    qux: ['qux'],
+  },
 }
 
 fromJS(foos)

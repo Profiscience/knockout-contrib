@@ -18,8 +18,8 @@ ko.components.register('element', {
                 undefined,
                 'ctx.element is undefined in redirection'
               )
-            }
-          })
+            },
+          }),
         ],
         '/foo': [
           (ctx) => ({
@@ -38,15 +38,15 @@ ko.components.register('element', {
                 'ctx.element is router-view container after render'
               )
               done()
-            }
+            },
           }),
-          'foo'
-        ]
+          'foo',
+        ],
       })
 
       history.pushState(null, null, '/')
 
       ko.components.register('foo', { template: '<div id="foo-view"></div>' })
     }
-  }
+  },
 })

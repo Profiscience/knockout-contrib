@@ -16,7 +16,7 @@ describe('model.mixins.pager', () => {
 
       protected async fetch(): Promise<any> {
         return {
-          foos: [FOOS[this.params.page - 1]]
+          foos: [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -46,7 +46,7 @@ describe('model.mixins.pager', () => {
 
       protected async fetch(): Promise<any> {
         return {
-          foos: [FOOS[this.params.page - 1]]
+          foos: [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -69,7 +69,7 @@ describe('model.mixins.pager', () => {
       protected async fetch(): Promise<any> {
         return {
           foos:
-            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]]
+            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -95,7 +95,7 @@ describe('model.mixins.pager', () => {
       protected async fetch(): Promise<any> {
         return {
           foos:
-            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]]
+            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -117,7 +117,7 @@ describe('model.mixins.pager', () => {
       protected async fetch(): Promise<any> {
         return {
           foos:
-            this.params.page >= FOOS.length ? [] : [FOOS[this.params.page - 1]]
+            this.params.page >= FOOS.length ? [] : [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -151,7 +151,7 @@ describe('model.mixins.pager', () => {
       protected async fetch(): Promise<any> {
         return {
           foos:
-            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]]
+            this.params.page > FOOS.length ? [] : [FOOS[this.params.page - 1]],
         }
       }
     }
@@ -189,7 +189,7 @@ describe('model.mixins.pager', () => {
           foos:
             this.params.pageNumber > FOOS.length
               ? []
-              : [FOOS[this.params.pageNumber - 1]]
+              : [FOOS[this.params.pageNumber - 1]],
         }
       }
     }

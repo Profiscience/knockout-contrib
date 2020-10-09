@@ -53,7 +53,7 @@ export class Context /* implements IContext, use Context & IContext */ {
         params,
         pathname,
         route,
-        search
+        search,
       },
       _with
     )
@@ -177,7 +177,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     do {
       for (const l of [
         ...ctx._appMiddlewareLifecycles,
-        ...ctx._routeMiddlewareLifecycles
+        ...ctx._routeMiddlewareLifecycles,
       ]) {
         if (l.afterRender) await l.afterRender()
       }
@@ -192,7 +192,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     }
     for (const l of [
       ...this._routeMiddlewareLifecycles,
-      ...this._appMiddlewareLifecycles
+      ...this._appMiddlewareLifecycles,
     ]) {
       if (l.beforeDispose) await l.beforeDispose()
     }
@@ -207,7 +207,7 @@ export class Context /* implements IContext, use Context & IContext */ {
     }
     for (const l of [
       ...this._routeMiddlewareLifecycles,
-      ...this._appMiddlewareLifecycles
+      ...this._appMiddlewareLifecycles,
     ]) {
       if (l.afterDispose) await l.afterDispose()
     }
@@ -244,7 +244,7 @@ export class Context /* implements IContext, use Context & IContext */ {
             beforeRender: () => iterator.next().value,
             afterRender: () => iterator.next().value,
             beforeDispose: () => iterator.next().value,
-            afterDispose: () => iterator.next().value
+            afterDispose: () => iterator.next().value,
           }
         } else {
           lifecycle = ret as Lifecycle

@@ -10,7 +10,7 @@ describe('router.plugins.redirect', () => {
     const route = new Route('/', {
       redirect() {
         return '//'
-      }
+      },
     })
     const [middleware] = route.middleware
     await middleware(ctx)
@@ -22,7 +22,7 @@ describe('router.plugins.redirect', () => {
     const route = new Route('/', {
       redirect() {
         return
-      }
+      },
     })
     const [middleware] = route.middleware
     await middleware(ctx)
@@ -34,7 +34,7 @@ describe('router.plugins.redirect', () => {
     const route = new Route('/', {
       redirect() {
         return Promise.resolve('//')
-      }
+      },
     })
     const [middleware] = route.middleware
     await middleware(ctx)
@@ -46,7 +46,7 @@ describe('router.plugins.redirect', () => {
     const route = new Route('/', {
       redirect() {
         return Promise.resolve()
-      }
+      },
     })
     const [middleware] = route.middleware
     await middleware(ctx)
@@ -59,7 +59,7 @@ describe('router.plugins.redirect', () => {
       redirect(actual) {
         expect(actual).toEqual(ctx)
         done()
-      }
+      },
     })
     const [middleware] = route.middleware
     middleware(ctx)

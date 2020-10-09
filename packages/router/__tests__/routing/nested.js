@@ -17,7 +17,7 @@ function assertStaticIsNavigating(ctx) {
         Router.isNavigating(),
         'Router.isNavigating() is false when all nested routers finish'
       )
-    }
+    },
   })
 }
 
@@ -46,7 +46,7 @@ ko.components.register('nested', {
             )
             Router.update('/nested/a')
           }
-        }
+        },
       })
 
       ko.components.register('a', {
@@ -55,7 +55,7 @@ ko.components.register('nested', {
             t.pass('navigates to new child route from parent router')
             ctx.router.update('/b')
           }
-        }
+        },
       })
 
       ko.components.register('b', {
@@ -64,7 +64,7 @@ ko.components.register('nested', {
             t.pass('navigates to new child route from child router')
             Router.update('/nested/c')
           }
-        }
+        },
       })
 
       let parent
@@ -75,7 +75,7 @@ ko.components.register('nested', {
           constructor(ctx) {
             parent = ctx
           }
-        }
+        },
       })
 
       ko.components.register('c', {
@@ -122,10 +122,10 @@ ko.components.register('nested', {
 
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })
 
 export const path = '/nested'
@@ -141,9 +141,9 @@ export const routes = {
         assertStaticIsNavigating,
         'c-pre',
         {
-          '/': 'c' // https://www.youtube.com/watch?v=5l-PjIqPOBw
-        }
-      ]
-    }
-  ]
+          '/': 'c', // https://www.youtube.com/watch?v=5l-PjIqPOBw
+        },
+      ],
+    },
+  ],
 }

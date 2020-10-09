@@ -5,9 +5,9 @@ update_configs:
     update_schedule: live
     automerged_updates:
       - match:
-          dependency_type: "development"
-          update_type: "all"
+          dependency_type: 'development'
+          update_type: 'all'
       - match:
-          dependency_type: "production"
-          update_type: "semver:minor"
+          dependency_type: 'production'
+          update_type: 'semver:minor'
     version_requirement_updates: widen_ranges

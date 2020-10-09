@@ -1,7 +1,7 @@
 import {
   Context,
   IContext,
-  LifecycleMiddleware
+  LifecycleMiddleware,
 } from '@profiscience/knockout-contrib-router'
 
 export type ScrollPositionMiddlewareOpts = {
@@ -39,10 +39,10 @@ export function createScrollPositionMiddleware(
       history.replaceState(
         {
           ...(history.state || {}),
-          scrollPosition: window.scrollY
+          scrollPosition: window.scrollY,
         },
         document.title
       )
-    }
+    },
   })
 }

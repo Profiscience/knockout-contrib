@@ -29,8 +29,8 @@ Route.usePlugin(withRoutePlugin)
 // Sync
 new Route('/', {
   with: {
-    myAdditionalProp: true
-  }
+    myAdditionalProp: true,
+  },
 })
 
 // Accessor
@@ -38,14 +38,14 @@ new Route('/', {
   with: (ctx) => {
     // synchronous
     return {
-      myAdditionalProp: true
+      myAdditionalProp: true,
     }
 
     // async via promises
     return Promise.resolve({
-      myAdditionalProp: true
+      myAdditionalProp: true,
     })
-  }
+  },
 })
 ```
 
@@ -67,7 +67,7 @@ declare module '@profiscience/knockout-contrib-router' {
 
 new Route('/', {
   with: {
-    myAdditionalProp: true
-  } as any
+    myAdditionalProp: true,
+  } as any,
 })
 ```

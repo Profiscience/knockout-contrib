@@ -1,6 +1,6 @@
 import {
   DataModelConstructorBuilder,
-  ViewModelConstructorBuilder
+  ViewModelConstructorBuilder,
 } from '@profiscience/knockout-contrib'
 
 test("DisposalAggregatorMixin doesn't re-dispose deleted data model", async () => {

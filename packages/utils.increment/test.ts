@@ -20,7 +20,7 @@ describe('utils.increment', () => {
       write: (v) => {
         expect(v).toBe(1)
         done()
-      }
+      },
     })
     increment(count)
   })
@@ -56,7 +56,7 @@ describe('utils.decrement', () => {
       write: (v) => {
         expect(v).toBe(-1)
         done()
-      }
+      },
     })
     decrement(count)
   })

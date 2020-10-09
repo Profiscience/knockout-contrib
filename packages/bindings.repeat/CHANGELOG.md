@@ -5,7 +5,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # 1.1.0 (2020-02-10)
 
-
 ### Features
 
-* **bindings.repeat:** initial commit ([7fd0e0d](https://github.com/Profiscience/knockout-contrib/commit/7fd0e0d09e843456faa391735f9e956f4ddc4212))
+- **bindings.repeat:** initial commit ([7fd0e0d](https://github.com/Profiscience/knockout-contrib/commit/7fd0e0d09e843456faa391735f9e956f4ddc4212))

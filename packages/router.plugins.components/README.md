@@ -31,8 +31,8 @@ Route.usePlugin(componentsRoutePlugin)
 new Route('/', {
   components: () => ({
     // will register the <toolbar></toolbar> component for use in this view and its children
-    toolbar: import('./toolbar')
-  })
+    toolbar: import('./toolbar'),
+  }),
 })
 ```
 

@@ -64,7 +64,7 @@ describe('model.mixins.subscriptionDisposal', () => {
       const obs2 = ko.observable<string>()
       const tree = {
         obs1,
-        obs2
+        obs2,
       }
 
       let assertions = 0

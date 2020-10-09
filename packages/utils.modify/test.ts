@@ -16,7 +16,7 @@ describe('utils.modify', () => {
     const _str = ko.observable('foobar')
     const str = ko.pureComputed({
       read: () => _str(),
-      write: (v) => _str(v)
+      write: (v) => _str(v),
     })
     modify(str, reverseString)
     expect(str()).toBe('raboof')
@@ -28,8 +28,5 @@ describe('utils.modify', () => {
 })
 
 function reverseString(str: string) {
-  return str
-    .split('')
-    .reverse()
-    .join('')
+  return str.split('').reverse().join('')
 }

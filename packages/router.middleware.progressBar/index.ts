@@ -15,6 +15,6 @@ export function createProgressBarMiddleware(
     end: () =>
       progressBar.finish().catch(() => {
         /* noop */
-      })
+      }),
   })
 }

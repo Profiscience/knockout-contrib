@@ -7,53 +7,29 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-query
 
-
-
-
-
 ## [2.1.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.4...@profiscience/knockout-contrib-query@2.1.6) (2019-12-12)
-
 
 ### Bug Fixes
 
-* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
-
-
-
-
+- ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
 
 ## [2.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.4...@profiscience/knockout-contrib-query@2.1.5) (2019-12-12)
 
-
 ### Bug Fixes
 
-* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
-
-
-
-
+- ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
 
 ## [2.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.3...@profiscience/knockout-contrib-query@2.1.4) (2019-12-06)
 
-
 ### Bug Fixes
 
-* **query:** ensure param opts.initial is written to url ([e0ecfe4](https://github.com/Profiscience/knockout-contrib/commit/e0ecfe4))
-
-
-
-
+- **query:** ensure param opts.initial is written to url ([e0ecfe4](https://github.com/Profiscience/knockout-contrib/commit/e0ecfe4))
 
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.2...@profiscience/knockout-contrib-query@2.1.3) (2019-08-14)
 
-
 ### Bug Fixes
 
-* **query:** infinite looping issue w/ deeply nested async viewModels ([fd3b0ab](https://github.com/Profiscience/knockout-contrib/commit/fd3b0ab))
-
-
-
-
+- **query:** infinite looping issue w/ deeply nested async viewModels ([fd3b0ab](https://github.com/Profiscience/knockout-contrib/commit/fd3b0ab))
 
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-query@2.1.1...@profiscience/knockout-contrib-query@2.1.2) (2019-05-14)
 

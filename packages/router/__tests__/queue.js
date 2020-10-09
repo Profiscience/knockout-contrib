@@ -43,10 +43,10 @@ ko.components.register('queue', {
                   queuedPromiseAResolved,
                   'queued promises in parent router does not prevent child middleware from executing'
                 )
-              }
-            ]
-          }
-        ]
+              },
+            ],
+          },
+        ],
       })
 
       ko.components.register('foo', {
@@ -62,8 +62,8 @@ ko.components.register('queue', {
             )
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

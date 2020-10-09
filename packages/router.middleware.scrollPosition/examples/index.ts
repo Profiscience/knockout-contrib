@@ -26,17 +26,17 @@ ko.components.register('view', {
       <li data-bind="attr: { id: $data }, text: $data"></li>
     </ul>
   `,
-  synchronous: true
+  synchronous: true,
 })
 
 Router.setConfig({
   base: '/router.middleware.scrollPosition',
-  hashbang: true
+  hashbang: true,
 })
 
 Router.use(
   createScrollPositionMiddleware({
-    scrollTo: (x, y) => window.scroll({ top: y, behavior: 'smooth' })
+    scrollTo: (x, y) => window.scroll({ top: y, behavior: 'smooth' }),
   })
 )
 

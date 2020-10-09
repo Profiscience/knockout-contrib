@@ -2,7 +2,7 @@ import {
   Context,
   IContext,
   Lifecycle,
-  Route
+  Route,
 } from '@profiscience/knockout-contrib-router'
 
 import { createTitleRoutePlugin } from './index'
@@ -91,7 +91,7 @@ describe('router.plugins.title', () => {
     const parentCtx = {
       $child: childCtx,
       $children: [childCtx],
-      queue: parentQueue
+      queue: parentQueue,
     } as Context & IContext
     const childRoute = new Route('/', { title: 'child' })
     const parentRoute = new Route('/', { title: 'parent' })
@@ -118,19 +118,19 @@ describe('router.plugins.title', () => {
 
     const childQueue = jest.fn()
     const childCtx = {
-      queue: childQueue as any
+      queue: childQueue as any,
     } as Context & IContext
     const parentQueue = jest.fn()
     const parentCtx = {
       queue: parentQueue as any,
       $child: childCtx,
-      $children: [childCtx]
+      $children: [childCtx],
     } as Context & IContext
     const childRoute = new Route('/', {
-      title: createAsyncGetter('child', 1000)
+      title: createAsyncGetter('child', 1000),
     })
     const parentRoute = new Route('/', {
-      title: createAsyncGetter('parent', 500)
+      title: createAsyncGetter('parent', 500),
     })
     const [childMiddleware] = childRoute.middleware
     const [parentMiddleware] = parentRoute.middleware
@@ -161,19 +161,19 @@ describe('router.plugins.title', () => {
 
     const childQueue = jest.fn()
     const childCtx = {
-      queue: childQueue as any
+      queue: childQueue as any,
     } as Context & IContext
     const parentQueue = jest.fn()
     const parentCtx = {
       queue: parentQueue as any,
       $child: childCtx,
-      $children: [childCtx]
+      $children: [childCtx],
     } as Context & IContext
     const childRoute = new Route('/', {
-      title: 'child'
+      title: 'child',
     })
     const parentRoute = new Route('/', {
-      title: createAsyncGetter('parent', 500)
+      title: createAsyncGetter('parent', 500),
     })
     const [childMiddleware] = childRoute.middleware
     const [parentMiddleware] = parentRoute.middleware
@@ -211,7 +211,7 @@ describe('router.plugins.title', () => {
     const parentCtx = {
       $child: childCtx,
       $children: [childCtx],
-      queue: parentQueue
+      queue: parentQueue,
     } as Context & IContext
     const childRoute = new Route('/', { title: 'child' })
     const parentRoute = new Route('/', { title: 'parent' })

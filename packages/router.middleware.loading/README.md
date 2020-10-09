@@ -36,7 +36,7 @@ Router.use(
     },
 
     /* OPTIONAL */
-    minDuration: 0 // prevent flickering on fast navigation (show loader for at least <n> ms)
+    minDuration: 0, // prevent flickering on fast navigation (show loader for at least <n> ms)
   })
 )
 ```

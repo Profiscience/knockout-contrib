@@ -6,11 +6,11 @@ ko.components.register('basic', {
       t.pass('navigates to basic route')
       done()
     }
-  }
+  },
 })
 
 export const path = '/basic'
 
 export const routes = {
-  '/basic': 'basic'
+  '/basic': 'basic',
 }

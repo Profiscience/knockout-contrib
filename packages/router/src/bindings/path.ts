@@ -4,7 +4,7 @@ import {
   resolveHref,
   traversePath,
   getRouterForBindingContext,
-  log
+  log,
 } from '../utils'
 import { activePathBinding } from './active-path'
 
@@ -29,14 +29,14 @@ export const pathBinding: ko.BindingHandler = {
           el,
           {
             attr: {
-              href: ko.pureComputed(() => resolveHref(route()))
-            }
+              href: ko.pureComputed(() => resolveHref(route())),
+            },
           },
           bindingCtx
         )
       })
       .catch((err) => log.error('Error initializing path binding', err))
-  }
+  },
 }
 
 ko.bindingHandlers.path = pathBinding

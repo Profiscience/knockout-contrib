@@ -10,7 +10,7 @@ declare module '@profiscience/knockout-contrib-router' {
 
 Router.setConfig({
   base: '/router.middleware.progressBar',
-  hashbang: true
+  hashbang: true,
 })
 
 ko.components.register('view', {
@@ -21,7 +21,7 @@ ko.components.register('view', {
     <a data-bind="path: '/2s'">2s</a>
     <a data-bind="path: '/5s'">5s</a>
     <a data-bind="path: '/10s'">10s</a>
-  `
+  `,
 })
 
 // Use `view` component for all routes
@@ -40,7 +40,7 @@ Router.useRoutes([
   new Route('/400ms', { delay: 400 }),
   new Route('/2s', { delay: 2000 }),
   new Route('/5s', { delay: 5000 }),
-  new Route('/10s', { delay: 10000 })
+  new Route('/10s', { delay: 10000 }),
 ])
 
 ko.applyBindings()

@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-modify
 
-
-
-
-
 # [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-modify@2.0.0-rc.3...@profiscience/knockout-contrib-utils-modify@2.0.0) (2019-02-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-modify

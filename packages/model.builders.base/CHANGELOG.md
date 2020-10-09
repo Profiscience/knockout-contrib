@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-base@2.0.0-rc.4...@profiscience/knockout-contrib-model-builders-base@2.0.1) (2019-08-23)
 
-
 ### Bug Fixes
 
-* don't auto-dispose data/view model if already disposed ([edc4433](https://github.com/Profiscience/knockout-contrib/commit/edc4433)), closes [#274](https://github.com/Profiscience/knockout-contrib/issues/274)
-
-
-
-
+- don't auto-dispose data/view model if already disposed ([edc4433](https://github.com/Profiscience/knockout-contrib/commit/edc4433)), closes [#274](https://github.com/Profiscience/knockout-contrib/issues/274)
 
 # [2.0.0-rc.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-base@2.0.0-rc.3...@profiscience/knockout-contrib-model-builders-base@2.0.0-rc.4) (2018-12-20)
 

@@ -1,7 +1,7 @@
 import {
   Context,
   IContext,
-  IRouteConfig
+  IRouteConfig,
 } from '@profiscience/knockout-contrib-router'
 
 type MaybePromise<T> = T | Promise<T>

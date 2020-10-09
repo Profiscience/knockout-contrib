@@ -9,7 +9,7 @@ const ignoredAnchors = [
   'empty-hash',
   'mail-to',
   'external',
-  'target'
+  'target',
 ]
 
 ko.components.register('anchor', {
@@ -28,7 +28,7 @@ ko.components.register('anchor', {
       Router.useRoutes({
         '/': 'root',
         '/a': 'a',
-        '/b': 'b'
+        '/b': 'b',
       })
 
       ko.components.register('root', {
@@ -39,7 +39,7 @@ ko.components.register('anchor', {
               document.getElementById('absolute-a').click()
             )
           }
-        }
+        },
       })
 
       ko.components.register('a', {
@@ -51,7 +51,7 @@ ko.components.register('anchor', {
               document.getElementById('relative-b').click()
             )
           }
-        }
+        },
       })
 
       ko.components.register('b', {
@@ -62,7 +62,7 @@ ko.components.register('anchor', {
               map(ignoredAnchors, (id) => document.getElementById(id).click())
             )
           }
-        }
+        },
       })
 
       let count = 0
@@ -82,5 +82,5 @@ ko.components.register('anchor', {
       }
       window.addEventListener('click', this.clickHandler)
     }
-  }
+  },
 })

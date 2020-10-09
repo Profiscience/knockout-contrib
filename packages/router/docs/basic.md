@@ -51,7 +51,7 @@ Router.setConfig({
   // is managed externally and independently from routing, set this to true so that
   // query objects shared across sibling routes will not be reset when navigating
   // between the two.
-  preserveQueryStringOnNavigation: false
+  preserveQueryStringOnNavigation: false,
 })
 ```
 
@@ -82,7 +82,7 @@ Router.useRoutes({
       // nested route map
       '/': [
         loadUsers, // middleware
-        'user-list' // component name
+        'user-list', // component name
       ],
 
       '/:id': [
@@ -90,11 +90,11 @@ Router.useRoutes({
         {
           // nested route map
           '/': 'user-show', // component name
-          '/edit': 'user-edit' // component name
-        }
-      ]
-    }
-  }
+          '/edit': 'user-edit', // component name
+        },
+      ],
+    },
+  },
 })
 ```
 
@@ -117,9 +117,9 @@ Router.useRoutes([
     new Route('/', loadUsers, 'user-list'),
     new Route('/:id', loadUser, [
       new Route('/', 'user-show'),
-      new Route('/edit', 'user-edit')
-    ])
-  ])
+      new Route('/edit', 'user-edit'),
+    ]),
+  ]),
 ])
 ```
 

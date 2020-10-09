@@ -66,6 +66,6 @@ import { Route } from '@profiscience/knockout-contrib'
 
 new Route('/', {
   // this is type-safe!
-  apiUrl: 'https://example.com'
+  apiUrl: 'https://example.com',
 })
 ```

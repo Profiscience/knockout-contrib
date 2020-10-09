@@ -9,7 +9,7 @@ ko.components.register('preserve-state', {
       Router.useRoutes({
         '/foo': 'foo',
         '/bar': 'bar',
-        '/baz': 'baz'
+        '/baz': 'baz',
       })
 
       history.pushState({ foo: 'foo' }, null, '/foo')
@@ -26,12 +26,12 @@ ko.components.register('preserve-state', {
             history.replaceState({ bar: 'bar' }, document.title)
 
             Router.setConfig({
-              preserveHistoryStateOnNavigation: true
+              preserveHistoryStateOnNavigation: true,
             })
 
             ctx.router.update('/bar')
           }
-        }
+        },
       })
 
       ko.components.register('bar', {
@@ -43,7 +43,7 @@ ko.components.register('preserve-state', {
 
             Router.update('/baz', { state: { baz: 'baz' } })
           }
-        }
+        },
       })
 
       ko.components.register('baz', {
@@ -56,13 +56,13 @@ ko.components.register('preserve-state', {
             )
 
             Router.setConfig({
-              preserveQueryStringOnNavigation: false
+              preserveQueryStringOnNavigation: false,
             })
 
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })

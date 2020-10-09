@@ -7,170 +7,87 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 # [2.2.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.1.3...@profiscience/knockout-contrib@2.2.0) (2020-02-10)
-
 
 ### Features
 
-* **bindings.repeat:** initial commit ([7fd0e0d](https://github.com/Profiscience/knockout-contrib/commit/7fd0e0d09e843456faa391735f9e956f4ddc4212))
-
-
-
-
+- **bindings.repeat:** initial commit ([7fd0e0d](https://github.com/Profiscience/knockout-contrib/commit/7fd0e0d09e843456faa391735f9e956f4ddc4212))
 
 ## [2.1.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.1.2...@profiscience/knockout-contrib@2.1.3) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.1.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.1.1...@profiscience/knockout-contrib@2.1.2) (2019-12-17)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.1.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.1.0...@profiscience/knockout-contrib@2.1.1) (2019-12-17)
-
 
 ### Bug Fixes
 
-* **metapackage:** actually re-export bindings.infiniteScroll ([c372774](https://github.com/Profiscience/knockout-contrib/commit/c372774aae2bf62fe298ac0d1178ea1c285a6cba))
-
-
-
-
+- **metapackage:** actually re-export bindings.infiniteScroll ([c372774](https://github.com/Profiscience/knockout-contrib/commit/c372774aae2bf62fe298ac0d1178ea1c285a6cba))
 
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.28...@profiscience/knockout-contrib@2.1.0) (2019-12-17)
 
-
 ### Features
 
-* **bindings.infinitescroll:** initial commit ([7df2d84](https://github.com/Profiscience/knockout-contrib/commit/7df2d84994f1956577290b4fe4142038021d4c22))
-
-
-
-
+- **bindings.infinitescroll:** initial commit ([7df2d84](https://github.com/Profiscience/knockout-contrib/commit/7df2d84994f1956577290b4fe4142038021d4c22))
 
 ## [2.0.28](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.27...@profiscience/knockout-contrib@2.0.28) (2019-12-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.27](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.26...@profiscience/knockout-contrib@2.0.27) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.26](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.24...@profiscience/knockout-contrib@2.0.26) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.25](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.24...@profiscience/knockout-contrib@2.0.25) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.24](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.23...@profiscience/knockout-contrib@2.0.24) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.23](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.22...@profiscience/knockout-contrib@2.0.23) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.22](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.21...@profiscience/knockout-contrib@2.0.22) (2019-12-06)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.21](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.20...@profiscience/knockout-contrib@2.0.21) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.20](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.19...@profiscience/knockout-contrib@2.0.20) (2019-11-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.19](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.18...@profiscience/knockout-contrib@2.0.19) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.18](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.17...@profiscience/knockout-contrib@2.0.18) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.17](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.16...@profiscience/knockout-contrib@2.0.17) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.16](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.15...@profiscience/knockout-contrib@2.0.16) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
 
-
-
-
-
 ## [2.0.15](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.14...@profiscience/knockout-contrib@2.0.15) (2019-08-14)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib
-
-
-
-
 
 ## [2.0.14](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib@2.0.13...@profiscience/knockout-contrib@2.0.14) (2019-08-07)
 

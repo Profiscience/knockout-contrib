@@ -3,7 +3,7 @@ import {
   Context,
   IContext,
   IRouteConfig,
-  LifecycleMiddleware
+  LifecycleMiddleware,
 } from '@profiscience/knockout-contrib-router'
 
 declare module '@profiscience/knockout-contrib-router' {
@@ -30,7 +30,7 @@ interface IComponentMap {
 }
 
 export function componentsRoutePlugin({
-  components
+  components,
 }: IRouteConfig): LifecycleMiddleware | void {
   if (!components) return
 
@@ -50,7 +50,7 @@ export function componentsRoutePlugin({
       },
       beforeDispose() {
         componentNames.forEach((c) => ko.components.unregister(c))
-      }
+      },
     }
   }
 }

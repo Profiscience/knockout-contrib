@@ -49,13 +49,13 @@ import { assign } from '@profiscience/knockout-contrib'
 
 const foos = {
   foo: ko.observable('foo'),
-  bar: 'bar'
+  bar: 'bar',
 }
 
 assign(foos, {
   foo: 'new foo',
   bar: 'new bar',
-  baz: 'baz'
+  baz: 'baz',
 })
 // {
 //   foo: ko.observable('new foo'),
@@ -68,7 +68,7 @@ assign(
   {
     foo: 'new foo',
     bar: 'new bar',
-    baz: 'baz'
+    baz: 'baz',
   },
   { strict: true }
 )

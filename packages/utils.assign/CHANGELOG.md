@@ -7,36 +7,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-assign
 
-
-
-
-
 ## [2.0.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.2...@profiscience/knockout-contrib-utils-assign@2.0.4) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-assign
-
-
-
-
 
 ## [2.0.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.2...@profiscience/knockout-contrib-utils-assign@2.0.3) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-assign
 
-
-
-
-
 ## [2.0.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.1...@profiscience/knockout-contrib-utils-assign@2.0.2) (2019-10-22)
-
 
 ### Bug Fixes
 
-* **utils.assign:** create object on destination if null ([2c4e372](https://github.com/Profiscience/knockout-contrib/commit/2c4e372))
-
-
-
-
+- **utils.assign:** create object on destination if null ([2c4e372](https://github.com/Profiscience/knockout-contrib/commit/2c4e372))
 
 ## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-assign@2.0.0...@profiscience/knockout-contrib-utils-assign@2.0.1) (2019-06-04)
 

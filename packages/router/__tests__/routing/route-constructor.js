@@ -14,7 +14,7 @@ ko.components.register('route-constructor', {
             t.pass('Route constructor works with spread children')
             Router.update('/nested/arr')
           }
-        }
+        },
       })
 
       ko.components.register('arr', {
@@ -23,7 +23,7 @@ ko.components.register('route-constructor', {
             t.pass('Route constructor works with child routes in array')
             Router.update('/middleware')
           }
-        }
+        },
       })
 
       ko.components.register('route-constructor-middleware', {
@@ -36,10 +36,10 @@ ko.components.register('route-constructor', {
             t.true(ctx.arrMiddlewareHit, 'middleware in an array is flattened')
             done()
           }
-        }
+        },
       })
     }
-  }
+  },
 })
 
 export const path = '/nested/spread'
@@ -53,7 +53,7 @@ export const path = '/nested/spread'
 export const routes = [
   new Route('/', 'route-constructor', [
     new Route('/nested', new Route('/spread', 'spread'), [
-      new Route('/arr', 'arr')
+      new Route('/arr', 'arr'),
     ]),
     new Route(
       '/middleware',
@@ -64,8 +64,8 @@ export const routes = [
       [
         (ctx) => {
           ctx.arrMiddlewareHit = true
-        }
+        },
       ]
-    )
-  ])
+    ),
+  ]),
 ]

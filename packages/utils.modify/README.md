@@ -31,10 +31,7 @@ import { modify } from '@profiscience/knockout-contrib'
 const foobar = ko.observable('foobar')
 
 function reverseString(str) {
-  return str
-    .split('')
-    .reverse()
-    .join('')
+  return str.split('').reverse().join('')
 }
 
 const ret = modify(foobar, reverseString)

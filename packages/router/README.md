@@ -38,8 +38,8 @@ Router.useRoutes([
   new Route('/', 'home'),
   new Route('/users', [
     new Route('/', [loadUsers, 'users']),
-    new Route('/:id', [loadUser, 'user'])
-  ])
+    new Route('/:id', [loadUser, 'user']),
+  ]),
 ])
 /**
  * Optionally use object-shorthand
@@ -53,7 +53,7 @@ Router.useRoutes([
  */
 
 ko.components.register('home', {
-  template: `<a data-bind="path: '/users'">Show users</a>`
+  template: `<a data-bind="path: '/users'">Show users</a>`,
 })
 
 ko.components.register('users', {
@@ -70,7 +70,7 @@ ko.components.register('users', {
     <ul data-bind="foreach: users">
       <span data-bind="text: name, click: $parent.navigateToUser"></span>
     </ul>
-  `
+  `,
 })
 
 ko.components.register('user', {
@@ -79,7 +79,7 @@ ko.components.register('user', {
       this.user = ctx.user
     }
   },
-  template: `...`
+  template: `...`,
 })
 
 function loadingMiddleware(ctx) {
@@ -89,7 +89,7 @@ function loadingMiddleware(ctx) {
     },
     afterRender() {
       loading(false)
-    }
+    },
   }
 }
 

@@ -7,9 +7,9 @@ export const ctrlClickBindingHandler: ko.BindingHandler = {
       {
         click($data: any, e: MouseEvent) {
           if (e.ctrlKey) valueAccessor().call(this, $data, e)
-        }
+        },
       },
       bindingContext
     )
-  }
+  },
 }

@@ -194,7 +194,7 @@ describe('model.builders.data', () => {
     const foo = await FooModel.create({})
 
     expect(foo.toJS()).toEqual({
-      value: 'foo'
+      value: 'foo',
     })
 
     foo.dispose()
@@ -280,7 +280,7 @@ describe('model.builders.data', () => {
         foo: 'foo',
         bar: 'bar',
         dontIncludeThis: 'no good',
-        baz: 'baz'
+        baz: 'baz',
       }
       nonenumerable(obj, 'dontIncludeThis')
 

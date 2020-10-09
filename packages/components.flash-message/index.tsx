@@ -89,11 +89,11 @@ const template = [
     >
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
+  </div>,
 ]
 
 export const flashMessageComponentConfig: ko.components.Config = {
   synchronous: true,
   viewModel: FlashMessageViewModel,
-  template
+  template,
 }

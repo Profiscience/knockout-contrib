@@ -7,129 +7,65 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.19](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.18...@profiscience/knockout-contrib-model-mixins-query@1.1.19) (2020-02-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.18](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.17...@profiscience/knockout-contrib-model-mixins-query@1.1.18) (2019-12-13)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.17](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.16...@profiscience/knockout-contrib-model-mixins-query@1.1.17) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.16](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.14...@profiscience/knockout-contrib-model-mixins-query@1.1.16) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.15](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.14...@profiscience/knockout-contrib-model-mixins-query@1.1.15) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.14](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.13...@profiscience/knockout-contrib-model-mixins-query@1.1.14) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.13](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.12...@profiscience/knockout-contrib-model-mixins-query@1.1.13) (2019-12-11)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.12](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.11...@profiscience/knockout-contrib-model-mixins-query@1.1.12) (2019-12-06)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.10...@profiscience/knockout-contrib-model-mixins-query@1.1.11) (2019-11-27)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.9...@profiscience/knockout-contrib-model-mixins-query@1.1.10) (2019-11-04)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.9](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.8...@profiscience/knockout-contrib-model-mixins-query@1.1.9) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.8](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.7...@profiscience/knockout-contrib-model-mixins-query@1.1.8) (2019-10-30)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.7](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.6...@profiscience/knockout-contrib-model-mixins-query@1.1.7) (2019-10-22)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.6](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.5...@profiscience/knockout-contrib-model-mixins-query@1.1.6) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
 
-
-
-
-
 ## [1.1.5](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.4...@profiscience/knockout-contrib-model-mixins-query@1.1.5) (2019-08-14)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query
-
-
-
-
 
 ## [1.1.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.3...@profiscience/knockout-contrib-model-mixins-query@1.1.4) (2019-08-07)
 

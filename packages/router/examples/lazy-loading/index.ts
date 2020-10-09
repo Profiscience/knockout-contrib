@@ -25,7 +25,7 @@ const lazyLoadPlugin: RoutePlugin = (componentName: string) => [
           console.error('Error fetching component', componentName, err)
         )
     )
-  }
+  },
 ]
 
 Router.usePlugin(lazyLoadPlugin)
@@ -35,7 +35,7 @@ Router.useRoutes({
   '/foo': 'foo',
   '/bar': 'bar',
   '/baz': 'baz',
-  '/qux': 'qux'
+  '/qux': 'qux',
 })
 
 ko.components.register('lazy-loading', { template })

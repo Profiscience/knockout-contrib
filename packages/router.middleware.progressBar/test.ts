@@ -18,14 +18,14 @@ describe('router.middleware.progressBar', () => {
     const topCtx: Context & IContext = {
       $child: {},
       router: {
-        isRoot: true
-      }
+        isRoot: true,
+      },
     } as Context & IContext
     const bottomCtx: Context & IContext = {
       router: {
-        isRoot: false
+        isRoot: false,
       },
-      $child: undefined
+      $child: undefined,
     } as any
     const middleware = createProgressBarMiddleware()
     const topLifecycle = middleware(topCtx) as any
@@ -38,14 +38,14 @@ describe('router.middleware.progressBar', () => {
     const topCtx: Context & IContext = {
       $child: {},
       router: {
-        isRoot: true
-      }
+        isRoot: true,
+      },
     } as Context & IContext
     const bottomCtx: Context & IContext = {
       router: {
-        isRoot: false
+        isRoot: false,
       },
-      $child: undefined
+      $child: undefined,
     } as any
     const middleware = createProgressBarMiddleware()
     const topLifecycle = middleware(topCtx) as any

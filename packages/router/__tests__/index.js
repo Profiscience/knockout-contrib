@@ -40,7 +40,7 @@ const tests = [
   'element',
   'plugins',
   'preserve-query',
-  'preserve-state'
+  'preserve-state',
 ]
 
 class TestRunner {

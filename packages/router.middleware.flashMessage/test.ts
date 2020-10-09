@@ -3,7 +3,7 @@ import {
   IFlashMessage,
   FLASH_MESSAGE,
   flashMessageMiddleware,
-  flashMessage
+  flashMessage,
 } from './index'
 
 declare module './index' {

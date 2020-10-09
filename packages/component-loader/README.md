@@ -33,11 +33,11 @@ const manifest = {
   // synchronous component
   'app-nav': {
     template: '...',
-    viewModel: class {}
+    viewModel: class {},
   },
 
   // lazy-loaded component
-  widget: () => import('./widget')
+  widget: () => import('./widget'),
 }
 
 const componentLoader = new ComponentLoader(manifest)
@@ -69,15 +69,15 @@ You may pass a `transform` option to transform the component config before it is
 ```ts
 const manifest = {
   'my-component': {
-    template: '...'
-  }
+    template: '...',
+  },
 }
 
 const componentLoader = new ComponentLoader(manifest, {
   transform: (component) => {
     component.template = `<span style="border: 1px solid red">${component.template}</span>`
     return component
-  }
+  },
 })
 ```
 

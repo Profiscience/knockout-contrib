@@ -6,13 +6,13 @@ import {
   IContext,
   IRouteConfig,
   Lifecycle,
-  Route
+  Route,
 } from '@profiscience/knockout-contrib-router'
 
 import {
   componentRoutePlugin,
   IRoutedComponentInstance,
-  disableUninstantiableViewModelWarning
+  disableUninstantiableViewModelWarning,
 } from './index'
 
 Route.usePlugin(componentRoutePlugin)
@@ -149,7 +149,7 @@ describe('router.plugins.component', () => {
       const getComponent = () => ({
         // intended for use with import('./template.html')
         template: Promise.resolve(template),
-        viewModel: Promise.resolve(ViewModel)
+        viewModel: Promise.resolve(ViewModel),
       })
       const route = new Route('/', { component: getComponent })
       const ctx = createMockContext(route)
@@ -182,8 +182,8 @@ describe('router.plugins.component', () => {
         // intended for use with import('./template.html')
         template: Promise.resolve({ default: template }),
         viewModel: Promise.resolve({
-          default: ViewModel
-        })
+          default: ViewModel,
+        }),
       })
       const route = new Route('/', { component: getComponent })
       const ctx = { queue: jest.fn() as any, route } as Context & IContext
@@ -217,8 +217,8 @@ describe('router.plugins.component', () => {
           // instead named template and viewModel exports
           default: {
             template,
-            viewModel: ViewModel
-          }
+            viewModel: ViewModel,
+          },
         })
       const route = new Route('/', { component: getComponent })
       const ctx = { queue: jest.fn() as any, route } as Context & IContext
@@ -250,7 +250,7 @@ describe('router.plugins.component', () => {
         Promise.resolve({
           // intended for use with import('./component')
           template,
-          viewModel: ViewModel
+          viewModel: ViewModel,
         })
       const route = new Route('/', { component: getComponent })
       const ctx = { queue: jest.fn() as any, route } as Context & IContext
@@ -280,7 +280,7 @@ describe('router.plugins.component', () => {
       const component = {
         template,
         viewModel: ViewModel,
-        name: 'my-awesome-component'
+        name: 'my-awesome-component',
       }
       const route = new Route('/', { component })
       const ctx = createMockContext(route)
@@ -451,7 +451,7 @@ describe('router.plugins.component', () => {
         component: (_ctx) => {
           expect(_ctx).toEqual(ctx)
           return name
-        }
+        },
       })
       const ctx = createMockContext(route)
       const [middleware] = route.middleware
@@ -469,7 +469,7 @@ describe('router.plugins.component', () => {
         component: (_ctx) => {
           expect(_ctx).toEqual(ctx)
           return Promise.resolve(name)
-        }
+        },
       })
       const ctx = createMockContext(route)
       const [middleware] = route.middleware

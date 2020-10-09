@@ -13,9 +13,9 @@ ko.components.register('before-navigate-callbacks', {
         '/nested': [
           'nested',
           {
-            '/': 'nested-child'
-          }
-        ]
+            '/': 'nested-child',
+          },
+        ],
       })
 
       ko.components.register('empty', {})
@@ -33,7 +33,7 @@ ko.components.register('before-navigate-callbacks', {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => !block)
           }
-        }
+        },
       })
 
       ko.components.register('async', {
@@ -41,7 +41,7 @@ ko.components.register('before-navigate-callbacks', {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => Promise.resolve(!block))
           }
-        }
+        },
       })
 
       let hit = false
@@ -54,7 +54,7 @@ ko.components.register('before-navigate-callbacks', {
               t.ok(hit, 'callbacks are called sequentially from bottom => top')
             })
           }
-        }
+        },
       })
 
       ko.components.register('nested-child', {
@@ -70,7 +70,7 @@ ko.components.register('before-navigate-callbacks', {
                 })
             )
           }
-        }
+        },
       })
 
       await Router.update('/sync')
@@ -100,5 +100,5 @@ ko.components.register('before-navigate-callbacks', {
       await Router.update('/nested')
       await Router.update('/')
     }
-  }
+  },
 })

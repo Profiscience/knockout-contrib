@@ -20,7 +20,7 @@ export const jqueryBindingHandler = {
         $el[pluginName](opts)
 
         if (value) value(el.value)
-      }
+      },
     } as ko.BindingHandler
-  }
+  },
 } as ko.BindingHandler

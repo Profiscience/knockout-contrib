@@ -9,10 +9,10 @@ import * as ts from 'typescript'
 const builds: { [k: string]: babel.TransformOptions | false } = {
   default: {
     presets: [['env', { modules: false }]],
-    plugins: ['transform-runtime']
+    plugins: ['transform-runtime'],
   },
   esnext: false,
-  node: { presets: [['env', { targets: { node: 'current' } }]] }
+  node: { presets: [['env', { targets: { node: 'current' } }]] },
 }
 
 type FileMeta = {
@@ -54,7 +54,7 @@ function parseFd(fd: string): FileMeta {
     outFilename,
     outFd,
     mapFilename,
-    mapSource
+    mapSource,
   }
 }
 
@@ -67,8 +67,8 @@ function fixSourcemapMapping(meta: FileMeta, output: ts.TranspileOutput) {
     map: {
       ...JSON.parse(output.sourceMapText as string),
       file: meta.mapFilename,
-      sources: [meta.mapSource]
-    }
+      sources: [meta.mapSource],
+    },
   }
 }
 
@@ -83,14 +83,14 @@ async function transpileTarget(
   if (babelConfig) {
     const result = babel.transform(code, {
       inputSourceMap: map,
-      ...babelConfig
+      ...babelConfig,
     })
     code = result.code as string
     map = result.map
   }
   await Promise.all([
     fs.outputFile(dest, code),
-    fs.outputFile(dest + '.map', JSON.stringify(map))
+    fs.outputFile(dest + '.map', JSON.stringify(map)),
   ])
 }
 

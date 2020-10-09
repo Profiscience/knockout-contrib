@@ -13,7 +13,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch(): Promise<any> {
         return {
-          foos: ['foo', 'bar', 'baz', 'qux']
+          foos: ['foo', 'bar', 'baz', 'qux'],
         }
       }
     }
@@ -95,7 +95,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch(): Promise<any> {
         return {
-          foos: ['foo', 'bar', 'baz', 'qux']
+          foos: ['foo', 'bar', 'baz', 'qux'],
         }
       }
     }
@@ -105,7 +105,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch(): Promise<any> {
         return {
-          foos: ['foo', 'bar', 'baz', 'qux']
+          foos: ['foo', 'bar', 'baz', 'qux'],
         }
       }
     }
@@ -115,7 +115,7 @@ describe('model.mixins.query', () => {
     )<P> {
       protected async fetch(): Promise<any> {
         return {
-          foos: ['foo', 'bar', 'baz', 'qux']
+          foos: ['foo', 'bar', 'baz', 'qux'],
         }
       }
     }
@@ -123,7 +123,7 @@ describe('model.mixins.query', () => {
     const [foo, foo2, bar] = await Promise.all([
       FooModel.create({}),
       Foo2Model.create({}),
-      BarModel.create({})
+      BarModel.create({}),
     ])
 
     foo.query.myQueryParam('foo')
@@ -156,7 +156,7 @@ describe('model.mixins.query', () => {
     const bar = await BarModel.create({})
 
     expect(bar.toJS()).toEqual({
-      bar: 'bar'
+      bar: 'bar',
     })
   })
 })

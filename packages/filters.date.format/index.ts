@@ -8,6 +8,6 @@ export function formatDateFilter(
   return formatDate(ko.unwrap(value), format, {
     // see https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
     useAdditionalDayOfYearTokens: true,
-    useAdditionalWeekYearTokens: true
+    useAdditionalWeekYearTokens: true,
   } as any)
 }

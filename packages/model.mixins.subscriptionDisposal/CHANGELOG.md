@@ -5,33 +5,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [2.1.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.2...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.1.0) (2020-08-12)
 
-
 ### Features
 
-* **model.mixins.subscriptiondisposal:** improve typings ([c583bc0](https://github.com/Profiscience/knockout-contrib/commit/c583bc08b71871eee45699242f682576a22c9b16))
-
-
-
-
+- **model.mixins.subscriptiondisposal:** improve typings ([c583bc0](https://github.com/Profiscience/knockout-contrib/commit/c583bc08b71871eee45699242f682576a22c9b16))
 
 ## [2.0.2](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.1...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.2) (2019-12-12)
 
-
 ### Bug Fixes
 
-* ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
-
-
-
-
+- ts compilation errors ([a4e753b](https://github.com/Profiscience/knockout-contrib/commit/a4e753b87265bd5bc2c184530596522a82806659))
 
 ## [2.0.1](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.0...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.1) (2019-08-23)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-subscription-disposal
-
-
-
-
 
 # [2.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.0-rc.6...@profiscience/knockout-contrib-model-mixins-subscription-disposal@2.0.0) (2019-02-22)
 

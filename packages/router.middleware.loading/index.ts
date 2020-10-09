@@ -1,7 +1,7 @@
 import {
   Context,
   IContext,
-  LifecycleMiddleware
+  LifecycleMiddleware,
 } from '@profiscience/knockout-contrib-router'
 
 let startTime = Date.now()
@@ -9,7 +9,7 @@ let startTime = Date.now()
 export function createLoadingMiddleware({
   start,
   end,
-  minDuration
+  minDuration,
 }: {
   start: (ctx: Context & IContext) => any
   end: (ctx: Context & IContext) => any
@@ -34,6 +34,6 @@ export function createLoadingMiddleware({
           end(ctx)
         }
       }
-    }
+    },
   })
 }

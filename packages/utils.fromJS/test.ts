@@ -29,7 +29,7 @@ describe('utils.fromJS', () => {
       obj: { foo: 'foo' },
       obs: ko.observable({ foo: 'bar' }),
       func() {}, // tslint:disable-line no-empty
-      class: new Clazz()
+      class: new Clazz(),
     }
 
     const actual = fromJS(raw)

@@ -16,7 +16,7 @@ declare global {
 describe('bindings.jquery', () => {
   test('calls the jquery plugin on the bound element', (done) => {
     const actualEl = <div data-bind="$.myPlugin: {}" />
-    $.fn.myPlugin = function() {
+    $.fn.myPlugin = function () {
       expect(this.get(0)).toEqual(actualEl)
       done()
     }
@@ -27,7 +27,7 @@ describe('bindings.jquery', () => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts" />
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       expect(_opts).toEqual(opts)
       done()
     }
@@ -37,7 +37,7 @@ describe('bindings.jquery', () => {
   test('options default to undefined', (done) => {
     const el = <div data-bind="$.myPlugin" />
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       expect(_opts).toBeUndefined()
       done()
     }
@@ -49,7 +49,7 @@ describe('bindings.jquery', () => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, value: val" />
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       this.val('foobar')
     }
     val.subscribe((v) => {
@@ -64,7 +64,7 @@ describe('bindings.jquery', () => {
     const opts = { myOpts: true }
     const el = <div data-bind="$.myPlugin: opts, value: val" />
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       val.subscribe((v) => {
         expect(v).toBe('foobar')
         done()
@@ -83,7 +83,7 @@ describe('bindings.jquery', () => {
       done()
     }
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       this.trigger('change')
     }
     ko.applyBindings({ opts, onChange }, el)
@@ -97,7 +97,7 @@ describe('bindings.jquery', () => {
       done()
     }
     // tslint:disable-next-line only-arrow-functions
-    $.fn.myPlugin = function(_opts: any) {
+    $.fn.myPlugin = function (_opts: any) {
       this.trigger('change')
     }
     ko.applyBindings({ opts, onChange }, el)

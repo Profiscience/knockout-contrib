@@ -23,7 +23,7 @@ query.sort() // alpha
 // you probably want to configure it to preserve the querystring between navigation
 // since we're managing it externally.
 Router.setConfig({
-  preserveQueryStringOnNavigation: true
+  preserveQueryStringOnNavigation: true,
 })
 ```
 
@@ -48,10 +48,10 @@ const query = Query.create({
   foo: {
     default: 'foo',
     initial: 'bar',
-    coerce: (v) => (v === 'baz' ? 'qux' : v)
+    coerce: (v) => (v === 'baz' ? 'qux' : v),
   },
 
-  bar: 'bar'
+  bar: 'bar',
 })
 ```
 
@@ -85,7 +85,7 @@ import rison from 'rison' // https://github.com/Nanonid/rison
 
 Query.setParser({
   parse: rison.decode_object,
-  stringify: rison.encode_object
+  stringify: rison.encode_object,
 })
 ```
 

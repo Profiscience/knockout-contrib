@@ -2,7 +2,7 @@ import {
   Context,
   IContext,
   SimpleMiddleware,
-  IRouteConfig
+  IRouteConfig,
 } from '@profiscience/knockout-contrib-router'
 import { IRoutedComponentInstance } from '@profiscience/knockout-contrib-router-plugins-component'
 

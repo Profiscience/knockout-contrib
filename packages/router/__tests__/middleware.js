@@ -18,7 +18,7 @@ ko.components.register('middleware', {
         },
         afterDispose() {
           ctx.afterDisposeGlobalMiddlewareHit = true
-        }
+        },
       }))
 
       history.replaceState(null, null, '/sync')
@@ -30,7 +30,7 @@ ko.components.register('middleware', {
           },
           () => {
             Router.update('/async')
-          }
+          },
         ],
 
         '/async': [
@@ -48,11 +48,11 @@ ko.components.register('middleware', {
             ctx.waitOver = false
 
             Router.update('/lifecycle')
-          }
+          },
         ],
 
         '/generator': [
-          function*(ctx) {
+          function* (ctx) {
             t.pass('generator middleware is called')
 
             t.ok(
@@ -102,7 +102,7 @@ ko.components.register('middleware', {
               'generator middleware works with yield-ed promise'
             )
           },
-          'generator'
+          'generator',
         ],
 
         '/lifecycle': [
@@ -154,7 +154,7 @@ ko.components.register('middleware', {
                 ctx.afterDisposeGlobalMiddlewareHit,
                 'route after dispose middleware is called before global after dispose middleware'
               )
-            }
+            },
           }),
           (ctx) => ({
             beforeRender() {
@@ -169,10 +169,10 @@ ko.components.register('middleware', {
                 'object middleware works with callback'
               )
               done()
-            }
+            },
           }),
-          'lifecycle'
-        ]
+          'lifecycle',
+        ],
       })
 
       ko.components.register('generator', {
@@ -180,7 +180,7 @@ ko.components.register('middleware', {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => (ctx.beforeNavigateHit = true))
           }
-        }
+        },
       })
 
       ko.components.register('lifecycle', {
@@ -188,12 +188,12 @@ ko.components.register('middleware', {
           constructor(ctx) {
             ctx.addBeforeNavigateCallback(() => (ctx.beforeNavigateHit = true))
           }
-        }
+        },
       })
     }
 
     dispose() {
       Router.middleware = []
     }
-  }
+  },
 })
