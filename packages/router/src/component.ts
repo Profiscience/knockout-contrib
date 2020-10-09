@@ -22,7 +22,7 @@ ko.components.register('router', {
 
 ko.bindingHandlers.__router__ = {
   init(el, valueAccessor, allBindings, viewModel, bindingCtx) {
-    const $router = bindingCtx.$rawData
+    const $router: Router = bindingCtx.$rawData
     const bindingEvent: any = ko.bindingEvent
 
     bindingEvent.subscribe(el, 'descendantsComplete', () => {
@@ -49,14 +49,16 @@ ko.bindingHandlers.__router__ = {
 }
 
 function createViewModel(params: { [k: string]: any }) {
-  let router = Router.head
-  if (!router) {
-    router = new Router(Router.getPathFromLocation(), undefined, params)
-  } else {
+  let router: Router
+  try {
+    router = Router.head
     while (router.bound) {
       router = (router.ctx.$child as Context).router
     }
+  } catch (e) {
+    router = new Router(Router.getPathFromLocation(), undefined, params)
   }
+
   router.bound = true
 
   if (router.isRoot) {

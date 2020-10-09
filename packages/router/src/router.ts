@@ -55,8 +55,9 @@ export class Router {
   private static _head?: Router
 
   public static get head() {
-    if (!this._head)
+    if (!this._head) {
       throw new Error('Cannot access Router.head before initialization')
+    }
     return this._head
   }
 
@@ -288,9 +289,9 @@ export class Router {
   }
 
   static get initialized(): Promise<Router> {
-    if (Router.head) {
+    try {
       return Promise.resolve(Router.head)
-    } else {
+    } catch (e) {
       return new Promise((resolve) => this.onInit.push(resolve))
     }
   }
