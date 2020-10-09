@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.10...@profiscience/knockout-contrib-model-builders-data@2.3.11) (2020-10-09)
+
+
+### Bug Fixes
+
+* **model.builders.data:** typings for fetch ([59a5afe](https://github.com/Profiscience/knockout-contrib/commit/59a5afefeeb21f1980510f3f59659abf085ef5cd))
+
+
+
+
+
 ## [2.3.10](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-builders-data@2.3.9...@profiscience/knockout-contrib-model-builders-data@2.3.10) (2020-08-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-builders-data

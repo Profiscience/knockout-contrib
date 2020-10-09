@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.21](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.20...@profiscience/knockout-contrib-model-mixins-query@1.1.21) (2020-10-09)
+
+
+### Bug Fixes
+
+* **model.builders.data:** typings for fetch ([59a5afe](https://github.com/Profiscience/knockout-contrib/commit/59a5afefeeb21f1980510f3f59659abf085ef5cd))
+
+
+
+
+
 ## [1.1.20](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-query@1.1.19...@profiscience/knockout-contrib-model-mixins-query@1.1.20) (2020-08-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-query

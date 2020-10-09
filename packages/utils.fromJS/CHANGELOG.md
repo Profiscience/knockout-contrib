@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-from-js@2.0.3...@profiscience/knockout-contrib-utils-from-js@2.0.4) (2020-10-09)
+
+**Note:** Version bump only for package @profiscience/knockout-contrib-utils-from-js
+
+
+
+
+
 ## [2.0.3](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-utils-from-js@2.0.2...@profiscience/knockout-contrib-utils-from-js@2.0.3) (2019-12-12)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-utils-from-js
