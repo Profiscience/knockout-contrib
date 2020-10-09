@@ -52,7 +52,14 @@ export type UrlFragments = {
 }
 
 export class Router {
-  public static head: Router
+  private static _head?: Router
+
+  public static get head() {
+    if (!this._head)
+      throw new Error('Cannot access Router.head before initialization')
+    return this._head
+  }
+
   public static readonly onInit: ((router: Router) => void)[] = [
     () => {
       Router.isNavigating(Router._isNavigating())
@@ -110,7 +117,7 @@ export class Router {
       : ($parentCtx as Context & IContext).route.children
 
     if (this.isRoot) {
-      Router.head = this
+      Router._head = this
       document.addEventListener<'click'>(Router.events.click, Router.onclick)
       window.addEventListener(Router.events.popstate, Router.onpopstate)
     }
@@ -276,7 +283,7 @@ export class Router {
         Router.onpopstate,
         false
       )
-      delete Router.head
+      delete Router._head
     }
   }
 
