@@ -84,7 +84,7 @@ describe('router.plugins.init', () => {
         default: class {
           private initialized = false
 
-          public [INITIALIZED] = new Promise((resolve) => {
+          public [INITIALIZED] = new Promise<void>((resolve) => {
             setTimeout(() => {
               this.initialized = true
               resolve()

@@ -169,7 +169,7 @@ describe('model.builders.data', () => {
     params.valueIn('bar')
 
     expect(foo.loading()).toBe(true)
-    await new Promise((resolve) => {
+    await new Promise<void>((resolve) => {
       const sub = foo.value.subscribe((newVal) => {
         sub.dispose()
         resolve()

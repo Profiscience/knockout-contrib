@@ -27,9 +27,7 @@ export type LifecycleMiddleware = (
   ctx: Context & IContext
 ) => MaybePromise<Lifecycle>
 
-export type GeneratorMiddleware = (
-  ctx: Context & IContext
-) =>
+export type GeneratorMiddleware = (ctx: Context & IContext) =>
   | IterableIterator<MaybePromise<void>> // sync generators yielding nothing or a promise
   | AsyncIterableIterator<void> // async generator
 
@@ -244,7 +242,13 @@ export class Router {
         log.warn(
           'Error in afterRender middleware during redirection. This may be caused by attempting to use ctx.component (or a property thereof), or the DOM in the middleware. Because redirection occured, no component was actually rendered. You may wish to add a guard in your middleware to handle this case.'
         )
-        log.error(e)
+        log.error(
+          e instanceof Error
+            ? e
+            : typeof e === 'string'
+            ? e
+            : new Error(`Unknown error: ${e}`)
+        )
       }
       const { router: r, path: p } = traversePath(toCtx.router, toCtx._redirect)
       r.update(p, toCtx._redirectArgs).catch((err) =>

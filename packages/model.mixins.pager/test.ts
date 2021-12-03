@@ -169,7 +169,7 @@ describe('model.mixins.pager', () => {
 
     extraneous(true)
 
-    await new Promise((resolve) => {
+    await new Promise<void>((resolve) => {
       ko.when(model.hasMore, (v) => {
         expect(v).toBe(true)
         resolve()

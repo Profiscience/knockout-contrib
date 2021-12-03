@@ -108,7 +108,7 @@ process.on('message', async ({ file }) => {
   try {
     await transpileFile(file)
     if (process.send) process.send({ file })
-  } catch (err) {
+  } catch (err: any) {
     console.error(chalk.red('\n[build.worker]: Error in', file, '\n'))
     console.error(
       err.message

@@ -82,12 +82,16 @@ function createWorkers(size: number) {
 }
 
 function pifyProc(proc: ChildProcess) {
-  return new Promise<{ code: number; output: string }>((resolve, reject) => {
-    let output = ''
-    if (proc.stdout) proc.stdout.on('data', (buf) => (output += buf.toString()))
-    proc.on('close', (code) => resolve({ code, output }))
-    proc.on('error', (err) => reject(err))
-  })
+  return new Promise<{ code: number | null; output: string }>(
+    (resolve, reject) => {
+      let output = ''
+      if (proc.stdout) {
+        proc.stdout.on('data', (buf) => (output += buf.toString()))
+      }
+      proc.on('close', (code) => resolve({ code, output }))
+      proc.on('error', (err) => reject(err))
+    }
+  )
 }
 
 function startTypeChecker() {
