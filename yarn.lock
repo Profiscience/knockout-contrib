@@ -4220,10 +4220,10 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"
-  integrity sha512-jPl+wbWPOWJ7SXsWyqGRk3lGecbar0Cb0OvZF/r/ZU011R4YqiRehgkQ9p4eQfo9DSDLqLL3wHwfxeJiuIsNag==
+csstype@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
+  integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -7234,12 +7234,12 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsx-dom@^6.3.1:
-  version "6.4.23"
-  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-6.4.23.tgz#47f4e547eb86679bd03f3d0b36f2097c2799ee46"
-  integrity sha512-Y0ax82xa4nzqFdbUXs3ma2haDZy4pB638kMZsGRzZqdmtyzY2nAKs7Bh3DrLn0vqMuxmvZQ3g9hq3NtnI5yXtQ==
+jsx-dom@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/jsx-dom/-/jsx-dom-7.0.2.tgz#be5b90cff3c5fe38e00404843d8d63990984560b"
+  integrity sha512-3yqioWCpAygkZ7ouqeZIqNJh7sXVXeGvv9SSVyhDvhlJE2r+Xv8UpZo0OfJuRu/SPu0kmjcObn8HGW8DMl5F0Q==
   dependencies:
-    csstype "^3.0.3"
+    csstype "^3.0.8"
 
 karma-firefox-launcher@^2.0.0:
   version "2.1.1"
