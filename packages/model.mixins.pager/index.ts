@@ -27,7 +27,8 @@ export function PagerMixin<
   property: keyof TData,
   strategy: PaginationStrategy<TParams> = ((page: number) => ({
     page,
-  })) as PaginationStrategy<any>
+  })) as PaginationStrategy<any>,
+  primeSecondPage: boolean = false
 ) {
   return <
     T extends new (...args: any[]) => DataModelConstructorBuilder<
@@ -47,18 +48,18 @@ export function PagerMixin<
         Object.assign(args[0], strategy(1))
         super(...args)
 
-        this[PAGER] = this[CREATE_PAGER]()
+        this[PAGER] = this[CREATE_PAGER]() // Setup pager generator
         this.hasMore = ko.observable(true)
-
         // ensure method is called with correct "this" value
         this.getMore = this.getMore.bind(this)
 
         const initialized = this[INITIALIZED]
-        this[INITIALIZED] = initialized
-          // @TODO unchain this when proper error handling is implemented
-          .then(() => this[PRIME_PAGER]())
+        this[INITIALIZED] = primeSecondPage
+          ? initialized.then(() => this[PRIME_PAGER]())
+          : initialized
       }
 
+      /** Manually fetch the next page of data */
       public async getMore(): Promise<boolean> {
         this.loading(true)
         const { done } = await this[PAGER].next()
@@ -66,15 +67,17 @@ export function PagerMixin<
         return !done
       }
 
+      /** Resets pager and reloads starting from page 1 */
       protected update() {
         Object.assign(this.params, strategy(1))
         this[PAGER] = this[CREATE_PAGER]()
         const p = super.update()
-        return p.then(() => this[PRIME_PAGER]())
+        return p.then(() => primeSecondPage ? this[PRIME_PAGER]() : undefined)
       }
 
+      /** Generator to yield control between page loads */
       private async *[CREATE_PAGER](): AsyncIterableIterator<void> {
-        let page = 2
+        let page = 2 // Page 1 already loaded by base model
 
         Object.assign(this.params, strategy(page))
 
@@ -98,6 +101,7 @@ export function PagerMixin<
         } while (this.hasMore())
       }
 
+      /** Loads the first yield from the pager (usually page 2) */
       private async [PRIME_PAGER]() {
         await this[PAGER].next()
       }

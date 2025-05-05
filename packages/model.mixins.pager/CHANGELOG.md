@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.11...@profiscience/knockout-contrib-model-mixins-pager@3.0.0) (2025-05-05)
+
+### ✅ Summary of Changes:
+
+- **Added** a `primeSecondPage` optional parameter to `PagerMixin`, defaulting to `false`.
+- **Modified** the `PRIME_PAGER` method to conditionally fetch page 2 based on `primeSecondPage`.
+- **Updated** `constructor` and `update()` to pass `primeSecondPage` to `PRIME_PAGER`.
+- **⚠️ Breaking Change**: Previously, page 2 was always loaded during initialization. This change **defers the loading of page 2** unless `primeSecondPage` is explicitly set to `true`.  
+  → **This is designed to reduce server load and improve perceived performance** on first load.
+
 ## [2.1.11](https://github.com/Profiscience/knockout-contrib/compare/@profiscience/knockout-contrib-model-mixins-pager@2.1.10...@profiscience/knockout-contrib-model-mixins-pager@2.1.11) (2020-10-09)
 
 **Note:** Version bump only for package @profiscience/knockout-contrib-model-mixins-pager
